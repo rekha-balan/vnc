@@ -1,0 +1,4 @@
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\Data\bin\Release\Data.dll
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\Data\bin\Release\Data.pdb
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\Data\obj\Release\Data.dll
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\Data\obj\Release\Data.pdb

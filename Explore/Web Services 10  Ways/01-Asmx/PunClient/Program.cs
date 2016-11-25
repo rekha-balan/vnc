@@ -76,7 +76,7 @@ namespace PunClient
             var name = Console.ReadLine();
             Console.Write("Pun? ");
             var joke = Console.ReadLine();
-            var pun = new Pun
+            var pun = new PunWebService.Pun
             {
                 PunID = index,
                 Title = name,
@@ -92,7 +92,7 @@ namespace PunClient
             var name = Console.ReadLine();
             Console.Write("Pun? ");
             var joke = Console.ReadLine();
-            var pun = new Pun
+            var pun = new PunWebService.Pun
             {
                 Title = name,
                 Joke = joke

@@ -1,0 +1,6 @@
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\bin\Debug\PunClient.exe.config
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\bin\Debug\PunClient.exe
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\bin\Debug\PunClient.pdb
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\obj\Debug\PunClient.exe
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\obj\Debug\PunClient.pdb
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\PunClient\obj\Debug\PunClient.csprojResolveAssemblyReference.cache
