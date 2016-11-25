@@ -87,9 +87,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\PunData\PunData.csproj">
       <Project>{00f507bc-dedc-4d14-9f07-cf3927773087}</Project>
-      <Name>Data</Name>
+      <Name>PunData</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

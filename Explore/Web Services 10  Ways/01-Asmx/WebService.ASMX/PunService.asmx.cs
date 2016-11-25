@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using Data;
+using PunData;
 
 namespace WebService.ASMX
 {
@@ -17,7 +17,7 @@ namespace WebService.ASMX
     // [System.Web.Script.Services.ScriptService]
     public class PunService : System.Web.Services.WebService
     {
-        private PunDataService _service;
+        private PunData.PunDataService _service;
 
         //[WebMethod]
         //public string HelloWorld()
@@ -30,14 +30,14 @@ namespace WebService.ASMX
         /// </summary>
         public PunService()
         {
-            _service = new PunDataService();
+            _service = new PunData.PunDataService();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PunService"/> class.
         /// </summary>
         /// <param name="service"></param>
-        public PunService(PunDataService service)
+        public PunService(PunData.PunDataService service)
         {
             _service = service;
         }

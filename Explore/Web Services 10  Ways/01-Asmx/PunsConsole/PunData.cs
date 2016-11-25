@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Data
+namespace PunsConsole
 {
-    public class PunDataService
+    class PunData
     {
         private List<Pun> Puns { get; set; }
 
-        public PunDataService()
+        public PunData()
         {
             if (File.Exists("./puns.dat"))
             {
