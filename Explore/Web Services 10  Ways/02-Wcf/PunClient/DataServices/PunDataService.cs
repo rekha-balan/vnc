@@ -1,39 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PunClient.Transports;
+//using PunClient.Transports;
+using PunClient.WCFPunService;
 
 namespace PunClient.DataServices
 {
     class PunDataService
     {
+        private PunServiceClient _client;
         public PunDataService()
         {
+            _client = new WCFPunService.PunServiceClient();
         }
 
         public Pun[] GetPuns()
         {
-            throw new NotImplementedException();
+            return _client.GetPuns();
         }
 
         public Pun GetPunByID(int punID)
         {
-            throw new NotImplementedException();
+            return _client.GetPunByID(punID);
         }
 
         public void CreatePun(Pun pun)
         {
-            throw new NotImplementedException();
+            _client.CreatePun(pun);
         }
 
         public void UpdatePun(Pun pun)
         {
-            throw new NotImplementedException();
+            _client.UpdatePun(pun);
         }
 
         public void DeletePun(int punID)
         {
-            throw new NotImplementedException();
+            _client.DeletePun(punID);
         }
     }
 }

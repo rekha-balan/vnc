@@ -1,3 +1,4 @@
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\obj\Release\WebService.ASMX.csprojResolveAssemblyReference.cache
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\roslyn\csc.exe
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -13,10 +14,9 @@ C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\roslyn\V
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\WebService.ASMX.dll.config
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\WebService.ASMX.dll
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\WebService.ASMX.pdb
-C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\Data.dll
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\Data.pdb
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\PunData.dll
+C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\PunData.pdb
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\obj\Release\WebService.ASMX.csprojResolveAssemblyReference.cache
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\obj\Release\WebService.ASMX.dll
 C:\GitHub\VNC\Explore\Web Services 10  Ways\01-Asmx\WebService.ASMX\obj\Release\WebService.ASMX.pdb

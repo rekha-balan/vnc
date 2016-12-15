@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PunService.AJAX.PunService" CodeBehind="PunService.svc.cs" %>
