@@ -17,6 +17,7 @@ using DevExpress.CodeRush.Core;
 using DevExpress.CodeRush.PlugInCore;
 using DevExpress.CodeRush.StructuralParser;
 using DevExpress.CodeRush.Core.Replacement;
+using DevExpress.DXCore.Constants;
 
 
 namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
@@ -68,6 +69,16 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToSolution();
         }
 
+        private void btnInsertDefaultRegions_Click(object sender, RoutedEventArgs e)
+        {
+            InsertDefaultRegions();
+        }
+
+        private void btnInsertLoggingProperties_Click(object sender, RoutedEventArgs e)
+        {
+            InsertLoggingProperties();
+        }
+
         private void btnClearListBox_Click(object sender, RoutedEventArgs e)
         {
             this.lbDebugWindow.Items.Clear();
@@ -92,6 +103,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             DisplaySolutionInfo();
         }
 
+        private void btnImportsEaseCore_Click(object sender, RoutedEventArgs e)
+        {
+            ImportsEaseCore();
+        }
         #endregion
 
         #region Main Methods
@@ -365,7 +380,87 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
             }
         }
-#endregion
+
+
+        private void ImportsEaseCore()
+        {
+            try
+            {
+                SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
+
+                // TODO(crhodes):
+                // Extract most of this to method that understands languages.
+
+
+                if (sourceFile.UsingList.ContainsValue("EaseCore"))
+                {
+                    Helper.WriteToDebugWindow("Already contains EaseCore", Helper.DebugDisplay.Debug);
+                }
+                else
+                {
+
+                    Helper.WriteToDebugWindow("Adding Reference to EaseCore", Helper.DebugDisplay.Debug);
+                    SourceRange sourceRange = new SourceRange(0, 0);
+
+                    foreach (LanguageElement element in sourceFile.Nodes)
+                    {
+                        if (element is NamespaceReference)
+                        {
+                            if (sourceRange.Top < element.Range.Top)
+                            {
+                                sourceRange = element.Range.Clone();
+                            }
+                        }
+                    }
+
+
+                    NamespaceReference namespaceReference = new NamespaceReference("EaseCore");
+                    // HACK(crhodes)
+                    // Hard code to VB for now.
+
+                    string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference);
+                    //string code = CodeRush.Language.GenerateElement(namespaceReference, Str.Language.VisualBasic);
+                    CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertDefaultRegions()
+        {
+            // TODO(crhodes):
+            // Handle creating blank area then calling this.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("IDR");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertLoggingProperties()
+        {
+            // TODO(crhodes):
+            // Determine if in Module or Class and insert at first appropriate line.  Have to handle inheritance, etc.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("LOGPROP");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+        #endregion
 
         #region Utility Methods
 
