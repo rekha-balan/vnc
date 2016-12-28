@@ -75,15 +75,22 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         private void btnDisplayContextInfo_Click(object sender, RoutedEventArgs e)
         {
-            SolutionElement solution = CodeRush.Source.ActiveSolution;
-            ProjectElement project = CodeRush.Source.ActiveProject;
-            LanguageElement active = CodeRush.Source.Active;
-            LanguageElement activeType =  CodeRush.Source.ActiveType;
+            try
+            {
+                SolutionElement solution = CodeRush.Source.ActiveSolution;
+                ProjectElement project = CodeRush.Source.ActiveProject;
+                LanguageElement active = CodeRush.Source.Active;
+                LanguageElement activeType = CodeRush.Source.ActiveType;
 
-            Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name));
-            Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name));
-            Helper.WriteToDebugWindow(string.Format("Active: >{0}< >{1}< ", active.Name, active.ElementType.ToString()));
-            Helper.WriteToDebugWindow(string.Format("ActiveType: >{0}<  >{1}< ", activeType.Name, activeType.ElementType.ToString()));
+                Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name));
+                Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name));
+                Helper.WriteToDebugWindow(string.Format("Active: >{0}< >{1}< ", active.Name, active.ElementType.ToString()));
+                Helper.WriteToDebugWindow(string.Format("ActiveType: >{0}<  >{1}< ", activeType.Name, activeType.ElementType.ToString()));
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString());
+            }
         }
 
         private void btnDisplayProjectInfo_Click(object sender, RoutedEventArgs e)
@@ -149,6 +156,12 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         {
             try
             {
+                if (LanguageElementType.Class != CodeRush.Source.ActiveType.ElementType)
+                {
+                    MessageBox.Show("Not in a Class ElementType");
+                    return;
+                }
+
                 Class activeClass = CodeRush.Source.ActiveClass;
 
                 fileChangeCollection = new FileChangeCollection();
@@ -172,10 +185,17 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         {
             try
             {
+                if (LanguageElementType.Method != CodeRush.Source.ActiveType.ElementType)
+                {
+                    MessageBox.Show("Not in a Method ElementType");
+                    return;
+                }
+
+                Method method = CodeRush.Source.ActiveMethod;
+
                 fileChangeCollection = new FileChangeCollection();
 
-                Method activeMethod = CodeRush.Source.ActiveMethod;
-                AddLoggingToMethod(activeMethod);
+                AddLoggingToMethod(method);
 
                 CodeRush.File.ApplyChanges(fileChangeCollection);
                 CodeRush.Source.ParseIfTextChanged();
@@ -190,25 +210,31 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         private void AddLoggingToActiveModule()
         {
-            //    try
-            //    {
-            //        Class activeClass = CodeRush.Source.ActiveClass;
+            try
+            {
+                if (LanguageElementType.Module != CodeRush.Source.ActiveType.ElementType)
+                {
+                    MessageBox.Show("Not in a module ElementType");
+                    return; 
+                }
 
-            //        fileChangeCollection = new FileChangeCollection();
+                Module module = CodeRush.Source.ActiveType as Module;
 
-            //        foreach (var method in activeClass.AllMethods)
-            //        {
-            //            Method methodDetails = (Method)method;
+                fileChangeCollection = new FileChangeCollection();
 
-            //            System.Diagnostics.Debug.WriteLine(string.Format("Method:  Name:>{0}<  Type:>{1}<", methodDetails.Name, methodDetails.MethodType));
-            //            AddLoggingToMethod((DevExpress.CodeRush.StructuralParser.Method)method);
-            //        }
+                foreach (Method method in module.AllMethods)
+                {
+                    AddLoggingToMethod(method);
+                }
 
-            //    }
-            //    catch (Exception ex)
-            //    {
+                CodeRush.File.ApplyChanges(fileChangeCollection);
+                CodeRush.Source.ParseIfTextChanged();
+                fileChangeCollection = null;
+            }
+            catch (Exception ex)
+            {
 
-            //    }            
+            }
 
         }
 
@@ -298,6 +324,12 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         private static void AddLoggingToProject()
         {
             MessageBox.Show("My, my.  Aren't you brave!  Not implented yet.");
+
+            if (LanguageElementType.ProjectElement != CodeRush.Source.ActiveType.ElementType)
+            {
+                MessageBox.Show("Not in a Project ElementType");
+                return;
+            }
         }
 
         private static void AddLoggingToSolution()

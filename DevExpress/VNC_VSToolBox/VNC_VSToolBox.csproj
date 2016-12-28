@@ -74,17 +74,17 @@
     <Compile Include="User Interface\User Controls WPF\wucLoggingControlPanel.xaml.cs">
       <DependentUpon>wucLoggingControlPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VNC_AddLogging.cs">
+    <Compile Include="VNC_VSToolBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="VNC_AddLogging.Designer.cs">
-      <DependentUpon>VNC_AddLogging.cs</DependentUpon>
+    <Compile Include="VNC_VSToolBox.Designer.cs">
+      <DependentUpon>VNC_VSToolBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="VNC_AddLogging.resx">
-      <DependentUpon>VNC_AddLogging.cs</DependentUpon>
+    <EmbeddedResource Include="VNC_VSToolBox.resx">
+      <DependentUpon>VNC_VSToolBox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
