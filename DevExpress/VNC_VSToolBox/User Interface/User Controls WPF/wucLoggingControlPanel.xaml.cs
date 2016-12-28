@@ -204,12 +204,12 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 Helper.WriteToDebugWindow(string.Format("Method Type:>{0}<", method.MethodType), Helper.DebugDisplay.Debug);
 
-                Helper.WriteToDebugWindow(string.Format("Method Line:>{0}< Offset:>{1}<", method.StartLine, method.StartOffset), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format(" Method Start Line:>{0}< Offset:>{1}<", method.StartLine, method.StartOffset), Helper.DebugDisplay.Debug);
 
-                Helper.WriteToDebugWindow(string.Format("  Body Line:>{0}< >{1}<", startBody.Line, startBody.Offset), Helper.DebugDisplay.Debug);
-                Helper.WriteToDebugWindow(string.Format("  Body Line:>{0}< >{1}<", endBody.Line, endBody.Offset), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("   Body Start Line:>{0}< >{1}<", startBody.Line, startBody.Offset), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("   Body End   Line:>{0}< >{1}<", endBody.Line, endBody.Offset), Helper.DebugDisplay.Debug);
 
-                Helper.WriteToDebugWindow(string.Format("Method Line:>{0}< Offset:>{1}<", method.EndLine, method.EndOffset), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format(" Method End  Line:>{0}< Offset:>{1}<", method.EndLine, method.EndOffset), Helper.DebugDisplay.Debug);
 
                 SourcePoint logEntryPoint = new SourcePoint();
                 SourcePoint logExitPoint = new SourcePoint();
@@ -230,8 +230,12 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     {
                         Helper.WriteToDebugWindow("LastCodeChild was return", Helper.DebugDisplay.Debug);
 
+                        Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", codeLine.StartLine, codeLine.StartOffset), Helper.DebugDisplay.Debug);
+                        Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", codeLine.EndLine, codeLine.EndOffset), Helper.DebugDisplay.Debug);
+
                         logExitPoint.Line = codeLine.StartLine;
                         logExitPoint.Offset = 1;
+                        //logExitPoint.Offset = codeLine.StartOffset;
                     }
                     else
                     {
@@ -259,15 +263,22 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 SourceFile activeFile = CodeRush.Source.ActiveSourceFile;
 
-                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
-
-                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
-                fileChangeCollection.Add(logEntryFileChange);
+                // Write the Exit entry before the Enter entry to handle edge cases with returns.
 
                 Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
 
                 FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
                 fileChangeCollection.Add(logExitFileChange);
+
+                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
+
+                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
+                fileChangeCollection.Add(logEntryFileChange);
+
+                //Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
+
+                //FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
+                //fileChangeCollection.Add(logExitFileChange);
             }
             catch (Exception ex)
             {
@@ -509,6 +520,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
 ";
                     break;
+
                 case "basic":
                     message = @"
 
