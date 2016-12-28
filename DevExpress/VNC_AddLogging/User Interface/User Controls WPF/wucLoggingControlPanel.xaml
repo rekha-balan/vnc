@@ -1,27 +1,86 @@
-﻿<Grid x:Class="VNC_AddLogging.User_Interface.User_Controls_WPF.wucLoggingControlPanel"
+﻿<Grid x:Class="VNC_VSToolBox.User_Interface.User_Controls_WPF.wucVNCControlPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VNC_AddLogging.User_Interface.User_Controls_WPF"
+             xmlns:local="clr-namespace:VNC_VSToolBox.User_Interface.User_Controls_WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid.Resources>
+        <Style x:Key="ActionButtonWide" TargetType="Button">
+            <Setter  Property="Margin" Value="5" />
+        </Style>        
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter  Property="Margin" Value="5" />
+            <Setter  Property="Width" Value="80" />
+        </Style>
+    </Grid.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0">Hello</Label>
-        <Button Grid.Row="1" Click="Button_Click">Hello</Button>
+        <TextBlock Grid.Row="0" Background="#D3D3D3">Color suggests risk</TextBlock>
 
-        <Button Grid.Row="2" x:Name="btnAddLoggingToClass" Click="btnAddLoggingToClass_Click">Add Logging to Class</Button>
-        <Button Grid.Row="3" x:Name="btnAddLoggingToModule" Click="btnAddLoggingToModule_Click">Add Logging to Module</Button>
-        <Button Grid.Row="4" x:Name="btnAddLoggingToMethod" Click="btnAddLoggingToMethod_Click">Add Logging to Method</Button>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnAddLoggingToSolution"
+                Style="{StaticResource ActionButtonWide}"
+                Click="btnAddLoggingToSolution_Click" Background="Red" >
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Solution</TextBlock>
+            </Button>
+            <Button x:Name="btnAddLoggingProject" 
+                    Style="{StaticResource ActionButtonWide}"                
+                    Grid.Row="2" Click="btnAddLoggingToProject_Click" Background="OrangeRed">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Project</TextBlock>
+            </Button>            
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnDisplaySolutionInfo" 
+                    Click="btnDisplaySolutionInfo_Click"  Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List Solution Info</TextBlock>
+            </Button>
+            <Button x:Name="btnDisplayProjectInfo" 
+                    Click="btnDisplayProjectInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List Project Info</TextBlock>
+            </Button>
+            <Button x:Name="btnDisplaySourceFileInfo" 
+                    Click="btnDisplaySourceFileInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List SourceFile Info</TextBlock>
+            </Button>
+            <Button x:Name="btnDisplayContextInfo" 
+                    Click="btnDisplayContextInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Display Context Info</TextBlock>
+            </Button>            
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnAddLoggingToClass" 
+                    Background="LightGreen"
+                    Click="btnAddLoggingToClass_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Class</TextBlock>
+            </Button>
+            <Button x:Name="btnAddLoggingToModule" 
+                    Background="LightGreen"
+                    Click="btnAddLoggingToModule_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Module</TextBlock>
+            </Button>
+            <Button x:Name="btnAddLoggingToMethod" 
+                    Background="Green"
+                    Click="btnAddLoggingToMethod_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Method</TextBlock>
+            </Button>
+        </StackPanel>
+
+        <Button x:Name="btnClearListBox"
+                Margin="5"
+                Grid.Row="4" Click="btnClearListBox_Click">Clear Listbox</Button>   
         
         <ListBox x:Name="lbDebugWindow" Grid.Row="5" />
     </Grid>

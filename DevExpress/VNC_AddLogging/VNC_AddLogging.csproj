@@ -8,8 +8,8 @@
     <ProjectGuid>{D3DA913E-D14E-49E4-8361-03DE564DFDF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VNC_AddLogging</RootNamespace>
-    <AssemblyName>VNC_AddLogging</AssemblyName>
+    <RootNamespace>VNC_VSToolBox</RootNamespace>
+    <AssemblyName>VNC_VSToolBox</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

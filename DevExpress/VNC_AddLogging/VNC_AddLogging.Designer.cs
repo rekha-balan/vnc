@@ -1,9 +1,9 @@
 using System.Runtime.InteropServices;
 
-namespace VNC_AddLogging
+namespace VNC_VSToolBox
 {
     [Guid("bc39eac1-02b8-4676-ae8e-25ba553db52a")]
-    partial class VNC_AddLogging
+    partial class VNC_VSToolBox
     {
         /// <summary>
         /// Required designer variable.
@@ -11,7 +11,7 @@ namespace VNC_AddLogging
         private System.ComponentModel.IContainer components = null;
         private DevExpress.DXCore.PlugInCore.DXCoreEvents events;
 
-        public VNC_AddLogging()
+        public VNC_VSToolBox()
         {
             /// <summary>
             /// Required for Windows.Forms Class Composition Designer support
@@ -43,7 +43,6 @@ namespace VNC_AddLogging
             this.components = new System.ComponentModel.Container();
             this.events = new DevExpress.DXCore.PlugInCore.DXCoreEvents(this.components);
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            ((System.ComponentModel.ISupportInitialize)(this.Images16x16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.events)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
@@ -59,12 +58,11 @@ namespace VNC_AddLogging
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = null;
             // 
-            // ToolWindow1
+            // VNC_AddLogging
             // 
             this.Controls.Add(this.elementHost1);
-            this.Name = "ToolWindow1";
+            this.Name = "VNC_AddLogging";
             this.Size = new System.Drawing.Size(490, 150);
-            ((System.ComponentModel.ISupportInitialize)(this.Images16x16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.events)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
@@ -79,7 +77,7 @@ namespace VNC_AddLogging
         ///
         public static EnvDTE.Window ShowWindow()
         {
-            return DevExpress.CodeRush.Core.CodeRush.ToolWindows.Show(typeof(VNC_AddLogging).GUID);
+            return DevExpress.CodeRush.Core.CodeRush.ToolWindows.Show(typeof(VNC_VSToolBox).GUID);
         }
         #endregion
         #region HideWindow
@@ -88,7 +86,7 @@ namespace VNC_AddLogging
         ///
         public static EnvDTE.Window HideWindow()
         {
-            return DevExpress.CodeRush.Core.CodeRush.ToolWindows.Hide(typeof(VNC_AddLogging).GUID);
+            return DevExpress.CodeRush.Core.CodeRush.ToolWindows.Hide(typeof(VNC_VSToolBox).GUID);
         }
         #endregion
 

@@ -19,12 +19,12 @@ using DevExpress.CodeRush.StructuralParser;
 using DevExpress.CodeRush.Core.Replacement;
 
 
-namespace VNC_AddLogging.User_Interface.User_Controls_WPF
+namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 {
     /// <summary>
     /// Interaction logic for wucLoggingControlPanel.xaml
     /// </summary>
-    public partial class wucLoggingControlPanel : Grid
+    public partial class wucVNCControlPanel : Grid
     {
         #region Enums, Fields, Properties, Structures
 
@@ -34,7 +34,7 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
 
         #region Constructors and Load
 
-        public wucLoggingControlPanel()
+        public wucVNCControlPanel()
         {
             InitializeComponent();
         }
@@ -44,6 +44,108 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
         #region Event Handlers
 
         private void btnAddLoggingToClass_Click(object sender, RoutedEventArgs e)
+        {
+            AddLoggingToClass();
+        }
+
+        private void btnAddLoggingToMethod_Click(object sender, RoutedEventArgs e)
+        {
+            AddLoggingToActiveMethod();
+        }
+
+        private void btnAddLoggingToModule_Click(object sender, RoutedEventArgs e)
+        {
+            AddLoggingToActiveModule();
+        }
+
+        private void btnAddLoggingToProject_Click(object sender, RoutedEventArgs e)
+        {
+            AddLoggingToProject();
+        }
+
+        private void btnAddLoggingToSolution_Click(object sender, RoutedEventArgs e)
+        {
+            AddLoggingToSolution();
+        }
+
+        private void btnClearListBox_Click(object sender, RoutedEventArgs e)
+        {
+            this.lbDebugWindow.Items.Clear();
+        }
+
+        private void btnDisplayContextInfo_Click(object sender, RoutedEventArgs e)
+        {
+            SolutionElement solution = CodeRush.Source.ActiveSolution;
+            ProjectElement project = CodeRush.Source.ActiveProject;
+            LanguageElement active = CodeRush.Source.Active;
+            LanguageElement activeType =  CodeRush.Source.ActiveType;
+
+            Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name));
+            Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name));
+            Helper.WriteToDebugWindow(string.Format("Active: >{0}< >{1}< ", active.Name, active.ElementType.ToString()));
+            Helper.WriteToDebugWindow(string.Format("ActiveType: >{0}<  >{1}< ", activeType.Name, activeType.ElementType.ToString()));
+        }
+
+        private void btnDisplayProjectInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                DisplayProjectInfo(project);
+
+                foreach (SourceFile sourceFile in project.AllFiles)
+                {
+                    DisplaySourceFileInfo(sourceFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString());
+            }
+        }
+
+        private void btnDisplaySourceFileInfo_Click(object sender, RoutedEventArgs e)
+        {
+            SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
+
+            DisplaySourceFileInfo(sourceFile);
+        }
+
+        private static void DisplaySolutionInfo(SolutionElement solution)
+        {
+            Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  Projects:>{1}<", solution.FilePath, solution.ProjectElements.Count));
+        }
+
+        private void btnDisplaySolutionInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SolutionElement solution = CodeRush.Source.ActiveSolution;
+                DisplaySolutionInfo(solution);
+
+                if (solution == null)
+                {
+                    MessageBox.Show("No Active Solution");
+                    return;
+                }
+
+                foreach (ProjectElement project in solution.AllProjects)
+                {
+                    DisplayProjectSummaryInfo(project);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString());
+            }
+        }
+
+        #endregion
+
+        #region Main Methods
+
+        private void AddLoggingToClass()
         {
             try
             {
@@ -66,7 +168,7 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
             }
         }
 
-        private void btnAddLoggingToMethod_Click(object sender, RoutedEventArgs e)
+        private void AddLoggingToActiveMethod()
         {
             try
             {
@@ -86,58 +188,29 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
             }
         }
 
-        private void btnAddLoggingToModule_Click(object sender, RoutedEventArgs e)
+        private void AddLoggingToActiveModule()
         {
-        //    try
-        //    {
-        //        Class activeClass = CodeRush.Source.ActiveClass;
+            //    try
+            //    {
+            //        Class activeClass = CodeRush.Source.ActiveClass;
 
-        //        fileChangeCollection = new FileChangeCollection();
+            //        fileChangeCollection = new FileChangeCollection();
 
-        //        foreach (var method in activeClass.AllMethods)
-        //        {
-        //            Method methodDetails = (Method)method;
+            //        foreach (var method in activeClass.AllMethods)
+            //        {
+            //            Method methodDetails = (Method)method;
 
-        //            System.Diagnostics.Debug.WriteLine(string.Format("Method:  Name:>{0}<  Type:>{1}<", methodDetails.Name, methodDetails.MethodType));
-        //            AddLoggingToMethod((DevExpress.CodeRush.StructuralParser.Method)method);
-        //        }
+            //            System.Diagnostics.Debug.WriteLine(string.Format("Method:  Name:>{0}<  Type:>{1}<", methodDetails.Name, methodDetails.MethodType));
+            //            AddLoggingToMethod((DevExpress.CodeRush.StructuralParser.Method)method);
+            //        }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-                
-        //    }
+            //    }
+            //    catch (Exception ex)
+            //    {
+
+            //    }            
+
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello Logging");
-        }
-
-        #endregion
-
-        private string GetLogEntryText()
-        {
-            string message = @"
-    #If TRACE
-        Dim startTicks As Long = Log.Trace9(""Enter"", LOG_APPNAME, BASE_ERRORNUMBER + 0)
-    #End If
-
-";
-            return message;
-        }
-
-        private string GetLogExitText()
-        {
-            string message = @"
-
-    #If TRACE
-        Log.Trace9(""Exit"", LOG_APPNAME, BASE_ERRORNUMBER + 0, startTicks)
-    #End If
-";
-            return message;
-        }
-        #region Main Methods
 
         private void AddLoggingToMethod(Method method)
         {
@@ -171,20 +244,34 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
 
                 if (method.MethodType == MethodTypeEnum.Function)
                 {
-                    logExitPoint.Line = method.EndLine - 1;
-                    logExitPoint.Offset = endBody.Offset;
+                    // TODO(crhodes):
+                    // This works fine if there is only one Return statement.  If there are multiple it finds the first one.
+
+                    LanguageElement codeLine = method.GetLastCodeChild();
+
+                    if (codeLine.ElementType == LanguageElementType.Return)
+                    {
+                        Helper.WriteToDebugWindow("LastCodeChild was return");
+                        logExitPoint.Line = codeLine.StartLine;
+                        logExitPoint.Offset = 1;
+                    }
+                    else
+                    {
+                        Helper.WriteToDebugWindow("Using FindChildByElementType");
+                        var returnLine = method.FindChildByElementType(LanguageElementType.Return);
+                        Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", returnLine.StartLine, returnLine.StartOffset));
+                        Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", returnLine.EndLine, returnLine.EndOffset));
+                        logExitPoint.Line = returnLine.StartLine;
+                        logExitPoint.Offset = 1;
+                    }
                 }
                 else
                 {
-                    var returnLine = method.FindChildByElementType(LanguageElementType.Return);
-                    Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", returnLine.StartLine, returnLine.StartOffset));
-                    Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", returnLine.EndLine, returnLine.EndOffset));
-
                     logExitPoint.Line = method.EndLine - 1;
                     logExitPoint.Offset = endBody.Offset;
                 }
 
-                if (startBody.Line == endBody.Line)
+                if (startBody.Line == method.EndLine)
                 {
                     Helper.WriteToDebugWindow("Empty method body, skipping.");
                     return;
@@ -208,6 +295,143 @@ namespace VNC_AddLogging.User_Interface.User_Controls_WPF
             }
         }
 
+        private static void AddLoggingToProject()
+        {
+            MessageBox.Show("My, my.  Aren't you brave!  Not implented yet.");
+        }
+
+        private static void AddLoggingToSolution()
+        {
+            MessageBox.Show("What are you nuts!  Not implented yet, anyway");
+        }
+
+#endregion
+
+        #region Utility Methods
+
+        #endregion
+
+        #region Private Methods
+
+        private void DisplayProjectInfo(ProjectElement project)
+        {
+            Helper.WriteToDebugWindow(string.Format("Project: >{0,20}< >{1,10}< >{2,10}< >{3,10}< >{4}<",
+                                    project.Name, project.AssemblyName, project.Language, project.TargetFramework, project.FilePath));
+        }
+
+        private static void DisplayProjectSummaryInfo(ProjectElement project)
+        {
+            Helper.WriteToDebugWindow(string.Format("Project: >{0,20}< >{1,10}< >{2,10}< >{3,10}< >{4}<",
+                                    project.Name, project.AssemblyName, project.Language, project.TargetFramework, project.FilePath));
+        }
+
+        private static void DisplayRegionInfo(RegionDirectiveCollection regions)
+        {
+            Helper.WriteToDebugWindow(string.Format("      Regions: >{0}<  ", regions.Count));
+
+            foreach (RegionDirective region in regions)
+            {
+                Helper.WriteToDebugWindow(string.Format("         Name: >{0}< >{1}< >{2}<", region.Name, region.StartLine, region.EndLine));
+            }
+        }
+
+        private static void DisplayNodeInfo(NodeList nodes)
+        {
+            Helper.WriteToDebugWindow(string.Format("         Nodes: >{0}<", nodes.Count));
+
+            foreach(TypeDeclaration type in nodes)
+            {
+                Helper.WriteToDebugWindow(string.Format("           Name: >{0}<  Type: >{1}<", type.Name, type.ElementType.ToString()));
+            }
+        }
+
+        private static void DisplaySourceFileInfo(SourceFile sourceFile)
+        {
+            Helper.WriteToDebugWindow(string.Format("  File: >{0}<  >{1}<", sourceFile.FilePath, sourceFile.Name));
+            Helper.WriteToDebugWindow(string.Format("    ClassName: >{0}<  ElementType >{1}<", sourceFile.ClassName, sourceFile.ElementType.ToString()));
+            Helper.WriteToDebugWindow(string.Format("      UsingList: >{0}<  ", sourceFile.UsingList.Count));
+            DisplayRegionInfo(sourceFile.Regions);
+
+
+            Helper.WriteToDebugWindow(string.Format("      EndLine: >{0}<  ", sourceFile.EndLine));
+            Helper.WriteToDebugWindow(string.Format("      Nodes: >{0}<  ", sourceFile.Nodes.Count));
+            DisplayNodeInfo(sourceFile.Nodes);
+            Helper.WriteToDebugWindow(string.Format("      OptionExplicit: >{0}<  OptionInfer: >{1}<  OptionStrict: >{2}<",
+                sourceFile.OptionExplicit, sourceFile.OptionInfer, sourceFile.OptionStrict));
+
+
+            //foreach (SourceFile sourceFile in project.AllFiles)
+            //{
+            //    sourceFileCount++;
+            //    
+
+            //    foreach (TypeDeclaration typeDeclaration in sourceFile.AllTypes)
+            //    {
+            //        typeCount++;
+
+            //        foreach (TypeDeclaration x in typeDeclaration.AllChildTypes)
+            //        {
+            //            childTypeCount++;
+            //        }
+
+            //        foreach (Const x in typeDeclaration.AllConstants)
+            //        {
+            //            constantsCount++;
+            //        }
+
+            //        foreach (Event x in typeDeclaration.AllEvents)
+            //        {
+            //            eventsCount++;
+            //        }
+
+            //        foreach (DevExpress.CodeRush.StructuralParser.IFieldElement x in typeDeclaration.AllFields)
+            //        {
+            //            fieldsCount++;
+            //        }
+
+            //        foreach (Member member in typeDeclaration.AllMembers)
+            //        {
+            //            System.Diagnostics.Debug.WriteLine(string.Format("    Member: >{0}<", member.Name));
+            //            membersCount++;
+            //        }
+
+            //        foreach (Method method in typeDeclaration.AllMethods)
+            //        {
+            //            System.Diagnostics.Debug.WriteLine(string.Format("    Method: >{0}<", method.Name));
+            //            methodsCount++;
+            //        }
+
+            //        foreach (Property x in typeDeclaration.AllProperties)
+            //        {
+            //            propertiesCount++;
+            //        }
+            //    }
+            //}
+        }
+
+        private string GetLogEntryText()
+        {
+            string message = @"
+    #If TRACE
+        Dim startTicks As Long = Log.Trace9(""Enter"", LOG_APPNAME, BASE_ERRORNUMBER + 0)
+    #End If
+
+";
+            return message;
+        }
+
+        private string GetLogExitText()
+        {
+            string message = @"
+
+    #If TRACE
+        Log.Trace9(""Exit"", LOG_APPNAME, BASE_ERRORNUMBER + 0, startTicks)
+    #End If
+";
+            return message;
+        }
+
         #endregion
     }
 }
+
