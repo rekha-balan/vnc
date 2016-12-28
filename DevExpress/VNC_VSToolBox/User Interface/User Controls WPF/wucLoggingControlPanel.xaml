@@ -22,6 +22,7 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -78,10 +79,15 @@
             </Button>
         </StackPanel>
 
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>            
+            <CheckBox x:Name="ckDisplayDebugMessages" Margin="5" IsChecked="False">Display Debug Messages</CheckBox>
+        </StackPanel>
+        
         <Button x:Name="btnClearListBox"
                 Margin="5"
-                Grid.Row="4" Click="btnClearListBox_Click">Clear Listbox</Button>   
+                Grid.Row="5" Click="btnClearListBox_Click">Clear Listbox</Button>   
         
-        <ListBox x:Name="lbDebugWindow" Grid.Row="5" />
+        <ListBox x:Name="lbDebugWindow" Grid.Row="6" />
     </Grid>
 </Grid>

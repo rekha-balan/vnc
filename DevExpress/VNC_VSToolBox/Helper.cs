@@ -8,9 +8,25 @@ namespace VNC_VSToolBox
 {
     public class Helper
     {
-        public static void WriteToDebugWindow(string message)
+        public enum DebugDisplay
         {
-            VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+            Always = 0,
+            Debug = 1
+        }
+
+        public static void WriteToDebugWindow(string message, DebugDisplay debugLevel)
+        {
+            if ((bool)VNC_VSToolBox.controlPanel.ckDeveloperMode.IsChecked)
+            {
+                if (DebugDisplay.Always == debugLevel)
+                {
+                    VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+                }
+                else if ((bool)VNC_VSToolBox.controlPanel.ckDisplayDebugMessages.IsChecked)
+                {
+                    VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+                }
+            }
         }
     }
 }
