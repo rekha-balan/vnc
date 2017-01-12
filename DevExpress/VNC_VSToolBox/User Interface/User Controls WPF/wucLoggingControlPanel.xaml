@@ -5,26 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VNC_VSToolBox.User_Interface.User_Controls_WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="600" d:DesignWidth="400">
     <Grid.Resources>
         <Style x:Key="ActionButtonWide" TargetType="Button">
             <Setter  Property="Margin" Value="5" />
         </Style>        
         <Style x:Key="ActionButton" TargetType="Button">
             <Setter  Property="Margin" Value="5" />
-            <Setter  Property="Width" Value="85" />
+            <!--<Setter  Property="Width" Value="85" />-->
         </Style>
     </Grid.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
@@ -34,69 +34,80 @@
             <Button x:Name="btnAddLoggingToSolution"
                 Style="{StaticResource ActionButtonWide}"
                 Click="btnAddLoggingToSolution_Click" Background="Red" >
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Solution</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Add Logging to Solution">Add Logging to Solution</TextBlock>
             </Button>
             <Button x:Name="btnAddLoggingProject" 
                     Style="{StaticResource ActionButtonWide}"                
                     Grid.Row="2" Click="btnAddLoggingToProject_Click" Background="OrangeRed">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Project</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Add Logging to Project">Add Logging to Project</TextBlock>
             </Button>            
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnDisplaySolutionInfo" 
                     Click="btnDisplaySolutionInfo_Click"  Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List Solution Info</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="List Solution Info">List Solution Info</TextBlock>
             </Button>
             <Button x:Name="btnDisplayProjectInfo" 
                     Click="btnDisplayProjectInfo_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List Project Info</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" ToolTip="List Project Info">List Project Info</TextBlock>
             </Button>
             <Button x:Name="btnDisplaySourceFileInfo" 
                     Click="btnDisplaySourceFileInfo_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">List SourceFile Info</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="List SourceFile Info">List SourceFile Info</TextBlock>
             </Button>
             <Button x:Name="btnDisplayContextInfo" 
                     Click="btnDisplayContextInfo_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Display Context Info</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Display Context Info">Display Context Info</TextBlock>
             </Button>            
-        </StackPanel>
+        </WrapPanel>
         
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnAddLoggingToClass" 
                     Background="#00FFFF"
                     Click="btnAddLoggingToClass_Click" Style="{StaticResource ActionButton}">
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Class</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Add Logging to Class">Add Logging to Class</TextBlock>
             </Button>
             <Button x:Name="btnAddLoggingToModule" 
                     Background="#00FFFF"
                     Click="btnAddLoggingToModule_Click" Style="{StaticResource ActionButton}">
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Module</TextBlock>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                               ToolTip="Add Logging to Module">Add Logging to Module</TextBlock>
             </Button>
             <Button x:Name="btnAddLoggingToMethod" 
                     Background="Green"
                     Click="btnAddLoggingToMethod_Click" Style="{StaticResource ActionButton}">
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Add Logging to Method</TextBlock>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                               ToolTip="Add Logging to Method">Add Logging to Method</TextBlock>
             </Button>
-        </StackPanel>
+        </WrapPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnImportsEaseCore" 
                     Background="Green"
                     Click="btnImportsEaseCore_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Imports EaseCore</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Imports EaseCore">Imports EaseCore</TextBlock>
             </Button>
             <Button x:Name="btnInsertLoggingProperties" 
                     Background="Green"
                     Click="btnInsertLoggingProperties_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Insert Logging Properties</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Isert Logging Properties">Insert Logging Properties</TextBlock>
             </Button>            
             <Button x:Name="btnInsertDefaultRegions" 
                     Background="Green"
                     Click="btnInsertDefaultRegions_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Insert Default Regions</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Insert Default Regions">Insert Default Regions</TextBlock>
             </Button>
-        </StackPanel>        
+        </WrapPanel>        
         
         <StackPanel Grid.Row="5" Orientation="Horizontal" Background="Bisque">
             <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>            
@@ -105,8 +116,8 @@
         
         <Button x:Name="btnClearListBox"
                 Margin="5"
-                Grid.Row="6" Click="btnClearListBox_Click">Clear Listbox</Button>   
+                Grid.Row="6" Click="btnClearListBox_Click">Clear Debug Window</Button>   
         
-        <ListBox x:Name="lbDebugWindow" Grid.Row="7" />
+        <ListBox x:Name="lbDebugWindow" Grid.Row="7" FontFamily="Lucida Console" />
     </Grid>
 </Grid>

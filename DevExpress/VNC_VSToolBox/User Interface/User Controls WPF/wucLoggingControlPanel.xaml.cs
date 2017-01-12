@@ -29,7 +29,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
     {
         #region Enums, Fields, Properties, Structures
 
-        private FileChangeCollection fileChangeCollection = null;
+        private FileChangeCollection _fileChangeCollection = null;
 
         #endregion
 
@@ -123,16 +123,16 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 Class activeClass = CodeRush.Source.ActiveClass;
 
-                fileChangeCollection = new FileChangeCollection();
+                _fileChangeCollection = new FileChangeCollection();
 
                 foreach (Method method in activeClass.AllMethods)
                 {
                     AddLoggingToMethod(method);
                 }
 
-                CodeRush.File.ApplyChanges(fileChangeCollection);
+                CodeRush.File.ApplyChanges(_fileChangeCollection);
                 CodeRush.Source.ParseIfTextChanged();
-                fileChangeCollection = null;
+                _fileChangeCollection = null;
             }
             catch (Exception ex)
             {
@@ -158,14 +158,14 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     return;
                 }
 
-                fileChangeCollection = new FileChangeCollection();
+                _fileChangeCollection = new FileChangeCollection();
 
                 AddLoggingToMethod(method);
 
-                CodeRush.File.ApplyChanges(fileChangeCollection);
+                CodeRush.File.ApplyChanges(_fileChangeCollection);
                 CodeRush.Source.ParseIfTextChanged();
 
-                fileChangeCollection = null;
+                _fileChangeCollection = null;
             }
             catch (Exception ex)
             {
@@ -185,16 +185,16 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 Module module = CodeRush.Source.ActiveType as Module;
 
-                fileChangeCollection = new FileChangeCollection();
+                _fileChangeCollection = new FileChangeCollection();
 
                 foreach (Method method in module.AllMethods)
                 {
                     AddLoggingToMethod(method);
                 }
 
-                CodeRush.File.ApplyChanges(fileChangeCollection);
+                CodeRush.File.ApplyChanges(_fileChangeCollection);
                 CodeRush.Source.ParseIfTextChanged();
-                fileChangeCollection = null;
+                _fileChangeCollection = null;
             }
             catch (Exception ex)
             {
@@ -202,6 +202,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
+        /// <summary>
+        /// Adds Entry and Exit Log.Trace methods to method.
+        /// </summary>
+        /// <param name="method"></param>
         private void AddLoggingToMethod(Method method)
         {
             if (method == null)
@@ -209,7 +213,13 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 return;
             }
 
-            Helper.WriteToDebugWindow(string.Format("Method: >{0}<", method.Name), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("Method: >{0}<", method.Name), Helper.DebugDisplay.Debug);
+
+            // TODO(crhodes)
+            // Consider breaking this into two parts.
+            // AddEntryTrace() and AddExitTrace()
+            // AddEntryTrace() is easy,
+            // AddExitTrace() is easy if no return value, more difficult if returns as there can be multiple.
 
             try
             {
@@ -226,18 +236,28 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 Helper.WriteToDebugWindow(string.Format(" Method End  Line:>{0}< Offset:>{1}<", method.EndLine, method.EndOffset), Helper.DebugDisplay.Debug);
 
+                if (startBody.Line == method.EndLine)
+                {
+                    Helper.WriteToDebugWindow("Empty method body, skipping.", Helper.DebugDisplay.Debug);
+                    return;
+                }
+
                 SourcePoint logEntryPoint = new SourcePoint();
                 SourcePoint logExitPoint = new SourcePoint();
+                SourceFile activeFile = CodeRush.Source.ActiveSourceFile;
 
                 logEntryPoint.Line = startBody.Line;
                 logEntryPoint.Offset = 1;
 
-                // If we are in a function, searchbackward through the method body looking for the first return.
+                // N.B. Write the Exit Trace Lines before the Etnry Trace lines to handle edge cases with returns.
+
+                // If we are in a function, search backward through the method body looking for the first return.
 
                 if (method.MethodType == MethodTypeEnum.Function)
                 {
                     // TODO(crhodes):
-                    // This works fine if there is only one Return statement.  If there are multiple it finds the first one.
+                    // This section works fine if there is only one Return statement.  If there are multiple it finds the first one.
+                    // Need to handle multiple return lines.  Should probably just log and handle manually for now as there may not be a block to use.
 
                     LanguageElement codeLine = method.GetLastCodeChild();
 
@@ -256,44 +276,27 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     {
                         var returnLine = method.FindChildByElementType(LanguageElementType.Return);
 
-                        Helper.WriteToDebugWindow("Using FindChildByElementType", Helper.DebugDisplay.Debug);
+                        Helper.WriteToDebugWindow(string.Format("Using FindChildByElementType in {0}", method.Name), Helper.DebugDisplay.Always);
                         Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", returnLine.StartLine, returnLine.StartOffset), Helper.DebugDisplay.Debug);
                         Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", returnLine.EndLine, returnLine.EndOffset), Helper.DebugDisplay.Debug);
 
                         logExitPoint.Line = returnLine.StartLine;
                         logExitPoint.Offset = 1;
                     }
+
+                    AddExitTraceLines(method, logExitPoint, activeFile);
                 }
                 else
                 {
+                    // No return value so simple add the Exit Trace Lines
+
                     logExitPoint.Line = method.EndLine - 1;
                     logExitPoint.Offset = endBody.Offset;
+
+                    AddExitTraceLines(method, logExitPoint, activeFile);
                 }
 
-                if (startBody.Line == method.EndLine)
-                {
-                    Helper.WriteToDebugWindow("Empty method body, skipping.", Helper.DebugDisplay.Debug);
-                    return;
-                }
-
-                SourceFile activeFile = CodeRush.Source.ActiveSourceFile;
-
-                // Write the Exit entry before the Enter entry to handle edge cases with returns.
-
-                Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
-
-                FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
-                fileChangeCollection.Add(logExitFileChange);
-
-                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
-
-                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
-                fileChangeCollection.Add(logEntryFileChange);
-
-                //Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
-
-                //FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
-                //fileChangeCollection.Add(logExitFileChange);
+                AddEntryTraceLines(method, logEntryPoint, activeFile);
             }
             catch (Exception ex)
             {
@@ -301,9 +304,25 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
+        private void AddExitTraceLines(Method method, SourcePoint logExitPoint, SourceFile activeFile)
+        {
+            Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
+
+            FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
+            _fileChangeCollection.Add(logExitFileChange);
+        }
+
+        private void AddEntryTraceLines(Method method, SourcePoint logEntryPoint, SourceFile activeFile)
+        {
+            Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
+
+            FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
+            _fileChangeCollection.Add(logEntryFileChange);
+        }
+
         private static void AddLoggingToProject()
         {
-            MessageBox.Show("My, my.  Aren't you brave!  Not implented yet.");
+            MessageBox.Show("My, my.  Aren't you brave!  Not implemented yet.");
 
             if (LanguageElementType.ProjectElement != CodeRush.Source.ActiveType.ElementType)
             {
@@ -314,7 +333,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         private static void AddLoggingToSolution()
         {
-            MessageBox.Show("What are you nuts!  Not implented yet, anyway");
+            MessageBox.Show("What are you nuts!  Not implemented yet, anyway");
         }
 
 
@@ -326,11 +345,17 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 ProjectElement project = CodeRush.Source.ActiveProject;
                 LanguageElement active = CodeRush.Source.Active;
                 LanguageElement activeType = CodeRush.Source.ActiveType;
+                Method activeMethod = CodeRush.Source.ActiveMethod;
 
                 Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name), Helper.DebugDisplay.Always);
                 Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("Active: >{0}< >{1}< ", active.Name, active.ElementType.ToString()), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("ActiveType: >{0}<  >{1}< ", activeType.Name, activeType.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("Active: Name:>{0}< ElementType:>{1}< ", active.Name, active.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("ActiveType: Name:>{0}<  ElementType:>{1}< ", activeType.Name, activeType.ElementType.ToString()), Helper.DebugDisplay.Always);
+
+                if (activeMethod != null)
+                {
+                    Helper.WriteToDebugWindow(string.Format("Method: Name:>{0}<", activeMethod.Name), Helper.DebugDisplay.Always);
+                }
             }
             catch (Exception ex)
             {
@@ -418,7 +443,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     // HACK(crhodes)
                     // Hard code to VB for now.
 
-                    string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference);
+                    string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
                     //string code = CodeRush.Language.GenerateElement(namespaceReference, Str.Language.VisualBasic);
                     CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
                 }
@@ -507,19 +532,32 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         private static void DisplaySourceFileInfo(SourceFile sourceFile)
         {
-            Helper.WriteToDebugWindow(string.Format("  File: >{0}<  >{1}<", sourceFile.FilePath, sourceFile.Name), Helper.DebugDisplay.Always);
-            Helper.WriteToDebugWindow(string.Format("    ClassName: >{0}<  ElementType >{1}<", sourceFile.ClassName, sourceFile.ElementType.ToString()), Helper.DebugDisplay.Always);
-            Helper.WriteToDebugWindow(string.Format("      UsingList: >{0}<  ", sourceFile.UsingList.Count), Helper.DebugDisplay.Always);
-            DisplayRegionInfo(sourceFile.Regions);
+            if (null == sourceFile)
+            {
+                MessageBox.Show("No active SourceFile");
+                return;
+            }
+
+            try
+            {
+                Helper.WriteToDebugWindow(string.Format("  File: >{0}<  >{1}<", sourceFile.FilePath, sourceFile.Name), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("    OptionExplicit: >{0}<  OptionInfer: >{1}<  OptionStrict: >{2}<",
+                    sourceFile.OptionExplicit, sourceFile.OptionInfer, sourceFile.OptionStrict), Helper.DebugDisplay.Always);
+
+                //Helper.WriteToDebugWindow(string.Format("    ElementType >{1}<", sourceFile.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("    UsingList: >{0}<  ", sourceFile.UsingList.Count), Helper.DebugDisplay.Always);
+                DisplayRegionInfo(sourceFile.Regions);
+
+                Helper.WriteToDebugWindow(string.Format("    EndLine: >{0}<  ", sourceFile.EndLine), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("    Nodes: >{0}<  ", sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
+                DisplayNodeInfo(sourceFile.Nodes);
 
 
-            Helper.WriteToDebugWindow(string.Format("      EndLine: >{0}<  ", sourceFile.EndLine), Helper.DebugDisplay.Always);
-            Helper.WriteToDebugWindow(string.Format("      Nodes: >{0}<  ", sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
-            DisplayNodeInfo(sourceFile.Nodes);
-            Helper.WriteToDebugWindow(string.Format("      OptionExplicit: >{0}<  OptionInfer: >{1}<  OptionStrict: >{2}<",
-                sourceFile.OptionExplicit, sourceFile.OptionInfer, sourceFile.OptionStrict), Helper.DebugDisplay.Always);
-
-
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
             //foreach (SourceFile sourceFile in project.AllFiles)
             //{
             //    sourceFileCount++;

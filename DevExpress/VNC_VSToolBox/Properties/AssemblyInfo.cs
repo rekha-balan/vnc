@@ -13,7 +13,7 @@ using DevExpress.CodeRush.Common;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VNC")]
 [assembly: AssemblyProduct("VNC_VSToolBox")]
-[assembly: AssemblyCopyright("Copyright © VNC 2016")]
+[assembly: AssemblyCopyright("Copyright © VNC 2016, 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,7 +34,7 @@ using DevExpress.CodeRush.Common;
 // AssemblyVersion is required.
 // If AssemblyFileVersion is not provided it is loaded from AssemblyVersion.
 // If AssemblyInformationalVersion is not provided it is loaded from AssemblyFileVersion if provided
-// otherwise from AssemblyVersion.  It can be an arbitraily string.
+// otherwise from AssemblyVersion.  It can be an arbitrary string.
 //
 // Each attribute takes a version number consisting of four parts:
 //
@@ -67,4 +67,4 @@ using DevExpress.CodeRush.Common;
 //  Version   Date          By
 //  1.0.0.0   mm/dd/yyyy    Christopher Rhodes
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2016.12.28B")]
+[assembly: AssemblyInformationalVersion("2017.01.12A")]
