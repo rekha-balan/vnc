@@ -208,12 +208,18 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         /// <param name="method"></param>
         private void AddLoggingToMethod(Method method)
         {
+            Helper.WriteToDebugWindow(string.Format("Method: >{0}<", method.Name), Helper.DebugDisplay.Debug);
+
             if (method == null)
             {
                 return;
             }
 
-            Helper.WriteToDebugWindow(string.Format("Method: >{0}<", method.Name), Helper.DebugDisplay.Debug);
+            // Skip constructors for now.  Not smart enough to detect calling base initialization routines.
+            if (method.IsConstructor)
+            {
+                return;
+            }
 
             // TODO(crhodes)
             // Consider breaking this into two parts.

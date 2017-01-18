@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using DevExpress.CodeRush.Common;
 
-[assembly: DXCoreAssembly(DXCoreAssemblyType.PlugIn, "VNC_VSToolBox", PlugInLoadType.Demand, LoadAbilityType.LoadDisabled)]
+[assembly: DXCoreAssembly(DXCoreAssemblyType.PlugIn, "VNC_VSToolBox", PlugInLoadType.StartUp, LoadAbilityType.LoadEnabled)]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -67,4 +67,4 @@ using DevExpress.CodeRush.Common;
 //  Version   Date          By
 //  1.0.0.0   mm/dd/yyyy    Christopher Rhodes
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2017.01.12A")]
+[assembly: AssemblyInformationalVersion("2017.01.18A")]
