@@ -250,8 +250,24 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 SourcePoint logExitPoint = new SourcePoint();
                 SourceFile activeFile = CodeRush.Source.ActiveSourceFile;
 
-                logEntryPoint.Line = startBody.Line;
-                logEntryPoint.Offset = 1;
+                if (method.StartLine < startBody.Line)
+                {
+                    // This is the normal case
+                    logEntryPoint.Line = startBody.Line;
+                    logEntryPoint.Offset = 1;
+                }
+                else if (method.StartLine == startBody.Line)
+                {
+                    // This can happen if there is a comment at the end of the method declaration.
+                    // Don't worry about the formatting; drop a marker so we can inspect.
+
+                    Helper.WriteToDebugWindow(string.Format("{0} method.StartLine == startBody.Line", method.Name), Helper.DebugDisplay.Always);
+
+                    logEntryPoint.Line = startBody.Line;
+                    logEntryPoint.Offset = startBody.Offset;
+
+                    CodeRush.Markers.Drop(logEntryPoint);
+                }
 
                 // N.B. Write the Exit Trace Lines before the Entry Trace lines to handle edge cases with returns.
 
@@ -265,6 +281,13 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     // Drop a marker so can easily go to the issues.
 
                     LanguageElement codeLine = method.GetLastCodeChild();
+
+                    if (null == codeLine)
+                    {
+                        Helper.WriteToDebugWindow(string.Format("{0} LastCodeChild returned null", method.Name), Helper.DebugDisplay.Always);
+                        CodeRush.Markers.Drop(logEntryPoint);
+                        return;
+                    }
 
                     if (codeLine.ElementType == LanguageElementType.Return)
                     {
