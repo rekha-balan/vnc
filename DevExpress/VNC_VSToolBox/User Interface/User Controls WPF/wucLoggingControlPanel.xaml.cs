@@ -236,10 +236,8 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 Helper.WriteToDebugWindow(string.Format("Method Type:>{0}<", method.MethodType), Helper.DebugDisplay.Debug);
 
                 Helper.WriteToDebugWindow(string.Format(" Method Start Line:>{0}< Offset:>{1}<", method.StartLine, method.StartOffset), Helper.DebugDisplay.Debug);
-
                 Helper.WriteToDebugWindow(string.Format("   Body Start Line:>{0}< >{1}<", startBody.Line, startBody.Offset), Helper.DebugDisplay.Debug);
                 Helper.WriteToDebugWindow(string.Format("   Body End   Line:>{0}< >{1}<", endBody.Line, endBody.Offset), Helper.DebugDisplay.Debug);
-
                 Helper.WriteToDebugWindow(string.Format(" Method End  Line:>{0}< Offset:>{1}<", method.EndLine, method.EndOffset), Helper.DebugDisplay.Debug);
 
                 if (startBody.Line == method.EndLine)
@@ -255,7 +253,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 logEntryPoint.Line = startBody.Line;
                 logEntryPoint.Offset = 1;
 
-                // N.B. Write the Exit Trace Lines before the Etnry Trace lines to handle edge cases with returns.
+                // N.B. Write the Exit Trace Lines before the Entry Trace lines to handle edge cases with returns.
 
                 // If we are in a function, search backward through the method body looking for the first return.
 
@@ -264,6 +262,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     // TODO(crhodes):
                     // This section works fine if there is only one Return statement.  If there are multiple it finds the first one.
                     // Need to handle multiple return lines.  Should probably just log and handle manually for now as there may not be a block to use.
+                    // Drop a marker so can easily go to the issues.
 
                     LanguageElement codeLine = method.GetLastCodeChild();
 
@@ -282,19 +281,34 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     {
                         var returnLine = method.FindChildByElementType(LanguageElementType.Return);
 
-                        Helper.WriteToDebugWindow(string.Format("Using FindChildByElementType in {0}", method.Name), Helper.DebugDisplay.Always);
-                        Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", returnLine.StartLine, returnLine.StartOffset), Helper.DebugDisplay.Debug);
-                        Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", returnLine.EndLine, returnLine.EndOffset), Helper.DebugDisplay.Debug);
+                        if (null != returnLine)
+                        {
+                            Helper.WriteToDebugWindow(string.Format("Using FindChildByElementType in {0}", method.Name), Helper.DebugDisplay.Always);
+                            Helper.WriteToDebugWindow(string.Format("  Return Start Line:>{0}< Offset:>{1}<", returnLine.StartLine, returnLine.StartOffset), Helper.DebugDisplay.Debug);
+                            Helper.WriteToDebugWindow(string.Format("  Return End   Line:>{0}< Offset:>{1}<", returnLine.EndLine, returnLine.EndOffset), Helper.DebugDisplay.Debug);
 
-                        logExitPoint.Line = returnLine.StartLine;
-                        logExitPoint.Offset = 1;
+                            logExitPoint.Line = returnLine.StartLine;
+                            logExitPoint.Offset = 1;
+
+                            CodeRush.Markers.Drop(logExitPoint);
+                        }
+                        else
+                        {
+                            Helper.WriteToDebugWindow(string.Format("FindChildByElementType returned null in {0}", method.Name), Helper.DebugDisplay.Always);
+                            // No return value so simple add the Exit Trace Lines
+
+                            logExitPoint.Line = method.EndLine - 1;
+                            logExitPoint.Offset = endBody.Offset;
+
+                            CodeRush.Markers.Drop(logExitPoint);
+                        }
                     }
 
                     AddExitTraceLines(method, logExitPoint, activeFile);
                 }
                 else
                 {
-                    // No return value so simple add the Exit Trace Lines
+                    // No return value
 
                     logExitPoint.Line = method.EndLine - 1;
                     logExitPoint.Offset = endBody.Offset;
@@ -312,18 +326,32 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         private void AddExitTraceLines(Method method, SourcePoint logExitPoint, SourceFile activeFile)
         {
-            Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
+            try
+            {
+                Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
 
-            FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
-            _fileChangeCollection.Add(logExitFileChange);
+                FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
+                _fileChangeCollection.Add(logExitFileChange);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
         }
 
         private void AddEntryTraceLines(Method method, SourcePoint logEntryPoint, SourceFile activeFile)
         {
-            Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
+            try
+            {
+                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
 
-            FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
-            _fileChangeCollection.Add(logEntryFileChange);
+                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
+                _fileChangeCollection.Add(logEntryFileChange);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
         }
 
         private static void AddLoggingToProject()
