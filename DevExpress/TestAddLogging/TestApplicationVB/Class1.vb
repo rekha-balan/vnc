@@ -1,4 +1,5 @@
 ﻿Public Class Class1
+
     Private Sub bar()
     End Sub
 

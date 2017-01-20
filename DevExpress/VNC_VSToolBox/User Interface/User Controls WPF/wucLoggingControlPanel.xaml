@@ -25,6 +25,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
@@ -66,8 +67,44 @@
                            ToolTip="Display Context Info">Display Context Info</TextBlock>
             </Button>            
         </WrapPanel>
+
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnInstrumentClass" 
+                    Background="#9370DB"
+                    Click="btnInstrumentClass_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Imports EaseCore">Instrument Class</TextBlock>
+            </Button>
+            <Button x:Name="btnInstrumentModule" 
+                    Background="#1E90FF"
+                    Click="btnInstrumentModule_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Isert Logging Properties">Instrument Module</TextBlock>
+            </Button>
+        </WrapPanel>
         
         <WrapPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnImportsEaseCore" 
+                    Background="Green"
+                    Click="btnImportsEaseCore_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Imports EaseCore">Imports EaseCore</TextBlock>
+            </Button>
+            <Button x:Name="btnInsertLoggingProperties" 
+                    Background="Green"
+                    Click="btnInsertLoggingProperties_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Isert Logging Properties">Insert Logging Properties</TextBlock>
+            </Button>
+            <Button x:Name="btnInsertDefaultRegions" 
+                    Background="Green"
+                    Click="btnInsertDefaultRegions_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Insert Default Regions">Insert Default Regions</TextBlock>
+            </Button>
+        </WrapPanel>
+        
+        <WrapPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnAddLoggingToClass" 
                     Background="#00FFFF"
                     Click="btnAddLoggingToClass_Click" Style="{StaticResource ActionButton}">
@@ -88,36 +125,17 @@
             </Button>
         </WrapPanel>
 
-        <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="btnImportsEaseCore" 
-                    Background="Green"
-                    Click="btnImportsEaseCore_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
-                           ToolTip="Imports EaseCore">Imports EaseCore</TextBlock>
-            </Button>
-            <Button x:Name="btnInsertLoggingProperties" 
-                    Background="Green"
-                    Click="btnInsertLoggingProperties_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
-                           ToolTip="Isert Logging Properties">Insert Logging Properties</TextBlock>
-            </Button>            
-            <Button x:Name="btnInsertDefaultRegions" 
-                    Background="Green"
-                    Click="btnInsertDefaultRegions_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
-                           ToolTip="Insert Default Regions">Insert Default Regions</TextBlock>
-            </Button>
-        </WrapPanel>        
+
         
-        <StackPanel Grid.Row="5" Orientation="Horizontal" Background="Bisque">
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Background="Bisque">
             <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>            
             <CheckBox x:Name="ckDisplayDebugMessages" Margin="5" IsChecked="False">Display Debug Messages</CheckBox>
         </StackPanel>
         
         <Button x:Name="btnClearListBox"
                 Margin="5"
-                Grid.Row="6" Click="btnClearListBox_Click">Clear Debug Window</Button>   
+                Grid.Row="7" Click="btnClearListBox_Click">Clear Debug Window</Button>   
         
-        <ListBox x:Name="lbDebugWindow" Grid.Row="7" FontFamily="Lucida Console" />
+        <ListBox x:Name="lbDebugWindow" Grid.Row="8" FontFamily="Lucida Console" />
     </Grid>
 </Grid>

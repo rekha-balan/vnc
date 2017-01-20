@@ -107,6 +107,24 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         {
             ImportsEaseCore();
         }
+
+        private void btnInstrumentClass_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO(crhodes):
+            // Should do some checks to validate in Class, etc.
+            InsertLoggingProperties();
+            AddLoggingToClass();
+            ImportsEaseCore();
+        }
+
+        private void btnInstrumentModule_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO(crhodes):
+            // Should do some checks to validate in Module, etc.
+            InsertLoggingProperties();
+            AddLoggingToActiveModule();
+            ImportsEaseCore();
+        }
         #endregion
 
         #region Main Methods
