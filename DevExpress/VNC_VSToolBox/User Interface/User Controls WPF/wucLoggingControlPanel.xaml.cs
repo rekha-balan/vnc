@@ -55,7 +55,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     if (sourceFile.Name.ToLower().Contains(".vb") && ! sourceFile.Name.ToLower().Contains("designer"))
                     {
                         Helper.WriteToDebugWindow(String.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
-                        ImportsEaseCore();
+                        ImportsNamespaceReference(sourceFile, "EaseCore");
                     }
                 }
             }
