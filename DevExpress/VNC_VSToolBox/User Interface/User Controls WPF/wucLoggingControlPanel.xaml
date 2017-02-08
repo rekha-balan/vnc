@@ -38,29 +38,46 @@
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                            ToolTip="Add Logging to Solution">Add Logging to Solution</TextBlock>
             </Button>
-            <Button x:Name="btnAddLoggingProject" 
+            <Button x:Name="btnAddLoggingToProject" 
                     Style="{StaticResource ActionButtonWide}"                
                     Grid.Row="2" Click="btnAddLoggingToProject_Click" Background="OrangeRed">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                            ToolTip="Add Logging to Project">Add Logging to Project</TextBlock>
-            </Button>            
+            </Button>
+            <Button x:Name="btnAddImportToProject" 
+                    Style="{StaticResource ActionButtonWide}"                
+                    Grid.Row="2" Click="btnAddImportToProject_Click" Background="OrangeRed">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Add Import to Project">Add Import to Project</TextBlock>
+            </Button>
         </StackPanel>
 
         <WrapPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnDisplaySolutionInfo" 
                     Click="btnDisplaySolutionInfo_Click"  Style="{StaticResource ActionButton}">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
-                           ToolTip="List Solution Info">List Solution Info</TextBlock>
+                           ToolTip="Display Solution Info">Display Solution Info</TextBlock>
             </Button>
-            <Button x:Name="btnDisplayProjectInfo" 
-                    Click="btnDisplayProjectInfo_Click" Style="{StaticResource ActionButton}">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" ToolTip="List Project Info">List Project Info</TextBlock>
+            <Button x:Name="btnDisplayProjectSummaryInfo" 
+                    Click="btnDisplayProjectSummaryInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Display Project Summary Info">Display Project Summary Info</TextBlock>
             </Button>
+            <Button x:Name="btnDisplayProjectDetailInfo" 
+                    Click="btnDisplayProjectDetailInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Display Project Detail Info">Display Project Detail Info</TextBlock>
+            </Button>            
             <Button x:Name="btnDisplaySourceFileInfo" 
                     Click="btnDisplaySourceFileInfo_Click" Style="{StaticResource ActionButton}">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
-                           ToolTip="List SourceFile Info">List SourceFile Info</TextBlock>
+                           ToolTip="Display SourceFile Info">Display SourceFile Info</TextBlock>
             </Button>
+            <Button x:Name="btnDisplayFileNodeInfo" 
+                    Click="btnDisplayFileNodeInfo_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                           ToolTip="Display FileNode Info">Display FileNode Info</TextBlock>
+            </Button>            
             <Button x:Name="btnDisplayContextInfo" 
                     Click="btnDisplayContextInfo_Click" Style="{StaticResource ActionButton}">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 

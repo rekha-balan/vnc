@@ -44,6 +44,32 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         #region Event Handlers
 
+        private void AddImportToProject()
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                foreach (SourceFile sourceFile in project.AllFiles)
+                {
+                    if (sourceFile.Name.ToLower().Contains(".vb") && ! sourceFile.Name.ToLower().Contains("designer"))
+                    {
+                        Helper.WriteToDebugWindow(String.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
+                        ImportsEaseCore();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void btnAddImportToProject_Click(object sender, RoutedEventArgs e)
+        {
+            AddImportToProject();
+        }
+
         private void btnAddLoggingToClass_Click(object sender, RoutedEventArgs e)
         {
             AddLoggingToClass();
@@ -69,6 +95,22 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToSolution();
         }
 
+        private void btnDisplayFileNodeInfo_Click(object sender, RoutedEventArgs e)
+        {
+            SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
+
+            Helper.WriteToDebugWindow(string.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  Nodes: >{0}<  ", sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
+
+            DisplayNodeInfo(sourceFile.Nodes, 4);
+        }
+
+        private void btnDisplayProjectDetailInfo_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayProjectDetailInfo();
+        }
+
         private void btnInsertDefaultRegions_Click(object sender, RoutedEventArgs e)
         {
             InsertDefaultRegions();
@@ -83,20 +125,21 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         {
             this.lbDebugWindow.Items.Clear();
         }
+
         private void btnDisplayContextInfo_Click(object sender, RoutedEventArgs e)
         {
             DisplayContextInfo();
         }
-        private void btnDisplayProjectInfo_Click(object sender, RoutedEventArgs e)
+        private void btnDisplayProjectSummaryInfo_Click(object sender, RoutedEventArgs e)
         {
-            DisplayProjectInfo();
+            DisplayProjectSummaryInfo();
         }
 
         private void btnDisplaySourceFileInfo_Click(object sender, RoutedEventArgs e)
         {
             SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
 
-            DisplaySourceFileInfo(sourceFile);
+            DisplaySourceFileInfo(sourceFile, 0);
         }
         private void btnDisplaySolutionInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -438,18 +481,32 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
-        private void DisplayProjectInfo()
+        private void DisplayProjectDetailInfo()
         {
             try
             {
                 ProjectElement project = CodeRush.Source.ActiveProject;
 
-                DisplayProjectInfo(project);
+                DisplayProjectDetailInfo(project, 0);
 
                 foreach (SourceFile sourceFile in project.AllFiles)
                 {
-                    DisplaySourceFileInfo(sourceFile);
+                    DisplaySourceFileInfo(sourceFile, 4);
                 }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void DisplayProjectSummaryInfo()
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                DisplayProjectSummaryInfo(project);
             }
             catch (Exception ex)
             {
@@ -482,46 +539,44 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         }
 
 
+        private static void ImportsNamespaceReference(SourceFile sourceFile, string nameSpaceName)
+        {
+            if (sourceFile.UsingList.ContainsValue(nameSpaceName))
+            {
+                Helper.WriteToDebugWindow(string.Format("Already contains ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
+            }
+            else
+            {
+
+                Helper.WriteToDebugWindow(string.Format("Adding Reference to ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
+                SourceRange sourceRange = new SourceRange(0, 0);
+
+                foreach (LanguageElement element in sourceFile.Nodes)
+                {
+                    if (element is NamespaceReference)
+                    {
+                        if (sourceRange.Top < element.Range.Top)
+                        {
+                            sourceRange = element.Range.Clone();
+                        }
+                    }
+                }
+
+                NamespaceReference namespaceReference = new NamespaceReference(nameSpaceName);
+
+                string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
+                
+                CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
+            }
+        }
+
         private void ImportsEaseCore()
         {
             try
             {
                 SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
 
-                // TODO(crhodes):
-                // Extract most of this to method that understands languages.
-
-
-                if (sourceFile.UsingList.ContainsValue("EaseCore"))
-                {
-                    Helper.WriteToDebugWindow("Already contains EaseCore", Helper.DebugDisplay.Debug);
-                }
-                else
-                {
-
-                    Helper.WriteToDebugWindow("Adding Reference to EaseCore", Helper.DebugDisplay.Debug);
-                    SourceRange sourceRange = new SourceRange(0, 0);
-
-                    foreach (LanguageElement element in sourceFile.Nodes)
-                    {
-                        if (element is NamespaceReference)
-                        {
-                            if (sourceRange.Top < element.Range.Top)
-                            {
-                                sourceRange = element.Range.Clone();
-                            }
-                        }
-                    }
-
-
-                    NamespaceReference namespaceReference = new NamespaceReference("EaseCore");
-                    // HACK(crhodes)
-                    // Hard code to VB for now.
-
-                    string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
-                    //string code = CodeRush.Language.GenerateElement(namespaceReference, Str.Language.VisualBasic);
-                    CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
-                }
+                ImportsNamespaceReference(sourceFile, "EaseCore");
             }
             catch (Exception ex)
             {
@@ -568,10 +623,39 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         #region Private Methods
 
-        private void DisplayProjectInfo(ProjectElement project)
+        private void DisplayProjectDetailInfo(ProjectElement project, Int16 indentLevel)
         {
-            Helper.WriteToDebugWindow(string.Format("Project: >{0,20}< >{1,10}< >{2,10}< >{3,10}< >{4}<",
-                                    project.Name, project.AssemblyName, project.Language, project.TargetFramework, project.FilePath), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("Project: >{0}<", project.Name), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "Name", project.Name), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "FullName", project.FullName), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "FilePath", project.FilePath), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "AssemblyName", project.AssemblyName), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "AssemblyReferences", project.AssemblyReferences.Count), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "Attributes", project.Attributes.Count), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "Language", project.Language), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "TargetFramework", project.TargetFramework), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "OptionExplicit", project.OptionExplicit), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "OptionInfer", project.OptionInfer), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "OptionStrict", project.OptionStrict), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsCaseSensitiveLanguage", project.IsCaseSensitiveLanguage), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsCsharp", project.IsCSharp), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsLightSwitch", project.IsLightSwitch), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsMiscProject", project.IsMiscProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsMvcProject", project.IsMvcProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsSilverlightProject", project.IsSilverlightProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsUnmodeledProject", project.IsUnmodeledProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsUWPProject", project.IsUWPProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsValidProject", project.IsValidProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsWebApplication", project.IsWebApplication), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsWebSite", project.IsWebSite), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsWinRTProject", project.IsWinRTProject), Helper.DebugDisplay.Always);
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "IsWpfProject", project.IsWpfProject), Helper.DebugDisplay.Always);
+
+            Helper.WriteToDebugWindow(string.Format("  {0,25}: >{1}<", "Files", project.AllFilesCount), Helper.DebugDisplay.Always);
         }
 
         private static void DisplayProjectSummaryInfo(ProjectElement project)
@@ -580,24 +664,48 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                                     project.Name, project.AssemblyName, project.Language, project.TargetFramework, project.FilePath), Helper.DebugDisplay.Always);
         }
 
-        private static void DisplayRegionInfo(RegionDirectiveCollection regions)
+        private static void DisplayRegionInfo(RegionDirectiveCollection regions, Int16 indentLevel)
         {
-            Helper.WriteToDebugWindow(string.Format("      Regions: >{0}<  ", regions.Count), Helper.DebugDisplay.Debug);
-
-            foreach (RegionDirective region in regions)
+            try
             {
-                Helper.WriteToDebugWindow(string.Format("         Name: >{0}< >{1}< >{2}<", region.Name, region.StartLine, region.EndLine), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("{0}Regions: >{1}<  ",
+                    PadString(' ', indentLevel), regions.Count), Helper.DebugDisplay.Debug);
+
+                foreach (RegionDirective region in regions)
+                {
+                    Helper.WriteToDebugWindow(string.Format("{0}     Name: >{1}< >{2}< >{3}<",
+                        PadString(' ', indentLevel), region.Name, region.StartLine, region.EndLine), Helper.DebugDisplay.Always);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
             }
         }
 
-        private static void DisplayNodeInfo(NodeList nodes)
+        private static void DisplayNodeInfo(NodeList nodes, Int16 indentLevel)
         {
-            Helper.WriteToDebugWindow(string.Format("         Nodes: >{0}<", nodes.Count), Helper.DebugDisplay.Debug);
-
-            foreach(TypeDeclaration type in nodes)
+            try
             {
-                Helper.WriteToDebugWindow(string.Format("           Name: >{0}<  Type: >{1}<", type.Name, type.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("{0}Nodes: >{1}<",
+                    PadString(' ', indentLevel),
+                    nodes.Count), Helper.DebugDisplay.Debug);
+
+                foreach (var node in nodes)
+                {
+                    Helper.WriteToDebugWindow(String.Format("{0}  Node: >{1}<  >{2}<",
+                        PadString(' ', indentLevel),
+                        node.ToString(), node.GetType()), Helper.DebugDisplay.Always);
+                }
             }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+            //foreach (TypeDeclaration type in nodes)
+            //{
+            //    Helper.WriteToDebugWindow(string.Format("           Name: >{0}<  Type: >{1}<", type.Name, type.ElementType.ToString()), Helper.DebugDisplay.Always);
+            //}
         }
 
         private static void DisplaySolutionInfo(SolutionElement solution)
@@ -605,7 +713,22 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  Projects:>{1}<", solution.FilePath, solution.ProjectElements.Count), Helper.DebugDisplay.Always);
         }
 
-        private static void DisplaySourceFileInfo(SourceFile sourceFile)
+        private static string PadString(char pad, Int16 length)
+        {
+            return new string(pad, length);
+        }
+
+        private static void DisplayUsingListInfo(System.Collections.SortedList usingList, Int16 indentLevel)
+        {
+            foreach (System.Collections.DictionaryEntry item in usingList)
+            {
+                Helper.WriteToDebugWindow(String.Format("{0}Item: >{1}<  >{2}<", 
+                    PadString(' ', indentLevel),
+                    item.Key, item.Value), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private static void DisplaySourceFileInfo(SourceFile sourceFile, Int16 indentLevel)
         {
             if (null == sourceFile)
             {
@@ -615,17 +738,26 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
             try
             {
-                Helper.WriteToDebugWindow(string.Format("  File: >{0}<  >{1}<", sourceFile.FilePath, sourceFile.Name), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("    OptionExplicit: >{0}<  OptionInfer: >{1}<  OptionStrict: >{2}<",
+                Helper.WriteToDebugWindow(string.Format("{0}File: >{1}<", PadString(' ', indentLevel),
+                    sourceFile.Name), Helper.DebugDisplay.Always);
+
+                Helper.WriteToDebugWindow(string.Format("{0}    OptionExplicit: >{1}<  OptionInfer: >{2}<  OptionStrict: >{3}<",
+                    PadString(' ', indentLevel),
                     sourceFile.OptionExplicit, sourceFile.OptionInfer, sourceFile.OptionStrict), Helper.DebugDisplay.Always);
 
                 //Helper.WriteToDebugWindow(string.Format("    ElementType >{1}<", sourceFile.ElementType.ToString()), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("    UsingList: >{0}<  ", sourceFile.UsingList.Count), Helper.DebugDisplay.Always);
-                DisplayRegionInfo(sourceFile.Regions);
+                Helper.WriteToDebugWindow(string.Format("{0}    UsingList: >{1}<  ", PadString(' ', indentLevel), 
+                    sourceFile.UsingList.Count), Helper.DebugDisplay.Always);
 
-                Helper.WriteToDebugWindow(string.Format("    EndLine: >{0}<  ", sourceFile.EndLine), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("    Nodes: >{0}<  ", sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
-                DisplayNodeInfo(sourceFile.Nodes);
+                DisplayUsingListInfo(sourceFile.UsingList, 4);
+                DisplayRegionInfo(sourceFile.Regions, 4);
+
+                Helper.WriteToDebugWindow(string.Format("{0}    EndLine: >{1}<  ", PadString(' ', indentLevel),
+                    sourceFile.EndLine), Helper.DebugDisplay.Always);
+
+                Helper.WriteToDebugWindow(string.Format("{0}    Nodes: >{1}<  ", PadString(' ', indentLevel),
+                    sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
+                DisplayNodeInfo(sourceFile.Nodes, 4);
 
 
             }
