@@ -165,7 +165,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToActiveModule();
             ImportsEaseCore();
         }
-
+        private void btnSelectionToExitTrace_Click(object sender, RoutedEventArgs e)
+        {
+            AddSelectionToExitTrace();
+        }
         #endregion
 
         #region Main Methods
@@ -412,28 +415,52 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
-        private void DisplaySelectionInfo(TextViewSelection selection)
+        void AddSelectionToExitTrace()
         {
-            SourcePoint startPoint = selection.StartSourcePoint;
-            SourcePoint endPoint = selection.EndSourcePoint;
+            Boolean isSupportedType = false;
 
-            Helper.WriteToDebugWindow(string.Format("Selection"), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  Text:>{0}<", selection.Text), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  StartLine:>{0}<", selection.StartLine), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  StartOffset:>{0}<", selection.StartOffset), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  StartPosition:>{0}<", selection.StartPosition), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  StartSourcePoint<"), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", startPoint.Line), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", startPoint.Offset), Helper.DebugDisplay.Debug);
+            try
+            {
+                Method method = CodeRush.Source.ActiveMethod;
 
+                if (null == method)
+                {
+                    MessageBox.Show("Not in a method ElementType");
+                    return;
+                }
 
-            Helper.WriteToDebugWindow(string.Format("  EndLine:>{0}<", selection.EndLine), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  EndOffset:>{0}<", selection.EndOffset), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  EndPosition:>{0}<", selection.EndPosition), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("  EndSourcePoint<"), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", endPoint.Line), Helper.DebugDisplay.Debug);
-            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", endPoint.Offset), Helper.DebugDisplay.Debug);
+                StringBuilder sbFinalOutput = new StringBuilder();
+                StringBuilder sbFormatString = new StringBuilder();
+                StringBuilder sbArgs = new StringBuilder();
 
+                string variable = Clipboard.GetText();
+                sbFinalOutput.AppendFormat("String.Format(\"Exit ({{0}})\", {0})", variable);
+
+                Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
+
+                // Ok, now we have what we want to use, let's hope we have something selected to replace
+
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+
+                DisplaySelectionInfo(selection);
+
+                SourcePoint startPoint = selection.StartSourcePoint;
+                SourcePoint endPoint = selection.EndSourcePoint;
+
+                startPoint.Offset = startPoint.Offset - 1;
+                endPoint.Offset = endPoint.Offset + 1;
+
+                SourceRange sourceRange = new SourceRange(startPoint, endPoint);
+
+                activeTextDocument.SelectText(sourceRange);
+
+                activeTextDocument.ReplaceSelection(sbFinalOutput.ToString(), keepSelection: false);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
         }
 
         void AddParametersToExitTrace()
@@ -507,11 +534,93 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 Helper.WriteToDebugWindow(string.Format("sbFormatString:>{0}<", sbFormatString.ToString()), Helper.DebugDisplay.Debug);
                 Helper.WriteToDebugWindow(string.Format("sbArgs:>{0}<", sbArgs.ToString()), Helper.DebugDisplay.Debug);
                 Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
+
+                // Ok, now we have what we want to use, let's hope we have something selected to replace
+
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+
+                DisplaySelectionInfo(selection);
+
+                SourcePoint startPoint = selection.StartSourcePoint;
+                SourcePoint endPoint = selection.EndSourcePoint;
+
+                startPoint.Offset = startPoint.Offset - 1;
+                endPoint.Offset = endPoint.Offset + 1;
+
+                SourceRange sourceRange = new SourceRange(startPoint, endPoint);
+
+                activeTextDocument.SelectText(sourceRange);
+
+                activeTextDocument.ReplaceSelection(sbFinalOutput.ToString(), keepSelection: false);
             }
             catch (Exception ex)
             {
                 Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
             }
+        }
+
+        private void ImportsEaseCore()
+        {
+            try
+            {
+                SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
+
+                ImportsNamespaceReferenceInActiveDocument(sourceFile, "EaseCore");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertDefaultRegions()
+        {
+            // TODO(crhodes):
+            // Handle creating blank area then calling this.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("IDR");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertLoggingProperties()
+        {
+            // TODO(crhodes):
+            // Determine if in Module or Class and insert at first appropriate line.  Have to handle inheritance, etc.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("LOGPROP");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        #endregion
+
+        #region Utility Methods
+
+        private bool ContainsNamespaceReference(SourceFile sourceFile, string nameSpaceName)
+        {
+            Boolean containsRefererece = false;
+
+            if (sourceFile.UsingList.ContainsValue(nameSpaceName))
+            {
+                Helper.WriteToDebugWindow(string.Format("Already contains ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
+                containsRefererece = true;
+            }
+
+            return containsRefererece;
         }
 
         private static void DisplayContextInfo()
@@ -611,6 +720,30 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
+        private void DisplaySelectionInfo(TextViewSelection selection)
+        {
+            SourcePoint startPoint = selection.StartSourcePoint;
+            SourcePoint endPoint = selection.EndSourcePoint;
+
+            Helper.WriteToDebugWindow(string.Format("Selection"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  Text:>{0}<", selection.Text), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartLine:>{0}<", selection.StartLine), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartOffset:>{0}<", selection.StartOffset), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartPosition:>{0}<", selection.StartPosition), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartSourcePoint<"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", startPoint.Line), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", startPoint.Offset), Helper.DebugDisplay.Debug);
+
+
+            Helper.WriteToDebugWindow(string.Format("  EndLine:>{0}<", selection.EndLine), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndOffset:>{0}<", selection.EndOffset), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndPosition:>{0}<", selection.EndPosition), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndSourcePoint<"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", endPoint.Line), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", endPoint.Offset), Helper.DebugDisplay.Debug);
+
+        }
+
         private static void DisplaySolutionInfo()
         {
             try
@@ -633,69 +766,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             {
                 Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
             }
-        }
-
-        private void ImportsEaseCore()
-        {
-            try
-            {
-                SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
-
-                ImportsNamespaceReferenceInActiveDocument(sourceFile, "EaseCore");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void InsertDefaultRegions()
-        {
-            // TODO(crhodes):
-            // Handle creating blank area then calling this.
-
-            try
-            {
-                CodeRush.Templates.ExpandAtCursor(false);
-                CodeRush.Templates.ExpandTemplate("IDR");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void InsertLoggingProperties()
-        {
-            // TODO(crhodes):
-            // Determine if in Module or Class and insert at first appropriate line.  Have to handle inheritance, etc.
-
-            try
-            {
-                CodeRush.Templates.ExpandAtCursor(false);
-                CodeRush.Templates.ExpandTemplate("LOGPROP");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        #endregion
-
-        #region Utility Methods
-
-        private bool ContainsNamespaceReference(SourceFile sourceFile, string nameSpaceName)
-        {
-            Boolean containsRefererece = false;
-
-            if (sourceFile.UsingList.ContainsValue(nameSpaceName))
-            {
-                Helper.WriteToDebugWindow(string.Format("Already contains ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
-                containsRefererece = true;
-            }
-
-            return containsRefererece;
         }
 
         private static bool IsValidSourceFile(SourceFile sourceFile)

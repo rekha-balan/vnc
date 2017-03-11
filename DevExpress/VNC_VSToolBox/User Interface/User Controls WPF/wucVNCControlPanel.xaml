@@ -166,6 +166,12 @@
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center"
                            ToolTip="Add Parameters to Exit Trace">Add Parameters to Exit Trace</TextBlock>
             </Button>
+            <Button x:Name="btnSelectionToExitTrace" 
+                    Background="Green"
+                    Click="btnSelectionToExitTrace_Click" Style="{StaticResource ActionButton}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add Selection to Exit Trace">Add Selection to Exit Trace</TextBlock>
+            </Button>
         </WrapPanel>
 
         
