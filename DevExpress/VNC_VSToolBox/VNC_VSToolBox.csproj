@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -71,8 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
-    <Compile Include="User Interface\User Controls WPF\wucLoggingControlPanel.xaml.cs">
-      <DependentUpon>wucLoggingControlPanel.xaml</DependentUpon>
+    <Compile Include="User Interface\User Controls WPF\wucVNCControlPanel.xaml.cs">
+      <DependentUpon>wucVNCControlPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="VNC_VSToolBox.cs">
       <SubType>UserControl</SubType>
@@ -88,7 +93,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="User Interface\User Controls WPF\wucLoggingControlPanel.xaml">
+    <Page Include="User Interface\User Controls WPF\wucVNCControlPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
