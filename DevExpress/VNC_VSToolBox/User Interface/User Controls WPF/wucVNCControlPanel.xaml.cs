@@ -44,30 +44,12 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
         #region Event Handlers
 
-        private void AddImportToProject()
-        {
-            try
-            {
-                ProjectElement project = CodeRush.Source.ActiveProject;
-
-                foreach (SourceFile sourceFile in project.AllFiles)
-                {
-                    if (sourceFile.Name.ToLower().Contains(".vb") && ! sourceFile.Name.ToLower().Contains("designer"))
-                    {
-                        Helper.WriteToDebugWindow(String.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
-                        ImportsNamespaceReference(sourceFile, "EaseCore");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
         private void btnAddImportToProject_Click(object sender, RoutedEventArgs e)
         {
-            AddImportToProject();
+            // TODO(crhodes):
+            // Get this from the UI
+
+            AddImportToProject("EaseCore");
         }
 
         private void btnAddLoggingToClass_Click(object sender, RoutedEventArgs e)
@@ -95,15 +77,28 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToSolution();
         }
 
+        private void btnAddParametersToEnterTrace_Click(object sender, RoutedEventArgs e)
+        {
+            AddParametersToEnterTrace();
+        }
+
+        private void btnAddParametersToExitTrace_Click(object sender, RoutedEventArgs e)
+        {
+            AddParametersToExitTrace();
+        }
+
         private void btnDisplayFileNodeInfo_Click(object sender, RoutedEventArgs e)
         {
             SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
 
             Helper.WriteToDebugWindow(string.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
 
-            Helper.WriteToDebugWindow(string.Format("  Nodes: >{0}<  ", sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
-
             DisplayNodeInfo(sourceFile.Nodes, 4);
+        }
+
+        private void btnDisplayMethodInfo_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayMethodInfo();
         }
 
         private void btnDisplayProjectDetailInfo_Click(object sender, RoutedEventArgs e)
@@ -130,6 +125,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
         {
             DisplayContextInfo();
         }
+
         private void btnDisplayProjectSummaryInfo_Click(object sender, RoutedEventArgs e)
         {
             DisplayProjectSummaryInfo();
@@ -141,6 +137,7 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
             DisplaySourceFileInfo(sourceFile, 0);
         }
+
         private void btnDisplaySolutionInfo_Click(object sender, RoutedEventArgs e)
         {
             DisplaySolutionInfo();
@@ -168,9 +165,56 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToActiveModule();
             ImportsEaseCore();
         }
+
         #endregion
 
         #region Main Methods
+
+        private void AddImportToProject(string nameSpace)
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                if (null == project)
+                {
+                    Helper.WriteToDebugWindow("No Active Project, exiting", Helper.DebugDisplay.Always);
+                    return;
+                }
+
+                Helper.WriteToDebugWindow(string.Format("Adding Import To Project ({0})", project.Name), Helper.DebugDisplay.Always);
+
+                FileChangeCollection fileChangeCollection = new FileChangeCollection();
+
+                foreach (SourceFile sourceFile in project.AllFiles)
+                {
+                    if (IsValidSourceFile(sourceFile))
+                    {
+                        Helper.WriteToDebugWindow(String.Format("File: >{0}<", sourceFile.Name), Helper.DebugDisplay.Always);
+
+                        if (! ContainsNamespaceReference(sourceFile, nameSpace))
+                        {
+                            SourceRange sourceRange = GetNamespaceSourceRange(sourceFile);
+                            SourcePoint sourcePoint = new SourcePoint(sourceRange.Bottom.Line + 1, 0);
+
+                            NamespaceReference namespaceReference = new NamespaceReference(nameSpace);
+
+                            string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
+
+                            FileChange fileChange = new FileChange(sourceFile.Name, sourcePoint, code);
+                            //FileChange fileChange = new FileChange(sourceFile.Name, sourceRange, code);
+                            fileChangeCollection.Add(fileChange);
+                        }
+                    }
+                }
+
+                CodeRush.File.ApplyChanges(fileChangeCollection);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
 
         private void AddLoggingToClass()
         {
@@ -260,6 +304,465 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             catch (Exception ex)
             {
                 Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Debug);
+            }
+        }
+
+        private static void AddLoggingToProject()
+        {
+            MessageBox.Show("My, my.  Aren't you brave!  Not implemented yet.");
+
+            if (LanguageElementType.ProjectElement != CodeRush.Source.ActiveType.ElementType)
+            {
+                MessageBox.Show("Not in a Project ElementType");
+                return;
+            }
+        }
+
+        private static void AddLoggingToSolution()
+        {
+            MessageBox.Show("What are you nuts!  Not implemented yet, anyway");
+        }
+
+        void AddParametersToEnterTrace()
+        {
+            Boolean isSupportedType = false;
+
+            try
+            {
+                Method method = CodeRush.Source.ActiveMethod;
+
+                if (null == method)
+                {
+                    MessageBox.Show("Not in a method ElementType");
+                    return;
+                }
+
+                StringBuilder sbFinalOutput = new StringBuilder();
+
+                StringBuilder sbFormatString = new StringBuilder();
+                StringBuilder sbArgs = new StringBuilder();
+
+                sbFinalOutput.AppendFormat("String.Format(\"Enter");
+
+                Int16 position = 0;
+
+                foreach (Param parameter in method.AllParameters)
+                {
+                    Helper.WriteToDebugWindow(string.Format("  Name:>{0}< Type:({1}) ByVal:({2}) ByRef:({3}) Optional:({4}) Default:({5})  ",
+                        parameter.Name, parameter.ParamType, parameter.IsByVal, parameter.IsReferenceParam, parameter.IsOptional, parameter.IsDefault), Helper.DebugDisplay.Debug);
+
+                    switch (parameter.ParamType.ToLower())
+                    {
+                        case "boolean":
+                        case "int16":
+                        case "int32":
+                        case "string":
+                            isSupportedType = true;
+                            break;
+
+                        default:
+                            Helper.WriteToDebugWindow(string.Format("Unsupported Type:({0}) Skipping",
+                                parameter.ParamType), Helper.DebugDisplay.Always);
+
+                            isSupportedType = false;
+                            break;
+                    }
+
+                    if (isSupportedType && ! parameter.IsReferenceParam)
+                    {
+                        sbFormatString.AppendFormat(" {0}:({{{1}}})", parameter.Name, position);
+                        sbArgs.AppendFormat(", {0}", parameter.Name);
+                        position++;
+                    }
+                }
+
+                sbFinalOutput.AppendFormat("{0}", sbFormatString.ToString());
+                sbFinalOutput.AppendFormat("\"");
+                sbFinalOutput.AppendFormat("{0}", sbArgs.ToString());
+                sbFinalOutput.AppendFormat(")");
+
+                Helper.WriteToDebugWindow(string.Format("sbFormatString:>{0}<", sbFormatString.ToString()), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("sbArgs:>{0}<", sbArgs.ToString()), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
+
+                // Ok, now we have what we want to use, let's hope we have something selected to replace
+
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+
+                DisplaySelectionInfo(selection);
+
+                SourcePoint startPoint = selection.StartSourcePoint;
+                SourcePoint endPoint = selection.EndSourcePoint;
+
+                startPoint.Offset = startPoint.Offset - 1;
+                endPoint.Offset = endPoint.Offset + 1;
+
+                SourceRange sourceRange = new SourceRange(startPoint, endPoint);
+
+                activeTextDocument.SelectText(sourceRange);
+
+                activeTextDocument.ReplaceSelection(sbFinalOutput.ToString(), keepSelection: false);
+
+
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void DisplaySelectionInfo(TextViewSelection selection)
+        {
+            SourcePoint startPoint = selection.StartSourcePoint;
+            SourcePoint endPoint = selection.EndSourcePoint;
+
+            Helper.WriteToDebugWindow(string.Format("Selection"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  Text:>{0}<", selection.Text), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartLine:>{0}<", selection.StartLine), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartOffset:>{0}<", selection.StartOffset), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartPosition:>{0}<", selection.StartPosition), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  StartSourcePoint<"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", startPoint.Line), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", startPoint.Offset), Helper.DebugDisplay.Debug);
+
+
+            Helper.WriteToDebugWindow(string.Format("  EndLine:>{0}<", selection.EndLine), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndOffset:>{0}<", selection.EndOffset), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndPosition:>{0}<", selection.EndPosition), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("  EndSourcePoint<"), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Line:>{0}<", endPoint.Line), Helper.DebugDisplay.Debug);
+            Helper.WriteToDebugWindow(string.Format("    Offset:>{0}<", endPoint.Offset), Helper.DebugDisplay.Debug);
+
+        }
+
+        void AddParametersToExitTrace()
+        {
+            Boolean isSupportedType = false;
+
+            try
+            {
+                Method method = CodeRush.Source.ActiveMethod;
+
+                if (null == method)
+                {
+                    MessageBox.Show("Not in a method ElementType");
+                    return;
+                }
+
+                StringBuilder sbFinalOutput = new StringBuilder();
+
+                StringBuilder sbFormatString = new StringBuilder();
+                StringBuilder sbArgs = new StringBuilder();
+
+
+                if (method.MethodType == MethodTypeEnum.Function)
+                {
+                    sbFinalOutput.AppendFormat("String.Format(\"Exit ({{0}})");
+                    sbArgs.AppendFormat(", RETURNVALUE");
+                }
+                else
+                {
+                    sbFinalOutput.AppendFormat("String.Format(\"Exit");
+                }
+
+                Int16 position = 0;
+
+                foreach (Param parameter in method.AllParameters)
+                {
+                    Helper.WriteToDebugWindow(string.Format("  Name:>{0}< Type:({1}) ByVal:({2}) ByRef:({3}) Optional:({4}) Default:({5})  ",
+                        parameter.Name, parameter.ParamType, parameter.IsByVal, parameter.IsReferenceParam, parameter.IsOptional, parameter.IsDefault), Helper.DebugDisplay.Debug);
+
+                    switch (parameter.ParamType.ToLower())
+                    {
+                        case "boolean":
+                        case "int16":
+                        case "int32":
+                        case "integer":
+                        case "string":
+                            isSupportedType = true;
+                            break;
+
+                        default:
+                            Helper.WriteToDebugWindow(string.Format("Unsupported Type:({0}) Skipping",
+                                parameter.ParamType), Helper.DebugDisplay.Always);
+
+                            isSupportedType = false;
+                            break;
+                    }
+
+                    if (isSupportedType && parameter.IsReferenceParam)
+                    {
+                        sbFormatString.AppendFormat(" {0}:({{{1}}})", parameter.Name, position);
+                        sbArgs.AppendFormat(", {0}", parameter.Name);
+                        position++;
+                    }
+                }
+
+                sbFinalOutput.AppendFormat("{0}", sbFormatString.ToString());
+                sbFinalOutput.AppendFormat("\"");
+                sbFinalOutput.AppendFormat("{0}", sbArgs.ToString());
+                sbFinalOutput.AppendFormat(")");
+
+                Helper.WriteToDebugWindow(string.Format("sbFormatString:>{0}<", sbFormatString.ToString()), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("sbArgs:>{0}<", sbArgs.ToString()), Helper.DebugDisplay.Debug);
+                Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private static void DisplayContextInfo()
+        {
+            try
+            {
+                SolutionElement solution = CodeRush.Source.ActiveSolution;
+                ProjectElement project = CodeRush.Source.ActiveProject;
+                LanguageElement active = CodeRush.Source.Active;
+                LanguageElement activeType = CodeRush.Source.ActiveType;
+                Method activeMethod = CodeRush.Source.ActiveMethod;
+
+                Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("Active: Name:>{0}< ElementType:>{1}< ", active.Name, active.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("ActiveType: Name:>{0}<  ElementType:>{1}< ", activeType.Name, activeType.ElementType.ToString()), Helper.DebugDisplay.Always);
+
+                if (activeMethod != null)
+                {
+                    Helper.WriteToDebugWindow(string.Format("Method: Name:>{0}<", activeMethod.Name), Helper.DebugDisplay.Always);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        void DisplayMethodInfo()
+        {
+            try
+            {
+                SolutionElement solution = CodeRush.Source.ActiveSolution;
+                ProjectElement project = CodeRush.Source.ActiveProject;
+                LanguageElement active = CodeRush.Source.Active;
+                LanguageElement activeType = CodeRush.Source.ActiveType;
+                Method activeMethod = CodeRush.Source.ActiveMethod;
+
+                Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("Active: Name:>{0}< ElementType:>{1}< ", active.Name, active.ElementType.ToString()), Helper.DebugDisplay.Always);
+                Helper.WriteToDebugWindow(string.Format("ActiveType: Name:>{0}<  ElementType:>{1}< ", activeType.Name, activeType.ElementType.ToString()), Helper.DebugDisplay.Always);
+
+                if (activeMethod != null)
+                {
+                    Helper.WriteToDebugWindow(string.Format("Method: Name:>{0}<", activeMethod.Name), Helper.DebugDisplay.Always);
+                    DisplayMethodInfo(activeMethod);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        void DisplayMethodInfo(Method method)
+        {
+            Helper.WriteToDebugWindow(string.Format("Parameters:"), Helper.DebugDisplay.Always);
+
+            foreach (Param parameter in method.AllParameters)
+            {
+                Helper.WriteToDebugWindow(string.Format("  Name:>{0}< Type:({1}) ByVal:({2}) ByRef:({3}) Optional:({4}) Default:({5})  ", 
+                    parameter.Name, parameter.ParamType, parameter.IsByVal, parameter.IsReferenceParam, parameter.IsOptional, parameter.IsDefault), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void DisplayProjectDetailInfo()
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                DisplayProjectDetailInfo(project, 0);
+
+                foreach (SourceFile sourceFile in project.AllFiles)
+                {
+                    DisplaySourceFileInfo(sourceFile, 4);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void DisplayProjectSummaryInfo()
+        {
+            try
+            {
+                ProjectElement project = CodeRush.Source.ActiveProject;
+
+                DisplayProjectSummaryInfo(project);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private static void DisplaySolutionInfo()
+        {
+            try
+            {
+                SolutionElement solution = CodeRush.Source.ActiveSolution;
+                DisplaySolutionInfo(solution);
+
+                if (solution == null)
+                {
+                    MessageBox.Show("No Active Solution");
+                    return;
+                }
+
+                foreach (ProjectElement project in solution.AllProjects)
+                {
+                    DisplayProjectSummaryInfo(project);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void ImportsEaseCore()
+        {
+            try
+            {
+                SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
+
+                ImportsNamespaceReferenceInActiveDocument(sourceFile, "EaseCore");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertDefaultRegions()
+        {
+            // TODO(crhodes):
+            // Handle creating blank area then calling this.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("IDR");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void InsertLoggingProperties()
+        {
+            // TODO(crhodes):
+            // Determine if in Module or Class and insert at first appropriate line.  Have to handle inheritance, etc.
+
+            try
+            {
+                CodeRush.Templates.ExpandAtCursor(false);
+                CodeRush.Templates.ExpandTemplate("LOGPROP");
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        #endregion
+
+        #region Utility Methods
+
+        private bool ContainsNamespaceReference(SourceFile sourceFile, string nameSpaceName)
+        {
+            Boolean containsRefererece = false;
+
+            if (sourceFile.UsingList.ContainsValue(nameSpaceName))
+            {
+                Helper.WriteToDebugWindow(string.Format("Already contains ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
+                containsRefererece = true;
+            }
+
+            return containsRefererece;
+        }
+
+        private static bool IsValidSourceFile(SourceFile sourceFile)
+        {
+            Boolean isValid = false;
+
+            string fileExtension = System.IO.Path.GetExtension(sourceFile.Name);
+            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(sourceFile.Name);
+
+            if ( ! System.IO.Path.GetExtension(fileNameWithoutExtension).ToUpper().Equals(".DESIGNER"))
+            {
+                string languageID = CodeRush.Language.GetLanguageID(fileExtension);
+
+                switch (languageID.ToLower())
+                {
+                    case "csharp":
+                        isValid = true;
+                        break;
+
+                    case "basic":
+                        isValid = true;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return isValid;
+        }
+
+        private static string PadString(char pad, Int16 length)
+        {
+            return new string(pad, length);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void AddEntryTraceLines(Method method, SourcePoint logEntryPoint, SourceFile activeFile)
+        {
+            try
+            {
+                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
+
+                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
+                _fileChangeCollection.Add(logEntryFileChange);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
+            }
+        }
+
+        private void AddExitTraceLines(Method method, SourcePoint logExitPoint, SourceFile activeFile)
+        {
+            try
+            {
+                Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
+
+                FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
+                _fileChangeCollection.Add(logExitFileChange);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
             }
         }
 
@@ -408,221 +911,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
-        private void AddExitTraceLines(Method method, SourcePoint logExitPoint, SourceFile activeFile)
-        {
-            try
-            {
-                Helper.WriteToDebugWindow(string.Format("Exit  Insert Line:>{0}< Offset:>{1}<", logExitPoint.Line, logExitPoint.Offset), Helper.DebugDisplay.Debug);
-
-                FileChange logExitFileChange = new FileChange(activeFile.Name, logExitPoint, GetLogExitText(CodeRush.Language.GetLanguageID(method)));
-                _fileChangeCollection.Add(logExitFileChange);
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void AddEntryTraceLines(Method method, SourcePoint logEntryPoint, SourceFile activeFile)
-        {
-            try
-            {
-                Helper.WriteToDebugWindow(string.Format("Entry Insert Line:>{0}< Offset:>{1}<", logEntryPoint.Line, logEntryPoint.Offset), Helper.DebugDisplay.Debug);
-
-                FileChange logEntryFileChange = new FileChange(activeFile.Name, logEntryPoint, GetLogEntryText(CodeRush.Language.GetLanguageID(method)));
-                _fileChangeCollection.Add(logEntryFileChange);
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private static void AddLoggingToProject()
-        {
-            MessageBox.Show("My, my.  Aren't you brave!  Not implemented yet.");
-
-            if (LanguageElementType.ProjectElement != CodeRush.Source.ActiveType.ElementType)
-            {
-                MessageBox.Show("Not in a Project ElementType");
-                return;
-            }
-        }
-
-        private static void AddLoggingToSolution()
-        {
-            MessageBox.Show("What are you nuts!  Not implemented yet, anyway");
-        }
-
-
-        private static void DisplayContextInfo()
-        {
-            try
-            {
-                SolutionElement solution = CodeRush.Source.ActiveSolution;
-                ProjectElement project = CodeRush.Source.ActiveProject;
-                LanguageElement active = CodeRush.Source.Active;
-                LanguageElement activeType = CodeRush.Source.ActiveType;
-                Method activeMethod = CodeRush.Source.ActiveMethod;
-
-                Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  ", solution.Name), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("Project: >{0}<  ", project.Name), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("Active: Name:>{0}< ElementType:>{1}< ", active.Name, active.ElementType.ToString()), Helper.DebugDisplay.Always);
-                Helper.WriteToDebugWindow(string.Format("ActiveType: Name:>{0}<  ElementType:>{1}< ", activeType.Name, activeType.ElementType.ToString()), Helper.DebugDisplay.Always);
-
-                if (activeMethod != null)
-                {
-                    Helper.WriteToDebugWindow(string.Format("Method: Name:>{0}<", activeMethod.Name), Helper.DebugDisplay.Always);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void DisplayProjectDetailInfo()
-        {
-            try
-            {
-                ProjectElement project = CodeRush.Source.ActiveProject;
-
-                DisplayProjectDetailInfo(project, 0);
-
-                foreach (SourceFile sourceFile in project.AllFiles)
-                {
-                    DisplaySourceFileInfo(sourceFile, 4);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void DisplayProjectSummaryInfo()
-        {
-            try
-            {
-                ProjectElement project = CodeRush.Source.ActiveProject;
-
-                DisplayProjectSummaryInfo(project);
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private static void DisplaySolutionInfo()
-        {
-            try
-            {
-                SolutionElement solution = CodeRush.Source.ActiveSolution;
-                DisplaySolutionInfo(solution);
-
-                if (solution == null)
-                {
-                    MessageBox.Show("No Active Solution");
-                    return;
-                }
-
-                foreach (ProjectElement project in solution.AllProjects)
-                {
-                    DisplayProjectSummaryInfo(project);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-
-        private static void ImportsNamespaceReference(SourceFile sourceFile, string nameSpaceName)
-        {
-            if (sourceFile.UsingList.ContainsValue(nameSpaceName))
-            {
-                Helper.WriteToDebugWindow(string.Format("Already contains ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
-            }
-            else
-            {
-
-                Helper.WriteToDebugWindow(string.Format("Adding Reference to ({0})", nameSpaceName), Helper.DebugDisplay.Debug);
-                SourceRange sourceRange = new SourceRange(0, 0);
-
-                foreach (LanguageElement element in sourceFile.Nodes)
-                {
-                    if (element is NamespaceReference)
-                    {
-                        if (sourceRange.Top < element.Range.Top)
-                        {
-                            sourceRange = element.Range.Clone();
-                        }
-                    }
-                }
-
-                NamespaceReference namespaceReference = new NamespaceReference(nameSpaceName);
-
-                string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
-                
-                CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
-            }
-        }
-
-        private void ImportsEaseCore()
-        {
-            try
-            {
-                SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
-
-                ImportsNamespaceReference(sourceFile, "EaseCore");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void InsertDefaultRegions()
-        {
-            // TODO(crhodes):
-            // Handle creating blank area then calling this.
-
-            try
-            {
-                CodeRush.Templates.ExpandAtCursor(false);
-                CodeRush.Templates.ExpandTemplate("IDR");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-
-        private void InsertLoggingProperties()
-        {
-            // TODO(crhodes):
-            // Determine if in Module or Class and insert at first appropriate line.  Have to handle inheritance, etc.
-
-            try
-            {
-                CodeRush.Templates.ExpandAtCursor(false);
-                CodeRush.Templates.ExpandTemplate("LOGPROP");
-            }
-            catch (Exception ex)
-            {
-                Helper.WriteToDebugWindow(ex.ToString(), Helper.DebugDisplay.Always);
-            }
-        }
-        #endregion
-
-        #region Utility Methods
-
-        #endregion
-
-        #region Private Methods
-
         private void DisplayProjectDetailInfo(ProjectElement project, Int16 indentLevel)
         {
             Helper.WriteToDebugWindow(string.Format("Project: >{0}<", project.Name), Helper.DebugDisplay.Always);
@@ -713,11 +1001,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             Helper.WriteToDebugWindow(string.Format("Solution: >{0}<  Projects:>{1}<", solution.FilePath, solution.ProjectElements.Count), Helper.DebugDisplay.Always);
         }
 
-        private static string PadString(char pad, Int16 length)
-        {
-            return new string(pad, length);
-        }
-
         private static void DisplayUsingListInfo(System.Collections.SortedList usingList, Int16 indentLevel)
         {
             foreach (System.Collections.DictionaryEntry item in usingList)
@@ -754,12 +1037,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 Helper.WriteToDebugWindow(string.Format("{0}    EndLine: >{1}<  ", PadString(' ', indentLevel),
                     sourceFile.EndLine), Helper.DebugDisplay.Always);
-
-                Helper.WriteToDebugWindow(string.Format("{0}    Nodes: >{1}<  ", PadString(' ', indentLevel),
-                    sourceFile.Nodes.Count), Helper.DebugDisplay.Always);
-                DisplayNodeInfo(sourceFile.Nodes, 4);
-
-
             }
             catch (Exception ex)
             {
@@ -876,6 +1153,40 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
 
             return message;
+        }
+
+        private static SourceRange GetNamespaceSourceRange(SourceFile sourceFile)
+        {
+            SourceRange sourceRange = new SourceRange(0, 0);
+
+            foreach (LanguageElement element in sourceFile.Nodes)
+            {
+                if (element is NamespaceReference)
+                {
+                    if (sourceRange.Top < element.Range.Top)
+                    {
+                        sourceRange = element.Range.Clone();
+                    }
+                }
+            }
+
+            return sourceRange;
+        }
+
+        private void ImportsNamespaceReferenceInActiveDocument(SourceFile sourceFile, string nameSpace)
+        {
+            if (! ContainsNamespaceReference(sourceFile, nameSpace))
+            {
+                Helper.WriteToDebugWindow(string.Format("Adding Reference to ({0})", nameSpace), Helper.DebugDisplay.Debug);
+
+                SourceRange sourceRange = GetNamespaceSourceRange(sourceFile);
+
+                NamespaceReference namespaceReference = new NamespaceReference(nameSpace);
+
+                string code = CodeRush.Language.GenerateElement(namespaceReference, CodeRush.Language.GetLanguageID(namespaceReference));
+               
+                CodeRush.Documents.ActiveTextDocument.InsertLines(sourceRange.Bottom.Line + 1, new string[] { code });
+            }
         }
 
         #endregion
