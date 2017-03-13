@@ -87,6 +87,11 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddParametersToExitTrace();
         }
 
+        private void btnCountClipboardToExitTrace_Click(object sender, RoutedEventArgs e)
+        {
+            AddClipboardToExitTrace(UseCount: true);
+        }
+
         private void btnDisplayFileNodeInfo_Click(object sender, RoutedEventArgs e)
         {
             SourceFile sourceFile = CodeRush.Source.ActiveSourceFile;
@@ -165,9 +170,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             AddLoggingToActiveModule();
             ImportsEaseCore();
         }
-        private void btnSelectionToExitTrace_Click(object sender, RoutedEventArgs e)
+
+        private void btnClipboardToExitTrace_Click(object sender, RoutedEventArgs e)
         {
-            AddSelectionToExitTrace();
+            AddClipboardToExitTrace(UseCount: false);
         }
         #endregion
 
@@ -340,8 +346,17 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     return;
                 }
 
-                StringBuilder sbFinalOutput = new StringBuilder();
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+                DisplaySelectionInfo(selection);
 
+                if ("Enter" != selection.Text)
+                {
+                    MessageBox.Show("Must select Enter text first.  Aborting.", "Context Error");
+                    return;
+                }
+
+                StringBuilder sbFinalOutput = new StringBuilder();
                 StringBuilder sbFormatString = new StringBuilder();
                 StringBuilder sbArgs = new StringBuilder();
 
@@ -357,8 +372,11 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     switch (parameter.ParamType.ToLower())
                     {
                         case "boolean":
+                        case "double":
                         case "int16":
                         case "int32":
+                        case "integer":
+                        case "short":
                         case "string":
                             isSupportedType = true;
                             break;
@@ -388,15 +406,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 Helper.WriteToDebugWindow(string.Format("sbArgs:>{0}<", sbArgs.ToString()), Helper.DebugDisplay.Debug);
                 Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
 
-                // Ok, now we have what we want to use, let's hope we have something selected to replace
-
-                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
-                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
-
-                DisplaySelectionInfo(selection);
-
                 SourcePoint startPoint = selection.StartSourcePoint;
                 SourcePoint endPoint = selection.EndSourcePoint;
+
+                // Expand selection to include surrounding quotes. Enter -> "Enter"
 
                 startPoint.Offset = startPoint.Offset - 1;
                 endPoint.Offset = endPoint.Offset + 1;
@@ -406,8 +419,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 activeTextDocument.SelectText(sourceRange);
 
                 activeTextDocument.ReplaceSelection(sbFinalOutput.ToString(), keepSelection: false);
-
-
             }
             catch (Exception ex)
             {
@@ -415,10 +426,8 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
             }
         }
 
-        void AddSelectionToExitTrace()
+        void AddClipboardToExitTrace(Boolean UseCount)
         {
-            Boolean isSupportedType = false;
-
             try
             {
                 Method method = CodeRush.Source.ActiveMethod;
@@ -429,24 +438,44 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     return;
                 }
 
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+                DisplaySelectionInfo(selection);
+
+                if ("Exit" != selection.Text)
+                {
+                    MessageBox.Show("Must select Exit text first.  Aborting.", "Context Error");
+                    return;
+                }
+
+                string cliboardVariable = Clipboard.GetText();
+
+                if (0 == cliboardVariable.Length)
+                {
+                    MessageBox.Show("Clipboard empty.  Must select return variable and copy to clipboard.  Aborting.", "Context Error");
+                    return;
+                }
+
                 StringBuilder sbFinalOutput = new StringBuilder();
                 StringBuilder sbFormatString = new StringBuilder();
                 StringBuilder sbArgs = new StringBuilder();
 
-                string variable = Clipboard.GetText();
-                sbFinalOutput.AppendFormat("String.Format(\"Exit ({{0}})\", {0})", variable);
+                if (UseCount)
+                {
+                    sbFinalOutput.AppendFormat("String.Format(\"Exit Count:({{0}})\", UBound({0}))", cliboardVariable);
+                }
+                else
+                {
+                    sbFinalOutput.AppendFormat("String.Format(\"Exit ({{0}})\", {0})", cliboardVariable);                    
+                }
 
                 Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
 
-                // Ok, now we have what we want to use, let's hope we have something selected to replace
-
-                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
-                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
-
-                DisplaySelectionInfo(selection);
 
                 SourcePoint startPoint = selection.StartSourcePoint;
                 SourcePoint endPoint = selection.EndSourcePoint;
+
+                // Expand selection to include surrounding quotes. Exit -> "Exit"
 
                 startPoint.Offset = startPoint.Offset - 1;
                 endPoint.Offset = endPoint.Offset + 1;
@@ -456,6 +485,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 activeTextDocument.SelectText(sourceRange);
 
                 activeTextDocument.ReplaceSelection(sbFinalOutput.ToString(), keepSelection: false);
+
+                // Clear clipboard so don't accidentally carry something forward.
+
+                Clipboard.Clear();
             }
             catch (Exception ex)
             {
@@ -477,23 +510,32 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     return;
                 }
 
-                StringBuilder sbFinalOutput = new StringBuilder();
+                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
+                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
+                DisplaySelectionInfo(selection);
 
+                if ("Exit" != selection.Text)
+                {
+                    MessageBox.Show("Must select Exit text first.  Aborting.", "Context Error");
+                    return;
+                }
+
+                StringBuilder sbFinalOutput = new StringBuilder();
                 StringBuilder sbFormatString = new StringBuilder();
                 StringBuilder sbArgs = new StringBuilder();
 
+                Int16 argPostion = 0;
 
                 if (method.MethodType == MethodTypeEnum.Function)
                 {
                     sbFinalOutput.AppendFormat("String.Format(\"Exit ({{0}})");
                     sbArgs.AppendFormat(", RETURNVALUE");
+                    argPostion = 1;
                 }
                 else
                 {
-                    sbFinalOutput.AppendFormat("String.Format(\"Exit");
+                    sbFinalOutput.AppendFormat("String.Format(\"Exit");             
                 }
-
-                Int16 position = 0;
 
                 foreach (Param parameter in method.AllParameters)
                 {
@@ -503,9 +545,11 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     switch (parameter.ParamType.ToLower())
                     {
                         case "boolean":
+                        case "double":
                         case "int16":
                         case "int32":
                         case "integer":
+                        case "short":
                         case "string":
                             isSupportedType = true;
                             break;
@@ -520,9 +564,9 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                     if (isSupportedType && parameter.IsReferenceParam)
                     {
-                        sbFormatString.AppendFormat(" {0}:({{{1}}})", parameter.Name, position);
+                        sbFormatString.AppendFormat(" {0}:({{{1}}})", parameter.Name, argPostion);
                         sbArgs.AppendFormat(", {0}", parameter.Name);
-                        position++;
+                        argPostion++;
                     }
                 }
 
@@ -535,15 +579,10 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                 Helper.WriteToDebugWindow(string.Format("sbArgs:>{0}<", sbArgs.ToString()), Helper.DebugDisplay.Debug);
                 Helper.WriteToDebugWindow(string.Format("sbFinalOutput:>{0}<", sbFinalOutput.ToString()), Helper.DebugDisplay.Debug);
 
-                // Ok, now we have what we want to use, let's hope we have something selected to replace
-
-                TextDocument activeTextDocument = CodeRush.Documents.ActiveTextDocument;
-                TextViewSelection selection = activeTextDocument.ActiveViewSelection;
-
-                DisplaySelectionInfo(selection);
-
                 SourcePoint startPoint = selection.StartSourcePoint;
                 SourcePoint endPoint = selection.EndSourcePoint;
+
+                // Expand selection to include surrounding quotes. Exit -> "Exit"
 
                 startPoint.Offset = startPoint.Offset - 1;
                 endPoint.Offset = endPoint.Offset + 1;
@@ -1187,7 +1226,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 default:
                     throw new Exception("Unsupported Language");
-                    break;
             }
 
             return message;
@@ -1219,7 +1257,6 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
 
                 default:
                     throw new Exception("Unsupported Language");
-                    break;
             }
 
             return message;
