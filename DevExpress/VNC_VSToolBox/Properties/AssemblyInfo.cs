@@ -67,4 +67,4 @@ using DevExpress.CodeRush.Common;
 //  Version   Date          By
 //  1.0.0.0   mm/dd/yyyy    Christopher Rhodes
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2017.03.13E")]
+[assembly: AssemblyInformationalVersion("2017.03.23B")]

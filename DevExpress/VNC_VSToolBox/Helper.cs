@@ -16,17 +16,29 @@ namespace VNC_VSToolBox
 
         public static void WriteToDebugWindow(string message, DebugDisplay debugLevel)
         {
-            if ((bool)VNC_VSToolBox.controlPanel.ckDeveloperMode.IsChecked)
+            if ((bool)VNC_VSToolBoxCHR.controlPanel.ckDeveloperMode.IsChecked)
             {
                 if (DebugDisplay.Always == debugLevel)
                 {
-                    VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+                    VNC_VSToolBoxCHR.controlPanel.lbDebugWindow.Items.Add(message);
                 }
-                else if ((bool)VNC_VSToolBox.controlPanel.ckDisplayDebugMessages.IsChecked)
+                else if ((bool)VNC_VSToolBoxCHR.controlPanel.ckDisplayDebugMessages.IsChecked)
                 {
-                    VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+                    VNC_VSToolBoxCHR.controlPanel.lbDebugWindow.Items.Add(message);
                 }
             }
+
+            //if ((bool)VNC_VSToolBox.controlPanel.ckDeveloperMode.IsChecked)
+            //{
+            //    if (DebugDisplay.Always == debugLevel)
+            //    {
+            //        VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+            //    }
+            //    else if ((bool)VNC_VSToolBox.controlPanel.ckDisplayDebugMessages.IsChecked)
+            //    {
+            //        VNC_VSToolBox.controlPanel.lbDebugWindow.Items.Add(message);
+            //    }
+            //}
         }
     }
 }

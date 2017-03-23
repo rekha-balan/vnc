@@ -372,11 +372,14 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     switch (parameter.ParamType.ToLower())
                     {
                         case "boolean":
+                        case "byte":
                         case "double":
                         case "int16":
                         case "int32":
                         case "integer":
+                        case "long":
                         case "short":
+                        case "single":
                         case "string":
                             isSupportedType = true;
                             break;
@@ -545,11 +548,14 @@ namespace VNC_VSToolBox.User_Interface.User_Controls_WPF
                     switch (parameter.ParamType.ToLower())
                     {
                         case "boolean":
+                        case "byte":
                         case "double":
                         case "int16":
                         case "int32":
                         case "integer":
+                        case "long":
                         case "short":
+                        case "single":
                         case "string":
                             isSupportedType = true;
                             break;

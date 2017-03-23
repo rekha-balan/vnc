@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="User Interface\User Controls WPF\wucVNCControlPanelCHR.xaml.cs">
+      <DependentUpon>wucVNCControlPanelCHR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls WPF\wucVNCControlPanel.xaml.cs">
       <DependentUpon>wucVNCControlPanel.xaml</DependentUpon>
     </Compile>
@@ -86,13 +89,26 @@
       <DependentUpon>VNC_VSToolBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VNC_VSToolBoxCHR.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VNC_VSToolBoxCHR.Designer.cs">
+      <DependentUpon>VNC_VSToolBoxCHR.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="VNC_VSToolBox.resx">
       <DependentUpon>VNC_VSToolBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VNC_VSToolBoxCHR.resx">
+      <DependentUpon>VNC_VSToolBoxCHR.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="User Interface\User Controls WPF\wucVNCControlPanelCHR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="User Interface\User Controls WPF\wucVNCControlPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -24,14 +24,16 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <dxlc:LayoutControl x:Name="layoutItems"
+        <!--<dxlc:LayoutControl x:Name="layoutItems"
                         Orientation="Vertical"
-                        Background="White">
+                        Background="White">-->
 
-            <dxlc:LayoutGroup Header="Risky (Not Implemented) Stuff"
+        <!--<dxlc:LayoutGroup Header="Risky (Not Implemented) Stuff"
                               View="GroupBox" Orientation="Vertical"
                               VerticalAlignment="Top"
                               IsCollapsible="True" IsCollapsed="True">
@@ -70,9 +72,9 @@
                     </Button>
                 </dxlc:LayoutItem>
 
-            </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Display Information"
+        <!--<dxlc:LayoutGroup Header="Display Information"
                           View="GroupBox" Orientation="Vertical"
                           VerticalAlignment="Top"
                           IsCollapsible="True" IsCollapsed="True">
@@ -133,9 +135,9 @@
                 </Button>
             </dxlc:LayoutItem>
             
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="File Level Operations"
+        <!--<dxlc:LayoutGroup Header="File Level Operations"
                           View="GroupBox" Orientation="Horizontal"
                           VerticalAlignment="Top"
                           IsCollapsible="True" IsCollapsed="True">
@@ -158,9 +160,9 @@
                 </Button>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Add Logging to File Individual Operations"
+        <!--<dxlc:LayoutGroup Header="Add Logging to File Individual Operations"
                               View="GroupBox" Orientation="Vertical"
                               VerticalAlignment="Top"
                               IsCollapsible="True" IsCollapsed="True">
@@ -192,9 +194,9 @@
                 </Button>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Individual Operations"
+        <!--<dxlc:LayoutGroup Header="Individual Operations"
                               View="GroupBox" Orientation="Vertical"
                               VerticalAlignment="Top"
                               IsCollapsible="True" IsCollapsed="True">
@@ -226,9 +228,9 @@
                 </Button>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Add Paramters to Enter/Exit logging"
+        <!--<dxlc:LayoutGroup Header="Add Paramters to Enter/Exit logging"
                               View="GroupBox" Orientation="Vertical"
                               VerticalAlignment="Top"
                               IsCollapsible="True" IsCollapsed="False">
@@ -269,9 +271,40 @@
                     </Button>
                 </dxlc:LayoutItem>
             
-            </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Configuration and Control"
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            
+                <Button x:Name="btnAddParametersToEnterTrace" 
+                    Background="Green"
+                    Click="btnAddParametersToEnterTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add ByVal Method Parameters to enter Trace.  Select Enter then push button">Add ByVal Method Parameters to Enter Trace</TextBlock>
+                </Button>                
+
+                <Button x:Name="btnAddParametersToExitTrace" 
+                    Background="Cyan"
+                    Click="btnAddParametersToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add ByRef Method Parameters to Exit Trace.  Select Exit then push button">Add ByRef Method Parameters to Exit Trace</TextBlock>
+                </Button>
+
+                <Button x:Name="btnClipboardToExitTrace" 
+                    Background="Cyan"
+                    Click="btnClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add Clipboard to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Clipboard to Exit Trace</TextBlock>
+                </Button>
+
+                <Button x:Name="btnCountClipboardToExitTrace" 
+                    Background="Cyan"
+                    Click="btnCountClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                        ToolTip="Add Count(Clipboard) to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Count(Clipboard) to Exit Trace</TextBlock>
+                </Button>
+
+        </StackPanel>
+        <!--<dxlc:LayoutGroup Header="Configuration and Control"
                             View="GroupBox" Orientation="Vertical"
                             VerticalAlignment="Top"
                             IsCollapsible="True" IsCollapsed="True">
@@ -282,19 +315,25 @@
                     </StackPanel>                    
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem>
-                    <Button x:Name="btnClearListBox"
+            <dxlc:LayoutItem>
+                <Button x:Name="btnClearListBox"
                             Margin="5"
-                            Click="btnClearListBox_Click">Clear Debug Window</Button>  
-                </dxlc:LayoutItem>
+                            Click="btnClearListBox_Click">Clear Debug Window</Button>
+            </dxlc:LayoutItem>
 
+        </dxlc:LayoutGroup>-->
 
-              
-        </dxlc:LayoutGroup>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Background="Bisque">
+                <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>
+                <CheckBox x:Name="ckDisplayDebugMessages" Margin="5" IsChecked="False">Display Debug Messages</CheckBox>
 
-    </dxlc:LayoutControl>
+            <Button x:Name="btnClearListBox"
+                            Margin="5"
+                            Click="btnClearListBox_Click">Clear Debug Window</Button>
+        </StackPanel>
+        <!--</dxlc:LayoutControl>-->
     
-        <ListBox x:Name="lbDebugWindow" Grid.Row="1" FontFamily="Lucida Console" />
+        <ListBox x:Name="lbDebugWindow" Grid.Row="3" FontFamily="Lucida Console" />
 
     </Grid>
 </Grid>

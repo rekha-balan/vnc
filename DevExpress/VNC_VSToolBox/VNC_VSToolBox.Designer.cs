@@ -58,10 +58,10 @@ namespace VNC_VSToolBox
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = null;
             // 
-            // VNC_AddLogging
+            // VNC_VSToolBox
             // 
             this.Controls.Add(this.elementHost1);
-            this.Name = "VNC_AddLogging";
+            this.Name = "VNC_VSToolBox";
             this.Size = new System.Drawing.Size(490, 150);
             ((System.ComponentModel.ISupportInitialize)(this.events)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
