@@ -1,0 +1,27 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+Hello Natalie, I love you.  When you were born, Christmas was on <#= DateTime.Parse("12/25/1994").DayOfWeek #>
+<#
+	DateTime xmas = DateTime.Parse("12/25/1994");
+
+	for (int i = 0 ; i < 30 ; i++)
+	{
+		xmas = xmas.AddYears(1);
+#>
+When you were <#= i+1 #> it was on a <#= GetDayOfXmas(1994 + i + 1) #>
+<#
+	}
+#>
+
+but when you are thirty it will be on a <#= xmas.DayOfWeek #>
+
+<#+
+private string GetDayOfXmas(int year)
+{
+	return DateTime.Parse("12/25/" + year).DayOfWeek.ToString();
+}
+#>

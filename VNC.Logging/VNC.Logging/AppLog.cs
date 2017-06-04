@@ -71,6 +71,7 @@ namespace VNC
             Debug2 = 1002,
             Debug3 = 1003,
             Debug4 = 1004,
+            Debug5 = 1005,
             Trace  = 10000,
             Trace1 = 10001,
             Trace2 = 10002,
@@ -86,7 +87,12 @@ namespace VNC
             Trace12 = 10012,
             Trace13 = 10013,
             Trace14 = 10014,
-            Trace15 = 10015
+            Trace15 = 10015,
+            Trace16 = 10016,
+            Trace17 = 10017,
+            Trace18 = 10018,
+            Trace19 = 10019,
+            Trace20 = 10020
         }
 
         public enum ShowStack
@@ -1284,9 +1290,93 @@ namespace VNC
 
         #endregion
 
+        #region Debug5
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Debug5(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Debug5,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
         #endregion
-    
-    #region Log Trace Methods
+
+        #endregion
+
+        #region Log Trace Methods
 
         #region Trace
 
@@ -2632,9 +2722,429 @@ namespace VNC
 
         #endregion
 
-    #endregion
+        #region Trace16
 
-    #endregion
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace16(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace16,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
+        #region Trace17
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace17(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace17,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
+        #region Trace18
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace18(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace18,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
+        #region Trace19
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace19(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace19,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
+        #region Trace20
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, false, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, int EventId)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, int EventId, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, int EventId, long startTicks)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        [DebuggerStepThrough]
+        public static long Trace20(string message, string applicationCategory, int EventId, long startTicks, Dictionary<string, string> props)
+        {
+            StackTrace trace = new StackTrace();
+            MethodBase method = trace.GetFrame(1).GetMethod();
+            InternalWrite(message, TraceEventType.Verbose, applicationCategory, LoggingPriority.Trace20,
+                method.ReflectedType.Name, method.Name, Assembly.GetCallingAssembly().GetName().Name, Convert.ToBoolean(0), EventId, startTicks, props);
+            return Stopwatch.GetTimestamp();
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
 
     }
 
