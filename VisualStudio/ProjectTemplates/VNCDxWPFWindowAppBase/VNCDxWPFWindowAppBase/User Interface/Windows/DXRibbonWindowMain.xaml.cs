@@ -234,14 +234,14 @@ namespace VNCDxWPFWindowAppBase.User_Interface.Windows
 
             if (snd.IsChecked == true)
             {
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Administrator;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Administrator;
                 Common.AllowEditing = true;
                 lc_Root.Background = new SolidColorBrush(Color.FromArgb(0x7E, 0xFF, 0x01, 0x01));
             }
             else
             {
                 // TODO(crhodes): Decide if this is correct or if we need to use the Common.UserMode at all.
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Basic;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Basic;
                 Common.AllowEditing = false;
                 lc_Root.Background = Brushes.Transparent;
             }
@@ -255,11 +255,11 @@ namespace VNCDxWPFWindowAppBase.User_Interface.Windows
 
             if (snd.IsChecked == true)
             {
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Beta;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Beta;
             }
             else
             {
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Basic;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Basic;
             }
 
             // This saves the current mode back to the app.config file.
@@ -337,13 +337,13 @@ namespace VNCDxWPFWindowAppBase.User_Interface.Windows
 
             if (snd.IsChecked == true)
             {
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Advanced;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Advanced;
                 IsAdvancedMode = true;
 
             }
             else
             {
-                Common.UserMode.CurrentMode = (int)User_Interface.ViewMode.Mode.Basic;
+                Common.UserMode.CurrentMode = (int)ViewMode.Mode.Basic;
                 IsAdvancedMode = false;
             }
 

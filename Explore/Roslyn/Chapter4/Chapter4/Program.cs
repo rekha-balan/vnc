@@ -6,16 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.MSBuild;
 using System.IO;
 
-namespace Chapter4
+namespace CodeGenerationWithRoslyn
 {
     class Program
     {
         static void Main(string[] args)
         {
             //Method1();
-            Method2();
+            //Method2();
+            Method3();
         }
 
         private static void Method1()
@@ -43,6 +45,24 @@ namespace Chapter4
             var walker = new Walker();
             walker.Visit(tree.GetRoot());
 
+            Console.ReadLine();
+        }
+
+        private static void Method3()
+        {
+            var work = MSBuildWorkspace.Create();
+            var solution = work.OpenSolutionAsync(@"..\..\..\RoslynPlayGround.sln").Result;
+            var project = solution.Projects.FirstOrDefault(p => p.Name == "CodeGenerationWithRoslyn");
+
+            if (project == null)
+            {
+                throw new Exception("Could not find the CodeGenerationWithRoslyn Project");
+            }
+
+            var compilation = project.GetCompilationAsync().Result;
+            // Do something with the compilation
+
+            Symbols.ReviewSymbolTable(compilation);
             Console.ReadLine();
         }
     }

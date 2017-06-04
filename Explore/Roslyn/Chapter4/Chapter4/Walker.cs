@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Chapter4
+namespace CodeGenerationWithRoslyn
 {
     class Walker : CSharpSyntaxWalker
     {
