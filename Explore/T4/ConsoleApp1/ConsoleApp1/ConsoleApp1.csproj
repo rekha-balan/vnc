@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionStringHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConnectionStringHelper.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuntimeTextTemplate1.cs">
@@ -49,23 +62,66 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RuntimeTextTemplate1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TextTemplate2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextTemplate2.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="TextTemplate1.txtcs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextTemplate1.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConnectionStringHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConnectionStringHelper.cs</LastGenOutput>
+    </Content>
+    <Content Include="Inc1.tt" />
+    <Content Include="Inc2.tt" />
     <Content Include="RuntimeTextTemplate1.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RuntimeTextTemplate1.cs</LastGenOutput>
     </Content>
     <Content Include="TextTemplate1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TextTemplate1.txt</LastGenOutput>
+      <LastGenOutput>TextTemplate1.txtcs</LastGenOutput>
     </Content>
-    <Content Include="TextTemplate1.txt">
+    <Content Include="TextTemplate2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate2.cs</LastGenOutput>
+    </Content>
+    <Content Include="TextTemplate3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate3.txt</LastGenOutput>
+    </Content>
+    <Content Include="TextTemplate3.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TextTemplate1.tt</DependentUpon>
+      <DependentUpon>TextTemplate3.tt</DependentUpon>
+    </Content>
+    <Content Include="TextTemplate4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate4.txt</LastGenOutput>
+    </Content>
+    <Content Include="TextTemplate4.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextTemplate4.tt</DependentUpon>
+    </Content>
+    <Content Include="TextTemplate5.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate5.txt</LastGenOutput>
+    </Content>
+    <Content Include="TextTemplate5.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextTemplate5.tt</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
