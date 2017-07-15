@@ -1,0 +1,9 @@
+﻿Include Two
+<#+ 
+private void ShowMessage()
+{
+#>
+Message from ShowMessage
+<#+
+}
+#>

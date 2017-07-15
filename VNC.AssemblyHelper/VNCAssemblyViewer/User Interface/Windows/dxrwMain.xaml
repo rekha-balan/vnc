@@ -1,0 +1,310 @@
+﻿<dxr:DXRibbonWindow
+    x:Class="VNCAssemblyViewer.User_Interface.Windows.dxrwMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"  
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxch="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"         
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+
+    xmlns:my="clr-namespace:VNCAssemblyViewer.User_Interface.Windows"
+    xmlns:local="clr-namespace:VNCAssemblyViewer"
+    xmlns:localData="clr-namespace:VNCAssemblyViewer.Data"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"     
+    xmlns:uiuc="clr-namespace:VNCAssemblyViewer.User_Interface.User_Controls"    
+    xmlns:uiss="clr-namespace:VNCAssemblyViewer.User_Interface.Splash_Screens"
+    xmlns:uiw="clr-namespace:VNCAssemblyViewer.User_Interface.Windows"    
+    Title="VNCAssemblyViewer" 
+    Name="DXRibbonWindowMain1"
+    Width="900" Height="700"
+    MinWidth="900" MinHeight="700"
+    WindowStartupLocation="CenterScreen"
+    Loaded="OnWindowLoaded" 
+
+    Icon="/VNCAssemblyViewer;component/Resources/Icons/Application.ico" >
+    <!--dx:DXSplashScreen.SplashScreenType = "{x:Type uiss:wucDXSplashScreen}"-->
+    <dxr:DXRibbonWindow.Resources>
+
+        <localData:ApplicationDS x:Key="applicationDataSet" />
+
+        <Style x:Key="AboutLayout" >
+            <Setter Property="dxlc:LayoutItem.LabelPosition" Value="Top" />
+            <Setter Property="dxlc:LayoutItem.LabelHorizontalAlignment" Value="Left" />
+            <Setter Property="dxlc:LayoutItem.VerticalAlignment" Value="Stretch" />
+        </Style>
+
+    </dxr:DXRibbonWindow.Resources>
+
+    <Grid>
+
+        <dxb:BarManager CreateStandardLayout="True">
+            <!--<dxb:BarManager.Resources>
+            <dxr:ApplicationMenu x:Key="appMenu">
+                <dxr:ApplicationMenu.ItemLinks>
+                    <dxb:BarItemLink BarItemName="sbFile" />
+                    <dxb:BarItemLink BarItemName="bTools" />
+                    <dxb:BarItemLink BarItemName="bAbout" />
+                    <dxb:BarItemLink BarItemName="bExit" />
+                </dxr:ApplicationMenu.ItemLinks>
+            </dxr:ApplicationMenu>
+        </dxb:BarManager.Resources>-->
+
+            <dxb:BarManager.Items>
+
+                <dxb:BarEditItem Name="bei_DetailViewMode" Content="DetailViewMode" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                                 EditValueChanged="bei_DetailViewMode_EditValueChanged" >
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings IsTextEditable="False">
+                            <dxe:ComboBoxEditSettings.Items>
+                                <dxe:ComboBoxEditItem Content="Tooltip" Tag="tooltip" />
+                                <dxe:ComboBoxEditItem Content="SelectedRow" Tag="selected" />
+                                <dxe:ComboBoxEditItem Content="DetailedRows" Tag="details" />
+                                <dxe:ComboBoxEditItem Content="None" Tag="none" />
+                            </dxe:ComboBoxEditSettings.Items>
+                        </dxe:ComboBoxEditSettings>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+
+                <dxb:BarEditItem Name="bei_VisualTheme" Content="Visual Theme" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                                 EditValueChanged="bei_VisualTheme_EditValueChanged" >
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings IsTextEditable="False" Name="cbes_Themes" ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_AdvancedMode" 
+                    Content="Enable Advanced Views" 
+                    Hint="Enable Additional Views and Command Panels"
+                    ItemClick="OnAdvancedMode_Click" 
+                    ToolTip="bci advanced mode"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_AdministratorMode" 
+                    Content="Enable Updates" 
+                    Hint="Enable grids for updating"
+                    ItemClick="OnAdministratorMode_Click"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_DeveloperMode" 
+                    Content="Enable Developer" 
+                    ItemClick="OnDeveloperMode_Click"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_BetaMode" 
+                    Content="Enable Beta Options" 
+                    Hint="Enable half baked ideas"
+                    ItemClick="OnBetaMode_Clicked"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveCSV" 
+                    Content="Save as .CSV" 
+                    Hint="Save all information in the displayed grid as a .CSV file"                       
+                    Glyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-32x32.png"
+                    ItemClick="OnFileSave_Click" 
+                    Tag="csv"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveXLS" 
+                    Content="Save as .XLS" 
+                    Hint="Save all information in the displayed grid as an .XLS file"                      
+                    Glyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-32x32.png"                    
+                    ItemClick="OnFileSave_Click" 
+                    Tag="xls"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveXLSX" 
+                    Content="Save as .XLSX" 
+                    Hint="Save all information in the displayed grid as an .XLSX file"                      
+                    Glyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCAssemblyViewer;component/Resources/Icons/save-as-32x32.png"                    
+                    ItemClick="OnFileSave_Click" 
+                    Tag="xlsx"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Settings" 
+                    Content="Settings" 
+                    ItemClick="OnSettings_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_About" 
+                    Content="About" 
+                    ItemClick="OnAboutClick"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Feedback" 
+                    Content="Provide Feedback" 
+                    ItemClick="OnSendFeedback_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Help" 
+                    Content="Help" 
+                    ItemClick="OnHelp_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Exit" 
+                    Content="Exit" 
+                    ItemClick="OnExit_Click"/>
+
+                <!-- Standard Stuff
+                
+                    Add BarButtonItems for each control to be loaded in main part of UI.
+                -->      
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_ApplicationConsole" 
+                    Content="Application Console" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.wucApplicationConsole"/>
+
+                <!-- Beta Stuff -->
+
+                <dxb:BarButtonItem 
+                    Name="bbi_Beta1" 
+                    Content="3D UI" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.wuc3DUI"/>
+
+                <!-- Admin Stuff -->
+
+                <dxb:BarButtonItem 
+                    Name="bbi_ApplicationUsage" 
+                    Content="View Application Usage" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.wucApplicationUsage"/>
+
+                <!-- Menus start here -->
+                
+                <dxb:BarSubItem Name="bsi_File" Content="File">
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveCSV" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveXLS" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveXLSX" />
+                    <dxb:BarItemLinkSeparator />                    
+                    <dxb:BarButtonItemLink BarItemName="bbi_Exit" />
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_View" Content="View"  >
+                    <!-- These items are always visible -->
+                    <dxb:BarButtonItemLink BarItemName="bbi_ApplicationConsole" IsVisible="True" />
+                    
+                    <dxb:BarItemLinkSeparator />
+
+                    <dxb:BarButtonItemLink BarItemName="bbi_ApplicationConsole" Name="bbil_ApplicationConsole" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=dxrwMain}"  />
+                    
+                    <dxb:BarItemLinkSeparator />  
+                    
+                    <dxb:BarCheckItemLink BarItemName="bci_AdvancedMode" />  
+                    
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Tools" Content="Settings" ToolTip="bsi tools" >
+                    <dxb:BarEditItemLink BarItemName="bei_DetailViewMode" />                    
+                    <dxb:BarEditItemLink BarItemName="bei_VisualTheme" />
+                    <!--<dxb:BarCheckItemLink BarItemName="bci_BetaMode" Name="bcil_BetaMode" IsEnabled="False" IsVisible="False" />-->
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_Settings" />-->
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Admin" Content="Administration" 
+                                IsVisible="{Binding Path=(local:Common.IsAdministrator)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsAdministrator)}"  >
+                    <dxb:BarCheckItemLink BarItemName="bci_AdministratorMode" ToolTip="Enable Administrative Options" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItemLink BarItemName="bbi_ApplicationUsage" />                    
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Developer" Content="Developer" Alignment="Far"
+                                IsVisible="{Binding Path=(local:Common.IsDeveloper)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsDeveloper)}"  >
+                    <dxb:BarCheckItemLink BarItemName="bci_DeveloperMode" ToolTip="Enable Developer Options" />                    
+          
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_ApplicationUsage" />-->
+                </dxb:BarSubItem>
+                
+                <dxb:BarSubItem Name="bsi_Beta" Content="BETA Ideas" Alignment="Far"
+                                IsVisible="{Binding Path=(local:Common.IsBetaUser)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
+                    <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_Beta2" />-->
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >
+                    <dxb:BarButtonItemLink BarItemName="bbi_Feedback" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_About" />
+                </dxb:BarSubItem>
+
+            </dxb:BarManager.Items>
+
+            <dxb:BarManager.Bars>
+                <dxb:Bar Caption="Main" IsMainMenu="True" UseWholeRow="True">
+                    <dxb:Bar.DockInfo>
+                        <!--<dxb:BarDockInfo ContainerType="Floating" />-->
+                        <dxb:BarDockInfo ContainerType="Top" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:Bar.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="bsi_File" />
+                        <dxb:BarSubItemLink BarItemName="bsi_View" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Tools" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Admin" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Developer" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Beta" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Help" />
+                    </dxb:Bar.ItemLinks>
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+
+            <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch">
+
+                <dxlc:LayoutControl.AvailableItems>
+
+                    <!-- Add things that are optionally displayable-->
+
+                </dxlc:LayoutControl.AvailableItems>
+
+                <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top" 
+                        Orientation="Horizontal" >
+
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Name="lg_Body" 
+                          HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch" >
+
+                    <Grid x:Name="splashScreenGrid" >
+                        <!--<uiuc:wuc3DUI x:Name="SplashScreen" />-->
+
+                    </Grid>
+
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Name="lg_Footer"
+                          VerticalAlignment="Top" 
+                          HorizontalAlignment="Right"
+                          Orientation="Horizontal" >
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutControl>
+
+        </dxb:BarManager>
+
+    </Grid>
+
+</dxr:DXRibbonWindow>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="46126150-5cc3-4870-b0fe-5e94396534ba" ChangeDateTime="05/28/2017 04:29:36">
+    <Property Name="ElementName" Value="[dbo].[StateLookup].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[StateLookup]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StateID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="de481feb-9741-494b-b0a6-5c2522e1d079" ChangeDateTime="05/28/2017 04:33:03">
+    <Property Name="ElementName" Value="[dbo].[Address].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Address]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AddressId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="325d13d4-132f-453a-8765-0af4d4c668de" ChangeDateTime="05/28/2017 05:20:45">
+    <Property Name="ElementName" Value="[dbo].[GreetingRule].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[GreetingRule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GreetingRuleID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1df6caf1-a432-443e-8eb3-1a4d37d3b0f5" ChangeDateTime="05/28/2017 05:22:20">
+    <Property Name="ElementName" Value="[dbo].[Gender].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Gender]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GenderID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9e9d22ca-89e8-450b-bb2f-5560c39b2730" ChangeDateTime="05/28/2017 05:23:18">
+    <Property Name="ElementName" Value="[dbo].[MaritalStatus].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MaritalStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MaritalStatusID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5f859cad-3ec4-44b1-8664-05f1be7db0d4" ChangeDateTime="05/28/2017 05:34:33">
+    <Property Name="ElementName" Value="[dbo].[LoanCode].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[LoanCode]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LoanCodeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="672da2b1-6745-485b-80a8-53c3e6a37450" ChangeDateTime="05/28/2017 05:35:36">
+    <Property Name="ElementName" Value="[dbo].[LoandCodeType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[LoandCodeType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LoanCodeTypeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a0467a40-7507-4042-8df9-a1a378f06abb" ChangeDateTime="05/28/2017 05:37:00">
+    <Property Name="ElementName" Value="[dbo].[UnderwritingRuld].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UnderwritingRuld]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UnderwritingRuleID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="16d5a66d-4b31-4798-a51d-ac5b17d240db" ChangeDateTime="05/28/2017 05:38:35">
+    <Property Name="ElementName" Value="[dbo].[UnderwritingRuleDetail].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UnderwritingRuleDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UnderwritingRuleDetailID" />
+  </Operation>
+</Operations>

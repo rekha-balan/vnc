@@ -1,0 +1,6 @@
+﻿Include One
+
+
+Text in TextTemplate2.tt
+Message from ShowMessage
+Include Two

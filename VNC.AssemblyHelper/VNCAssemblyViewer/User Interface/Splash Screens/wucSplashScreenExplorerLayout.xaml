@@ -1,0 +1,319 @@
+﻿<UserControl 
+    x:Class="VNCAssemblyViewer.User_Interface.User_Controls.SplashScreens.wucSplashScreenExplorerLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+
+    xmlns:local="clr-namespace:VNCAssemblyViewer.User_Interface"
+    xmlns:localData="clr-namespace:VNCAssemblyViewer.Data;assembly=VNCAssemblyViewer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"     
+    xmlns:uiuc="clr-namespace:VNCAssemblyViewer.User_Interface.User_Controls"              
+    mc:Ignorable="d" 
+    d:DesignWidth="900" d:DesignHeight="600" 
+    >
+    
+    <UserControl.Resources>
+        <Style x:Key="cyclonStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5D2727"/>
+                    <GradientStop Color="#FFF93030" Offset="1"/>
+                </LinearGradientBrush>                
+            </Style.Resources>
+            <!--<Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <Setter Property="Background" Value="#CC0000" />
+            <Setter Property="Margin" Value="1" />            
+        </Style>
+        
+        <Style x:Key="adminWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#5D2727"/>
+                    <GradientStop Color="#CA4A4A" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+
+        </Style>
+        
+        <!--<Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32" />            
+        </Style>-->
+
+        <Style x:Key="exploreWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF445D27"/>
+                    <GradientStop Color="#46D354" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+        </Style>
+        
+        <Style x:Key="startingPlaceStyle" TargetType="{x:Type Button}">
+            <!--<Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#FF27315D"/>
+                    <GradientStop Color="#FF7789FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <!--<Setter Property="Margin" Value="1" />-->
+            <Setter Property="TextBlock.FontSize" Value="20" />            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="20" />
+                </Trigger>
+            </Style.Triggers>            
+        </Style>
+
+        <Style x:Key="mainButtonStyle" TargetType="{x:Type Button}">
+            <!--<Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#FF27315D"/>
+                    <GradientStop Color="#FF7789FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <!--<Setter Property="Margin" Value="1" />-->
+            <Setter Property="TextBlock.FontSize" Value="20" />
+            <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="20" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="subButtonStyle" TargetType="{x:Type Button}">
+            <!--<Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#FF27315D"/>
+                    <GradientStop Color="#FF7789FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <!--<Setter Property="Margin" Value="1" />-->
+            <Setter Property="TextBlock.FontSize" Value="16" />
+            <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="20" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="mainLayoutGroup" TargetType="{x:Type dxlc:LayoutGroup}" >
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="View" Value="GroupBox" />
+            <Setter Property="IsCollapsed" Value="False" />
+            <Setter Property="IsCollapsible" Value="True" />
+        </Style>
+
+        <Style x:Key="buttonImageStyle" >
+            <Setter Property="Image.VerticalAlignment" Value="Center" />
+            <Setter Property="Image.HorizontalAlignment" Value="Right" />
+        </Style>
+        
+        <Style x:Key="inactiveStyle" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#404041"/>
+                    <GradientStop Color="Gainsboro" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Button.Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Button.Margin" Value="1" />
+            
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="Button.BorderBrush" Value="Black" />
+                    <Setter Property="Button.BorderThickness" Value="10" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+            
+        <ControlTemplate x:Key="splashInactiveStyleTemplate" TargetType="{x:Type Button}">          
+            <Border x:Name="bdr_main" CornerRadius="5" Margin="1"
+                    BorderBrush="Black" BorderThickness="1"
+                    Background="White" >
+                <ContentPresenter Margin="1" ContentSource="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+    </UserControl.Resources>
+
+    <Grid>
+    <dxlc:LayoutControl Name="layoutControl_Root" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent" >
+
+        <dxlc:LayoutControl.AvailableItems>
+
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup 
+            Name="layoutGroup_Root"
+            Orientation="Vertical"  >
+                            
+            <dxlc:LayoutGroup Header="Hierarchical Explorers"
+                Name="layoutGroup_Explorers_Main"
+                Style="{StaticResource mainLayoutGroup}"
+                Margin="0,5,0,5" >
+            
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Click="OnExplore_Instances_Click" 
+                            Style="{StaticResource mainButtonStyle}"
+                            Grid.Row="0" Grid.Column="0" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  />
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<TextBlock 
+                                            Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" 
+                                            Text="Explore Instances" />-->
+                            <Image Style="{StaticResource buttonImageStyle}"
+                                            Grid.Row="0" Grid.RowSpan="2"  
+                                            Grid.Column="0" Grid.ColumnSpan="2" 
+                                            Source="/VNCAssemblyViewer;component/Resources/Images/Instance Hierarchy.png" 
+                                            ToolTip="Explore the Server - Instance - Database Hierarchy" />
+                        </Grid>
+
+                    </Button>
+
+                    <!--<Button Click="OnExplore_DatabaseContents" 
+                            Style="{StaticResource mainButtonStyle}"
+                            Grid.Row="0" Grid.Column="1" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  />
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Style="{StaticResource buttonImageStyle}"
+                                            Grid.Row="0" Grid.RowSpan="2"  
+                                            Grid.Column="0" Grid.ColumnSpan="2" 
+                                                Source="/VNCAssemblyViewer;component/Resources/Images/Instance Hierarchy.png"  />
+                        </Grid>
+
+                    </Button>-->
+
+                    <Button Click="OnExplore_DatabaseStorage" 
+                            Style="{StaticResource mainButtonStyle}"
+                            Grid.Row="1" Grid.Column="0" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  />
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Database Storage Explorer (Beta ProtoType)"
+                                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" 
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"                                            
+                                        TextWrapping="Wrap" TextAlignment="Center" />
+                            <Image Style="{StaticResource buttonImageStyle}"
+                                        Grid.Row="0" Grid.RowSpan="2"  Grid.Column="1" 
+                                            Source="/VNCAssemblyViewer;component/Resources/Images/server-room.jpg" 
+                                            Height="50" />
+                        </Grid>
+
+                    </Button>
+
+                    <Button Click="OnExplore_JobServers_Click" 
+                                    Style="{StaticResource mainButtonStyle}"
+                                    Grid.Row="1" Grid.Column="1">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  />
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="JobServers Explorer (Alpha Prototype)" 
+                                            Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" 
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"                                    
+                                            TextWrapping="Wrap" TextAlignment="Center" />
+                            <Image 
+                                        Grid.Row="0" Grid.RowSpan="2"  Grid.Column="1" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Height="50" />
+                        </Grid>
+
+                    </Button>
+                </Grid>
+                       
+            </dxlc:LayoutGroup>
+ 
+
+           
+        </dxlc:LayoutGroup>
+        
+    </dxlc:LayoutControl>
+    </Grid>
+
+</UserControl>

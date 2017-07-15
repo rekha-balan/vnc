@@ -1,0 +1,25 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".txt" #>
+<#= ShowMessage("hello") #>
+<#= ShowMessage("HELLO") #>
+<#= ShowMessage("") #>
+
+<#+
+
+private string ShowMessage(string msg)
+{
+	if (string.IsNullOrEmpty(msg))
+	{
+		Error("msg cannot be empty!");
+	}
+
+	string changed = msg.ToUpper();
+
+	if (msg.Equals(changed))
+	{
+		Warning("msg was not changed");
+	}
+
+	return changed;
+}
+#>

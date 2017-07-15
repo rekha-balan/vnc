@@ -1,0 +1,256 @@
+﻿<UserControl 
+    x:Class="VNCAssemblyViewer.User_Interface.User_Controls.SplashScreens.wucSplashScreenTileLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+
+    xmlns:local="clr-namespace:VNCAssemblyViewer.User_Interface"
+    xmlns:localData="clr-namespace:VNCAssemblyViewer.Data"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"     
+    xmlns:uiuc="clr-namespace:VNCAssemblyViewer.User_Interface.User_Controls"              
+    mc:Ignorable="d" 
+    d:DesignWidth="900" d:DesignHeight="750" >
+    
+    <UserControl.Resources>
+        <Style x:Key="cyclonStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5D2727"/>
+                    <GradientStop Color="#FFF93030" Offset="1"/>
+                </LinearGradientBrush>                
+            </Style.Resources>
+            <!--<Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <Setter Property="Background" Value="#CC0000" />
+            <Setter Property="Margin" Value="1" />            
+        </Style>
+        
+        <Style x:Key="adminWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#5D2727"/>
+                    <GradientStop Color="#CA4A4A" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+
+        </Style>
+        
+        <Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32" />            
+        </Style>
+        
+        <Style x:Key="exploreWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF445D27"/>
+                    <GradientStop Color="#46D354" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+        </Style>
+        
+        <Style x:Key="startingPlaceStyle" TargetType="{x:Type Button}">
+            <!--<Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#FF27315D"/>
+                    <GradientStop Color="#FF7789FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <!--<Setter Property="Margin" Value="1" />-->
+            <Setter Property="TextBlock.FontSize" Value="24" />            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="20" />
+                </Trigger>
+            </Style.Triggers>            
+        </Style>
+
+        <Style x:Key="inactiveStyle" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#404041"/>
+                    <GradientStop Color="Gainsboro" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Button.Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Button.Margin" Value="1" />
+            
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="Button.BorderBrush" Value="Black" />
+                    <Setter Property="Button.BorderThickness" Value="10" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+            
+        <ControlTemplate x:Key="splashInactiveStyleTemplate" TargetType="{x:Type Button}">          
+            <Border x:Name="bdr_main" CornerRadius="5" Margin="1"
+                    BorderBrush="Black" BorderThickness="1"
+                    Background="White" >
+                <ContentPresenter Margin="1" ContentSource="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <dxlc:TileLayoutControl Name="tileLayoutControl"
+            AllowItemMoving="True"
+            Background="{x:Null}" >
+            
+            <dxlc:Tile 
+                dxlc:FlowLayoutControl.IsFlowBreak="True"
+                dxlc:TileLayoutControl.GroupHeader="Instances" 
+                Header="Instances" 
+                Size="Large" >
+                
+                 <Button Grid.Row="0" Grid.Column="0" Click="OnAllInstances_Click" Style="{StaticResource startingPlaceStyle}"  >
+                <!--<Button Grid.Row="0" Grid.Column="0" Click="OnAllInstances_Click" >-->
+                <!--<TextBlock Text="Instances" TextWrapping="Wrap" TextAlignment="Center" />-->
+                    <Image Source="/VNCAssemblyViewer;component/Resources/Images/DB_Instance.png" 
+                           StretchDirection="DownOnly" Height="78" Width="283"  />                     
+                </Button>   
+                
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                Header="Instance Logins"
+                Size="Small" >
+
+                <Button Grid.Row="0" Grid.Column="1" Click="OnAllLogins_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <!--<Button Grid.Row="0" Grid.Column="1" Click="OnAllLogins_Click" >-->
+                    <TextBlock Text="Logins" TextWrapping="Wrap" TextAlignment="Center" />
+                    <!--<Image Source="/VNCAssemblyViewer;component/Resources/Images/DB_Instance.png"  Stretch="None"  />-->
+                </Button>
+                
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                dxlc:FlowLayoutControl.IsFlowBreak="True" 
+                dxlc:TileLayoutControl.GroupHeader="Databases"
+                Header="Instance and Database Content Explorer"
+                Size="Large" >
+                <Button Grid.Row="1" Grid.Column="0" Click="OnBigPictureDBContents_Click" Style="{StaticResource startingPlaceStyle}"  >
+                    <!--<TextBlock Text="Instance and Database Content Explorer" TextWrapping="Wrap" TextAlignment="Center" />-->
+                    <Image Source="/VNCAssemblyViewer;component/Resources/Images/300px-IBM_Blue_Gene_P_supercomputer.jpg" 
+                           Stretch="Fill" Height="83" Width="140" />
+                </Button>
+            </dxlc:Tile>
+            
+            <dxlc:Tile 
+                Header="Databases" 
+                Size="Small" >
+                
+                <Button Grid.Row="0" Grid.Column="2" Click="OnAllDatabases_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <!--<TextBlock Text="Databases" TextWrapping="Wrap" TextAlignment="Center" />-->
+                    <Image Source="/VNCAssemblyViewer;component/Resources/Images/edata_128.png" 
+                           Stretch="Fill" Height="80" Width="106"  />                    
+                </Button>
+                
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                Header="Database Users"
+                Size="Small" >
+                
+                <Button Grid.Row="0" Grid.Column="3" Click="OnAllDBUsers_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <TextBlock Text="Database Users" TextWrapping="Wrap" TextAlignment="Center" />
+                    <!--<Image Source="/VNCAssemblyViewer;component/Resources/Images/edata_128.png"  Stretch="None"  />-->
+                </Button>
+                
+            </dxlc:Tile>
+
+            <dxlc:Tile  
+                dxlc:FlowLayoutControl.IsFlowBreak="True"
+                dxlc:TileLayoutControl.GroupHeader="Storage"
+                Header="Instance and Database Storage Explorer" 
+                Size="Large" >
+                
+               <Button Grid.Row="1" Grid.Column="1" Click="OnBigPictureDBStorage_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <!--<TextBlock Text="Instance and Database Storage Explorer" TextWrapping="Wrap" TextAlignment="Center" />-->
+                    <Image Source="/VNCAssemblyViewer;component/Resources/Images/server-room.jpg"  
+                           Stretch="Fill" Height="80" Width="140"  />
+                </Button>
+                
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                dxlc:FlowLayoutControl.IsFlowBreak="True"
+                dxlc:TileLayoutControl.GroupHeader="Jobs"  
+                Header="Instance and JobServers Explorer"
+                Size="Large" >
+                <Button Grid.Row="1" Grid.Column="2" Click="OnBigPictureJobServers_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <TextBlock Text="Instance and JobServers Explorer" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                dxlc:FlowLayoutControl.IsFlowBreak="True"
+                dxlc:TileLayoutControl.GroupHeader="General Information"                 
+                Header="General Information" 
+                Size="Large" >
+                <Button Grid.Row="1" Grid.Column="3" Click="OnLKUPTables_Click" Style="{StaticResource startingPlaceStyle}" >
+                    <TextBlock Text="General Information" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                Header="Help"
+                Size="Small" >
+                <Button Grid.Row="2" Grid.Column="0" Click="OnHelp_Click" Style="{StaticResource inactiveStyle}"  >
+                    <TextBlock Text="Help" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                Header="About" 
+                Size="Small" >
+                <Button Grid.Row="2" Grid.Column="3" Click="OnAbout_Click" Style="{StaticResource inactiveStyle}"  >
+                    <TextBlock Text="About" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+            
+            <dxlc:Tile 
+                dxlc:FlowLayoutControl.IsFlowBreak="True"                
+                dxlc:TileLayoutControl.GroupHeader="Administration" 
+                Header="Table View and Administration"  
+                Size="Large"  >
+                <Button Grid.Row="2" Grid.Column="1" Click="OnAdministration_Click" Style="{StaticResource startingPlaceStyle}"  >
+                    <TextBlock Text="Table View and Administration" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+
+            <dxlc:Tile 
+                Header="ToDo"
+                Size="Small" >
+                <Button Grid.Row="2" Grid.Column="2" Click="OnToDo_Click" Style="{StaticResource inactiveStyle}"  >
+                    <TextBlock Text="ToDo" TextWrapping="Wrap" TextAlignment="Center" />
+                </Button>
+            </dxlc:Tile>
+
+        </dxlc:TileLayoutControl>
+
+</UserControl>

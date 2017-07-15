@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInformation.cs" />
+    <Compile Include="AssemblyReflectionManager.cs" />
+    <Compile Include="AssemblyReflectionProxy.cs" />
     <Compile Include="ConfigData1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

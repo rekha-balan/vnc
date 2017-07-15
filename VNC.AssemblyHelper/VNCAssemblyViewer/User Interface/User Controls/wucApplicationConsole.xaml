@@ -1,0 +1,249 @@
+﻿<uiuc:wucDX_Base
+    x:Class="VNCAssemblyViewer.User_Interface.User_Controls.wucApplicationConsole"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"   
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"        
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d"  
+    xmlns:local="clr-namespace:VNCAssemblyViewer.User_Interface"     
+    xmlns:localData="clr-namespace:VNCAssemblyViewer.Data"              
+    xmlns:uiuc="clr-namespace:VNCAssemblyViewer.User_Interface.User_Controls"      
+    Title="Application Console"
+    d:DesignHeight="600" d:DesignWidth="1000" >
+
+    <uiuc:wucDX_Base.Resources>
+        
+        <Style x:Key="AdminButtonEvent" TargetType="{x:Type Button}" >
+            <!-- This Loads the Control into the Right Pane based on the Tag value -->
+            
+            <EventSetter Event="Button.Click" Handler="DisplayUserControlFromTag" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <!-- This controls the look -->
+
+                        <Grid>
+                            <Rectangle x:Name="bgcolor" 
+                                       RadiusX="4" RadiusY="4">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#DCDCDC" Offset="0" />
+                                                <GradientStop Color="#C6C5C5" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <Rectangle x:Name="outer" 
+                                       RadiusX="4" RadiusY="4"
+                                       StrokeThickness="1" >
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#DCDCDC" Offset="0" />
+                                                <GradientStop Color="#C6C5C5" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <Rectangle x:Name="inner"  
+                               RadiusX="4" RadiusY="4" 
+                               StrokeThickness="1" StrokeMiterLimit="10" 
+                               StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter" 
+                               Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" 
+                               Margin="3,3,3,0" 
+                               HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                               Width="Auto" Height="Auto">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <Rectangle x:Name="BrightShine" 
+                               Visibility="Collapsed" 
+                               Margin="2" Height="Auto" 
+                               RadiusX="4px" RadiusY="4px" 
+                               VerticalAlignment="Top">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="transparent" Offset="0" />
+                                                <GradientStop Color="#909090" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <ContentPresenter x:Name="ContentSite" 
+                              Margin="8,0,8,0" 
+                              TextElement.Foreground="#5F5F5F" 
+                              VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}" 
+                              HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}" />
+                        </Grid>
+
+                        <!-- This controls the behavior -->
+
+                        <ControlTemplate.Triggers>
+                            <!-- Focused -->
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <!-- MouseOver -->
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="bgcolor" Property="Stroke" Value="Red" />
+                                <Setter TargetName="bgcolor" Property="StrokeThickness" Value="2" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- These allow some level of horizontal placement of the buttons -->
+        
+        <Style x:Key="AdminButtonLeft" TargetType="{x:Type Button}"  BasedOn="{StaticResource AdminButtonEvent}">
+            <EventSetter Event="Button.Click" Handler="DisplayUserControlFromTag" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+
+        <Style x:Key="AdminButtonCenter" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminButtonEvent}" >
+            <Setter Property="Margin" Value="20,2,2,2" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="AdminButtonRight" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminButtonEvent}" >
+            <Setter Property="Margin" Value="50,2,5,2" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+    </uiuc:wucDX_Base.Resources>
+    
+    <DockPanel>
+        
+        <Border DockPanel.Dock="Left" Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2" Background="White">
+            <DockPanel>
+                
+                <TextBlock FontSize="16" HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Bold">Application Launcher</TextBlock>
+                
+                <uiuc:CylonEyeBall x:Name="cylonEyeBall1" DockPanel.Dock="Bottom" 
+                                  Margin="5"/>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Left" >
+                    
+                    <StackPanel Width="200">
+                        <!-- 
+                            Place Buttons here for each User Control that can be launched
+                            and loaded to the panel on the right.  The "Tag" attribute holds the name of the item to load
+                        -->
+                        <Button Content="Cylon EyeBall" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="CylonEyeBall" />
+                        
+                        <Button Content="Application Usage" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="wucApplicationUsage" />
+
+                        <Button Content="DataGrid Sample" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="wucDataGridSample"  />
+
+                        <Button Content="Table Viewer Fancy" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="wucTableViewerFancy"  />
+
+                        <Button Content="About" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="About"  />
+
+                        <Button Content="Provide Feedback" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="ProvideFeedback"  />
+
+                        <Button Content="SplashScreen" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="SplashScreen"  />
+                        
+                        <Border BorderBrush="OrangeRed" BorderThickness="2" Margin="5" CornerRadius="5" >
+                            
+                            <StackPanel>
+
+                                <Button Content="3D User Interface" 
+                                        Style="{StaticResource AdminButtonLeft}" 
+                                        Tag="wuc3DUI"  />
+
+                            </StackPanel>
+                            
+                        </Border>
+                        
+                    </StackPanel>
+                    
+                </ScrollViewer>
+                
+            </DockPanel>
+            
+        </Border>
+        
+        <Border DockPanel.Dock="Right" Margin="0,5,5,5"
+                BorderBrush="Black"
+                BorderThickness="2" Background="White">
+            
+            <DockPanel Name="dpUserControlContainer" >
+                <!-- User Controls get loaded here -->
+            </DockPanel>
+            
+        </Border>
+        
+    </DockPanel>
+
+</uiuc:wucDX_Base>

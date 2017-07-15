@@ -1,0 +1,7 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="Inc1.tt" #>
+
+<#@ output extension=".txt" #>
+Text in TextTemplate2.tt
+<# ShowMessage(); #>
+<#@ include file="Inc2.tt" #>

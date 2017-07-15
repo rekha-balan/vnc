@@ -1,0 +1,24 @@
+﻿The current time is 6:53 PM
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+Easier to read
+
+    0
+        1
+            2
+                3
+                    4
+                        5
+    6
+        7
+            8
+                9

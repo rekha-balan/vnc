@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E19B7D96-8445-4950-BFF4-1F9C05612BD7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VNCAssemblyViewer</RootNamespace>
+    <AssemblyName>VNCAssemblyViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AssemblyHelper">
+      <HintPath>..\..\..\Common\AssemblyHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v15.2" />
+    <Reference Include="DevExpress.Data.v15.2" />
+    <Reference Include="DevExpress.Xpf.Docking.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Gauges.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Layout.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v15.2" />
+    <Reference Include="DevExpress.Printing.v15.2.Core" />
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="VNC.ADHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.ADHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e85d2f854dfd286, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Common\VNC.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.RallyHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.RallyHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.SalesforceHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.SalesforceHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.SMOHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.SMOHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.SPHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.SPHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.TFSHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.TFSHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.XamlHelper">
+      <HintPath>..\..\..\VNC\Common\VNC.XamlHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Data\Config.cs" />
+    <Compile Include="Exceptions\CustomExceptions.cs" />
+    <Compile Include="ExternalProgram.cs" />
+    <Compile Include="Usage.cs" />
+    <Compile Include="Helpers\Command.cs" />
+    <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Security.cs" />
+    <Compile Include="User Interface\Content Controls\cc1.xaml.cs" />
+    <Compile Include="User Interface\Content Controls\cc2.xaml.cs" />
+    <Compile Include="User Interface\CustomFormat.cs" />
+    <Compile Include="User Interface\Detail3DManager.cs" />
+    <Compile Include="User Interface\DisplayOptions.cs" />
+    <Compile Include="User Interface\Help.cs" />
+    <Compile Include="User Interface\Helper.cs" />
+    <Compile Include="User Interface\PreserveColumnOrderBehavior.cs" />
+    <Compile Include="User Interface\Splash Screens\DXSplashScreen\wucDXSplashScreen.xaml.cs">
+      <DependentUpon>wucDXSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Splash Screens\LoadingSplashScreen.xaml.cs" />
+    <Compile Include="User Interface\Splash Screens\SplashItem.cs" />
+    <Compile Include="User Interface\Splash Screens\SplashScreenItems.cs" />
+    <Compile Include="User Interface\Splash Screens\wucInitialSplash.xaml.cs">
+      <DependentUpon>wucInitialSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Splash Screens\wucSplashScreenExplorerLayout.xaml.cs">
+      <DependentUpon>wucSplashScreenExplorerLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Splash Screens\wucSplashScreenTileLayout.xaml.cs">
+      <DependentUpon>wucSplashScreenTileLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\ToolBoxResources.cs" />
+    <Compile Include="User Interface\ucBase.cs" />
+    <Compile Include="User Interface\UnboundColumns.cs" />
+    <Compile Include="User Interface\User Controls\wuc3DUI.xaml.cs" />
+    <Compile Include="User Interface\User Controls\wucTableViewerFancy.xaml.cs" />
+    <Compile Include="User Interface\User Controls\wucApplicationConsole.xaml.cs" />
+    <Compile Include="User Interface\User Controls\wucApplicationUsage.xaml.cs" />
+    <Compile Include="User Interface\User Controls\CylonEyeBall.xaml.cs">
+      <DependentUpon>CylonEyeBall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\User Controls\IRefresh.cs" />
+    <Compile Include="User Interface\User Controls\RowDetailContainerControl.cs" />
+    <Compile Include="User Interface\User Controls\wucDX_Base.cs" />
+    <Compile Include="User Interface\ViewMode.cs" />
+    <Compile Include="User Interface\ViewModeItem.cs" />
+    <Compile Include="User Interface\ViewModes.cs" />
+    <Compile Include="User Interface\Windows\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\dxrwMain.xaml.cs">
+      <DependentUpon>dxrwMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\GlobalSettings.xaml.cs">
+      <DependentUpon>GlobalSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\ProvideFeedback.xaml.cs">
+      <DependentUpon>ProvideFeedback.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\dxwUserControlHost.xaml.cs">
+      <DependentUpon>dxwUserControlHost.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\Xaml\ControlStylesandTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\ServerListStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Content Controls\cc1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Content Controls\cc2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\wuc3DUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\wucDataGridSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucTableViewerFancy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\wucApplicationConsole.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\wucApplicationUsage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="Data\ApplicationDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorNumbers.cs" />
+    <Compile Include="User Interface\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Xaml\AutoHideGroup_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\BrandingVisuals.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Button_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\ColumnHeader_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Display_StylesAndTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\GridControl_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Layout_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\ScrollBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\StoryboardAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\TextBox_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\ToolBoxResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Splash Screens\DXSplashScreen\wucDXSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\Splash Screens\LoadingSplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Splash Screens\wucInitialSplash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Splash Screens\wucSplashScreenExplorerLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Splash Screens\wucSplashScreenTileLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\CylonEyeBall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\dxrwMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\GlobalSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\ProvideFeedback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\Windows\dxwUserControlHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Data\ApplicationDS.xsc">
+      <DependentUpon>ApplicationDS.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ApplicationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ApplicationDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ApplicationDS.xss">
+      <DependentUpon>ApplicationDS.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\Images\FilterEditor.max" />
+    <None Include="Resources\Images\IconLights.max" />
+    <None Include="Resources\Images\QuestionMark.max" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test Data\" />
+    <Folder Include="User Interface\Ribbon\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\cut-16x16.png" />
+    <Resource Include="Resources\Icons\cut-32x32.png" />
+    <Resource Include="Resources\Icons\EyeOnLife.bmp" />
+    <Resource Include="Resources\Icons\Application.ico" />
+    <Resource Include="Resources\Icons\EyeOnLife.png" />
+    <Resource Include="Resources\Icons\save-16x16.png" />
+    <Resource Include="Resources\Icons\save-32x32.png" />
+    <Resource Include="Resources\Icons\save-as-16x16.png" />
+    <Resource Include="Resources\Icons\save-as-32x32.png" />
+    <Resource Include="Resources\Icons\VNCDeveloperMotivation.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\300px-IBM_Blue_Gene_P_supercomputer.jpg" />
+    <Resource Include="Resources\Images\Data-Transfer-Rate.jpg" />
+    <Resource Include="Resources\Images\databasetop.png" />
+    <Resource Include="Resources\Images\DB_Instance-icon.png" />
+    <Resource Include="Resources\Images\DB_Instance.png" />
+    <Resource Include="Resources\Images\edata_128.png" />
+    <Resource Include="Resources\Images\EyeOnLife.png" />
+    <Resource Include="Resources\Images\FilterEditor.png" />
+    <Resource Include="Resources\Images\GreenBall.png" />
+    <Resource Include="Resources\Images\GroupByPanel.png" />
+    <Resource Include="Resources\Images\Images_QuestionMark.png" />
+    <Resource Include="Resources\Images\Instance Hierarchy.png" />
+    <Resource Include="Resources\Images\iStock_000006362032XSmall1-300x225.jpg" />
+    <Resource Include="Resources\Images\Media_PatientProtal.png" />
+    <Resource Include="Resources\Images\Media_UltrasoundPortal.png" />
+    <Resource Include="Resources\Images\multi-server-icon.png" />
+    <Resource Include="Resources\Images\OrangeBall.png" />
+    <Resource Include="Resources\Images\QuestionMark.png" />
+    <Resource Include="Resources\Images\RedBall.png" />
+    <Resource Include="Resources\Images\RowDetails.png" />
+    <Resource Include="Resources\Images\Server Hierarchy.png" />
+    <Resource Include="Resources\Images\server-icon.png" />
+    <Resource Include="Resources\Images\server-room.jpg" />
+    <Resource Include="Resources\Images\SnapShotCamera.png" />
+    <Resource Include="Resources\Images\ToolBox.png" />
+    <Resource Include="Resources\Images\VNCDeveloper.bmp" />
+    <Resource Include="Resources\Images\VNCDeveloperMotivation.jpg" />
+    <Resource Include="Resources\Images\VNCDeveloperMotivation.png" />
+    <Resource Include="Resources\Images\WatchWindow.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="User Interface\Splash Screens\Image.png" />
+    <Resource Include="User Interface\Splash Screens\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="User Interface\Splash Screens\DXSplashScreen\Image.png" />
+    <Resource Include="User Interface\Splash Screens\DXSplashScreen\Logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

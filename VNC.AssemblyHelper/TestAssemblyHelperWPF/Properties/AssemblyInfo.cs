@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("TestAssemblyHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Pacific Life")]
+[assembly: AssemblyCompany("VNC")]
 [assembly: AssemblyProduct("TestAssemblyHelper")]
-[assembly: AssemblyCopyright("Copyright © Pacific Life 2010")]
+[assembly: AssemblyCopyright("Copyright © VNC 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,7 +29,6 @@ using System.Windows;
 //the line below to match the UICulture setting in the project file.
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
-
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
