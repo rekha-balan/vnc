@@ -8,8 +8,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+// Based on Marius Bancila article
+// https://www.codeproject.com/Articles/453778/Loading-Assemblies-from-Anywhere-into-a-New-AppDom
+
 namespace VNC.AssemblyHelper
 {
+
     public class AssemblyReflectionManager : IDisposable
     {
         Dictionary<string, AppDomain> _mapDomains = new Dictionary<string, AppDomain>();
@@ -197,6 +201,24 @@ namespace VNC.AssemblyHelper
             }
 
             return false;
+        }
+
+        public List<TypeInformation> GetTypeInformation(String assemblyPath)
+        {
+            List<TypeInformation> results = new List<TypeInformation>();
+
+            // Check if the assembly is found in the internal dictionaries
+
+            if (_loadedAssemblies.ContainsKey(assemblyPath) && _proxies.ContainsKey(assemblyPath))
+            {
+                {
+                    {
+                        return _proxies[assemblyPath].AllTypeInformation();
+                    }
+                }
+            }
+
+            return results;
         }
 
         public TResult Reflect<TResult>(String assemblyPath, Func<Assembly, TResult> func)

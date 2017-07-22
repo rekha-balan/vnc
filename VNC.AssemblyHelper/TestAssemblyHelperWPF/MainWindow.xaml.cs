@@ -41,7 +41,20 @@ namespace TestAssemblyHelperWPF
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            var assemblyPath = @"C:\GitHub\VNC\Common\VNC.AssemblyHelper.dll";
+            var manager = new AssemblyReflectionManager();
+            var success = manager.LoadAssembly(assemblyPath, "demodomain");
 
+            var results = manager.GetTypeInformation(assemblyPath);
+
+            txtOutput.Clear();
+
+            foreach (TypeInformation info in results)
+            {
+                txtOutput.Text += (System.Environment.NewLine + info.FullName);
+            }
+
+            manager.UnloadAssembly(assemblyPath);
         }
 
         private void btnAssemblyReflection_Click(object sender, RoutedEventArgs e)

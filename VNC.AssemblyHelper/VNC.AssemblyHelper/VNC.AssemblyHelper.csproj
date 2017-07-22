@@ -49,8 +49,11 @@
     <Compile Include="AssemblyInformation.cs" />
     <Compile Include="AssemblyReflectionManager.cs" />
     <Compile Include="AssemblyReflectionProxy.cs" />
+    <Compile Include="TypeInformation.cs" />
+    <Compile Include="MethodInformation.cs" />
     <Compile Include="ConfigData1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueTypeInformation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -15,6 +15,13 @@ namespace VNC.AssemblyHelper
 
         private Assembly _Assembly;
 
+        public enum LoadMethod
+        {
+            LoadFrom,
+            LoadFile,
+            ReflectionOnlyLoadFrom
+        }
+
         public string AlgorithmIdAttribute
         {
             get
@@ -272,6 +279,8 @@ namespace VNC.AssemblyHelper
             }
         }
         #endregion
+
+
 
         #region "Constructors, Initialization, and Load"
 
