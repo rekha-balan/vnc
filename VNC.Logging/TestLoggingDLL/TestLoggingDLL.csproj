@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e85d2f854dfd286, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Common\VNC.Logging.dll</HintPath>
+      <HintPath>..\..\Common\VNC.Logging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

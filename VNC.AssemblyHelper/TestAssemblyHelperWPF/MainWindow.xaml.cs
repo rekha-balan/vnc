@@ -27,7 +27,7 @@ namespace TestAssemblyHelperWPF
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btnDisplayAssemblyInfo_Click(object sender, RoutedEventArgs e)
         {
             DisplayAssemblyInfo();
         }
@@ -39,9 +39,9 @@ namespace TestAssemblyHelperWPF
             txtOutput.Text = txtOutput.Text + System.Environment.NewLine + info.ToString();
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void btnDomainReflection_Click(object sender, RoutedEventArgs e)
         {
-            var assemblyPath = @"C:\GitHub\VNC\Common\VNC.AssemblyHelper.dll";
+            var assemblyPath = txtAssemblyPath.Text;
             var manager = new AssemblyReflectionManager();
             var success = manager.LoadAssembly(assemblyPath, "demodomain");
 
@@ -59,7 +59,7 @@ namespace TestAssemblyHelperWPF
 
         private void btnAssemblyReflection_Click(object sender, RoutedEventArgs e)
         {
-            var assemblyPath = @"C:\GitHub\VNC\Common\VNC.AssemblyHelper.dll";
+            var assemblyPath = txtAssemblyPath.Text;
             var manager = new AssemblyReflectionManager();
             var success = manager.LoadAssembly(assemblyPath, "demodomain");
 
