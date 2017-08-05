@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerationWithRoslyn", "CodeGenerationWithRoslyn\CodeGenerationWithRoslyn.csproj", "{EFFC8085-20F6-4979-8E47-9A79D44F571E}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VNCDB", "VNCDB\VNCDB.sqlproj", "{0CF50996-B6C3-4C05-8D22-E7367625B1DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSIXProject1Roslyn", "VSIXProject1Roslyn\VSIXProject1Roslyn.csproj", "{D2069C72-8743-4BBF-B5E3-4E5807933439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{0CF50996-B6C3-4C05-8D22-E7367625B1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CF50996-B6C3-4C05-8D22-E7367625B1DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CF50996-B6C3-4C05-8D22-E7367625B1DB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D2069C72-8743-4BBF-B5E3-4E5807933439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2069C72-8743-4BBF-B5E3-4E5807933439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2069C72-8743-4BBF-B5E3-4E5807933439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2069C72-8743-4BBF-B5E3-4E5807933439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

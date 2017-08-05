@@ -154,20 +154,42 @@ namespace PatternTemplates
 
     public sealed class Singleton5
     {
+        private Singleton5()
+        {
+            Setup();
+        }
+
         public static Singleton5 Instance
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("CS Instance");
                 return Nested.instance;
             }
         }
 
+        public string FieldValue;
+
+        string propertyValue;
+        public string PropertyValue
+        {
+            get { return propertyValue; }
+            set
+            {
+                propertyValue = value;
+            }
+        }
+
+        void Setup()
+        {
+            System.Diagnostics.Debug.WriteLine("CS Setup");
+        }
         private class Nested
         {
             // Explicit static constructor to tell C# compiler
-            // to ot mark type as beforefieldinit
+            // to not mark type as beforefieldinit
 
-            static Nested()  { }
+            static Nested()  { System.Diagnostics.Debug.WriteLine("CS Nested Constructor"); }
 
             internal static readonly Singleton5 instance = new Singleton5();
         }
