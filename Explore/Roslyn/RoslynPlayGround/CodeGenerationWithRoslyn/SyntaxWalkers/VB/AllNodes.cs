@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace CodeGenerationWithRoslyn
+namespace CodeGenerationWithRoslyn.SyntaxWalkers.VB
 {
-    class Walker : CSharpSyntaxWalker
+    class AllNodes : VisualBasicSyntaxWalker
     {
-        public Walker() : base(SyntaxWalkerDepth.StructuredTrivia)
+        public AllNodes() : base(SyntaxWalkerDepth.StructuredTrivia)
         {
             
         }
@@ -32,8 +32,6 @@ namespace CodeGenerationWithRoslyn
             var indents = new String(' ', tabs * 3);
             Console.WriteLine(string.Format("{0}{1}:\t{2}", indents, token.Kind(), token));
             base.VisitToken(token);
-        }
-
-        
+        }     
     }
 }

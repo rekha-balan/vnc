@@ -22,24 +22,54 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
+using CodeGenerationWithRoslyn;
+
 
 namespace CodeGenerationWithRoslyn
 {
     class Program
     {
-        static void Main(string[] args)
+        public delegate void CallMethod();
+
+        public class MethodCall
         {
+            public string Name;
+            public Int16 Number;
+            public CallMethod Target;
+            public string Description;
 
+            public MethodCall(string name, short number, CallMethod target, string description)
+            {
+                Name = name;
+                Number = number;
+                Target = target;
+                Description = description;
+            }
+        }
 
-            //Method1();
-            //Method2();
-            //Method3();
-            //Method4();
-            //Method5();
-            //Method6();
-            //Method7();
-            //Method8();
-            //Method9();
+        public static Dictionary<Int16, MethodCall> Commands = new Dictionary<Int16, MethodCall>();
+
+        static void ThanksForPlaying()
+        {
+            Console.WriteLine("Thanks for Playing");
+            Console.ReadLine();
+        }
+
+        static void InitializeCommands()
+        {
+            Commands.Add(0, new MethodCall( "Exit", 0, ThanksForPlaying, "Terminate Program"));
+
+            // From 
+
+            Commands.Add(1, new MethodCall("Method1", 1, Method1, "Method1 Description"));
+            Commands.Add(2, new MethodCall("Method2", 2, Method2, "Method2 Description"));
+            Commands.Add(3, new MethodCall("Method3", 3, Method3, "Method3 Description"));
+            Commands.Add(4, new MethodCall("Method4", 4, Method4, "Method4 Description"));
+            Commands.Add(5, new MethodCall("Method5", 5, Method5, "Method5 Description"));
+            Commands.Add(6, new MethodCall("Method6", 6, Method6, "Method6 Description"));
+            Commands.Add(7, new MethodCall("Method7", 7, Method7, "Method7 Description"));
+            Commands.Add(8, new MethodCall("Method8", 8, Method8, "Method8 Description"));
+            Commands.Add(9, new MethodCall("Method9", 9, Method9, "Method9 Description"));
 
             // From Learn Roslyn Now - Josh Varty
 
@@ -48,25 +78,26 @@ namespace CodeGenerationWithRoslyn
 
             // Learn Roslyn Now - E03 - The CSharp Syntax Walker
 
-            //VBSyntaxTree();
-            //CSharpSyntaxWalkerDemo();     //03
+            Commands.Add(10, new MethodCall("VBSyntaxTree", 10, Method9, "VBSyntaxTree Description"));
+            Commands.Add(11, new MethodCall("CSharpSyntaxWalkerDemo", 11, Method9, "Method9 Description"));
 
             // Learn Roslyn Now - E04 - The CSharp Syntax Rewriter
 
-            //CSharpSyntaxRewriterDemo1();
-            //CSharpSyntaxRewriterDemo2();
-            //CSharpSyntaxRewriterDemo3();
-            //CSharpSyntaxRewriterDemo4();
+            Commands.Add(12, new MethodCall("CSharpSyntaxRewriterDemo1", 12, Method9, "CSharpSyntaxRewriterDemo1 Description"));
+            Commands.Add(13, new MethodCall("CSharpSyntaxRewriterDemo2", 13, Method9, "CSharpSyntaxRewriterDemo2 Description"));
+            Commands.Add(14, new MethodCall("CSharpSyntaxRewriterDemo3", 14, Method9, "CSharpSyntaxRewriterDemo3 Description"));
+            Commands.Add(15, new MethodCall("CSharpSyntaxRewriterDemo4", 15, Method9, "CSharpSyntaxRewriterDemo4 Description"));
 
             // Learn Roslyn Now - E05 - Semantic Model and Symbols
 
-            //SemanticModelDemo1();
-            //SemanticModelDemo2();
+            Commands.Add(16, new MethodCall("SemanticModelDemo1", 16, Method9, "SemanticModelDemo1 Description"));
+            Commands.Add(17, new MethodCall("SemanticModelDemo2", 17, Method9, "SemanticModelDemo2 Description"));
 
-            // Learn Roslyn Now - E06 - MSBuildWorkspace            
-
-            //ExploreSolution();
-            //ChangeFile();
+            // Learn Roslyn Now - E06 - MSBuildWorkspace     
+            
+            Commands.Add(18, new MethodCall("ExploreSolution", 18, Method9, "ExploreSolution Description"));
+            Commands.Add(19, new MethodCall("ListFileInfo", 19, ListFileInfo, "ListFileInfo Description"));
+            Commands.Add(20, new MethodCall("ChangeFile", 20, Method9, "ChangeFile Description"));
 
             //VisualStudioWorkSpaceDemo1();
 
@@ -77,21 +108,40 @@ namespace CodeGenerationWithRoslyn
             // Learn Roslyn Now - E09 - Introduction to Analyzers
 
             // Introduction to the .NET Compiler Platform
-            // Pluralsight Bret De Veers
+            // PluralSight Bret De Veers
 
             // 5 - Semantic Models
 
-            //GettingTheConstantValueOfLiterals();
+            Commands.Add(30, new MethodCall("GettingTheConstantValueOfLiterals", 30, Method9, "GettingTheConstantValueOfLiterals Description"));
 
             // 7 - Workspace APIs
 
-            DisplaySolutionInfo();
-
-
-
-            Console.WriteLine("Press Enter to Exit");
-            Console.ReadLine();
+            Commands.Add(31, new MethodCall("DisplaySolutionInfo", 31, Method9, "DisplaySolutionInfo Description"));
         }
+
+        static void Main(string[] args)
+        {
+            Int16 selectedCommand;
+
+            InitializeCommands();
+
+            while ((selectedCommand = ParseRequest()) != 0)
+            {
+                if (Commands.ContainsKey(selectedCommand))
+                {
+                    Console.WriteLine("--- Start of Execution ---");
+
+                    Commands[selectedCommand].Target();
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized command #");
+                }
+
+                Console.WriteLine("--- End of Execution ---");
+            }
+        }
+
         static void DisplaySolutionInfo()
         {
             string targetSolution = @"C:\EaseSource\Source-ease_main-C7.7\WebApps\CumminsWI\CumminsWI.sln";
@@ -107,11 +157,19 @@ namespace CodeGenerationWithRoslyn
             // Simplification(solution);
             PrintSolution(solution);
         }
+
         static void PrintSolution(Solution solution)
         {
             // Print the root of the solution
 
             Console.WriteLine(Path.GetFileName(solution.FilePath));
+
+            Console.WriteLine("Projects:");
+
+            foreach (var project in solution.Projects)
+            {
+                Console.WriteLine("  - " + project.Name);
+            }
 
             // Get dependency graph to perform a sort
 
@@ -134,20 +192,27 @@ namespace CodeGenerationWithRoslyn
 
                 Console.WriteLine("> " + project.Name);
 
-                Console.WriteLine("  > References");
+                Console.WriteLine("  > MetadataReferences");
+
+                foreach (var reference in project.MetadataReferences)
+                {
+                    Console.WriteLine("     - " + reference.Display);
+                }
+
+                Console.WriteLine("  > ProjectReferences");
 
                 foreach (var reference in project.ProjectReferences)
                 {
                     Console.WriteLine("     - " + solution.GetProject(reference.ProjectId).Name);
                 }
 
+                Console.WriteLine("  > Documents");
+
                 foreach (var document in project.Documents)
                 {
                     Console.WriteLine("    - " + document.Name + " " + document.GetType().ToString());
                 }
             }
-
-
         }
 
         static void GettingTheConstantValueOfLiterals()
@@ -470,8 +535,6 @@ public partial class MyPartialClass
             // Can cast to more specific type to get addition info
 
             var invokedMethodSymbol = symbolInfo.Symbol as IMethodSymbol;
-
-
         }
 
         static void SemanticModelDemo2()
@@ -522,22 +585,30 @@ public partial class MyPartialClass
 
         static void ExploreSolution()
         {
-            string path = @"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln";
+            ExploreSolution(@"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln");
+        }
 
+        static void ExploreSolution(string solutionFullPath)
+        {
             var msBuildWS = MSBuildWorkspace.Create();
             // Should await task. Be lazy and just get result
-            var solution = msBuildWS.OpenSolutionAsync(path).Result;
+            var solution = msBuildWS.OpenSolutionAsync(solutionFullPath).Result;
 
             foreach (var project in solution.Projects)
             {
                 foreach (var document in project.Documents)
                 {
-                    Console.WriteLine(string.Format("Name: {0}  Filepath: {1}\n", document.Name, document.FilePath));
+                    Console.WriteLine(string.Format("Name: {0}  FilePath: {1}\n", document.Name, document.FilePath));
                 }
             }
         }
 
         static void ChangeFile()
+        {
+            ChangeFile(@"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln");
+        }
+
+        static void ChangeFile(string solutionFullPath)
         {
             string path = @"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln";
 
@@ -567,16 +638,39 @@ public partial class MyPartialClass
             var result = msBuildWS.TryApplyChanges(newDocument.Project.Solution);
         }
 
+        static void ListFileInfo()
+        {
+            string path = @"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln";
+
+            var msBuildWS = MSBuildWorkspace.Create();
+            // Should await task. Be lazy and just get result
+            var solution = msBuildWS.OpenSolutionAsync(path).Result;
+            string targetFile = "TestFile.cs";
+
+            ListFileInfo(solution, targetFile);
+        }
+
+        static void ListFileInfo(Microsoft.CodeAnalysis.Solution solution, string targetFile)
+        {
+            var document = solution.Projects.SelectMany(n => n.Documents.Where(m => m.Name == targetFile)).Single();
+
+            var documentSourceText = document.GetTextAsync().Result;
+            string documentString = documentSourceText.ToString();
+
+            Console.WriteLine(documentString);
+        }
+
         private static void Method1()
         {
             string sourceCode = "a=B+c;";
+            Console.WriteLine("sourceCode");
+            Console.WriteLine(sourceCode);
 
             SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
-            var walker = new Walker();
+            var walker = new SyntaxWalkers.CS.AllNodes();
             walker.Visit(tree.GetRoot());
             Console.WriteLine("We can get back to the original code by calling ToFullString()");
             Console.WriteLine(tree.GetRoot().ToFullString());
-            Console.ReadLine();
         }
 
         private static void Method2()
@@ -589,10 +683,8 @@ public partial class MyPartialClass
             }
 
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
-            var walker = new Walker();
+            var walker = new SyntaxWalkers.CS.AllNodes();
             walker.Visit(tree.GetRoot());
-
-            Console.ReadLine();
         }
 
         private static void Method3()
@@ -610,7 +702,6 @@ public partial class MyPartialClass
             // Do something with the compilation
 
             Symbols.ReviewSymbolTable(compilation);
-            Console.ReadLine();
         }
 
         private static void Method4()
@@ -631,8 +722,6 @@ public partial class MyPartialClass
             var type = Symbols.FindClassesDeriviedOrImplementedByType(compilation, targetType);
 
             Console.WriteLine(type.First().Identifier.ToFullString());
-
-            Console.ReadLine();
         }
 
         private static void Method5()
@@ -666,8 +755,6 @@ public partial class MyPartialClass
                     }
                 }
             }
-
-            Console.ReadLine();
         }
 
         private static void Method6()
@@ -714,8 +801,6 @@ public partial class MyPartialClass
             {
                 Console.WriteLine(method.Name);
             }             
-
-            Console.ReadLine();
         }
 
         private static void Method7()
@@ -770,8 +855,6 @@ public partial class MyPartialClass
             {
                 Console.WriteLine(method.Name);
             }
-
-            Console.ReadLine();
         }
 
         private static void Method8()
@@ -787,8 +870,6 @@ public partial class MyPartialClass
             }
 
             Console.WriteLine(emptyClass.ToFullString());
-
-            Console.ReadLine();
         }
 
         private static void Method9()
@@ -818,8 +899,36 @@ public partial class MyPartialClass
                 .NormalizeWhitespace();
 
             Console.WriteLine(emptyClass.ToFullString());
-
-            Console.ReadLine();
         }
+
+        #region Utilities
+
+        static Int16 ParseRequest()
+        {
+            Int16 selectedCommand;
+            Boolean success = false;
+
+            do
+            {
+                DisplayCommands();
+                string input = Console.ReadLine();
+                success = Int16.TryParse(input, out selectedCommand);
+            } while (!success);
+
+            return selectedCommand;
+        }
+
+        static void DisplayCommands()
+        {
+            Console.WriteLine("Enter # of Command to Execute");
+
+            foreach (var command in Commands)
+            {
+                Console.WriteLine(string.Format("  {0,2} - {1} - {2}", command.Key, command.Value.Name, command.Value.Description));
+            }
+        }
+
+        #endregion
+
     }
 }
