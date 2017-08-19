@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
 using CodeGenerationWithRoslyn;
-
+using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace CodeGenerationWithRoslyn
 {
@@ -78,8 +78,8 @@ namespace CodeGenerationWithRoslyn
 
             // Learn Roslyn Now - E03 - The CSharp Syntax Walker
 
-            Commands.Add(10, new MethodCall("VBSyntaxTree", 10, Method9, "VBSyntaxTree Description"));
-            Commands.Add(11, new MethodCall("CSharpSyntaxWalkerDemo", 11, Method9, "Method9 Description"));
+            Commands.Add(10, new MethodCall("VBSyntaxWalkerDemo", 10, VBSyntaxWalkerDemo, "VBSyntaxWalkerDemo Description"));
+            Commands.Add(11, new MethodCall("CSharpSyntaxWalkerDemo", 11, CSharpSyntaxWalkerDemo, "CSharpSyntaxWalkerDemo Description"));
 
             // Learn Roslyn Now - E04 - The CSharp Syntax Rewriter
 
@@ -258,6 +258,94 @@ namespace CodeGenerationWithRoslyn
 
         }
 
+        static void VBSyntaxWalkerDemo()
+        {
+            var tree = VisualBasicSyntaxTree.ParseText(@"
+    ''' <summary>
+    ''' Adds Forward slash (\) if the passed value doesn't have one in the end
+    ''' </summary>
+    ''' <param name=""strDir"">Directory</param>
+    ''' <returns>Directory</returns>
+    ''' <remarks></remarks>
+    Public Function AddForwardSlash(ByVal strDir As String) As String
+
+    # If TRACE
+        Dim startTicks As Long = Log.Trace15(""Enter"", LOG_APPNAME, BASE_ERRORNUMBER + 0)
+    #End If
+
+        '\ - Slash or Forward Slash, / - Backward Slash
+        strDir = Trim("" & strDir)
+        If Len(strDir) > 0 Then
+            If Right(strDir, 1) <> ""\"" Then
+                strDir = strDir & ""\""
+            End If
+        End If
+
+
+    # If TRACE
+        Log.Trace15(String.Format(""Exit ({0})"", strDir), LOG_APPNAME, BASE_ERRORNUMBER + 0, startTicks)
+    #End If
+        Return strDir
+    End Function
+");
+
+            // Get errors
+
+            //var diagnostics = tree.GetDiagnostics().Where(n => n.Severity == DiagnosticSeverity.Error).First();
+
+            // Top level node
+
+            var root = tree.GetRoot();
+
+            // ClassDeclarationSyntax
+            // MethodDeclarationSyntax
+            //
+            // TryStatementSyntax
+
+
+            DisplayHeader("ClassBlockSyntax Node");
+
+            var classS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ClassBlockSyntax>().First();
+
+            Console.WriteLine(classS.ToFullString());
+            Console.WriteLine(classS.ToString());
+
+            DisplayHeader("MethodBlockSyntax Node");
+
+            var methodS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodBlockSyntax>().First();
+
+            Console.WriteLine(methodS.ToFullString());
+            Console.WriteLine(methodS.ToString());
+
+            DisplayHeader("TryStatementSyntax Node");
+
+            var tryS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.TryStatementSyntax>().First();
+            var block = tryS.Block;
+
+            Console.WriteLine(tryS.ToFullString());
+            Console.WriteLine(tryS.ToString());
+
+            DisplayHeader("Block");
+
+            Console.WriteLine(block.ToFullString());
+            Console.WriteLine(block.ToString());
+
+            //var method = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+
+            // Use .With after SyntaxNode to see what is available for that node.
+
+            // Rewrite something
+
+            DisplayHeader("Return Int16");
+
+            var returnType = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseTypeName("Int16");
+
+            var newMethodS = methodS.WithReturnType(returnType);
+
+            Console.WriteLine(newMethodS.ToFullString());
+            Console.WriteLine(newMethodS.ToString());
+        }
+
         static void CSharpSyntaxWalkerDemo()
         {
             var tree = CSharpSyntaxTree.ParseText(@"
@@ -316,21 +404,21 @@ class C
 
             DisplayHeader("ClassDeclarationSyntax Node");
 
-            var classS = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+            var classS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().First();
 
             Console.WriteLine(classS.ToFullString());
             Console.WriteLine(classS.ToString());
 
             DisplayHeader("MethodDeclarationSyntax Node");
 
-            var methodS = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var methodS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().First();
 
             Console.WriteLine(methodS.ToFullString());
             Console.WriteLine(methodS.ToString());
 
             DisplayHeader("TryStatementSyntax Node");
 
-            var tryS = root.DescendantNodes().OfType<TryStatementSyntax>().First();
+            var tryS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.TryStatementSyntax>().First();
             var block = tryS.Block;
 
             Console.WriteLine(tryS.ToFullString());
@@ -349,7 +437,7 @@ class C
 
             DisplayHeader("Return Int16");
 
-            var returnType = SyntaxFactory.ParseTypeName("Int16");
+            var returnType = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseTypeName("Int16");
 
             var newMethodS = methodS.WithReturnType(returnType);
 
@@ -407,12 +495,12 @@ class Program
 
             Console.WriteLine(root.ToFullString());
 
-            var ifStatements = root.DescendantNodes().OfType<IfStatementSyntax>();
+            var ifStatements = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.IfStatementSyntax>();
 
             foreach (var ifStatement in ifStatements)
             {
                 var body = ifStatement.Statement;
-                var block = SyntaxFactory.Block(body);
+                var block = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.Block(body);
                 var newIfStatement = ifStatement.WithStatement(block);
                 root = root.ReplaceNode(ifStatement, newIfStatement);
             }
@@ -479,12 +567,12 @@ class Program
 
             Console.WriteLine(root.ToFullString());
 
-            var ifStatements = root.DescendantNodes().OfType<IfStatementSyntax>();
+            var ifStatements = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.IfStatementSyntax>();
 
             foreach (var ifStatement in ifStatements)
             {
                 var body = ifStatement.Statement;
-                var block = SyntaxFactory.Block(body);
+                var block = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.Block(body);
                 var newIfStatement = ifStatement.WithStatement(block);
                 root = root.ReplaceNode(ifStatement, newIfStatement);
             }
@@ -519,11 +607,11 @@ public partial class MyPartialClass
             var root = tree.GetRoot();
 
             var semaniticModel = compilation.GetSemanticModel(tree);
-            var methodSyntax = root.DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var methodSyntax = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().Single();
 
             var methodSymbol = semaniticModel.GetDeclaredSymbol(methodSyntax);
 
-            var invokedMethod = root.DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var invokedMethod = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>().Single();
             var symbolInfo = semaniticModel.GetSymbolInfo(invokedMethod);
 
             var invokedSymbol = symbolInfo.Symbol;
@@ -560,14 +648,14 @@ public partial class MyPartialClass
             var root = tree.GetRoot();
 
             var semaniticModel = compilation.GetSemanticModel(tree);
-            var methodSyntax = root.DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var methodSyntax = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().Single();
 
             var methodSymbol = semaniticModel.GetDeclaredSymbol(methodSyntax);
 
             var parentAssembly = methodSymbol.ContainingAssembly;
 
-            var firstClass = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First();
-            var secondClass = root.DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
+            var firstClass = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().First();
+            var secondClass = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().Last();
 
             var firstSymbol = semaniticModel.GetDeclaredSymbol(firstClass);
             var secondSymbol = semaniticModel.GetDeclaredSymbol(secondClass);
