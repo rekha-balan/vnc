@@ -203,6 +203,24 @@ namespace VNC.AssemblyHelper
             return false;
         }
 
+        public List<MethodInformation> GetMethodInformation(String assemblyPath)
+        {
+            List<MethodInformation> results = new List<MethodInformation>();
+
+            // Check if the assembly is found in the internal dictionaries
+
+            if (_loadedAssemblies.ContainsKey(assemblyPath) && _proxies.ContainsKey(assemblyPath))
+            {
+                {
+                    {
+                        results = _proxies[assemblyPath].AllMethodInformation();
+                    }
+                }
+            }
+
+            return results;
+        }
+
         public List<TypeInformation> GetTypeInformation(String assemblyPath)
         {
             List<TypeInformation> results = new List<TypeInformation>();
@@ -213,7 +231,25 @@ namespace VNC.AssemblyHelper
             {
                 {
                     {
-                        return _proxies[assemblyPath].AllTypeInformation();
+                        results = _proxies[assemblyPath].AllTypeInformation();
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        public List<ValueTypeInformation> GetStructureInformation(String assemblyPath)
+        {
+            List<ValueTypeInformation> results = new List<ValueTypeInformation>();
+
+            // Check if the assembly is found in the internal dictionaries
+
+            if (_loadedAssemblies.ContainsKey(assemblyPath) && _proxies.ContainsKey(assemblyPath))
+            {
+                {
+                    {
+                        results = _proxies[assemblyPath].AllStructureInformation();
                     }
                 }
             }

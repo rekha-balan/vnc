@@ -43,7 +43,7 @@ namespace TestAssemblyHelperWPF
         {
             var assemblyPath = txtAssemblyPath.Text;
             var manager = new AssemblyReflectionManager();
-            var success = manager.LoadAssembly(assemblyPath, "demodomain");
+            var success = manager.LoadAssembly(assemblyPath, "VNCReflectionDomain");
 
             var results = manager.GetTypeInformation(assemblyPath);
 
@@ -61,7 +61,7 @@ namespace TestAssemblyHelperWPF
         {
             var assemblyPath = txtAssemblyPath.Text;
             var manager = new AssemblyReflectionManager();
-            var success = manager.LoadAssembly(assemblyPath, "demodomain");
+            var success = manager.LoadAssembly(assemblyPath, "VNCReflectionDomain");
 
             var results = manager.Reflect(assemblyPath, (a) =>
             {

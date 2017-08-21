@@ -17,7 +17,7 @@
             <Label Content="Assembly Path" />
             <TextBox Name="txtAssemblyPath" 
                      Margin="10,5,10,5"
-                     Text="C:\GitHub\VNC\Common\VNC.AssemblyHelper.dll" />
+                     Text="C:\Ease Inc\Installation\builds\7.0\master\7.0.0.1350\client\EASE7_ClientApps_7.0.0.1350\EaseCore.dll" />
             <Button Name="btnDisplayAssemblyInfo" 
                     Content="Display Assembly Info"
                     Style="{StaticResource Buttons}"
