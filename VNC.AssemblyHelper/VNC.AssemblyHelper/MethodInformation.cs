@@ -23,7 +23,6 @@ namespace VNC.AssemblyHelper
         public string OutParameters { get; set; }
         public string OptionalParameters { get; set; }
         public string ByRefParameters { get; set; }
-        public string CRC32 { get; set; }
         public string MD5 { get; set; }
 
         public static string[] GetHeadersSourceContext()
@@ -53,7 +52,6 @@ namespace VNC.AssemblyHelper
                     "Out Parameters",
                     "Optional Parameters",
                     "ByRef Parameters",
-                    "CRC32",
                     "MD5"
                 };
 

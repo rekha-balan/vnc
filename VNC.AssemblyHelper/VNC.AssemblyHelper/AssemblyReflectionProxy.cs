@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +13,12 @@ using System.Threading.Tasks;
 namespace VNC.AssemblyHelper
 {
 
+
     public class AssemblyReflectionProxy : MarshalByRefObject
     {
         private string _assemblyPath;
         public string _assemblyPathLoadedFromLocation;
+        MD5 _md5Hash = MD5.Create();
 
         public void LoadAssembly(String assemblyPath)
         {
@@ -163,49 +166,84 @@ namespace VNC.AssemblyHelper
 
                 foreach (MethodInfo methodInfo in type.GetMethods(bindingFlags))
                 {
-                    MethodInformation methodInformation = new MethodInformation();
+                    try
+                    {
+                        MethodInformation methodInformation = new MethodInformation();
 
-                    string methodParameters = "";
+                        string methodParameters = "";
 
-                    bool hasRetValParameters = false;
-                    bool hasOutParameters = false;
-                    bool hasOptionalParameters = false;
-                    bool hasByRefParameters = false;
+                        bool hasRetValParameters = false;
+                        bool hasOutParameters = false;
+                        bool hasOptionalParameters = false;
+                        bool hasByRefParameters = false;
 
-                    methodParameters = FormatMethodParameters(methodInfo,
-                    ref hasRetValParameters, ref hasOutParameters, ref hasOptionalParameters, ref hasByRefParameters);
+                        methodParameters = FormatMethodParameters(methodInfo,
+                        ref hasRetValParameters, ref hasOutParameters, ref hasOptionalParameters, ref hasByRefParameters);
 
-                    methodInformation.Assembly = assembly.GetName().Name;
+                        methodInformation.Assembly = assembly.GetName().Name;
 
-                    methodInformation.Type = typeInfo.FullName;
+                        methodInformation.Type = typeInfo.FullName;
 
-                    methodInformation.IsStatic = methodInfo.IsStatic.ToString();
-                    methodInformation.IsPublic = methodInfo.IsPublic.ToString();
-                    methodInformation.IsPrivate = methodInfo.IsPrivate.ToString();
+                        methodInformation.IsStatic = methodInfo.IsStatic.ToString();
+                        methodInformation.IsPublic = methodInfo.IsPublic.ToString();
+                        methodInformation.IsPrivate = methodInfo.IsPrivate.ToString();
 
-                    methodInformation.ReturnType = methodInfo.ReturnType.ToString();
+                        methodInformation.ReturnType = methodInfo.ReturnType.ToString();
 
-                    methodInformation.Method = methodInfo.Name);
+                        methodInformation.Method = methodInfo.Name;
 
-                    methodInformation.Parameters = methodParameters);
+                        methodInformation.Parameters = methodParameters;
 
-                    methodInformation.RetValParameters = hasRetValParameters ? "X" : "";
-                    methodInformation.OutParameters = hasOutParameters ? "X" : "";
-                    methodInformation.OptionalParameters = hasOptionalParameters ? "X" : "";
-                    methodInformation.ByRefParameters = hasByRefParameters ? "X" : "";
+                        methodInformation.RetValParameters = hasRetValParameters ? "X" : "";
+                        methodInformation.OutParameters = hasOutParameters ? "X" : "";
+                        methodInformation.OptionalParameters = hasOptionalParameters ? "X" : "";
+                        methodInformation.ByRefParameters = hasByRefParameters ? "X" : "";
 
-                    byte[] methodBodyBytes = methodInfo.GetMethodBody().GetILAsByteArray();
+                        MethodBody methodBody;
 
-                    //methodInformation.MD5 = GetMd5Hash(md5Hash, methodBodyBytes));
+                        try
+                        {
+                            methodBody = methodInfo.GetMethodBody();
 
-                    results.Add(methodInformation);
+                            byte[] methodBodyBytes = methodBody.GetILAsByteArray();
+                            methodInformation.MD5 = GetMd5Hash(_md5Hash, methodBodyBytes);
+                        }
+                        catch (Exception ex)
+                        {
+                            methodInformation.MD5 = "???";
+                        }
+                        
+                        results.Add(methodInformation);
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
                 }
             }
 
             return results;
         }
 
-    private string FormatMethodParameters(MethodInfo method,
+        string GetMd5Hash(MD5 md5Hash, byte[] bytes)
+        {
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = md5Hash.ComputeHash(bytes);
+
+            StringBuilder sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data 
+            // and format each one as a hexadecimal string.
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
+
+        private string FormatMethodParameters(MethodInfo method,
         ref bool hasRetValParameters, ref bool hasOutParameters,
         ref bool hasOptionalParameters, ref bool hasByRefParameters)
     {
