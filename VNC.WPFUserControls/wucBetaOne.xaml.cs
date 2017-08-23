@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VNC.WPFUserControls
 {
     /// <summary>
-    /// Interaction logic for wucUIOne.xaml
+    /// Interaction logic for wucBetaOne.xaml
     /// </summary>
-    public partial class wucUITwo : wucBase
+    public partial class wucBetaOne : wucBase
     {
-        public wucUITwo()
+        public wucBetaOne()
         {
             InitializeComponent();
         }

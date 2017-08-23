@@ -62,7 +62,10 @@
 
             <dxb:BarManager.Items>
 
-                <dxb:BarEditItem Name="bei_DetailViewMode" Content="DetailViewMode" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                <dxb:BarEditItem Name="bei_DetailViewMode" 
+                                 Content="DetailViewMode" 
+                                 EditWidth="100" 
+                                 ClosePopupOnChangingEditValue="True" 
                                  EditValueChanged="bei_DetailViewMode_EditValueChanged" >
                     <dxb:BarEditItem.EditSettings>
                         <dxe:ComboBoxEditSettings IsTextEditable="False">
@@ -76,7 +79,10 @@
                     </dxb:BarEditItem.EditSettings>
                 </dxb:BarEditItem>
 
-                <dxb:BarEditItem Name="bei_VisualTheme" Content="Visual Theme" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                <dxb:BarEditItem Name="bei_VisualTheme" 
+                                 Content="Visual Theme" 
+                                 EditWidth="100" 
+                                 ClosePopupOnChangingEditValue="True" 
                                  EditValueChanged="bei_VisualTheme_EditValueChanged" >
                     <dxb:BarEditItem.EditSettings>
                         <dxe:ComboBoxEditSettings IsTextEditable="False" Name="cbes_Themes" ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}" />
@@ -87,6 +93,8 @@
                     Name="bci_AdvancedMode" 
                     Content="Enable Advanced Views" 
                     Hint="Enable Additional Views and Command Panels"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-32x32.png"                       
                     ItemClick="OnAdvancedMode_Click" 
                     ToolTip="bci advanced mode"/>
                 
@@ -94,17 +102,23 @@
                     Name="bci_AdministratorMode" 
                     Content="Enable Updates" 
                     Hint="Enable grids for updating"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-32x32.png"                       
                     ItemClick="OnAdministratorMode_Click"/>
                 
                 <dxb:BarCheckItem 
                     Name="bci_DeveloperMode" 
-                    Content="Enable Developer" 
+                    Content="Enable Developer"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-32x32.png"                       
                     ItemClick="OnDeveloperMode_Click"/>
                 
                 <dxb:BarCheckItem 
                     Name="bci_BetaMode" 
                     Content="Enable Beta Options" 
                     Hint="Enable half baked ideas"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-32x32.png"                       
                     ItemClick="OnBetaMode_Clicked"/>
 
                 <dxb:BarButtonItem 
@@ -136,27 +150,37 @@
                 
                 <dxb:BarButtonItem 
                     Name="bbi_Settings" 
-                    Content="Settings" 
+                    Content="Settings"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/save-as-32x32.png"                       
                     ItemClick="OnSettings_Click"/>
                 
                 <dxb:BarButtonItem 
                     Name="bbi_About" 
                     Content="About" 
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                     
                     ItemClick="OnAboutClick"/>
                 
                 <dxb:BarButtonItem 
                     Name="bbi_Feedback" 
                     Content="Provide Feedback" 
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                      
                     ItemClick="OnSendFeedback_Click"/>
                 
                 <dxb:BarButtonItem 
                     Name="bbi_Help" 
                     Content="Help" 
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnHelp_Click"/>
                 
                 <dxb:BarButtonItem 
                     Name="bbi_Exit" 
                     Content="Exit" 
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnExit_Click"/>
 
                 <!-- Standard Stuff -->
@@ -164,9 +188,13 @@
                 <dxb:BarButtonItem 
                     Name="bbi_UI1" 
                     Content="UI1"
-                    Hint="Hint about UI 1"                      
+                    Hint="Hint about UI 1"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNC.WPFUserControls.wucUIOne, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+                
+                <!-- This tag form is used for local controls -->
                 
                 <!--<dxb:BarButtonItem 
                     Name="bbi_UI2" 
@@ -175,46 +203,69 @@
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="User_Controls.wucUITwo"/>-->
 
+                <!-- This tag form is used for external controls -->
+                
                 <dxb:BarButtonItem 
                     Name="bbi_UI2" 
                     Content="UI2" 
-                    Hint="Hint about UI 2"                      
+                    Hint="Hint about UI 2"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNC.WPFUserControls.wucUITwo, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
 
                 <dxb:BarButtonItem 
                     Name="bbi_UI3" 
                     Content="UI3" 
-                    Hint="Hint about UI 3"                      
+                    Hint="Hint about UI 3"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNC.WPFUserControls.wucUIThree, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
 
                 <dxb:BarButtonItem 
+                    Name="bbi_UserControl1" 
+                    Content="UserControl1" 
+                    Hint="Hint about UserControl 1"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.UserControl1"/>
+                
+                <dxb:BarButtonItem 
                     Name="bbi_UIMenu" 
                     Content="UI Menu" 
-                    Hint="UI Menu Launcher"                    
+                    Hint="UI Menu Launcher"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNCDxWPFWindowAppBase.User_Interface.User_Controls.wucUIMenu"/>
 
                 <!-- Beta Stuff -->
 
                 <dxb:BarButtonItem 
-                    Name="bbi_ExploreHierarchy" 
-                    Content="Explore Hierarchy" 
+                    Name="bbi_Beta1" 
+                    Content="Beta Idea 1"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
-                    Tag="User_Controls.Explore_Hierarchy"/>
+                    Tag="VNC.WPFUserControls.wucBetaOne, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
                            
                 <dxb:BarButtonItem 
-                    Name="bbi_Charts" 
-                    Content="Explore Charts" 
+                    Name="bbi_Beta2" 
+                    Content="Beta Idea 2"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
-                    Tag="User_Controls.wucMasterDetailBase1"/>
+                    Tag="VNC.WPFUserControls.wucBetaTwo, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
 
                 <!-- Admin Stuff -->
              
                 <dxb:BarButtonItem 
                     Name="bbi_ApplicationUsage" 
-                    Content="View Application Usage" 
+                    Content="View Application Usage"
+                    Glyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCDxWPFWindowAppBase;component/Resources/Icons/application.ico"                        
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="User_Controls.ApplicationUsage"/>
 
@@ -240,6 +291,7 @@
                     <!-- These items are always visible -->
                     <dxb:BarButtonItemLink BarItemName="bbi_UI1" IsVisible="True" />
                     <dxb:BarButtonItemLink BarItemName="bbi_UI2" IsVisible="True"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_UserControl1" IsVisible="True"  />
                     
                     <dxb:BarItemLinkSeparator />    
                     
@@ -247,7 +299,7 @@
 
                     <dxb:BarItemLinkSeparator />
                     
-                    <!--These are hidden unless running in AdvancedMode -->
+                    <!--These are hidden unless running in IsAdvancedMode -->
 
                     <dxb:BarButtonItemLink BarItemName="bbi_UI3" Name="bbil_UI3" 
                                            IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
@@ -257,7 +309,6 @@
 
                     <dxb:BarButtonItemLink BarItemName="bbi_UILauncher" Name="bbil_UILauncher" 
                                            IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
-
 
                     <dxb:BarItemLinkSeparator />  
                     
@@ -299,11 +350,8 @@
                 <dxb:BarSubItem Name="bsi_Beta" Content="BETA Ideas" Alignment="Far"
                                 IsVisible="{Binding Path=(local:Common.IsBetaUser)}" 
                                 IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
-                    <dxb:BarButtonItemLink BarItemName="bbi_ExploreHierarchy" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_ExporeJobServers" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_Tiles" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_ExploratoryPOC" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_Charts" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Beta2" />
                 </dxb:BarSubItem>
 
                 <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >

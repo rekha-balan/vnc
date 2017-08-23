@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="VNCDxWPFWindowAppBase.User_Interface.User_Controls.UserControl1"
+﻿<local:wucDX_Base x:Class="VNCDxWPFWindowAppBase.User_Interface.User_Controls.UserControl1"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Button Click="Button_Click">UserControl1 from wucDX_Base</Button>
     </Grid>
-</UserControl>
+</local:wucDX_Base>

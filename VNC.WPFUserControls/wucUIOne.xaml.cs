@@ -18,7 +18,7 @@ namespace VNC.WPFUserControls
     /// <summary>
     /// Interaction logic for wucUIOne.xaml
     /// </summary>
-    public partial class wucUIOne : UserControl
+    public partial class wucUIOne : wucBase
     {
         public wucUIOne()
         {

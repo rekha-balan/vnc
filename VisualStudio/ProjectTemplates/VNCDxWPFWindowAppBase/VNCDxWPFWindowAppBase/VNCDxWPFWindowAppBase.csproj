@@ -62,12 +62,13 @@
     <Reference Include="VNC.ADHelper">
       <HintPath>..\..\..\..\Common\VNC.ADHelper.dll</HintPath>
     </Reference>
-    <Reference Include="VNC.AssemblyHelper">
-      <HintPath>..\..\..\..\..\..\TFS\VNCDEV\Common\VNC.AssemblyHelper.dll</HintPath>
+    <Reference Include="VNC.AssemblyHelper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Common\VNC.AssemblyHelper.dll</HintPath>
     </Reference>
     <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e85d2f854dfd286, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\TFS\VNCDEV\Common\VNC.Logging.dll</HintPath>
+      <HintPath>..\..\..\..\Common\VNC.Logging.dll</HintPath>
     </Reference>
     <Reference Include="VNC.WPFUserControls">
       <HintPath>..\..\..\..\Common\VNC.WPFUserControls.dll</HintPath>
@@ -143,36 +144,36 @@
     <Compile Include="Helpers\ExternalProgram.cs" />
     <Compile Include="User Interface\Windows\UserControlHost.xaml.cs" />
     <Page Include="User Interface\SplashScreens\LoadingSplashScreen.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\SplashScreens\wucInitialSplash.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\User Controls\wucUIMenu.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\Windows\About.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\Windows\DXRibbonWindowMain.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\Windows\GlobalSettings.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\Windows\ProvideFeedback.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\Windows\UserControlHost.xaml">
-		<Generator>MSBuild:Compile</Generator>
-		<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

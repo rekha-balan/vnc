@@ -18,11 +18,17 @@ namespace VNCDxWPFWindowAppBase.User_Interface.User_Controls
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class UserControl1 : wucDX_Base
     {
         public UserControl1()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(string.Format("{0}",
+                 System.Reflection.MethodInfo.GetCurrentMethod().Name));
         }
     }
 }

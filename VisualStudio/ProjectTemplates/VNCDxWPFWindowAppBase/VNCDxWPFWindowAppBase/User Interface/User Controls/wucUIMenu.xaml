@@ -203,18 +203,22 @@
 
                         <Button Content="UI1" 
                                 Style="{StaticResource AdminButtonLeft}" 
+                                ToolTip="UI1 Tool Tip"
                                 Tag="VNC.WPFUserControls.wucUIOne, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"  />
 
                         <Button Content="UI2" 
                                 Style="{StaticResource AdminButtonCenter}" 
+                                ToolTip="UI2 Tool Tip"
                                 Tag="VNC.WPFUserControls.wucUITwo, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"  />
 
                         <Button Content="UI3" 
-                                Style="{StaticResource AdminButtonRight}" 
+                                Style="{StaticResource AdminButtonRight}"
+                                ToolTip="UI3 Tool Tip"
                                 Tag="VNC.WPFUserControls.wucUIThree, VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"  />
 
-                        <Button Content="UI1" 
-                                Style="{StaticResource AdminButtonLeft}" 
+                        <Button Content="UI1 Menu" 
+                                Style="{StaticResource AdminButtonLeft}"
+                                ToolTip="You can launch this menu inside again, but why would you?"
                                 Tag="VNCDxWPFWindowAppBase.User_Interface.User_Controls.wucUIMenu"  />
 
                     </VirtualizingStackPanel>
