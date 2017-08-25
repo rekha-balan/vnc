@@ -320,15 +320,15 @@ namespace CodeGenerationWithRoslyn
             DisplayHeader("TryStatementSyntax Node");
 
             var tryS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.TryStatementSyntax>().First();
-            var block = tryS.Block;
+            //var block = tryS.Block;
 
             Console.WriteLine(tryS.ToFullString());
             Console.WriteLine(tryS.ToString());
 
             DisplayHeader("Block");
 
-            Console.WriteLine(block.ToFullString());
-            Console.WriteLine(block.ToString());
+            //Console.WriteLine(block.ToFullString());
+            //Console.WriteLine(block.ToString());
 
             //var method = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
 
@@ -340,10 +340,10 @@ namespace CodeGenerationWithRoslyn
 
             var returnType = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseTypeName("Int16");
 
-            var newMethodS = methodS.WithReturnType(returnType);
+            //var newMethodS = methodS.WithReturnType(returnType);
 
-            Console.WriteLine(newMethodS.ToFullString());
-            Console.WriteLine(newMethodS.ToString());
+            //Console.WriteLine(newMethodS.ToFullString());
+            //Console.WriteLine(newMethodS.ToString());
         }
 
         static void CSharpSyntaxWalkerDemo()
