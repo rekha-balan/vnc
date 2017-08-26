@@ -109,12 +109,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnOne_Click(object sender, RoutedEventArgs e)
         {
-
+            Commands.Explore.DisplayAllNodesVB(teSourceFile.Text);
         }
 
         private void btnTwo_Click(object sender, RoutedEventArgs e)
         {
-
+            Commands.Explore.DisplayMethodsVB(teSourceFile.Text);
         }
 
         private void wucSourceBranch_Picker_ControlChanged()
@@ -155,11 +155,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             string fileName = project.Attribute("FileName").Value;
             string folderPath = project.Attribute("FolderPath").Value;
-            string sourcePath = teRepositoryPath.Text + "\\" + folderPath + "\\";
+            string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
 
             teSourcePath.Text = sourcePath + "\\";
 
-            // Clear if no project file.  THis is typical if web site with only a solution file.
+            // Clear if no project file.  This is typical if web site with only a solution file.
 
             teProjectFile.Text = fileName != "" ? sourcePath + "\\" + fileName : "";
         }
@@ -167,9 +167,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private void cbeSourceFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
             XElement sourceFile = (XElement)e.NewValue;
-            string fileName = sourceFile.Attribute("FileName").Value;         
+            string fileName = sourceFile.Attribute("FileName").Value;
+            string folderPath = sourceFile.Attribute("FolderPath").Value;
+            string filePath = (folderPath != "" ? folderPath + "\\" : "") + fileName;
 
-            teSourceFile.Text = teRepositoryPath.Text + "\\" + teSourcePath.Text + "\\" + fileName;
+            teSourceFile.Text = teSourcePath.Text + filePath;
         }
     }
 }

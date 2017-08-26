@@ -233,15 +233,24 @@
                     Tag="VNCCodeCommandConsole.User_Interface.User_Controls.UserControl1"/>
                 
                 <dxb:BarButtonItem 
-                    Name="bbi_SyntaxExplorerMenu" 
-                    Content="SyntaxExplorer Menu" 
-                    Hint="SyntaxExploer Menu Launcher"
+                    Name="bbi_CodeExplorerMenu" 
+                    Content="CodeExplorer Menu" 
+                    Hint="CodeExplorer Menu Launcher"
                     Glyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
                     LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
                     ItemClick="OnShowInCurrentWindow_Click" 
-                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucSyntaxExplorerMenu"/>
-
+                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucCodeExplorerMenu"/>
+                
                 <!-- Beta Stuff -->
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_CodeExplorer" 
+                    Content="CodeExplorer" 
+                    Hint="CodeExplorer with Docking Windowsr"
+                    Glyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucCodeExplorer"/>
 
                 <dxb:BarButtonItem 
                     Name="bbi_Beta1" 
@@ -269,14 +278,6 @@
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNCCodeCommandConsole.User_Interface.User_Controls.ApplicationUsage"/>
 
-                <!--<dxb:BarButtonItem 
-                    Name="bbi_TakeWeeklySnapshot" 
-                    Content="Take Weekly Snapshot" 
-                    Hint="Collects data using the current Weekly Settings."                    
-                    Glyph="/VNCCodeCommandConsole;component/Resources/Images/SnapShotCamera.png"                    
-                    ItemClick="OnTakeSnapshot_Click" 
-                    Tag="Weekly" />-->
-
                 <!-- Menus start here -->
                 
                 <dxb:BarSubItem Name="bsi_File" Content="File">
@@ -289,7 +290,9 @@
 
                 <dxb:BarSubItem Name="bsi_View" Content="View"  >
                     <!-- These items are always visible -->
-                    <dxb:BarButtonItemLink BarItemName="bbi_SyntaxExplorerMenu" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorerMenu" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbe_CodeExplorer" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_UI1" IsVisible="True"  />
                     <dxb:BarButtonItemLink BarItemName="bbi_UI2" IsVisible="True"  />
                     
                     <dxb:BarItemLinkSeparator />    
@@ -351,6 +354,7 @@
                                 IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta2" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorer" />
                 </dxb:BarSubItem>
 
                 <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >

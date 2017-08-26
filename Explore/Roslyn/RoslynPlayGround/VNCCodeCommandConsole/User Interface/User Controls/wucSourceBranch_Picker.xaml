@@ -22,7 +22,7 @@
     
     <dxlc:LayoutControl x:Name="layoutItems" Orientation="Vertical" Background="#FFFFFF" Padding="0" >
 
-        <dxlc:LayoutGroup View="GroupBox" Orientation="Horizontal" Header="Select SourceBranch" >
+        <dxlc:LayoutGroup View="GroupBox" Orientation="Horizontal" Header="Repository Branch" >
 
             <dxlc:LayoutGroup.DataContext>
                 <XmlDataProvider x:Name="comboBox"

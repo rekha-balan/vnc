@@ -58,23 +58,22 @@
                 LabelPosition="Top"/>
                 
                 <dxlc:LayoutGroup Header="Select Input" 
+                                  View="GroupBox"
                                   Orientation="Vertical" IsCollapsed="False" IsCollapsible="True">
        
-                    <dxlc:LayoutItem 
-                        Label="Select Source Branch" 
-                        LabelPosition="Top">
+                    <dxlc:LayoutItem>
                         <uiuc:wucSourceBranch_Picker x:Name="wucSourceBranch_Picker" 
                                                      ControlChanged="wucSourceBranch_Picker_ControlChanged" />
                     </dxlc:LayoutItem>
                 
-                    <dxlc:LayoutItem Label="Select Solution File" 
+                    <dxlc:LayoutItem Label="Solution File" 
                                  LabelPosition="Top">
                         <dxe:ComboBoxEdit x:Name="cbeSolutionFile"
                                           EditValueChanged="cbeSolutionFile_EditValueChanged">
                             <dxe:ComboBoxEdit.Resources>
                                 <ui:SolutionConverter x:Key="converter" />
                             </dxe:ComboBoxEdit.Resources>
-                        <!--<dxe:ComboBoxEdit.StyleSettings>
+                            <!--<dxe:ComboBoxEdit.StyleSettings>
                                 <dxe:CheckedComboBoxStyleSettings />
                             </dxe:ComboBoxEdit.StyleSettings>-->
                             <dxe:ComboBoxEdit.EditTemplate>
@@ -173,11 +172,11 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem>
-                    <Button x:Name="btnOne" Content="Button One" Click="btnOne_Click"/>
+                    <Button x:Name="btnOne" Content="Explore1" Click="btnOne_Click"/>
                 </dxlc:LayoutItem>
                 
                 <dxlc:LayoutItem>
-                    <Button x:Name="btnTwo" Content="Button Two" Click="btnTwo_Click"/>
+                    <Button x:Name="btnTwo" Content="Explore2" Click="btnTwo_Click"/>
                 </dxlc:LayoutItem>
                 
                 <dxlc:LayoutItem Label="Select Sections to Add" 
