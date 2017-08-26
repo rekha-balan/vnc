@@ -73,6 +73,7 @@
     <Build Include="dbo\Tables\LoandCodeType.sql" />
     <Build Include="dbo\Tables\UnderwritingRule.sql" />
     <Build Include="dbo\Tables\UnderwritingRuleDetail.sql" />
+    <Build Include="dbo\Tables\ApplicationUsage.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="VNCDB.refactorlog" />
