@@ -1,0 +1,4 @@
+# Ignore Folders until ready to commit
+
+!Debug/
+!*.dll
