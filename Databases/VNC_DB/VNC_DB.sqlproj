@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>VNC</Name>
+    <Name>VNC_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{ff1c749d-fad5-4f37-a5ff-e45db83b7ea0}</ProjectGuid>
+    <ProjectGuid>{0cf50996-b6c3-4c05-8d22-e7367625b1db}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>VNC</RootNamespace>
-    <AssemblyName>VNC</AssemblyName>
+    <RootNamespace>VNC_DB</RootNamespace>
+    <AssemblyName>VNC_DB</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -25,6 +25,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetDatabase>VNC</TargetDatabase>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -48,6 +49,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SqlTargetName>VNC</SqlTargetName>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -66,13 +68,19 @@
     <Build Include="dbo\Tables\OneTrueLookupTable.sql" />
     <Build Include="dbo\Tables\StateLookup.sql" />
     <Build Include="dbo\Tables\Address.sql" />
-    <Build Include="dbo\Tables\Gender.sql" />
     <Build Include="dbo\Tables\GreetingRule.sql" />
+    <Build Include="dbo\Tables\Gender.sql" />
     <Build Include="dbo\Tables\MaritalStatus.sql" />
     <Build Include="dbo\Tables\LoanCode.sql" />
     <Build Include="dbo\Tables\LoandCodeType.sql" />
-    <Build Include="dbo\Tables\UnderwritingRuleDetail.sql" />
     <Build Include="dbo\Tables\UnderwritingRule.sql" />
+    <Build Include="dbo\Tables\UnderwritingRuleDetail.sql" />
     <Build Include="dbo\Tables\ApplicationUsage.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="VNC_DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VNC_DB.publish.xml" />
   </ItemGroup>
 </Project>

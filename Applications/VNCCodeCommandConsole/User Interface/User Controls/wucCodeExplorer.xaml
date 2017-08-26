@@ -100,12 +100,20 @@
 
                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
 
-                                    <dxlc:LayoutItem MaxHeight="1200">
+                                    <dxlc:LayoutItem>
                                         <dxe:TextEdit x:Name="teSourceCode" />
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
 
+                                <dxlc:LayoutGroup Header="Workspace" Name="lg_Workspace">
+
+                                    <dxlc:LayoutItem MaxHeight="600">
+                                        <dxe:TextEdit x:Name="teWorkspace" />
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup>
+                                
                                 <dxlc:LayoutGroup Header="Classes" Name="lg_Classes">
 
                                     <dxlc:LayoutItem MaxHeight="600">
@@ -284,6 +292,30 @@
                             </dxlc:LayoutControl> 
                         </dxdo:LayoutPanel>
 
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace" ItemWidth="300">
+                            
+                            <dxlc:LayoutControl Orientation="Vertical">
+                                
+                                <dxlc:LayoutItem>
+                                    <Button Content="Solution Info" Click="btnInfo_Solution_Click"/>
+                                </dxlc:LayoutItem>
+
+                                <dxlc:LayoutItem>
+                                    <Button Content="Project Info" Click="btnInfo_Project_Click"/>
+                                </dxlc:LayoutItem>
+
+                                <dxlc:LayoutItem>
+                                    <Button Content="Document Info" Click="btnInfo_Document_Click"/>
+                                </dxlc:LayoutItem>
+
+                                <dxlc:LayoutItem>
+                                    <dxe:CheckEdit x:Name="ceIncludeDescendants" 
+                                                           Content="Include Descendants" IsChecked="False" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutControl>
+                            
+                        </dxdo:LayoutPanel>
+                        
                     </dxdo:AutoHideGroup>
 
                 </dxdo:DockLayoutManager.AutoHideGroups>

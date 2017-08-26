@@ -314,5 +314,32 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             teSyntaxTree.Text = sb.ToString();
         }
+
+        private void btnInfo_Document_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb;
+
+            sb = VNC.CodeAnalysis.Workspace.Document.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+
+            teWorkspace.Text = sb.ToString();
+        }
+
+        private void btnInfo_Project_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb;
+
+            sb = VNC.CodeAnalysis.Workspace.Project.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+
+            teWorkspace.Text = sb.ToString();
+        }
+
+        private void btnInfo_Solution_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb;
+
+            sb = VNC.CodeAnalysis.Workspace.Solution.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+
+            teWorkspace.Text = sb.ToString();
+        }
     }
 }

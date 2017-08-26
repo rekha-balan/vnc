@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerationWithRoslyn", "CodeGenerationWithRoslyn\CodeGenerationWithRoslyn.csproj", "{EFFC8085-20F6-4979-8E47-9A79D44F571E}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VNCDB", "VNCDB\VNCDB.sqlproj", "{0CF50996-B6C3-4C05-8D22-E7367625B1DB}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VNC_DB", "VNCDB\VNC_DB.sqlproj", "{0CF50996-B6C3-4C05-8D22-E7367625B1DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSIXProject1Roslyn", "VSIXProject1Roslyn\VSIXProject1Roslyn.csproj", "{D2069C72-8743-4BBF-B5E3-4E5807933439}"
 EndProject

@@ -104,6 +104,7 @@ namespace VNCCodeCommandConsole
         // TODO(crhodes): Get rid of this (I think) and use the one from VNCCodeCommandConsole.  See if need anything else
         // in  a DataSet first.  May want a separate one for the App.
         private static Data.ApplicationDataSet _ApplicationDataSet;
+
         public static Data.ApplicationDataSet ApplicationDataSet
         {
             get

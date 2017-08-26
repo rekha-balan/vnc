@@ -150,6 +150,9 @@
     <Compile Include="SyntaxWalkers\CS\AllMethods.cs" />
     <Compile Include="SyntaxWalkers\VB\AllNodes.cs" />
     <Compile Include="SyntaxWalkers\VB\AllMethods.cs" />
+    <Compile Include="Workspace\Document.cs" />
+    <Compile Include="Workspace\Project.cs" />
+    <Compile Include="Workspace\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
