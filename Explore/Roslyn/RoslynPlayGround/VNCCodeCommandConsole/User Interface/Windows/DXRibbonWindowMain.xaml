@@ -290,8 +290,7 @@
 
                 <dxb:BarSubItem Name="bsi_View" Content="View"  >
                     <!-- These items are always visible -->
-                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorerMenu" IsVisible="True" />
-                    <dxb:BarButtonItemLink BarItemName="bbe_CodeExplorer" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorer" IsVisible="True" />
                     <dxb:BarButtonItemLink BarItemName="bbi_UI1" IsVisible="True"  />
                     <dxb:BarButtonItemLink BarItemName="bbi_UI2" IsVisible="True"  />
                     
@@ -354,7 +353,7 @@
                                 IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta2" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorer" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorerMenu" />
                 </dxb:BarSubItem>
 
                 <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >

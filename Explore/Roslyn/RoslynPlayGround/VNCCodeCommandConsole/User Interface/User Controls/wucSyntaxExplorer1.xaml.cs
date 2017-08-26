@@ -114,7 +114,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnTwo_Click(object sender, RoutedEventArgs e)
         {
-            Commands.Explore.DisplayMethodsVB(teSourceFile.Text);
+            Commands.Explore.DisplayMethodsVB(teSourceFile.Text, false, false);
         }
 
         private void wucSourceBranch_Picker_ControlChanged()

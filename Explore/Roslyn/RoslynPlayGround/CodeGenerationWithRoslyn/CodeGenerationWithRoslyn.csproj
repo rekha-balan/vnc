@@ -175,11 +175,11 @@
     <Compile Include="Symbols.cs" />
     <Compile Include="SimpleGenerator.cs" />
     <Compile Include="SyntaxWalkers\VB\AllNodes.cs" />
-    <Compile Include="SyntaxWalkers\VB\MethodWalker.cs" />
+    <Compile Include="SyntaxWalkers\VB\AllMethods.cs" />
     <Compile Include="TestFile - Orig.cs" />
     <Compile Include="TestFile.cs" />
     <Compile Include="Underwriting.cs" />
-    <Compile Include="SyntaxWalkers\CS\MethodWalker.cs" />
+    <Compile Include="SyntaxWalkers\CS\AllMethods.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNodes.cs" />
   </ItemGroup>
   <ItemGroup>
