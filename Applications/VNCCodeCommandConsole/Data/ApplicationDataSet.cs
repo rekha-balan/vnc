@@ -13,7 +13,7 @@ namespace VNCCodeCommandConsole.Data
         // This is used to single thread access to the dataset
         static readonly object _concurrencyLock = new object();
 
-        public ADSTA.ApplicationUsageTA ApplicationUsageTA { get; set; }
+        public ADSTA.ApplicationUsageTableAdapter ApplicationUsageTA { get; set; }
 
         Data.ApplicationDataSetTableAdapters.TableAdapterManager _taManager = null;
 
@@ -31,13 +31,13 @@ namespace VNCCodeCommandConsole.Data
 
                         #region Create the TableAdapters for all the tables
 
-                        ApplicationUsageTA = new ADSTA.ApplicationUsageTA();
+                        ApplicationUsageTA = new ADSTA.ApplicationUsageTableAdapter();
 
                         #endregion
 
                         #region Hook the table adapters to the table manager
 
-                        _taManager.ApplicationUsageTA = ApplicationUsageTA;
+                        _taManager.ApplicationUsageTableAdapter = ApplicationUsageTA;
 
                         #endregion
 
@@ -95,6 +95,7 @@ namespace VNCCodeCommandConsole.Data
             VNC.AppLog.Trace("End", LOG_APPNAME, BASE_ERRORNUMBER + 62, startTicksTotal);
 #endif
         }
+        
         /// <summary>
         /// Load the tables that are most often used.
         /// </summary>
@@ -103,7 +104,7 @@ namespace VNCCodeCommandConsole.Data
         {
             lock (_concurrencyLock)
             {
-                TaManager.ApplicationUsageTA.Fill(applicationDS.ApplicationUsage);
+                TaManager.ApplicationUsageTableAdapter.Fill(applicationDS.ApplicationUsage);
             }
         }
 

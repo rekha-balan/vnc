@@ -138,7 +138,7 @@ namespace VNCCodeCommandConsole
             // HACK(crhodes)
             // Skip writing to database for now
 
-            Data.ApplicationDataSetTableAdapters.ApplicationUsageTA applicationUsageTA = new Data.ApplicationDataSetTableAdapters.ApplicationUsageTA();
+            Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter applicationUsageTA = new Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter();
             applicationUsageTA.Update(Common.ApplicationDataSet.ApplicationUsage);
         }
     }

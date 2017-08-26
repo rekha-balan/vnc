@@ -164,22 +164,28 @@
     <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="VNC.ADHelper">
-      <HintPath>..\..\..\..\Common\VNC.ADHelper.dll</HintPath>
+    <Reference Include="VNC.ADHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\VNC.ADHelper.dll</HintPath>
     </Reference>
     <Reference Include="VNC.AssemblyHelper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Common\VNC.AssemblyHelper.dll</HintPath>
+      <HintPath>..\..\Common\VNC.AssemblyHelper.dll</HintPath>
     </Reference>
-    <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e85d2f854dfd286, processorArchitecture=MSIL">
+    <Reference Include="VNC.Helper">
+      <HintPath>..\..\Common\VNC.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6621de8a79b51ca3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Common\VNC.Logging.dll</HintPath>
+      <HintPath>..\..\Common\VNC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="VNC.WPFUserControls">
-      <HintPath>..\..\..\..\Common\VNC.WPFUserControls.dll</HintPath>
+    <Reference Include="VNC.WPFUserControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\VNC.WPFUserControls.dll</HintPath>
     </Reference>
-    <Reference Include="VNC.XamlHelper">
-      <HintPath>..\..\..\..\..\..\TFS\VNCDEV\VNC\Common\VNC.XamlHelper.dll</HintPath>
+    <Reference Include="VNC.XamlHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\VNC.XamlHelper.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

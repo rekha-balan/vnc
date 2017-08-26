@@ -26,8 +26,6 @@ namespace VNCCodeCommandConsole.Data {
         
         private ApplicationUsageDataTable tableApplicationUsage;
         
-        private ApplicationUsageXDataTable tableApplicationUsageX;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -59,9 +57,6 @@ namespace VNCCodeCommandConsole.Data {
                 if ((ds.Tables["ApplicationUsage"] != null)) {
                     base.Tables.Add(new ApplicationUsageDataTable(ds.Tables["ApplicationUsage"]));
                 }
-                if ((ds.Tables["ApplicationUsageX"] != null)) {
-                    base.Tables.Add(new ApplicationUsageXDataTable(ds.Tables["ApplicationUsageX"]));
-                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -87,16 +82,6 @@ namespace VNCCodeCommandConsole.Data {
         public ApplicationUsageDataTable ApplicationUsage {
             get {
                 return this.tableApplicationUsage;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ApplicationUsageXDataTable ApplicationUsageX {
-            get {
-                return this.tableApplicationUsageX;
             }
         }
         
@@ -170,9 +155,6 @@ namespace VNCCodeCommandConsole.Data {
                 if ((ds.Tables["ApplicationUsage"] != null)) {
                     base.Tables.Add(new ApplicationUsageDataTable(ds.Tables["ApplicationUsage"]));
                 }
-                if ((ds.Tables["ApplicationUsageX"] != null)) {
-                    base.Tables.Add(new ApplicationUsageXDataTable(ds.Tables["ApplicationUsageX"]));
-                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -212,12 +194,6 @@ namespace VNCCodeCommandConsole.Data {
                     this.tableApplicationUsage.InitVars();
                 }
             }
-            this.tableApplicationUsageX = ((ApplicationUsageXDataTable)(base.Tables["ApplicationUsageX"]));
-            if ((initTable == true)) {
-                if ((this.tableApplicationUsageX != null)) {
-                    this.tableApplicationUsageX.InitVars();
-                }
-            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -230,19 +206,11 @@ namespace VNCCodeCommandConsole.Data {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableApplicationUsage = new ApplicationUsageDataTable();
             base.Tables.Add(this.tableApplicationUsage);
-            this.tableApplicationUsageX = new ApplicationUsageXDataTable();
-            base.Tables.Add(this.tableApplicationUsageX);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeApplicationUsage() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeApplicationUsageX() {
             return false;
         }
         
@@ -303,9 +271,6 @@ namespace VNCCodeCommandConsole.Data {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void ApplicationUsageRowChangeEventHandler(object sender, ApplicationUsageRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void ApplicationUsageXRowChangeEventHandler(object sender, ApplicationUsageXRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -471,12 +436,8 @@ namespace VNCCodeCommandConsole.Data {
                 this.columnEventMessage = new global::System.Data.DataColumn("EventMessage", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEventMessage);
                 this.columnApplication.AllowDBNull = false;
-                this.columnApplication.Caption = "application";
                 this.columnApplication.MaxLength = 50;
-                this.columnEventDate.Caption = "eventdate";
-                this.columnUser.ReadOnly = true;
-                this.columnUser.MaxLength = 128;
-                this.columnEventMessage.Caption = "eventmessage";
+                this.columnUser.MaxLength = 50;
                 this.columnEventMessage.MaxLength = 256;
             }
             
@@ -564,298 +525,6 @@ namespace VNCCodeCommandConsole.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "ApplicationUsageDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ApplicationUsageXDataTable : global::System.Data.TypedTableBase<ApplicationUsageXRow> {
-            
-            private global::System.Data.DataColumn columnApplication;
-            
-            private global::System.Data.DataColumn columnEventDate;
-            
-            private global::System.Data.DataColumn columnUser;
-            
-            private global::System.Data.DataColumn columnEventMessage;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXDataTable() {
-                this.TableName = "ApplicationUsageX";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal ApplicationUsageXDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected ApplicationUsageXDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn ApplicationColumn {
-                get {
-                    return this.columnApplication;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EventDateColumn {
-                get {
-                    return this.columnEventDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn UserColumn {
-                get {
-                    return this.columnUser;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EventMessageColumn {
-                get {
-                    return this.columnEventMessage;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXRow this[int index] {
-                get {
-                    return ((ApplicationUsageXRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event ApplicationUsageXRowChangeEventHandler ApplicationUsageXRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event ApplicationUsageXRowChangeEventHandler ApplicationUsageXRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event ApplicationUsageXRowChangeEventHandler ApplicationUsageXRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event ApplicationUsageXRowChangeEventHandler ApplicationUsageXRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddApplicationUsageXRow(ApplicationUsageXRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXRow AddApplicationUsageXRow(string Application, System.DateTime EventDate, string User, string EventMessage) {
-                ApplicationUsageXRow rowApplicationUsageXRow = ((ApplicationUsageXRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        Application,
-                        EventDate,
-                        User,
-                        EventMessage};
-                rowApplicationUsageXRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowApplicationUsageXRow);
-                return rowApplicationUsageXRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                ApplicationUsageXDataTable cln = ((ApplicationUsageXDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new ApplicationUsageXDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal void InitVars() {
-                this.columnApplication = base.Columns["Application"];
-                this.columnEventDate = base.Columns["EventDate"];
-                this.columnUser = base.Columns["User"];
-                this.columnEventMessage = base.Columns["EventMessage"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            private void InitClass() {
-                this.columnApplication = new global::System.Data.DataColumn("Application", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnApplication);
-                this.columnEventDate = new global::System.Data.DataColumn("EventDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEventDate);
-                this.columnUser = new global::System.Data.DataColumn("User", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUser);
-                this.columnEventMessage = new global::System.Data.DataColumn("EventMessage", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEventMessage);
-                this.columnApplication.MaxLength = 50;
-                this.columnUser.MaxLength = 50;
-                this.columnEventMessage.MaxLength = 256;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXRow NewApplicationUsageXRow() {
-                return ((ApplicationUsageXRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ApplicationUsageXRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(ApplicationUsageXRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.ApplicationUsageXRowChanged != null)) {
-                    this.ApplicationUsageXRowChanged(this, new ApplicationUsageXRowChangeEvent(((ApplicationUsageXRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.ApplicationUsageXRowChanging != null)) {
-                    this.ApplicationUsageXRowChanging(this, new ApplicationUsageXRowChangeEvent(((ApplicationUsageXRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.ApplicationUsageXRowDeleted != null)) {
-                    this.ApplicationUsageXRowDeleted(this, new ApplicationUsageXRowChangeEvent(((ApplicationUsageXRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.ApplicationUsageXRowDeleting != null)) {
-                    this.ApplicationUsageXRowDeleting(this, new ApplicationUsageXRowChangeEvent(((ApplicationUsageXRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveApplicationUsageXRow(ApplicationUsageXRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ApplicationDataSet ds = new ApplicationDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ApplicationUsageXDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1007,133 +676,6 @@ namespace VNCCodeCommandConsole.Data {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class ApplicationUsageXRow : global::System.Data.DataRow {
-            
-            private ApplicationUsageXDataTable tableApplicationUsageX;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal ApplicationUsageXRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableApplicationUsageX = ((ApplicationUsageXDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string Application {
-                get {
-                    try {
-                        return ((string)(this[this.tableApplicationUsageX.ApplicationColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Application\' in table \'ApplicationUsageX\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableApplicationUsageX.ApplicationColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime EventDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableApplicationUsageX.EventDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EventDate\' in table \'ApplicationUsageX\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableApplicationUsageX.EventDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string User {
-                get {
-                    try {
-                        return ((string)(this[this.tableApplicationUsageX.UserColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'User\' in table \'ApplicationUsageX\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableApplicationUsageX.UserColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string EventMessage {
-                get {
-                    try {
-                        return ((string)(this[this.tableApplicationUsageX.EventMessageColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EventMessage\' in table \'ApplicationUsageX\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableApplicationUsageX.EventMessageColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsApplicationNull() {
-                return this.IsNull(this.tableApplicationUsageX.ApplicationColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetApplicationNull() {
-                this[this.tableApplicationUsageX.ApplicationColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsEventDateNull() {
-                return this.IsNull(this.tableApplicationUsageX.EventDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetEventDateNull() {
-                this[this.tableApplicationUsageX.EventDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsUserNull() {
-                return this.IsNull(this.tableApplicationUsageX.UserColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetUserNull() {
-                this[this.tableApplicationUsageX.UserColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsEventMessageNull() {
-                return this.IsNull(this.tableApplicationUsageX.EventMessageColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetEventMessageNull() {
-                this[this.tableApplicationUsageX.EventMessageColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1166,40 +708,6 @@ namespace VNCCodeCommandConsole.Data {
                 }
             }
         }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class ApplicationUsageXRowChangeEvent : global::System.EventArgs {
-            
-            private ApplicationUsageXRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXRowChangeEvent(ApplicationUsageXRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplicationUsageXRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
     }
 }
 namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
@@ -1214,7 +722,7 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class ApplicationUsageTA : global::System.ComponentModel.Component {
+    public partial class ApplicationUsageTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1228,7 +736,7 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public ApplicationUsageTA() {
+        public ApplicationUsageTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1333,19 +841,20 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[applicationusage] ([application], [eventdate], [eventmessage])" +
-                " VALUES (@application, @eventdate, @eventmessage)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ApplicationUsage] ([Application], [EventDate], [User], [EventM" +
+                "essage]) VALUES (@Application, @EventDate, @User, @EventMessage)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@application", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "application", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@eventdate", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "eventdate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@eventmessage", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "eventmessage", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Application", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Application", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EventDate", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EventDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@User", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "User", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EventMessage", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EventMessage", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VNCCodeCommandConsole.Properties.Settings.Default.VNCConnectionString;
+            this._connection.ConnectionString = global::VNCCodeCommandConsole.Properties.Settings.Default.localhost_VNC;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1354,7 +863,7 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "select application, eventdate, user, eventmessage from dbo.applicationusage";
+            this._commandCollection[0].CommandText = "SELECT Application, EventDate, [User], EventMessage FROM dbo.ApplicationUsage";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1415,19 +924,30 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string application, System.DateTime eventdate, string eventmessage) {
-            if ((application == null)) {
-                throw new global::System.ArgumentNullException("application");
+        public virtual int Insert(string Application, global::System.Nullable<global::System.DateTime> EventDate, string User, string EventMessage) {
+            if ((Application == null)) {
+                throw new global::System.ArgumentNullException("Application");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(application));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Application));
             }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(eventdate));
-            if ((eventmessage == null)) {
-                throw new global::System.ArgumentNullException("eventmessage");
+            if ((EventDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(EventDate.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(eventmessage));
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((User == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(User));
+            }
+            if ((EventMessage == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(EventMessage));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1458,7 +978,7 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private ApplicationUsageTA _applicationUsageTA;
+        private ApplicationUsageTableAdapter _applicationUsageTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -1480,12 +1000,12 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public ApplicationUsageTA ApplicationUsageTA {
+        public ApplicationUsageTableAdapter ApplicationUsageTableAdapter {
             get {
-                return this._applicationUsageTA;
+                return this._applicationUsageTableAdapter;
             }
             set {
-                this._applicationUsageTA = value;
+                this._applicationUsageTableAdapter = value;
             }
         }
         
@@ -1508,9 +1028,9 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._applicationUsageTA != null) 
-                            && (this._applicationUsageTA.Connection != null))) {
-                    return this._applicationUsageTA.Connection;
+                if (((this._applicationUsageTableAdapter != null) 
+                            && (this._applicationUsageTableAdapter.Connection != null))) {
+                    return this._applicationUsageTableAdapter.Connection;
                 }
                 return null;
             }
@@ -1525,7 +1045,7 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._applicationUsageTA != null)) {
+                if ((this._applicationUsageTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -1539,12 +1059,12 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateUpdatedRows(ApplicationDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._applicationUsageTA != null)) {
+            if ((this._applicationUsageTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ApplicationUsage.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._applicationUsageTA.Update(updatedRows));
+                    result = (result + this._applicationUsageTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -1558,11 +1078,11 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateInsertedRows(ApplicationDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._applicationUsageTA != null)) {
+            if ((this._applicationUsageTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ApplicationUsage.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._applicationUsageTA.Update(addedRows));
+                    result = (result + this._applicationUsageTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -1576,11 +1096,11 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateDeletedRows(ApplicationDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._applicationUsageTA != null)) {
+            if ((this._applicationUsageTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ApplicationUsage.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._applicationUsageTA.Update(deletedRows));
+                    result = (result + this._applicationUsageTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -1623,8 +1143,8 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._applicationUsageTA != null) 
-                        && (this.MatchTableAdapterConnection(this._applicationUsageTA.Connection) == false))) {
+            if (((this._applicationUsageTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._applicationUsageTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -1660,13 +1180,13 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._applicationUsageTA != null)) {
-                    revertConnections.Add(this._applicationUsageTA, this._applicationUsageTA.Connection);
-                    this._applicationUsageTA.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._applicationUsageTA.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._applicationUsageTA.Adapter.AcceptChangesDuringUpdate) {
-                        this._applicationUsageTA.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._applicationUsageTA.Adapter);
+                if ((this._applicationUsageTableAdapter != null)) {
+                    revertConnections.Add(this._applicationUsageTableAdapter, this._applicationUsageTableAdapter.Connection);
+                    this._applicationUsageTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._applicationUsageTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._applicationUsageTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._applicationUsageTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._applicationUsageTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1727,9 +1247,9 @@ namespace VNCCodeCommandConsole.Data.ApplicationDataSetTableAdapters {
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._applicationUsageTA != null)) {
-                    this._applicationUsageTA.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._applicationUsageTA]));
-                    this._applicationUsageTA.Transaction = null;
+                if ((this._applicationUsageTableAdapter != null)) {
+                    this._applicationUsageTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._applicationUsageTableAdapter]));
+                    this._applicationUsageTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

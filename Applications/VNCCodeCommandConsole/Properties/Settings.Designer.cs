@@ -26,10 +26,10 @@ namespace VNCCodeCommandConsole.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CRHODES-DEV;Initial Catalog=VNC;Integrated Security=True")]
-        public string VNCConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=VNC;Integrated Security=True")]
+        public string localhost_VNC {
             get {
-                return ((string)(this["VNCConnectionString"]));
+                return ((string)(this["localhost_VNC"]));
             }
         }
     }
