@@ -32,6 +32,45 @@ namespace VNC.CodeAnalysis.Workspace
         {
             StringBuilder sb = new StringBuilder();
 
+            var workSpace = MSBuildWorkspace.Create();
+            var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+
+            PrintInfo(project, sb);
+
+            return sb;
+        }
+
+        static StringBuilder PrintInfo(Microsoft.CodeAnalysis.Project project, StringBuilder sb)
+        {
+            // Print the root of the solution
+
+            sb.AppendLine(Path.GetFileName(project.FilePath));
+
+            sb.AppendLine("> " + project.Name);
+
+            sb.AppendLine("  > MetadataReferences");
+
+            foreach (var reference in project.MetadataReferences)
+            {
+                sb.AppendLine("     - " + reference.Display);
+            }
+
+            //sb.AppendLine("  > ProjectReferences");
+
+            Microsoft.CodeAnalysis.Solution solution = project.Solution;
+
+            foreach (var reference in project.ProjectReferences)
+            {
+                sb.AppendLine("     - " + solution.GetProject(reference.ProjectId).Name);
+            }
+
+            sb.AppendLine("  > Documents");
+
+            foreach (var document in project.Documents)
+            {
+                sb.AppendLine("    - " + document.Name + " " + document.GetType().ToString());
+            }
+
             return sb;
         }
     }

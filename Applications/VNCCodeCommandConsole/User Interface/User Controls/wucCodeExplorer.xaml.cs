@@ -287,7 +287,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnParseSourceVB_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder sb;
+            StringBuilder sb = null;
 
             // TODO(crhodes)
             // Need to also get our hands on SyntaxTree that got produced.
@@ -295,20 +295,33 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // or add out parameter
             // or add another method that returns string
 
-            switch (lbeSyntaxWalkerDepth)
+            switch (lbeSyntaxWalkerDepth.EditValue.ToString())
             {
-                case 0:
-                    
+                case "Node":
+                    sb = Commands.Explore.ParseVBDepthNode(teSourceCode1.Text);
+                    break;
+
+                case "StructuredTrivia":
+                    sb = Commands.Explore.ParseVBStructuredTrivia(teSourceCode1.Text);
+                    break;
+
+                case "Token":
+                    sb = Commands.Explore.ParseVBDepthToken(teSourceCode1.Text);
+                    break;
+
+                case "Trivia":
+                    sb = Commands.Explore.ParseVBDepthTrivia(teSourceCode1.Text);
                     break;
             }
-            sb = Commands.Explore.DisplayAllStructuredTriviaVB(teSourceCode1.Text);
 
-            teSyntaxTree.Text = sb.ToString();
+               teSyntaxTree.Text = sb.ToString();
+
+            lg_SyntaxTree.Focus();
         }
 
         private void btnParseSourceCS_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder sb;
+            StringBuilder sb = null;
 
             // TODO(crhodes)
             // Need to also get our hands on SyntaxTree that got produced.
@@ -316,27 +329,50 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // or add out parameter
             // or add another method that returns string
 
-            sb = Commands.Explore.DisplayAllStructuredTriviaVB(teSourceCode1.Text);
+            switch (lbeSyntaxWalkerDepth.EditValue.ToString())
+            {
+                case "Node":
+                    sb = Commands.Explore.ParseCSDepthNode(teSourceCode1.Text);
+                    break;
+
+                case "StructuredTrivia":
+                    sb = Commands.Explore.ParseCSStructuredTrivia(teSourceCode1.Text);
+                    break;
+
+                case "Token":
+                    sb = Commands.Explore.ParseCSDepthToken(teSourceCode1.Text);
+                    break;
+
+                case "Trivia":
+                    sb = Commands.Explore.ParseCSDepthTrivia(teSourceCode1.Text);
+                    break;
+            }
 
             teSyntaxTree.Text = sb.ToString();
+
+            lg_SyntaxTree.Focus();
         }
 
         private void btnInfo_Document_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Document.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+            sb = VNC.CodeAnalysis.Workspace.Document.ListInfo(wucCodeExplorerContext.teSourceFile.Text);
 
             teWorkspace.Text = sb.ToString();
+
+            lg_Workspace.Focus();
         }
 
         private void btnInfo_Project_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Project.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+            sb = VNC.CodeAnalysis.Workspace.Project.ListInfo(wucCodeExplorerContext.teProjectFile.Text);
 
             teWorkspace.Text = sb.ToString();
+
+            lg_Workspace.Focus();
         }
 
         private void btnInfo_Solution_Click(object sender, RoutedEventArgs e)
@@ -346,6 +382,19 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             sb = VNC.CodeAnalysis.Workspace.Solution.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
 
             teWorkspace.Text = sb.ToString();
+
+            lg_Workspace.Focus();
+        }
+
+        private void btnCodeToCommentRatioVB_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb;
+            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
+            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+
+            sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+
+            teSourceCode.Text = sb.ToString();
         }
     }
 }

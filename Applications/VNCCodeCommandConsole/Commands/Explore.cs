@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
-using Microsoft.CodeAnalysis.CSharp;
+using CS=Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
@@ -21,7 +21,7 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
-using Microsoft.CodeAnalysis.VisualBasic;
+using VB=Microsoft.CodeAnalysis.VisualBasic;
 
 using VNC.CodeAnalysis;
 
@@ -42,17 +42,17 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
 
             IEnumerable<SyntaxNode> syntaxNodes;
 
             if (statementsOnly)
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ClassStatementSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassStatementSyntax>();
             }
             else
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ClassBlockSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
             }
 
             foreach (SyntaxNode node in syntaxNodes)
@@ -74,17 +74,17 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
 
             IEnumerable<SyntaxNode> syntaxNodes;
 
             if (statementsOnly)
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ModuleStatementSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ModuleStatementSyntax>();
             }
             else
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ModuleBlockSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ModuleBlockSyntax>();
             }
 
             foreach (SyntaxNode node in syntaxNodes)
@@ -106,17 +106,17 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
 
             IEnumerable<SyntaxNode> syntaxNodes;
 
             if (statementsOnly)
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.StructureStatementSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.StructureStatementSyntax>();
             }
             else
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.StructureBlockSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.StructureBlockSyntax>();
             }
 
             foreach (SyntaxNode node in syntaxNodes)
@@ -142,7 +142,7 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = CSharpSyntaxTree.ParseText(sourceCode);
+            var tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
             walker.StringBuilder = sb;
             walker.Visit(tree.GetRoot());
@@ -160,7 +160,7 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
             walker.StringBuilder = sb;
             walker.Visit(tree.GetRoot());
@@ -177,9 +177,9 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
 
-            var syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>();
+            var syntaxNodes = tree.GetRoot().DescendantNodes().OfType<CS.Syntax.MethodDeclarationSyntax>();
 
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
 
@@ -200,17 +200,17 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
 
             IEnumerable<SyntaxNode> syntaxNodes;
 
             if (statementsOnly)
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodStatementSyntax>();      
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.MethodStatementSyntax>();      
             }
             else
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodBlockSyntax>();            
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.MethodBlockSyntax>();            
             }
 
             foreach (SyntaxNode node in syntaxNodes)
@@ -225,7 +225,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
             walker.StringBuilder = sb;
 
@@ -238,7 +238,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllNode();
             walker.StringBuilder = sb;
 
@@ -251,7 +251,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
             walker.StringBuilder = sb;
 
@@ -264,7 +264,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
             walker.StringBuilder = sb;
 
@@ -277,7 +277,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllToken();
             walker.StringBuilder = sb;
 
@@ -290,7 +290,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllToken();
             walker.StringBuilder = sb;
 
@@ -303,7 +303,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllTrivia();
             walker.StringBuilder = sb;
 
@@ -316,7 +316,7 @@ namespace VNCCodeCommandConsole.Commands
         {
             StringBuilder sb = new StringBuilder();
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllTrivia();
             walker.StringBuilder = sb;
 
@@ -386,7 +386,7 @@ namespace VNCCodeCommandConsole.Commands
 
         static void CSharpSyntaxRewriterDemo1()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 class Program
 {
     static void Main()
@@ -416,7 +416,7 @@ class Program
 
         static void CSharpSyntaxRewriterDemo2()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 class Program
 {
     static void Main()
@@ -433,12 +433,12 @@ class Program
 
             Console.WriteLine(root.ToFullString());
 
-            var ifStatements = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.IfStatementSyntax>();
+            var ifStatements = root.DescendantNodes().OfType<CS.Syntax.IfStatementSyntax>();
 
             foreach (var ifStatement in ifStatements)
             {
                 var body = ifStatement.Statement;
-                var block = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.Block(body);
+                var block = CS.SyntaxFactory.Block(body);
                 var newIfStatement = ifStatement.WithStatement(block);
                 root = root.ReplaceNode(ifStatement, newIfStatement);
             }
@@ -452,7 +452,7 @@ class Program
 
         static void CSharpSyntaxRewriterDemo3()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 class Program
 {
     static void Main()
@@ -486,7 +486,7 @@ class Program
 
         static void CSharpSyntaxRewriterDemo4()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 class Program
 {
     static void Main()
@@ -505,12 +505,12 @@ class Program
 
             Console.WriteLine(root.ToFullString());
 
-            var ifStatements = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.IfStatementSyntax>();
+            var ifStatements = root.DescendantNodes().OfType<CS.Syntax.IfStatementSyntax>();
 
             foreach (var ifStatement in ifStatements)
             {
                 var body = ifStatement.Statement;
-                var block = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.Block(body);
+                var block = CS.SyntaxFactory.Block(body);
                 var newIfStatement = ifStatement.WithStatement(block);
                 root = root.ReplaceNode(ifStatement, newIfStatement);
             }
@@ -524,7 +524,7 @@ class Program
 
         static void CSharpSyntaxWalkerDemo()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 class C
 {
     void Method1()
@@ -580,21 +580,21 @@ class C
 
             DisplayHeader("ClassDeclarationSyntax Node");
 
-            var classS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().First();
+            var classS = root.DescendantNodes().OfType<CS.Syntax.ClassDeclarationSyntax>().First();
 
             Console.WriteLine(classS.ToFullString());
             Console.WriteLine(classS.ToString());
 
             DisplayHeader("MethodDeclarationSyntax Node");
 
-            var methodS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().First();
+            var methodS = root.DescendantNodes().OfType<CS.Syntax.MethodDeclarationSyntax>().First();
 
             Console.WriteLine(methodS.ToFullString());
             Console.WriteLine(methodS.ToString());
 
             DisplayHeader("TryStatementSyntax Node");
 
-            var tryS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.TryStatementSyntax>().First();
+            var tryS = root.DescendantNodes().OfType<CS.Syntax.TryStatementSyntax>().First();
             var block = tryS.Block;
 
             Console.WriteLine(tryS.ToFullString());
@@ -613,7 +613,7 @@ class C
 
             DisplayHeader("Return Int16");
 
-            var returnType = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseTypeName("Int16");
+            var returnType = CS.SyntaxFactory.ParseTypeName("Int16");
 
             var newMethodS = methodS.WithReturnType(returnType);
 
@@ -670,11 +670,11 @@ class C
         {
             var code = @"class Foo { void Bar() { int x = 42; } }";
 
-            var tree = CSharpSyntaxTree.ParseText(code);
+            var tree = CS.CSharpSyntaxTree.ParseText(code);
 
             var mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
 
-            var comp = CSharpCompilation.Create("Dem0")
+            var comp = CS.CSharpCompilation.Create("Dem0")
                 .AddSyntaxTrees(tree)
                 .AddReferences(mscorlib);
 
@@ -860,7 +860,7 @@ class C
 
             // Provide compilation options
 
-            var options = new CSharpCompilationOptions(
+            var options = new CS.CSharpCompilationOptions(
                 Microsoft.CodeAnalysis.OutputKind.ConsoleApplication,
                 optimizationLevel: Microsoft.CodeAnalysis.OptimizationLevel.Release,
                 platform: Microsoft.CodeAnalysis.Platform.X64);
@@ -960,7 +960,7 @@ class C
 
         static void SemanticModelDemo1()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 public partial class MyPartialClass
 {
     void MyMethod()
@@ -974,18 +974,18 @@ public partial class MyPartialClass
 }
 ");
             var mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-            var compilation = CSharpCompilation.Create("MyCompilation",
+            var compilation = CS.CSharpCompilation.Create("MyCompilation",
                 syntaxTrees: new[] { tree },
                 references: new[] { mscorlib });
 
             var root = tree.GetRoot();
 
             var semaniticModel = compilation.GetSemanticModel(tree);
-            var methodSyntax = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().Single();
+            var methodSyntax = root.DescendantNodes().OfType<CS.Syntax.MethodDeclarationSyntax>().Single();
 
             var methodSymbol = semaniticModel.GetDeclaredSymbol(methodSyntax);
 
-            var invokedMethod = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>().Single();
+            var invokedMethod = root.DescendantNodes().OfType<CS.Syntax.InvocationExpressionSyntax>().Single();
             var symbolInfo = semaniticModel.GetSymbolInfo(invokedMethod);
 
             var invokedSymbol = symbolInfo.Symbol;
@@ -1001,7 +1001,7 @@ public partial class MyPartialClass
 
         static void SemanticModelDemo2()
         {
-            var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CS.CSharpSyntaxTree.ParseText(@"
 public partial class MyPartialClass
 {
     void MyMethod()
@@ -1015,21 +1015,21 @@ public partial class MyPartialClass
 }
 ");
             var mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-            var compilation = CSharpCompilation.Create("MyCompilation",
+            var compilation = CS.CSharpCompilation.Create("MyCompilation",
                 syntaxTrees: new[] { tree },
                 references: new[] { mscorlib });
 
             var root = tree.GetRoot();
 
             var semaniticModel = compilation.GetSemanticModel(tree);
-            var methodSyntax = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>().Single();
+            var methodSyntax = root.DescendantNodes().OfType<CS.Syntax.MethodDeclarationSyntax>().Single();
 
             var methodSymbol = semaniticModel.GetDeclaredSymbol(methodSyntax);
 
             var parentAssembly = methodSymbol.ContainingAssembly;
 
-            var firstClass = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().First();
-            var secondClass = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().Last();
+            var firstClass = root.DescendantNodes().OfType<CS.Syntax.ClassDeclarationSyntax>().First();
+            var secondClass = root.DescendantNodes().OfType<CS.Syntax.ClassDeclarationSyntax>().Last();
 
             var firstSymbol = semaniticModel.GetDeclaredSymbol(firstClass);
             var secondSymbol = semaniticModel.GetDeclaredSymbol(secondClass);
@@ -1039,7 +1039,7 @@ public partial class MyPartialClass
 
         static void VBSyntaxWalkerDemo()
         {
-            var tree = VisualBasicSyntaxTree.ParseText(@"
+            var tree = VB.VisualBasicSyntaxTree.ParseText(@"
     ''' <summary>
     ''' Adds Forward slash (\) if the passed value doesn't have one in the end
     ''' </summary>
@@ -1084,21 +1084,21 @@ public partial class MyPartialClass
 
             DisplayHeader("ClassBlockSyntax Node");
 
-            var classS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.ClassBlockSyntax>().First();
+            var classS = root.DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>().First();
 
             Console.WriteLine(classS.ToFullString());
             Console.WriteLine(classS.ToString());
 
             DisplayHeader("MethodBlockSyntax Node");
 
-            var methodS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodBlockSyntax>().First();
+            var methodS = root.DescendantNodes().OfType<VB.Syntax.MethodBlockSyntax>().First();
 
             Console.WriteLine(methodS.ToFullString());
             Console.WriteLine(methodS.ToString());
 
             DisplayHeader("TryStatementSyntax Node");
 
-            var tryS = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.TryStatementSyntax>().First();
+            var tryS = root.DescendantNodes().OfType<VB.Syntax.TryStatementSyntax>().First();
             //var block = tryS.Block;
 
             Console.WriteLine(tryS.ToFullString());
@@ -1117,13 +1117,130 @@ public partial class MyPartialClass
 
             DisplayHeader("Return Int16");
 
-            var returnType = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseTypeName("Int16");
+            var returnType = VB.SyntaxFactory.ParseTypeName("Int16");
 
             //var newMethodS = methodS.WithReturnType(returnType);
 
             //Console.WriteLine(newMethodS.ToFullString());
             //Console.WriteLine(newMethodS.ToString());
         }
+        public static StringBuilder CodeToCommentRatioVB(string fileNameAndPath)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(fileNameAndPath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            IEnumerable<SyntaxNode> syntaxNodes;
+
+            // Both of these return the same results.
+
+            //var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(VB.SyntaxKind.ClassBlock));
+            //var x2 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
+
+            //sb.AppendLine("Where(...)");
+            //foreach (SyntaxNode node in x1)
+            //{
+            //    sb.AppendLine(node.ToFullString());
+            //}
+
+            //sb.AppendLine("OfType(...)");
+            //foreach (SyntaxNode node in x2)
+            //{
+            //    sb.AppendLine(node.ToFullString());
+            //}
+
+            //var x3 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+            //    .Cast<VB.Syntax.ClassBlockSyntax>()
+            //    .Select(c =>
+            //       new
+            //       {
+            //           ClassName = c.BlockStatement.Identifier,
+            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+            //       });
+
+            //foreach (var node in x3)
+            //{
+            //    sb.AppendLine(node.ClassName.Text);
+            //    //sb.AppendLine(node.ClassName.Value.ToString());
+
+            //    foreach (var method in node.Methods)
+            //    {
+
+            //        sb.AppendLine(method.ToString());
+            //    }
+            //}
+
+            //var x4 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+            //    .Cast<VB.Syntax.ClassBlockSyntax>()
+            //    .Select(c =>
+            //       new
+            //       {
+            //           ClassName = c.BlockStatement.Identifier,
+            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+            //       });
+
+            //foreach (var node in x4)
+            //{
+            //    //sb.AppendLine(node.ClassName.Text);
+            //    sb.AppendLine(node.ClassName.Value.ToString());
+
+            //    foreach (var method in node.Methods)
+            //    {
+            //        sb.AppendLine("Method");
+            //        VB.Syntax.MethodStatementSyntax statement = method.DescendantNodes().First() as VB.Syntax.MethodStatementSyntax;
+            //        sb.AppendLine(statement.Identifier.ToString());
+            //        sb.AppendLine("Parameters");
+            //        sb.AppendLine(statement.ParameterList.ToString());
+            //    }
+            //}
+
+            var x5 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+                .Cast<VB.Syntax.ClassBlockSyntax>()
+                .Select(c =>
+                   new
+                   {
+                       ClassName = c.BlockStatement.Identifier,
+                       Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+                   })
+                .Select(t =>
+                    new
+                    {
+                        ClassName = t.ClassName,
+                        MethodDetails = t.Methods
+                            .Select(m =>
+                               new
+                               {
+                                   Name = ((VB.Syntax.MethodStatementSyntax)m.DescendantNodes().First()).Identifier.ValueText,
+                                   Lines = m.Statements.Count,
+                                   Comments = m.DescendantTrivia().Count(b => b.IsKind(VB.SyntaxKind.CommentTrivia))
+                               }
+                            )
+                    });
+
+            foreach (var item in x5)
+            {
+                sb.AppendLine(item.ClassName.Text);
+
+                foreach (var detail in item.MethodDetails)
+                {
+                    sb.AppendLine(string.Format("   {0,-40}   Statements:{1,5}    Comments:{2,5}", 
+                        detail.Name,
+                        detail.Lines.ToString(),
+                        detail.Comments.ToString()));
+                }
+            }
+
+            return sb;
+
+        }
+
         #endregion
 
         //private static void Method8()

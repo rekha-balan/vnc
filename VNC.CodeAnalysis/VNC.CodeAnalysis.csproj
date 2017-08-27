@@ -143,7 +143,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignMetrics\CS\Check.cs" />
+    <Compile Include="DesignMetrics\VB\Check.cs" />
+    <Compile Include="PerformanceMetrics\CS\Check.cs" />
+    <Compile Include="PerformanceMetrics\VB\Check.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualityMetrics\CS\Check.cs" />
+    <Compile Include="QualityMetrics\VB\Check.cs" />
     <Compile Include="Symbols.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNode.cs" />

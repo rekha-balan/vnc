@@ -34,7 +34,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
         public override void VisitToken(SyntaxToken token)
         {
             var indents = new String(' ', tabs * 3);
-            StringBuilder.AppendLine(string.Format("{0}{1}:\t{2}", indents, token.Kind(), token));
+            StringBuilder.AppendLine(string.Format("{0}{1}:>{2}<", indents, token.Kind(), token));
 
             // Call base to visit children
 
@@ -44,7 +44,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
         public override void VisitTrivia(SyntaxTrivia trivia)
         {
             var indents = new String(' ', tabs * 3);
-            StringBuilder.AppendLine(string.Format("{0}{1}:\t{2}", indents, trivia.Kind(), trivia));
+            StringBuilder.AppendLine(string.Format("{0}{1}:>{2}<", indents, trivia.Kind(), trivia));
 
             // Call base to visit children
 

@@ -101,7 +101,7 @@
                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
 
                                     <dxlc:LayoutItem>
-                                        <dxe:TextEdit x:Name="teSourceCode" />
+                                        <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
@@ -182,14 +182,17 @@
 
                     <dxdo:AutoHideGroup DockType="Right">
 
-                        <dxdo:LayoutPanel x:Name="lp_RightStuff" Caption="Commands" ItemWidth="300" >
+                        <dxdo:LayoutPanel x:Name="lp_Commands" Caption="Commands" 
+                                         ItemWidth="300" >
                             <dxlc:LayoutControl Orientation="Vertical">
-                                <dxlc:LayoutGroup Header="All Nodes">
+                                
+                                <dxlc:LayoutGroup Header="All Nodes" Orientation="Vertical">
+                                    
                                     <dxlc:LayoutItem>
                                         <Button Content="All Nodes" Click="btnAllNodes_Click"/>
                                     </dxlc:LayoutItem>
 
-                                    <dx:GroupFrame Header="SyntaxWalkerDepth">
+                                    <!--<dx:GroupFrame Header="SyntaxWalkerDepth" Height="150">
                                         <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
                                                          ValueMember="Content" 
                                                          SelectedIndex="0"                                                         
@@ -204,14 +207,13 @@
                                             </dxe:ListBoxEdit.ItemsPanel>
                                             <dxe:ListBoxEdit.Items>
                                                 <dxe:ListBoxEditItem Content="StructuredTrivia" />
-                                                <dxe:ListBoxEditItem Content="Node" Margin="18,0,0,0" />
-                                                <dxe:ListBoxEditItem Content="Token" Margin="18,0,18,0" />
+                                                <dxe:ListBoxEditItem Content="Node" />
+                                                <dxe:ListBoxEditItem Content="Token" />
                                                 <dxe:ListBoxEditItem Content="Trivia" />
                                             </dxe:ListBoxEdit.Items>
                                         </dxe:ListBoxEdit>
-                                    </dx:GroupFrame>
+                                    </dx:GroupFrame>-->
                                 </dxlc:LayoutGroup>
-
 
                                 <dxlc:LayoutGroup Header="Classes" View="GroupBox" Orientation="Vertical">
                                     <dxlc:LayoutItem>
@@ -300,18 +302,44 @@
 
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Parse" Caption="Parse" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Parse" Caption="Parse" ItemWidth="300">
                             <dxlc:LayoutControl Orientation="Vertical">
                                 <dxlc:LayoutItem Label="SourceCode" LabelPosition="Top">
-                                    <dxe:TextEdit x:Name="teSourceCode1" Height="100" />
+                                    <dxe:TextEdit x:Name="teSourceCode1" 
+                                                  Height="200" TextWrapping="Wrap"
+                                                  VerticalContentAlignment="Top"
+                                                  AcceptsReturn="True" AcceptsTab="True">
+                                    </dxe:TextEdit>
                                 </dxlc:LayoutItem>
- 
+
+                                <dx:GroupFrame Header="SyntaxWalkerDepth" Height="120">
+                                    <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                                                         ValueMember="Content" 
+                                                         SelectedIndex="0"                                                         
+                                                         ShowBorder="False" Background="{x:Null}">
+                                        <dxe:ListBoxEdit.StyleSettings>
+                                            <dxe:RadioListBoxEditStyleSettings />
+                                        </dxe:ListBoxEdit.StyleSettings>
+                                        <dxe:ListBoxEdit.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Vertical" />
+                                            </ItemsPanelTemplate>
+                                        </dxe:ListBoxEdit.ItemsPanel>
+                                        <dxe:ListBoxEdit.Items>
+                                            <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                                            <dxe:ListBoxEditItem Content="Node" />
+                                            <dxe:ListBoxEditItem Content="Token" />
+                                            <dxe:ListBoxEditItem Content="Trivia" />
+                                        </dxe:ListBoxEdit.Items>
+                                    </dxe:ListBoxEdit>
+                                </dx:GroupFrame>
+                                
                                 <dxlc:LayoutItem>
-                                    <Button Content="ParseCS" Click="btnParseSourceCS_Click"/>
+                                    <Button Content="Parse CS" Click="btnParseSourceCS_Click"/>
                                 </dxlc:LayoutItem>
 
                                 <dxlc:LayoutItem>
-                                    <Button Content="ParseVB" Click="btnParseSourceVB_Click"/>
+                                    <Button Content="Parse VB" Click="btnParseSourceVB_Click"/>
                                 </dxlc:LayoutItem>
 
                             </dxlc:LayoutControl> 
@@ -340,7 +368,15 @@
                             </dxlc:LayoutControl>
                             
                         </dxdo:LayoutPanel>
-                        
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
+                            <dxlc:LayoutItem>
+                                <Button Content="Code-to-Comment Ration" Click="btnCodeToCommentRatioVB_Click"/>
+                            </dxlc:LayoutItem>
+
+                        </dxdo:LayoutPanel>
+
+
                     </dxdo:AutoHideGroup>
 
                 </dxdo:DockLayoutManager.AutoHideGroups>

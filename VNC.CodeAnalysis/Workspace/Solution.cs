@@ -40,12 +40,12 @@ namespace VNC.CodeAnalysis.Workspace
             // Recommend(workSpace, solution);
             // Rename(workSpace, solution);
             // Simplification(solution);
-            PrintSolution(solution, sb);
+            PrintInfo(solution, sb);
 
             return sb;
         }
 
-        static StringBuilder PrintSolution(Microsoft.CodeAnalysis.Solution solution, StringBuilder sb)
+        static StringBuilder PrintInfo(Microsoft.CodeAnalysis.Solution solution, StringBuilder sb)
         {
             // Print the root of the solution
 
@@ -86,14 +86,14 @@ namespace VNC.CodeAnalysis.Workspace
                     sb.AppendLine("     - " + reference.Display);
                 }
 
-                Console.WriteLine("  > ProjectReferences");
+                sb.AppendLine("  > ProjectReferences");
 
                 foreach (var reference in project.ProjectReferences)
                 {
                     sb.AppendLine("     - " + solution.GetProject(reference.ProjectId).Name);
                 }
 
-                Console.WriteLine("  > Documents");
+                sb.AppendLine("  > Documents");
 
                 foreach (var document in project.Documents)
                 {
@@ -103,6 +103,5 @@ namespace VNC.CodeAnalysis.Workspace
 
             return sb;
         }
-
     }
 }
