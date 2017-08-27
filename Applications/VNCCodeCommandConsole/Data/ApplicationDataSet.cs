@@ -95,7 +95,7 @@ namespace VNCCodeCommandConsole.Data
             VNC.AppLog.Trace("End", LOG_APPNAME, BASE_ERRORNUMBER + 62, startTicksTotal);
 #endif
         }
-        
+
         /// <summary>
         /// Load the tables that are most often used.
         /// </summary>

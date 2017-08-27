@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace VNC.CodeAnalysis.SyntaxWalkers.CS
+namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class AllNodes : CSharpSyntaxWalker
+    public class AllToken : VisualBasicSyntaxWalker
     {
         public StringBuilder StringBuilder;
 
-        public AllNodes() : base(SyntaxWalkerDepth.StructuredTrivia)
+        public AllToken() : base(SyntaxWalkerDepth.Token)
         {
             
         }
@@ -25,6 +25,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
             tabs++;
             var indents = new String(' ', tabs * 3);
             StringBuilder.AppendLine(indents + node.Kind());
+
+            // Call base to visit children
+
             base.Visit(node);
             tabs--;
         }
@@ -33,7 +36,20 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.CS
         {
             var indents = new String(' ', tabs * 3);
             StringBuilder.AppendLine(string.Format("{0}{1}:\t{2}", indents, token.Kind(), token));
+
+            // Call base to visit children
+
             base.VisitToken(token);
-        }     
+        }
+
+        public override void VisitTrivia(SyntaxTrivia trivia)
+        {
+            var indents = new String(' ', tabs * 3);
+            StringBuilder.AppendLine(string.Format("{0}{1}:\t{2}", indents, trivia.Kind(), trivia));
+
+            // Call base to visit children
+
+            base.VisitTrivia(trivia);
+        }
     }
 }

@@ -184,9 +184,34 @@
 
                         <dxdo:LayoutPanel x:Name="lp_RightStuff" Caption="Commands" ItemWidth="300" >
                             <dxlc:LayoutControl Orientation="Vertical">
-                                 <dxlc:LayoutItem Label="Nodes">
-                                    <Button Content="All Nodes" Click="btnAllNodes_Click"/>
-                                </dxlc:LayoutItem>
+                                <dxlc:LayoutGroup Header="All Nodes">
+                                    <dxlc:LayoutItem>
+                                        <Button Content="All Nodes" Click="btnAllNodes_Click"/>
+                                    </dxlc:LayoutItem>
+
+                                    <dx:GroupFrame Header="SyntaxWalkerDepth">
+                                        <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                                                         ValueMember="Content" 
+                                                         SelectedIndex="0"                                                         
+                                                         ShowBorder="False" Background="{x:Null}">
+                                            <dxe:ListBoxEdit.StyleSettings>
+                                                <dxe:RadioListBoxEditStyleSettings />
+                                            </dxe:ListBoxEdit.StyleSettings>
+                                            <dxe:ListBoxEdit.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Vertical" />
+                                                </ItemsPanelTemplate>
+                                            </dxe:ListBoxEdit.ItemsPanel>
+                                            <dxe:ListBoxEdit.Items>
+                                                <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                                                <dxe:ListBoxEditItem Content="Node" Margin="18,0,0,0" />
+                                                <dxe:ListBoxEditItem Content="Token" Margin="18,0,18,0" />
+                                                <dxe:ListBoxEditItem Content="Trivia" />
+                                            </dxe:ListBoxEdit.Items>
+                                        </dxe:ListBoxEdit>
+                                    </dx:GroupFrame>
+                                </dxlc:LayoutGroup>
+
 
                                 <dxlc:LayoutGroup Header="Classes" View="GroupBox" Orientation="Vertical">
                                     <dxlc:LayoutItem>

@@ -42,7 +42,7 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
             IEnumerable<SyntaxNode> syntaxNodes;
 
@@ -131,8 +131,10 @@ namespace VNCCodeCommandConsole.Commands
 
         #region Internal Methods
 
-        internal static void DisplayAllNodesCS(string fileNameAndPath)
+        internal static StringBuilder DisplayAllStructuredTriviaCS(string fileNameAndPath)
         {
+            StringBuilder sb = new StringBuilder();
+
             var sourceCode = "";
 
             using (var sr = new StreamReader(fileNameAndPath))
@@ -141,11 +143,14 @@ namespace VNCCodeCommandConsole.Commands
             }
 
             var tree = CSharpSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNodes();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
+            walker.StringBuilder = sb;
             walker.Visit(tree.GetRoot());
+
+            return sb;
         }
 
-        internal static StringBuilder DisplayAllNodesVB(string fileNameAndPath)
+        internal static StringBuilder DisplayAllStructuredTriviaVB(string fileNameAndPath)
         {
             StringBuilder sb = new StringBuilder();
             var sourceCode = "";
@@ -156,9 +161,8 @@ namespace VNCCodeCommandConsole.Commands
             }
 
             var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllNodes();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
             walker.StringBuilder = sb;
-
             walker.Visit(tree.GetRoot());
 
             return sb;
@@ -173,11 +177,11 @@ namespace VNCCodeCommandConsole.Commands
                 sourceCode = sr.ReadToEnd();
             }
 
-            var tree = CSharpSyntaxTree.ParseText(sourceCode);
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
 
             var syntaxNodes = tree.GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax>();
 
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNodes();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
 
             foreach (SyntaxNode node in syntaxNodes)
             {
@@ -217,12 +221,12 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseCS(string sourceCode)
+        internal static StringBuilder ParseCSDepthNode(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNodes();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
             walker.StringBuilder = sb;
 
             walker.Visit(tree.GetRoot());
@@ -230,12 +234,90 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVB(string sourceCode)
+        internal static StringBuilder ParseVBDepthNode(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllNodes();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllNode();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseCSStructuredTrivia(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseVBStructuredTrivia(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseCSDepthToken(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllToken();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseVBDepthToken(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllToken();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseCSDepthTrivia(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllTrivia();
+            walker.StringBuilder = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        internal static StringBuilder ParseVBDepthTrivia(string sourceCode)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllTrivia();
             walker.StringBuilder = sb;
 
             walker.Visit(tree.GetRoot());

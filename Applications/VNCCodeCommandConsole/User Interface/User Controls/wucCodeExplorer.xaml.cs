@@ -236,7 +236,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             StringBuilder sb;
 
-            sb = Commands.Explore.DisplayAllNodesVB(wucCodeExplorerContext.teSourceFile.Text);
+            sb = Commands.Explore.DisplayAllStructuredTriviaCS(wucCodeExplorerContext.teSourceFile.Text);
 
             teSyntaxTree.Text = sb.ToString();
         }
@@ -295,7 +295,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // or add out parameter
             // or add another method that returns string
 
-            sb = Commands.Explore.ParseVB(teSourceCode1.Text);
+            switch (lbeSyntaxWalkerDepth)
+            {
+                case 0:
+                    
+                    break;
+            }
+            sb = Commands.Explore.DisplayAllStructuredTriviaVB(teSourceCode1.Text);
 
             teSyntaxTree.Text = sb.ToString();
         }
@@ -310,7 +316,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // or add out parameter
             // or add another method that returns string
 
-            sb = Commands.Explore.ParseCS(teSourceCode1.Text);
+            sb = Commands.Explore.DisplayAllStructuredTriviaVB(teSourceCode1.Text);
 
             teSyntaxTree.Text = sb.ToString();
         }

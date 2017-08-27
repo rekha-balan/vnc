@@ -9,11 +9,12 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class AllMethods : VisualBasicSyntaxWalker
+    public class AllNode : VisualBasicSyntaxWalker
     {
-        public AllMethods() : base(SyntaxWalkerDepth.StructuredTrivia)
+        public StringBuilder StringBuilder;
+
+        public AllNode() : base(SyntaxWalkerDepth.Node)
         {
-            
         }
 
         static int tabs = 0;
@@ -22,7 +23,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             tabs++;
             var indents = new String(' ', tabs * 3);
-            Console.WriteLine(indents + node.Kind());
+            StringBuilder.AppendLine(indents + node.Kind());
+
+            // Call base to visit children
+
             base.Visit(node);
             tabs--;
         }
@@ -30,8 +34,20 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitToken(SyntaxToken token)
         {
             var indents = new String(' ', tabs * 3);
-            Console.WriteLine(string.Format("{0}{1}:\t{2}", indents, token.Kind(), token));
+
+            // Call base to visit children
+
             base.VisitToken(token);
-        }       
+        }
+
+        public override void VisitTrivia(SyntaxTrivia trivia)
+        {
+            var indents = new String(' ', tabs * 3);
+            StringBuilder.AppendLine(string.Format("{0}{1}:\t{2}", indents, trivia.Kind(), trivia));
+
+            // Call base to visit children
+
+            base.VisitTrivia(trivia);
+        }
     }
 }

@@ -109,7 +109,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnOne_Click(object sender, RoutedEventArgs e)
         {
-            Commands.Explore.DisplayAllNodesVB(teSourceFile.Text);
+            Commands.Explore.DisplayAllStructuredTriviaVB(teSourceFile.Text);
         }
 
         private void btnTwo_Click(object sender, RoutedEventArgs e)
