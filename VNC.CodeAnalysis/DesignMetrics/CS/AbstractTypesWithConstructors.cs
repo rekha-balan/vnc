@@ -25,9 +25,9 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.DesignMetrics.CS
 {
-    class AbstactTypesWithConstructors
+    public class AbstactTypesWithConstructors
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

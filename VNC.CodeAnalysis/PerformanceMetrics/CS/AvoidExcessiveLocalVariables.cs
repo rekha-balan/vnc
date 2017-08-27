@@ -24,9 +24,9 @@ using Microsoft.CodeAnalysis.Text;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace VNC.CodeAnalysis.PerformanceMetrics.CS
 {
-    class AvoidExcessiveLocalVariables
+    public class AvoidExcessiveLocalVariables
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

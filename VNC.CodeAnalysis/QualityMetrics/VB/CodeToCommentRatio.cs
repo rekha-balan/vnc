@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -21,24 +19,25 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
-using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace VNC.CodeAnalysis.DesignMetrics.VB
+namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
-    class CodeToCommentRatio
+    public class CodeToCommentRatio
     {
         public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 
-            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
+            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            IEnumerable<SyntaxNode> syntaxNodes;
+            IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> syntaxNodes;
 
             // Both of these return the same results.
 
-            var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(VB.SyntaxKind.ClassBlock));
-            var x2 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
+            var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(SyntaxKind.ClassBlock));
+            var x2 = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>();
 
             //sb.AppendLine("Where(...)");
             //foreach (SyntaxNode node in x1)
@@ -97,13 +96,13 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
             //    }
             //}
 
-            var x5 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-                .Cast<VB.Syntax.ClassBlockSyntax>()
+            var x5 = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>()
+                .Cast<ClassBlockSyntax>()
                 .Select(c =>
                    new
                    {
                        ClassName = c.BlockStatement.Identifier,
-                       Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+                       Methods = c.Members.OfType<MethodBlockSyntax>()
                    })
                 .Select(t =>
                     new
@@ -113,9 +112,9 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
                             .Select(m =>
                                new
                                {
-                                   Name = ((VB.Syntax.MethodStatementSyntax)m.DescendantNodes().First()).Identifier.ValueText,
+                                   Name = ((MethodStatementSyntax)m.DescendantNodes().First()).Identifier.ValueText,
                                    Lines = m.Statements.Count,
-                                   Comments = m.DescendantTrivia().Count(b => b.IsKind(VB.SyntaxKind.CommentTrivia))
+                                   Comments = m.DescendantTrivia().Count(b => b.IsKind(SyntaxKind.CommentTrivia))
                                }
                             )
                     });

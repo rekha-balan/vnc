@@ -27,7 +27,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
 {
     class TooManyParametersOnGenericTypes
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

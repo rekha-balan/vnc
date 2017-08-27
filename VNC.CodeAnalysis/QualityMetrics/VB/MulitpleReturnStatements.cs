@@ -23,11 +23,11 @@ using Microsoft.CodeAnalysis.Text;
 
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace VNC.CodeAnalysis.DesignMetrics.VB
+namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
     public class MulitpleReturnStatements
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

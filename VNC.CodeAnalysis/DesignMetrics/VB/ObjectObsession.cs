@@ -25,9 +25,9 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.DesignMetrics.VB
 {
-    class ObjectObsession
+    public class ObjectObsession
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -74,6 +74,6 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
         //    //if return type is of type object
         //    || mds.ReturnType.ToFullString()
         //    .ToLower().Trim() == "object";
-        }
+        //}
     }
 }

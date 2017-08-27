@@ -23,11 +23,11 @@ using Microsoft.CodeAnalysis.Text;
 
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace VNC.CodeAnalysis.DesignMetrics.VB
+namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
-    class LadderIfStatements
+    public class LadderIfStatements
     {
-        static StringBuilder Check(string fileNameAsourceCodendPath)
+        public static StringBuilder Check(string fileNameAsourceCodendPath)
         {
             StringBuilder sb = new StringBuilder();
 

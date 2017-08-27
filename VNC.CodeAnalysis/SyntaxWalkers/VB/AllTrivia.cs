@@ -19,7 +19,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         static int tabs = 0;
 
-        public override void Visit(SyntaxNode node)
+        public override void Visit(Microsoft.CodeAnalysis.SyntaxNode node)
         {
             tabs++;
             var indents = new String(' ', tabs * 3);

@@ -23,11 +23,11 @@ using Microsoft.CodeAnalysis.Text;
 
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace VNC.CodeAnalysis.DesignMetrics.CS
+namespace VNC.CodeAnalysis.QualityMetrics.CS
 {
-    class GotoLabels
+    public class GotoLabels
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

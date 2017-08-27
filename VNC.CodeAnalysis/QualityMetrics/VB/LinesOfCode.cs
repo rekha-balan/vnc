@@ -23,11 +23,11 @@ using Microsoft.CodeAnalysis.Text;
 
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace VNC.CodeAnalysis.DesignMetrics.VB
+namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
-    class LinesOfCode
+    public class LinesOfCode
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

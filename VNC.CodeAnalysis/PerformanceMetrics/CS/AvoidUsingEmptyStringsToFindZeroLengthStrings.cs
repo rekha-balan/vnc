@@ -25,9 +25,9 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.PerformanceMetrics.CS
 {
-    class AvoidUsingEmptyStringsToFindZeroLengthStrings
+    public class AvoidUsingEmptyStringsToFindZeroLengthStrings
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 

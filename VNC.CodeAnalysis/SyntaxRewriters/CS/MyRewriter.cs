@@ -11,7 +11,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.CS
 {
     public class MyRewriter : CSharpSyntaxRewriter
     {
-        public override SyntaxNode VisitIfStatement(IfStatementSyntax node)
+        public override Microsoft.CodeAnalysis.SyntaxNode VisitIfStatement(IfStatementSyntax node)
         {
             // remove node entirely
             // return null;

@@ -25,7 +25,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.DesignMetrics.CS
 {
-    class LotsOfMethodOverloads
+    public class LotsOfMethodOverloads
     {
         static StringBuilder Check(string sourceCode)
         {

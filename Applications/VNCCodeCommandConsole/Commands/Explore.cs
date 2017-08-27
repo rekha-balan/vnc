@@ -33,98 +33,57 @@ namespace VNCCodeCommandConsole.Commands
 
         public static StringBuilder DisplayClassesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
         {
-            StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
+            using (var stream = new StreamReader(fileNameAndPath))
             {
-                sourceCode = sr.ReadToEnd();
+                return VNC.CodeAnalysis.SyntaxNode.VB.Classes.Display(stream, includeTrivia, statementsOnly);
             }
-
-            SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-
-            IEnumerable<SyntaxNode> syntaxNodes;
-
-            if (statementsOnly)
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassStatementSyntax>();
-            }
-            else
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
-            }
-
-            foreach (SyntaxNode node in syntaxNodes)
-            {
-                sb.AppendLine(node.ToFullString());
-            }
-
-            return sb;
         }
 
         public static StringBuilder DisplayModulesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
         {
-            StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
+            using (var stream = new StreamReader(fileNameAndPath))
             {
-                sourceCode = sr.ReadToEnd();
+                return VNC.CodeAnalysis.SyntaxNode.VB.Modules.Display(stream, includeTrivia, statementsOnly);
             }
-
-            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-
-            IEnumerable<SyntaxNode> syntaxNodes;
-
-            if (statementsOnly)
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ModuleStatementSyntax>();
-            }
-            else
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ModuleBlockSyntax>();
-            }
-
-            foreach (SyntaxNode node in syntaxNodes)
-            {
-                sb.AppendLine(node.ToFullString());
-            }
-
-            return sb;
         }
 
+        internal static StringBuilder DisplayMethodsVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        {
+            using (var stream = new StreamReader(fileNameAndPath))
+            {
+                return VNC.CodeAnalysis.SyntaxNode.VB.Methods.Display(stream, includeTrivia, statementsOnly);
+            }
+        }
         public static StringBuilder DisplayStructuresVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
         {
-            StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
+            using (var stream = new StreamReader(fileNameAndPath))
             {
-                sourceCode = sr.ReadToEnd();
+                return VNC.CodeAnalysis.SyntaxNode.VB.Structures.Display(stream, includeTrivia, statementsOnly);
             }
+        }
 
-            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-
-            IEnumerable<SyntaxNode> syntaxNodes;
-
-            if (statementsOnly)
+        public static StringBuilder DisplayClassesCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        {
+            using (var stream = new StreamReader(fileNameAndPath))
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.StructureStatementSyntax>();
+                return VNC.CodeAnalysis.SyntaxNode.CS.Classes.Display(stream, includeTrivia, statementsOnly);
             }
-            else
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.StructureBlockSyntax>();
-            }
+        }
 
-            foreach (SyntaxNode node in syntaxNodes)
+        internal static StringBuilder DisplayMethodsCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        {
+            using (var stream = new StreamReader(fileNameAndPath))
             {
-                sb.AppendLine(node.ToFullString());
+                return VNC.CodeAnalysis.SyntaxNode.CS.Methods.Display(stream, includeTrivia, statementsOnly);
             }
+        }
 
-            return sb;
+        public static StringBuilder DisplayStructuresCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        {
+            using (var stream = new StreamReader(fileNameAndPath))
+            {
+                return VNC.CodeAnalysis.SyntaxNode.CS.Structures.Display(stream, includeTrivia, statementsOnly);
+            }
         }
 
         #endregion
@@ -168,58 +127,7 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static void DisplayMethodsCS(string fileNameAndPath)
-        {
-            var sourceCode = "";
 
-            using (var sr = new StreamReader(fileNameAndPath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
-
-            var syntaxNodes = tree.GetRoot().DescendantNodes().OfType<CS.Syntax.MethodDeclarationSyntax>();
-
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
-
-            foreach (SyntaxNode node in syntaxNodes)
-            {
-                walker.Visit(node);
-            }
-        }
-
-        internal static StringBuilder DisplayMethodsVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-
-            IEnumerable<SyntaxNode> syntaxNodes;
-
-            if (statementsOnly)
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.MethodStatementSyntax>();      
-            }
-            else
-            {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.MethodBlockSyntax>();            
-            }
-
-            foreach (SyntaxNode node in syntaxNodes)
-            {
-                sb.AppendLine(node.ToFullString());
-            }
-
-            return sb;
-        }
 
         internal static StringBuilder ParseCSDepthNode(string sourceCode)
         {
@@ -630,41 +538,41 @@ class C
             Console.WriteLine("\n");
         }
 
-        static void DisplaySolutionInfo()
-        {
-            string targetSolution = @"C:\EaseSource\Source-ease_main-C7.7\WebApps\CumminsWI\CumminsWI.sln";
+        //static void DisplaySolutionInfo()
+        //{
+        //    string targetSolution = @"C:\EaseSource\Source-ease_main-C7.7\WebApps\CumminsWI\CumminsWI.sln";
 
-            var workSpace = MSBuildWorkspace.Create();
-            var solution = workSpace.OpenSolutionAsync(targetSolution).Result;
+        //    var workSpace = MSBuildWorkspace.Create();
+        //    var solution = workSpace.OpenSolutionAsync(targetSolution).Result;
 
-            // Classify(workSpace, solution);
-            // Formatting(solution);
-            // SymbolFinding(solution);
-            // Recommend(workSpace, solution);
-            // Rename(workSpace, solution);
-            // Simplification(solution);
-            PrintSolution(solution);
-        }
+        //    // Classify(workSpace, solution);
+        //    // Formatting(solution);
+        //    // SymbolFinding(solution);
+        //    // Recommend(workSpace, solution);
+        //    // Rename(workSpace, solution);
+        //    // Simplification(solution);
+        //    VNC.CodeAnalysis.Workspace.Solution.ListInfo(solution);
+        //}
 
-        static void ExploreSolution()
-        {
-            ExploreSolution(@"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln");
-        }
+        //static void ExploreSolution()
+        //{
+        //    ExploreSolution(@"C:\GitHub\VNC\Explore\Roslyn\RoslynPlayGround\RoslynPlayground.sln");
+        //}
 
-        static void ExploreSolution(string solutionFullPath)
-        {
-            var msBuildWS = MSBuildWorkspace.Create();
-            // Should await task. Be lazy and just get result
-            var solution = msBuildWS.OpenSolutionAsync(solutionFullPath).Result;
+        //static void ExploreSolution(string solutionFullPath)
+        //{
+        //    var msBuildWS = MSBuildWorkspace.Create();
+        //    // Should await task. Be lazy and just get result
+        //    var solution = msBuildWS.OpenSolutionAsync(solutionFullPath).Result;
 
-            foreach (var project in solution.Projects)
-            {
-                foreach (var document in project.Documents)
-                {
-                    Console.WriteLine(string.Format("Name: {0}  FilePath: {1}\n", document.Name, document.FilePath));
-                }
-            }
-        }
+        //    foreach (var project in solution.Projects)
+        //    {
+        //        foreach (var document in project.Documents)
+        //        {
+        //            Console.WriteLine(string.Format("Name: {0}  FilePath: {1}\n", document.Name, document.FilePath));
+        //        }
+        //    }
+        //}
 
         static void GettingTheConstantValueOfLiterals()
         {
@@ -901,63 +809,6 @@ class C
             }
         }
 
-        static void PrintSolution(Solution solution)
-        {
-            // Print the root of the solution
-
-            Console.WriteLine(Path.GetFileName(solution.FilePath));
-
-            Console.WriteLine("Projects:");
-
-            foreach (var project in solution.Projects)
-            {
-                Console.WriteLine("  - " + project.Name);
-            }
-
-            // Get dependency graph to perform a sort
-
-            var dGraph = solution.GetProjectDependencyGraph();
-            var ds = dGraph.GetDependencySets();
-
-            //var ddotp = dGraph.GetProjectsThatDirectlyDependOnThisProject();
-            //var tdotp = dGraph.GetProjectsThatTransitivelyDependOnThisProject();
-
-            //var tpddo = dGraph.GetProjectsThatThisProjectDirectlyDependsOn();
-            //var tptdo = dGraph.GetProjectsThatThisProjectTransitivelyDependsOn);
-
-            var tsp = dGraph.GetTopologicallySortedProjects();
-
-            // Print all projects, their documents, and references
-
-            foreach (var p in tsp)
-            {
-                var project = solution.GetProject(p);
-
-                Console.WriteLine("> " + project.Name);
-
-                Console.WriteLine("  > MetadataReferences");
-
-                foreach (var reference in project.MetadataReferences)
-                {
-                    Console.WriteLine("     - " + reference.Display);
-                }
-
-                Console.WriteLine("  > ProjectReferences");
-
-                foreach (var reference in project.ProjectReferences)
-                {
-                    Console.WriteLine("     - " + solution.GetProject(reference.ProjectId).Name);
-                }
-
-                Console.WriteLine("  > Documents");
-
-                foreach (var document in project.Documents)
-                {
-                    Console.WriteLine("    - " + document.Name + " " + document.GetType().ToString());
-                }
-            }
-        }
-
         static void SemanticModelDemo1()
         {
             var tree = CS.CSharpSyntaxTree.ParseText(@"
@@ -1124,122 +975,122 @@ public partial class MyPartialClass
             //Console.WriteLine(newMethodS.ToFullString());
             //Console.WriteLine(newMethodS.ToString());
         }
-        public static StringBuilder CodeToCommentRatioVB(string fileNameAndPath)
-        {
-            StringBuilder sb = new StringBuilder();
+        //public static StringBuilder CodeToCommentRatioVB(string fileNameAndPath)
+        //{
+        //    StringBuilder sb = new StringBuilder();
 
-            var sourceCode = "";
+        //    var sourceCode = "";
 
-            using (var sr = new StreamReader(fileNameAndPath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
+        //    using (var sr = new StreamReader(fileNameAndPath))
+        //    {
+        //        sourceCode = sr.ReadToEnd();
+        //    }
 
-            var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
+        //    var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            IEnumerable<SyntaxNode> syntaxNodes;
+        //    IEnumerable<SyntaxNode> syntaxNodes;
 
-            // Both of these return the same results.
+        //    // Both of these return the same results.
 
-            //var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(VB.SyntaxKind.ClassBlock));
-            //var x2 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
+        //    //var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(VB.SyntaxKind.ClassBlock));
+        //    //var x2 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>();
 
-            //sb.AppendLine("Where(...)");
-            //foreach (SyntaxNode node in x1)
-            //{
-            //    sb.AppendLine(node.ToFullString());
-            //}
+        //    //sb.AppendLine("Where(...)");
+        //    //foreach (SyntaxNode node in x1)
+        //    //{
+        //    //    sb.AppendLine(node.ToFullString());
+        //    //}
 
-            //sb.AppendLine("OfType(...)");
-            //foreach (SyntaxNode node in x2)
-            //{
-            //    sb.AppendLine(node.ToFullString());
-            //}
+        //    //sb.AppendLine("OfType(...)");
+        //    //foreach (SyntaxNode node in x2)
+        //    //{
+        //    //    sb.AppendLine(node.ToFullString());
+        //    //}
 
-            //var x3 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-            //    .Cast<VB.Syntax.ClassBlockSyntax>()
-            //    .Select(c =>
-            //       new
-            //       {
-            //           ClassName = c.BlockStatement.Identifier,
-            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
-            //       });
+        //    //var x3 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+        //    //    .Cast<VB.Syntax.ClassBlockSyntax>()
+        //    //    .Select(c =>
+        //    //       new
+        //    //       {
+        //    //           ClassName = c.BlockStatement.Identifier,
+        //    //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+        //    //       });
 
-            //foreach (var node in x3)
-            //{
-            //    sb.AppendLine(node.ClassName.Text);
-            //    //sb.AppendLine(node.ClassName.Value.ToString());
+        //    //foreach (var node in x3)
+        //    //{
+        //    //    sb.AppendLine(node.ClassName.Text);
+        //    //    //sb.AppendLine(node.ClassName.Value.ToString());
 
-            //    foreach (var method in node.Methods)
-            //    {
+        //    //    foreach (var method in node.Methods)
+        //    //    {
 
-            //        sb.AppendLine(method.ToString());
-            //    }
-            //}
+        //    //        sb.AppendLine(method.ToString());
+        //    //    }
+        //    //}
 
-            //var x4 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-            //    .Cast<VB.Syntax.ClassBlockSyntax>()
-            //    .Select(c =>
-            //       new
-            //       {
-            //           ClassName = c.BlockStatement.Identifier,
-            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
-            //       });
+        //    //var x4 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+        //    //    .Cast<VB.Syntax.ClassBlockSyntax>()
+        //    //    .Select(c =>
+        //    //       new
+        //    //       {
+        //    //           ClassName = c.BlockStatement.Identifier,
+        //    //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+        //    //       });
 
-            //foreach (var node in x4)
-            //{
-            //    //sb.AppendLine(node.ClassName.Text);
-            //    sb.AppendLine(node.ClassName.Value.ToString());
+        //    //foreach (var node in x4)
+        //    //{
+        //    //    //sb.AppendLine(node.ClassName.Text);
+        //    //    sb.AppendLine(node.ClassName.Value.ToString());
 
-            //    foreach (var method in node.Methods)
-            //    {
-            //        sb.AppendLine("Method");
-            //        VB.Syntax.MethodStatementSyntax statement = method.DescendantNodes().First() as VB.Syntax.MethodStatementSyntax;
-            //        sb.AppendLine(statement.Identifier.ToString());
-            //        sb.AppendLine("Parameters");
-            //        sb.AppendLine(statement.ParameterList.ToString());
-            //    }
-            //}
+        //    //    foreach (var method in node.Methods)
+        //    //    {
+        //    //        sb.AppendLine("Method");
+        //    //        VB.Syntax.MethodStatementSyntax statement = method.DescendantNodes().First() as VB.Syntax.MethodStatementSyntax;
+        //    //        sb.AppendLine(statement.Identifier.ToString());
+        //    //        sb.AppendLine("Parameters");
+        //    //        sb.AppendLine(statement.ParameterList.ToString());
+        //    //    }
+        //    //}
 
-            var x5 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-                .Cast<VB.Syntax.ClassBlockSyntax>()
-                .Select(c =>
-                   new
-                   {
-                       ClassName = c.BlockStatement.Identifier,
-                       Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
-                   })
-                .Select(t =>
-                    new
-                    {
-                        ClassName = t.ClassName,
-                        MethodDetails = t.Methods
-                            .Select(m =>
-                               new
-                               {
-                                   Name = ((VB.Syntax.MethodStatementSyntax)m.DescendantNodes().First()).Identifier.ValueText,
-                                   Lines = m.Statements.Count,
-                                   Comments = m.DescendantTrivia().Count(b => b.IsKind(VB.SyntaxKind.CommentTrivia))
-                               }
-                            )
-                    });
+        //    var x5 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
+        //        .Cast<VB.Syntax.ClassBlockSyntax>()
+        //        .Select(c =>
+        //           new
+        //           {
+        //               ClassName = c.BlockStatement.Identifier,
+        //               Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
+        //           })
+        //        .Select(t =>
+        //            new
+        //            {
+        //                ClassName = t.ClassName,
+        //                MethodDetails = t.Methods
+        //                    .Select(m =>
+        //                       new
+        //                       {
+        //                           Name = ((VB.Syntax.MethodStatementSyntax)m.DescendantNodes().First()).Identifier.ValueText,
+        //                           Lines = m.Statements.Count,
+        //                           Comments = m.DescendantTrivia().Count(b => b.IsKind(VB.SyntaxKind.CommentTrivia))
+        //                       }
+        //                    )
+        //            });
 
-            foreach (var item in x5)
-            {
-                sb.AppendLine(item.ClassName.Text);
+        //    foreach (var item in x5)
+        //    {
+        //        sb.AppendLine(item.ClassName.Text);
 
-                foreach (var detail in item.MethodDetails)
-                {
-                    sb.AppendLine(string.Format("   {0,-40}   Statements:{1,5}    Comments:{2,5}", 
-                        detail.Name,
-                        detail.Lines.ToString(),
-                        detail.Comments.ToString()));
-                }
-            }
+        //        foreach (var detail in item.MethodDetails)
+        //        {
+        //            sb.AppendLine(string.Format("   {0,-40}   Statements:{1,5}    Comments:{2,5}", 
+        //                detail.Name,
+        //                detail.Lines.ToString(),
+        //                detail.Comments.ToString()));
+        //        }
+        //    }
 
-            return sb;
+        //    return sb;
 
-        }
+        //}
 
         #endregion
 

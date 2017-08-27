@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -388,11 +389,20 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnCodeToCommentRatioVB_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder sb;
             //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
             //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+            StringBuilder sb = new StringBuilder();
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+            sb = VNC.CodeAnalysis.QualityMetrics.VB.CodeToCommentRatio.Check(sourceCode);
 
             teSourceCode.Text = sb.ToString();
         }

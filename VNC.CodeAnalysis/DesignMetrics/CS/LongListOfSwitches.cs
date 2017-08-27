@@ -27,7 +27,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.CS
 {
     class LongListOfSwitches
     {
-        static StringBuilder Check(string sourceCode)
+        public static StringBuilder Check(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();
 
