@@ -27,11 +27,22 @@ namespace VNC.CodeAnalysis.Workspace
 {
     public class Document
     {
-        public static StringBuilder ListInfo(string documentFullPath)
+        public static StringBuilder Display(string documentFullPath)
         {
             StringBuilder sb = new StringBuilder();
 
+            Microsoft.CodeAnalysis.Document document = null;
+            return Display(document);
+        }
+
+        static StringBuilder Display(Microsoft.CodeAnalysis.Document document)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Not Implemented Yet");
+
             return sb;
+
         }
     }
 }

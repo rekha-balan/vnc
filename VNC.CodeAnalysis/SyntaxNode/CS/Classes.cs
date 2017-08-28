@@ -27,7 +27,7 @@ namespace VNC.CodeAnalysis.SyntaxNode.CS
     {
         public static StringBuilder Display(StreamReader stream, Boolean includeTrivia, Boolean statementsOnly)
         {
-            return Methods.Display(stream.ReadToEnd(), includeTrivia, statementsOnly);
+            return Display(stream.ReadToEnd(), includeTrivia, statementsOnly);
         }
 
         public static StringBuilder Display(string sourceCode, Boolean includeTrivia, Boolean statementsOnly)

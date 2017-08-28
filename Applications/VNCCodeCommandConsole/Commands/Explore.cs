@@ -127,8 +127,6 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-
-
         internal static StringBuilder ParseCSDepthNode(string sourceCode)
         {
             StringBuilder sb = new StringBuilder();

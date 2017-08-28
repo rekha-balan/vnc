@@ -27,10 +27,8 @@ namespace VNC.CodeAnalysis.Workspace
 {
     public class Solution
     {
-        public static StringBuilder ListInfo(string solutionFullPath)
+        public static StringBuilder Display(string solutionFullPath)
         {
-            StringBuilder sb = new StringBuilder();
-
             var workSpace = MSBuildWorkspace.Create();
             var solution = workSpace.OpenSolutionAsync(solutionFullPath).Result;
 
@@ -40,16 +38,16 @@ namespace VNC.CodeAnalysis.Workspace
             // Recommend(workSpace, solution);
             // Rename(workSpace, solution);
             // Simplification(solution);
-            PrintInfo(solution, sb);
-
-            return sb;
+            return Display(solution);
         }
 
-        static StringBuilder PrintInfo(Microsoft.CodeAnalysis.Solution solution, StringBuilder sb)
+        static StringBuilder Display(Microsoft.CodeAnalysis.Solution solution)
         {
+            StringBuilder sb = new StringBuilder();
+
             // Print the root of the solution
 
-           sb.AppendLine(Path.GetFileName(solution.FilePath));
+            sb.AppendLine(Path.GetFileName(solution.FilePath));
 
             sb.AppendLine("Projects:");
 

@@ -261,6 +261,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             sb = Commands.Explore.DisplayClassesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
+            lg_Classes.Focus();
+   
             teClasses.Text = sb.ToString();
         }
 
@@ -272,6 +274,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             sb = Commands.Explore.DisplayModulesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
+            groupContainer.Focus();
+            lg_Modules.Focus();
             teModules.Text = sb.ToString();
         }
 
@@ -283,6 +287,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             sb = Commands.Explore.DisplayStructuresVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
+
+            //lg_Body.Focus();
+            //lg_Body_dlm.Focus();
+            //lg_Body_dlm_lg.Focus();
+            //lg_Body_dlm_lg_lpRoot.Focus();
+
+            groupContainer.Focus();
+            lg_Structures.Focus();
             teStructures.Text = sb.ToString();
         }
 

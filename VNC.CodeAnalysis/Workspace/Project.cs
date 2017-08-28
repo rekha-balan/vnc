@@ -28,20 +28,17 @@ namespace VNC.CodeAnalysis.Workspace
 {
     public class Project
     {
-        public static StringBuilder ListInfo(string projectFullPath)
+        public static StringBuilder Display(string projectFullPath)
         {
-            StringBuilder sb = new StringBuilder();
-
             var workSpace = MSBuildWorkspace.Create();
             var project = workSpace.OpenProjectAsync(projectFullPath).Result;
 
-            PrintInfo(project, sb);
-
-            return sb;
+            return Display(project);
         }
 
-        static StringBuilder PrintInfo(Microsoft.CodeAnalysis.Project project, StringBuilder sb)
+        static StringBuilder Display(Microsoft.CodeAnalysis.Project project)
         {
+            StringBuilder sb = new StringBuilder();
             // Print the root of the solution
 
             sb.AppendLine(Path.GetFileName(project.FilePath));
