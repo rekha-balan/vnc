@@ -370,7 +370,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Document.ListInfo(wucCodeExplorerContext.teSourceFile.Text);
+            sb = VNC.CodeAnalysis.Workspace.Document.Display(wucCodeExplorerContext.teSourceFile.Text);
 
             teWorkspace.Text = sb.ToString();
 
@@ -381,7 +381,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Project.ListInfo(wucCodeExplorerContext.teProjectFile.Text);
+            sb = VNC.CodeAnalysis.Workspace.Project.Display(wucCodeExplorerContext.teProjectFile.Text);
 
             teWorkspace.Text = sb.ToString();
 
@@ -392,7 +392,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Solution.ListInfo(wucCodeExplorerContext.teSolutionFile.Text);
+            sb = VNC.CodeAnalysis.Workspace.Solution.Display(wucCodeExplorerContext.teSolutionFile.Text);
 
             teWorkspace.Text = sb.ToString();
 
@@ -415,6 +415,26 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
             sb = VNC.CodeAnalysis.QualityMetrics.VB.CodeToCommentRatio.Check(sourceCode);
+
+            teSourceCode.Text = sb.ToString();
+        }
+
+        private void btnInvocation_Click(object sender, RoutedEventArgs e)
+        {
+            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
+            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+
+            StringBuilder sb = new StringBuilder();
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, true, true);
 
             teSourceCode.Text = sb.ToString();
         }

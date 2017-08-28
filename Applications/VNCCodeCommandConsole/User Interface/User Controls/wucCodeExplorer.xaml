@@ -371,11 +371,25 @@
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
                             <dxlc:LayoutItem>
-                                <Button Content="Code-to-Comment Ration" Click="btnCodeToCommentRatioVB_Click"/>
+                                <Button Content="Code-to-Comment Ratio" Click="btnCodeToCommentRatioVB_Click"/>
                             </dxlc:LayoutItem>
 
                         </dxdo:LayoutPanel>
 
+                        
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find" ItemWidth="300">
+                            <dxlc:LayoutControl Orientation="Vertical">                            
+                                <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
+                                    <dxe:TextEdit x:Name="teIdentifier" >
+                                    </dxe:TextEdit>
+                                </dxlc:LayoutItem>
+                            
+                                <dxlc:LayoutItem>
+                                    <Button Content="Invocation" Click="btnInvocation_Click"/>
+                                </dxlc:LayoutItem>
+                                </dxlc:LayoutControl>
+
+                        </dxdo:LayoutPanel>
 
                     </dxdo:AutoHideGroup>
 

@@ -231,6 +231,7 @@
     <Compile Include="SyntaxNode\CS\Methods.cs" />
     <Compile Include="SyntaxNode\CS\Structures.cs" />
     <Compile Include="SyntaxNode\VB\Classes.cs" />
+    <Compile Include="SyntaxNode\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxNode\VB\Methods.cs" />
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />

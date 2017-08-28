@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -24,7 +23,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxNode.VB
 {
-    public class Methods
+    public class InvocationExpression
     {
         public static StringBuilder Display(StreamReader stream, Boolean includeTrivia, Boolean statementsOnly)
         {
@@ -41,16 +40,16 @@ namespace VNC.CodeAnalysis.SyntaxNode.VB
 
             if (statementsOnly)
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<MethodStatementSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>();
             }
             else
             {
-                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<MethodBlockSyntax>();
+                syntaxNodes = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>();
             }
 
             foreach (Microsoft.CodeAnalysis.SyntaxNode node in syntaxNodes)
             {
-                
+
                 sb.AppendLine(node.ToFullString());
             }
 
