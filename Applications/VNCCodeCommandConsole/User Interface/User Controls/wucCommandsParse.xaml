@@ -1,0 +1,70 @@
+﻿<uiuc:wucDXBase
+    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsParse"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+    mc:Ignorable="d"
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"     
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+    
+    xmlns:local="clr-namespace:VNCCodeCommandConsole"
+    xmlns:localData="clr-namespace:VNCCodeCommandConsole.Data"
+    xmlns:ui="clr-namespace:VNCCodeCommandConsole.User_Interface" 
+    xmlns:uiuc="clr-namespace:VNCCodeCommandConsole.User_Interface.User_Controls"
+    xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
+
+    d:DesignWidth="800" d:DesignHeight="600"
+    Title="DXLayoutControl" 
+    Loaded="OnLoaded"  >
+
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutItem Label="SourceCode" LabelPosition="Top">
+            <dxe:TextEdit x:Name="teSourceCode1" 
+                                                  Height="200" TextWrapping="Wrap"
+                                                  VerticalContentAlignment="Top"
+                                                  AcceptsReturn="True" AcceptsTab="True">
+            </dxe:TextEdit>
+        </dxlc:LayoutItem>
+
+        <dx:GroupFrame Header="SyntaxWalkerDepth" Height="120">
+            <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                                                         ValueMember="Content" 
+                                                         SelectedIndex="0"                                                         
+                                                         ShowBorder="False" Background="{x:Null}">
+                <dxe:ListBoxEdit.StyleSettings>
+                    <dxe:RadioListBoxEditStyleSettings />
+                </dxe:ListBoxEdit.StyleSettings>
+                <dxe:ListBoxEdit.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </dxe:ListBoxEdit.ItemsPanel>
+                <dxe:ListBoxEdit.Items>
+                    <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                    <dxe:ListBoxEditItem Content="Node" />
+                    <dxe:ListBoxEditItem Content="Token" />
+                    <dxe:ListBoxEditItem Content="Trivia" />
+                </dxe:ListBoxEdit.Items>
+            </dxe:ListBoxEdit>
+        </dx:GroupFrame>
+
+        <dxlc:LayoutItem>
+            <Button Content="Parse CS" Click="btnParseSourceCS_Click"/>
+        </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem>
+            <Button Content="Parse VB" Click="btnParseSourceVB_Click"/>
+        </dxlc:LayoutItem>
+
+    </dxlc:LayoutControl>
+
+</uiuc:wucDXBase>

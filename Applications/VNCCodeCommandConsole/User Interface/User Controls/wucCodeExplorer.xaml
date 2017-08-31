@@ -181,214 +181,36 @@
                     </dxdo:AutoHideGroup>
 
                     <dxdo:AutoHideGroup DockType="Right">
-
                         <dxdo:LayoutPanel x:Name="lp_Commands" Caption="Commands" 
                                          ItemWidth="300" >
-                            <dxlc:LayoutControl Orientation="Vertical">
-                                
-                                <dxlc:LayoutGroup Header="All Nodes" Orientation="Vertical">
-                                    
-                                    <dxlc:LayoutItem>
-                                        <Button Content="All Nodes" Click="btnAllNodes_Click"/>
-                                    </dxlc:LayoutItem>
 
-                                    <!--<dx:GroupFrame Header="SyntaxWalkerDepth" Height="150">
-                                        <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
-                                                         ValueMember="Content" 
-                                                         SelectedIndex="0"                                                         
-                                                         ShowBorder="False" Background="{x:Null}">
-                                            <dxe:ListBoxEdit.StyleSettings>
-                                                <dxe:RadioListBoxEditStyleSettings />
-                                            </dxe:ListBoxEdit.StyleSettings>
-                                            <dxe:ListBoxEdit.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Vertical" />
-                                                </ItemsPanelTemplate>
-                                            </dxe:ListBoxEdit.ItemsPanel>
-                                            <dxe:ListBoxEdit.Items>
-                                                <dxe:ListBoxEditItem Content="StructuredTrivia" />
-                                                <dxe:ListBoxEditItem Content="Node" />
-                                                <dxe:ListBoxEditItem Content="Token" />
-                                                <dxe:ListBoxEditItem Content="Trivia" />
-                                            </dxe:ListBoxEdit.Items>
-                                        </dxe:ListBoxEdit>
-                                    </dx:GroupFrame>-->
-                                </dxlc:LayoutGroup>
-
-                                <dxlc:LayoutGroup Header="Classes" View="GroupBox" Orientation="Vertical">
-                                    <dxlc:LayoutItem>
-                                        <Button Content="All Classes" Click="btnAllClasses_Click"/>
-                                    </dxlc:LayoutItem>
-
-                                    <dxlc:LayoutGroup>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceClassesIncludeTrivia" 
-                                                           Content="Include Trivia" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-                                        
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceClassesStatementsOnly" 
-                                                           Content="Statements Only" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-                                        
-                                    </dxlc:LayoutGroup>
-
-                                </dxlc:LayoutGroup>                                    
-
-                                <dxlc:LayoutGroup Header="Modules" View="GroupBox" Orientation="Vertical">
-                                    <dxlc:LayoutItem>
-                                        <Button Content="All Modules" Click="btnAllModules_Click"/>
-                                    </dxlc:LayoutItem>
-
-                                    <dxlc:LayoutGroup>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceModulesIncludeTrivia" 
-                                                           Content="Include Trivia" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceModulesStatementsOnly" 
-                                                           Content="Statements Only" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                    </dxlc:LayoutGroup>
-                                </dxlc:LayoutGroup>
-
-                                <dxlc:LayoutGroup Header="Methods" View="GroupBox" Orientation="Vertical">
-                                    <dxlc:LayoutItem>
-                                        <Button Content="All Methods" Click="btnAllMethods_Click"/>
-                                    </dxlc:LayoutItem>
-
-                                    <dxlc:LayoutGroup>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceMethodsIncludeTrivia" 
-                                                           Content="Include Trivia" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceMethodsStatementsOnly" 
-                                                           Content="Statements Only" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                    </dxlc:LayoutGroup>
-                                </dxlc:LayoutGroup>
-
-                                <dxlc:LayoutGroup Header="Structures" View="GroupBox" Orientation="Vertical">
-                                    
-                                     <dxlc:LayoutItem>
-                                        <Button Content="All Structures" Click="btnAllStructures_Click"/>
-                                    </dxlc:LayoutItem>
-                                    
-                                    <dxlc:LayoutGroup>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceStructuresIncludeTrivia" 
-                                                           Content="Include Trivia" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                        <dxlc:LayoutItem>
-                                            <dxe:CheckEdit x:Name="ceStructuresStatementsOnly" 
-                                                           Content="Statements Only" IsChecked="True" />
-                                        </dxlc:LayoutItem>
-
-                                    </dxlc:LayoutGroup>
-                                    
-                                </dxlc:LayoutGroup>
-
-                            </dxlc:LayoutControl>
+                            <uiuc:wucCommands x:Name="wucCommands" />
 
                         </dxdo:LayoutPanel>
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Parse" Caption="Parse" ItemWidth="300">
-                            <dxlc:LayoutControl Orientation="Vertical">
-                                <dxlc:LayoutItem Label="SourceCode" LabelPosition="Top">
-                                    <dxe:TextEdit x:Name="teSourceCode1" 
-                                                  Height="200" TextWrapping="Wrap"
-                                                  VerticalContentAlignment="Top"
-                                                  AcceptsReturn="True" AcceptsTab="True">
-                                    </dxe:TextEdit>
-                                </dxlc:LayoutItem>
 
-                                <dx:GroupFrame Header="SyntaxWalkerDepth" Height="120">
-                                    <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
-                                                         ValueMember="Content" 
-                                                         SelectedIndex="0"                                                         
-                                                         ShowBorder="False" Background="{x:Null}">
-                                        <dxe:ListBoxEdit.StyleSettings>
-                                            <dxe:RadioListBoxEditStyleSettings />
-                                        </dxe:ListBoxEdit.StyleSettings>
-                                        <dxe:ListBoxEdit.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Vertical" />
-                                            </ItemsPanelTemplate>
-                                        </dxe:ListBoxEdit.ItemsPanel>
-                                        <dxe:ListBoxEdit.Items>
-                                            <dxe:ListBoxEditItem Content="StructuredTrivia" />
-                                            <dxe:ListBoxEditItem Content="Node" />
-                                            <dxe:ListBoxEditItem Content="Token" />
-                                            <dxe:ListBoxEditItem Content="Trivia" />
-                                        </dxe:ListBoxEdit.Items>
-                                    </dxe:ListBoxEdit>
-                                </dx:GroupFrame>
-                                
-                                <dxlc:LayoutItem>
-                                    <Button Content="Parse CS" Click="btnParseSourceCS_Click"/>
-                                </dxlc:LayoutItem>
+                            <uiuc:wucCommandsParse x:Name="wucCommandsParse" />
 
-                                <dxlc:LayoutItem>
-                                    <Button Content="Parse VB" Click="btnParseSourceVB_Click"/>
-                                </dxlc:LayoutItem>
-
-                            </dxlc:LayoutControl> 
                         </dxdo:LayoutPanel>
+                       
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace" 
+                                          ItemWidth="300">
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace" ItemWidth="300">
-                            
-                            <dxlc:LayoutControl Orientation="Vertical">
-                                
-                                <dxlc:LayoutItem>
-                                    <Button Content="Solution Info" Click="btnInfo_Solution_Click"/>
-                                </dxlc:LayoutItem>
-
-                                <dxlc:LayoutItem>
-                                    <Button Content="Project Info" Click="btnInfo_Project_Click"/>
-                                </dxlc:LayoutItem>
-
-                                <dxlc:LayoutItem>
-                                    <Button Content="Document Info" Click="btnInfo_Document_Click"/>
-                                </dxlc:LayoutItem>
-
-                                <dxlc:LayoutItem>
-                                    <dxe:CheckEdit x:Name="ceIncludeDescendants" 
-                                                           Content="Include Descendants" IsChecked="False" />
-                                </dxlc:LayoutItem>
-                            </dxlc:LayoutControl>
+                            <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
                             
                         </dxdo:LayoutPanel>
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
-                            <dxlc:LayoutItem>
-                                <Button Content="Code-to-Comment Ratio" Click="btnCodeToCommentRatioVB_Click"/>
-                            </dxlc:LayoutItem>
 
+                            <uiuc:wucCommandsQuality x:Name="wucCommandsQuality" />
                         </dxdo:LayoutPanel>
 
                         
                         <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find" ItemWidth="300">
-                            <dxlc:LayoutControl Orientation="Vertical">                            
-                                <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
-                                    <dxe:TextEdit x:Name="teIdentifier" >
-                                    </dxe:TextEdit>
-                                </dxlc:LayoutItem>
-                            
-                                <dxlc:LayoutItem>
-                                    <Button Content="Invocation" Click="btnInvocation_Click"/>
-                                </dxlc:LayoutItem>
-                                </dxlc:LayoutControl>
 
+                            <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
+                            
                         </dxdo:LayoutPanel>
 
                     </dxdo:AutoHideGroup>

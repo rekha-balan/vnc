@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -163,6 +164,21 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             string filePath = (folderPath != "" ? folderPath + "\\" : "") + fileName;
 
             teSourceFile.Text = teSourcePath.Text + filePath;
+        }
+
+        private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            openFileDialog1.FileName = "";
+
+            if (true == openFileDialog1.ShowDialog())
+            {
+                string fileName = openFileDialog1.FileName;
+
+                teSourceFile.Text = fileName;
+            }
         }
     }
 }

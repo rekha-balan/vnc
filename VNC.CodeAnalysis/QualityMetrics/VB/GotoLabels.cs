@@ -1,6 +1,7 @@
 ﻿using System;
 
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,7 @@ using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -21,7 +20,8 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
-using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
@@ -31,34 +31,65 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
         {
             StringBuilder sb = new StringBuilder();
 
-            //            var tree = CSharpSyntaxTree.ParseText(sourceCode);
-            //            tree.GetRoot()
-            //            .DescendantNodes()
-            //            .Where(t => t.Kind() == SyntaxKind.ClassDeclaration)
-            //            .Cast<ClassDeclarationSyntax>()
-            //            .Select(cds =>
-            //           new
-            //            {
-            //                ClassName = cds.Identifier.ValueText,
-            //                Methods =
-            //           cds.Members
-            //           .Where(m => m.Kind() ==
-            //          SyntaxKind.MethodDeclaration)
-            //           .Cast<MethodDeclarationSyntax>()
-            //           .Select(mds =>
-            //          new
-            //            {
-            //                MethodName = mds.Identifier.ValueText,
-            //                HasGoto =
-            //          CSharpSyntaxTree.ParseText(mds.ToString())
-            //          .GetRoot()
-            //          .DescendantTokens()
-            //          //Checking whether the method uses "goto" labels or not .Any (st => st.Kind()
-            //          == SyntaxKind.GotoKeyword)
-            //            })
-            //            .Where(mds => mds.HasGoto)
-            //            .Select(mds => mds.MethodName)})
-            //.Dump("Classwise methods which use goto");
+            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var results = tree.GetRoot()
+            .DescendantNodes()
+            .Where(t => t.Kind() == SyntaxKind.ClassBlock)
+            .Cast<ClassBlockSyntax>()
+            .Select(cbs =>
+            new
+            {
+                ClassName = cbs.ClassStatement.Identifier,
+                Methods = cbs.Members
+                .Where(m => m.Kind() == SyntaxKind.FunctionBlock || m.Kind() == SyntaxKind.SubBlock)
+                .Cast<MethodBlockSyntax>()
+                .Select(mbs =>
+                new
+                {
+                    MethodName = mbs.SubOrFunctionStatement.Identifier.ValueText,
+                    HasGoto = VisualBasicSyntaxTree.ParseText(mbs.ToString())
+                        .GetRoot()
+                        .DescendantTokens()
+                        .Any(st => st.Kind() == SyntaxKind.GoToKeyword)
+                })
+                .Where(mbs => mbs.HasGoto)
+                .Select(mbs => mbs.MethodName)
+            });
+
+            foreach (var item in results)
+            {
+                sb.AppendLine(string.Format("Class >{0}<", item.ClassName));
+
+                foreach (var method in item.Methods)
+                {
+                    sb.AppendLine(string.Format("  Method >{0}<,", method.ToString()));
+                }
+            }
+
+            //  .Select(cds =>
+            // new
+            // {
+            //     ClassName = (ClassStatementSyntax)cds.GetFirstToken()
+            //     Methods =
+            // cds.Members
+            // .Where(m => m.Kind() ==
+            //SyntaxKind.MethodDeclaration)
+            // .Cast<MethodDeclarationSyntax>()
+            // .Select(mds =>
+            //new
+            //{
+            //    MethodName = mds.Identifier.ValueText,
+            //    HasGoto =
+            //CSharpSyntaxTree.ParseText(mds.ToString())
+            //.GetRoot()
+            //.DescendantTokens()
+            ////Checking whether the method uses "goto" labels or not .Any (st => st.Kind()
+            //== SyntaxKind.GotoKeyword)
+            // })
+            //  .Where(mds => mds.HasGoto)
+            //  .Select(mds => mds.MethodName)});
+            //  //.Dump("Classwise methods which use goto");
 
             return sb;
         }

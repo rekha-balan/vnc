@@ -226,6 +226,19 @@
     <Compile Include="User Interface\User Controls\wucCodeExplorer.xaml.cs">
       <DependentUpon>wucCodeExplorer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucCommands.xaml.cs">
+      <DependentUpon>wucCommands.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsFind.xaml.cs">
+      <DependentUpon>wucCommandsFind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsParse.cs" />
+    <Compile Include="User Interface\User Controls\wucCommandsQuality.xaml.cs">
+      <DependentUpon>wucCommandsQuality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsWorkspace.xaml.cs">
+      <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucDXBase.cs" />
     <Compile Include="User Interface\User Controls\wucSourceBranch_Picker.xaml.cs">
       <DependentUpon>wucSourceBranch_Picker.xaml</DependentUpon>
@@ -309,6 +322,26 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\User Controls\wucCodeExplorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommands.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsFind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsParse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsQuality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsWorkspace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

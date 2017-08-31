@@ -59,14 +59,15 @@
                 
                 <dxlc:LayoutGroup Header="Select Input" 
                                   View="GroupBox"
-                                  Orientation="Vertical" IsCollapsed="False" IsCollapsible="True">
+                                  Orientation="Vertical" 
+                                  IsCollapsed="False" IsCollapsible="True">
        
                     <dxlc:LayoutItem>
                         <uiuc:wucSourceBranch_Picker x:Name="wucSourceBranch_Picker" 
                                                      ControlChanged="wucSourceBranch_Picker_ControlChanged" />
                     </dxlc:LayoutItem>
                 
-                    <dxlc:LayoutItem Label="Solution File" 
+                    <dxlc:LayoutItem Label="Select Solution File" 
                                  LabelPosition="Top">
                         <dxe:ComboBoxEdit x:Name="cbeSolutionFile"
                                           EditValueChanged="cbeSolutionFile_EditValueChanged">
@@ -137,6 +138,14 @@
                             </dxe:ComboBoxEdit.StyleSettings>-->
                         </dxe:ComboBoxEdit>
                     </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem Label="Browse for Source File" 
+                                 LabelPosition="Top">
+                        
+                        <Button Content="Browse" Click="btnBrowseForFile_Click"/>
+                        
+                    </dxlc:LayoutItem>
+                        
                 </dxlc:LayoutGroup>
                 
                 <dxlc:LayoutGroup Orientation="Vertical">

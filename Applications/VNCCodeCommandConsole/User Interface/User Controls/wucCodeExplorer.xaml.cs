@@ -28,6 +28,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             try
             {
                 InitializeComponent();
+                UpdateChildUserControls();
             }
             catch (Exception ex)
             {
@@ -77,6 +78,23 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //    }
             //}
         }
+        void UpdateChildUserControls()
+        {
+            wucCommands.CodeExplorer = this;
+            wucCommands.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsFind.CodeExplorer = this;
+            wucCommandsFind.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsParse.CodeExplorer = this;
+            wucCommandsParse.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsQuality.CodeExplorer = this;
+            wucCommandsQuality.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsWorkspace.CodeExplorer = this;
+            wucCommandsWorkspace.CodeExplorerContext = wucCodeExplorerContext;
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -109,334 +127,219 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //serversGridControl.GroupBy("SecurityZone");
         }
 
-        private void OnDisplayIDColumns_Checked(object sender, RoutedEventArgs e)
-        {
-            //HideIDColumns(((CheckBox)sender).IsChecked);
-            //gc_ID1.Visible = true;
-            //gc_ID52.Visible = true;
-            //gc_ID5a2.Visible = true;
-
-            //gc_ID2.Visible = true;
-            //gc_ID2a.Visible = true;
-
-            //gc_ID3.Visible = true;
-            //gc_ID3a.Visible = true;
-
-            ////gc_ID4.Visible = true;
-            ////gc_ID4a.Visible = true;
-
-            ////gc_ID5.Visible = true;
-            ////gc_ID5a.Visible = true;
-
-            //gc_ID6.Visible = true;
-            //gc_ID6a.Visible = true;
-
-            ////gc_ID7.Visible = true;
-            ////gc_ID7a.Visible = true;
-
-            //gc_ID8.Visible = true;
-            //gc_ID8a.Visible = true;
-        }
 
 
-        private void HideIDColumns(Nullable<bool> isChecked)
-        {
-            //if ((bool)isChecked)
-            //{
-            //    gc_ID1.Visible = true;
-            //}
-            //else
-            //{
-            //    gc_ID1.Visible = false;
-            //}
-        }
 
-        private void ckDisplayIDColumns_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //gc_ID52.Visible = false;
-            //gc_ID5a2.Visible = false;
-            //gc_ID1.Visible = false;
 
-            //gc_ID2.Visible = false;
-            //gc_ID2a.Visible = false;
 
-            //gc_ID3.Visible = false;
-            //gc_ID3a.Visible = false;
 
-            ////gc_ID4.Visible = false;
-            ////gc_ID4a.Visible = false;
 
-            ////gc_ID5.Visible = false;
-            ////gc_ID5a.Visible = false;
 
-            //gc_ID6.Visible = false;
-            //gc_ID6a.Visible = false;
 
-            ////gc_ID7.Visible = false;
-            ////gc_ID7a.Visible = false;
+        //private void btnAllNodes_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
 
-            //gc_ID8.Visible = false;
-            //gc_ID8a.Visible = false;
-        }
+        //    sb = Commands.Explore.DisplayAllStructuredTriviaCS(wucCodeExplorerContext.teSourceFile.Text);
 
-        private void OnDisplaySnapShotColumns_Checked(object sender, RoutedEventArgs e)
-        {
-            //gc_SnapShotDate1.Visible = true;
-            //gc_SnapShotError1.Visible = true;
+        //    teSyntaxTree.Text = sb.ToString();
+        //}
 
-            //gc_SnapShotDate2.Visible = true;
-            //gc_SnapShotError2.Visible = true;
+        //private void btnAllMethods_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = wucCommands.ceMethodsIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = wucCommands.ceMethodsStatementsOnly.IsChecked.Value;
 
-            //gc_SnapShotDate3.Visible = true;
-            //gc_SnapShotError3.Visible = true;
+        //    sb = Commands.Explore.DisplayMethodsVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            ////gc_SnapShotDate4.Visible = true;
-            ////gc_SnapShotError4.Visible = true;
+        //    teMethods.Text = sb.ToString();
+        //}
 
-            ////gc_SnapShotDate5.Visible = true;
-            ////gc_SnapShotError5.Visible = true;
+        //private void btnAllClasses_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = wucCommands.ceClassesIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = wucCommands.ceClassesStatementsOnly.IsChecked.Value;
 
-            //gc_SnapShotDate6.Visible = true;
-            //gc_SnapShotError6.Visible = true;
+        //    sb = Commands.Explore.DisplayClassesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            ////gc_SnapShotDate7.Visible = true;
-            ////gc_SnapShotError7.Visible = true;
-
-            //gc_SnapShotDate8.Visible = true;
-            //gc_SnapShotError8.Visible = true;
-        }
-
-        private void ckDisplaySnapShotColumns_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //gc_SnapShotDate1.Visible = false;
-            //gc_SnapShotError1.Visible = false;
-
-            //gc_SnapShotDate2.Visible = false;
-            //gc_SnapShotError2.Visible = false;
-
-            //gc_SnapShotDate3.Visible = false;
-            //gc_SnapShotError3.Visible = false;
-
-            ////gc_SnapShotDate4.Visible = false;
-            ////gc_SnapShotError4.Visible = false;
-
-            ////gc_SnapShotDate5.Visible = false;
-            ////gc_SnapShotError5.Visible = false;
-
-            //gc_SnapShotDate6.Visible = false;
-            //gc_SnapShotError6.Visible = false;
-
-            ////gc_SnapShotDate7.Visible = false;
-            ////gc_SnapShotError7.Visible = false;
-
-            //gc_SnapShotDate8.Visible = false;
-            //gc_SnapShotError8.Visible = false;
-        }
-
-        private void btnAllNodes_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-
-            sb = Commands.Explore.DisplayAllStructuredTriviaCS(wucCodeExplorerContext.teSourceFile.Text);
-
-            teSyntaxTree.Text = sb.ToString();
-        }
-
-        private void btnAllMethods_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceMethodsIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceMethodsStatementsOnly.IsChecked.Value;
-
-            sb = Commands.Explore.DisplayMethodsVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
-
-            teMethods.Text = sb.ToString();
-        }
-
-        private void btnAllClasses_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceClassesIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceClassesStatementsOnly.IsChecked.Value;
-
-            sb = Commands.Explore.DisplayClassesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
-
-            lg_Classes.Focus();
+        //    lg_Classes.Focus();
    
-            teClasses.Text = sb.ToString();
-        }
+        //    teClasses.Text = sb.ToString();
+        //}
 
-        private void btnAllModules_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceModulesIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceModulesStatementsOnly.IsChecked.Value;
+        //private void btnAllModules_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = wucCommands.ceModulesIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = wucCommands.ceModulesStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayModulesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayModulesVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            groupContainer.Focus();
-            lg_Modules.Focus();
-            teModules.Text = sb.ToString();
-        }
+        //    groupContainer.Focus();
+        //    lg_Modules.Focus();
+        //    teModules.Text = sb.ToString();
+        //}
 
-        private void btnAllStructures_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+        //private void btnAllStructures_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = wucCommands.ceStructuresIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = wucCommands.ceStructuresStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayStructuresVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayStructuresVB(wucCodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
 
-            //lg_Body.Focus();
-            //lg_Body_dlm.Focus();
-            //lg_Body_dlm_lg.Focus();
-            //lg_Body_dlm_lg_lpRoot.Focus();
+        //    //lg_Body.Focus();
+        //    //lg_Body_dlm.Focus();
+        //    //lg_Body_dlm_lg.Focus();
+        //    //lg_Body_dlm_lg_lpRoot.Focus();
 
-            groupContainer.Focus();
-            lg_Structures.Focus();
-            teStructures.Text = sb.ToString();
-        }
+        //    groupContainer.Focus();
+        //    lg_Structures.Focus();
+        //    teStructures.Text = sb.ToString();
+        //}
 
-        private void btnParseSourceVB_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb = null;
+        //private void btnParseSourceVB_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb = null;
 
-            // TODO(crhodes)
-            // Need to also get our hands on SyntaxTree that got produced.
-            // Either change return type
-            // or add out parameter
-            // or add another method that returns string
+        //    // TODO(crhodes)
+        //    // Need to also get our hands on SyntaxTree that got produced.
+        //    // Either change return type
+        //    // or add out parameter
+        //    // or add another method that returns string
 
-            switch (lbeSyntaxWalkerDepth.EditValue.ToString())
-            {
-                case "Node":
-                    sb = Commands.Explore.ParseVBDepthNode(teSourceCode1.Text);
-                    break;
+        //    switch (wucCommandsParse.lbeSyntaxWalkerDepth.EditValue.ToString())
+        //    {
+        //        case "Node":
+        //            sb = Commands.Explore.ParseVBDepthNode(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "StructuredTrivia":
-                    sb = Commands.Explore.ParseVBStructuredTrivia(teSourceCode1.Text);
-                    break;
+        //        case "StructuredTrivia":
+        //            sb = Commands.Explore.ParseVBStructuredTrivia(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "Token":
-                    sb = Commands.Explore.ParseVBDepthToken(teSourceCode1.Text);
-                    break;
+        //        case "Token":
+        //            sb = Commands.Explore.ParseVBDepthToken(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "Trivia":
-                    sb = Commands.Explore.ParseVBDepthTrivia(teSourceCode1.Text);
-                    break;
-            }
+        //        case "Trivia":
+        //            sb = Commands.Explore.ParseVBDepthTrivia(wucCommandsParse.teSourceCode1.Text);
+        //            break;
+        //    }
 
-               teSyntaxTree.Text = sb.ToString();
+        //       teSyntaxTree.Text = sb.ToString();
 
-            lg_SyntaxTree.Focus();
-        }
+        //    lg_SyntaxTree.Focus();
+        //}
 
-        private void btnParseSourceCS_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb = null;
+        //private void btnParseSourceCS_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb = null;
 
-            // TODO(crhodes)
-            // Need to also get our hands on SyntaxTree that got produced.
-            // Either change return type
-            // or add out parameter
-            // or add another method that returns string
+        //    // TODO(crhodes)
+        //    // Need to also get our hands on SyntaxTree that got produced.
+        //    // Either change return type
+        //    // or add out parameter
+        //    // or add another method that returns string
 
-            switch (lbeSyntaxWalkerDepth.EditValue.ToString())
-            {
-                case "Node":
-                    sb = Commands.Explore.ParseCSDepthNode(teSourceCode1.Text);
-                    break;
+        //    switch (wucCommandsParse.lbeSyntaxWalkerDepth.EditValue.ToString())
+        //    {
+        //        case "Node":
+        //            sb = Commands.Explore.ParseCSDepthNode(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "StructuredTrivia":
-                    sb = Commands.Explore.ParseCSStructuredTrivia(teSourceCode1.Text);
-                    break;
+        //        case "StructuredTrivia":
+        //            sb = Commands.Explore.ParseCSStructuredTrivia(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "Token":
-                    sb = Commands.Explore.ParseCSDepthToken(teSourceCode1.Text);
-                    break;
+        //        case "Token":
+        //            sb = Commands.Explore.ParseCSDepthToken(wucCommandsParse.teSourceCode1.Text);
+        //            break;
 
-                case "Trivia":
-                    sb = Commands.Explore.ParseCSDepthTrivia(teSourceCode1.Text);
-                    break;
-            }
+        //        case "Trivia":
+        //            sb = Commands.Explore.ParseCSDepthTrivia(wucCommandsParse.teSourceCode1.Text);
+        //            break;
+        //    }
 
-            teSyntaxTree.Text = sb.ToString();
+        //    teSyntaxTree.Text = sb.ToString();
 
-            lg_SyntaxTree.Focus();
-        }
+        //    lg_SyntaxTree.Focus();
+        //}
 
-        private void btnInfo_Document_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
+        //private void btnInfo_Document_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Document.Display(wucCodeExplorerContext.teSourceFile.Text);
+        //    sb = VNC.CodeAnalysis.Workspace.Document.Display(wucCodeExplorerContext.teSourceFile.Text);
 
-            teWorkspace.Text = sb.ToString();
+        //    teWorkspace.Text = sb.ToString();
 
-            lg_Workspace.Focus();
-        }
+        //    lg_Workspace.Focus();
+        //}
 
-        private void btnInfo_Project_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
+        //private void btnInfo_Project_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Project.Display(wucCodeExplorerContext.teProjectFile.Text);
+        //    sb = VNC.CodeAnalysis.Workspace.Project.Display(wucCodeExplorerContext.teProjectFile.Text);
 
-            teWorkspace.Text = sb.ToString();
+        //    teWorkspace.Text = sb.ToString();
 
-            lg_Workspace.Focus();
-        }
+        //    lg_Workspace.Focus();
+        //}
 
-        private void btnInfo_Solution_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
+        //private void btnInfo_Solution_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
 
-            sb = VNC.CodeAnalysis.Workspace.Solution.Display(wucCodeExplorerContext.teSolutionFile.Text);
+        //    sb = VNC.CodeAnalysis.Workspace.Solution.Display(wucCodeExplorerContext.teSolutionFile.Text);
 
-            teWorkspace.Text = sb.ToString();
+        //    teWorkspace.Text = sb.ToString();
 
-            lg_Workspace.Focus();
-        }
+        //    lg_Workspace.Focus();
+        //}
 
-        private void btnCodeToCommentRatioVB_Click(object sender, RoutedEventArgs e)
-        {
-            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+        //private void btnCodeToCommentRatioVB_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
+        //    //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
 
-            StringBuilder sb = new StringBuilder();
+        //    StringBuilder sb = new StringBuilder();
 
-            var sourceCode = "";
+        //    var sourceCode = "";
 
-            using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
+        //    using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
+        //    {
+        //        sourceCode = sr.ReadToEnd();
+        //    }
 
-            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
-            sb = VNC.CodeAnalysis.QualityMetrics.VB.CodeToCommentRatio.Check(sourceCode);
+        //    //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+        //    sb = VNC.CodeAnalysis.QualityMetrics.VB.CodeToCommentRatio.Check(sourceCode);
 
-            teSourceCode.Text = sb.ToString();
-        }
+        //    teSourceCode.Text = sb.ToString();
+        //}
 
-        private void btnInvocation_Click(object sender, RoutedEventArgs e)
-        {
-            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+        //private void btnInvocation_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
+        //    //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
 
-            StringBuilder sb = new StringBuilder();
+        //    StringBuilder sb = new StringBuilder();
 
-            var sourceCode = "";
+        //    var sourceCode = "";
 
-            using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
+        //    using (var sr = new StreamReader(wucCodeExplorerContext.teSourceFile.Text))
+        //    {
+        //        sourceCode = sr.ReadToEnd();
+        //    }
 
-            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
-            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, true, true);
+        //    //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
+        //    sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, true, true);
 
-            teSourceCode.Text = sb.ToString();
-        }
+        //    teSourceCode.Text = sb.ToString();
+        //}
     }
 }
