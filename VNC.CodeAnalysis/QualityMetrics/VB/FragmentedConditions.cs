@@ -54,6 +54,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //        })
             //        .Dump("Fragmented conditions");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

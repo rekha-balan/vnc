@@ -25,7 +25,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.DesignMetrics.VB
 {
-    class TooManyParametersOnGenericTypes
+    public class TooManyParametersOnGenericTypes
     {
         public static StringBuilder Check(string sourceCode)
         {
@@ -41,6 +41,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
             //.Where(mds => mds.Arity > 2)
             //.Dump("Generic Methods with lots of generic attribute");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

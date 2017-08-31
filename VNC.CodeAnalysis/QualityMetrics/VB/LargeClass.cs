@@ -49,6 +49,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //            .Where(am => am.Size > averageLength)//#5
             //            .Dump("Large Class");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

@@ -68,9 +68,9 @@
             <dxdo:DockLayoutManager 
                 Name="lg_Body_dlm" dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
 
-                <dxdo:LayoutGroup Name="lg_Body_dlm_lg">
+                <dxdo:LayoutGroup Name="lg_Body_dlm_lg" >
 
-                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot"  ItemHeight="400" MaxHeight="1200" FontSize="12">
+                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot"  ItemHeight="400" MaxHeight="1200" FontSize="12" >
 
                         <dxlc:LayoutControl 
                             Grid.Row="1" Grid.Column="0"
@@ -180,6 +180,12 @@
 
                     </dxdo:AutoHideGroup>
 
+                    <!--<dxdo:AutoHideGroup DockType="Top">
+                        --><!--<dxdo:LayoutPanel x:Name="lp_TopStuff" Caption="CodeExplorer Content" >
+                            <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext2" />
+                        </dxdo:LayoutPanel>--><!--
+                    </dxdo:AutoHideGroup>-->
+
                     <dxdo:AutoHideGroup DockType="Right">
                         <dxdo:LayoutPanel x:Name="lp_Commands" Caption="Commands" 
                                          ItemWidth="300" >
@@ -194,27 +200,50 @@
 
                         </dxdo:LayoutPanel>
                        
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace" 
+                        <!--<dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace" 
+                                          ItemWidth="300">
+
+                            <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
+                            
+                        </dxdo:LayoutPanel>-->
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
+
+                            <uiuc:wucCommandsQuality x:Name="wucCommandsQuality" />
+                            
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Design" Caption="Design" ItemWidth="300">
+
+                            <uiuc:wucCommandsDesign x:Name="wucCommandsDesign" />
+
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Performance" Caption="Performance" ItemWidth="300">
+
+                            <uiuc:wucCommandsPerformance x:Name="wucCommandsPerformance" />
+
+                        </dxdo:LayoutPanel>
+
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup DockType="Bottom">
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" 
                                           ItemWidth="300">
 
                             <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
                             
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
-
-                            <uiuc:wucCommandsQuality x:Name="wucCommandsQuality" />
-                        </dxdo:LayoutPanel>
-
-                        
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
 
                             <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
-                            
+
                         </dxdo:LayoutPanel>
-
                     </dxdo:AutoHideGroup>
-
+                    
                 </dxdo:DockLayoutManager.AutoHideGroups>
 
             </dxdo:DockLayoutManager>

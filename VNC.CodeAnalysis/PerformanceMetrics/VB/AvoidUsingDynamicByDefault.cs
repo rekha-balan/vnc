@@ -40,6 +40,7 @@ namespace VNC.CodeAnalysis.PerformanceMetrics.VB
             //.Select(vds => vds.ToFullString())
             //.Dump("All usages of dynamic. Some may not be required");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

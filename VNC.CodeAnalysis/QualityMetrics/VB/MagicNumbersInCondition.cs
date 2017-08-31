@@ -77,7 +77,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //           .Select(w => w.MethodName)
             //            }).Dump();
 
-
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

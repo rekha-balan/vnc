@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace VNC.CodeAnalysis.QualityMetrics.CS
 {
-    public class GotoLabels
+    public class GoToLabels
     {
         public static StringBuilder Check(string sourceCode)
         {

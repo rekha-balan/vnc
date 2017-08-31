@@ -18,17 +18,14 @@ using System.Reflection;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
-    public partial class wucCommandsQuality : wucDXBase
+    public partial class wucCommandsPerformance : wucDXBase
     {
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
-        public wucCodeExplorer CodeExplorer = null;
-        public wucCodeExplorerContext CodeExplorerContext = null;
-
         #region Constructors
 
-        public wucCommandsQuality()
+        public wucCommandsPerformance()
         {
 #if TRACE
             long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
@@ -80,6 +77,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
+        public wucCodeExplorer CodeExplorer = null;
+        public wucCodeExplorerContext CodeExplorerContext = null;
+
+       
         #region Event Handlers
 
         private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
@@ -117,32 +118,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 sourceCode = sr.ReadToEnd();
             }
 
-            string metricClass = string.Format("VNC.CodeAnalysis.QualityMetrics.{0}.{1},VNC.CodeAnalysis", language, targetName);
+            string metricClass = string.Format("VNC.CodeAnalysis.PerformanceMetrics.{0}.{1},VNC.CodeAnalysis", language, targetName);
 
-            //Type checkType = Type.GetType("VNC.CodeAnalysis.QualityMetrics.VB.GoToLabels,VNC.CodeAnalysis");
             Type metricType = Type.GetType(metricClass);
-
             MethodInfo metricMethod = metricType.GetMethod("Check");
             object[] parametersArray = new object[] { sourceCode };
-
 
             sb = (StringBuilder)metricMethod.Invoke(null, parametersArray);
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
-
-            // TODO(crhodes)
-            // This is ugly.  Figure out how to do this all with configuration and reflection.  Invoke the proper
-            // methods based on building up string then calling.
-
-            //switch (targetName)
-            //{
-            //    case "CodeToCommentRatio":
-            //        sb = language == "VB"
-            //            ? VNC.CodeAnalysis.QualityMetrics.VB.CodeToCommentRatio.Check(sourceCode)
-            //            : VNC.CodeAnalysis.QualityMetrics.CS.CodeToCommentRatio.Check(sourceCode);
-            //        break;
-
-            
         }
     }
 }

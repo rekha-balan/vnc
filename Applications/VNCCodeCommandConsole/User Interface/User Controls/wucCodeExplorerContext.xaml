@@ -150,33 +150,33 @@
                 
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutGroup Orientation="Horizontal">
-                        <dxlc:LayoutItem Label="Repository">
+                        <dxlc:LayoutItem Label="Repository"  LabelPosition="Top">
                             <dxe:TextEdit x:Name="teRepository" />
                         </dxlc:LayoutItem>
 
-                        <dxlc:LayoutItem Label="Branch">
+                        <dxlc:LayoutItem Label="Branch"  LabelPosition="Top">
                             <dxe:TextEdit x:Name="teRepositoryName" />
                         </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
    
-                    <dxlc:LayoutItem Label="RepositoryPath">
+                    <dxlc:LayoutItem Label="RepositoryPath" LabelPosition="Top">
                         <dxe:TextEdit x:Name="teRepositoryPath" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
-                
-                <dxlc:LayoutItem Label="SolutionFile">
+
+                <dxlc:LayoutItem Label="SolutionFile"  LabelPosition="Top">
                     <dxe:TextEdit x:Name="teSolutionFile" />
                 </dxlc:LayoutItem>
                           
-                <dxlc:LayoutItem Label="ProjectFile">
+                <dxlc:LayoutItem Label="ProjectFile"  LabelPosition="Top">
                     <dxe:TextEdit x:Name="teProjectFile" />
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem Label="SourcePath">
+                <dxlc:LayoutItem Label="SourcePath"  LabelPosition="Top">
                     <dxe:TextEdit x:Name="teSourcePath" />
                 </dxlc:LayoutItem>
 
-                <dxlc:LayoutItem Label="SourceFile">
+                <dxlc:LayoutItem Label="SourceFile"  LabelPosition="Top">
                     <dxe:TextEdit x:Name="teSourceFile" />
                 </dxlc:LayoutItem>
 

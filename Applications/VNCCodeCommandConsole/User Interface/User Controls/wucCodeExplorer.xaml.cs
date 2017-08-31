@@ -80,6 +80,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         }
         void UpdateChildUserControls()
         {
+            // Tell child controls where to find controls they need
+            // Output goes to controls on CodeExplorer
+            // Input comes from controls on CodeExplorerContext
+
             wucCommands.CodeExplorer = this;
             wucCommands.CodeExplorerContext = wucCodeExplorerContext;
 
@@ -91,6 +95,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             wucCommandsQuality.CodeExplorer = this;
             wucCommandsQuality.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsDesign.CodeExplorer = this;
+            wucCommandsDesign.CodeExplorerContext = wucCodeExplorerContext;
+
+            wucCommandsPerformance.CodeExplorer = this;
+            wucCommandsPerformance.CodeExplorerContext = wucCodeExplorerContext;
 
             wucCommandsWorkspace.CodeExplorer = this;
             wucCommandsWorkspace.CodeExplorerContext = wucCodeExplorerContext;

@@ -29,33 +29,34 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
         {
             StringBuilder sb = new StringBuilder();
 
-//            var tree = CSharpSyntaxTree.ParseText(sourceCode);
-//            tree.GetRoot()
-//            .DescendantNodes()
-//            .Where(t => t.Kind() == SyntaxKind.ClassDeclaration)
-//            .Cast<ClassDeclarationSyntax>()
-//            .Select(t =>
-//           new
-//            {
-//                ClassName = t.Identifier.ValueText,
-//                Methods =
-//           t.Members.OfType<MethodDeclarationSyntax>()
-//            })//#1
-//            .Select(t =>
-//           new {
-//                ClassName = t.ClassName,
-//                MethodDetails = t.Methods
-//           .Select(m => new {
-//                Name = m.Identifier.ValueText,
-//                Lines = m.Body.Statements.Count, //#2
-//    Comments = m.Body.DescendantTrivia()
-//          .Count(b => b.Kind() ==
-//         SyntaxKind.SingleLineCommentTrivia
-//         || b.Kind == SyntaxKind.MultiLineCommentTrivia) //#3
-//})
-//            })
-//            .Dump("Code and Comment per method per class");
+            //            var tree = CSharpSyntaxTree.ParseText(sourceCode);
+            //            tree.GetRoot()
+            //            .DescendantNodes()
+            //            .Where(t => t.Kind() == SyntaxKind.ClassDeclaration)
+            //            .Cast<ClassDeclarationSyntax>()
+            //            .Select(t =>
+            //           new
+            //            {
+            //                ClassName = t.Identifier.ValueText,
+            //                Methods =
+            //           t.Members.OfType<MethodDeclarationSyntax>()
+            //            })//#1
+            //            .Select(t =>
+            //           new {
+            //                ClassName = t.ClassName,
+            //                MethodDetails = t.Methods
+            //           .Select(m => new {
+            //                Name = m.Identifier.ValueText,
+            //                Lines = m.Body.Statements.Count, //#2
+            //    Comments = m.Body.DescendantTrivia()
+            //          .Count(b => b.Kind() ==
+            //         SyntaxKind.SingleLineCommentTrivia
+            //         || b.Kind == SyntaxKind.MultiLineCommentTrivia) //#3
+            //})
+            //            })
+            //            .Dump("Code and Comment per method per class");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

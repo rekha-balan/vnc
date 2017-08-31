@@ -1,5 +1,5 @@
 ﻿<uiuc:wucDXBase
-    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsQuality"
+    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsPerformance"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
@@ -55,81 +55,61 @@
                 </dxe:ListBoxEdit.Items>
             </dxe:ListBoxEdit>
         </dx:GroupFrame>
-        
+
         <dxlc:LayoutItem>
-            <Button Content="Display Code-to-Comment Ratio" 
-                    Click="btnCallTagTarget" Tag="CodeToCommentRatio"/>
+            <Button Content="Avoid Boxing" 
+                    Click="btnCallTagTarget" Tag="AvoidBoxing"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Control Flags" 
-                    Click="btnCallTagTarget" Tag="ControlFlags"/>
+            <Button Content="Avoid Excessive Local Variables" 
+                    Click="btnCallTagTarget" Tag="AvoidExcessiveLocalVariables"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Fragmented Conditions" 
-                    Click="btnCallTagTarget" Tag="FragmentedConditions"/>
-        </dxlc:LayoutItem>
-        
-        <dxlc:LayoutItem>
-            <Button Content="Has GoTo Labels" 
-                    Click="btnCallTagTarget" Tag="GoToLabels"/>
+            <Button Content="Avoid Unnecessary Projections" 
+                    Click="btnCallTagTarget" Tag="AvoidUnnecessaryProjections"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Hungarian Variable Names"
-                    Click="btnCallTagTarget" Tag="HungarianVariableNames"/>
+            <Button Content="Avoid Using Dynamic by Default" 
+                    Click="btnCallTagTarget" Tag="AvoidUsingDynamicByDefault"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Ladder If Statements"
-                    Click="btnCallTagTarget" Tag="LadderIfStatements"/>
+            <Button Content="Avoid Volatile Declarations"
+                    Click="btnCallTagTarget" Tag="AvoidVolatileDeclarations"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Is a Large Class" 
-                    Click="btnCallTagTarget" Tag="LargeClass"/>
+            <Button Content="Do Not Return Array From Property"
+                    Click="btnCallTagTarget" Tag="DoNotReturnArrayFromProperty"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Display Lines of Code" 
-                    Click="btnCallTagTarget" Tag="LinesOfCode"/>
+            <Button Content="Do Not Use Object Array In Params" 
+                    Click="btnCallTagTarget" Tag="DoNotUseObjectArrayInParams"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Long Parameter Lists" 
-                    Click="btnCallTagTarget" Tag="LongParameterList"/>
+            <Button Content="Do Not Use Thread AbortOrThreadSuspend" 
+                    Click="btnCallTagTarget" Tag="DoNotUseThreadAbortOrThreadSuspend"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Lots of Local Variables" 
-                    Click="btnCallTagTarget" Tag="LotsOfLocalVariables"/>
+            <Button Content="Prefer Jagged Arrays Over Multi-Dimensional Arrays" 
+                    Click="btnCallTagTarget" Tag="PreferJaggedArrasyOverMultidimensionalArrays"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Condition" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInCondition"/>
+            <Button Content="Prefer Literals Over Evaluation" 
+                    Click="btnCallTagTarget" Tag="PreferLiteralsOverEvaluation"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Index" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInIndex"/>
+            <Button Content="Value Types Should Override Equals and GetHashCode" 
+                    Click="btnCallTagTarget" Tag="ValueTypesShouldOverrideEqualsAndGetHashCode"/>
         </dxlc:LayoutItem>
 
-        <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Math" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInMath"/>
-        </dxlc:LayoutItem>
-
-        <dxlc:LayoutItem>
-            <Button Content="Has Multiple Return Statements" 
-                    Click="btnCallTagTarget" Tag="MultipleReturnStatements"/>
-        </dxlc:LayoutItem>
-
-        <dxlc:LayoutItem>
-            <Button Content="Has Unused Method Parameters" 
-                    Click="btnCallTagTarget" Tag="UnusedMethodParameters"/>
-        </dxlc:LayoutItem>
     </dxlc:LayoutControl>
-    
 </uiuc:wucDXBase>

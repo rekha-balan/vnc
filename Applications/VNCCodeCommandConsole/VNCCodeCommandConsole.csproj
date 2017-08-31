@@ -229,10 +229,16 @@
     <Compile Include="User Interface\User Controls\wucCommands.xaml.cs">
       <DependentUpon>wucCommands.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsDesign.xaml.cs">
+      <DependentUpon>wucCommandsDesign.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsFind.xaml.cs">
       <DependentUpon>wucCommandsFind.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsParse.cs" />
+    <Compile Include="User Interface\User Controls\wucCommandsPerformance.xaml.cs">
+      <DependentUpon>wucCommandsPerformance.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsQuality.xaml.cs">
       <DependentUpon>wucCommandsQuality.xaml</DependentUpon>
     </Compile>
@@ -329,11 +335,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="User Interface\User Controls\wucCommandsDesign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="User Interface\User Controls\wucCommandsFind.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucCommandsParse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsPerformance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

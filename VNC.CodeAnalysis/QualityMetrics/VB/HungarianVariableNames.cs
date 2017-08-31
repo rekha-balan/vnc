@@ -84,6 +84,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //       fds.TypeName.ToString()))
             //        .Dump("Hungaranian Notations");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

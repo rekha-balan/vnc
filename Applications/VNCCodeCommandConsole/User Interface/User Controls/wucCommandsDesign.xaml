@@ -1,5 +1,5 @@
 ﻿<uiuc:wucDXBase
-    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsQuality"
+    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsDesign"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
@@ -35,9 +35,10 @@
 
     </uiuc:wucDXBase.Resources>-->
 
-    <dxlc:LayoutControl Orientation="Vertical">
-        <dx:GroupFrame Header="Language" Height="120">
-            <dxe:ListBoxEdit Name="lbeCommandsQuality_Language" 
+    <dxlc:LayoutControl Orientation="Vertical" Header="Design Evaluation" >
+ 
+        <dx:GroupFrame Header="Language" Height="60">
+            <dxe:ListBoxEdit Name="lbeCommandsDesign_Language" 
                                                          ValueMember="Content" 
                                                          SelectedIndex="0"                                                         
                                                          ShowBorder="False" Background="{x:Null}">
@@ -55,81 +56,77 @@
                 </dxe:ListBoxEdit.Items>
             </dxe:ListBoxEdit>
         </dx:GroupFrame>
-        
+
         <dxlc:LayoutItem>
-            <Button Content="Display Code-to-Comment Ratio" 
-                    Click="btnCallTagTarget" Tag="CodeToCommentRatio"/>
+            <Button Content="Has Abstract Types with Constructors" 
+                    Click="btnCallTagTarget" Tag="AbstractTypesWithConstructors"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Control Flags" 
-                    Click="btnCallTagTarget" Tag="ControlFlags"/>
+            <Button Content="Has Data Only Classes" 
+                    Click="btnCallTagTarget" Tag="DataClasses"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Fragmented Conditions" 
-                    Click="btnCallTagTarget" Tag="FragmentedConditions"/>
-        </dxlc:LayoutItem>
-        
-        <dxlc:LayoutItem>
-            <Button Content="Has GoTo Labels" 
-                    Click="btnCallTagTarget" Tag="GoToLabels"/>
+            <Button Content="Has Deeply Nested If Blocks" 
+                    Click="btnCallTagTarget" Tag="DeeplyNestedIfBlocks"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Hungarian Variable Names"
-                    Click="btnCallTagTarget" Tag="HungarianVariableNames"/>
+            <Button Content="Has Deeply Nested Loops" 
+                    Click="btnCallTagTarget" Tag="DeeplyNestedLoops"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Ladder If Statements"
-                    Click="btnCallTagTarget" Tag="LadderIfStatements"/>
+            <Button Content="Has Empty Interfaces"
+                    Click="btnCallTagTarget" Tag="EmptyInterfaces"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Is a Large Class" 
-                    Click="btnCallTagTarget" Tag="LargeClass"/>
+            <Button Content="Has Local Classes"
+                    Click="btnCallTagTarget" Tag="LocalClasses"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Display Lines of Code" 
-                    Click="btnCallTagTarget" Tag="LinesOfCode"/>
+            <Button Content="Has Long List of Switches" 
+                    Click="btnCallTagTarget" Tag="LongListOfSwitches"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Long Parameter Lists" 
-                    Click="btnCallTagTarget" Tag="LongParameterList"/>
+            <Button Content="Has Lots of Method Overloads" 
+                    Click="btnCallTagTarget" Tag="LotsOfMethodOverloads"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Lots of Local Variables" 
-                    Click="btnCallTagTarget" Tag="LotsOfLocalVariables"/>
+            <Button Content="Has Object Obsession" 
+                    Click="btnCallTagTarget" Tag="ObjectObsession"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Condition" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInCondition"/>
+            <Button Content="Has Out Parameters" 
+                    Click="btnCallTagTarget" Tag="OutParameters"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Index" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInIndex"/>
+            <Button Content="Has Refused Bequest" 
+                    Click="btnCallTagTarget" Tag="RefusedBequest"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Magic Numbers in Math" 
-                    Click="btnCallTagTarget" Tag="MagicNumbersInMath"/>
+            <Button Content="Has Sealed Class and Protected Members" 
+                    Click="btnCallTagTarget" Tag="SealedClassAndProtectedMembers"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Multiple Return Statements" 
-                    Click="btnCallTagTarget" Tag="MultipleReturnStatements"/>
+            <Button Content="Has Static Members on Generic Types" 
+                    Click="btnCallTagTarget" Tag="StaticMembersOnGenericTypes"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Has Unused Method Parameters" 
-                    Click="btnCallTagTarget" Tag="UnusedMethodParameters"/>
+            <Button Content="Has Too Many Parameters on Generic Types" 
+                    Click="btnCallTagTarget" Tag="TooManyParametersOnGenericTypes"/>
         </dxlc:LayoutItem>
+
     </dxlc:LayoutControl>
-    
+
 </uiuc:wucDXBase>

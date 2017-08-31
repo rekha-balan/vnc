@@ -42,6 +42,8 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
             //})
             //.Where(thisInterface => thisInterface.IsEmpty)//#3
             //.Dump("Empty Interfaces");
+
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

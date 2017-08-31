@@ -103,11 +103,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private void XXX_Picker_ControlChanged()
-        {
+        //private void XXX_Picker_ControlChanged()
+        //{
 
-        }
-
+        //}
 
         private void wucSourceBranch_Picker_ControlChanged()
         {
@@ -170,7 +169,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            openFileDialog1.Filter = "VB Source (*.vb)|*.vb|CS Source (*.cs)|*.cs|All files (*.*)|*.*";
+            //openFileDialog1.Filter = "A files (*.xml)|*.xml|All files (*.*)|*.*";
+
             openFileDialog1.FileName = "";
 
             if (true == openFileDialog1.ShowDialog())

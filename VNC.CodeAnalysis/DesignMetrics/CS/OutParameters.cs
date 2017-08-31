@@ -49,6 +49,7 @@ namespace VNC.CodeAnalysis.DesignMetrics.CS
             //})
             //.Dump("Methods with \"out\" parameters");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

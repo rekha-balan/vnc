@@ -55,6 +55,8 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             //})
             //.Dump();
 
+
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

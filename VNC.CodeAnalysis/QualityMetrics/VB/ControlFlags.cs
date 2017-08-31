@@ -72,6 +72,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //bools.Contains(c.Substring(1))))//#5
             //           .Dump("if nodes with control flags");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

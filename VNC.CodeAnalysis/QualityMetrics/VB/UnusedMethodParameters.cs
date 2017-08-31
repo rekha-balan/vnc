@@ -59,6 +59,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //.ForEach(x => Console.WriteLine(x.MethodName + " "
             //+ x.IsUsingAllParameter));
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

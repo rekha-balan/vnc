@@ -39,7 +39,7 @@ namespace VNC.CodeAnalysis.Workspace
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("Not Implemented Yet");
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
 
             return sb;
 

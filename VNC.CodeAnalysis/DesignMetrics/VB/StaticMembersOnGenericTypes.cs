@@ -25,7 +25,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNC.CodeAnalysis.DesignMetrics.VB
 {
-    class StaticMembersOnGenericTypes
+    public class StaticMembersOnGenericTypes
     {
         public static StringBuilder Check(string sourceCode)
         {
@@ -50,6 +50,8 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
             //            })
             //.Where(cds => cds.StaticMethods.Count() > 0)//#3
             //.Dump("Static methods on generic types");
+
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

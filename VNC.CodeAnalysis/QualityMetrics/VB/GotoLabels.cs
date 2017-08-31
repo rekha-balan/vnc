@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
-    public class GotoLabels
+    public class GoToLabels
     {
         public static StringBuilder Check(string sourceCode)
         {
@@ -63,33 +63,9 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
 
                 foreach (var method in item.Methods)
                 {
-                    sb.AppendLine(string.Format("  Method >{0}<,", method.ToString()));
+                    sb.AppendLine(string.Format("  Method >{0}<", method.ToString()));
                 }
             }
-
-            //  .Select(cds =>
-            // new
-            // {
-            //     ClassName = (ClassStatementSyntax)cds.GetFirstToken()
-            //     Methods =
-            // cds.Members
-            // .Where(m => m.Kind() ==
-            //SyntaxKind.MethodDeclaration)
-            // .Cast<MethodDeclarationSyntax>()
-            // .Select(mds =>
-            //new
-            //{
-            //    MethodName = mds.Identifier.ValueText,
-            //    HasGoto =
-            //CSharpSyntaxTree.ParseText(mds.ToString())
-            //.GetRoot()
-            //.DescendantTokens()
-            ////Checking whether the method uses "goto" labels or not .Any (st => st.Kind()
-            //== SyntaxKind.GotoKeyword)
-            // })
-            //  .Where(mds => mds.HasGoto)
-            //  .Select(mds => mds.MethodName)});
-            //  //.Dump("Classwise methods which use goto");
 
             return sb;
         }

@@ -45,6 +45,7 @@ namespace VNC.CodeAnalysis.PerformanceMetrics.VB
             //.Select(mds => mds.Identifier.ValueText)//#5
             //.Dump("Methods with many local variable declarations");
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

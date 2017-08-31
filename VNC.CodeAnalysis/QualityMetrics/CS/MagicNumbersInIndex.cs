@@ -53,7 +53,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
             //.Any(i => Regex.Match(i, "[0-9]+").Success))
             //.Dump("Methods using magic indices");
 
-
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

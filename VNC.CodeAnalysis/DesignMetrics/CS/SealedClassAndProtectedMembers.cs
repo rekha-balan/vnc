@@ -56,6 +56,8 @@ namespace VNC.CodeAnalysis.DesignMetrics.CS
             //)
             //.Where(cds => cds.ProtectedMembers.Count() > 0)//#3
             //.Dump("CA1047 Defaulters");
+
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

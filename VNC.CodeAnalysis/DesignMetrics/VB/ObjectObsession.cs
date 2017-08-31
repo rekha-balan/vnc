@@ -31,23 +31,24 @@ namespace VNC.CodeAnalysis.DesignMetrics.VB
         {
             StringBuilder sb = new StringBuilder();
 
-//            var tree = CSharpSyntaxTree.ParseText(code);
-//            var result = tree.GetRoot()
-//            .DescendantNodes()
-//            .OfType<MethodDeclarationSyntax>()//#1
-//            .Where(thisMethod => //#2
-//                                 //This method is not an event declaration
-//            !thisMethod.IsEventDeclaration()
-//            && thisMethod.TakesOrReturnsObject())
-//            .Select(thisMethod =>
-//            thisMethod.Identifier.ValueText); //#3
+            //            var tree = CSharpSyntaxTree.ParseText(code);
+            //            var result = tree.GetRoot()
+            //            .DescendantNodes()
+            //            .OfType<MethodDeclarationSyntax>()//#1
+            //            .Where(thisMethod => //#2
+            //                                 //This method is not an event declaration
+            //            !thisMethod.IsEventDeclaration()
+            //            && thisMethod.TakesOrReturnsObject())
+            //            .Select(thisMethod =>
+            //            thisMethod.Identifier.ValueText); //#3
 
-//            if (result.Count() > 0)
-//            {
-//                result.Dump(@"Methods that aren't event handlers but takes or
-//returns objects");
-//            }
+            //            if (result.Count() > 0)
+            //            {
+            //                result.Dump(@"Methods that aren't event handlers but takes or
+            //returns objects");
+            //            }
 
+                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }
