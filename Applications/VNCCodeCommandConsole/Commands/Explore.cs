@@ -54,6 +54,7 @@ namespace VNCCodeCommandConsole.Commands
                 return VNC.CodeAnalysis.SyntaxNode.VB.Methods.Display(stream, includeTrivia, statementsOnly);
             }
         }
+
         public static StringBuilder DisplayStructuresVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
         {
             using (var stream = new StreamReader(fileNameAndPath))
@@ -250,7 +251,6 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-
         #endregion
 
         #region Private Methods
@@ -302,7 +302,6 @@ class Program
     }
 }
 ");
-
             var root = tree.GetRoot();
 
             DisplayHeader("Root Node");

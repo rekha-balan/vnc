@@ -236,6 +236,7 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
+    <Compile Include="SyntaxRewriters\VB\ReplaceConvertToInt16.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNode.cs" />
     <Compile Include="SyntaxWalkers\CS\AllStructuredTrivia.cs" />
     <Compile Include="SyntaxWalkers\CS\AllToken.cs" />
@@ -256,9 +257,7 @@
     <Analyzer Include="..\Explore\Roslyn\RoslynPlayGround\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\Explore\Roslyn\RoslynPlayGround\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SyntaxRewriters\VB\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug goto :debug
