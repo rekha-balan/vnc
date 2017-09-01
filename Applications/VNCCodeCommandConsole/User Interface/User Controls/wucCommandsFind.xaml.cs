@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.LayoutControl;
+using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
@@ -119,6 +120,36 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, true, identifier);
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        private void btnInvocationWalker_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb;
+
+            sb = DisplayInvocationWalkerVB(CodeExplorerContext.teSourceFile.Text);
+
+            CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        internal StringBuilder DisplayInvocationWalkerVB(string fileNameAndPath)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(fileNameAndPath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            string pattern = teIdentifier.Text;
+
+            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(pattern);
+            walker.StringBuilder = sb;
+            walker.Visit(tree.GetRoot());
+
+            return sb;
         }
     }
 }

@@ -55,6 +55,7 @@ namespace HelloWorld
             var stringTypeSymbol = (INamedTypeSymbol)literalInfo.Type;
 
             Console.Clear();
+
             foreach (var name in (from method in stringTypeSymbol.GetMembers()
                                                               .OfType<IMethodSymbol>()
                                   where method.ReturnType.Equals(stringTypeSymbol) &&
@@ -65,6 +66,8 @@ namespace HelloWorld
                 Console.WriteLine(name);
             }
 
+            Console.WriteLine("Press any key to exit");
+            Console.ReadLine();
         }
     }
 }

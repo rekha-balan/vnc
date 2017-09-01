@@ -45,6 +45,10 @@
         <dxlc:LayoutItem>
             <Button Content="Invocation" Click="btnInvocation_Click"/>
         </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem>
+            <Button Content="Invocation Walker" Click="btnInvocationWalker_Click"/>
+        </dxlc:LayoutItem>
     </dxlc:LayoutControl>
     
 </uiuc:wucDXBase>
