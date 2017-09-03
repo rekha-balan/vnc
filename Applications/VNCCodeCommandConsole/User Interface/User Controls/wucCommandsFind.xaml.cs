@@ -116,8 +116,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             string identifier = teIdentifier.Text;
 
+            var additionalLocations = lbeNodes.SelectedItem;
+            var additionalLocations1 = lbeNodes.SelectedIndex;
+            var source = lbeNodes.ItemsSource;
+
             //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
-            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, true, identifier);
+            //sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true)
+            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true, (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)additionalLocations1);
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }

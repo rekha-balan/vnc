@@ -48,7 +48,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\EnumBindingSourceExtension.cs" />
+    <Compile Include="Enums\EnumDescriptionTypeConverter.cs" />
     <Compile Include="ExtensionMethods\Methods.cs" />
+    <Compile Include="Enums\LocalizedDescriptionAttribute.cs" />
     <Compile Include="LogicalTree.cs" />
     <Compile Include="PhysicalTree.cs" />
     <Compile Include="Transitions\Flip3D.xaml.cs" />
@@ -72,17 +75,18 @@
   <ItemGroup>
     <Content Include="Transitions\pingme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug goto :debug
 
 :release
-copy $(TargetName).* ..\..\..\..\..\Common\
+copy $(TargetName).* ..\..\..\Common\
 
 goto :exit
 
 :debug
-copy $(TargetName).* ..\..\..\..\..\Common\$(ConfigurationName)\
+copy $(TargetName).* ..\..\..\Common\$(ConfigurationName)\
 
 :exit</PostBuildEvent>
   </PropertyGroup>

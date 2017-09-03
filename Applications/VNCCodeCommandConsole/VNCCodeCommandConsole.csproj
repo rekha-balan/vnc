@@ -242,6 +242,9 @@
     <Compile Include="User Interface\User Controls\wucCommandsQuality.xaml.cs">
       <DependentUpon>wucCommandsQuality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsRewrite.xaml.cs">
+      <DependentUpon>wucCommandsRewrite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsWorkspace.xaml.cs">
       <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucCommandsQuality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsRewrite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

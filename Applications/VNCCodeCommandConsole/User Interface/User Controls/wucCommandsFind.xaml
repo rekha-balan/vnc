@@ -21,6 +21,9 @@
     xmlns:ui="clr-namespace:VNCCodeCommandConsole.User_Interface" 
     xmlns:uiuc="clr-namespace:VNCCodeCommandConsole.User_Interface.User_Controls"
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
+    
+    xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"
+    xmlns:vcasn="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"    
 
     d:DesignWidth="800" d:DesignHeight="600"
     Title="DXLayoutControl" 
@@ -37,11 +40,54 @@
 
 
     <dxlc:LayoutControl Orientation="Vertical">
-        <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
-            <dxe:TextEdit x:Name="teIdentifier" >
-            </dxe:TextEdit>
-        </dxlc:LayoutItem>
 
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teIdentifier" >
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutGroup Orientation="Horizontal" >
+                <dxe:CheckEdit x:Name="ceIncludeTrivia" Content="Include Trivia" IsChecked="True" VerticalAlignment="Top" />
+                <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
+                    <dxe:ComboBoxEdit Name="lbeSyntaxWalkerDepth" VerticalAlignment="Top"
+                                     ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vcasn:WalkerDepth}}}"                                                                     
+                                     SelectedIndex="0"                                                         
+                                     ShowBorder="False" Background="{x:Null}">
+                    </dxe:ComboBoxEdit>                    
+                    <!--<dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                                                         ValueMember="Content" 
+                                                         SelectedIndex="0"                                                         
+                                                         ShowBorder="False" Background="{x:Null}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </dxe:ListBoxEdit.ItemsPanel>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                            <dxe:ListBoxEditItem Content="Node" />
+                            <dxe:ListBoxEditItem Content="Token" />
+                            <dxe:ListBoxEditItem Content="Trivia" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>-->
+                </dx:GroupFrame>
+
+                <dx:GroupFrame Header="Node Retrieval" VerticalAlignment="Top">
+                    <dxe:ComboBoxEdit Name="lbeNodes" VerticalAlignment="Top"
+                                     ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vcasn:AdditionalNodes}}}"                                                                     
+                                     SelectedIndex="0"                                                         
+                                     ShowBorder="False" Background="{x:Null}">
+                    </dxe:ComboBoxEdit>
+                </dx:GroupFrame>
+
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutItem>
             <Button Content="Invocation" Click="btnInvocation_Click"/>
         </dxlc:LayoutItem>

@@ -141,6 +141,9 @@
     <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\Explore\Roslyn\RoslynPlayGround\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
+    <Reference Include="VNC.XamlHelper">
+      <HintPath>..\Common\VNC.XamlHelper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DesignMetrics\CS\AbstractTypesWithConstructors.cs" />
@@ -227,6 +230,8 @@
     <Compile Include="QualityMetrics\VB\UnusedMethodParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbols.cs" />
+    <Compile Include="SyntaxNode\WalkerDepth.cs" />
+    <Compile Include="SyntaxNode\AdditionaNodes.cs" />
     <Compile Include="SyntaxNode\CS\Classes.cs" />
     <Compile Include="SyntaxNode\CS\Methods.cs" />
     <Compile Include="SyntaxNode\CS\Structures.cs" />

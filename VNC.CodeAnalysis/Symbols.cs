@@ -51,7 +51,7 @@ namespace VNC.CodeAnalysis
             return returnValue;
         }
 
-        public static IEnumerable<BaseTypeDeclarationSyntax> FindClassesDeriviedOrImplementedByType(Compilation compilation, INamedTypeSymbol target)
+        public static IEnumerable<BaseTypeDeclarationSyntax> FindClassesDerivedOrImplementedByType(Compilation compilation, INamedTypeSymbol target)
         {
             foreach (var tree in compilation.SyntaxTrees)
             {

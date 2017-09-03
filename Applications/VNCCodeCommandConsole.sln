@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNCCodeCommandConsole", "VNCCodeCommandConsole\VNCCodeCommandConsole.csproj", "{AEB76DE9-F7D5-4ECB-9719-D608D14E2845}"
 EndProject
@@ -9,7 +9,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VNC_DB", "..\Databases\VNC_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNC.CodeAnalysis", "..\VNC.CodeAnalysis\VNC.CodeAnalysis.csproj", "{9D21B031-3BFE-44B1-A622-D500230F90A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStartedCS", "..\Explore\Roslyn\RoslynPlayGround\GettingStartedCS\GettingStartedCS.csproj", "{9E34AE62-D450-4584-9380-1D0CDA365434}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxCS", "..\Explore\Roslyn\RoslynPlayGround\GettingStartedCS\SyntaxCS.csproj", "{9E34AE62-D450-4584-9380-1D0CDA365434}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticsCS", "..\Explore\Roslyn\RoslynPlayGround\SemanticsCS\SemanticsCS.csproj", "{BB83B811-8368-4031-B097-944C00004B0D}"
 EndProject
@@ -30,6 +30,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceConvertToInt16VB.Test", "..\..\EASE\ReplaceConvertToInt16VB\ReplaceConvertToInt16VB.Test\ReplaceConvertToInt16VB.Test.csproj", "{75DF31DC-18BB-4CEC-BAA3-42BFC1C23E0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceConvertToInt16VB.Vsix", "..\..\EASE\ReplaceConvertToInt16VB\ReplaceConvertToInt16VB.Vsix\ReplaceConvertToInt16VB.Vsix.csproj", "{597C8B2D-1948-4BDF-AF96-2488BD3F7E78}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SyntaxVB", "..\Explore\Roslyn\RoslynPlayGround\GettingStartedVB\SyntaxVB.vbproj", "{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SemanticsVB", "..\Explore\Roslyn\RoslynPlayGround\SemanticsVB\SemanticsVB.vbproj", "{A15E2D56-8A35-486E-988C-5E001FF66786}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +149,18 @@ Global
 		{597C8B2D-1948-4BDF-AF96-2488BD3F7E78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{597C8B2D-1948-4BDF-AF96-2488BD3F7E78}.Release|x86.ActiveCfg = Release|Any CPU
 		{597C8B2D-1948-4BDF-AF96-2488BD3F7E78}.Release|x86.Build.0 = Release|Any CPU
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Debug|x86.ActiveCfg = Debug|x86
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Debug|x86.Build.0 = Debug|x86
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Release|Any CPU.ActiveCfg = Release|x86
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Release|x86.ActiveCfg = Release|x86
+		{4D04C43D-93CC-4DBC-A02F-D487FA4EB9AF}.Release|x86.Build.0 = Release|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Debug|x86.ActiveCfg = Debug|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Debug|x86.Build.0 = Debug|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Release|Any CPU.ActiveCfg = Release|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Release|x86.ActiveCfg = Release|x86
+		{A15E2D56-8A35-486E-988C-5E001FF66786}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

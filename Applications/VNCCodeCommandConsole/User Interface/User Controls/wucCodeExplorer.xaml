@@ -242,6 +242,13 @@
                             <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
 
                         </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="300">
+
+                            <uiuc:wucCommandsFind x:Name="wucCommandsRewrite" />
+
+                        </dxdo:LayoutPanel>
+
                     </dxdo:AutoHideGroup>
                     
                 </dxdo:DockLayoutManager.AutoHideGroups>

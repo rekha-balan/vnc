@@ -87,20 +87,23 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             wucCommands.CodeExplorer = this;
             wucCommands.CodeExplorerContext = wucCodeExplorerContext;
 
+            wucCommandsDesign.CodeExplorer = this;
+            wucCommandsDesign.CodeExplorerContext = wucCodeExplorerContext;
+
             wucCommandsFind.CodeExplorer = this;
             wucCommandsFind.CodeExplorerContext = wucCodeExplorerContext;
 
             wucCommandsParse.CodeExplorer = this;
             wucCommandsParse.CodeExplorerContext = wucCodeExplorerContext;
 
+            wucCommandsPerformance.CodeExplorer = this;
+            wucCommandsPerformance.CodeExplorerContext = wucCodeExplorerContext;
+
             wucCommandsQuality.CodeExplorer = this;
             wucCommandsQuality.CodeExplorerContext = wucCodeExplorerContext;
 
-            wucCommandsDesign.CodeExplorer = this;
-            wucCommandsDesign.CodeExplorerContext = wucCodeExplorerContext;
-
-            wucCommandsPerformance.CodeExplorer = this;
-            wucCommandsPerformance.CodeExplorerContext = wucCodeExplorerContext;
+            wucCommandsRewrite.CodeExplorer = this;
+            wucCommandsRewrite.CodeExplorerContext = wucCodeExplorerContext;
 
             wucCommandsWorkspace.CodeExplorer = this;
             wucCommandsWorkspace.CodeExplorerContext = wucCodeExplorerContext;

@@ -668,7 +668,7 @@ class C
             // Do something with the compilation
 
             var targetType = compilation.GetTypeByMetadataName("CodeGenerationWithRoslyn.IGreetingProfile");
-            var type = Symbols.FindClassesDeriviedOrImplementedByType(compilation, targetType);
+            var type = Symbols.FindClassesDerivedOrImplementedByType(compilation, targetType);
 
             Console.WriteLine(type.First().Identifier.ToFullString());
         }
