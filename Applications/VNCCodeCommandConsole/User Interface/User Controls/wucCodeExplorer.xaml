@@ -23,9 +23,9 @@
     Title="Server-Instance Explorer" FontSize="16"
     d:DesignWidth="1000" d:DesignHeight="800" 
     Loaded="OnLoaded"  >
-    
+
     <uiuc:wucDXBase.Resources>
-        
+
         <localData:ApplicationDataSet x:Key="applicationDataSet" />
 
     </uiuc:wucDXBase.Resources>
@@ -70,13 +70,12 @@
 
                 <dxdo:LayoutGroup Name="lg_Body_dlm_lg" >
 
-                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot"  ItemHeight="400" MaxHeight="1200" FontSize="12" >
+                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12" >
 
-                        <dxlc:LayoutControl 
-                            Grid.Row="1" Grid.Column="0"
+                        <dxlc:LayoutControl
                             Orientation="Vertical" StretchContentVertically="False" Background="Transparent">
 
-                            <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs">
+                            <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs" >
 
                                 <dxlc:LayoutGroup.GroupBoxStyle>
                                     <Style TargetType="dxlc:GroupBox">
@@ -90,9 +89,9 @@
 
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
 
-                                <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree">
+                                <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree" >
 
-                                    <dxlc:LayoutItem>
+                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
                                         <dxe:TextEdit x:Name="teSyntaxTree" />
                                     </dxlc:LayoutItem>
 
@@ -100,7 +99,7 @@
 
                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
 
-                                    <dxlc:LayoutItem>
+                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True">
                                         <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
                                     </dxlc:LayoutItem>
 
@@ -174,8 +173,24 @@
 
                     <dxdo:AutoHideGroup DockType="Left">
 
+                        <!--<dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
+                            <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
+                        </dxdo:LayoutPanel>-->
+
                         <dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
                             <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
+
+                            <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
+
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="300">
+
+                            <uiuc:wucCommandsRewrite x:Name="wucCommandsRewrite" />
+
                         </dxdo:LayoutPanel>
 
                     </dxdo:AutoHideGroup>
@@ -187,6 +202,14 @@
                     </dxdo:AutoHideGroup>-->
 
                     <dxdo:AutoHideGroup DockType="Right">
+                        
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" 
+                                          ItemWidth="300">
+
+                            <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
+
+                        </dxdo:LayoutPanel>
+                        
                         <dxdo:LayoutPanel x:Name="lp_Commands" Caption="Commands" 
                                          ItemWidth="300" >
 
@@ -230,24 +253,7 @@
 
                     <dxdo:AutoHideGroup DockType="Bottom">
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" 
-                                          ItemWidth="300">
-
-                            <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
-                            
-                        </dxdo:LayoutPanel>
-
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
-
-                            <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
-
-                        </dxdo:LayoutPanel>
-
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="300">
-
-                            <uiuc:wucCommandsFind x:Name="wucCommandsRewrite" />
-
-                        </dxdo:LayoutPanel>
+ 
 
                     </dxdo:AutoHideGroup>
                     
@@ -265,5 +271,5 @@
         </dxlc:LayoutGroup>
         
     </dxlc:LayoutControl>
-    
+
 </uiuc:wucDXBase>

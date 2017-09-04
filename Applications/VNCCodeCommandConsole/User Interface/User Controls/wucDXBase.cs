@@ -44,6 +44,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         //protected GridColumn gc_SnapShotDuration = null;
         //protected GridColumn gc_SnapShotError = null;
 
+        // These hold instances of the controls so other pages can access them.
+        // Initialized by wucCodeExplorer
+
+        public wucCodeExplorer CodeExplorer = null;
+        public wucCodeExplorerContext CodeExplorerContext = null;
+
         public wucDXBase()
         {
             Loaded += EditForm_Loaded;

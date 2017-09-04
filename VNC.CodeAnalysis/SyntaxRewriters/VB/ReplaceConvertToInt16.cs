@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
-    class ReplaceConvertToInt16 : VisualBasicSyntaxRewriter
+    public class ReplaceConvertToInt16 : VisualBasicSyntaxRewriter
     {
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {

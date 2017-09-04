@@ -11,24 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.LayoutControl;
-using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
-    public partial class wucCommandsFind : wucDXBase
+    public partial class wucCommandsRewrite : wucDXBase
     {
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
-        //public wucCodeExplorer CodeExplorer = null;
-        //public wucCodeExplorerContext CodeExplorerContext = null;
-
         #region Constructors
 
-        public wucCommandsFind()
+        public wucCommandsRewrite()
         {
 #if TRACE
             long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
@@ -100,61 +100,34 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private void btnInvocation_Click(object sender, RoutedEventArgs e)
+        private void btnReplace_ConvertToInt16_Click(object sender, RoutedEventArgs e)
         {
-            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
-
             StringBuilder sb = new StringBuilder();
 
             var sourceCode = "";
+            string identifier = teIdentifier.Text;
 
             using (var sr = new StreamReader(CodeExplorerContext.teSourceFile.Text))
             {
                 sourceCode = sr.ReadToEnd();
             }
 
-            string identifier = teIdentifier.Text;
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            var additionalLocations = lbeNodes.SelectedItem;
-            var additionalLocations1 = lbeNodes.SelectedIndex;
-            var source = lbeNodes.ItemsSource;
+            IEnumerable<InvocationExpressionSyntax> syntaxNodes;
 
-            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
-            //sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true)
-            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true, (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)additionalLocations1);
+            syntaxNodes = tree.GetRoot().DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(e => e.Expression.ToFullString() == identifier);
 
-            CodeExplorer.teSourceCode.Text = sb.ToString();
-        }
-
-        private void btnInvocationWalker_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-
-            sb = DisplayInvocationWalkerVB(CodeExplorerContext.teSourceFile.Text);
-
-            CodeExplorer.teSourceCode.Text = sb.ToString();
-        }
-
-        internal StringBuilder DisplayInvocationWalkerVB(string fileNameAndPath)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
+            foreach (InvocationExpressionSyntax targetNode in syntaxNodes)
             {
-                sourceCode = sr.ReadToEnd();
+                
             }
 
-            string pattern = teIdentifier.Text;
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(pattern);
-            walker.StringBuilder = sb;
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            SyntaxNode newNode = rewriter.VisitInvocationExpression();
         }
     }
 }
