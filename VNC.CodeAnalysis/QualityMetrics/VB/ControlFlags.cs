@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+//using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -21,7 +21,8 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
-using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
@@ -31,10 +32,12 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
         {
             StringBuilder sb = new StringBuilder();
 
-            //            //Find all boolean variables in the class
-            //            //Find all if statements that solely rely on those
-            //            //Find the methods in which these if statements are
-            //            var tree = CSharpSyntaxTree.ParseText(sourceCode);
+            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            // Find all boolean variables in the class
+            // Find all if statements that solely rely on those
+            // Find the methods in which these if statements are
+
             //            var bools = tree.GetRoot()
             //            .DescendantNodes()
             //            .Where(t => t.Kind() == SyntaxKind.VariableDeclaration
@@ -72,7 +75,91 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //bools.Contains(c.Substring(1))))//#5
             //           .Dump("if nodes with control flags");
 
-                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
+            // Find all the variable declarations
+
+            //var bools = tree.GetRoot().DescendantNodes()
+            //    .Where(syn => syn.IsKind(SyntaxKind.VariableDeclarator) && ((VariableDeclaratorSyntax)syn).AsClause.Type().IsKind(SyntaxKind.BooleanKeyword))
+            //    .Cast<VariableDeclaratorSyntax>();
+
+            //var bools = tree.GetRoot().DescendantNodes()
+            //    .Where(syn => syn.IsKind(SyntaxKind.VariableDeclarator)
+            //        && ((PredefinedTypeSyntax) ((VariableDeclaratorSyntax)syn).AsClause.Type()).Keyword.Text == "Boolean")
+            //    .Cast<VariableDeclaratorSyntax>();
+
+            var bools = tree.GetRoot().DescendantNodes()
+                .Where(syn => syn.IsKind(SyntaxKind.VariableDeclarator)
+                && ((VariableDeclaratorSyntax)syn).AsClause.Type().ToString() == "Boolean")
+                .Select(t =>
+                new
+                {
+                    VarT = ((VariableDeclaratorSyntax)t).Names[0].ToString(),
+                    VariableName = t.ToFullString(),
+                    Class = t.Ancestors()
+                    .Where(x => x.IsKind(SyntaxKind.ClassBlock))
+                    .Cast<ClassBlockSyntax>().First()
+                });
+
+            foreach (var item in bools)
+            {
+                var t = item.VarT;
+                var c = item.Class;
+                var v = item.VariableName;
+            }
+            //.Cast<VariableDeclaratorSyntax>();
+
+            //var bools = tree.GetRoot().DescendantNodes()
+            //    .Where(syn => syn.IsKind(SyntaxKind.VariableDeclarator)
+            //        && ((PredefinedTypeSyntax)(((VariableDeclaratorSyntax)syn).AsClause.Type())).Keyword.Text == "Boolean");
+
+            //var bools = tree.GetRoot().DescendantNodes()
+            //    .Where(syn => syn.IsKind(SyntaxKind.VariableDeclarator))
+            //    .Cast<VariableDeclaratorSyntax>()
+            //    .Where(ac => ((PredefinedTypeSyntax)ac.AsClause.Type()).Keyword.Text == "Boolean");
+
+            //    .Cast<VariableDeclaratorSyntax>();
+
+            //foreach (var item in bools)
+            //{
+            //    var t = item.AsClause.Type();
+            //    var t1 = t as IdentifierNameSyntax;
+            //    var t2 = t as SimpleNameSyntax;
+            //    var t3 = t as PredefinedTypeSyntax;
+
+            //    var x = t3.Keyword.Text;
+
+            //    var k = item.AsClause.Kind();
+
+            //    sb.AppendLine(item.ToString());
+            //}
+
+            //var bools2 = bools.Where(syn => ((PredefinedTypeSyntax)syn.AsClause.Type()).Keyword.Text == "Boolean");
+
+
+            //foreach (VariableDeclaratorSyntax item in bools)
+            //{
+            //    var t0 = item.AsClause;
+            //    var t = item.AsClause.Type();
+            //    var t1 = t as IdentifierNameSyntax;
+            //    var t2 = t as SimpleNameSyntax;
+            //    var t3 = t as PredefinedTypeSyntax;
+
+            //    var i0 = ((SimpleAsClauseSyntax)t0).Type;
+            //    var i1 = i0.ToString();
+
+            //    //var x = t3.Keyword.Text;
+
+            //    //var k = item.AsClause.Kind();
+
+            //    sb.AppendLine(item.ToString());
+            //}
+
+            //foreach (var item in bools2)
+            //{
+            //    var t = item.AsClause;
+            //}
+
+            //sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
+
             return sb;
         }
     }

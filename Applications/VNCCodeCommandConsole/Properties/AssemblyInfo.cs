@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("VNCCodeCommandConsole")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("VNC")]
 [assembly: AssemblyProduct("VNCCodeCommandConsole")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
@@ -82,5 +82,5 @@ using System.Windows;
 //  Version   Date        By
 //  1.0.0.0   mm/dd/yyyy    Developer
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2017.09.01A")]
+[assembly: AssemblyInformationalVersion("2017.09.13A")]
 

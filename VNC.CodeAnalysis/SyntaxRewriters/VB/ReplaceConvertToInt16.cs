@@ -14,10 +14,13 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
-
             var expression = node.Expression;
+            InvocationExpressionSyntax newInvocationExpression = node;
 
-            var newInvocationExpression = SyntaxFactory.InvocationExpression(expression);
+            if (expression.ToString() == "ConvertToInt16")
+            {
+                //newInvocationExpression = SyntaxFactory.InvocationExpression;
+            }
             
             return newInvocationExpression;
         }

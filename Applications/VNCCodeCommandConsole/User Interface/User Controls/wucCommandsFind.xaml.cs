@@ -102,9 +102,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnInvocation_Click(object sender, RoutedEventArgs e)
         {
-            //Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            //Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
-
             StringBuilder sb = new StringBuilder();
 
             var sourceCode = "";
@@ -115,25 +112,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             string identifier = teIdentifier.Text;
+            Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
+            var additionalLocations = (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;
 
-            var additionalLocations = lbeNodes.SelectedItem;
-            var additionalLocations1 = lbeNodes.SelectedIndex;
-            var source = lbeNodes.ItemsSource;
-
-            //sb = Commands.Explore.CodeToCommentRatioVB(wucCodeExplorerContext.teSourceFile.Text);
-            //sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true)
-            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, true, (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)additionalLocations1);
+            sb = VNC.CodeAnalysis.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, includeTrivia, additionalLocations);
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
         private void btnInvocationWalker_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder sb;
-
-            sb = DisplayInvocationWalkerVB(CodeExplorerContext.teSourceFile.Text);
-
-            CodeExplorer.teSourceCode.Text = sb.ToString();
+            CodeExplorer.teSourceCode.Text = DisplayInvocationWalkerVB(CodeExplorerContext.teSourceFile.Text).ToString();
         }
 
         internal StringBuilder DisplayInvocationWalkerVB(string fileNameAndPath)

@@ -50,7 +50,7 @@ namespace VNC.CodeAnalysis.SyntaxNode.VB
 
             foreach (Microsoft.CodeAnalysis.SyntaxNode node in syntaxNodes)
             {
-                sb.AppendLine(node.ToFullString());
+                sb.AppendLine(includeTrivia ? node.ToFullString() : node.ToString());
             }
 
             return sb;

@@ -13,7 +13,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class InvocationExpression : VisualBasicSyntaxWalker
     {
         public StringBuilder StringBuilder;
-        static int tabs = 0;
+
         private string _pattern;
 
         public InvocationExpression(string pattern) : base(SyntaxWalkerDepth.StructuredTrivia)
@@ -23,16 +23,14 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            //tabs++;
-            //var indents = new String(' ', tabs * 3);
-
             if (node.Expression.ToString() == _pattern)
             {
                 StringBuilder.AppendLine(node.ToString());
             }
 
+            // Call base to visit children
+
             base.VisitInvocationExpression(node);
-            //tabs--;
         }
     }
 }

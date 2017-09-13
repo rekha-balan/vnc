@@ -114,20 +114,20 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            IEnumerable<InvocationExpressionSyntax> syntaxNodes;
+            //IEnumerable<InvocationExpressionSyntax> syntaxNodes;
 
-            syntaxNodes = tree.GetRoot().DescendantNodes()
-                .OfType<InvocationExpressionSyntax>()
-                .Where(e => e.Expression.ToFullString() == identifier);
+            //syntaxNodes = tree.GetRoot().DescendantNodes()
+            //    .OfType<InvocationExpressionSyntax>()
+            //    .Where(e => e.Expression.ToFullString() == identifier);
 
-            foreach (InvocationExpressionSyntax targetNode in syntaxNodes)
-            {
+            //foreach (InvocationExpressionSyntax targetNode in syntaxNodes)
+            //{
                 
-            }
+            //}
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
+            //var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
 
-            SyntaxNode newNode = rewriter.VisitInvocationExpression();
+            //SyntaxNode newNode = rewriter.VisitInvocationExpression(syntaxNodes);
         }
     }
 }
