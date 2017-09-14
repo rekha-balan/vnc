@@ -31,9 +31,9 @@
     MinWidth="900" MinHeight="700"
     WindowStartupLocation="CenterScreen"
     Loaded="OnWindowLoaded" 
-    dx:DXSplashScreen.SplashScreenType = "{x:Type uiss:LoadingSplashScreen}"    
-    Icon="/VNCCodeCommandConsole;component/Resources/Icons/application.ico" >
 
+    Icon="/VNCCodeCommandConsole;component/Resources/Icons/application.ico" >
+    <!--dx:DXSplashScreen.SplashScreenType = "{x:Type uiss:LoadingSplashScreen}"-->
     <dxr:DXRibbonWindow.Resources>
 
         <localData:ApplicationDataSet x:Key="applicationDataSet" />

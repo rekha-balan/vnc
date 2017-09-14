@@ -15,13 +15,19 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         {
             Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
             var expression = node.Expression;
-            InvocationExpressionSyntax newInvocationExpression = node;
+            InvocationExpressionSyntax newInvocationExpression;
 
-            if (expression.ToString() == "ConvertToInt16")
+            var dojie = SyntaxFactory.IdentifierName("Doje");
+
+            if (expression.ToString() == "ConvertToInt16" || expression.ToString() == "Ec.GeneralFunc.ConvertToInt16")
             {
-                //newInvocationExpression = SyntaxFactory.InvocationExpression;
+                newInvocationExpression = node.WithExpression(dojie);
             }
-            
+            else
+            {
+                newInvocationExpression = node;
+            }
+
             return newInvocationExpression;
         }
     }

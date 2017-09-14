@@ -107,8 +107,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             sb = VNC.CodeAnalysis.Workspace.Document.Display(CodeExplorerContext.teSourceFile.Text);
 
             CodeExplorer.teWorkspace.Text = sb.ToString();
-
-
         }
 
         private void btnInfo_Project_Click(object sender, RoutedEventArgs e)

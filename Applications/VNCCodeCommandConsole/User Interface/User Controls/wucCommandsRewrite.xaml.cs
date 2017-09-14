@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -103,31 +104,75 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private void btnReplace_ConvertToInt16_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = new StringBuilder();
+            CodeExplorer.teWorkspace.Clear();
 
             var sourceCode = "";
             string identifier = teIdentifier.Text;
+            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            if (projectFullPath != "")
+            {
+                var workSpace = MSBuildWorkspace.Create();
+                var project = workSpace.OpenProjectAsync(projectFullPath).Result;
 
-            using (var sr = new StreamReader(CodeExplorerContext.teSourceFile.Text))
+                foreach (var document in project.Documents)
+                {
+                    string filePath = document.FilePath;
+
+                    if (filePath.Contains("designer"))
+                    {
+                        continue;
+                    }
+
+                    if (filePath.Contains("My Project"))
+                    {
+                        continue;
+                    }
+
+                    if (document.Name == "Assembly.vb")
+                    {
+                        continue;
+                    }
+
+                    if (document.Name.EndsWith(".vb"))
+                    {
+                        sb.AppendLine("ReWriting " + filePath);
+                        RewriteFile(filePath);
+                    }
+                }
+            }
+            else
+            {
+                string filePath = CodeExplorerContext.teSourceFile.Text;
+                sb.AppendLine("ReWriting" + filePath);
+                RewriteFile(filePath);
+            }
+
+            CodeExplorer.teWorkspace.Text = sb.ToString();
+        }
+
+        private void RewriteFile(string filePath)
+        {
+            string sourceCode;
+
+            using (var sr = new StreamReader(filePath))
             {
                 sourceCode = sr.ReadToEnd();
             }
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            //IEnumerable<InvocationExpressionSyntax> syntaxNodes;
+            var syntaxNodes = tree.GetRoot().DescendantNodes();
 
-            //syntaxNodes = tree.GetRoot().DescendantNodes()
-            //    .OfType<InvocationExpressionSyntax>()
-            //    .Where(e => e.Expression.ToFullString() == identifier);
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
 
-            //foreach (InvocationExpressionSyntax targetNode in syntaxNodes)
-            //{
-                
-            //}
+            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
 
-            //var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
+            if (newNode != tree.GetRoot())
+            {
+                string newFilePath = filePath + "2";
 
-            //SyntaxNode newNode = rewriter.VisitInvocationExpression(syntaxNodes);
+                File.WriteAllText(newFilePath, newNode.ToFullString());
+            }
         }
     }
 }
