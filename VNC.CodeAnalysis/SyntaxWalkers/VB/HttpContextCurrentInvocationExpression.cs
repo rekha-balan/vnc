@@ -13,7 +13,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class HttpContextCurrentInvocationExpression : VisualBasicSyntaxWalker
     {
         public StringBuilder StringBuilder;
-        public Dictionary<string, Int32> Matches = new Dictionary<string, Int32>();
+        public Dictionary<string, Int32> Matches; // = new Dictionary<string, Int32>();
 
         private string _pattern;
 
@@ -51,17 +51,47 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     .Where(x => x.IsKind(SyntaxKind.ClassBlock))
                     .Cast<ClassBlockSyntax>().ToList();
 
+                var a3a = node.Ancestors()
+                    .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
+                    .Cast<ModuleBlockSyntax>().ToList();
+
                 var a4 = node.Ancestors()
                     .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
                     .Cast<MethodBlockSyntax>().ToList();
 
-                var className = node.Ancestors()
-                    .Where(x => x.IsKind(SyntaxKind.ClassBlock))
-                    .Cast<ClassBlockSyntax>().First().ClassStatement.Identifier.ToString();
-
-                var methodName = node.Ancestors()
+                var a5 = node.Ancestors()
                     .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
-                    .Cast<MethodBlockSyntax>().First().SubOrFunctionStatement.Identifier.ToString();
+                    .Cast<MethodBlockSyntax>().ToList();
+
+                string className = "unknown";
+                string moduleName = "unknown";
+                string typeName = "unknown";
+                string methodName = "none";
+
+                if (a3.Count > 0)
+                {
+                    typeName = "Class";
+
+                    className = node.Ancestors()
+                        .Where(x => x.IsKind(SyntaxKind.ClassBlock))
+                        .Cast<ClassBlockSyntax>().First().ClassStatement.Identifier.ToString();
+                }
+
+                if (a3a.Count > 0)
+                {
+                    typeName = "Module";
+
+                    moduleName = node.Ancestors()
+                        .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
+                        .Cast<ModuleBlockSyntax>().First().ModuleStatement.Identifier.ToString();
+                }
+
+                if (a5.Count > 0)
+                {
+                    methodName = node.Ancestors()
+                        .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
+                        .Cast<MethodBlockSyntax>().First().SubOrFunctionStatement.Identifier.ToString();
+                }
 
                 //string className = node.Ancestors()
                 //    .Where(x => x.IsKind(SyntaxKind.ClassStatement))
@@ -71,7 +101,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 //    .Where(x => x.IsKind(SyntaxKind.FunctionStatement) || x.IsKind(SyntaxKind.SubStatement))
                 //    .Cast<MethodStatementSyntax>().First().ToString();
 
-                StringBuilder.AppendLine(String.Format("Class:({0,-25})  Method:({1,-35}) {2}", className, methodName, nodeValue));
+                StringBuilder.AppendLine(String.Format("{0,6}:({1,-25})  Method:({2,-35}) {3}", 
+                    typeName,
+                    typeName == "Class" ? className : moduleName,
+                    methodName, nodeValue));
             }
 
             // Call base to visit children
