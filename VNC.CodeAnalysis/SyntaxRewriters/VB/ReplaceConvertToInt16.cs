@@ -17,7 +17,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression;
 
-            var dojie = SyntaxFactory.IdentifierName("Doje");
+            var dojie = SyntaxFactory.IdentifierName("Dojie");
 
             if (expression.ToString() == "ConvertToInt16" || expression.ToString() == "Ec.GeneralFunc.ConvertToInt16")
             {

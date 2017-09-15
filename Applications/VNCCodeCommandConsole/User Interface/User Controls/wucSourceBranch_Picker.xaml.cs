@@ -169,36 +169,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
         }
 
-        //private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    var v = sender;
-        //    var item = ((System.Windows.Controls.ComboBox)v).SelectedItem;
-        //    System.Xml.XmlElement xmlElement = (System.Xml.XmlElement)item;
-        //    xElement = XElement.Parse(xmlElement.OuterXml);
-
-        //    if (null == item)
-        //    {
-        //        // May have just opened new file and no item has been selected.
-        //        return;
-        //    }
-
-        //    _Name = xmlElement.Attributes["Name"].Value;
-        //    NameDP = xmlElement.Attributes["Name"].Value;
-
-        //    _Repository = xmlElement.Attributes["Repository"].Value;
-        //    RepositoryDP = xmlElement.Attributes["Repository"].Value;
-
-        //    _SourcePath = xmlElement.Attributes["SourcePath"].Value;
-        //    SourcePathDP = xmlElement.Attributes["SourcePath"].Value;
-
-        //    ControlEvent fireEvent = Interlocked.CompareExchange(ref ControlChanged, null, null);
-
-        //    if (null != fireEvent)
-        //    {
-        //        fireEvent();
-        //    }
-        //}
-
         protected virtual void OnNameDPChanged(string oldValue, string newValue)
         {
             // TODO: Add your property changed side-effects. Descendants can override as well.

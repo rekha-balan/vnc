@@ -218,7 +218,9 @@
       <DependentUpon>wucInitialSplash.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="User Interface\User Controls\ApplicationUsage.xaml.cs" />
+    <Compile Include="User Interface\User Controls\ApplicationUsage.xaml.cs">
+      <DependentUpon>ApplicationUsage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
@@ -235,7 +237,9 @@
     <Compile Include="User Interface\User Controls\wucCommandsFind.xaml.cs">
       <DependentUpon>wucCommandsFind.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\User Controls\wucCommandsParse.cs" />
+    <Compile Include="User Interface\User Controls\wucCommandsParse.cs">
+      <DependentUpon>wucCommandsParse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsPerformance.xaml.cs">
       <DependentUpon>wucCommandsPerformance.xaml</DependentUpon>
     </Compile>
@@ -249,6 +253,7 @@
       <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucDXBase.cs" />
+    <Compile Include="User Interface\User Controls\wucFind_Picker.cs" />
     <Compile Include="User Interface\User Controls\wucSourceBranch_Picker.xaml.cs">
       <DependentUpon>wucSourceBranch_Picker.xaml</DependentUpon>
     </Compile>
@@ -258,7 +263,12 @@
     <Compile Include="User Interface\User Controls\wucSyntaxExplorer1.xaml.cs">
       <DependentUpon>wucSyntaxExplorer1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\User Controls\wucCodeExplorerMenu.cs" />
+    <Compile Include="User Interface\User Controls\wucCodeExplorerMenu.cs">
+      <DependentUpon>wucCodeExplorerMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\Windows\UserControlHost.xaml.cs">
+      <DependentUpon>UserControlHost.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\ViewMode.cs" />
     <Compile Include="User Interface\ViewModeItem.cs" />
     <Compile Include="User Interface\ViewModes.cs" />
@@ -293,7 +303,6 @@
     <Compile Include="Helpers\Command.cs" />
     <Compile Include="Helpers\Email.cs" />
     <Compile Include="Helpers\ExternalProgram.cs" />
-    <Compile Include="User Interface\Windows\UserControlHost.xaml.cs" />
     <Page Include="Resources\Xaml\AutoHideGroup_Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -363,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucCommandsWorkspace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucFind_Picker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

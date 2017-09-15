@@ -43,12 +43,16 @@
 
         <dxlc:LayoutGroup Orientation="Vertical">
             <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teIdentifier" >
-                </dxe:TextEdit>
+                <uiuc:wucFind_Picker x:Name="wucFind_Picker" 
+                                             ControlChanged="wucFindPicker_ControlChanged" />
+                <!--<dxe:TextEdit x:Name="teIdentifier" >
+                </dxe:TextEdit>-->
             </dxlc:LayoutItem>
 
-            <dxlc:LayoutGroup Orientation="Horizontal" >
+            <dxlc:LayoutGroup Orientation="Vertical" >
+                <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" IsChecked="True" VerticalAlignment="Top" />                
                 <dxe:CheckEdit x:Name="ceIncludeTrivia" Content="Include Trivia" IsChecked="True" VerticalAlignment="Top" />
+
                 <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
                     <dxe:ComboBoxEdit Name="lbeSyntaxWalkerDepth" VerticalAlignment="Top"
                                      ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vcasn:WalkerDepth}}}"                                                                     
@@ -89,11 +93,26 @@
         </dxlc:LayoutGroup>
         
         <dxlc:LayoutItem>
-            <Button Content="Invocation" Click="btnInvocation_Click"/>
+            <Button Content="InvocationExpression" Click="btnInvocation_Click"/>
         </dxlc:LayoutItem>
 
         <dxlc:LayoutItem>
-            <Button Content="Invocation Walker" Click="btnInvocationWalker_Click"/>
+            <Button Content="InvocationExpression Walker" Click="btnInvocationWalker_Click"/>
+        </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem>
+            <Button Content="Current.Application" 
+                    Click="btnHttpContextWalker_Click" Tag="Application"/>
+        </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem>
+            <Button Content="Current.Session" 
+                    Click="btnHttpContextWalker_Click" Tag="Session"/>
+        </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem>
+            <Button Content="Current.Cache" 
+                    Click="btnHttpContextWalker_Click" Tag="Cache"/>
         </dxlc:LayoutItem>
     </dxlc:LayoutControl>
     

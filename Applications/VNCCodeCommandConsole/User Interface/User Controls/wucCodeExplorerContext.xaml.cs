@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DevExpress.Xpf.Editors;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -157,12 +158,35 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void cbeSourceFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            XElement sourceFile = (XElement)e.NewValue;
-            string fileName = sourceFile.Attribute("FileName").Value;
-            string folderPath = sourceFile.Attribute("FolderPath").Value;
+            var s = (ComboBoxEdit)sender;
+            var e1 = e.NewValue;
+            var e2 = e.OldValue;
+
+            var e3 = e1.GetType();
+
+            if (s.SelectedItems.Count() == 1)
+            {
+                XElement sourceFileElement = (XElement)s.SelectedItem;
+                string filePath = GetFilePath(sourceFileElement);
+                teSourceFile.Text = teSourcePath.Text + filePath;
+            }
+            else
+            {
+                teSourceFile.Clear();
+            }
+            //XElement sourceFile = (XElement)e.NewValue;
+
+
+
+        }
+
+        public static string GetFilePath(XElement sourceFileElement)
+        {
+            string fileName = sourceFileElement.Attribute("FileName").Value;
+            string folderPath = sourceFileElement.Attribute("FolderPath").Value;
             string filePath = (folderPath != "" ? folderPath + "\\" : "") + fileName;
 
-            teSourceFile.Text = teSourcePath.Text + filePath;
+            return filePath;
         }
 
         private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
