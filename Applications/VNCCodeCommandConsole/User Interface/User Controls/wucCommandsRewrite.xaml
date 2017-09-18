@@ -36,6 +36,19 @@
     </uiuc:wucDXBase.Resources>-->
 
     <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutGroup Header="Simple InvocationExpression Replacement"
+                          Orientation="Vertical">
+            <dxlc:LayoutGroup Header="Header" 
+            	View="Group" Orientation="Vertical"
+            	IsCollapsible="True" IsCollapsed="False" >
+            
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutItem>
+                <dxe:TextEdit x:Name="asd" />
+            </dxlc:LayoutItem>
+            <dxe:TextEdit x:Name="teCurrentInvocationExpression" />
+
+        </dxlc:LayoutGroup>
         <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
             <dxe:TextEdit x:Name="teIdentifier" >
             </dxe:TextEdit>
