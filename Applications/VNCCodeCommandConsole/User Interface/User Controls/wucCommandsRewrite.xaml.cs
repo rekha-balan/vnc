@@ -172,7 +172,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             if (newNode != tree.GetRoot())
             {
-                string newFilePath = filePath + "2";
+                string newFilePath = filePath + (ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "");
 
                 File.WriteAllText(newFilePath, newNode.ToFullString());
             }

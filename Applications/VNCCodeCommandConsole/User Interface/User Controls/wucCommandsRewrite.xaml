@@ -21,20 +21,22 @@
     xmlns:ui="clr-namespace:VNCCodeCommandConsole.User_Interface" 
     xmlns:uiuc="clr-namespace:VNCCodeCommandConsole.User_Interface.User_Controls"
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
+    xmlns:vncX="clr-namespace:VNC.Xaml;assembly=VNC.XamlHelper" 
+    xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"   
 
     d:DesignWidth="800" d:DesignHeight="600"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
     
-    <!--<uiuc:wucDXBase.Resources>
-        
-        --><!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
+    <uiuc:wucDXBase.Resources>
+        <!--<vncX:VisToBool x:Key="VisToBool" />-->
+        <!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
 
         <CollectionViewSource x:Key="dataSource" 
-                              Source="{Binding Path=ApplicationUsage, Source={StaticResource applicationDataSet}}" />--><!--
+                              Source="{Binding Path=ApplicationUsage, Source={StaticResource applicationDataSet}}" />-->
 
-    </uiuc:wucDXBase.Resources>-->
+    </uiuc:wucDXBase.Resources>
 
     <dxlc:LayoutControl Orientation="Vertical" >
 
@@ -63,9 +65,9 @@
             	Orientation="Horizontal">
                 <dxe:CheckEdit x:Name="ceAddFileSuffix" Content="Add FileSuffix" IsChecked="False" />
                 <dxlc:LayoutItem Label="File Suffix" ToolTip="Added to name of modified file"
-                                 Visibility="{Binding ElementName=ceAddFileSuffix, Path=IsChecked}">
-                    <dxe:TextEdit x:Name="teFileSuffix" Text="2"  
-                                  Visibility="{Binding ElementName=ceAddFileSuffix, Path=IsChecked}" 
+                                 Visibility="{cb:Binding ElementName=ceAddFileSuffix, Path=IsChecked}">
+                    <dxe:TextEdit x:Name="teFileSuffix" Text="2"
+                                  Visibility="{cb:Binding ElementName=ceAddFileSuffix, Path=IsChecked}"               
                                   IsEnabled="True"/>
                 </dxlc:LayoutItem>          
             </dxlc:LayoutGroup>

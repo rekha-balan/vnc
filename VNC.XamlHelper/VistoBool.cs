@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace VNC.Xaml
 {
-    class VisToBool : IValueConverter
+    public class VisToBool : IValueConverter
     {
         bool inverted = false;
         public bool Inverted
