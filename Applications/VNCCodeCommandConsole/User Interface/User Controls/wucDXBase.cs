@@ -62,6 +62,21 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         }
 
+        /// <summary>
+        /// Override to populate controls with content if needed
+        /// </summary>
+        internal virtual void LoadControlContents()
+        {
+            //try
+            //{
+            //    wucFind_Picker.PopulateControlFromFile(Common.cCONFIG_FILE);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}
+        }
+
         protected void EditForm_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             ApplyAuthorization();

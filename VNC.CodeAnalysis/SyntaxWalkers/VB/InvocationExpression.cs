@@ -12,7 +12,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class InvocationExpression : VisualBasicSyntaxWalker
     {
-        public StringBuilder StringBuilder;
+        public StringBuilder Messages;
 
         private string _pattern;
 
@@ -25,7 +25,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (node.Expression.ToString() == _pattern)
             {
-                StringBuilder.AppendLine(node.ToString());
+                Messages.AppendLine(node.ToString());
             }
 
             // Call base to visit children

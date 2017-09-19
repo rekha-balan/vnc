@@ -59,7 +59,6 @@ namespace VNCCodeCommandConsole
                         Data.Config.ADGroup_Administrators,
                         Data.Config.AD_Domain);
 
-
                     Common.IsBetaUser = VNC.AD.Helper.CheckDirectGroupMembership(
                         Common.CurrentUser.Identity.Name,
                         Data.Config.ADGroup_BetaUsers,

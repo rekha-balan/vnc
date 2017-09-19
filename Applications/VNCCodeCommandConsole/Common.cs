@@ -127,19 +127,20 @@ namespace VNCCodeCommandConsole
 
         public static void IndicateApplicationUsage(string application, DateTime eventDate, string user, string message)
         {
-            var dataRow = Common.ApplicationDataSet.ApplicationUsage.NewApplicationUsageRow();
+            if ( ! Data.Config.DBBypass)
+            {
+                var dataRow = Common.ApplicationDataSet.ApplicationUsage.NewApplicationUsageRow();
 
-            dataRow.Application = application;
-            dataRow.EventDate = eventDate;
-            dataRow.User = user;
-            dataRow.EventMessage = message;
+                dataRow.Application = application;
+                dataRow.EventDate = eventDate;
+                dataRow.User = user;
+                dataRow.EventMessage = message;
 
-            Common.ApplicationDataSet.ApplicationUsage.AddApplicationUsageRow(dataRow);
-            // HACK(crhodes)
-            // Skip writing to database for now
+                Common.ApplicationDataSet.ApplicationUsage.AddApplicationUsageRow(dataRow);
 
-            Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter applicationUsageTA = new Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter();
-            applicationUsageTA.Update(Common.ApplicationDataSet.ApplicationUsage);
+                Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter applicationUsageTA = new Data.ApplicationDataSetTableAdapters.ApplicationUsageTableAdapter();
+                applicationUsageTA.Update(Common.ApplicationDataSet.ApplicationUsage);
+            }
         }
     }
 }

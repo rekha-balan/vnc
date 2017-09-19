@@ -11,6 +11,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
     public class InvocationExpression : VisualBasicSyntaxRewriter
     {
+        public StringBuilder Messages;
         public string _targetInvocationExpression = null;
         public string _newInvocationExpression = null;
 
@@ -41,6 +42,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             if (expression.ToString() == _targetInvocationExpression)
             {
                 newInvocationExpression = node.WithExpression(newExpression);
+                Messages.AppendLine(string.Format("From: >{0}< To: >{1}<", expression.ToString(), newInvocationExpression.ToString()));
             }
             else
             {

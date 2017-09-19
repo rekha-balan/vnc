@@ -95,13 +95,13 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
             {
                 InitializeComponent();
 
-                Theme theme = new Theme("CHR1", "DevExpress.Xpf.Themes.CHR1.v12.2");
-                theme.AssemblyName = "DevExpress.Xpf.Themes.CHR1.v12.2";
-                Theme.RegisterTheme(theme);
+                //Theme theme = new Theme("CHR1", "DevExpress.Xpf.Themes.CHR1.v12.2");
+                //theme.AssemblyName = "DevExpress.Xpf.Themes.CHR1.v12.2";
+                //Theme.RegisterTheme(theme);
 
-                theme = new Theme("Halloween", "DevExpress.Xpf.Themes.Halloween.v12.2");
-                theme.AssemblyName = "DevExpress.Xpf.Themes.Halloween.v12.2";
-                Theme.RegisterTheme(theme);
+                //theme = new Theme("Halloween", "DevExpress.Xpf.Themes.Halloween.v12.2");
+                //theme.AssemblyName = "DevExpress.Xpf.Themes.Halloween.v12.2";
+                //Theme.RegisterTheme(theme);
 
                 ApplicationThemeHelper.ApplicationThemeName = Data.Config.DefaultUITheme;
 
@@ -138,10 +138,13 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
             // Do not load your data at design time.
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
+                if (! Data.Config.DBBypass)
+                {
+                    Common.ApplicationDataSet.LoadApplicationDataSetFromDB(Common.ApplicationDataSet);
+                }
+
                 // HACK(crhodes)
                 // Disable loading data so we can run app
-                Common.ApplicationDataSet.LoadApplicationDataSetFromDB(Common.ApplicationDataSet);
-
                 // but pretend we have
                 Common.DataFullyLoaded = true;
             }

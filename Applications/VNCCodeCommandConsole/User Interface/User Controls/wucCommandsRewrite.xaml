@@ -53,7 +53,7 @@
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem>
-                <Button Content="Replace InvocationExpression" Click="btnReplace_InvocationExpression_Click"/>
+                <Button Content="Replace InvocationExpression" Click="btnRewrite_InvocationExpression_Click"/>
             </dxlc:LayoutItem>
             
         </dxlc:LayoutGroup>

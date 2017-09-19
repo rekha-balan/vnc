@@ -25,7 +25,7 @@
     xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"
     xmlns:vcasn="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"    
 
-    d:DesignWidth="800" d:DesignHeight="600"
+    d:DesignWidth="600" d:DesignHeight="600"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
@@ -42,7 +42,10 @@
 
     <dxlc:LayoutControl Orientation="Vertical">
 
-        <dxlc:LayoutGroup Orientation="Vertical">
+        <dxlc:LayoutGroup Header="Find Patterns" 
+            View="GroupBox"
+            Orientation="Vertical">
+            
             <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
                 <!--<uiuc:wucFind_Picker x:Name="wucFind_Picker" 
                                              ControlChanged="wucFindPicker_ControlChanged" />-->
@@ -50,8 +53,15 @@
                 </dxe:TextEdit>
             </dxlc:LayoutItem>
 
-            <dxlc:LayoutGroup Orientation="Vertical" >
-                <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" IsChecked="True" VerticalAlignment="Top" />                
+            <dxlc:LayoutItem>
+                <Button Content="InvocationExpression Walker" Click="btnInvocationWalker_Click"/>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutGroup  Header="Manual Loop"
+                               View="GroupBox"
+                               IsCollapsible="True" IsCollapsed="True"
+                               Orientation="Vertical">
+
                 <dxe:CheckEdit x:Name="ceIncludeTrivia" Content="Include Trivia" IsChecked="True" VerticalAlignment="Top" />
 
                 <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
@@ -59,7 +69,7 @@
                                      ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vcasn:WalkerDepth}}}"                                                                     
                                      SelectedIndex="0"                                                         
                                      ShowBorder="False" Background="{x:Null}">
-                    </dxe:ComboBoxEdit>                    
+                    </dxe:ComboBoxEdit>
                     <!--<dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
                                                          ValueMember="Content" 
                                                          SelectedIndex="0"                                                         
@@ -89,32 +99,38 @@
                     </dxe:ComboBoxEdit>
                 </dx:GroupFrame>
 
+                <dxlc:LayoutItem>
+                    <Button Content="InvocationExpression" Click="btnInvocation_Click"/>
+                </dxlc:LayoutItem>
+
             </dxlc:LayoutGroup>
 
         </dxlc:LayoutGroup>
-        
-        <dxlc:LayoutItem>
-            <Button Content="InvocationExpression" Click="btnInvocation_Click"/>
-        </dxlc:LayoutItem>
 
-        <dxlc:LayoutItem>
-            <Button Content="InvocationExpression Walker" Click="btnInvocationWalker_Click"/>
-        </dxlc:LayoutItem>
+        <dxlc:LayoutGroup Header="Find Common Things" 
+        	    View="GroupBox" Orientation="Vertical">
 
-        <dxlc:LayoutItem>
-            <Button Content="Current.Application" 
+            <dxlc:LayoutItem>
+                <Button Content="Current.Application" 
                     Click="btnHttpContextWalker_Click" Tag="Application"/>
-        </dxlc:LayoutItem>
+            </dxlc:LayoutItem>
 
-        <dxlc:LayoutItem>
-            <Button Content="Current.Session" 
+            <dxlc:LayoutItem>
+                <Button Content="Current.Session" 
                     Click="btnHttpContextWalker_Click" Tag="Session"/>
-        </dxlc:LayoutItem>
+            </dxlc:LayoutItem>
 
-        <dxlc:LayoutItem>
-            <Button Content="Current.Cache" 
+            <dxlc:LayoutItem>
+                <Button Content="Current.Cache" 
                     Click="btnHttpContextWalker_Click" Tag="Cache"/>
-        </dxlc:LayoutItem>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" 
+                       Content="List Impacted Files Only" 
+                       IsChecked="False" VerticalAlignment="Top" />
+
     </dxlc:LayoutControl>
     
 </uiuc:wucDXBase>

@@ -60,6 +60,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // Cheat and force outcome if not using dat
             Common.DataFullyLoaded = true;
             User_Interface.Helper.ValidateDataFullyLoaded();
+            LoadControlContents();
 
             try
             {
@@ -83,16 +84,63 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Event Handlers
 
-        private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
-        {
-            //CustomFormat.FormatStorageColumns(e);
-        }
+        //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
+        //{
+        //    //CustomFormat.FormatStorageColumns(e);
+        //}
 
         #endregion
 
-        private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
+        //private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
+        //{
+        //    //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
+        //}
+
+        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
+
+        void ProcessOperation(RewriteFileCommand command)
         {
-            //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
+            StringBuilder sb = new StringBuilder();
+            CodeExplorer.teSourceCode.Clear();
+
+            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            string newInvocationExpression = teNewInvocationExpression.Text;
+            string targetInvocationExpression = teTargetInvocationExpression.Text;
+
+            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
+
+            if (filesToProcess.Count > 0)
+            {
+                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                {
+                    sb.AppendLine("Would Process these files ....");
+                }
+
+                foreach (string filePath in filesToProcess)
+                {
+                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    {
+                        sb.AppendLine(string.Format("  {0}", filePath));
+                    }
+                    else
+                    {
+                        sb.AppendLine("Rewriting " + filePath);
+                        sb = command(sb, filePath, targetInvocationExpression, newInvocationExpression);
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("No files selected to process");
+            }
+
+            CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        private void btnRewrite_InvocationExpression_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(RewriteFileVB);
         }
 
         #region Main Function Routines
@@ -101,58 +149,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private void btnReplace_InvocationExpression_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb = new StringBuilder();
-            CodeExplorer.teWorkspace.Clear();
 
-            var sourceCode = "";
-            string newInvocationExpression = teNewInvocationExpression.Text;
-            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
-            string targetInvocationExpression = teTargetInvocationExpression.Text;
-
-            if (projectFullPath != "")
-            {
-                var workSpace = MSBuildWorkspace.Create();
-                var project = workSpace.OpenProjectAsync(projectFullPath).Result;
-
-                foreach (var document in project.Documents)
-                {
-                    string filePath = document.FilePath;
-
-                    if (filePath.Contains("designer"))
-                    {
-                        continue;
-                    }
-
-                    if (filePath.Contains("My Project"))
-                    {
-                        continue;
-                    }
-
-                    if (document.Name == "Assembly.vb")
-                    {
-                        continue;
-                    }
-
-                    if (document.Name.EndsWith(".vb"))
-                    {
-                        sb.AppendLine("ReWriting " + filePath);
-                        RewriteFile(filePath, targetInvocationExpression, newInvocationExpression);
-                    }
-                }
-            }
-            else
-            {
-                string filePath = CodeExplorerContext.teSourceFile.Text;
-                sb.AppendLine("ReWriting" + filePath);
-                RewriteFile(filePath, targetInvocationExpression, newInvocationExpression);
-            }
-
-            CodeExplorer.teWorkspace.Text = sb.ToString();
-        }
-
-        private void RewriteFile(string filePath, string targetInvocationExpression, string newInvocationExpression)
+        private StringBuilder RewriteFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression)
         {
             string sourceCode;
 
@@ -163,10 +161,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            var syntaxNodes = tree.GetRoot().DescendantNodes();
-
             var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(targetInvocationExpression, newInvocationExpression);
-            //var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
+
+            rewriter.Messages = sb;
 
             SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
 
@@ -176,6 +173,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 File.WriteAllText(newFilePath, newNode.ToFullString());
             }
+
+            return sb;
         }
     }
 }

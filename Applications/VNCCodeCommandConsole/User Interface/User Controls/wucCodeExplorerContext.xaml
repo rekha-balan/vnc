@@ -53,11 +53,12 @@
 
         <dxlc:LayoutGroup Name="lg_Body" >
 
-            <dxlc:LayoutControl x:Name="layoutItems" Orientation="Vertical" Background="White" Margin="4,20,-4,-20">
+            <dxlc:LayoutControl x:Name="layoutItems" 
+                                Orientation="Vertical" >
                 <dxlc:LayoutItem             
-                Label="CodeExplorer Context" 
-                LabelPosition="Top"/>
-                
+                    Label="CodeExplorer Context" 
+                    LabelPosition="Top"/>
+
                 <dxlc:LayoutGroup Header="Select Input" 
                                   View="GroupBox"
                                   Orientation="Vertical" 

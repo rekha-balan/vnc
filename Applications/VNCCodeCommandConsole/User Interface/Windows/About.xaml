@@ -69,7 +69,7 @@
 
                 <dxlc:LayoutItem Label="Disclaimer" Style="{StaticResource AboutLayout}" VerticalAlignment="Top" >
                     <TextBlock TextWrapping="Wrap" FontSize="12"
-                               Text="This is Christopher Rhodes' first real WPF application.  Hope you enjoy it.  He is pleased with parts, amused by others, and quite disturbed by all the rest.  Your feedback is welcome and will be entertained subject to the author's obvious limitations." />
+                               Text="Intial Ideas to use Microsoft.CodeAnalysis to refactor code." />
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem Label="AssemblyVersion:" Style="{StaticResource AboutLayoutHorizontal}" VerticalAlignment="Top"  >
@@ -103,12 +103,16 @@
         </dxlc:LayoutGroup>
         
         <dxlc:LayoutGroup Name="lg_Footer" >
-            <Button Click="OnToDo_Click" HorizontalAlignment="Left">
-                <TextBlock Text="ToDo" TextWrapping="Wrap" TextAlignment="Center"  />
-            </Button>
             <dxlc:LayoutItem >
-                <VNCDxWPF:CylonEyeBall x:Name="cylonEyeBall1" HorizontalAlignment="Right" />
-            </dxlc:LayoutItem>            
+                <VNCDxWPF:CylonEyeBall x:Name="cylonEyeBall1"  />
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem>
+                <Button Click="OnToDo_Click" >
+                    <TextBlock Text="ToDo" TextWrapping="Wrap" TextAlignment="Center"  />
+                </Button>
+            </dxlc:LayoutItem>
+      
         </dxlc:LayoutGroup>
         
     </dxlc:LayoutControl>

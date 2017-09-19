@@ -1,4 +1,5 @@
 ﻿using DevExpress.Xpf.Editors;
+using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -187,6 +188,54 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             string filePath = (folderPath != "" ? folderPath + "\\" : "") + fileName;
 
             return filePath;
+        }
+
+        public List<String> GetFilesToProcess()
+        {
+            List<String> filesToProcess = new List<string>();
+
+            string projectFullPath = teProjectFile.Text;
+
+            if (projectFullPath != "")
+            {
+                using (var workSpace = MSBuildWorkspace.Create())
+                {
+                    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+
+                    foreach (var document in project.Documents)
+                    {
+                        string filePath = document.FilePath;
+
+                        if (filePath.Contains("designer"))
+                        {
+                            continue;
+                        }
+
+                        if (filePath.Contains("My Project"))
+                        {
+                            continue;
+                        }
+
+                        if (document.Name == "Assembly.vb")
+                        {
+                            continue;
+                        }
+
+                        if (document.Name.EndsWith(".vb"))
+                        {
+                            filesToProcess.Add(filePath);
+                        }
+                    }
+                }
+            }
+            else if (teSourceFile.Text != "")
+            {
+                // TODO(crhodes)
+                // Add check for existence
+                filesToProcess.Add(teSourceFile.Text);
+            }
+
+            return filesToProcess;
         }
 
         private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)

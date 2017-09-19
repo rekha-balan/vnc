@@ -268,6 +268,37 @@ namespace VNCCodeCommandConsole.Data
         //    }
         //}
 
+        private static Nullable<Boolean> _DBBypass = null;
+        public static Boolean DBBypass
+        {
+            get
+            {
+                if (_DBBypass == null)
+                {
+                    //_ADBypass = ValidateExists_Boolean("ADBypass");
+
+                    // Special case this so we don't throw an exception.
+                    // No need to broadcast this capability.
+
+                    string configValue = ConfigurationManager.AppSettings["DBBypass"];
+
+                    if (configValue == null)
+                    {
+                        return false;
+                        //throw new ApplicationException(string.Format("Missing Config File Information: {0}", configString));
+                    }
+
+                    _DBBypass = Convert.ToBoolean(configValue);
+                }
+
+                return (bool)_DBBypass;
+            }
+            set
+            {
+                _DBBypass = value;
+            }
+        }
+
         private static string _DefaultUITheme = null;
         public static string DefaultUITheme
         {

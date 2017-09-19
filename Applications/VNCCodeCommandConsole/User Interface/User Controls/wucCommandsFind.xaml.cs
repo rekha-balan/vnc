@@ -16,6 +16,8 @@ using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.LayoutControl;
 using Microsoft.CodeAnalysis.VisualBasic;
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
@@ -49,17 +51,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Initialization
 
-        private void LoadControlContents()
-        {
-            //try
-            //{
-            //    wucFind_Picker.PopulateControlFromFile(Common.cCONFIG_FILE);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
-        }
+        //private void LoadControlContents()
+        //{
+        //    //try
+        //    //{
+        //    //    wucFind_Picker.PopulateControlFromFile(Common.cCONFIG_FILE);
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    MessageBox.Show(ex.ToString());
+        //    //}
+        //}
 
         internal override void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -102,14 +104,56 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //DisplayHttpContextWalkerVB(CodeExplorerContext.teSourceFile.Text, tag);
         }
 
+        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
+
+        void ProcessOperation(SearchFileCommand command)
+        {
+            StringBuilder sb = new StringBuilder();
+            CodeExplorer.teSourceCode.Clear();
+
+            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            string invocationExpression = teIdentifier.Text;
+
+            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
+
+            if (filesToProcess.Count > 0)
+            {
+                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                {
+                    sb.AppendLine("Would Search these files ....");
+                }
+
+                foreach (string filePath in filesToProcess)
+                {
+                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    {
+                        sb.AppendLine(string.Format("  {0}", filePath));
+                    }
+                    else
+                    {
+                        sb.AppendLine("Searching " + filePath);
+                        sb = command(sb, filePath, invocationExpression);
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("No files selected to process");
+            }
+
+            CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
         private void btnInvocationWalker_Click(object sender, RoutedEventArgs e)
         {
-            CodeExplorer.teSourceCode.Text = DisplayInvocationWalkerVB(CodeExplorerContext.teSourceFile.Text).ToString();
+            ProcessOperation(DisplayInvocationWalkerVB);
         }
 
         private void btnInvocation_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = new StringBuilder();
+            CodeExplorer.teSourceCode.Clear();
 
             var sourceCode = "";
 
@@ -129,28 +173,24 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        private void wucFindPicker_ControlChanged()
-        {
+        //private void wucFindPicker_ControlChanged()
+        //{
 
-        }
+        //}
 
-        private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
-        {
-            //CustomFormat.FormatStorageColumns(e);
-        }
+        //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
+        //{
+        //    //CustomFormat.FormatStorageColumns(e);
+        //}
 
         #endregion
 
-        private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
-        {
-            //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
-        }
+        //private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
+        //{
+        //    //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
+        //}
 
         #region Main Function Routines
-
-
-
-        #endregion
 
         void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
         {
@@ -210,23 +250,23 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                     foreach (XElement file in codeExplorerContext.cbeSourceFile.SelectedItems)
                     {
-                        string fileNameAndPath = codeExplorerContext.teSourcePath.Text + wucCodeExplorerContext.GetFilePath(file);
+                        string filePath = codeExplorerContext.teSourcePath.Text + wucCodeExplorerContext.GetFilePath(file);
 
-                        if ( ! File.Exists(fileNameAndPath))
+                        if ( ! File.Exists(filePath))
                         {
-                            sb.AppendLine(string.Format("ERROR File ({0}) does not exist.  Check config file", fileNameAndPath));
+                            sb.AppendLine(string.Format("ERROR File ({0}) does not exist.  Check config file", filePath));
                             continue;
                         }
 
                         if ((Boolean)ceListImpactedFilesOnly.IsChecked)
                         {
-                            sb.AppendLine(string.Format("  {0}", fileNameAndPath));
+                            sb.AppendLine(string.Format("  {0}", filePath));
                         }
                         else
                         {
-                            sb.AppendLine(string.Format("Processing ({0}) ...", fileNameAndPath));
+                            sb.AppendLine(string.Format("Processing ({0}) ...", filePath));
 
-                            using (var sr = new StreamReader(fileNameAndPath))
+                            using (var sr = new StreamReader(filePath))
                             {
                                 sourceCode = sr.ReadToEnd();
                             }
@@ -257,23 +297,25 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        internal StringBuilder DisplayInvocationWalkerVB(string fileNameAndPath)
+        #endregion
+
+        private StringBuilder DisplayInvocationWalkerVB(StringBuilder sb, string filePath, string invocationExpression)
         {
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
 
             var sourceCode = "";
 
-            using (var sr = new StreamReader(fileNameAndPath))
+            using (var sr = new StreamReader(filePath))
             {
                 sourceCode = sr.ReadToEnd();
             }
 
-            string pattern = teIdentifier.Text;
-            //string pattern = User_Controls.wucFind_Picker.ValueProperty.ToString();
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(pattern);
-            walker.StringBuilder = sb;
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(invocationExpression);
+
+            walker.Messages = sb;
+
             walker.Visit(tree.GetRoot());
 
             return sb;
