@@ -101,14 +101,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private void btnReplace_ConvertToInt16_Click(object sender, RoutedEventArgs e)
+        private void btnReplace_InvocationExpression_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = new StringBuilder();
             CodeExplorer.teWorkspace.Clear();
 
             var sourceCode = "";
-            string identifier = teIdentifier.Text;
+            string newInvocationExpression = teNewInvocationExpression.Text;
             string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            string targetInvocationExpression = teTargetInvocationExpression.Text;
+
             if (projectFullPath != "")
             {
                 var workSpace = MSBuildWorkspace.Create();
@@ -136,7 +138,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     if (document.Name.EndsWith(".vb"))
                     {
                         sb.AppendLine("ReWriting " + filePath);
-                        RewriteFile(filePath);
+                        RewriteFile(filePath, targetInvocationExpression, newInvocationExpression);
                     }
                 }
             }
@@ -144,13 +146,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             {
                 string filePath = CodeExplorerContext.teSourceFile.Text;
                 sb.AppendLine("ReWriting" + filePath);
-                RewriteFile(filePath);
+                RewriteFile(filePath, targetInvocationExpression, newInvocationExpression);
             }
 
             CodeExplorer.teWorkspace.Text = sb.ToString();
         }
 
-        private void RewriteFile(string filePath)
+        private void RewriteFile(string filePath, string targetInvocationExpression, string newInvocationExpression)
         {
             string sourceCode;
 
@@ -163,7 +165,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             var syntaxNodes = tree.GetRoot().DescendantNodes();
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(targetInvocationExpression, newInvocationExpression);
+            //var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.ReplaceConvertToInt16();
 
             SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
 

@@ -51,14 +51,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void LoadControlContents()
         {
-            try
-            {
-                wucFind_Picker.PopulateControlFromFile(Common.cCONFIG_FILE);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            //try
+            //{
+            //    wucFind_Picker.PopulateControlFromFile(Common.cCONFIG_FILE);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}
         }
 
         internal override void OnLoaded(object sender, RoutedEventArgs e)
@@ -118,8 +118,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 sourceCode = sr.ReadToEnd();
             }
 
-            //string identifier = teIdentifier.Text;
-            string identifier = User_Controls.wucFind_Picker.ValueProperty.ToString();
+            string identifier = teIdentifier.Text;
+            //string identifier = User_Controls.wucFind_Picker.ValueProperty.ToString();
 
             Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
             var additionalLocations = (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;
@@ -268,8 +268,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 sourceCode = sr.ReadToEnd();
             }
 
-            //string pattern = teIdentifier.Text;
-            string pattern = User_Controls.wucFind_Picker.ValueProperty.ToString();
+            string pattern = teIdentifier.Text;
+            //string pattern = User_Controls.wucFind_Picker.ValueProperty.ToString();
 
             var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(pattern);

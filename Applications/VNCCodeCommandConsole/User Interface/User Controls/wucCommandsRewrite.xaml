@@ -23,6 +23,7 @@
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
 
     d:DesignWidth="800" d:DesignHeight="600"
+    d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
     
@@ -35,15 +36,42 @@
 
     </uiuc:wucDXBase.Resources>-->
 
-    <dxlc:LayoutControl Orientation="Vertical">
-        <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
-            <dxe:TextEdit x:Name="teIdentifier" >
-            </dxe:TextEdit>
-        </dxlc:LayoutItem>
+    <dxlc:LayoutControl Orientation="Vertical" >
 
-        <dxlc:LayoutItem>
-            <Button Content="Replace ConvertToInt16" Click="btnReplace_ConvertToInt16_Click"/>
-        </dxlc:LayoutItem>
+        <dxlc:LayoutGroup Header="InvocationExpressionSyntax"
+            View="GroupBox"	Orientation="Vertical">
+             <dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teTargetInvocationExpression" >
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teNewInvocationExpression" >
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button Content="Replace InvocationExpression" Click="btnReplace_InvocationExpression_Click"/>
+            </dxlc:LayoutItem>
+            
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup
+        	Orientation="Vertical" VerticalAlignment="Top">
+            
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+                <dxe:CheckEdit x:Name="ceAddFileSuffix" Content="Add FileSuffix" IsChecked="False" />
+                <dxlc:LayoutItem Label="File Suffix" ToolTip="Added to name of modified file"
+                                 Visibility="{Binding ElementName=ceAddFileSuffix, Path=IsChecked}">
+                    <dxe:TextEdit x:Name="teFileSuffix" Text="2"  
+                                  Visibility="{Binding ElementName=ceAddFileSuffix, Path=IsChecked}" 
+                                  IsEnabled="True"/>
+                </dxlc:LayoutItem>          
+            </dxlc:LayoutGroup>
+
+            <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" IsChecked="True" VerticalAlignment="Top" />
+        </dxlc:LayoutGroup>
 
     </dxlc:LayoutControl>
     

@@ -26,6 +26,11 @@
         <!--<Setter Property="dxlc:LayoutControl.VerticalAlignment" Value="Top" />-->
     </Style>
 
+    <!-- This is used to make the design experience better -->
+    <Style x:Key="myDesignStyle" TargetType="UserControl">
+        <Setter Property="Background" Value="White" />
+    </Style>
+    
     <Style x:Key="DisplayOptionsStyle" TargetType="CheckBox" >
         <Setter Property="FontSize" Value="8" />
         <Setter Property="Margin" Value="5,0,5,0" />

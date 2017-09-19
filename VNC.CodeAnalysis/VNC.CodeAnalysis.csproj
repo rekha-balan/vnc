@@ -244,6 +244,7 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
+    <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxRewriters\VB\ReplaceConvertToInt16.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNode.cs" />
     <Compile Include="SyntaxWalkers\CS\AllStructuredTrivia.cs" />
