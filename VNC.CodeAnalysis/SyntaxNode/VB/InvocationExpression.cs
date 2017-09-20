@@ -53,12 +53,38 @@ namespace VNC.CodeAnalysis.SyntaxNode.VB
 
             foreach (InvocationExpressionSyntax node in syntaxNodes.Where(e => e.Expression.ToString() == identifier))
             {
-                
-                sb.AppendLine(string.Format("FullString: >{0}<", node.Expression.ToFullString()));
-                sb.AppendLine(string.Format("ToString: >{0}<\nExpression: >{1}<\nArgumentList: >{2}<",
-                    node.ToString(),
-                    node.Expression.ToString(),
-                    node.ArgumentList.ToString()));
+                if (includeTrivia)
+                {
+                    sb.AppendLine(string.Format(">{0}<", node.ToFullString()));
+
+                    sb.AppendLine(string.Format("Expression\n>{0}<", node.Expression.ToFullString()));
+
+                    sb.AppendLine(string.Format("ArgumentList:\n>{0}<", node.ArgumentList.ToFullString()));
+
+                    sb.AppendLine(string.Format("HasLeadingTrivia: >{0}<", node.HasLeadingTrivia));
+
+                    sb.AppendLine(string.Format("GetLeadingTrivia:\n>{0}<", node.GetLeadingTrivia().ToFullString()));
+
+                    sb.AppendLine(string.Format("HasTrailingTrivia: >{0}<", node.HasTrailingTrivia));
+
+                    sb.AppendLine(string.Format("GetTrailingTrivia:\n>{0}<", node.GetTrailingTrivia().ToFullString()));
+                }
+                else
+                {
+                    sb.AppendLine(string.Format(">{0}<", node.ToString()));
+
+                    sb.AppendLine(string.Format("Expression\n>{0}<", node.Expression.ToString()));
+
+                    sb.AppendLine(string.Format("ArgumentList:\n>{0}<", node.ArgumentList.ToString()));
+
+                    sb.AppendLine(string.Format("HasLeadingTrivia: >{0}<", node.HasLeadingTrivia));
+
+                    sb.AppendLine(string.Format("GetLeadingTrivia:\n>{0}<", node.GetLeadingTrivia().ToString()));
+
+                    sb.AppendLine(string.Format("HasTrailingTrivia: >{0}<", node.HasTrailingTrivia));
+
+                    sb.AppendLine(string.Format("GetTrailingTrivia:\n>{0}<", node.GetTrailingTrivia().ToString()));
+                }
 
                 IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> extraSyntaxNodes;
                 IEnumerable<Microsoft.CodeAnalysis.SyntaxToken> extraSyntaxTokens;

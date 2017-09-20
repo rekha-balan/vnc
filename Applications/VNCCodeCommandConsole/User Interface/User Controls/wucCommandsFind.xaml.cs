@@ -163,7 +163,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             string identifier = teIdentifier.Text;
-            //string identifier = User_Controls.wucFind_Picker.ValueProperty.ToString();
 
             Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
             var additionalLocations = (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;

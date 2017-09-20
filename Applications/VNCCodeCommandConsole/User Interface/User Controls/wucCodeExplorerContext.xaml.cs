@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
@@ -190,13 +191,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return filePath;
         }
 
+        /// <summary>
+        /// Returns list of files to process based on selections
+        /// </summary>
+        /// <returns></returns>
         public List<String> GetFilesToProcess()
         {
             List<String> filesToProcess = new List<string>();
 
+            // This  method returns a list of files to process.
+            // If a specific SourceFile is specified, return it
+            // If a ProjectFile is available, use it to get the list of files
+            // Otherwise return the files selected in cbeSourceFiles.
+
             string projectFullPath = teProjectFile.Text;
 
-            if (projectFullPath != "")
+            if (teSourceFile.Text != "")
+            {
+                // TODO(crhodes)
+                // Add check for existence
+                filesToProcess.Add(teSourceFile.Text);
+            }
+            else if (projectFullPath != "")
             {
                 using (var workSpace = MSBuildWorkspace.Create())
                 {
@@ -228,11 +244,44 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     }
                 }
             }
-            else if (teSourceFile.Text != "")
+            else if (cbeSourceFile.SelectedItems.Count > 0)
             {
-                // TODO(crhodes)
-                // Add check for existence
-                filesToProcess.Add(teSourceFile.Text);
+                string sourcePath = teSourcePath.Text;
+
+                foreach (XElement sourceFile in cbeSourceFile.SelectedItems)
+                {
+                    string filePath = sourcePath;
+                    string folderPath = sourceFile.Attribute("FolderPath").Value;
+                    string fileName = sourceFile.Attribute("FileName").Value;
+
+                    if (folderPath.Length > 0)
+                    {
+                        filePath += folderPath + "\\";
+                    }
+
+                    filesToProcess.Add(filePath + fileName);
+                }
+            }
+
+            var filesToCheck = filesToProcess.ToList();
+
+            foreach (string filePath in filesToCheck)
+            {
+                if (! File.Exists(filePath))
+                {
+                    FileInfo fileInfo = new FileInfo(filePath);
+
+                    if (! Directory.Exists(fileInfo.DirectoryName))
+                    {
+                        MessageBox.Show(string.Format("Directory\n\n{0}\n\ndoes not exist", fileInfo.DirectoryName), "Check Path or Config File");
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("File\n\n{0}\nin\n\n{1}\n\ndoes not exist", fileInfo.Name, fileInfo.DirectoryName), "Check Path or Config File");
+                    }
+
+                    filesToProcess.Remove(filePath);
+                }
             }
 
             return filesToProcess;

@@ -32,78 +32,20 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
 
             var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> syntaxNodes;
-
             // Both of these return the same results.
 
-            var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(SyntaxKind.ClassBlock));
-            var x2 = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>();
+            //var x1 = tree.GetRoot().DescendantNodes().Where(syn => syn.IsKind(SyntaxKind.ClassBlock));
+            //var x2 = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>();
 
-            //sb.AppendLine("Where(...)");
-            //foreach (SyntaxNode node in x1)
-            //{
-            //    sb.AppendLine(node.ToFullString());
-            //}
-
-            //sb.AppendLine("OfType(...)");
-            //foreach (SyntaxNode node in x2)
-            //{
-            //    sb.AppendLine(node.ToFullString());
-            //}
-
-            //var x3 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-            //    .Cast<VB.Syntax.ClassBlockSyntax>()
-            //    .Select(c =>
-            //       new
-            //       {
-            //           ClassName = c.BlockStatement.Identifier,
-            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
-            //       });
-
-            //foreach (var node in x3)
-            //{
-            //    sb.AppendLine(node.ClassName.Text);
-            //    //sb.AppendLine(node.ClassName.Value.ToString());
-
-            //    foreach (var method in node.Methods)
-            //    {
-
-            //        sb.AppendLine(method.ToString());
-            //    }
-            //}
-
-            //var x4 = tree.GetRoot().DescendantNodes().OfType<VB.Syntax.ClassBlockSyntax>()
-            //    .Cast<VB.Syntax.ClassBlockSyntax>()
-            //    .Select(c =>
-            //       new
-            //       {
-            //           ClassName = c.BlockStatement.Identifier,
-            //           Methods = c.Members.OfType<VB.Syntax.MethodBlockSyntax>()
-            //       });
-
-            //foreach (var node in x4)
-            //{
-            //    //sb.AppendLine(node.ClassName.Text);
-            //    sb.AppendLine(node.ClassName.Value.ToString());
-
-            //    foreach (var method in node.Methods)
-            //    {
-            //        sb.AppendLine("Method");
-            //        VB.Syntax.MethodStatementSyntax statement = method.DescendantNodes().First() as VB.Syntax.MethodStatementSyntax;
-            //        sb.AppendLine(statement.Identifier.ToString());
-            //        sb.AppendLine("Parameters");
-            //        sb.AppendLine(statement.ParameterList.ToString());
-            //    }
-            //}
-
-            var x5 = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>()
+            var results = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>()
                 .Cast<ClassBlockSyntax>()
                 .Select(c =>
                    new
                    {
                        ClassName = c.BlockStatement.Identifier,
                        Methods = c.Members.OfType<MethodBlockSyntax>()
-                   })
+                   }
+                )
                 .Select(t =>
                     new
                     {
@@ -119,7 +61,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
                             )
                     });
 
-            foreach (var item in x5)
+            foreach (var item in results)
             {
                 sb.AppendLine(item.ClassName.Text);
 

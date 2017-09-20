@@ -83,6 +83,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnRewrite_InvocationExpression_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(RewriteFileVB);
+        }
+        private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(CommentFileVB);
+        }
 
         //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
         //{
@@ -97,6 +105,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         //}
 
         delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+
         delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
 
         void ProcessOperation(RewriteFileCommand command)
@@ -137,18 +146,38 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
-
-        private void btnRewrite_InvocationExpression_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessOperation(RewriteFileVB);
-        }
-
         #region Main Function Routines
 
 
 
         #endregion
 
+        private StringBuilder CommentFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression)
+        {
+            string sourceCode;
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(targetInvocationExpression, teComment.Text);
+
+            rewriter.Messages = sb;
+
+            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+
+            if (newNode != tree.GetRoot())
+            {
+                string newFilePath = filePath + (ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "");
+
+                File.WriteAllText(newFilePath, newNode.ToFullString());
+            }
+
+            return sb;
+        }
 
         private StringBuilder RewriteFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression)
         {

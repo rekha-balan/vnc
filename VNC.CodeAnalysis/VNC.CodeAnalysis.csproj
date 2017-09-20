@@ -177,6 +177,8 @@
     <Compile Include="DesignMetrics\VB\SealedClassAndProtectedMembers.cs" />
     <Compile Include="DesignMetrics\VB\ObjectObsession.cs" />
     <Compile Include="DesignMetrics\VB\DeeplyNestedLoops.cs" />
+    <Compile Include="Helpers\CS.cs" />
+    <Compile Include="Helpers\VB.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidBoxing.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidExcessiveLocalVariables.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidUnnecessaryProjections.cs" />
@@ -244,8 +246,8 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
+    <Compile Include="SyntaxRewriters\VB\CommentOutSingleLineInvocationExpression.cs" />
     <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
-    <Compile Include="SyntaxRewriters\VB\ReplaceConvertToInt16.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNode.cs" />
     <Compile Include="SyntaxWalkers\CS\AllStructuredTrivia.cs" />
     <Compile Include="SyntaxWalkers\CS\AllToken.cs" />

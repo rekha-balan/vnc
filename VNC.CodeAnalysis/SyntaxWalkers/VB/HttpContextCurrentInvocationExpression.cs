@@ -101,10 +101,15 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 //    .Where(x => x.IsKind(SyntaxKind.FunctionStatement) || x.IsKind(SyntaxKind.SubStatement))
                 //    .Cast<MethodStatementSyntax>().First().ToString();
 
-                StringBuilder.AppendLine(String.Format("{0,6}:({1,-25})  Method:({2,-35}) {3}", 
-                    typeName,
-                    typeName == "Class" ? className : moduleName,
-                    methodName, nodeValue));
+                //StringBuilder.AppendLine(String.Format("{0,6}:({1,-25})  Method:({2,-35}) {3}", 
+                //    typeName,
+                //    typeName == "Class" ? className : moduleName,
+                //    Helpers.VB.GetContainingMethod(node), nodeValue));
+
+                StringBuilder.AppendLine(String.Format("{0} Method:({1,-35}) {2}",
+                    Helpers.VB.GetContainingType(node),
+                    Helpers.VB.GetContainingMethod(node), 
+                    nodeValue));
             }
 
             // Call base to visit children

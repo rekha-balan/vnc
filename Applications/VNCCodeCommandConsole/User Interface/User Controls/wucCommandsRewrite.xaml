@@ -55,7 +55,20 @@
             <dxlc:LayoutItem>
                 <Button Content="Replace InvocationExpression" Click="btnRewrite_InvocationExpression_Click"/>
             </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teComment" 
+                        Text="Commented out by CodeCommandConsole"
+                        ToolTip="Accepts multiple lines"
+                        TextWrapping="Wrap"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True" AcceptsTab="True" />
+            </dxlc:LayoutItem>
             
+            <dxlc:LayoutItem>
+                <Button Content="CommentOut SingleLine InvocationExpression" Click="btnCommentOut_InvocationExpression_Click"/>
+            </dxlc:LayoutItem>
+
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup

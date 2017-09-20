@@ -59,7 +59,7 @@
 
             <dxlc:LayoutGroup  Header="Manual Loop"
                                View="GroupBox"
-                               IsCollapsible="True" IsCollapsed="True"
+                               IsCollapsible="True" IsCollapsed="False"
                                Orientation="Vertical">
 
                 <dxe:CheckEdit x:Name="ceIncludeTrivia" Content="Include Trivia" IsChecked="True" VerticalAlignment="Top" />

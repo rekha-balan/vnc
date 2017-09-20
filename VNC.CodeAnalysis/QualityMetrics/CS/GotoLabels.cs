@@ -47,9 +47,6 @@ namespace VNC.CodeAnalysis.QualityMetrics.CS
                         .Select(mds => mds.MethodName)
                 });
 
-            // TODO(crhodes)
-            // Unpack the results
-
             foreach (var item in results)
             {
                 sb.AppendLine(string.Format("Class >{0}<", item.ClassName));
