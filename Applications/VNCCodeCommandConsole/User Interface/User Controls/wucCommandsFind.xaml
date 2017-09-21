@@ -54,7 +54,11 @@
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem>
-                <Button Content="InvocationExpression Walker" Click="btnInvocationWalker_Click"/>
+                <Button Content="InvocationExpression Walker" Click="btnInvocationExpressionWalker_Click"/>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button Content="VariableDeclarator Walker" Click="btnVariableDeclaratorWalker_Click"/>
             </dxlc:LayoutItem>
 
             <dxlc:LayoutGroup  Header="Manual Loop"

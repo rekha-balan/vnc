@@ -21,7 +21,8 @@ using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 
-using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
@@ -31,6 +32,31 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
         {
             StringBuilder sb = new StringBuilder();
 
+            var tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var results = tree.GetRoot()
+                .DescendantNodes()
+                .Where(t => t.Kind() == SyntaxKind.FunctionBlock || t.Kind() == SyntaxKind.SubBlock)
+                .Cast<MethodBlockSyntax>()
+                .Select(mb =>
+                new
+                {
+                    Name = mb.SubOrFunctionStatement.Identifier.ValueText,
+                    IfStatements = mb.Statements
+                    .Where(i => i.Kind() == SyntaxKind.IfStatement)
+                    .Cast<Microsoft.CodeAnalysis.VisualBasic.Syntax.IfStatementSyntax>()
+                    .Select(iss =>
+                    new
+                    {
+                        Statement = iss.ToFullString(),
+                        IfStatement = iss.Condition.ToFullString()
+                    })
+                }).ToLookup(iss => iss.ToString());
+
+            foreach (var item in results)
+            {
+
+            }
 
             //        var tree = CSharpSyntaxTree.ParseText(sourceCode);
             //        tree.GetRoot()
@@ -54,7 +80,7 @@ namespace VNC.CodeAnalysis.QualityMetrics.VB
             //        })
             //        .Dump("Fragmented conditions");
 
-                        sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
+            sb.AppendLine(MethodBase.GetCurrentMethod().DeclaringType + "." + MethodBase.GetCurrentMethod().Name + " Not Implemented Yet");
             return sb;
         }
     }

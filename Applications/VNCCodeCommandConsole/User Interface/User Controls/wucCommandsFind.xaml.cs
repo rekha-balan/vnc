@@ -145,9 +145,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        private void btnInvocationWalker_Click(object sender, RoutedEventArgs e)
+        private void btnInvocationExpressionWalker_Click(object sender, RoutedEventArgs e)
         {
-            ProcessOperation(DisplayInvocationWalkerVB);
+            ProcessOperation(DisplayInvocationExpressionWalkerVB);
         }
 
         private void btnInvocation_Click(object sender, RoutedEventArgs e)
@@ -298,7 +298,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder DisplayInvocationWalkerVB(StringBuilder sb, string filePath, string invocationExpression)
+        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, string filePath, string invocationExpression)
         {
             //StringBuilder sb = new StringBuilder();
 
@@ -318,6 +318,33 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             walker.Visit(tree.GetRoot());
 
             return sb;
+        }
+
+        private StringBuilder DisplayVariableDeclaratorWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            //StringBuilder sb = new StringBuilder();
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator(pattern);
+
+            walker.Messages = sb;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayVariableDeclaratorWalkerVB);
         }
     }
 }

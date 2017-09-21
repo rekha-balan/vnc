@@ -27,6 +27,7 @@ namespace VNC.CodeAnalysis.Helpers
                     .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
                     .Cast<MethodBlockSyntax>().First().SubOrFunctionStatement.Identifier.ToString();
             }
+
             return methodName;
         }
 
@@ -74,13 +75,13 @@ namespace VNC.CodeAnalysis.Helpers
         {
             Boolean result = false;
 
+            // Seems like Trivia is Trivia  No notion of with our without :)
+
             string existingLeadingTrivia = node.GetLeadingTrivia().ToString();
             //string existingLeadingTriviaFull = node.GetLeadingTrivia().ToFullString();
 
             string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
             //string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
-
-            // Seems like Trivia is Trivia  No notion of with our without :)
 
             if (String.IsNullOrWhiteSpace(existingLeadingTrivia) && String.IsNullOrWhiteSpace(existingTrailingTrivia))
             {

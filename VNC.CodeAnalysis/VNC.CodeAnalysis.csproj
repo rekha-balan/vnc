@@ -257,6 +257,7 @@
     <Compile Include="SyntaxWalkers\VB\AllToken.cs" />
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\HttpContextCurrentInvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\VariableDeclarator.cs" />
     <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
     <Compile Include="Workspace\Document.cs" />
     <Compile Include="Workspace\Project.cs" />

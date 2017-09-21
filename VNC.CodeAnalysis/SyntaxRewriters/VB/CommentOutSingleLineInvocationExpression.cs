@@ -38,8 +38,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
                 string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
 
-                // TODO(crhodes)
-                // Verify leading trivia exists and this expression is on line by itself
+                // Verify this expression is on line by itself
 
                 if (Helpers.VB.IsOnLineByItself(node))
                 {
@@ -68,6 +67,5 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
             return newInvocationExpression;
         }
-
     }
 }
