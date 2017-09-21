@@ -27,12 +27,13 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             var nodeAsClause = node.AsClause;
             var nodeNames = node.Names;
             var asType = node.AsClause.Type().ToString();
-            
 
             //if (node.Expression.ToString() == _pattern)
             //{
             //    Messages.AppendLine(node.ToString());
             //}
+
+            // Call base to visit children
 
             base.VisitVariableDeclarator(node);
         }

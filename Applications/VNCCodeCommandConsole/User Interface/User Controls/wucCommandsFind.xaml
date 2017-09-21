@@ -22,6 +22,8 @@
     xmlns:uiuc="clr-namespace:VNCCodeCommandConsole.User_Interface.User_Controls"
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
     
+    xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding" 
+    
     xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"
     xmlns:vcasn="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"    
 
@@ -44,7 +46,8 @@
 
         <dxlc:LayoutGroup Header="Find Patterns" 
             View="GroupBox"
-            Orientation="Vertical">
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
             
             <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
                 <!--<uiuc:wucFind_Picker x:Name="wucFind_Picker" 
@@ -112,7 +115,8 @@
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup Header="Find Common Things" 
-        	    View="GroupBox" Orientation="Vertical">
+        	    View="GroupBox" Orientation="Vertical"
+                IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutItem>
                 <Button Content="Current.Application" 
@@ -129,6 +133,116 @@
                     Click="btnHttpContextWalker_Click" Tag="Cache"/>
             </dxlc:LayoutItem>
 
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Header="Find Structures" 
+        	View="GroupBox" Orientation="Vertical">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+                
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                    	<dxe:CheckEdit x:Name="ceStructuresUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem Label="Structures">
+                    	<dxe:TextEdit x:Name="teStructureRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceStructuresUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceShowFields" 
+                                   Content="ShowFields" 
+                                   IsChecked="True"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutGroup
+                    	Orientation="Vertical"
+                        Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}" >
+                        
+                        <dxlc:LayoutItem>
+                            <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"
+                                           Checked="ceFieldsUseRegEx_Checked"
+                                           EditValueChanged="ceFieldsUseRegEx_EditValueChanged"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Fields" >
+                            <dxe:TextEdit x:Name="teFieldsRegEx" Text=".*" 
+                                    IsEnabled="{cb:Binding ElementName=ceFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                    ToolTip="Supports Regular Expressions"/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem
+                            Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}">
+                            <dxe:CheckEdit x:Name="ceAllTypes" 
+                               Content="All Types" 
+                               IsChecked="True" />
+                        </dxlc:LayoutItem>
+
+                    </dxlc:LayoutGroup>
+
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup
+            	    Orientation="Vertical"
+                    Visibility="{cb:Binding ElementName=ceAllTypes, Path=!IsChecked}">
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceHasAttributes" 
+                               Content="Has Attributes" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIsBoolean" 
+                               Content="Is Boolean" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIsDate" 
+                               Content="Is Date" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIsInt16" 
+                               Content="Is Int16" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIsInt32" 
+                               Content="Is Int32" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIsString" 
+                               Content="Is String" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceOtherTypes" 
+                               Content="Is OtherType" 
+                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="Find Structures" 
+                    Click="btnFindStructures_Click"/>
+            </dxlc:LayoutItem>
+            
         </dxlc:LayoutGroup>
 
         <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" 

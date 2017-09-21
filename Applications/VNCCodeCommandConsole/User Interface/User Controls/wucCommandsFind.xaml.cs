@@ -342,9 +342,63 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
+        private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            //StringBuilder sb = new StringBuilder();
+            Boolean showFields = (bool)ceShowFields.IsChecked;
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
+
+            walker.Messages = sb;
+
+            walker.StructureNames = teStructureRegEx.Text;
+            walker.FieldNames = teFieldsRegEx.Text;
+            walker.InitializeRegEx();
+
+            walker.ShowFields = (bool)ceShowFields.IsChecked;
+
+            walker.AllFieldTypes = (bool)ceAllTypes.IsChecked;
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
+            walker.IsDate = (bool)ceIsDate.IsChecked;
+            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
+            walker.IsInt32= (bool)ceIsInt32.IsChecked;
+            walker.IsString = (bool)ceIsString.IsChecked;
+            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
         private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayVariableDeclaratorWalkerVB);
+        }
+
+        private void btnFindStructures_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayStructureBlockWalkerVB);
+        }
+
+        private void ceFieldsUseRegEx_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ceFieldsUseRegEx_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+
         }
     }
 }
