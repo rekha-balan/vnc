@@ -14,6 +14,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class VariableDeclarator : VisualBasicSyntaxWalker
     {
         public StringBuilder Messages;
+        public Boolean DisplayClassOrModuleName;
+        public Boolean DisplayMethodName;
 
         public string IdentifierNames;
 
@@ -115,7 +117,23 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                 if (addField)
                 {
-                    Messages.AppendLine(string.Format("  {0}", node.ToString()));
+                    string messageContext = "";
+
+                    if (DisplayClassOrModuleName)
+                    {
+                        messageContext = Helpers.VB.GetContainingType(node);
+                    }
+
+                    if (DisplayMethodName)
+                    {
+                        messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                    }
+
+                    Messages.AppendLine(String.Format("{0} {1}",
+                        messageContext,
+                        node.ToString()));
+
+                    //Messages.AppendLine(string.Format("  {0}", node.ToString()));
                     //displayStructure = true;
                 }
 

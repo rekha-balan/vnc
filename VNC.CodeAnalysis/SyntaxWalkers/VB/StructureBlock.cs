@@ -205,15 +205,15 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 {
                     string messageContext = "";
 
-                    //if (DisplayClassOrModuleName)
-                    //{
-                    //    messageContext = Helpers.VB.GetContainingType(node);
-                    //}
+                    if (DisplayClassOrModuleName)
+                    {
+                        messageContext = Helpers.VB.GetContainingType(node);
+                    }
 
-                    //if (DisplayMethodName)
-                    //{
-                    //    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-                    //}
+                    if (DisplayMethodName)
+                    {
+                        messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                    }
 
                     Messages.AppendLine(String.Format("{0} {1}",
                         messageContext,
