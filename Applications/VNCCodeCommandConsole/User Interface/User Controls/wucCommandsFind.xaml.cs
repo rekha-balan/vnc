@@ -348,6 +348,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.InitializeRegEx();
 
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
             walker.AllTypes = (bool)ceAllTypes.IsChecked;
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
@@ -405,6 +408,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             walker.InitializeRegEx();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.ShowFields = (bool)ceShowFields.IsChecked;
 

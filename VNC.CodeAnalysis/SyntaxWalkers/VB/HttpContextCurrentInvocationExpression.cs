@@ -116,7 +116,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     // HACK(crhodes)
                     // Figure out how to get Helpers to work
 
-                    //messageContext = Helpers.VB.GetContainingType(node);
+                    messageContext = Helpers.VB.GetContainingType(node);
                 }
 
                 if (DisplayMethodName)
@@ -124,7 +124,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     // HACK(crhodes)
                     // Figure out how to get Helpers to work
 
-                    //messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
                 }
 
                 Messages.AppendLine(String.Format("{0} {1}",
