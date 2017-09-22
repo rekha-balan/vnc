@@ -12,7 +12,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class HttpContextCurrentInvocationExpression : VisualBasicSyntaxWalker
     {
-        public StringBuilder StringBuilder;
+        public StringBuilder Messages;
+        public Boolean DisplayClassOrModuleName;
+        public Boolean DisplayMethodName;
+
         public Dictionary<string, Int32> Matches; // = new Dictionary<string, Int32>();
 
         private string _pattern;
@@ -106,7 +109,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 //    typeName == "Class" ? className : moduleName,
                 //    Helpers.VB.GetContainingMethod(node), nodeValue));
 
-                StringBuilder.AppendLine(String.Format("{0} Method:({1,-35}) {2}",
+                Messages.AppendLine(String.Format("{0} Method:({1,-35}) {2}",
                     Helpers.VB.GetContainingType(node),
                     Helpers.VB.GetContainingMethod(node), 
                     nodeValue));

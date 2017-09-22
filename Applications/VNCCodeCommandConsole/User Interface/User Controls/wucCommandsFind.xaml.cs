@@ -230,7 +230,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                     VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression walker = null;
                     walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression(context);
-                    walker.StringBuilder = sb;
+                    walker.Messages = sb;
                     walker.Matches = matches;
 
                     walker.Visit(tree.GetRoot());
@@ -276,7 +276,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                             VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression walker = null;
                             walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression(context);
-                            walker.StringBuilder = sb;
+                            walker.Messages = sb;
                             walker.Matches = matches;
 
                             walker.Visit(tree.GetRoot());
@@ -333,9 +333,35 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator(pattern);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator();
 
             walker.Messages = sb;
+
+            if ((bool)ceVariablesUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teVariableRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.AllTypes = (bool)ceAllTypes.IsChecked;
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
+            walker.IsDate = (bool)ceIsDate.IsChecked;
+            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
+            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
+            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
+            walker.IsInteger = (bool)ceIsInteger.IsChecked;
+            walker.IsLong = (bool)ceIsLong.IsChecked;
+            walker.IsSingle = (bool)ceIsSingle.IsChecked;
+            walker.IsString = (bool)ceIsString.IsChecked;
+
+            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
 
             walker.Visit(tree.GetRoot());
 
@@ -360,8 +386,24 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.Messages = sb;
 
-            walker.StructureNames = teStructureRegEx.Text;
-            walker.FieldNames = teFieldsRegEx.Text;
+            if ((bool)ceStructuresUseRegEx.IsChecked)
+            {
+                walker.StructureNames = teStructureRegEx.Text;
+            }
+            else
+            {
+                walker.StructureNames = ".*";
+            }
+
+            if ((bool)ceFieldsUseRegEx.IsChecked)
+            {
+                walker.FieldNames = teFieldsRegEx.Text;
+            }
+            else
+            {
+                walker.FieldNames = ".*";
+            }
+
             walker.InitializeRegEx();
 
             walker.ShowFields = (bool)ceShowFields.IsChecked;
@@ -371,9 +413,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
             walker.IsDate = (bool)ceIsDate.IsChecked;
+            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
             walker.IsInt16 = (bool)ceIsInt16.IsChecked;
-            walker.IsInt32= (bool)ceIsInt32.IsChecked;
+            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
+            walker.IsInteger = (bool)ceIsInteger.IsChecked;
+            walker.IsLong = (bool)ceIsLong.IsChecked;
+            walker.IsSingle = (bool)ceIsSingle.IsChecked;
             walker.IsString = (bool)ceIsString.IsChecked;
+
             walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
 
             walker.Visit(tree.GetRoot());

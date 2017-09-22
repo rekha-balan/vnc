@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -14,19 +15,118 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public StringBuilder Messages;
 
-        private string _pattern;
+        public string IdentifierNames;
 
-        public VariableDeclarator(string pattern) : base(SyntaxWalkerDepth.StructuredTrivia)
+        public Boolean AllTypes = false;
+        public Boolean HasAttributes = false;
+
+        public Boolean IsBoolean = false;
+        public Boolean IsDate = false;
+        public Boolean IsDateTime = false;
+        public Boolean IsInt16 = false;
+        public Boolean IsInt32 = false;
+        public Boolean IsInteger = false;
+        public Boolean IsLong = false;
+        public Boolean IsSingle = false;
+        public Boolean IsString = false;
+
+        public Boolean IsOtherType = false;
+
+        private Regex identifierNameRegEx;
+
+        public VariableDeclarator() : base(SyntaxWalkerDepth.StructuredTrivia)
         {
-            _pattern = pattern;
+
+        }
+
+        public void InitializeRegEx()
+        {
+            try
+            {
+                identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
+            }
+            catch (Exception ex)
+            {
+                Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
+                    IdentifierNames, ex.Message));
+                identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
+            }
         }
 
         public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
         {
             var nodeInitializer = node.Initializer;
-            var nodeAsClause = node.AsClause;
+            //var asClause = node.AsClause;
             var nodeNames = node.Names;
+            var nodeNames2 = nodeNames.First().ToString();
+
             var asType = node.AsClause.Type().ToString();
+
+            if (identifierNameRegEx.Match(nodeNames.First().ToString()).Success)
+            {
+                var asClause = node.AsClause;
+                var asClauseType = asClause.Type();
+                Boolean addField = false;
+
+                switch (asClauseType.ToString())
+                {
+                    case "Boolean":
+                        if (IsBoolean) addField = true;
+                        break;
+
+                    case "Date":
+                        if (IsDate) addField = true;
+                        break;
+
+                    case "DateTime":
+                        if (IsDateTime) addField = true;
+                        break;
+
+                    case "Int16":
+                        if (IsInt16) addField = true;
+                        break;
+
+                    case "Int32":
+                        if (IsInt32) addField = true;
+                        break;
+
+                    case "Integer":
+                        if (IsInteger) addField = true;
+                        break;
+
+                    case "Long":
+                        if (IsLong) addField = true;
+                        break;
+
+                    case "Single":
+                        if (IsSingle) addField = true;
+                        break;
+
+                    case "String":
+                        if (IsString) addField = true;
+                        break;
+
+                    default:
+                        if (IsOtherType) addField = true;
+                        //if (IsOtherType && !displayStructure) addField = true;
+
+                        break;
+                }
+
+                if (addField)
+                {
+                    Messages.AppendLine(string.Format("  {0}", node.ToString()));
+                    //displayStructure = true;
+                }
+
+                //if (HasAttributes)
+                //{
+                //    if (node.AttributeLists.Count > 0)
+                //    {
+                //        addField = true;
+                //    }
+                //}
+            }
 
             //if (node.Expression.ToString() == _pattern)
             //{
