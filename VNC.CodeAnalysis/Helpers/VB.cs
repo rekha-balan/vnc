@@ -13,7 +13,7 @@ namespace VNC.CodeAnalysis.Helpers
 {
     public static class VB
     {
-        public static string GetContainingMethod(DeclarationStatementSyntax node)
+        public static string GetContainingMethod(VisualBasicSyntaxNode node)
         {
             string methodName = "none";
 
@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.Helpers
             return methodName;
         }
 
-        public static string GetContainingType(DeclarationStatementSyntax node)
+        public static string GetContainingType(VisualBasicSyntaxNode node)
         {
             string typeName = "unknown";
 
