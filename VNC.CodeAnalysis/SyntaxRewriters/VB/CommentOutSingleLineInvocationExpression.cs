@@ -42,10 +42,12 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
                 if (Helpers.VB.IsOnLineByItself(node))
                 {
-                    Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
-                        Helpers.VB.GetContainingType(node),
-                        Helpers.VB.GetContainingMethod(node),
-                        node.ToString()));
+                    // HACK(crhodes)
+                    // Figure out how to get Helpers to work here.
+                    //Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
+                    //    Helpers.VB.GetContainingType(node),
+                    //    Helpers.VB.GetContainingMethod(node),
+                    //    node.ToString()));
 
                     string startOfLineWhiteSpace = existingLeadingTrivia.Replace(System.Environment.NewLine, "");
 
