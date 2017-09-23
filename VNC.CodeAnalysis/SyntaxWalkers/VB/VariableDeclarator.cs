@@ -11,49 +11,8 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class VariableDeclarator : VisualBasicSyntaxWalker
+    public class VariableDeclarator : VNCVBTypedSyntaxWalkerBase
     {
-        public StringBuilder Messages;
-        public Boolean DisplayClassOrModuleName;
-        public Boolean DisplayMethodName;
-
-        public string IdentifierNames;
-
-        public Boolean AllTypes = false;
-        public Boolean HasAttributes = false;
-
-        public Boolean IsBoolean = false;
-        public Boolean IsDate = false;
-        public Boolean IsDateTime = false;
-        public Boolean IsInt16 = false;
-        public Boolean IsInt32 = false;
-        public Boolean IsInteger = false;
-        public Boolean IsLong = false;
-        public Boolean IsSingle = false;
-        public Boolean IsString = false;
-
-        public Boolean IsOtherType = false;
-
-        private Regex identifierNameRegEx;
-
-        public VariableDeclarator() : base(SyntaxWalkerDepth.StructuredTrivia)
-        {
-
-        }
-
-        public void InitializeRegEx()
-        {
-            try
-            {
-                identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
-            }
-            catch (Exception ex)
-            {
-                Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
-                    IdentifierNames, ex.Message));
-                identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
-            }
-        }
 
         public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
         {
@@ -66,53 +25,66 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (identifierNameRegEx.Match(nodeNames.First().ToString()).Success)
             {
-                var asClause = node.AsClause;
-                var asClauseType = asClause.Type();
                 Boolean addField = false;
 
-                switch (asClauseType.ToString())
+                var asClause = node.AsClause;
+ 
+                // {Private Shared bCheckedCatSupport = False}
+                // TODO(crhodes)
+                // Need to handle null asClause
+
+                if (asClause == null)
                 {
-                    case "Boolean":
-                        if (IsBoolean) addField = true;
-                        break;
+                    addField = true;
+                }
+                else
+                {
+                    var asClauseType = asClause.Type();
 
-                    case "Date":
-                        if (IsDate) addField = true;
-                        break;
+                    switch (asClauseType.ToString())
+                    {
+                        case "Boolean":
+                            if (IsBoolean) addField = true;
+                            break;
 
-                    case "DateTime":
-                        if (IsDateTime) addField = true;
-                        break;
+                        case "Date":
+                            if (IsDate) addField = true;
+                            break;
 
-                    case "Int16":
-                        if (IsInt16) addField = true;
-                        break;
+                        case "DateTime":
+                            if (IsDateTime) addField = true;
+                            break;
 
-                    case "Int32":
-                        if (IsInt32) addField = true;
-                        break;
+                        case "Int16":
+                            if (IsInt16) addField = true;
+                            break;
 
-                    case "Integer":
-                        if (IsInteger) addField = true;
-                        break;
+                        case "Int32":
+                            if (IsInt32) addField = true;
+                            break;
 
-                    case "Long":
-                        if (IsLong) addField = true;
-                        break;
+                        case "Integer":
+                            if (IsInteger) addField = true;
+                            break;
 
-                    case "Single":
-                        if (IsSingle) addField = true;
-                        break;
+                        case "Long":
+                            if (IsLong) addField = true;
+                            break;
 
-                    case "String":
-                        if (IsString) addField = true;
-                        break;
+                        case "Single":
+                            if (IsSingle) addField = true;
+                            break;
 
-                    default:
-                        if (IsOtherType) addField = true;
-                        //if (IsOtherType && !displayStructure) addField = true;
+                        case "String":
+                            if (IsString) addField = true;
+                            break;
 
-                        break;
+                        default:
+                            if (IsOtherType) addField = true;
+                            //if (IsOtherType && !displayStructure) addField = true;
+
+                            break;
+                    }
                 }
 
                 if (addField)
@@ -133,22 +105,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                         messageContext,
                         node.ToString()));
                 }
-
-                //if (HasAttributes)
-                //{
-                //    if (node.AttributeLists.Count > 0)
-                //    {
-                //        addField = true;
-                //    }
-                //}
             }
-
-            //if (node.Expression.ToString() == _pattern)
-            //{
-            //    Messages.AppendLine(node.ToString());
-            //}
-
-            // Call base to visit children
 
             base.VisitVariableDeclarator(node);
         }

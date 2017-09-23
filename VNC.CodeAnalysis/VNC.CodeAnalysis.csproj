@@ -256,6 +256,9 @@
     <Compile Include="SyntaxWalkers\VB\AllStructuredTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\AllToken.cs" />
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
+    <Compile Include="SyntaxWalkers\VB\PropertyBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\PropertyStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\FieldDeclaration.cs" />
     <Compile Include="SyntaxWalkers\VB\ModuleBlock.cs" />
     <Compile Include="SyntaxWalkers\VB\ModuleStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\MethodStatement.cs" />
@@ -268,6 +271,7 @@
     <Compile Include="SyntaxWalkers\VB\StructureBlock.cs" />
     <Compile Include="SyntaxWalkers\VB\VariableDeclarator.cs" />
     <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\VNCVBTypedSyntaxWalkerBase.cs" />
     <Compile Include="SyntaxWalkers\VB\VNCVBSyntaxWalkerBase.cs" />
     <Compile Include="Workspace\Document.cs" />
     <Compile Include="Workspace\Project.cs" />

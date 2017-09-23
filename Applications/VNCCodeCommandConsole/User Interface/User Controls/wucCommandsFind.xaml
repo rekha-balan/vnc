@@ -176,6 +176,72 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find FieldDeclaration Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceFieldDeclarationUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Fields">
+                        <dxe:TextEdit x:Name="teFieldDeclarationRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceFieldStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="FieldDeclaration Walker" Click="btnFieldDeclarationWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find PropertyStatement Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="cePropertyStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Properties">
+                        <dxe:TextEdit x:Name="tePropertyStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=cePropertyStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceShowPropertyBlock" Content="Show Property Block" IsChecked="False" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button Content="PropertyStatement Walker" Click="btnPropertyStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"

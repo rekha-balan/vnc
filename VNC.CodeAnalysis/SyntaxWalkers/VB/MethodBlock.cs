@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class MethodBlock : VNCVBSyntaxWalkerBase
+    public class MethodBlock : VNCVBTypedSyntaxWalkerBase
     {
         public override void VisitMethodBlock(MethodBlockSyntax node)
         {

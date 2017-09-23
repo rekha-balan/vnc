@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class NamespaceStatement : VNCVBSyntaxWalkerBase
+    public class NamespaceStatement : VNCVBTypedSyntaxWalkerBase
     {
         public override void VisitNamespaceStatement(NamespaceStatementSyntax node)
         {
