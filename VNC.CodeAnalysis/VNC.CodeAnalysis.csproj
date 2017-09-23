@@ -256,6 +256,9 @@
     <Compile Include="SyntaxWalkers\VB\AllStructuredTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\AllToken.cs" />
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
+    <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
+    <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
+    <Compile Include="SyntaxWalkers\VB\ParameterList.cs" />
     <Compile Include="SyntaxWalkers\VB\PropertyBlock.cs" />
     <Compile Include="SyntaxWalkers\VB\PropertyStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\FieldDeclaration.cs" />

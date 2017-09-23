@@ -277,6 +277,37 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find ParameterList Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceParameterListUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Parameters">
+                        <dxe:TextEdit x:Name="teParameterListRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceParameterListUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="ParameterList Walker" Click="btnParameterListWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find InvocationExpressionSyntax" 
             View="GroupBox"
             Orientation="Vertical"
@@ -355,6 +386,37 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find ArgumentList Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceArgumentListUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Arguments">
+                        <dxe:TextEdit x:Name="teArgumentListRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceArgumentListUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="ArgumentList Walker" Click="btnArgumentListWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find HttpContext" 
         	    View="GroupBox" Orientation="Vertical"
                 IsCollapsible="True" IsCollapsed="True">

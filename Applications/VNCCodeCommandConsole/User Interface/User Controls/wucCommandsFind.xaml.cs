@@ -29,6 +29,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
         delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
 
+
+        delegate StringBuilder SearchTreeCommand(StringBuilder sb, SyntaxTree tree, string pattern);
+        delegate StringBuilder RewriteTreeCommand(StringBuilder sb, SyntaxTree tree, string targetPattern, string replacementPattern);
+
+
         #region Constructors
 
         public wucCommandsFind()
@@ -97,6 +102,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnParameterListWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayParameterListWalkerVB);
+        }
+        private void btnArgumentListWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayArgumentListWalkerVB);
+        }
         private void btnPropertyStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayPropertyStatementWalkerVB);
@@ -171,17 +184,64 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
-        StringBuilder DisplayPropertyStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        StringBuilder DisplayParameterListWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ParameterList();
 
-            using (var sr = new StreamReader(filePath))
+            return InvokeVNCSyntaxWalker(
+                sb, 
+                (bool)ceParameterListUseRegEx.IsChecked, teParameterListRegEx.Text, 
+                tree, walker);
+        }
+
+        StringBuilder InvokeVNCSyntaxWalker(
+            StringBuilder sb, 
+            Boolean useRegEx, string regEx,
+            SyntaxTree syntaxTree,
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker)
+        {
+            walker.Messages = sb;
+
+            if (useRegEx)
             {
-                sourceCode = sr.ReadToEnd();
+                walker.IdentifierNames = regEx;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
             }
 
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            walker.InitializeRegEx();
 
+            walker.Visit(syntaxTree.GetRoot());
+
+            return sb;
+        }
+
+        private StringBuilder DisplayArgumentListWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ArgumentList();
+
+            walker.Messages = sb;
+
+            if ((bool)ceArgumentListUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teArgumentListRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        StringBuilder DisplayPropertyStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
             if ((bool)ceShowPropertyBlock.IsChecked)
@@ -227,17 +287,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        StringBuilder DisplayFieldDeclarationWalkerVB(StringBuilder sb, string filePath, string pattern)
+        StringBuilder DisplayFieldDeclarationWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
             walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.FieldDeclaration();
@@ -277,18 +328,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        StringBuilder DisplayClassStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        StringBuilder DisplayClassStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
-            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker = null;
 
             if ((bool)ceShowClassBlock.IsChecked)
             {
@@ -317,17 +359,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private StringBuilder DisplayImportsStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        private StringBuilder DisplayImportsStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ImportsStatement();
 
             walker.Messages = sb;
@@ -348,17 +381,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        StringBuilder DisplayMethodStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        StringBuilder DisplayMethodStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
             if ((bool)ceShowMethodBlock.IsChecked)
@@ -390,17 +414,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        StringBuilder DisplayModuleStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        StringBuilder DisplayModuleStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
             if ((bool)ceShowModuleBlock.IsChecked)
@@ -430,17 +445,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private StringBuilder DisplayNamespaceStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        private StringBuilder DisplayNamespaceStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.NamespaceStatement();
 
             walker.Messages = sb;
@@ -464,7 +470,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private void ProcessOperation(SearchFileCommand command)
+        private void ProcessOperation(SearchTreeCommand command)
         {
             StringBuilder sb = new StringBuilder();
             CodeExplorer.teSourceCode.Clear();
@@ -490,7 +496,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     else
                     {
                         sb.AppendLine("Searching " + filePath);
-                        sb = command(sb, filePath, pattern);
+
+                        var sourceCode = "";
+
+                        using (var sr = new StreamReader(filePath))
+                        {
+                            sourceCode = sr.ReadToEnd();
+                        }
+
+                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+                        sb = command(sb, tree, pattern);
                     }
                 }
             }
@@ -609,19 +625,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, string filePath, string pattern)
+        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            //StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression();
 
             walker.Messages = sb;
@@ -645,19 +650,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private StringBuilder DisplayVariableDeclaratorWalkerVB(StringBuilder sb, string filePath, string pattern)
+        private StringBuilder DisplayVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            //StringBuilder sb = new StringBuilder();
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator();
 
             walker.Messages = sb;
@@ -696,20 +690,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, string filePath, string pattern)
+        private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
         {
-            //StringBuilder sb = new StringBuilder();
-            Boolean showFields = (bool)ceShowFields.IsChecked;
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(filePath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
 
             walker.Messages = sb;
