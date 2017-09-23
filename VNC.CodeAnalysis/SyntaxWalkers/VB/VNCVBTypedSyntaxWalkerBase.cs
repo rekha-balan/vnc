@@ -17,7 +17,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Boolean HasAttributes = false;
 
         public Boolean IsBoolean = false;
+        public Boolean IsByte = false;
         public Boolean IsDate = false;
+        public Boolean IsDataTable = false;
         public Boolean IsDateTime = false;
         public Boolean IsInt16 = false;
         public Boolean IsInt32 = false;
@@ -27,5 +29,72 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Boolean IsString = false;
 
         public Boolean IsOtherType = false;
+
+        internal bool FilterByType(AsClauseSyntax asClause)
+        {
+            Boolean addField = false;
+
+            if (asClause == null || AllTypes)
+            {
+                addField = true;
+            }
+            else
+            {
+                switch (asClause.Type().ToString())
+                {
+                    case "Boolean":
+                        if (IsBoolean) addField = true;
+                        break;
+
+                    case "Byte":
+                        if (IsByte) addField = true;
+                        break;
+
+                    case "DataTable":
+                        if (IsDataTable) addField = true;
+                        break;
+
+                    case "Date":
+                        if (IsDate) addField = true;
+                        break;
+
+                    case "DateTime":
+                        if (IsDateTime) addField = true;
+                        break;
+
+                    case "Int16":
+                        if (IsInt16) addField = true;
+                        break;
+
+                    case "Int32":
+                        if (IsInt32) addField = true;
+                        break;
+
+                    case "Integer":
+                        if (IsInteger) addField = true;
+                        break;
+
+                    case "Long":
+                        if (IsLong) addField = true;
+                        break;
+
+                    case "Single":
+                        if (IsSingle) addField = true;
+                        break;
+
+                    case "String":
+                        if (IsString) addField = true;
+                        break;
+
+                    default:
+                        if (IsOtherType) addField = true;
+                        //if (IsOtherType && !displayStructure) addField = true;
+
+                        break;
+                }
+            }
+            
+            return addField;
+        }
     }
 }

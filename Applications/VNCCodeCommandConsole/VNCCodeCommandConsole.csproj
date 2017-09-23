@@ -243,8 +243,11 @@
     <Compile Include="User Interface\User Controls\wucCommandsDesign.xaml.cs">
       <DependentUpon>wucCommandsDesign.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\User Controls\wucCommandsFind.xaml.cs">
-      <DependentUpon>wucCommandsFind.xaml</DependentUpon>
+    <Compile Include="User Interface\User Controls\wucCommandsFind.cs">
+	      <DependentUpon>wucCommandsFind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsFindSyntax.cs">
+	      <DependentUpon>wucCommandsFindSyntax.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsParse.cs">
       <DependentUpon>wucCommandsParse.xaml</DependentUpon>
@@ -262,7 +265,9 @@
       <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucDXBase.cs" />
-    <Compile Include="User Interface\User Controls\wucFind_Picker.cs" />
+    <Compile Include="User Interface\User Controls\wucFind_Picker.cs">
+		<DependentUpon>wucFind_Picker.xaml</DependentUpon>
+	</Compile>
     <Compile Include="User Interface\User Controls\wucSourceBranch_Picker.xaml.cs">
       <DependentUpon>wucSourceBranch_Picker.xaml</DependentUpon>
     </Compile>
@@ -361,6 +366,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucCommandsFind.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsFindSyntax.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

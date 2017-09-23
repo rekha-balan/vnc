@@ -11,12 +11,8 @@ using System.Text.RegularExpressions;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class StructureBlock : VisualBasicSyntaxWalker
+    public class StructureBlock : VNCVBTypedSyntaxWalkerBase
     {
-        public StringBuilder Messages;
-        public Boolean DisplayClassOrModuleName;
-        public Boolean DisplayMethodName;
-
         /// <summary>
         /// Regular Expression
         /// </summary>
@@ -29,29 +25,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Boolean ShowFields = false;
 
         public Boolean AllFieldTypes = false;
-        public Boolean HasAttributes = false;
-
-        public Boolean IsBoolean = false;
-        public Boolean IsDate = false;
-        public Boolean IsDateTime = false;
-        public Boolean IsInt16 = false;
-        public Boolean IsInt32 = false;
-        public Boolean IsInteger = false;
-        public Boolean IsLong = false;
-        public Boolean IsSingle = false;
-        public Boolean IsString = false;
-
-        public Boolean IsOtherType = false;
 
         private Regex structureNameRegEx;
         private Regex fieldNameRegEx;
 
-        public StructureBlock() : base(SyntaxWalkerDepth.StructuredTrivia)
-        {
 
-        }
-
-        public void InitializeRegEx()
+        public override void InitializeRegEx()
         {
             try
             {
@@ -109,34 +88,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                         var ac5 = typeof(Int32);
                         var ac6 = ac5.ToString();
 
-                        //if (IsString)
-                        //{
-                        //    if (asClauseType.ToString() == typeof(String).Name)
-                        //    {
-                        //        displayField = true;
-                        //    }
-                        //}
-
-                        //if (IsInt16)
-                        //{
-                        //    if (asClauseType.ToString() == typeof(Int16).Name)
-                        //    {
-                        //        displayField = true;
-                        //    }
-                        //}
-
-                        //if (IsInt32)
-                        //{
-                        //    if (asClauseType.ToString() == typeof(Int32).Name)
-                        //    {
-                        //        displayField = true;
-                        //    }
-                        //}
-
-                        //if (! displayStructure)
-                        //{
-                            switch (asClauseType.ToString())
-                            {
+                        switch (asClauseType.ToString())
+                        {
                             case "Boolean":
                                 if (IsBoolean) addField = true;
                                 break;
@@ -177,8 +130,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                                     if (IsOtherType && !displayStructure) addField = true;
 
                                     break;
-                            }                            
-                        //}
+                        }                            
+
 
                         if (HasAttributes)
                         {

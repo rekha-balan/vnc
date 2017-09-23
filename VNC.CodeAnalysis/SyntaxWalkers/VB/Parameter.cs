@@ -17,59 +17,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             {
-                //var nodeInitializer = node.Parameter;
-                //var nodeNames = nodeInitializer.Identifier;
-
-                var asClause = node.AsClause;
-                var asClauseType = asClause.Type();
-                Boolean addField = false;
-
-                switch (asClauseType.ToString())
-                {
-                    case "Boolean":
-                        if (IsBoolean) addField = true;
-                        break;
-
-                    case "Date":
-                        if (IsDate) addField = true;
-                        break;
-
-                    case "DateTime":
-                        if (IsDateTime) addField = true;
-                        break;
-
-                    case "Int16":
-                        if (IsInt16) addField = true;
-                        break;
-
-                    case "Int32":
-                        if (IsInt32) addField = true;
-                        break;
-
-                    case "Integer":
-                        if (IsInteger) addField = true;
-                        break;
-
-                    case "Long":
-                        if (IsLong) addField = true;
-                        break;
-
-                    case "Single":
-                        if (IsSingle) addField = true;
-                        break;
-
-                    case "String":
-                        if (IsString) addField = true;
-                        break;
-
-                    default:
-                        if (IsOtherType) addField = true;
-                        //if (IsOtherType && !displayStructure) addField = true;
-
-                        break;
-                }
-
-                if (addField)
+                if (FilterByType(node.AsClause))
                 {
                     string messageContext = "";
 

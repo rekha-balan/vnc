@@ -21,22 +21,22 @@ using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
-    public partial class wucCommandsFind : wucDXBase
+    public partial class wucCommandsFindSyntax : wucDXBase
     {
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
-        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath);
         delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
 
 
-        delegate StringBuilder SearchTreeCommand(StringBuilder sb, SyntaxTree tree, string pattern);
+        delegate StringBuilder SearchTreeCommand(StringBuilder sb, SyntaxTree tree);
         delegate StringBuilder RewriteTreeCommand(StringBuilder sb, SyntaxTree tree, string targetPattern, string replacementPattern);
 
 
         #region Constructors
 
-        public wucCommandsFind()
+        public wucCommandsFindSyntax()
         {
 #if TRACE
             long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
@@ -102,46 +102,57 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+
         private void btnParameterListWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayParameterListWalkerVB);
         }
+
         private void btnArgumentListWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayArgumentListWalkerVB);
         }
+
         private void btnPropertyStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayPropertyStatementWalkerVB);
         }
+
         private void btnFieldDeclarationWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayFieldDeclarationWalkerVB);
         }
+
         private void btnModuleStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayModuleStatementWalkerVB);
         }
+
         private void btnMethodStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayMethodStatementWalkerVB);
         }
+
         private void btnClassStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayClassStatementWalkerVB);
         }
+
         private void btnNamespaceStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayNamespaceStatementWalkerVB);
         }
+
         private void btnFindStructures_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayStructureBlockWalkerVB);
         }
+
         private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayVariableDeclaratorWalkerVB);
         }
+
         private void btnImportsStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayImportsStatementWalkerVB);
@@ -184,63 +195,68 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
-        StringBuilder DisplayParameterListWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+
+        private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            walker.ShowFields = (bool)ceShowFields.IsChecked;
+
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceStructuresUseRegEx.IsChecked, teStructureRegEx.Text,
+                tree, walker);
+        }
+
+        private StringBuilder DisplayVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            return InvokeVNCTypedSyntaxWalker(sb,
+                (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
+                tree, walker);
+        }
+
+        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
+                tree, walker);
+        }
+
+        private StringBuilder DisplayParameterListWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ParameterList();
 
-            return InvokeVNCSyntaxWalker(
-                sb, 
+            return InvokeVNCSyntaxWalker(sb, 
                 (bool)ceParameterListUseRegEx.IsChecked, teParameterListRegEx.Text, 
                 tree, walker);
         }
 
-        StringBuilder InvokeVNCSyntaxWalker(
-            StringBuilder sb, 
-            Boolean useRegEx, string regEx,
-            SyntaxTree syntaxTree,
-            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker)
-        {
-            walker.Messages = sb;
-
-            if (useRegEx)
-            {
-                walker.IdentifierNames = regEx;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(syntaxTree.GetRoot());
-
-            return sb;
-        }
-
-        private StringBuilder DisplayArgumentListWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayArgumentListWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ArgumentList();
 
-            walker.Messages = sb;
-
-            if ((bool)ceArgumentListUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teArgumentListRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceArgumentListUseRegEx.IsChecked, teArgumentListRegEx.Text,
+                tree, walker);
         }
 
-        StringBuilder DisplayPropertyStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayPropertyStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
@@ -253,82 +269,31 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.PropertyStatement();
             }
 
-            walker.Messages = sb;
-
-            if ((bool)cePropertyStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = tePropertyStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
             walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
-            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
-            walker.IsDate = (bool)ceIsDate.IsChecked;
-            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
-            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
-            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
-            walker.IsInteger = (bool)ceIsInteger.IsChecked;
-            walker.IsLong = (bool)ceIsLong.IsChecked;
-            walker.IsSingle = (bool)ceIsSingle.IsChecked;
-            walker.IsString = (bool)ceIsString.IsChecked;
-
-            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCTypedSyntaxWalker(sb,
+                (bool)cePropertyStatementUseRegEx.IsChecked, tePropertyStatementRegEx.Text,
+                tree, walker);
         }
 
-        StringBuilder DisplayFieldDeclarationWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayFieldDeclarationWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
             walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.FieldDeclaration();
 
-            walker.Messages = sb;
-
-            if ((bool)ceFieldDeclarationUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teFieldDeclarationRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
             walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
 
-            //walker.AllFieldTypes = (bool)ceAllTypes.IsChecked;
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
-            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
-            walker.IsDate = (bool)ceIsDate.IsChecked;
-            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
-            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
-            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
-            walker.IsInteger = (bool)ceIsInteger.IsChecked;
-            walker.IsLong = (bool)ceIsLong.IsChecked;
-            walker.IsSingle = (bool)ceIsSingle.IsChecked;
-            walker.IsString = (bool)ceIsString.IsChecked;
-
-            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCTypedSyntaxWalker(sb,
+                (bool)ceFieldDeclarationUseRegEx.IsChecked, teFieldDeclarationRegEx.Text,
+                tree, walker);
         }
 
-        StringBuilder DisplayClassStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayClassStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker = null;
 
@@ -341,47 +306,21 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ClassStatement();
             }
 
-            walker.Messages = sb;
-
-            if ((bool)ceClassStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teClassStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceClassStatementUseRegEx.IsChecked, teClassStatementRegEx.Text,
+                tree, walker);
         }
 
-        private StringBuilder DisplayImportsStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayImportsStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ImportsStatement();
 
-            walker.Messages = sb;
-
-            if ((bool)ceImportsStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teImportsStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceImportsStatementUseRegEx.IsChecked, teImportsStatementRegEx.Text,
+                tree, walker);
         }
 
-        StringBuilder DisplayMethodStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayMethodStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
@@ -394,27 +333,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MethodStatement();
             }
 
-            walker.Messages = sb;
-
-            if ((bool)ceMethodStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teMethodStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceMethodStatementUseRegEx.IsChecked, teMethodStatementRegEx.Text,
+                tree, walker);
         }
 
-        StringBuilder DisplayModuleStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayModuleStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
@@ -427,95 +351,18 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ModuleStatement();
             }
 
-            walker.Messages = sb;
-
-            if ((bool)ceModuleStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teModuleStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceModuleStatementUseRegEx.IsChecked, teModuleStatementRegEx.Text,
+                tree, walker);
         }
 
-        private StringBuilder DisplayNamespaceStatementWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        private StringBuilder DisplayNamespaceStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.NamespaceStatement();
 
-            walker.Messages = sb;
-
-            if ((bool)ceNamespaceStatementUseRegEx.IsChecked)
-            {
-                walker.IdentifierNames = teNamespaceStatementRegEx.Text;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
-        }
-
-        private void ProcessOperation(SearchTreeCommand command)
-        {
-            StringBuilder sb = new StringBuilder();
-            CodeExplorer.teSourceCode.Clear();
-
-            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
-            string pattern = teIdentifierRegEx.Text;
-
-            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
-
-            if (filesToProcess.Count > 0)
-            {
-                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                {
-                    sb.AppendLine("Would Search these files ....");
-                }
-
-                foreach (string filePath in filesToProcess)
-                {
-                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                    {
-                        sb.AppendLine(string.Format("  {0}", filePath));
-                    }
-                    else
-                    {
-                        sb.AppendLine("Searching " + filePath);
-
-                        var sourceCode = "";
-
-                        using (var sr = new StreamReader(filePath))
-                        {
-                            sourceCode = sr.ReadToEnd();
-                        }
-
-                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
-                        sb = command(sb, tree, pattern);
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("No files selected to process");
-            }
-
-            CodeExplorer.teSourceCode.Text = sb.ToString();
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceNamespaceStatementUseRegEx.IsChecked, teNamespaceStatementRegEx.Text,
+                tree, walker);
         }
 
         private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
@@ -625,15 +472,67 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
-        {
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression();
+        #region Utility Methods
 
+        private void ProcessOperation(SearchTreeCommand command)
+        {
+            StringBuilder sb = new StringBuilder();
+            CodeExplorer.teSourceCode.Clear();
+
+            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            string pattern = teIdentifierRegEx.Text;
+
+            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
+
+            if (filesToProcess.Count > 0)
+            {
+                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                {
+                    sb.AppendLine("Would Search these files ....");
+                }
+
+                foreach (string filePath in filesToProcess)
+                {
+                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    {
+                        sb.AppendLine(string.Format("  {0}", filePath));
+                    }
+                    else
+                    {
+                        sb.AppendLine("Searching " + filePath);
+
+                        var sourceCode = "";
+
+                        using (var sr = new StreamReader(filePath))
+                        {
+                            sourceCode = sr.ReadToEnd();
+                        }
+
+                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+                        sb = command(sb, tree);
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("No files selected to process");
+            }
+
+            CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        StringBuilder InvokeVNCSyntaxWalker(
+            StringBuilder sb, 
+            Boolean useRegEx, string regEx,
+            SyntaxTree syntaxTree,
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker)
+        {
             walker.Messages = sb;
 
-            if ((bool)ceVariablesUseRegEx.IsChecked)
+            if (useRegEx)
             {
-                walker.IdentifierNames = teVariableRegEx.Text;
+                walker.IdentifierNames = regEx;
             }
             else
             {
@@ -642,23 +541,22 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.InitializeRegEx();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
-
-            walker.Visit(tree.GetRoot());
+            walker.Visit(syntaxTree.GetRoot());
 
             return sb;
         }
 
-        private StringBuilder DisplayVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
+        StringBuilder InvokeVNCTypedSyntaxWalker(
+            StringBuilder sb,
+            Boolean useRegEx, string regEx,
+            SyntaxTree syntaxTree,
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker)
         {
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator();
-
             walker.Messages = sb;
 
-            if ((bool)ceVariablesUseRegEx.IsChecked)
+            if (useRegEx)
             {
-                walker.IdentifierNames = teVariableRegEx.Text;
+                walker.IdentifierNames = regEx;
             }
             else
             {
@@ -666,15 +564,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             walker.InitializeRegEx();
-
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.AllTypes = (bool)ceAllTypes.IsChecked;
-            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
+            walker.IsByte = (bool)ceIsByte.IsChecked;
             walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
             walker.IsDate = (bool)ceIsDate.IsChecked;
+            walker.IsDataTable = (bool)ceIsDataTable.IsChecked;
             walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
             walker.IsInt16 = (bool)ceIsInt16.IsChecked;
             walker.IsInt32 = (bool)ceIsInt32.IsChecked;
@@ -685,60 +581,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
 
-            walker.Visit(tree.GetRoot());
+            walker.Visit(syntaxTree.GetRoot());
 
             return sb;
         }
 
-        private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, SyntaxTree tree, string pattern)
-        {
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
-
-            walker.Messages = sb;
-
-            if ((bool)ceStructuresUseRegEx.IsChecked)
-            {
-                walker.StructureNames = teStructureRegEx.Text;
-            }
-            else
-            {
-                walker.StructureNames = ".*";
-            }
-
-            if ((bool)ceFieldsUseRegEx.IsChecked)
-            {
-                walker.FieldNames = teFieldsRegEx.Text;
-            }
-            else
-            {
-                walker.FieldNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
-
-            walker.ShowFields = (bool)ceShowFields.IsChecked;
-
-            walker.AllFieldTypes = (bool)ceAllTypes.IsChecked;
-            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
-
-            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
-            walker.IsDate = (bool)ceIsDate.IsChecked;
-            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
-            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
-            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
-            walker.IsInteger = (bool)ceIsInteger.IsChecked;
-            walker.IsLong = (bool)ceIsLong.IsChecked;
-            walker.IsSingle = (bool)ceIsSingle.IsChecked;
-            walker.IsString = (bool)ceIsString.IsChecked;
-
-            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
-
-            walker.Visit(tree.GetRoot());
-
-            return sb;
-        }
+        #endregion
     }
 }

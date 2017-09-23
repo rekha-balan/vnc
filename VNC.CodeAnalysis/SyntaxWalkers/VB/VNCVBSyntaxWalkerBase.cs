@@ -38,5 +38,22 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
             }
         }
+
+        public string GetNodeContext(VisualBasicSyntaxNode node)
+        {
+            string messageContext = "";
+
+            if (DisplayClassOrModuleName)
+            {
+                messageContext = Helpers.VB.GetContainingType(node);
+            }
+
+            if (DisplayMethodName)
+            {
+                messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+            }
+
+            return messageContext;
+        }
     }
 }

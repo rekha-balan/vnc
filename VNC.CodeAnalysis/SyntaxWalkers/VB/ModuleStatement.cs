@@ -17,22 +17,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             {
-                //string messageContext = "";
-
-                //if (DisplayClassOrModuleName)
-                //{
-                //    messageContext = Helpers.VB.GetContainingType(node);
-                //}
-
-                //if (DisplayMethodName)
-                //{
-                //    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-                //}
-
-                //Messages.AppendLine(String.Format("{0} {1}",
-                //    messageContext,
-                //    node.ToString()));
-
                 Messages.AppendLine(String.Format("{0}", node.ToString()));
             }
 

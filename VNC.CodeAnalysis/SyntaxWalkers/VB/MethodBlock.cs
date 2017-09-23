@@ -17,15 +17,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.SubOrFunctionStatement.Identifier.ToString()).Success)
             {
-                string messageContext = "";
-
-                if (DisplayClassOrModuleName)
-                {
-                    messageContext = Helpers.VB.GetContainingType(node);
-                }
-
                 Messages.AppendLine(String.Format("{0} {1}",
-                    messageContext,
+                    GetNodeContext(node),
                     node.ToString()));
             }
 
