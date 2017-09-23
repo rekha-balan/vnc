@@ -9,16 +9,15 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-
-
-
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class InvocationExpression : VNCVBSyntaxWalkerBase
+    public class ImportsStatement : VNCVBSyntaxWalkerBase
     {
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        public override void VisitImportsStatement(ImportsStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
+            var n = node.ImportsClauses.ToString();
+
+            if (identifierNameRegEx.Match(node.ImportsClauses.ToString()).Success)
             {
                 string messageContext = "";
 
@@ -37,9 +36,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     node.ToString()));
             }
 
-            // Call base to visit children
-
-            base.VisitInvocationExpression(node);
+            base.VisitImportsStatement(node);
         }
     }
 }

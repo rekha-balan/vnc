@@ -89,18 +89,26 @@
 
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
 
+                                <dxlc:LayoutGroup  Header="Sources" x:Name="lg_CodeExplorerContext"  >
+                                    
+                                    <dxlc:LayoutItem>
+                                        <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />                                    	
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup>
+                                
+                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
+
+                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True">
+                                        <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup> 
+                                
                                 <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree" >
 
                                     <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
                                         <dxe:TextEdit x:Name="teSyntaxTree" />
-                                    </dxlc:LayoutItem>
-
-                                </dxlc:LayoutGroup>
-
-                                <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
-
-                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True">
-                                        <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
@@ -177,9 +185,9 @@
                             <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
                         </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
+                        <!--<dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
                             <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
-                        </dxdo:LayoutPanel>
+                        </dxdo:LayoutPanel>-->
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
 

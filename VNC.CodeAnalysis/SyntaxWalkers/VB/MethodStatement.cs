@@ -9,16 +9,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-
-
-
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class InvocationExpression : VNCVBSyntaxWalkerBase
+    public class MethodStatement : VNCVBSyntaxWalkerBase
     {
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        public override void VisitMethodStatement(MethodStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
+            if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             {
                 string messageContext = "";
 
@@ -27,19 +24,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     messageContext = Helpers.VB.GetContainingType(node);
                 }
 
-                if (DisplayMethodName)
-                {
-                    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-                }
-
                 Messages.AppendLine(String.Format("{0} {1}",
                     messageContext,
                     node.ToString()));
             }
 
-            // Call base to visit children
-
-            base.VisitInvocationExpression(node);
+            base.VisitMethodStatement(node);
         }
     }
 }

@@ -121,26 +121,17 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                     if (DisplayClassOrModuleName)
                     {
-                        // HACK(crhodes)
-                        // Figure out how to get Helpers to work
-
                         messageContext = Helpers.VB.GetContainingType(node);
                     }
 
                     if (DisplayMethodName)
                     {
-                        // HACK(crhodes)
-                        // Figure out how to get Helpers to work
-
                         messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
                     }
 
                     Messages.AppendLine(String.Format("{0} {1}",
                         messageContext,
                         node.ToString()));
-
-                    //Messages.AppendLine(string.Format("  {0}", node.ToString()));
-                    //displayStructure = true;
                 }
 
                 //if (HasAttributes)

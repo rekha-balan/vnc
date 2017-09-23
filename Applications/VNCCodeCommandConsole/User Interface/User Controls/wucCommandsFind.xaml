@@ -44,17 +44,196 @@
 
     <dxlc:LayoutControl Orientation="Vertical">
 
+        <dxlc:LayoutGroup Header="Find ImportsStatementSyntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceImportsStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Imports">
+                        <dxe:TextEdit x:Name="teImportsStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceImportsStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="ImportsStatement Walker" Click="btnImportsStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find NamespaceSyntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceNamespaceStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Namespaces">
+                        <dxe:TextEdit x:Name="teNamespaceStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceNamespaceStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="NamepspaceStatement Walker" Click="btnNamespaceStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find ClassStatement Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceClassStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Classes">
+                        <dxe:TextEdit x:Name="teClassStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceClassStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+            	<dxe:CheckEdit x:Name="ceShowClassBlock" Content="Show Class Block" IsChecked="False" />
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem>
+                <Button Content="ClassStatement Walker" Click="btnClassStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find ModuleStatement Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceModuleStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Modules">
+                        <dxe:TextEdit x:Name="teModuleStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceModuleStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceShowModuleBlock" Content="Show Module Block" IsChecked="False" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button Content="ModuleStatement Walker" Click="btnModuleStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceMethodStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Methods">
+                        <dxe:TextEdit x:Name="teMethodStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceMethodStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceShowMethodBlock" Content="Show Method Block" IsChecked="False" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button Content="MethodStatement Walker" Click="btnMethodStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find InvocationExpressionSyntax" 
             View="GroupBox"
             Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
             
-            <dxlc:LayoutItem Label="Identifier" LabelPosition="Top">
-                <!--<uiuc:wucFind_Picker x:Name="wucFind_Picker" 
-                                             ControlChanged="wucFindPicker_ControlChanged" />-->
-                <dxe:TextEdit x:Name="teIdentifier" >
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIdentifierUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teIdentifierRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceVariablesUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
                 <Button Content="InvocationExpression Walker" Click="btnInvocationExpressionWalker_Click"/>
@@ -151,45 +330,6 @@
                                       ToolTip="Supports Regular Expressions"/>
                     </dxlc:LayoutItem>
 
-                    <!--<dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceShowFields" 
-                                   Content="ShowFields" 
-                                   IsChecked="True"/>
-                    </dxlc:LayoutItem>-->
-
-                    <!--<dxlc:LayoutItem>
-                        
-                        <dxe:CheckEdit x:Name="ceAllTypes_Variables" 
-                               Content="All Types" 
-                               IsChecked="True" />
-                    </dxlc:LayoutItem>-->
-                    
-                    <!--<dxlc:LayoutGroup
-                    	Orientation="Vertical"
-                        Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}" >
-
-                        <dxlc:LayoutItem>
-                            <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False"
-                                           Checked="ceFieldsUseRegEx_Checked"
-                                           EditValueChanged="ceFieldsUseRegEx_EditValueChanged"/>
-                        </dxlc:LayoutItem>
-
-                        <dxlc:LayoutItem Label="Fields" >
-                            <dxe:TextEdit x:Name="teFieldsRegEx" Text=".*" 
-                                    IsEnabled="{cb:Binding ElementName=ceFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
-                                    ToolTip="Supports Regular Expressions"/>
-                        </dxlc:LayoutItem>
-
-                        <dxlc:LayoutItem
-                            Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}">
-                            <dxe:CheckEdit x:Name="ceAllTypes" 
-                               Content="All Types" 
-                               IsChecked="True" />
-                        </dxlc:LayoutItem>
-
-                    </dxlc:LayoutGroup>-->
-
                 </dxlc:LayoutGroup>
 
             </dxlc:LayoutGroup>
@@ -211,7 +351,7 @@
                 	Orientation="Vertical">
                     <dxlc:LayoutItem>
                     	<dxe:CheckEdit x:Name="ceStructuresUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False"/>
+                                       IsChecked="False" />
                     </dxlc:LayoutItem>
                     
                     <dxlc:LayoutItem Label="Structures">
@@ -232,9 +372,7 @@
                         
                         <dxlc:LayoutItem>
                             <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False"
-                                           Checked="ceFieldsUseRegEx_Checked"
-                                           EditValueChanged="ceFieldsUseRegEx_EditValueChanged"/>
+                                       IsChecked="False" />
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem Label="Fields" >

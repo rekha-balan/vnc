@@ -26,6 +26,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
+        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
+
         #region Constructors
 
         public wucCommandsFind()
@@ -94,55 +97,40 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnModuleStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayModuleStatementWalkerVB);
+        }
+        private void btnMethodStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayMethodStatementWalkerVB);
+        }
+        private void btnClassStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayClassStatementWalkerVB);
+        }
+        private void btnNamespaceStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayNamespaceStatementWalkerVB);
+        }
+        private void btnFindStructures_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayStructureBlockWalkerVB);
+        }
+        private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayVariableDeclaratorWalkerVB);
+        }
+        private void btnImportsStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayImportsStatementWalkerVB);
+        }
+
         private void btnHttpContextWalker_Click(object sender, RoutedEventArgs e)
         {
-            //string controlTag = (string)e.Source
-            var foo = e;
             var tag = ((System.Windows.Controls.Button)sender).Tag.ToString();
 
             DisplayHttpContextWalkerVB(CodeExplorerContext, tag);
-            //DisplayHttpContextWalkerVB(CodeExplorerContext.teSourceFile.Text, tag);
-        }
-
-        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
-        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
-
-        void ProcessOperation(SearchFileCommand command)
-        {
-            StringBuilder sb = new StringBuilder();
-            CodeExplorer.teSourceCode.Clear();
-
-            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
-            string invocationExpression = teIdentifier.Text;
-
-            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
-
-            if (filesToProcess.Count > 0)
-            {
-                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                {
-                    sb.AppendLine("Would Search these files ....");
-                }
-
-                foreach (string filePath in filesToProcess)
-                {
-                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                    {
-                        sb.AppendLine(string.Format("  {0}", filePath));
-                    }
-                    else
-                    {
-                        sb.AppendLine("Searching " + filePath);
-                        sb = command(sb, filePath, invocationExpression);
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("No files selected to process");
-            }
-
-            CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
         private void btnInvocationExpressionWalker_Click(object sender, RoutedEventArgs e)
@@ -162,7 +150,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 sourceCode = sr.ReadToEnd();
             }
 
-            string identifier = teIdentifier.Text;
+            string identifier = teIdentifierRegEx.Text;
 
             Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
             var additionalLocations = (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;
@@ -172,26 +160,236 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        //private void wucFindPicker_ControlChanged()
-        //{
-
-        //}
-
-        //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
-        //{
-        //    //CustomFormat.FormatStorageColumns(e);
-        //}
-
         #endregion
-
-        //private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
-        //{
-        //    //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
-        //}
 
         #region Main Function Routines
 
-        void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
+        StringBuilder DisplayClassStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker = null;
+
+            if ((bool)ceShowClassBlock.IsChecked)
+            {
+                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ClassBlock();
+            }
+            else
+            {
+                walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ClassStatement();
+            }
+
+            walker.Messages = sb;
+
+            if ((bool)ceClassStatementUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teClassStatementRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        private StringBuilder DisplayImportsStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ImportsStatement();
+
+            walker.Messages = sb;
+
+            if ((bool)ceImportsStatementUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teImportsStatementRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        StringBuilder DisplayMethodStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker = null;
+
+            if ((bool)ceShowMethodBlock.IsChecked)
+            {
+                walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MethodBlock();
+            }
+            else
+            {
+                walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MethodStatement();
+            }
+
+            walker.Messages = sb;
+
+            if ((bool)ceMethodStatementUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teMethodStatementRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        StringBuilder DisplayModuleStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker = null;
+
+            if ((bool)ceShowModuleBlock.IsChecked)
+            {
+                walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ModuleBlock();
+            }
+            else
+            {
+                walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ModuleStatement();
+            }
+
+            walker.Messages = sb;
+
+            if ((bool)ceModuleStatementUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teModuleStatementRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        private StringBuilder DisplayNamespaceStatementWalkerVB(StringBuilder sb, string filePath, string pattern)
+        {
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.NamespaceStatement();
+
+            walker.Messages = sb;
+
+            if ((bool)ceNamespaceStatementUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teNamespaceStatementRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            walker.Visit(tree.GetRoot());
+
+            return sb;
+        }
+
+        private void ProcessOperation(SearchFileCommand command)
+        {
+            StringBuilder sb = new StringBuilder();
+            CodeExplorer.teSourceCode.Clear();
+
+            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
+            string pattern = teIdentifierRegEx.Text;
+
+            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
+
+            if (filesToProcess.Count > 0)
+            {
+                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                {
+                    sb.AppendLine("Would Search these files ....");
+                }
+
+                foreach (string filePath in filesToProcess)
+                {
+                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    {
+                        sb.AppendLine(string.Format("  {0}", filePath));
+                    }
+                    else
+                    {
+                        sb.AppendLine("Searching " + filePath);
+                        sb = command(sb, filePath, pattern);
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("No files selected to process");
+            }
+
+            CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
         {
             StringBuilder sb = new StringBuilder();
             Dictionary<string, Int32> matches = new Dictionary<string, Int32>();
@@ -298,7 +496,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, string filePath, string invocationExpression)
+        private StringBuilder DisplayInvocationExpressionWalkerVB(StringBuilder sb, string filePath, string pattern)
         {
             //StringBuilder sb = new StringBuilder();
 
@@ -311,9 +509,23 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression(invocationExpression);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression();
 
             walker.Messages = sb;
+
+            if ((bool)ceVariablesUseRegEx.IsChecked)
+            {
+                walker.IdentifierNames = teVariableRegEx.Text;
+            }
+            else
+            {
+                walker.IdentifierNames = ".*";
+            }
+
+            walker.InitializeRegEx();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.Visit(tree.GetRoot());
 
@@ -432,26 +644,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             walker.Visit(tree.GetRoot());
 
             return sb;
-        }
-
-        private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessOperation(DisplayVariableDeclaratorWalkerVB);
-        }
-
-        private void btnFindStructures_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessOperation(DisplayStructureBlockWalkerVB);
-        }
-
-        private void ceFieldsUseRegEx_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ceFieldsUseRegEx_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-
         }
     }
 }
