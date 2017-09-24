@@ -102,6 +102,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB);
+        }
 
         private void btnHttpContextWalker_Click(object sender, RoutedEventArgs e)
         {
@@ -113,6 +117,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+
 
         private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
         {
@@ -217,6 +222,20 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
  PrematureExitBummer:
             CodeExplorer.teSourceCode.Text = sb.ToString();
+        }
+
+        private StringBuilder DisplayMultipleVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MultipleVariableDeclarator();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            return InvokeVNCTypedSyntaxWalker(sb,
+                (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
+                tree, walker);
         }
 
         #endregion

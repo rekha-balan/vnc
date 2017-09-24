@@ -272,6 +272,7 @@
     <Compile Include="SyntaxWalkers\VB\NamespaceStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\ImportsStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\StructureBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\MultipleVariableDeclarator.cs" />
     <Compile Include="SyntaxWalkers\VB\VariableDeclarator.cs" />
     <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\VNCVBTypedSyntaxWalkerBase.cs" />

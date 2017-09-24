@@ -65,6 +65,37 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find Multiple VariableDeclaration" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceVariablesUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Variables">
+                        <dxe:TextEdit x:Name="teVariableRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceVariablesUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="Multiple VariableDeclarator Walker" Click="btnVariableDeclaratorWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+
         <dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
      

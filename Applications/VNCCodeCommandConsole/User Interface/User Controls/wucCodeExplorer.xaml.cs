@@ -93,6 +93,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             wucCommandsFind.CodeExplorer = this;
             wucCommandsFind.CodeExplorerContext = wucCodeExplorerContext;
 
+            wucCommandsFindSyntax.CodeExplorer = this;
+            wucCommandsFindSyntax.CodeExplorerContext = wucCodeExplorerContext;
+
             wucCommandsParse.CodeExplorer = this;
             wucCommandsParse.CodeExplorerContext = wucCodeExplorerContext;
 
