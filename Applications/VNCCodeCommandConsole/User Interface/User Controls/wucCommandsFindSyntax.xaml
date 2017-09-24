@@ -551,27 +551,6 @@
             
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find HttpContext" 
-        	    View="GroupBox" Orientation="Vertical"
-                IsCollapsible="True" IsCollapsed="True">
-
-            <dxlc:LayoutItem>
-                <Button Content="Current.Application" 
-                    Click="btnHttpContextWalker_Click" Tag="Application"/>
-            </dxlc:LayoutItem>
-
-            <dxlc:LayoutItem>
-                <Button Content="Current.Session" 
-                    Click="btnHttpContextWalker_Click" Tag="Session"/>
-            </dxlc:LayoutItem>
-
-            <dxlc:LayoutItem>
-                <Button Content="Current.Cache" 
-                    Click="btnHttpContextWalker_Click" Tag="Cache"/>
-            </dxlc:LayoutItem>
-
-        </dxlc:LayoutGroup>
-
         <dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
      
