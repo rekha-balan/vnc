@@ -90,6 +90,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnLocalDeclarationStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayLocalDeclarationStatementWalkerVB);
+        }
 
         private void btnParameterListWalker_Click(object sender, RoutedEventArgs e)
         {
@@ -176,6 +180,19 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+        StringBuilder DisplayLocalDeclarationStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.LocalDeclarationStatement();
+
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            return InvokeVNCTypedSyntaxWalker(sb,
+                (bool)ceLocalDeclarationStatementUseRegEx.IsChecked, teLocalDeclarationStatementRegEx.Text,
+                tree, walker);
+        }
 
         private StringBuilder DisplayStructureBlockWalkerVB(StringBuilder sb, SyntaxTree tree)
         {

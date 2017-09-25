@@ -23,15 +23,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     GetNodeContext(node),
                     node.ToString()));
             }
-            //if (identifierNameRegEx.Match(node.Names.First().ToString()).Success)
-            //{
-            //    if (FilterByType(node.AsClause))
-            //    {
-            //        Messages.AppendLine(String.Format("{0} {1}",
-            //            GetNodeContext(node),
-            //            node.ToString()));
-            //    }
-            //}
 
             base.VisitLocalDeclarationStatement(node);
         }

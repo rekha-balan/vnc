@@ -245,6 +245,7 @@
     <Compile Include="SyntaxNode\VB\Methods.cs" />
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
+    <Compile Include="SyntaxRewriters\VB\RewriteMultipleVariableDeclarations.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
     <Compile Include="SyntaxRewriters\VB\CommentOutSingleLineInvocationExpression.cs" />
     <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="SyntaxWalkers\VB\AllToken.cs" />
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
+    <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
     <Compile Include="SyntaxWalkers\VB\ParameterList.cs" />
     <Compile Include="SyntaxWalkers\VB\PropertyBlock.cs" />

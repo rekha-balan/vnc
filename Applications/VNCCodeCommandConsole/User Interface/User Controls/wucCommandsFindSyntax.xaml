@@ -308,6 +308,36 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find LocalDeclarationStatement Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	    Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceLocalDeclarationStatementUseRegEx" Content="Use Regular Expressions"
+                                           IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Local Variables">
+                        <dxe:TextEdit x:Name="teLocalDeclarationStatementRegEx" Text=".*"
+                                          IsEnabled="{cb:Binding ElementName=ceLocalDeclarationStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                          ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="LocalDeclarationStatement Walker" Click="btnLocalDeclarationStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find InvocationExpressionSyntax" 
             View="GroupBox"
             Orientation="Vertical"
@@ -417,7 +447,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find VariableDeclarationSyntax" 
+        <dxlc:LayoutGroup Header="Find VariableDeclaratorSyntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
