@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             tabs--;
         }
 
-        public override void VisitToken(SyntaxToken token)
+        public override void VisitToken(Microsoft.CodeAnalysis.SyntaxToken token)
         {
             var indents = new String(' ', tabs * 3);
             StringBuilder.AppendLine(string.Format("{0}{1}:>{2}<", indents, token.Kind(), token));
@@ -41,7 +41,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             base.VisitToken(token);
         }
 
-        public override void VisitTrivia(SyntaxTrivia trivia)
+        public override void VisitTrivia(Microsoft.CodeAnalysis.SyntaxTrivia trivia)
         {
             var indents = new String(' ', tabs * 3);
             StringBuilder.AppendLine(string.Format("{0}{1}:>{2}<", indents, trivia.Kind(), trivia));

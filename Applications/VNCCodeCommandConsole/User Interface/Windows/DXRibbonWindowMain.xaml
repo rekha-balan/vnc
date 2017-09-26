@@ -404,7 +404,8 @@
 
                     <Grid x:Name="splashScreenGrid" >
 
-                        <uiss:wucInitialSplash />
+                        <uiuc:wucCodeExplorer />
+                        <!--<uiss:wucInitialSplash />-->
 
                     </Grid>
 

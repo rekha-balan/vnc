@@ -90,10 +90,32 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+
+        private void btnSyntaxTrivianWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplaySyntaxTriviaWalkerVB);
+        }
+
+        private void btnSyntaxTokenWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplaySyntaxTokenWalkerVB);
+        }
+
+        private void btnSyntaxNodeWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplaySyntaxNodeWalkerVB);
+        }
+
+        private void btnBinaryExpresionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayBinaryExpressiontWalkerVB);
+        }
+
         private void btnAssignmentStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayAssignmentStatementWalkerVB);
         }
+
         private void btnLocalDeclarationStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayLocalDeclarationStatementWalkerVB);
@@ -184,9 +206,44 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+        StringBuilder DisplaySyntaxNodeWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.SyntaxNode();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceSyntaxNodeUseRegEx.IsChecked, teSyntaxNodeRegEx.Text,
+                tree, walker);
+        }
+
+        StringBuilder DisplaySyntaxTokenWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.SyntaxToken();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceSyntaxTokenUseRegEx.IsChecked, teSyntaxTokenRegEx.Text,
+                tree, walker);
+        }
+
+        StringBuilder DisplaySyntaxTriviaWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.SyntaxTrivia();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceSyntaxTriviaUseRegEx.IsChecked, teSyntaxTriviaRegEx.Text,
+                tree, walker);
+        }
+
+        private StringBuilder DisplayBinaryExpressiontWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.BinaryExpression();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceBinaryExpressionUseRegEx.IsChecked, teBinaryExpressionRegEx.Text,
+                tree, walker);
+        }
         StringBuilder DisplayAssignmentStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ParameterList();
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AssignmentStatement();
 
             return InvokeVNCSyntaxWalker(sb,
                 (bool)ceAssignmentStatementUseRegEx.IsChecked, teAssignmentStatementRegEx.Text,

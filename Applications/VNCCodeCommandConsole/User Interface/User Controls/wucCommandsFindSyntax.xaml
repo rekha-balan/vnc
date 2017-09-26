@@ -241,7 +241,63 @@
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
-        
+
+        <dxlc:LayoutGroup Header="Find StructureBlockSyntax" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True"                          >
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceStructuresUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Structures">
+                        <dxe:TextEdit x:Name="teStructureRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceStructuresUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceShowFields" 
+                                   Content="ShowFields" 
+                                   IsChecked="True"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutGroup
+                    	Orientation="Vertical"
+                        Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}" >
+
+                        <dxlc:LayoutItem>
+                            <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False" />
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Fields" >
+                            <dxe:TextEdit x:Name="teFieldsRegEx" Text=".*" 
+                                    IsEnabled="{cb:Binding ElementName=ceFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                    ToolTip="Supports Regular Expressions"/>
+                        </dxlc:LayoutItem>
+
+
+
+                    </dxlc:LayoutGroup>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="Find Structures" 
+                    Click="btnFindStructures_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
@@ -507,108 +563,124 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find StructureBlockSyntax" 
+        <dxlc:LayoutGroup Header="Find BinaryExpressionSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True"                          >
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
-                
+
                 <dxlc:LayoutGroup
                 	Orientation="Vertical">
                     <dxlc:LayoutItem>
-                    	<dxe:CheckEdit x:Name="ceStructuresUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False" />
+                        <dxe:CheckEdit x:Name="ceBinaryExpressionUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
                     </dxlc:LayoutItem>
-                    
-                    <dxlc:LayoutItem Label="Structures">
-                    	<dxe:TextEdit x:Name="teStructureRegEx" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceStructuresUseRegEx, Path=IsChecked, Mode=OneWay}"
+
+                    <dxlc:LayoutItem Label="Assignments">
+                        <dxe:TextEdit x:Name="teBinaryExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceBinaryExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
                                       ToolTip="Supports Regular Expressions"/>
                     </dxlc:LayoutItem>
-                    
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceShowFields" 
-                                   Content="ShowFields" 
-                                   IsChecked="True"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutGroup
-                    	Orientation="Vertical"
-                        Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}" >
-                        
-                        <dxlc:LayoutItem>
-                            <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False" />
-                        </dxlc:LayoutItem>
-
-                        <dxlc:LayoutItem Label="Fields" >
-                            <dxe:TextEdit x:Name="teFieldsRegEx" Text=".*" 
-                                    IsEnabled="{cb:Binding ElementName=ceFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
-                                    ToolTip="Supports Regular Expressions"/>
-                        </dxlc:LayoutItem>
-
-
-
-                    </dxlc:LayoutGroup>
 
                 </dxlc:LayoutGroup>
-
-                <!--<dxlc:LayoutGroup
-            	    Orientation="Vertical"
-                    Visibility="{cb:Binding ElementName=ceAllTypes, Path=!IsChecked}">
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceHasAttributes" 
-                               Content="Has Attributes" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIsBoolean" 
-                               Content="Is Boolean" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIsDate" 
-                               Content="Is Date" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIsInt16" 
-                               Content="Is Int16" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIsInt32" 
-                               Content="Is Int32" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIsString" 
-                               Content="Is String" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-                    
-                    <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceOtherTypes" 
-                               Content="Is OtherType" 
-                               IsChecked="{cb:Binding ElementName=ceAllTypes, Path=IsChecked, Mode=OneWay}"/>
-                    </dxlc:LayoutItem>
-
-                </dxlc:LayoutGroup>-->
 
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="Find Structures" 
-                    Click="btnFindStructures_Click"/>
+                <Button Content="BinaryExpression Walker" Click="btnBinaryExpresionWalker_Click"/>
             </dxlc:LayoutItem>
-            
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find SyntaxNodes" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceSyntaxNodeUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Nodes">
+                        <dxe:TextEdit x:Name="teSyntaxNodeRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceSyntaxNodeUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="SyntaxNode Walker" Click="btnSyntaxNodeWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Header="Find SyntaxTokens" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceSyntaxTokenUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Tokens">
+                        <dxe:TextEdit x:Name="teSyntaxTokenRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceSyntaxTokenUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="SyntaxToken Walker" Click="btnSyntaxTokenWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find SyntaxTrivia" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceSyntaxTriviaUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Trivia">
+                        <dxe:TextEdit x:Name="teSyntaxTriviaRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceSyntaxTriviaUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="SyntaxTrivia Walker" Click="btnSyntaxTrivianWalker_Click"/>
+            </dxlc:LayoutItem>
+
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup Header="Output Configuration Options" 

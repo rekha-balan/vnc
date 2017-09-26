@@ -259,6 +259,7 @@
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
     <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\ConcatenateExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
     <Compile Include="SyntaxWalkers\VB\ParameterList.cs" />
@@ -276,6 +277,9 @@
     <Compile Include="SyntaxWalkers\VB\ImportsStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\StructureBlock.cs" />
     <Compile Include="SyntaxWalkers\VB\MultipleVariableDeclarator.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\VariableDeclarator.cs" />
     <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\VNCVBTypedSyntaxWalkerBase.cs" />

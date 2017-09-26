@@ -68,12 +68,13 @@
             <dxdo:DockLayoutManager 
                 Name="lg_Body_dlm" dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
 
-                <dxdo:LayoutGroup Name="lg_Body_dlm_lg" >
-
-                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12" >
+                <dxdo:LayoutGroup Name="lg_Body_dlm_lg"  AllowClose="False" AllowFloat="False" AllowDock="False" >
+                    <!--<dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12"--> 
+                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" FontSize="12" 
+                                      AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
 
                         <dxlc:LayoutControl
-                            Orientation="Vertical" StretchContentVertically="False" Background="Transparent">
+                            Orientation="Vertical" StretchContentVertically="False" Background="Transparent" >
 
                             <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs" >
 
@@ -90,16 +91,16 @@
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
 
                                 <dxlc:LayoutGroup  Header="Sources" x:Name="lg_CodeExplorerContext"  >
-                                    
-                                    <dxlc:LayoutItem>
-                                        <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />                                    	
-                                    </dxlc:LayoutItem>
 
+                                    <!--<dxlc:LayoutItem>-->
+                                        <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext"  />
+                                    <!--</dxlc:LayoutItem>-->
+                                    
                                 </dxlc:LayoutGroup>
                                 
-                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
+                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode" >
 
-                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True">
+                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
                                         <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
                                     </dxlc:LayoutItem>
 
