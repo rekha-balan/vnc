@@ -90,6 +90,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnAssignmentStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayAssignmentStatementWalkerVB);
+        }
         private void btnLocalDeclarationStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplayLocalDeclarationStatementWalkerVB);
@@ -167,7 +171,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 sourceCode = sr.ReadToEnd();
             }
 
-            string identifier = teIdentifierRegEx.Text;
+            string identifier = teInvocationExpressionRegEx.Text;
 
             Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
             var additionalLocations = (VNC.CodeAnalysis.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;
@@ -180,12 +184,21 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+        StringBuilder DisplayAssignmentStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ParameterList();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceAssignmentStatementUseRegEx.IsChecked, teAssignmentStatementRegEx.Text,
+                tree, walker);
+        }
+
         StringBuilder DisplayLocalDeclarationStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.LocalDeclarationStatement();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
@@ -198,8 +211,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.ShowFields = (bool)ceShowFields.IsChecked;
 
@@ -214,13 +227,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VariableDeclarator();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
             return InvokeVNCTypedSyntaxWalker(sb,
-                (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
+                (bool)ceVariableDeclaratorUseRegEx.IsChecked, teVariableDeclaratorRegEx.Text,
                 tree, walker);
         }
 
@@ -228,11 +241,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.InvocationExpression();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             return InvokeVNCSyntaxWalker(sb,
-                (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
+                (bool)ceInvocationExpressionUseRegEx.IsChecked, teInvocationExpressionRegEx.Text,
                 tree, walker);
         }
 
@@ -267,7 +280,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.PropertyStatement();
             }
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
@@ -282,7 +295,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.FieldDeclaration();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
 
@@ -373,7 +386,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Clear();
 
             string projectFullPath = CodeExplorerContext.teProjectFile.Text;
-            string pattern = teIdentifierRegEx.Text;
+            //string pattern = teInvocationExpressionRegEx.Text;
 
             var filesToProcess = CodeExplorerContext.GetFilesToProcess();
 
@@ -423,6 +436,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             walker.Messages = sb;
 
+            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+
             if (useRegEx)
             {
                 walker.IdentifierNames = regEx;
@@ -445,18 +461,21 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             SyntaxTree syntaxTree,
             VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker)
         {
-            walker.Messages = sb;
+            //walker.Messages = sb;
 
-            if (useRegEx)
-            {
-                walker.IdentifierNames = regEx;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
+            //if (useRegEx)
+            //{
+            //    walker.IdentifierNames = regEx;
+            //}
+            //else
+            //{
+            //    walker.IdentifierNames = ".*";
+            //}
 
-            walker.InitializeRegEx();
+            //walker.InitializeRegEx();
+
+            //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
+            //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
 
             walker.AllTypes = (bool)ceAllTypes.IsChecked;
 
@@ -474,9 +493,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
 
-            walker.Visit(syntaxTree.GetRoot());
+            return InvokeVNCSyntaxWalker(sb, useRegEx, regEx, syntaxTree, walker);
 
-            return sb;
+            //walker.Visit(syntaxTree.GetRoot());
+
+            //return sb;
         }
 
         #endregion

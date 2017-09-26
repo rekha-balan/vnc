@@ -24,7 +24,5 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             base.VisitImportsStatement(node);
         }
-
-
     }
 }

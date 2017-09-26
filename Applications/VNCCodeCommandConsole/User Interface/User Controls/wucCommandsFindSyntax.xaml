@@ -193,7 +193,7 @@
 
                     <dxlc:LayoutItem Label="Fields">
                         <dxe:TextEdit x:Name="teFieldDeclarationRegEx" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceFieldStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      IsEnabled="{cb:Binding ElementName=ceFieldDeclarationUseRegEx, Path=IsChecked, Mode=OneWay}"
                                       ToolTip="Supports Regular Expressions"/>
                     </dxlc:LayoutItem>
 
@@ -349,13 +349,13 @@
                 <dxlc:LayoutGroup
                 	Orientation="Vertical">
                     <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceIdentifierUseRegEx" Content="Use Regular Expressions"
+                        <dxe:CheckEdit x:Name="ceInvocationExpressionUseRegEx" Content="Use Regular Expressions"
                                        IsChecked="False"/>
                     </dxlc:LayoutItem>
 
                     <dxlc:LayoutItem Label="Identifier">
-                        <dxe:TextEdit x:Name="teIdentifierRegEx" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceIdentifierUseRegEx, Path=IsChecked, Mode=OneWay}"
+                        <dxe:TextEdit x:Name="teInvocationExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceInvocationExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
                                       ToolTip="Supports Regular Expressions"/>
                     </dxlc:LayoutItem>
 
@@ -457,13 +457,13 @@
                 <dxlc:LayoutGroup
                 	Orientation="Vertical">
                     <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceVariablesUseRegEx" Content="Use Regular Expressions"
+                        <dxe:CheckEdit x:Name="ceVariableDeclaratorUseRegEx" Content="Use Regular Expressions"
                                        IsChecked="False"/>
                     </dxlc:LayoutItem>
 
                     <dxlc:LayoutItem Label="Variables">
-                        <dxe:TextEdit x:Name="teVariableRegEx" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceVariablesUseRegEx, Path=IsChecked, Mode=OneWay}"
+                        <dxe:TextEdit x:Name="teVariableDeclaratorRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceVariableDeclaratorUseRegEx, Path=IsChecked, Mode=OneWay}"
                                       ToolTip="Supports Regular Expressions"/>
                     </dxlc:LayoutItem>
 
@@ -473,6 +473,36 @@
 
             <dxlc:LayoutItem>
                 <Button Content="VariableDeclarator Walker" Click="btnVariableDeclaratorWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find AssignmentStatementSyntax" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceAssignmentStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Assignments">
+                        <dxe:TextEdit x:Name="teAssignmentStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceAssignmentStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="AssignmentStatement Walker" Click="btnAssignmentStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>

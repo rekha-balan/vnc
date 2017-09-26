@@ -15,8 +15,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitArgumentList(ArgumentListSyntax node)
         {
-            
-            //if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             if (identifierNameRegEx.Match(node.ToString()).Success)
             {
                 Messages.AppendLine(String.Format("{0} {1}",

@@ -11,9 +11,9 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class ParameterList : VNCVBSyntaxWalkerBase
+    public class AssignmentStatement : VNCVBSyntaxWalkerBase
     {
-        public override void VisitParameterList(ParameterListSyntax node)
+        public override void VisitAssignmentStatement(AssignmentStatementSyntax node)
         {
             if (identifierNameRegEx.Match(node.ToString()).Success)
             {
@@ -22,7 +22,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     node.ToString()));
             }
 
-            base.VisitParameterList(node);
+            base.VisitAssignmentStatement(node);
         }
     }
 }
