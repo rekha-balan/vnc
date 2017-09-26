@@ -16,14 +16,20 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitTrivia(Microsoft.CodeAnalysis.SyntaxTrivia trivia)
         {
             var st = trivia.SyntaxTree;
+            string s = trivia.ToString();
+            var p = trivia.GetLocation();
 
-            if (identifierNameRegEx.Match(trivia.ToString()).Success)
+            if (! String.IsNullOrWhiteSpace(trivia.ToString()))
             {
-                Messages.AppendLine(String.Format("{0} {1}",
-                    //GetNodeContext(trivia.SyntaxTree),
-                    "",
-                    trivia.ToString()));
+                if (identifierNameRegEx.Match(trivia.ToString()).Success)
+                {
+                    Messages.AppendLine(String.Format("{0} >{1}<",
+                        //GetNodeContext(trivia.SyntaxTree),
+                        "",
+                        trivia.ToString()));
+                }                
             }
+
 
             //base.VisitAssignmentStatement(node);
 

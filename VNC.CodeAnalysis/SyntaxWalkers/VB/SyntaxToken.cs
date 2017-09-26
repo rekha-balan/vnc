@@ -17,7 +17,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(token.ToString()).Success)
             {
-                Messages.AppendLine(String.Format("{0} {1}",
+                Messages.AppendLine(String.Format("{0} >{1}<",
                     //GetNodeContext(token),
                     "",
                     token.ToString()));
