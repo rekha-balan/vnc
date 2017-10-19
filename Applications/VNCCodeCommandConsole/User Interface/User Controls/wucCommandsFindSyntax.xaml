@@ -678,17 +678,24 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="SyntaxTrivia Walker" Click="btnSyntaxTrivianWalker_Click"/>
+                <Button Content="SyntaxTrivia Walker" Click="btnSyntaxTriviaWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
-     
-            <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" 
+            <dxlc:LayoutGroup
+     	        Orientation="Horizontal">
+                <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" 
                            Content="List Impacted Files Only" 
                            IsChecked="False" VerticalAlignment="Top" />
+
+                <dxe:CheckEdit x:Name="ceAlwaysDisplayFileName" 
+                           Content="Always Display File Name" 
+                           IsChecked="False" VerticalAlignment="Top" />
+            </dxlc:LayoutGroup>
+
 
             <dxe:CheckEdit x:Name="ceDisplayClassOrModuleName" 
                            Content="Display Class or Module Name" 

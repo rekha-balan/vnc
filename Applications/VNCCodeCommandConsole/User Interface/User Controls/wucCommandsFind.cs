@@ -354,5 +354,19 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         }
 
         #endregion
+
+        private void btnMethodNames_Click(object sender, RoutedEventArgs e)
+        {
+            string fileNameAndPath = CodeExplorerContext.teSourceFile.Text;
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(fileNameAndPath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            List<String> methodNames = VNC.CodeAnalysis.Helpers.VB.GetMethodNames(sourceCode);
+        }
     }
 }

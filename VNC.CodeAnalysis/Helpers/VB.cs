@@ -13,6 +13,20 @@ namespace VNC.CodeAnalysis.Helpers
 {
     public static class VB
     {
+        public static List<string> GetMethodNames(string sourceCode)
+        {
+            List<string> methodNames = new List<string>();
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+            VNC.CodeAnalysis.SyntaxWalkers.VB.MethodStatementNames walker = null;
+            walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MethodStatementNames();
+            walker.MethodNames = methodNames;
+            walker.Visit(tree.GetRoot());
+
+            return methodNames;
+        }
+
         public static string GetContainingMethod(VisualBasicSyntaxNode node)
         {
             string methodName = "none";

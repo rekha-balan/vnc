@@ -261,6 +261,7 @@
     <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\ConcatenateExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\MethodStatementNames.cs" />
     <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
     <Compile Include="SyntaxWalkers\VB\ParameterList.cs" />
     <Compile Include="SyntaxWalkers\VB\PropertyBlock.cs" />

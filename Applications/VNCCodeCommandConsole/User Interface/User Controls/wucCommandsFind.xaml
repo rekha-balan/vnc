@@ -95,7 +95,17 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find MethodNames" 
+        	    View="GroupBox" Orientation="Vertical"
+                IsCollapsible="True" IsCollapsed="True">
 
+            <dxlc:LayoutItem>
+                <Button Content="MethodNames" 
+                    Click="btnMethodNames_Click" />
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
      
