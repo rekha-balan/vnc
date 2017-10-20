@@ -112,7 +112,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             wucCommandsWorkspace.CodeExplorerContext = wucCodeExplorerContext;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        internal override void OnLoaded(object sender, RoutedEventArgs e)
         {
             //System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["serversInstancesViewSource"];
             //// Things work if this line is present.  Testing to see if it works without 6/13/2012
@@ -142,15 +142,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             //serversGridControl.GroupBy("SecurityZone");
         }
-
-
-
-
-
-
-
-
-
 
         //private void btnAllNodes_Click(object sender, RoutedEventArgs e)
         //{

@@ -505,7 +505,7 @@
 
         <dxlc:LayoutGroup Header="Find VariableDeclaratorSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True">
+            IsCollapsible="True" IsCollapsed="False">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -535,7 +535,7 @@
 
         <dxlc:LayoutGroup Header="Find AssignmentStatementSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True">
+            IsCollapsible="True" IsCollapsed="False">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -546,6 +546,18 @@
                         <dxe:CheckEdit x:Name="ceAssignmentStatementUseRegEx" Content="Use Regular Expressions"
                                        IsChecked="False"/>
                     </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutGroup
+                    	Orientation="Horizontal">
+                        <dxlc:LayoutItem>
+                            <dxe:CheckEdit x:Name="ceAssignmentStatementMatchLeft" Content="Match Left Side"
+                                       IsChecked="True"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem>
+                            <dxe:CheckEdit x:Name="ceAssignmentStatementMatchRight" Content="Match Right Side"
+                                       IsChecked="True"/>
+                        </dxlc:LayoutItem>                        
+                    </dxlc:LayoutGroup>
 
                     <dxlc:LayoutItem Label="Assignments">
                         <dxe:TextEdit x:Name="teAssignmentStatementRegEx" Text=".*"

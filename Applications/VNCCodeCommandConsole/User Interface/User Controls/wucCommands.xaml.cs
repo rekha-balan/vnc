@@ -45,8 +45,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        public wucCodeExplorer CodeExplorer = null;
-        public wucCodeExplorerContext CodeExplorerContext = null;
+        //public wucCodeExplorer CodeExplorer = null;
+        //public wucCodeExplorerContext CodeExplorerContext = null;
 
         #region Initialization
 

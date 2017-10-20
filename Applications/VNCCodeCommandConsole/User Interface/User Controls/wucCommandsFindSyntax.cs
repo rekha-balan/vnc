@@ -244,6 +244,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         StringBuilder DisplayAssignmentStatementWalkerVB(StringBuilder sb, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AssignmentStatement();
+            walker.MatchLeft = (bool)ceAssignmentStatementMatchLeft.IsChecked;
+            walker.MatchRight = (bool)ceAssignmentStatementMatchRight.IsChecked;
 
             return InvokeVNCSyntaxWalker(sb,
                 (bool)ceAssignmentStatementUseRegEx.IsChecked, teAssignmentStatementRegEx.Text,

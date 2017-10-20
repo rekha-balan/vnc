@@ -13,13 +13,30 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class AssignmentStatement : VNCVBSyntaxWalkerBase
     {
+        public Boolean MatchLeft = true;
+
+        public Boolean MatchRight = true;
+
         public override void VisitAssignmentStatement(AssignmentStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.ToString()).Success)
+            if (MatchLeft)
             {
-                Messages.AppendLine(String.Format("{0} {1}",
-                    GetNodeContext(node),
-                    node.ToString()));
+                if (identifierNameRegEx.Match(node.Left.ToString()).Success)
+                {
+                    Messages.AppendLine(String.Format("{0} {1}",
+                        GetNodeContext(node),
+                        node.ToString()));
+                }
+            }
+
+            if (MatchRight)
+            {
+                if (identifierNameRegEx.Match(node.Right.ToString()).Success)
+                {
+                    Messages.AppendLine(String.Format("{0} {1}",
+                        GetNodeContext(node),
+                        node.ToString()));
+                }                
             }
 
             base.VisitAssignmentStatement(node);

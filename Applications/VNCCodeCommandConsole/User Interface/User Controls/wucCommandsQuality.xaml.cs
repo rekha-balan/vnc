@@ -23,8 +23,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
-        public wucCodeExplorer CodeExplorer = null;
-        public wucCodeExplorerContext CodeExplorerContext = null;
+        //public wucCodeExplorer CodeExplorer = null;
+        //public wucCodeExplorerContext CodeExplorerContext = null;
 
         #region Constructors
 

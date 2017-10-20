@@ -41,7 +41,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Initialization
 
-        private void LoadControlContents()
+        internal override void LoadControlContents()
         {
             try
             {
