@@ -90,6 +90,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnSimpleAsClauseWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplaySimpleAsClauseWalkerVB);
+        }
+
+        private void btnObjectCreationExpressionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayObjectCreationExpressionWalkerVB);
+        }
 
         private void btnSyntaxTriviaWalker_Click(object sender, RoutedEventArgs e)
         {
@@ -221,6 +230,24 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             return InvokeVNCSyntaxWalker(sb,
                 (bool)ceSyntaxTokenUseRegEx.IsChecked, teSyntaxTokenRegEx.Text,
+                tree, walker);
+        }
+
+        StringBuilder DisplaySimpleAsClauseWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.SimpleAsClause();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceSimpleAsClauseUseRegEx.IsChecked, teSimpleAsClauseRegEx.Text,
+                tree, walker);
+        }
+
+        StringBuilder DisplayObjectCreationExpressionWalkerVB(StringBuilder sb, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.ObjectCreationExpression();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceObjectCreationExpressionUseRegEx.IsChecked, teObjectCreationExpressionRegEx.Text,
                 tree, walker);
         }
 

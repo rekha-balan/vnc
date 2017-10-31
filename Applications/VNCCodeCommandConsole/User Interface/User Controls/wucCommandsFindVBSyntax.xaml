@@ -533,6 +533,36 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find ObjectCreationExpression" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="False">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceObjectCreationExpressionUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Assignments">
+                        <dxe:TextEdit x:Name="teObjectCreationExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceObjectCreationExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="ObjectCreationExpression Walker" Click="btnObjectCreationExpressionWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find AssignmentStatementSyntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
@@ -577,7 +607,7 @@
 
         <dxlc:LayoutGroup Header="Find BinaryExpressionSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True">
+            IsCollapsible="True" IsCollapsed="False">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -604,6 +634,36 @@
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Header="Find SimpleAsClause" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="False">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceSimpleAsClauseUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Assignments">
+                        <dxe:TextEdit x:Name="teSimpleAsClauseRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceSimpleAsClauseUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="SimpleAsClause Walker" Click="btnSimpleAsClauseWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>        
 
         <dxlc:LayoutGroup Header="Find SyntaxNodes" 
         	View="GroupBox" Orientation="Vertical"

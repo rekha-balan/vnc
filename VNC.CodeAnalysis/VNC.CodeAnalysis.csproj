@@ -261,8 +261,10 @@
     <Compile Include="SyntaxWalkers\VB\AllToken.cs" />
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
+    <Compile Include="SyntaxWalkers\VB\ObjectCreationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\ConcatenateExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\SimpleAsClause.cs" />
     <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\MethodStatementNames.cs" />
     <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
