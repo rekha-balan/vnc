@@ -21,7 +21,7 @@ using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
-    public partial class wucCommandsFindSyntax : wucDXBase
+    public partial class wucCommandsFindVBSyntax : wucDXBase
     {
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
@@ -36,7 +36,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Constructors
 
-        public wucCommandsFindSyntax()
+        public wucCommandsFindVBSyntax()
         {
 #if TRACE
             long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);

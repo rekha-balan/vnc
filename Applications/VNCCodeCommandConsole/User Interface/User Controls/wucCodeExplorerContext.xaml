@@ -76,9 +76,9 @@
                             <dxe:ComboBoxEdit.Resources>
                                 <ui:SolutionConverter x:Key="converter" />
                             </dxe:ComboBoxEdit.Resources>
-                            <!--<dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:ComboBoxEdit.StyleSettings>
                                 <dxe:CheckedComboBoxStyleSettings />
-                            </dxe:ComboBoxEdit.StyleSettings>-->
+                            </dxe:ComboBoxEdit.StyleSettings>
                             <dxe:ComboBoxEdit.EditTemplate>
                                 <ControlTemplate>
                                     <!--<Label Content="Make Selection" />-->
@@ -104,14 +104,14 @@
                             <dxe:ComboBoxEdit.Resources>
                                 <ui:ProjectConverter x:Key="converter" />
                             </dxe:ComboBoxEdit.Resources>                        
-                            <!--<dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:ComboBoxEdit.StyleSettings>
                                 <dxe:CheckedComboBoxStyleSettings />
-                            </dxe:ComboBoxEdit.StyleSettings>-->
+                            </dxe:ComboBoxEdit.StyleSettings>
                             <dxe:ComboBoxEdit.EditTemplate>
                                 <ControlTemplate>
                                     <TextBox Text="{Binding EditValue, Converter={StaticResource converter}}" />
                                 </ControlTemplate>
-                            </dxe:ComboBoxEdit.EditTemplate>                        
+                            </dxe:ComboBoxEdit.EditTemplate>
                             <dxe:ComboBoxEdit.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

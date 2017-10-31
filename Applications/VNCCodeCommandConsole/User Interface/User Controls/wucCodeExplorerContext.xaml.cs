@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Xml.Linq;
@@ -113,73 +114,164 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void wucSourceBranch_Picker_ControlChanged()
         {
-            teRepositoryName.Text = wucSourceBranch_Picker.Name;
-            teRepository.Text = wucSourceBranch_Picker.Repository;
-            teRepositoryPath.Text = wucSourceBranch_Picker.SourcePath;
-            teSourcePath.Text = teRepositoryPath.Text;
+            try
+            {
+                teRepositoryName.Text = wucSourceBranch_Picker.Name;
+                teRepository.Text = wucSourceBranch_Picker.Repository;
+                teRepositoryPath.Text = wucSourceBranch_Picker.SourcePath;
+                teSourcePath.Text = teRepositoryPath.Text;
 
-            cbeSolutionFile.Items.Clear();
-            cbeSolutionFile.ItemsSource = wucSourceBranch_Picker.xElement.Elements("Solution");
-            //UpdateSolutionPicker(wucSourceBranch_Picker.xElement);
+                cbeSourceFile.Items.Clear();
+                cbeSourceFile.Clear();
+                cbeSourceFile.ItemsSource = null;
+
+                cbeProjectFile.Items.Clear();
+                cbeProjectFile.Clear();
+                cbeProjectFile.ItemsSource = null;
+
+                cbeSolutionFile.Items.Clear();
+                cbeSolutionFile.Clear();
+                cbeSolutionFile.ItemsSource = wucSourceBranch_Picker.xElement.Elements("Solution");
+                //UpdateSolutionPicker(wucSourceBranch_Picker.xElement);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void cbeSolutionFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            var a = sender.GetType();
-            var b = e.GetType();
-            var c = e.NewValue;
-            XElement solution = (XElement)e.NewValue;
+            try
+            {
+                var s = (ComboBoxEdit)sender;
 
-            cbeProjectFile.Items.Clear();
-            cbeProjectFile.ItemsSource = solution.Elements("Project");
+                var a = sender.GetType();
+                var b = e.GetType();
+                var c = e.NewValue;
 
-            string fileName = solution.Attribute("FileName").Value;
-            string folderPath = solution.Attribute("FolderPath").Value;
+                if (s.SelectedItems.Count() == 1)
+                {
+                    XElement solution = (XElement)s.SelectedItem;
 
-            teSolutionFile.Text = teRepositoryPath.Text + "\\" + folderPath + "\\" + fileName;
-            teSourcePath.Text = teRepositoryPath.Text + "\\" + folderPath + "\\";
+                    cbeSourceFile.Items.Clear();
+                    cbeSourceFile.Clear();
+                    cbeSourceFile.ItemsSource = null;
+
+                    cbeProjectFile.Items.Clear();
+                    cbeProjectFile.Clear();
+                    cbeProjectFile.ItemsSource = solution.Elements("Project");
+
+                    string fileName = solution.Attribute("FileName").Value;
+                    string folderPath = solution.Attribute("FolderPath").Value;
+
+                    teSolutionFile.Text = teRepositoryPath.Text + "\\" + folderPath + "\\" + fileName;
+                    teSourcePath.Text = teRepositoryPath.Text + "\\" + folderPath + "\\";
+
+                }
+                else
+                {
+                    // Have selected multiple solution files, so clear out controls that affect GetFilesToProc()
+
+                    List<XElement> projectElements = new List<XElement>();
+
+                    foreach (XElement solutionElement in cbeSolutionFile.SelectedItems)
+                    {
+                        foreach (XElement projectElement in solutionElement.Elements("Project"))
+                        {
+                            projectElements.Add(projectElement);
+                        }
+                    }
+
+                    cbeProjectFile.Items.Clear();
+                    cbeProjectFile.Clear();
+                    cbeProjectFile.ItemsSource = projectElements;
+                    teProjectFile.Clear();
+
+                    cbeSourceFile.Items.Clear();
+                    cbeSourceFile.Clear();
+                    cbeSourceFile.ItemsSource = null;
+                    teSourceFile.Clear();
+
+                    teSourcePath.Clear();   // not sure if this should be cleared.
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void cbeProjectFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            XElement project = (XElement)e.NewValue;
+            try
+            {
+                var s = (ComboBoxEdit)sender;
+                var e1 = e.NewValue;
+                var e2 = e.OldValue;
 
-            cbeSourceFile.Items.Clear();
-            cbeSourceFile.ItemsSource = project.Elements("SourceFile");
+                if (s.SelectedItems.Count() == 1)
+                {
+                    XElement project = (XElement)s.SelectedItem; ;
 
-            string fileName = project.Attribute("FileName").Value;
-            string folderPath = project.Attribute("FolderPath").Value;
-            string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
+                    cbeSourceFile.Items.Clear();
+                    cbeSourceFile.Clear();
+                    cbeSourceFile.ItemsSource = project.Elements("SourceFile");
 
-            teSourcePath.Text = sourcePath + "\\";
+                    string fileName = project.Attribute("FileName").Value;
+                    string folderPath = project.Attribute("FolderPath").Value;
+                    string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
 
-            // Clear if no project file.  This is typical if web site with only a solution file.
+                    teSourcePath.Text = sourcePath + "\\";
 
-            teProjectFile.Text = fileName != "" ? sourcePath + "\\" + fileName : "";
+                    // Set ProjectFile path or clear if no project file.  
+                    // This is typical if web site with only a solution file.
+
+                    teProjectFile.Text = fileName != "" ? sourcePath + "\\" + fileName : "";
+                }
+                else
+                {
+                    // Have selected multiple project files, so clear out controls that affect GetFilesToProcess()
+
+                    cbeSourceFile.Items.Clear();
+                    cbeSourceFile.Clear();
+                    teProjectFile.Clear();
+                    teSourcePath.Clear();
+                    teSourceFile.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void cbeSourceFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
-            var s = (ComboBoxEdit)sender;
-            var e1 = e.NewValue;
-            var e2 = e.OldValue;
-
-            var e3 = e1.GetType();
-
-            if (s.SelectedItems.Count() == 1)
+            try
             {
-                XElement sourceFileElement = (XElement)s.SelectedItem;
-                string filePath = GetFilePath(sourceFileElement);
-                teSourceFile.Text = teSourcePath.Text + filePath;
+                var s = (ComboBoxEdit)sender;
+                var e1 = e.NewValue;
+                var e2 = e.OldValue;
+
+                var e3 = e1.GetType();
+
+                if (s.SelectedItems.Count() == 1)
+                {
+                    XElement sourceFileElement = (XElement)s.SelectedItem;
+                    string filePath = GetFilePath(sourceFileElement);
+                    teSourceFile.Text = teSourcePath.Text + filePath;
+                }
+                else
+                {
+                    teSourceFile.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                teSourceFile.Clear();
+                MessageBox.Show(ex.ToString());
             }
-            //XElement sourceFile = (XElement)e.NewValue;
-
-
-
         }
 
         public static string GetFilePath(XElement sourceFileElement)
@@ -201,47 +293,114 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             // This  method returns a list of files to process.
             // If a specific SourceFile is specified, return it
+            //
+            // If multiple SolutionFiles are selected, the user must select
+            //  one or more project files.  Handle as multiple project files
+            //
+            // If multiple ProjectFiles are selected, 
+            //  Loop across <Project> elements 
+            //      and add files from project
+            //      and add files listed in <Project> elements
+            //
             // If a ProjectFile is available, use it to get the list of files
             // Otherwise return the files selected in cbeSourceFiles.
 
+            string solutionFullPath = teSolutionFile.Text;
             string projectFullPath = teProjectFile.Text;
-
+            
             if (teSourceFile.Text != "")
             {
                 // TODO(crhodes)
                 // Add check for existence
                 filesToProcess.Add(teSourceFile.Text);
             }
+            else if (cbeProjectFile.SelectedItems.Count > 1)
+            {
+                using (var workSpace = MSBuildWorkspace.Create())
+                {
+                    foreach (XElement projectElement in cbeProjectFile.SelectedItems)
+                    {
+                        string fileName = projectElement.Attribute("FileName").Value;
+                        string folderPath = projectElement.Attribute("FolderPath").Value;
+                        string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
+                        string projectPath = "";
+
+                        projectPath = fileName != "" ? sourcePath + "\\" + fileName : "";
+
+                        if (projectPath == "")
+                        {
+                            // No project file exists, so look across all the SourceFile elements
+
+                            foreach (XElement sourceFile in projectElement.Elements("SourceFile"))
+                            {
+                                //string sourceFileName = sourceFile.Attribute("FileName").Value;
+                                //string sourceFolderPath = sourceFile.Attribute("FolderPath").Value;
+
+                                //string filePath = sourcePath + "\\" + sourceFolderPath + "\\" + sourceFileName;
+
+                                // NB. The file names are added manually so we don't have to exclude any.
+                                string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
+
+                                filesToProcess.Add(fileFullPath);
+                            }
+                        }
+                        else
+                        {
+                            var project = workSpace.OpenProjectAsync(projectPath).Result;
+
+                            //Microsoft.CodeAnalysis.Project project = null;
+
+                            //project = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath)).Result;
+
+
+                            //Microsoft.CodeAnalysis.Project project = null;
+
+                            //var foo = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath));
+
+                            //foo.Wait();
+
+                            AddFilesFromProject(filesToProcess, project);
+                        }
+                    }
+                }
+            }
             else if (projectFullPath != "")
             {
                 using (var workSpace = MSBuildWorkspace.Create())
                 {
+
                     var project = workSpace.OpenProjectAsync(projectFullPath).Result;
 
-                    foreach (var document in project.Documents)
-                    {
-                        string filePath = document.FilePath;
+                    //Microsoft.CodeAnalysis.Project project = null;
 
-                        if (filePath.Contains("designer"))
-                        {
-                            continue;
-                        }
+                    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
 
-                        if (filePath.Contains("My Project"))
-                        {
-                            continue;
-                        }
+                    AddFilesFromProject(filesToProcess, project);
 
-                        if (document.Name == "Assembly.vb")
-                        {
-                            continue;
-                        }
+                    //foreach (var document in project.Documents)
+                    //{
+                    //    string filePath = document.FilePath;
 
-                        if (document.Name.EndsWith(".vb"))
-                        {
-                            filesToProcess.Add(filePath);
-                        }
-                    }
+                    //    if (filePath.Contains("designer"))
+                    //    {
+                    //        continue;
+                    //    }
+
+                    //    if (filePath.Contains("My Project"))
+                    //    {
+                    //        continue;
+                    //    }
+
+                    //    if (document.Name == "Assembly.vb")
+                    //    {
+                    //        continue;
+                    //    }
+
+                    //    if (document.Name.EndsWith(".vb"))
+                    //    {
+                    //        filesToProcess.Add(filePath);
+                    //    }
+                    //}
                 }
             }
             else if (cbeSourceFile.SelectedItems.Count > 0)
@@ -250,16 +409,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 foreach (XElement sourceFile in cbeSourceFile.SelectedItems)
                 {
-                    string filePath = sourcePath;
-                    string folderPath = sourceFile.Attribute("FolderPath").Value;
-                    string fileName = sourceFile.Attribute("FileName").Value;
+                    string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
 
-                    if (folderPath.Length > 0)
-                    {
-                        filePath += folderPath + "\\";
-                    }
-
-                    filesToProcess.Add(filePath + fileName);
+                    filesToProcess.Add(fileFullPath);
                 }
             }
 
@@ -285,6 +437,34 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             return filesToProcess;
+        }
+
+        private static void AddFilesFromProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
+        {
+            foreach (var document in project.Documents)
+            {
+                string filePath = document.FilePath;
+
+                if (filePath.ToLower().Contains("designer"))
+                {
+                    continue;
+                }
+
+                if (filePath.Contains("My Project"))
+                {
+                    continue;
+                }
+
+                if (document.Name == "Assembly.vb")
+                {
+                    continue;
+                }
+
+                if (document.Name.EndsWith(".vb"))
+                {
+                    filesToProcess.Add(filePath);
+                }
+            }
         }
 
         private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)

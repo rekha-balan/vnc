@@ -190,9 +190,9 @@
                             <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
                         </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_FindSyntax" Caption="Find Syntax" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_FindVBSyntax" Caption="Find VB Syntax" ItemWidth="300">
 
-                            <uiuc:wucCommandsFindSyntax x:Name="wucCommandsFindSyntax" />
+                            <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
 
                         </dxdo:LayoutPanel>
 

@@ -1,5 +1,5 @@
 ﻿<uiuc:wucDXBase
-    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsFindSyntax"
+    x:Class="VNCCodeCommandConsole.User_Interface.User_Controls.wucCommandsFindVBSyntax"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
@@ -505,7 +505,7 @@
 
         <dxlc:LayoutGroup Header="Find VariableDeclaratorSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -535,7 +535,7 @@
 
         <dxlc:LayoutGroup Header="Find AssignmentStatementSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
