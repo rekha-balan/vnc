@@ -17,9 +17,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.ImportsClauses.ToString()).Success)
             {
-                Messages.AppendLine(String.Format("{0} {1}",
-                    GetNodeContext(node),
-                    node.ToString()));
+                RecordMatchAndContext(node, node.ToString());
             }
 
             base.VisitImportsStatement(node);

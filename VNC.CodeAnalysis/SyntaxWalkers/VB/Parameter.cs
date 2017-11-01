@@ -31,6 +31,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                         messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
                     }
 
+                    // TODO(crhodes)
+                    // Think through if it would make sense to have parameters as a key
+
                     Messages.AppendLine(String.Format("{0} {1}",
                         messageContext,
                         node.ToString()));

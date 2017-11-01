@@ -13,13 +13,26 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class MethodStatement : VNCVBTypedSyntaxWalkerBase
     {
+        public Boolean ShowParameters = false;
+
         public override void VisitMethodStatement(MethodStatementSyntax node)
         {
             if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             {
+                string message = node.Identifier.ToString();
+
+                if (ShowParameters)
+                {
+                    message = node.ToString();
+                }
+
                 Messages.AppendLine(String.Format("{0} {1}",
                     GetNodeContext(node),
-                    node.ToString()));
+                    message));
+
+                //string nodeValue = message;
+
+                RecordMatch(message);
             }
 
             base.VisitMethodStatement(node);

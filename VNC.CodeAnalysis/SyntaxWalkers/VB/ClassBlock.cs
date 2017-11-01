@@ -17,7 +17,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.ClassStatement.Identifier.ToString()).Success)
             {
-                Messages.AppendLine(String.Format("{0}", node.ToString()));
+                RecordMatch(node.ToString());
+
+                //Messages.AppendLine(String.Format("{0}", node.ToString()));
             }
 
             base.VisitClassBlock(node);

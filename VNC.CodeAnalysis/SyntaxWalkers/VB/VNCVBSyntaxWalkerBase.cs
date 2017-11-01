@@ -20,6 +20,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public string IdentifierNames;
         internal Regex identifierNameRegEx;
 
+        public Dictionary<string, Int32> Matches;
+
         public VNCVBSyntaxWalkerBase() : base(SyntaxWalkerDepth.StructuredTrivia)
         {
 
@@ -54,6 +56,37 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             }
 
             return messageContext;
+        }
+
+        public void RecordMatch(string nodeValue)
+        {
+            Messages.AppendLine(String.Format("{0}", 
+                nodeValue));
+
+            if (Matches.ContainsKey(nodeValue))
+            {
+                Matches[nodeValue] += 1;
+            }
+            else
+            {
+                Matches.Add(nodeValue, 1);
+            }
+        }
+
+        public void RecordMatchAndContext(VisualBasicSyntaxNode node, string nodeValue)
+        {
+            Messages.AppendLine(String.Format("{0} {1}",
+                GetNodeContext(node),
+                nodeValue));
+
+            if (Matches.ContainsKey(nodeValue))
+            {
+                Matches[nodeValue] += 1;
+            }
+            else
+            {
+                Matches.Add(nodeValue, 1);
+            }
         }
     }
 }

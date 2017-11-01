@@ -25,9 +25,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 if (identifierNameRegEx.Match(faos.ToString()).Success)
                 {
-                    Messages.AppendLine(String.Format("{0} {1}",
-                        GetNodeContext(faos),
-                        faos.ToString()));
+                    RecordMatchAndContext(faos, faos.ToString());
+                    //Messages.AppendLine(String.Format("{0} {1}",
+                    //    GetNodeContext(faos),
+                    //    faos.ToString()));
                 }
             }
             if (faos != null)
@@ -43,9 +44,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 if (identifierNameRegEx.Match(node.ToString()).Success)
                 {
-                    Messages.AppendLine(String.Format("{0} {1}",
-                        GetNodeContext(node),
-                        node.ToString()));
+                    RecordMatchAndContext(node, node.ToString());
+                    //Messages.AppendLine(String.Format("{0} {1}",
+                    //    GetNodeContext(node),
+                    //    node.ToString()));
                 }
             }
 

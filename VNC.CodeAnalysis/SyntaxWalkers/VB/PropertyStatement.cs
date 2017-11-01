@@ -19,9 +19,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 if (FilterByType(node.AsClause))
                 {
-                    Messages.AppendLine(String.Format("{0} {1}",
-                        GetNodeContext(node),
-                        node.ToString()));
+                    RecordMatchAndContext(node, node.ToString());
+                    //Messages.AppendLine(String.Format("{0} {1}",
+                    //    GetNodeContext(node),
+                    //    node.ToString()));
                 }
             }
 

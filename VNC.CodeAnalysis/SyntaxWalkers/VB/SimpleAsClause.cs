@@ -16,23 +16,19 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitSimpleAsClause(SimpleAsClauseSyntax node)
         {
             var n = node;
-            
 
-            //if (identifierNameRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
-            //{
-            //    // TODO(crhodes)
-            //    // Need to handle multiple declarations.  For now, just pay attention to first
+            var s = node.ToString();
 
-            //    if (identifierNameRegEx.Match(node.Declarators.First().ToString()).Success)
-            //    {
-            //        if (FilterByType(node.Declarators.First().AsClause))
-            //        {
-            //            Messages.AppendLine(String.Format("{0} {1}",
-            //                GetNodeContext(node),
-            //                node.ToString()));
-            //        }
-            //    }
-            //}
+            if (identifierNameRegEx.Match(node.ToString()).Success)
+            {
+                //if (FilterByType(node.Declarators.First().AsClause))
+                //{
+                RecordMatchAndContext(node, node.ToString());
+                //Messages.AppendLine(String.Format("{0} {1}",
+                //        GetNodeContext(node),
+                //        node.ToString()));
+                //}
+            }
 
             base.VisitSimpleAsClause(node);
         }

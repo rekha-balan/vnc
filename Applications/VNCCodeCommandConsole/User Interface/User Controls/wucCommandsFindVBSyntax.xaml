@@ -27,7 +27,7 @@
     xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"
     xmlns:vcasn="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"    
 
-    d:DesignWidth="600" d:DesignHeight="600"
+    d:DesignWidth="600" d:DesignHeight="800"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
@@ -323,9 +323,16 @@
 
             </dxlc:LayoutGroup>
 
-            <dxlc:LayoutItem>
-                <dxe:CheckEdit x:Name="ceShowMethodBlock" Content="Show Method Block" IsChecked="False" />
-            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceShowMethodParameters" Content="Show Method Parameters" IsChecked="False" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceShowMethodBlock" Content="Show Method Block" IsChecked="False" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
                 <Button Content="MethodStatement Walker" Click="btnMethodStatementWalker_Click"/>
@@ -535,7 +542,7 @@
 
         <dxlc:LayoutGroup Header="Find ObjectCreationExpression" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -607,7 +614,7 @@
 
         <dxlc:LayoutGroup Header="Find BinaryExpressionSyntax" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -637,7 +644,7 @@
         
         <dxlc:LayoutGroup Header="Find SimpleAsClause" 
         	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -768,14 +775,42 @@
                            IsChecked="False" VerticalAlignment="Top" />
             </dxlc:LayoutGroup>
 
+            <dxlc:LayoutGroup
+	            Orientation="Horizontal">
+                <dxe:CheckEdit x:Name="ceDisplayClassOrModuleName" 
+                                Content="Display Class or Module Name" 
+                                IsChecked="False" VerticalAlignment="Top" />
 
-            <dxe:CheckEdit x:Name="ceDisplayClassOrModuleName" 
-                           Content="Display Class or Module Name" 
-                           IsChecked="False" VerticalAlignment="Top" />
+                <dxe:CheckEdit x:Name="ceDisplayMethodName" 
+                                Content="Display Method Name" 
+                                IsChecked="False" VerticalAlignment="Top" />
+            </dxlc:LayoutGroup>
 
-            <dxe:CheckEdit x:Name="ceDisplayMethodName" 
-                           Content="Display Method Name" 
-                           IsChecked="False" VerticalAlignment="Top" />
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplayResults" Content="Display Results" IsChecked="True"/>
+                    </dxlc:LayoutItem>
+                 
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplaySummary" Content="Display Summary" IsChecked="True"/>
+                    </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem Label="Display Summary Minimum" 
+                                 LabelPosition="Left"
+                                 Visibility="{cb:Binding ElementName=ceDisplaySummary, Path=IsChecked, Mode=OneWay}">
+                        <dxe:SpinEdit x:Name="sbDisplaySummaryMinimum" 
+                                  MinValue="1" Value="1" HorizontalAlignment="Left" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
 

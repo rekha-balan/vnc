@@ -184,6 +184,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Common\VNC.AssemblyHelper.dll</HintPath>
     </Reference>
+    <Reference Include="VNC.CodeAnalysis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\VNC.CodeAnalysis.dll</HintPath>
+    </Reference>
     <Reference Include="VNC.Helper">
       <HintPath>..\..\Common\VNC.Helper.dll</HintPath>
     </Reference>
@@ -502,12 +506,6 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\VNC.CodeAnalysis\VNC.CodeAnalysis.csproj">
-      <Project>{9d21b031-3bfe-44b1-a622-d500230f90a7}</Project>
-      <Name>VNC.CodeAnalysis</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

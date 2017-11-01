@@ -17,6 +17,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.SubOrFunctionStatement.Identifier.ToString()).Success)
             {
+                // Not sure it makes sense to use body as a key.
+
+                //RecordMatchAndContext(node, node.ToString());
                 Messages.AppendLine(String.Format("{0} {1}",
                     GetNodeContext(node),
                     node.ToString()));
