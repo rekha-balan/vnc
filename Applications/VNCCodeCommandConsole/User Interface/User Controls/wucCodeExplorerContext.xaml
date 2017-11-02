@@ -27,14 +27,24 @@
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
     
-    <!--<uiuc:wucDXBase.Resources>
+    <uiuc:wucDXBase.Resources>
         
-        --><!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
+       <!-- --><!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
 
         <CollectionViewSource x:Key="dataSource" 
                               Source="{Binding Path=ApplicationUsage, Source={StaticResource applicationDataSet}}" />--><!--
-
-    </uiuc:wucDXBase.Resources>-->
+-->
+        <DataTemplate x:Key="comboBoxTemplateSolution">
+            <StackPanel>
+                <Label Content="{Binding Path=Attribute[Name].Value}" />
+                <Label Content=" - " />
+                <Label Content="{Binding Path=Attribute[FileName].Value}" />
+            </StackPanel>
+        </DataTemplate>
+        <ui:SolutionConverter x:Key="solutionConverter" />
+        <ui:ProjectConverter x:Key="projectConverter" />
+        <ui:SourceFileConverter x:Key="sourceFileConverter" />
+    </uiuc:wucDXBase.Resources>
 
     <dxlc:LayoutControl Name="lc_Root" 
                       Orientation="Vertical"
@@ -71,7 +81,33 @@
                 
                     <dxlc:LayoutItem Label="Select Solution File" 
                                  LabelPosition="Top">
+
                         <dxe:ComboBoxEdit x:Name="cbeSolutionFile"
+                                          DisplayTextConverter="{StaticResource solutionConverter}"
+                                          EditValueChanged="cbeSolutionFile_EditValueChanged">
+                            <!--<dxe:ComboBoxEdit.Resources>
+                                <ui:SolutionConverter x:Key="converter" />
+                            </dxe:ComboBoxEdit.Resources>-->
+                            <dxe:ComboBoxEdit.StyleSettings>
+                                <dxe:CheckedComboBoxStyleSettings />
+                            </dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:ComboBoxEdit.EditTemplate>
+                                <ControlTemplate>
+                                    <TextBox Text="{Binding EditValue}" />
+                                </ControlTemplate>
+                            </dxe:ComboBoxEdit.EditTemplate>
+                            <dxe:ComboBoxEdit.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding Path=Attribute[Name].Value}" />
+                                        <Label Content=" - " />
+                                        <Label Content="{Binding Path=Attribute[FileName].Value}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </dxe:ComboBoxEdit.ItemTemplate>
+                        </dxe:ComboBoxEdit>
+                        
+                        <!--<dxe:ComboBoxEdit x:Name="cbeSolutionFile"
                                           EditValueChanged="cbeSolutionFile_EditValueChanged">
                             <dxe:ComboBoxEdit.Resources>
                                 <ui:SolutionConverter x:Key="converter" />
@@ -81,9 +117,9 @@
                             </dxe:ComboBoxEdit.StyleSettings>
                             <dxe:ComboBoxEdit.EditTemplate>
                                 <ControlTemplate>
-                                    <!--<Label Content="Make Selection" />-->
+                                    --><!--<Label Content="Make Selection" />--><!--
                                     <TextBox Text="{Binding EditValue, Converter={StaticResource converter}}" />
-                                    <!--<Label Content="{Binding Path=Attribute[Name].Value}" />-->
+                                    --><!--<Label Content="{Binding Path=Attribute[Name].Value}" />--><!--
                                 </ControlTemplate>
                             </dxe:ComboBoxEdit.EditTemplate>
                             <dxe:ComboBoxEdit.ItemTemplate>
@@ -95,21 +131,23 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </dxe:ComboBoxEdit.ItemTemplate>                        
-                        </dxe:ComboBoxEdit>
+                        </dxe:ComboBoxEdit>-->
                     </dxlc:LayoutItem>
 
                     <dxlc:LayoutItem Label="Select Project File" 
                                  LabelPosition="Top">
-                        <dxe:ComboBoxEdit x:Name="cbeProjectFile" EditValueChanged="cbeProjectFile_EditValueChanged">
-                            <dxe:ComboBoxEdit.Resources>
+                        <dxe:ComboBoxEdit x:Name="cbeProjectFile" 
+                                          DisplayTextConverter="{StaticResource projectConverter}"
+                                          EditValueChanged="cbeProjectFile_EditValueChanged">
+                            <!--<dxe:ComboBoxEdit.Resources>
                                 <ui:ProjectConverter x:Key="converter" />
-                            </dxe:ComboBoxEdit.Resources>                        
+                            </dxe:ComboBoxEdit.Resources>-->                        
                             <dxe:ComboBoxEdit.StyleSettings>
                                 <dxe:CheckedComboBoxStyleSettings />
                             </dxe:ComboBoxEdit.StyleSettings>
                             <dxe:ComboBoxEdit.EditTemplate>
                                 <ControlTemplate>
-                                    <TextBox Text="{Binding EditValue, Converter={StaticResource converter}}" />
+                                    <TextBox Text="{Binding EditValue}" />
                                 </ControlTemplate>
                             </dxe:ComboBoxEdit.EditTemplate>
                             <dxe:ComboBoxEdit.ItemTemplate>
@@ -126,13 +164,15 @@
 
                     <dxlc:LayoutItem Label="Select Source File" 
                                  LabelPosition="Top">
-                        <dxe:ComboBoxEdit x:Name="cbeSourceFile" EditValueChanged="cbeSourceFile_EditValueChanged">
-                            <dxe:ComboBoxEdit.Resources>
+                        <dxe:ComboBoxEdit x:Name="cbeSourceFile" 
+                                          DisplayTextConverter="{StaticResource sourceFileConverter}"
+                                          EditValueChanged="cbeSourceFile_EditValueChanged">
+                            <!--<dxe:ComboBoxEdit.Resources>
                                 <ui:SourceFileConverter x:Key="converter" />
-                            </dxe:ComboBoxEdit.Resources>
+                            </dxe:ComboBoxEdit.Resources>-->
                             <dxe:ComboBoxEdit.EditTemplate>
                                 <ControlTemplate>
-                                    <TextBox Text="{Binding EditValue, Converter={StaticResource converter}}" />
+                                    <TextBox Text="{Binding EditValue}" />
                                 </ControlTemplate>
                             </dxe:ComboBoxEdit.EditTemplate>
                             <dxe:ComboBoxEdit.StyleSettings>

@@ -15,7 +15,12 @@ namespace VNCCodeCommandConsole.User_Interface
             if (value != null)
             {
                 XElement e = (XElement)value;
-                return e.Attribute("Name").Value;
+                string result = e.Attribute("FileName").Value;
+                if (result == "")
+                {
+                    result = e.Attribute("Name").Value;
+                }
+                return result;
                 //return "Convert value is not null";
                 //List<object> collection = value as List<object>;
                 //if (collection.Count == 0)
