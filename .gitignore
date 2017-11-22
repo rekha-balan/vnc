@@ -1,5 +1,7 @@
 # Ignore Folders until ready to commit
 
+ConsoleApp1/
+ConsoleAppLogging/
 DevExpress/
 Source/
 
@@ -92,6 +94,9 @@ ipch/
 *.vsp
 *.vspx
 *.sap
+
+# Visual Studio Database Project SSDT
+*.jfm
 
 # TFS 2012 Local Workspace
 $tf/
