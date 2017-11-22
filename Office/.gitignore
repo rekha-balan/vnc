@@ -1,3 +1,6 @@
 ## Ignore Folders until ready to commit
-SupportTools_Excel/
-AddinHelper
+
+#AddinHelper/
+#Common/
+#SupportTools_Excel/
+#SupportTools_Visio/
