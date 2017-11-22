@@ -6,7 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using XLDataReader = Excel;    // DataReaderExcel
+//using XLDataReader = ExcelDataReader;    // DataReaderExcel
+using ExcelDataReader;
+using ExcelDataReader.Core;
+using ExcelDataReader.Exceptions;
+
 using XL = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using System.Windows;
@@ -30,6 +34,7 @@ namespace VNC.AddinHelper
                     _Path = value;
                 }
             }
+
             #endregion
 
             #region Constructors and Load
@@ -64,9 +69,9 @@ namespace VNC.AddinHelper
                 return dt;
             }
 
-            public XLDataReader.IExcelDataReader GetExcelReader()
+            public IExcelDataReader GetExcelReader()
             {
-                XLDataReader.IExcelDataReader reader = null;
+                IExcelDataReader reader = null;
 
                 using (FileStream stream = File.Open(Path, FileMode.Open, FileAccess.Read))
                 {
@@ -75,11 +80,11 @@ namespace VNC.AddinHelper
                     {
                         if (Path.EndsWith(".xls"))
                         {
-                            reader = XLDataReader.ExcelReaderFactory.CreateBinaryReader(stream);
+                            reader = ExcelReaderFactory.CreateBinaryReader(stream);
                         }
                         else
                         {
-                            reader = XLDataReader.ExcelReaderFactory.CreateOpenXmlReader(stream);
+                            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
                         }
 
                         return reader;
@@ -106,7 +111,7 @@ namespace VNC.AddinHelper
             {
                 using (var reader = this.GetExcelReader())
                 {
-                    reader.IsFirstRowAsColumnNames = firstRowIsColumnNames;
+                    //reader.IsFirstRowAsColumnNames = firstRowIsColumnNames;
                     var workSheet = reader.AsDataSet().Tables[sheetName];
                     var rows = from DataRow row in workSheet.Rows select row;
 
