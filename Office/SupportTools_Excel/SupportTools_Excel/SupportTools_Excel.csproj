@@ -48,7 +48,7 @@
     <PublishUrl>B:\Publish\SupportTools_Excel\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.33</ApplicationVersion>
+    <ApplicationVersion>1.0.0.34</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -446,10 +446,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Rally.RestApi, Version=3.0.1.0, Culture=neutral, PublicKeyToken=09c9d263d3ce713f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Common\Rally.RestApi.dll</HintPath>
-    </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -609,12 +605,6 @@
     <Compile Include="User Interface\Forms\frmITRDetail.Designer.cs">
       <DependentUpon>frmITRDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\Forms\frmSalesforceRallyInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="User Interface\Forms\frmSalesforceRallyInfo.Designer.cs">
-      <DependentUpon>frmSalesforceRallyInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="User Interface\Forms\frmWPFHost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -689,18 +679,6 @@
     <Compile Include="User Interface\Task Panes\TaskPane_NetworkTrace.Designer.cs">
       <DependentUpon>TaskPane_NetworkTrace.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\Task Panes\TaskPane_Rally.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Interface\Task Panes\TaskPane_Rally.designer.cs">
-      <DependentUpon>TaskPane_Rally.cs</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\Task Panes\TaskPane_Salesforce.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Interface\Task Panes\TaskPane_Salesforce.designer.cs">
-      <DependentUpon>TaskPane_Salesforce.cs</DependentUpon>
-    </Compile>
     <Compile Include="User Interface\Task Panes\TaskPane_SharePoint.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -743,9 +721,6 @@
     <Compile Include="User Interface\User Controls\wucExcel_FolderMap.xaml.cs">
       <DependentUpon>wucExcel_FolderMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\User Controls\wucSalesforceCases.xaml.cs">
-      <DependentUpon>wucSalesforceCases.xaml</DependentUpon>
-    </Compile>
     <Compile Include="User Interface\User Controls\wucSQLInstance_Picker.xaml.cs">
       <DependentUpon>wucSQLInstance_Picker.xaml</DependentUpon>
     </Compile>
@@ -760,30 +735,6 @@
     </Compile>
     <Compile Include="User Interface\User Controls\wucTaskPane_Utilities.xaml.cs">
       <DependentUpon>wucTaskPane_Utilities.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucTriageCommands.xaml.cs">
-      <DependentUpon>wucTriageCommands.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucLogonLogoff.xaml.cs">
-      <DependentUpon>wucLogonLogoff.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucRallyCommands.xaml.cs">
-      <DependentUpon>wucRallyCommands.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucSalesforceCommands.xaml.cs">
-      <DependentUpon>wucSalesforceCommands.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucSalesforceConfigInfo.xaml.cs">
-      <DependentUpon>wucSalesforceConfigInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucSalesforceRallyInfo.xaml.cs">
-      <DependentUpon>wucSalesforceRallyInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucTaskPane_Rally.xaml.cs">
-      <DependentUpon>wucTaskPane_Rally.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucTaskPane_Salesforce.xaml.cs">
-      <DependentUpon>wucTaskPane_Salesforce.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucTaskPane_SharePoint.xaml.cs">
       <DependentUpon>wucTaskPane_SharePoint.xaml</DependentUpon>
@@ -825,9 +776,6 @@
     <EmbeddedResource Include="User Interface\Forms\frmITRDetail.resx">
       <DependentUpon>frmITRDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\Forms\frmSalesforceRallyInfo.resx">
-      <DependentUpon>frmSalesforceRallyInfo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="User Interface\Forms\frmWPFHost.resx">
       <DependentUpon>frmWPFHost.cs</DependentUpon>
     </EmbeddedResource>
@@ -863,12 +811,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User Interface\Task Panes\TaskPane_NetworkTrace.resx">
       <DependentUpon>TaskPane_NetworkTrace.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\Task Panes\TaskPane_Rally.resx">
-      <DependentUpon>TaskPane_Rally.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\Task Panes\TaskPane_Salesforce.resx">
-      <DependentUpon>TaskPane_Salesforce.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Interface\Task Panes\TaskPane_SharePoint.resx">
       <DependentUpon>TaskPane_SharePoint.cs</DependentUpon>
@@ -1377,10 +1319,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Interface\User Controls\wucSalesforceCases.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="User Interface\User Controls\wucSQLInstance_Picker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1398,38 +1336,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucTaskPane_Utilities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucTriageCommands.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="User Interface\User Controls\wucLogonLogoff.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucRallyCommands.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucSalesforceCommands.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucSalesforceConfigInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucSalesforceRallyInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucTaskPane_Rally.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="User Interface\User Controls\wucTaskPane_Salesforce.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

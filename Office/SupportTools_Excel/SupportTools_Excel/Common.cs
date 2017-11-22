@@ -56,7 +56,7 @@ namespace SupportTools_Excel
         }
 
         // This controls the behavior of the overall application.
-        // It is intialized from app.config and is updated when the user changes the mode.
+        // It is initialized from app.config and is updated when the user changes the mode.
         // Changes are reflected in the app.config file.
 
         public static ViewMode UserMode { get; set; }
@@ -106,10 +106,6 @@ namespace SupportTools_Excel
         public static Microsoft.Office.Tools.CustomTaskPane TaskPaneLTC;
 
         public static Microsoft.Office.Tools.CustomTaskPane TaskPaneNetworkTrace;
-
-        public static Microsoft.Office.Tools.CustomTaskPane TaskPaneRally;
-
-        public static Microsoft.Office.Tools.CustomTaskPane TaskPaneSalesforce;
 
         public static Microsoft.Office.Tools.CustomTaskPane TaskPaneSharePoint;
 

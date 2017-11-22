@@ -164,18 +164,6 @@
             this.btnExaVault.Label = "";
             this.btnExaVault.Name = "btnExaVault";
             // 
-            // btnRally
-            // 
-            this.btnRally.Label = "Rally";
-            this.btnRally.Name = "btnRally";
-            this.btnRally.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRally_Click);
-            // 
-            // btnSalesforce
-            // 
-            this.btnSalesforce.Label = "Salesforce";
-            this.btnSalesforce.Name = "btnSalesforce";
-            this.btnSalesforce.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnSalesforce_Click);
-            // 
             // btnSMO
             // 
             this.btnSMO.Label = "SMO";
@@ -198,12 +186,6 @@
             this.grpForms.Items.Add(this.btnLoadWPFHost);
             this.grpForms.Label = "Forms";
             this.grpForms.Name = "grpForms";
-            // 
-            // btnLoadSalesforceRallyInfo
-            // 
-            this.btnLoadSalesforceRallyInfo.Label = "Salesforce Rally Info";
-            this.btnLoadSalesforceRallyInfo.Name = "btnLoadSalesforceRallyInfo";
-            this.btnLoadSalesforceRallyInfo.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnLoadSalesforceRallyInfo_Click);
             // 
             // btnLoadWPFHost
             // 

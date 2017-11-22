@@ -109,11 +109,6 @@ namespace SupportTools_Excel
             ToggleDeveloperMode();
         }
 
-        private void btnLoadSalesforceRallyInfo_Click(object sender, RibbonControlEventArgs e)
-        {
-            var frm = new User_Interface.Forms.frmSalesforceRallyInfo();
-            frm.Show();
-        }
 
         private void btnLoadWPFHost_Click(object sender, RibbonControlEventArgs e)
         {
@@ -121,27 +116,6 @@ namespace SupportTools_Excel
             frm.Show();
         }
 
-        private void btnRally_Click(object sender, RibbonControlEventArgs e)
-        {
-            Common.TaskPaneRally = VNCHlp.TaskPaneUtil.GetTaskPane(
-                () => new User_Interface.Task_Panes.TaskPane_Rally(), "Rally Utilities",
-                Globals.ThisAddIn.CustomTaskPanes, Globals.ThisAddIn.Application.Hwnd.ToString());
-
-            // This works if the minimum size for the control has been set.
-            Common.TaskPaneRally.Width = Common.TaskPaneRally.Control.Width;
-            Common.TaskPaneRally.Visible = !Common.TaskPaneRally.Visible;
-        }
-
-        private void btnSalesforce_Click(object sender, RibbonControlEventArgs e)
-        {
-            Common.TaskPaneSalesforce = VNCHlp.TaskPaneUtil.GetTaskPane(
-                () => new User_Interface.Task_Panes.TaskPane_Salesforce(), "Salesforce Utilities",
-                Globals.ThisAddIn.CustomTaskPanes, Globals.ThisAddIn.Application.Hwnd.ToString());
-
-            // This works if the minimum size for the control has been set.
-            Common.TaskPaneSalesforce.Width = Common.TaskPaneSalesforce.Control.Width;
-            Common.TaskPaneSalesforce.Visible = !Common.TaskPaneSalesforce.Visible;
-        }
 
         private void btnSharePoint_Click(object sender, RibbonControlEventArgs e)
         {
