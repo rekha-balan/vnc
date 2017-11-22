@@ -90,6 +90,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+
+        private void btnMemberAccessExpressionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(DisplayMemberAccessExpressionWalkerVB);
+        }
+
         private void btnSimpleAsClauseWalker_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(DisplaySimpleAsClauseWalkerVB);
@@ -215,6 +221,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+
+        private StringBuilder DisplayMemberAccessExpressionWalkerVB(StringBuilder sb, Dictionary<string, int> matches, SyntaxTree tree)
+        {
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MemberAccessExpression();
+
+            return InvokeVNCSyntaxWalker(sb,
+                (bool)ceMemberAccessExpressionUseRegEx.IsChecked, teMemberAccessExpressionRegEx.Text,
+                matches, tree, walker);
+        }
+
         StringBuilder DisplaySyntaxNodeWalkerVB(StringBuilder sb, Dictionary<string, Int32> matches, SyntaxTree tree)
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.SyntaxNode();
@@ -294,9 +310,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.StructureBlock();
 
-            walker.ShowFields = (bool)ceShowFields.IsChecked;
+            walker.ShowFields = (bool)ceStructureShowFields.IsChecked;
 
             walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
+
+            walker.AllFieldTypes = (bool)ceAllTypes.IsChecked;
+            walker.FieldNames = (bool)ceStructureFieldsUseRegEx.IsChecked ? teStructureFieldsRegEx.Text : ".*";
+            walker.StructureNames = (bool)ceStructuresUseRegEx.IsChecked ? teStructureRegEx.Text : ".*";
 
             return InvokeVNCSyntaxWalker(sb,
                 (bool)ceStructuresUseRegEx.IsChecked, teStructureRegEx.Text,
@@ -456,6 +476,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             StringBuilder sb = new StringBuilder();
             CodeExplorer.teSourceCode.Clear();
+            CodeExplorer.teSourceCode.InvalidateVisual();
+            //CodeExplorer.teSourceCode.Text = "";
 
             string projectFullPath = CodeExplorerContext.teProjectFile.Text;
 

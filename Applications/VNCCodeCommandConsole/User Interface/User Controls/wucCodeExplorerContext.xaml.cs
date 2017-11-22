@@ -376,31 +376,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
 
                     AddFilesFromProject(filesToProcess, project);
-
-                    //foreach (var document in project.Documents)
-                    //{
-                    //    string filePath = document.FilePath;
-
-                    //    if (filePath.Contains("designer"))
-                    //    {
-                    //        continue;
-                    //    }
-
-                    //    if (filePath.Contains("My Project"))
-                    //    {
-                    //        continue;
-                    //    }
-
-                    //    if (document.Name == "Assembly.vb")
-                    //    {
-                    //        continue;
-                    //    }
-
-                    //    if (document.Name.EndsWith(".vb"))
-                    //    {
-                    //        filesToProcess.Add(filePath);
-                    //    }
-                    //}
                 }
             }
             else if (cbeSourceFile.SelectedItems.Count > 0)

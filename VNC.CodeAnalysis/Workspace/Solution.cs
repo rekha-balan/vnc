@@ -101,5 +101,12 @@ namespace VNC.CodeAnalysis.Workspace
 
             return sb;
         }
+
+        public static IEnumerable<Microsoft.CodeAnalysis.Project> Projects(string solutionFullPath)
+        {
+            var workSpace = MSBuildWorkspace.Create();
+            var solution = workSpace.OpenSolutionAsync(solutionFullPath).Result;
+            return solution.Projects;
+        }
     }
 }

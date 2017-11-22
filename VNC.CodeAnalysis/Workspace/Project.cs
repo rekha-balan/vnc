@@ -70,5 +70,17 @@ namespace VNC.CodeAnalysis.Workspace
 
             return sb;
         }
+
+        public static IEnumerable<Microsoft.CodeAnalysis.Document> SourceFile(string projectFullPath)
+        {
+            var workSpace = MSBuildWorkspace.Create();
+            var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+
+            // TODO(crhodes)
+            // Do something to handle appropriate .vb or .cs files
+            // For now just return all documents
+
+            return project.Documents;
+        }
     }
 }

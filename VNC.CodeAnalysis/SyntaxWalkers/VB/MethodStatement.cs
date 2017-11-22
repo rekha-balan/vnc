@@ -26,13 +26,13 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     message = node.ToString();
                 }
 
-                Messages.AppendLine(String.Format("{0} {1}",
-                    GetNodeContext(node),
-                    message));
+                //Messages.AppendLine(String.Format("{0} {1}",
+                //    GetNodeContext(node),
+                //    message));
 
                 //string nodeValue = message;
 
-                RecordMatch(message);
+                RecordMatchAndContext(node, message);
             }
 
             base.VisitMethodStatement(node);

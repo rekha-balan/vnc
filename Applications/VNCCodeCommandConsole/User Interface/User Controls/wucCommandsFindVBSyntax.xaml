@@ -44,7 +44,7 @@
 
     <dxlc:LayoutControl Orientation="Vertical">
 
-        <dxlc:LayoutGroup Header="Find ImportsStatementSyntax" 
+        <dxlc:LayoutGroup Header="Find ImportsStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
@@ -75,7 +75,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find NamespaceSyntax" 
+        <dxlc:LayoutGroup Header="Find Namespace Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
@@ -242,7 +242,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find StructureBlockSyntax" 
+        <dxlc:LayoutGroup Header="Find StructureBlock Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True"                          >
 
@@ -263,7 +263,7 @@
                     </dxlc:LayoutItem>
 
                     <dxlc:LayoutItem>
-                        <dxe:CheckEdit x:Name="ceShowFields" 
+                        <dxe:CheckEdit x:Name="ceStructureShowFields" 
                                    Content="ShowFields" 
                                    IsChecked="True"/>
                     </dxlc:LayoutItem>
@@ -273,13 +273,13 @@
                         Visibility="{cb:Binding ElementName=ceShowFields, Path=IsChecked}" >
 
                         <dxlc:LayoutItem>
-                            <dxe:CheckEdit x:Name="ceFieldsUseRegEx" Content="Use Regular Expressions"
+                            <dxe:CheckEdit x:Name="ceStructureFieldsUseRegEx" Content="Use Regular Expressions"
                                        IsChecked="False" />
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem Label="Fields" >
-                            <dxe:TextEdit x:Name="teFieldsRegEx" Text=".*" 
-                                    IsEnabled="{cb:Binding ElementName=ceFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
+                            <dxe:TextEdit x:Name="teStructureFieldsRegEx" Text=".*" 
+                                    IsEnabled="{cb:Binding ElementName=ceStructureFieldsUseRegEx, Path=IsChecked, Mode=OneWay}"
                                     ToolTip="Supports Regular Expressions"/>
                         </dxlc:LayoutItem>
 
@@ -401,7 +401,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find InvocationExpressionSyntax" 
+        <dxlc:LayoutGroup Header="Find InvocationExpression Syntax" 
             View="GroupBox"
             Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
@@ -479,6 +479,36 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find MemberAccessExpression Syntax" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceMemberAccessExpressionUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Assignments">
+                        <dxe:TextEdit x:Name="teMemberAccessExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceMemberAccessExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="MemberAccessExpression Walker" Click="btnMemberAccessExpressionWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find ArgumentList Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
@@ -510,7 +540,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find VariableDeclaratorSyntax" 
+        <dxlc:LayoutGroup Header="Find VariableDeclarator Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
@@ -540,7 +570,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find ObjectCreationExpression" 
+        <dxlc:LayoutGroup Header="Find ObjectCreationExpression Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
@@ -570,7 +600,7 @@
 
         </dxlc:LayoutGroup>
         
-        <dxlc:LayoutGroup Header="Find AssignmentStatementSyntax" 
+        <dxlc:LayoutGroup Header="Find AssignmentStatement Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
@@ -612,7 +642,7 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Find BinaryExpressionSyntax" 
+        <dxlc:LayoutGroup Header="Find BinaryExpression Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
@@ -641,8 +671,8 @@
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
-        
-        <dxlc:LayoutGroup Header="Find SimpleAsClause" 
+
+        <dxlc:LayoutGroup Header="Find SimpleAsClause Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
 
