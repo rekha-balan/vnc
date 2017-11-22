@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Support_Tools>
+	<Excel_Config>
+		<ActiveDirectories>
+			<ADDomain Name="VNC.LOCAL" DNSHostName="vncdc1.vnc.local" DefaultNamingContext="DC=vnc,DC=local"/>
+			<ADDomain Name="VNCDEV.LOCAL" DNSHostName="vncdevc1.vnc.local" DefaultNamingContext="DC=vncdev,DC=local"/>
+			<ADDomain Name="CORP" DNSHostName="corp.firstam.com" DefaultNamingContext="DC=corp,DC=firstam,DC=com"/>
+		</ActiveDirectories>
+		<DBInstanceList>
+			<Environment Name="Production">
+				<Instance Server="LIFEDBA01C" IPV4Address="10.3.1.147" Name="" Port="1433" />
+				<Instance Server="LIFEDBA02A" IPV4Address="" Name="" Port="1436" />
+				<Instance Server="LIFEDBB01A" IPV4Address="10.3.1.118" Name="MiscDB" Port="1436" />
+				<Instance Server="LIFEDBB01A" IPV4Address="10.3.1.118" Name="" Port="1436" />
+				<Instance Server="A097912X0P" IPV4Address="" Name="sqlexpress" Port="" />
+				<Instance Server="A097912X0P" IPV4Address="" Name="SQL2008" Port="" />
+				<Instance Server="LIFESQL99VM " IPV4Address="10.1.4.79 " Name="" Port="1433" />
+			</Environment>
+			<Environment Name="Production-DMZ">
+
+			</Environment>
+			<Environment Name="Staging">
+				<Instance Server="LIFEDBA201C" IPV4Address="10.5.32.90" Name="" Port="1433" />
+				<Instance Server="LIFEDBB201A" IPV4Address="10.5.32.83" Name="" Port="1436" />
+				<Instance Server="LSSQLC05C2" IPV4Address="10.254.102.36" Name="" Port="1530"  />
+				<Instance Server="LSSQLI17CV1" IPV4Address="10.254.102.112" Name="SQL2K8INST01" Port="1630" />
+			</Environment>
+			<Environment Name="Staging-DMZ">
+			</Environment>
+			<Environment Name="iTest">
+			</Environment>
+			<Environment Name="iTest-DMZ">
+			</Environment>
+			<Environment Name="iDev">
+				<Instance Server="LDSQLI01v" IPV4Address="172.20.136.104" Name="SQL2KPDEV01" Port="1430" />
+				<Instance Server="LDSQLI02v" IPV4Address="172.20.136.106" Name="" Port="1530" />
+				<Instance Server="LDSQLI04v" IPV4Address="172.20.136.112" Name="" Port="1530" />
+				<Instance Server="LDSQLI05v" IPV4Address="172.20.136.113" Name="" Port="1431" />
+				<Instance Server="LDSQLI06v" IPV4Address="172.20.136.124" Name="" Port="1530" />
+				<Instance Server="LDSQLI07v" IPV4Address="172.20.136.138" Name="" Port="1532" />
+				<Instance Server="LDSQLI07v" IPV4Address="172.20.136.138" Name="" Port="1430" />
+				<Instance Server="LDSQLI08v" IPV4Address="172.20.136.145" Name="" Port="1530" />
+				<Instance Server="LDSQLI09v" IPV4Address="172.20.136.149" Name="" Port="1530" />
+			</Environment>
+			<Environment Name="iDev-DMZ">
+				<Instance Server="LDSQLZ07v" IPV4Address="172.20.135.97" Name="" Port="" />
+				<Instance Server="LDSQLZ08v" IPV4Address="172.20.135.89" Name="" Port="" />
+			</Environment>
+			<Environment Name="VNC">
+				<Instance Server="Matrix" IPV4Address="" Name="" Port="" />
+				<Instance Server="Parthenon" IPV4Address=""  Name="" Port="" />
+				<Instance Server="Tron" IPV4Address=""  Name="" Port="" />
+				<Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="" />
+				<Instance Server="" IPV4Address="10.0.0.5"  Name="NNN" Port="" />
+				<Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="PPP" />
+			</Environment>
+		</DBInstanceList>
+		<EnvironmentList>
+			<Environment Name="Production"	Path="\\LifeNas115\DataServices\Production\M_Treaty_Reporting" />
+			<Environment Name="Staging"		Path="\\LifeNas215\DataServices\QA_Staging\M_Treaty_Reporting" />
+			<Environment Name="Test"		Path="\\LifeNas215\DataServices\ITEST\M_Treaty_Reporting" />
+			<Environment Name="Dev"			Path="\\LifeNas215\DataServices\IDEV\M_Treaty_Reporting" />
+		</EnvironmentList>
+		<FileTypeList>
+			<FileType Name="FundServiceFees" 			Frequency="Weekly"		RelativePath="CorporateFinance_FundServiceFees" />
+			<FileType Name="FundAdvisoryFees" 			Frequency="Monthly"		RelativePath="CorporateFinance_FundAdvisoryFees" />
+			<FileType Name="CashManagementFees" 		Frequency="Monthly"		RelativePath="LifeFinancialReporting_CashManagementFees" />
+			<FileType Name="VITsFees" 					Frequency="Quarterly"	RelativePath="LifeReinsurance_VITSFees" />
+			<FileType Name="ExcludedPolicies" 			Frequency="Yearly"		RelativePath="LifeReinsurance_ExcludedPolicies" />
+			<FileType Name="PolicyValueAdjustments" 	Frequency=""			RelativePath="LifeReinsurance_ManualPolicyValueAdjustments" />
+			<FileType Name="SettlementFinancialValues" 	Frequency=""			RelativePath="LifeReinsurance_SettlementFinancialValues" />
+		</FileTypeList>
+		<SharePointSiteCollections>
+			<SiteCollection Name="ITMP"        Uri="http://communities.na.firstam.net/sites/ITMP" />
+			<SiteCollection Name="FAISDF"      Uri="http://communities.na.firstam.net/sites/FAISDF" />
+			<SiteCollection Name="AppDevMgmt"  Uri="http://communities.na.firstam.net/sites/AppDevMgmt" />
+			<SiteCollection Name="TechnologyServices"  Uri="http://communities.na.firstam.net/sites/TechnologyServices" />
+			<SiteCollection Name="VNCSP2010"   Uri="http://vncsp2010" />
+			<SiteCollection Name="HHSPOC"		Uri="http://myteam.onecallmedical.com/hhspoc" />
+		</SharePointSiteCollections>
+		<TFSProviders>
+			<Provider Name="FA TFS ALM" Uri=""/>
+			<Provider Name="FA TFS DefaultCollection" Uri="http://tfs.corp.firstam.com:8080/tfs"/>
+			<Provider Name="InfinityRhodes DefaultCollection" Uri="https://infinityrhodes.visualstudio.com"/>
+			<Provider Name="VNCDev DefaultCollection" Uri="https://vncdev.visualstudio.com"/>
+			<Provider Name="VNCTfs DefaultCollection" Uri="http://vnctfs:8080/tfs"/>
+		</TFSProviders>
+		<TFSQueries>
+			<Query 
+				Name="User Stories" 
+				Query="
+SELECT 
+	[System.Id], 
+	[System.WorkItemType], 
+	[Microsoft.VSTS.Scheduling.StoryPoints], 
+	[System.Title], 
+	[System.AssignedTo],
+	[System.State], 
+	[System.Tags], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM WorkItems 
+WHERE [System.TeamProject] = '@project' 
+and [System.WorkItemType] = 'User Story'
+" />
+			<Query 
+				Name="User Stories No Points 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], [Microsoft.VSTS.Scheduling.StoryPoints], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM
+	WorkItems 
+WHERE 
+	[System.TeamProject] = '@project' 
+	and [System.WorkItemType] = 'User Story' 
+	and [Microsoft.VSTS.Scheduling.StoryPoints] &lt; 0 
+	and [System.AreaPath] under '@project' 
+	and [System.IterationPath] under '@project' 
+ORDER BY 
+	[System.Id]
+" />
+			<Query 
+				Name="User Stories No Points 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], [Microsoft.VSTS.Scheduling.StoryPoints], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM
+	WorkItems 
+WHERE 
+	[System.TeamProject] = '@project' 
+	AND  [System.WorkItemType] = 'User Story'  
+	AND  [System.AreaPath] &lt;&gt; 'Agile Training\Help Desk'  
+	AND  [System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'  
+	AND  [System.State] IN ('New', 'Active', 'Resolved')  
+	AND  [Microsoft.VSTS.Scheduling.StoryPoints] = '' 
+ORDER BY 
+	[System.Id]
+" />
+			<Query 
+				Name="User Stories No Test Cases 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], [Microsoft.VSTS.Scheduling.StoryPoints], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM
+	WorkItemLinks
+WHERE 
+	(
+		Source.[System.TeamProject] = '@project' 
+		and Source.[System.WorkItemType] = 'User Story' 
+		and Source.[System.State] in ('Closed', 'Resolved') 
+		and Source.[System.IterationPath] &lt;&gt; '@project\Migrated Items'
+	) 
+	and ([System.Links.LinkType] = 'Microsoft.VSTS.Common.TestedBy-Forward') 
+	and (Target.[System.WorkItemType] = 'Test Case') 
+ORDER BY 
+	[System.Id]
+" />	
+			<Query 
+				Name="User Stories No Test Cases 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], [Microsoft.VSTS.Scheduling.StoryPoints], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM
+	WorkItemLinks
+WHERE 
+	(
+		Source.[System.TeamProject] = '@project' 
+		AND Source.[System.WorkItemType] = 'User Story' 
+		AND Source.[System.State] in ('Active', 'Resolved') 
+		AND  [Source].[System.AreaPath] &lt;&gt; 'Agile Training\Help Desk'  
+		AND  [Source].[System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'
+	) 
+	and ([System.Links.LinkType] = 'Microsoft.VSTS.Common.TestedBy-Forward') 
+	and
+	(
+		Target.[System.WorkItemType] = 'Test Case'
+		AND  [Target].[System.State] &lt;&gt; 'Closed'
+	) 
+ORDER BY 
+	[System.Id] mode (DoesNotContain)
+" />				
+			<Query 
+				Name="Tasks without Estimates 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItems
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		and [System.WorkItemType] = 'Task'
+		and 
+		(
+			[System.State] &lt;&gt; 'Removed'
+			or [System.State] &lt;&gt; 'Closed'
+		)
+		and [System.IterationPath] &lt;&gt; '@project\Trash Can' 
+		and [System.IterationPath] &lt;&gt; '@project\Migrated Items' 
+		and
+		(
+			[Microsoft.VSTS.Scheduling.OriginalEstimate] = ''						
+		)
+	) 
+ORDER BY
+	[System.Id] 
+mode(DoesNotContain)				
+" />		
+			<Query 
+				Name="Tasks without Estimates 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItems
+WHERE 
+	[System.TeamProject] = '@project' 
+	AND  [System.WorkItemType] = 'Task'  
+	AND  [System.AreaPath] NOT UNDER 'Agile Training\Help Desk'  	 
+	AND  [System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'  
+	AND 
+	( 
+	[Microsoft.VSTS.Scheduling.OriginalEstimate] = ''  
+	OR  [Microsoft.VSTS.Scheduling.RemainingWork] = ''  
+	OR  [Microsoft.VSTS.Scheduling.CompletedWork] = '' 
+	) 
+	AND  
+	[System.State] IN ('New', 'Active', 'Resolved')
+ORDER BY
+	[System.Id]				
+" />			
+			<Query 
+				Name="Oversized Tasks 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItems
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		and [System.WorkItemType] = 'Task'
+		and 
+		(
+			[System.State] &lt;&gt; 'Removed'
+			or [System.State] &lt;&gt; 'Closed'
+		)
+		and [System.IterationPath] &lt;&gt; '@project\Trash Can' 
+		and [System.IterationPath] &lt;&gt; '@project\Migrated Items' 
+		and
+		(
+			[Microsoft.VSTS.Scheduling.OriginalEstimate] &gt; 16 
+			or [Microsoft.VSTS.Scheduling.RemainingWork] &gt; 16						
+		)
+	) 
+	and (Target.[System.WorkItemType] in ('User Story', 'Test Case')) 
+ORDER BY
+	[System.Id]				
+" />	
+						<Query 
+				Name="Oversized Tasks 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItems
+WHERE 
+	[System.TeamProject] = '@project'  
+	AND  [System.WorkItemType] = 'Task'  
+	AND  [System.AreaPath] NOT UNDER 'Agile Training\Help Desk'  
+	AND  [System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'  
+	AND  [System.State] IN ('New', 'Active', 'Resolved')  
+	AND 
+	( 
+		[Microsoft.VSTS.Scheduling.OriginalEstimate] &gt; 16  
+		OR  [Microsoft.VSTS.Scheduling.RemainingWork] &gt; 16 
+	) 
+ORDER BY 
+	[System.Id]			
+" />
+			<Query 
+				Name="Orphaned Bugs 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItemLinks
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		and [System.WorkItemType] = 'Bug'
+		and Source.[System.State] &lt;&gt; 'Removed' 				
+		and Source.[System.IterationPath] &lt;&gt; '@project\Trash Can' 
+		and Source.[System.IterationPath] &lt;&gt; '@project\Migrated Items' 
+		and Source.[System.WorkItemType] = ''
+	) 
+	and (Target.[System.WorkItemType] in ('User Story', 'Test Case')) 
+ORDER BY
+	[System.Id] 
+mode(DoesNotContain)				
+" />
+			<Query 
+				Name="Orphaned Bugs 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags],
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItemLinks
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		AND  [Source].[System.WorkItemType] = 'Bug'  
+		AND  [Source].[System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'  
+		AND  [Source].[System.AreaPath] NOT UNDER 'Agile Training\Help Desk'
+		AND  [Source].[System.State] &lt;&gt; 'Closed'
+	) 
+	And ([System.Links.LinkType] &lt;&gt; '') 
+	And ([Target].[System.WorkItemType] IN ('User Story', 'Test Case')) 
+ORDER BY 
+	[System.Id] mode(DoesNotContain)				
+" />
+			<Query 
+				Name="Orphaned Tasks 0608" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItemLinks
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		and [System.WorkItemType] = 'Task'
+		and Source.[System.State] &lt;&gt; 'Removed' 				
+		and Source.[System.IterationPath] &lt;&gt; '@project\Trash Can' 
+		and Source.[System.IterationPath] &lt;&gt; '@project\Migrated Items' 
+		and Source.[System.WorkItemType] = ''
+	) 
+	and ([System.Links.LinkType] &lt;&gt; '')
+	and (Target.[System.WorkItemType] in ('User Story')) 
+ORDER BY 
+	[System.Id] 
+mode(DoesNotContain)				
+" />
+			<Query 
+				Name="Orphaned Tasks 0720" 
+				Query="
+SELECT 
+	[System.Id], [System.WorkItemType], [System.Title], 
+	[System.State], [System.Tags], 
+	[System.AreaPath], [System.IterationPath], 
+	[System.RelatedLinkCount], [System.ExternalLinkCount], [System.HyperLinkCount] 
+FROM 
+	WorkItemLinks
+WHERE 
+	(
+		[System.TeamProject] = '@project' 
+		AND  [Source].[System.WorkItemType] = 'Task'  
+		AND  [Source].[System.AreaPath] &lt;&gt; 'Agile Training\Trash Can'  
+		AND  [Source].[System.AreaPath] NOT UNDER 'Agile Training\Help Desk'  
+		AND  [Source].[System.State] IN ('New', 'Active', 'Resolved')
+	) 
+	and ([System.Links.LinkType] &lt;&gt; '')
+	and (Target.[System.WorkItemType] = ('User Story')) 
+ORDER BY 
+	[System.Id] 
+mode(DoesNotContain)				
+" />
+		</TFSQueries>
+	</Excel_Config>
+	<PowerPoint_Config>
+		
+	</PowerPoint_Config>
+	<Word_Config>
+		
+	</Word_Config>
+	<Visio_Config>
+    <ShapeEditorDialog>
+      <Command Name="Command1">
+        <ShapeSheet>
+          <Section>
+            <Row>
+              <Cell />
+            </Row>
+          </Section>
+        </ShapeSheet>
+      </Command>
+    </ShapeEditorDialog>
+	</Visio_Config>
+</Support_Tools>
