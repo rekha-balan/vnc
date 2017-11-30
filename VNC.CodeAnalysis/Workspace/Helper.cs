@@ -14,132 +14,82 @@ namespace VNC.CodeAnalysis.Workspace
     {
         public static List<String> GetSourceFilesToProcessFromConfigFile(string configFileFullPath, string branchName, string solutionName, string projectName)
         {
-            List<String> filesToProcess = new List<string>();
+            List<String> filesToProcess = null;
+            string sourcePath = string.Empty;
+            string projectFolderPath = string.Empty;
+            string projectFileName = string.Empty;
 
             // This  method returns a list of files to process.
-            // If a specific SourceFile is specified, return it
             //
-            // If multiple SolutionFiles are selected, the user must select
-            //  one or more project files.  Handle as multiple project files
-            //
-            // If multiple ProjectFiles are selected, 
-            //  Loop across <Project> elements 
-            //      and add files from project
-            //      and add files listed in <Project> elements
-            //
-            // If a ProjectFile is available, use it to get the list of files
-            // Otherwise return the files selected in cbeSourceFiles.
+            // If a VS ProjectFile is available, use it to get the list of files
+            // Otherwise return the files specified in the <SourceFile /> elements
 
+            XElement configFileElement = XElement.Load(new Uri(configFileFullPath).ToString());
+            XElement branchElement = configFileElement.Descendants("Branch").Where(attr => attr.Attribute("Name").Value == branchName).First();
 
-            XElement configFileElements = XElement.Load(new Uri(configFileFullPath).ToString());
-            XElement projectElements = configFileElements;
+            if (branchElement != null)
+            {
+                sourcePath = branchElement.Attribute("SourcePath").Value;
 
+                // TODO(crhodes)
+                // Add some validation         
+            }
 
-            //string solutionFullPath = teSolutionFile.Text;
-            //string projectFullPath = teProjectFile.Text;
+            XElement solutionElement = branchElement.Descendants("Solution").Where(attr => attr.Attribute("Name").Value == solutionName).First();
+            XElement projectElement = solutionElement.Descendants("Project").Where(attr => attr.Attribute("Name").Value == projectName).First();
 
-            //if (teSourceFile.Text != "")
-            //{
-            //    // TODO(crhodes)
-            //    // Add check for existence
-            //    filesToProcess.Add(teSourceFile.Text);
-            //}
-            //else if (cbeProjectFile.SelectedItems.Count > 1)
-            //{
-            //    using (var workSpace = MSBuildWorkspace.Create())
-            //    {
-            //        foreach (XElement projectElement in cbeProjectFile.SelectedItems)
-            //        {
-            //            string fileName = projectElement.Attribute("FileName").Value;
-            //            string folderPath = projectElement.Attribute("FolderPath").Value;
-            //            string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
-            //            string projectPath = "";
+            if (projectElement != null)
+            {
+                projectFolderPath = projectElement.Attribute("FolderPath").Value;
+                projectFileName = projectElement.Attribute("FileName").Value;
+            }
 
-            //            projectPath = fileName != "" ? sourcePath + "\\" + fileName : "";
+            if (projectFileName.Length > 0)
+            {
+                // TODO(crhodes)
+                // Verify the project file exists.  
+                // If so, open it and get the list of files.
+                filesToProcess = GetSourceFilesToProcessFromVSProject(sourcePath + "\\" + projectFolderPath + "\\" + projectFileName);
+            }
+            else
+            {
+                filesToProcess = new List<string>();
 
-            //            if (projectPath == "")
-            //            {
-            //                // No project file exists, so look across all the SourceFile elements
+                string projectBasePath = sourcePath + "\\" + projectFolderPath + "\\";
 
-            //                foreach (XElement sourceFile in projectElement.Elements("SourceFile"))
-            //                {
-            //                    //string sourceFileName = sourceFile.Attribute("FileName").Value;
-            //                    //string sourceFolderPath = sourceFile.Attribute("FolderPath").Value;
+                foreach (XElement sourceFile in projectElement.Descendants("SourceFile"))
+                {
+                    string sourceFolderPath = sourceFile.Attribute("FolderPath").Value;
 
-            //                    //string filePath = sourcePath + "\\" + sourceFolderPath + "\\" + sourceFileName;
+                    if (sourceFolderPath.Length > 0)
+                    {
+                        sourceFolderPath += "\\";
+                    }
 
-            //                    // NB. The file names are added manually so we don't have to exclude any.
-            //                    string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
+                    string sourceFullPath = projectBasePath + sourceFolderPath + sourceFile.Attribute("FileName").Value;
 
-            //                    filesToProcess.Add(fileFullPath);
-            //                }
-            //            }
-            //            else
-            //            {
-            //                var project = workSpace.OpenProjectAsync(projectPath).Result;
+                    if (File.Exists(sourceFullPath))
+                    {
+                        filesToProcess.Add(sourceFullPath);
+                    }
+                    else
+                    {                      
+                        // TODO(crhodes)
+                        // Handle errors.
 
-            //                //Microsoft.CodeAnalysis.Project project = null;
+                        //FileInfo fileInfo = new FileInfo(filePath);
 
-            //                //project = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath)).Result;
-
-
-            //                //Microsoft.CodeAnalysis.Project project = null;
-
-            //                //var foo = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath));
-
-            //                //foo.Wait();
-
-            //                AddFilesFromProject(filesToProcess, project);
-            //            }
-            //        }
-            //    }
-            //}
-            //else if (projectFullPath != "")
-            //{
-            //    using (var workSpace = MSBuildWorkspace.Create())
-            //    {
-
-            //        var project = workSpace.OpenProjectAsync(projectFullPath).Result;
-
-            //        //Microsoft.CodeAnalysis.Project project = null;
-
-            //        //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
-
-            //        AddFilesFromProject(filesToProcess, project);
-            //    }
-            //}
-            //else if (cbeSourceFile.SelectedItems.Count > 0)
-            //{
-            //    string sourcePath = teSourcePath.Text;
-
-            //    foreach (XElement sourceFile in cbeSourceFile.SelectedItems)
-            //    {
-            //        string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
-
-            //        filesToProcess.Add(fileFullPath);
-            //    }
-            //}
-
-            //var filesToCheck = filesToProcess.ToList();
-
-            //foreach (string filePath in filesToCheck)
-            //{
-            //    if (!File.Exists(filePath))
-            //    {
-            //        FileInfo fileInfo = new FileInfo(filePath);
-
-            //        if (!Directory.Exists(fileInfo.DirectoryName))
-            //        {
-            //            MessageBox.Show(string.Format("Directory\n\n{0}\n\ndoes not exist", fileInfo.DirectoryName), "Check Path or Config File");
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show(string.Format("File\n\n{0}\nin\n\n{1}\n\ndoes not exist", fileInfo.Name, fileInfo.DirectoryName), "Check Path or Config File");
-            //        }
-
-            //        filesToProcess.Remove(filePath);
-            //    }
-            //}
+                        //if (!Directory.Exists(fileInfo.DirectoryName))
+                        //{
+                        //    MessageBox.Show(string.Format("Directory\n\n{0}\n\ndoes not exist", fileInfo.DirectoryName), "Check Path or Config File");
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show(string.Format("File\n\n{0}\nin\n\n{1}\n\ndoes not exist", fileInfo.Name, fileInfo.DirectoryName), "Check Path or Config File");
+                        //}
+                    }
+                }
+            }
 
             return filesToProcess;
         }
@@ -150,149 +100,42 @@ namespace VNC.CodeAnalysis.Workspace
 
 
             // This  method returns a list of files to process.
-            // If a specific SourceFile is specified, return it
-            //
-            // If multiple SolutionFiles are selected, the user must select
-            //  one or more project files.  Handle as multiple project files
-            //
-            // If multiple ProjectFiles are selected, 
-            //  Loop across <Project> elements 
-            //      and add files from project
-            //      and add files listed in <Project> elements
-            //
+
             // If a ProjectFile is available, use it to get the list of files
             // Otherwise return the files selected in cbeSourceFiles.
 
-            //string solutionFullPath = teSolutionFile.Text;
-            //string projectFullPath = teProjectFile.Text;
-
-            //if (teSourceFile.Text != "")
-            //{
-            //    // TODO(crhodes)
-            //    // Add check for existence
-            //    filesToProcess.Add(teSourceFile.Text);
-            //}
-            //else if (cbeProjectFile.SelectedItems.Count > 1)
-            //{
-            //    using (var workSpace = MSBuildWorkspace.Create())
-            //    {
-            //        foreach (XElement projectElement in cbeProjectFile.SelectedItems)
-            //        {
-            //            string fileName = projectElement.Attribute("FileName").Value;
-            //            string folderPath = projectElement.Attribute("FolderPath").Value;
-            //            string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
-            //            string projectPath = "";
-
-            //            projectPath = fileName != "" ? sourcePath + "\\" + fileName : "";
-
-            //            if (projectPath == "")
-            //            {
-            //                // No project file exists, so look across all the SourceFile elements
-
-            //                foreach (XElement sourceFile in projectElement.Elements("SourceFile"))
-            //                {
-            //                    //string sourceFileName = sourceFile.Attribute("FileName").Value;
-            //                    //string sourceFolderPath = sourceFile.Attribute("FolderPath").Value;
-
-            //                    //string filePath = sourcePath + "\\" + sourceFolderPath + "\\" + sourceFileName;
-
-            //                    // NB. The file names are added manually so we don't have to exclude any.
-            //                    string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
-
-            //                    filesToProcess.Add(fileFullPath);
-            //                }
-            //            }
-            //            else
-            //            {
-            //                var project = workSpace.OpenProjectAsync(projectPath).Result;
-
-            //                //Microsoft.CodeAnalysis.Project project = null;
-
-            //                //project = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath)).Result;
-
-
-            //                //Microsoft.CodeAnalysis.Project project = null;
-
-            //                //var foo = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath));
-
-            //                //foo.Wait();
-
-            //                AddFilesFromProject(filesToProcess, project);
-            //            }
-            //        }
-            //    }
-            //}
-            //else 
-            if (projectFullPath != "")
+            using (var workSpace = MSBuildWorkspace.Create())
             {
-                using (var workSpace = MSBuildWorkspace.Create())
+                var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+
+                //Microsoft.CodeAnalysis.Project project = null;
+
+                //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
+
+                FileInfo fileInfo = new FileInfo(projectFullPath);
+
+                switch (fileInfo.Extension)
                 {
+                    case ".csproj":
+                        AddSourceFilesFromCSProject(filesToProcess, project);
+                        break;
 
-                    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+                    case ".vbproj":
+                        AddSourceFilesFromVBProject(filesToProcess, project);
+                        break;
 
-                    //Microsoft.CodeAnalysis.Project project = null;
-
-                    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
-
-                    FileInfo fileInfo = new FileInfo(projectFullPath);
-
-                    switch (fileInfo.Extension)
-                    {
-                        case ".csproj":
-                            AddSourceFilesFromCSProject(filesToProcess, project);
-                            break;
-
-                        case ".vbproj":
-                            AddSourceFilesFromVBProject(filesToProcess, project);
-                            break;
-
-                        default:
-                            // TODO(crhodes)
-                            // How to handle unsupported project types
-                            break;
-                    }
-
+                    default:
+                        // TODO(crhodes)
+                        // How to handle unsupported project types
+                        break;
                 }
-            }
 
-            //else if (cbeSourceFile.SelectedItems.Count > 0)
-            //{
-            //    string sourcePath = teSourcePath.Text;
-
-            //    foreach (XElement sourceFile in cbeSourceFile.SelectedItems)
-            //    {
-            //        string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
-
-            //        filesToProcess.Add(fileFullPath);
-            //    }
-            //}
-
-            var filesToCheck = filesToProcess.ToList();
-
-            foreach (string filePath in filesToCheck)
-            {
-                if (!File.Exists(filePath))
-                {
-                    FileInfo fileInfo = new FileInfo(filePath);
-
-                    //if (!Directory.Exists(fileInfo.DirectoryName))
-                    //{
-                    //    MessageBox.Show(string.Format("Directory\n\n{0}\n\ndoes not exist", fileInfo.DirectoryName), "Check Path or Config File");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show(string.Format("File\n\n{0}\nin\n\n{1}\n\ndoes not exist", fileInfo.Name, fileInfo.DirectoryName), "Check Path or Config File");
-                    //}
-
-                    filesToProcess.Remove(filePath);
-                }
             }
 
             return filesToProcess;
         }
 
-
-        private static void AddSourceFilesFromVBProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
+        public static void AddSourceFilesFromVBProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
         {
             foreach (var document in project.Documents)
             {
@@ -324,7 +167,7 @@ namespace VNC.CodeAnalysis.Workspace
             }
         }
 
-        private static void AddSourceFilesFromCSProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
+        public static void AddSourceFilesFromCSProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
         {
             foreach (var document in project.Documents)
             {

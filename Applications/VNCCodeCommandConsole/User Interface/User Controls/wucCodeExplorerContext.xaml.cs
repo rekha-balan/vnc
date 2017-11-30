@@ -316,8 +316,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
             else if (cbeProjectFile.SelectedItems.Count > 1)
             {
-                using (var workSpace = MSBuildWorkspace.Create())
-                {
+                //using (var workSpace = MSBuildWorkspace.Create())
+                //{
                     foreach (XElement projectElement in cbeProjectFile.SelectedItems)
                     {
                         string fileName = projectElement.Attribute("FileName").Value;
@@ -346,7 +346,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                         }
                         else
                         {
-                            var project = workSpace.OpenProjectAsync(projectPath).Result;
+                            filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath);
+                            //var project = workSpace.OpenProjectAsync(projectPath).Result;
 
                             //Microsoft.CodeAnalysis.Project project = null;
 
@@ -359,24 +360,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                             //foo.Wait();
 
-                            AddFilesFromProject(filesToProcess, project);
+                            //VNC.CodeAnalysis.Workspace.Helper.
+                            //VNC.CodeAnalysis.Workspace.Helper.AddSourceFilesFromVBProject(filesToProcess, project);
+                            //AddFilesFromProject(filesToProcess, project);
                         }
                     }
-                }
+                //}
             }
             else if (projectFullPath != "")
             {
-                using (var workSpace = MSBuildWorkspace.Create())
-                {
+                filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectFullPath);
+                //using (var workSpace = MSBuildWorkspace.Create())
+                //{
 
-                    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
+                //    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
 
-                    //Microsoft.CodeAnalysis.Project project = null;
+                //    //Microsoft.CodeAnalysis.Project project = null;
 
-                    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
+                //    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
+                //    VNC.CodeAnalysis.Workspace.Helper.AddSourceFilesFromVBProject(filesToProcess, project);
 
-                    AddFilesFromProject(filesToProcess, project);
-                }
+                //    //AddFilesFromProject(filesToProcess, project);
+                //}
             }
             else if (cbeSourceFile.SelectedItems.Count > 0)
             {
@@ -414,33 +419,33 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return filesToProcess;
         }
 
-        private static void AddFilesFromProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
-        {
-            foreach (var document in project.Documents)
-            {
-                string filePath = document.FilePath;
+        //private static void AddFilesFromProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
+        //{
+        //    foreach (var document in project.Documents)
+        //    {
+        //        string filePath = document.FilePath;
 
-                if (filePath.ToLower().Contains("designer"))
-                {
-                    continue;
-                }
+        //        if (filePath.ToLower().Contains("designer"))
+        //        {
+        //            continue;
+        //        }
 
-                if (filePath.Contains("My Project"))
-                {
-                    continue;
-                }
+        //        if (filePath.Contains("My Project"))
+        //        {
+        //            continue;
+        //        }
 
-                if (document.Name == "Assembly.vb")
-                {
-                    continue;
-                }
+        //        if (document.Name == "Assembly.vb")
+        //        {
+        //            continue;
+        //        }
 
-                if (document.Name.EndsWith(".vb"))
-                {
-                    filesToProcess.Add(filePath);
-                }
-            }
-        }
+        //        if (document.Name.EndsWith(".vb"))
+        //        {
+        //            filesToProcess.Add(filePath);
+        //        }
+        //    }
+        //}
 
         private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
         {
