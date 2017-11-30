@@ -300,6 +300,9 @@
     <Compile Include="User Interface\User Controls\wucFind_Picker.cs">
       <DependentUpon>wucFind_Picker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucOutputOptions.xaml.cs">
+      <DependentUpon>wucOutputOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucSourceBranch_Picker.xaml.cs">
       <DependentUpon>wucSourceBranch_Picker.xaml</DependentUpon>
     </Compile>
@@ -426,6 +429,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucFind_Picker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucOutputOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

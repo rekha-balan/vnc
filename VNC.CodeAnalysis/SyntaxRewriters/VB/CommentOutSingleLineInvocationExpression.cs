@@ -17,6 +17,8 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         private string _pattern;
         private string _comment;
 
+        DisplayInfo Display = new DisplayInfo();
+
         public CommentOutSingleLineInvocationExpression(string pattern, string comment="Removed by a button")
         {
             _pattern = pattern;
@@ -25,7 +27,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
+            //Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression = null;
 
@@ -45,7 +47,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                     // HACK(crhodes)
                     // Figure out how to get Helpers to work here.
                     Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
-                        Helpers.VB.GetContainingType(node),
+                        Helpers.VB.GetContainingContext(node, Display),
                         Helpers.VB.GetContainingMethod(node),
                         node.ToString()));
 

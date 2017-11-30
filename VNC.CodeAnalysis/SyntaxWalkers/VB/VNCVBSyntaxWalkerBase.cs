@@ -14,8 +14,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class VNCVBSyntaxWalkerBase : VisualBasicSyntaxWalker
     {
         public StringBuilder Messages;
-        public Boolean DisplayClassOrModuleName;
-        public Boolean DisplayMethodName;
+
+        public DisplayInfo Display = new DisplayInfo();
+        //public Boolean DisplayClassOrModuleName;
+        //public Boolean DisplayMethodName;
 
         public string IdentifierNames;
         internal Regex identifierNameRegEx;
@@ -45,12 +47,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             string messageContext = "";
 
-            if (DisplayClassOrModuleName)
+            if (Display.ClassOrModuleName)
             {
-                messageContext = Helpers.VB.GetContainingType(node);
+                messageContext = Helpers.VB.GetContainingContext(node, Display);
             }
 
-            if (DisplayMethodName)
+            if (Display.MethodName)
             {
                 messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
             }
@@ -76,7 +78,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public void RecordMatchAndContext(VisualBasicSyntaxNode node, string nodeValue)
         {
             Messages.AppendLine(String.Format("{0} {1}",
-                GetNodeContext(node),
+                Helpers.VB.GetContainingContext(node, Display),
                 nodeValue));
 
             if (Matches.ContainsKey(nodeValue))

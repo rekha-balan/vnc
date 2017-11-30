@@ -33,7 +33,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 return node;
             }
 
-            Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
+            //Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression;
 

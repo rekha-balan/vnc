@@ -1,3 +1,5 @@
+# Ignore Folders until ready to commit
+
 RoslynCodeSearcher/
-RoslynPlayGround/
+
 *.zip

@@ -52,22 +52,25 @@ namespace SupportTools_Visio.Actions
 
                 string configFileFullPath = @"C:\temp\CodeCommandConsole_Config.xml";
 
-                string projectFullPath = fileInfoShape.ProjectFileName;
-                string solutionFullPath = fileInfoShape.SolutionFileName;
+                string projectFileName = fileInfoShape.ProjectFileName;
+                string solutionFileName = fileInfoShape.SolutionFileName;
                 string branchName = fileInfoShape.BranchName;
                 string solutionName = fileInfoShape.SolutionName;
                 string projectName = fileInfoShape.ProjectName;
 
 
-                if (projectFullPath.Length > 0)
+                if (projectFileName.Length > 0)
                 {
-                    filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectFullPath);
+                    string sourcePath = fileInfoShape.BranchSourcePath;
+                    string projectFolderPath = fileInfoShape.ProjectFolderPath;
+
+                    filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(
+                        sourcePath + "\\" + projectFolderPath + "\\" + projectFileName);
                 }
                 else
                 {
                     filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromConfigFile(configFileFullPath, branchName, solutionName, projectName);
                 }
-
 
                 foreach (string filePath in filesToProcess)
                 {

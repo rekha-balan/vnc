@@ -21,12 +21,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 {
                     string messageContext = "";
 
-                    if (DisplayClassOrModuleName)
+                    if (Display.ClassOrModuleName)
                     {
-                        messageContext = Helpers.VB.GetContainingType(node);
+                        messageContext = Helpers.VB.GetContainingContext(node, Display);
                     }
 
-                    if (DisplayMethodName)
+                    if (Display.MethodName)
                     {
                         messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
                     }

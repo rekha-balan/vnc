@@ -14,7 +14,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
     {
         public StringBuilder Messages;
 
-        private string _pattern;
+        //private string _pattern;
         private string _comment;
 
         public RewriteMultipleVariableDeclarations(string comment="Rewritten by a button")

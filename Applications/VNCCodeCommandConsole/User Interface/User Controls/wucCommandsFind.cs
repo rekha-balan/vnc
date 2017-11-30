@@ -18,6 +18,8 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
+using VNCCA = VNC.CodeAnalysis;
+using VNCSW = VNC.CodeAnalysis.SyntaxWalkers;
 
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
@@ -25,14 +27,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
     {
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
-
-        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath);
-        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
-
-
-        delegate StringBuilder SearchTreeCommand(StringBuilder sb, SyntaxTree tree);
-        delegate StringBuilder RewriteTreeCommand(StringBuilder sb, SyntaxTree tree, string targetPattern, string replacementPattern);
-
 
         #region Constructors
 
@@ -102,9 +96,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnMethodNames_Click(object sender, RoutedEventArgs e)
+        {
+            string fileNameAndPath = CodeExplorerContext.teSourceFile.Text;
+
+            var sourceCode = "";
+
+            using (var sr = new StreamReader(fileNameAndPath))
+            {
+                sourceCode = sr.ReadToEnd();
+            }
+
+            List<String> methodNames = VNCCA.Helpers.VB.GetMethodNames(sourceCode);
+        }
+
+        private void btnInvocationExpressionInTryCatchWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayInvocationExpressionInTryCatchWalkerVB, CodeExplorer, CodeExplorerContext, outputOptions);
+        }
+
         private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
         {
-            ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB);
+            Helper.ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, outputOptions);
         }
 
         private void btnHttpContextWalker_Click(object sender, RoutedEventArgs e)
@@ -118,6 +131,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Main Function Routines
 
+        StringBuilder DisplayInvocationExpressionInTryCatchWalkerVB(StringBuilder sb, Dictionary<string, Int32> matches, SyntaxTree tree)
+        {
+            var walker = new VNCSW.VB.InvocationExpressionInTryCatch();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
+                (bool)ceInvocationExpressionInTryCatchUseRegEx.IsChecked, teInvocationExpressionInTryCatchRegEx.Text,
+                matches, tree, walker, outputOptions.GetDisplayInfo());
+        }
 
         private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
         {
@@ -138,7 +159,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     goto PrematureExitBummer;
                 }
 
-                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
                 {
                     sb.AppendLine("Would Process these files ....");
                     sb.AppendLine(string.Format("  {0}", fileNameAndPath));
@@ -156,8 +177,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                     string pattern = string.Empty;
 
-                    VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression walker = null;
-                    walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression(context);
+                    VNCSW.VB.HttpContextCurrentInvocationExpression walker = null;
+                    walker = new VNCCA.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression(context);
                     walker.Messages = sb;
                     walker.Matches = matches;
 
@@ -170,7 +191,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 if (codeExplorerContext.cbeSourceFile.SelectedItems.Count > 0)
                 {
-                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
                     {
                         sb.AppendLine("Would Process these files ....");
                     }
@@ -185,7 +206,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                             continue;
                         }
 
-                        if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                        if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
                         {
                             sb.AppendLine(string.Format("  {0}", filePath));
                         }
@@ -202,8 +223,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                             string pattern = string.Empty;
 
-                            VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression walker = null;
-                            walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.HttpContextCurrentInvocationExpression(context);
+                            VNCSW.VB.HttpContextCurrentInvocationExpression walker = null;
+                            walker = new VNCSW.VB.HttpContextCurrentInvocationExpression(context);
                             walker.Messages = sb;
                             walker.Matches = matches;
 
@@ -224,149 +245,22 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        private StringBuilder DisplayMultipleVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree)
+        private StringBuilder DisplayMultipleVariableDeclaratorWalkerVB(StringBuilder sb, Dictionary<string, Int32> matches, SyntaxTree tree)
         {
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.MultipleVariableDeclarator();
+            var walker = new VNCSW.VB.MultipleVariableDeclarator();
 
-            walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
-            walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            walker.HasAttributes = (bool)outputOptions.ceHasAttributes.IsChecked;
 
-            walker.HasAttributes = (bool)ceHasAttributes.IsChecked;
-
-            return InvokeVNCTypedSyntaxWalker(sb,
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
                 (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
-                tree, walker);
+                matches, tree, walker, outputOptions.GetDisplayInfo());
         }
 
         #endregion
 
         #region Utility Methods
 
-        private void ProcessOperation(SearchTreeCommand command)
-        {
-            StringBuilder sb = new StringBuilder();
-            CodeExplorer.teSourceCode.Clear();
-
-            string projectFullPath = CodeExplorerContext.teProjectFile.Text;
-
-            var filesToProcess = CodeExplorerContext.GetFilesToProcess();
-
-            if (filesToProcess.Count > 0)
-            {
-                if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                {
-                    sb.AppendLine("Would Search these files ....");
-                }
-
-                foreach (string filePath in filesToProcess)
-                {
-                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
-                    {
-                        sb.AppendLine(string.Format("  {0}", filePath));
-                    }
-                    else
-                    {
-                        sb.AppendLine("Searching " + filePath);
-
-                        var sourceCode = "";
-
-                        using (var sr = new StreamReader(filePath))
-                        {
-                            sourceCode = sr.ReadToEnd();
-                        }
-
-                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
-
-                        sb = command(sb, tree);
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("No files selected to process");
-            }
-
-            CodeExplorer.teSourceCode.Text = sb.ToString();
-        }
-
-        StringBuilder InvokeVNCSyntaxWalker(
-            StringBuilder sb, 
-            Boolean useRegEx, string regEx,
-            SyntaxTree syntaxTree,
-            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker)
-        {
-            walker.Messages = sb;
-
-            if (useRegEx)
-            {
-                walker.IdentifierNames = regEx;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.Visit(syntaxTree.GetRoot());
-
-            return sb;
-        }
-
-        StringBuilder InvokeVNCTypedSyntaxWalker(
-            StringBuilder sb,
-            Boolean useRegEx, string regEx,
-            SyntaxTree syntaxTree,
-            VNC.CodeAnalysis.SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker)
-        {
-            walker.Messages = sb;
-
-            if (useRegEx)
-            {
-                walker.IdentifierNames = regEx;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
-
-            walker.InitializeRegEx();
-
-            walker.AllTypes = (bool)ceAllTypes.IsChecked;
-
-            walker.IsByte = (bool)ceIsByte.IsChecked;
-            walker.IsBoolean = (bool)ceIsBoolean.IsChecked;
-            walker.IsDate = (bool)ceIsDate.IsChecked;
-            walker.IsDataTable = (bool)ceIsDataTable.IsChecked;
-            walker.IsDateTime = (bool)ceIsDateTime.IsChecked;
-            walker.IsInt16 = (bool)ceIsInt16.IsChecked;
-            walker.IsInt32 = (bool)ceIsInt32.IsChecked;
-            walker.IsInteger = (bool)ceIsInteger.IsChecked;
-            walker.IsLong = (bool)ceIsLong.IsChecked;
-            walker.IsSingle = (bool)ceIsSingle.IsChecked;
-            walker.IsString = (bool)ceIsString.IsChecked;
-
-            walker.IsOtherType = (bool)ceOtherTypes.IsChecked;
-
-            walker.Visit(syntaxTree.GetRoot());
-
-            return sb;
-        }
 
         #endregion
-
-        private void btnMethodNames_Click(object sender, RoutedEventArgs e)
-        {
-            string fileNameAndPath = CodeExplorerContext.teSourceFile.Text;
-
-            var sourceCode = "";
-
-            using (var sr = new StreamReader(fileNameAndPath))
-            {
-                sourceCode = sr.ReadToEnd();
-            }
-
-            List<String> methodNames = VNC.CodeAnalysis.Helpers.VB.GetMethodNames(sourceCode);
-        }
     }
 }

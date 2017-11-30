@@ -182,6 +182,7 @@
     <Compile Include="DesignMetrics\VB\SealedClassAndProtectedMembers.cs" />
     <Compile Include="DesignMetrics\VB\ObjectObsession.cs" />
     <Compile Include="DesignMetrics\VB\DeeplyNestedLoops.cs" />
+    <Compile Include="DisplayInfo.cs" />
     <Compile Include="Helpers\CS.cs" />
     <Compile Include="Helpers\VB.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidBoxing.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="SyntaxWalkers\VB\AllTrivia.cs" />
     <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
     <Compile Include="SyntaxWalkers\VB\MemberAccessExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\InvocationExpressionInTryCatchWalker.cs" />
     <Compile Include="SyntaxWalkers\VB\ObjectCreationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\ConcatenateExpression.cs" />
@@ -293,6 +295,7 @@
     <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\VNCVBTypedSyntaxWalkerBase.cs" />
     <Compile Include="SyntaxWalkers\VB\VNCVBSyntaxWalkerBase.cs" />
+    <Compile Include="Types.cs" />
     <Compile Include="Workspace\Document.cs" />
     <Compile Include="Workspace\Helper.cs" />
     <Compile Include="Workspace\Project.cs" />

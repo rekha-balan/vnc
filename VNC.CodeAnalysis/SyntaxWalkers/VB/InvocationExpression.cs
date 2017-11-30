@@ -18,9 +18,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
             {
                 RecordMatchAndContext(node, node.ToString());
-                //Messages.AppendLine(String.Format("{0} {1}",
-                //    GetNodeContext(node),
-                //    node.ToString()));
             }
 
             // Call base to visit children

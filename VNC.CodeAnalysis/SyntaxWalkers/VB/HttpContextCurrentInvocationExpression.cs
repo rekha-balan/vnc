@@ -16,6 +16,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Boolean DisplayClassOrModuleName;
         public Boolean DisplayMethodName;
 
+        DisplayInfo Display = new DisplayInfo();
+
         public Dictionary<string, Int32> Matches; // = new Dictionary<string, Int32>();
 
         private string _pattern;
@@ -116,7 +118,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     // HACK(crhodes)
                     // Figure out how to get Helpers to work
 
-                    messageContext = Helpers.VB.GetContainingType(node);
+                    messageContext = Helpers.VB.GetContainingContext(node, Display);
                 }
 
                 if (DisplayMethodName)

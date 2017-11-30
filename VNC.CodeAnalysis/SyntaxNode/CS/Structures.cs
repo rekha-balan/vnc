@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.SyntaxNode.CS
 
             SyntaxTree tree = CSharpSyntaxTree.ParseText(sourceCode);
 
-            IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> syntaxNodes;
+            //IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> syntaxNodes;
 
             //if (statementsOnly)
             //{

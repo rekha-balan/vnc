@@ -65,4 +65,4 @@ using System.Security;
 //  Version   Date          By
 //  1.0.0.0   mm/dd/yyyy    Christopher Rhodes
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2017.11.21A")]
+[assembly: AssemblyInformationalVersion("2017.11.23A")]

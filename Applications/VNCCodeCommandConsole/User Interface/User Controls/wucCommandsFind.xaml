@@ -95,6 +95,36 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find InvocationExpression Syntax Inside Try-Catch" 
+            View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="False">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceInvocationExpressionInTryCatchUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teInvocationExpressionInTryCatchRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceInvocationExpressionInTryCatchUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="InvocationExpression In Try-Catch Walker" Click="btnInvocationExpressionInTryCatchWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find MethodNames" 
         	    View="GroupBox" Orientation="Vertical"
                 IsCollapsible="True" IsCollapsed="True">
@@ -105,8 +135,9 @@
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
-        
-        <dxlc:LayoutGroup Header="Output Configuration Options" 
+
+        <uiuc:wucOutputOptions x:Name="outputOptions" />
+        <!--<dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
      
             <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" 
@@ -214,7 +245,7 @@
             </dxlc:LayoutGroup>
 
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
     </dxlc:LayoutControl>
     

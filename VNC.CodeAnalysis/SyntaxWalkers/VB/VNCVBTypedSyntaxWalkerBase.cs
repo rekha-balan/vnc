@@ -13,28 +13,28 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class VNCVBTypedSyntaxWalkerBase : VNCVBSyntaxWalkerBase
     {
-        public Boolean AllTypes = false;
+        //public Boolean AllTypes = false;
         public Boolean HasAttributes = false;
 
-        public Boolean IsBoolean = false;
-        public Boolean IsByte = false;
-        public Boolean IsDate = false;
-        public Boolean IsDataTable = false;
-        public Boolean IsDateTime = false;
-        public Boolean IsInt16 = false;
-        public Boolean IsInt32 = false;
-        public Boolean IsInteger = false;
-        public Boolean IsLong = false;
-        public Boolean IsSingle = false;
-        public Boolean IsString = false;
+        //public Boolean IsBoolean = false;
+        //public Boolean IsByte = false;
+        //public Boolean IsDate = false;
+        //public Boolean IsDataTable = false;
+        //public Boolean IsDateTime = false;
+        //public Boolean IsInt16 = false;
+        //public Boolean IsInt32 = false;
+        //public Boolean IsInteger = false;
+        //public Boolean IsLong = false;
+        //public Boolean IsSingle = false;
+        //public Boolean IsString = false;
 
-        public Boolean IsOtherType = false;
+        //public Boolean IsOtherType = false;
 
         internal bool FilterByType(AsClauseSyntax asClause)
         {
             Boolean addField = false;
 
-            if (asClause == null || AllTypes)
+            if (asClause == null || Display.AllTypes)
             {
                 addField = true;
             }
@@ -43,51 +43,51 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 switch (asClause.Type().ToString())
                 {
                     case "Boolean":
-                        if (IsBoolean) addField = true;
+                        if (Display.Boolean) addField = true;
                         break;
 
                     case "Byte":
-                        if (IsByte) addField = true;
+                        if (Display.Byte) addField = true;
                         break;
 
                     case "DataTable":
-                        if (IsDataTable) addField = true;
+                        if (Display.DataTable) addField = true;
                         break;
 
                     case "Date":
-                        if (IsDate) addField = true;
+                        if (Display.Date) addField = true;
                         break;
 
                     case "DateTime":
-                        if (IsDateTime) addField = true;
+                        if (Display.DateTime) addField = true;
                         break;
 
                     case "Int16":
-                        if (IsInt16) addField = true;
+                        if (Display.Int16) addField = true;
                         break;
 
                     case "Int32":
-                        if (IsInt32) addField = true;
+                        if (Display.Int32) addField = true;
                         break;
 
                     case "Integer":
-                        if (IsInteger) addField = true;
+                        if (Display.Integer) addField = true;
                         break;
 
                     case "Long":
-                        if (IsLong) addField = true;
+                        if (Display.Long) addField = true;
                         break;
 
                     case "Single":
-                        if (IsSingle) addField = true;
+                        if (Display.Single) addField = true;
                         break;
 
                     case "String":
-                        if (IsString) addField = true;
+                        if (Display.String) addField = true;
                         break;
 
                     default:
-                        if (IsOtherType) addField = true;
+                        if (Display.OtherTypes) addField = true;
                         //if (IsOtherType && !displayStructure) addField = true;
 
                         break;
