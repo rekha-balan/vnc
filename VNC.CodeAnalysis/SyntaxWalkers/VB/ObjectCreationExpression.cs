@@ -20,7 +20,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             var n = node;
-            
+
+            if (identifierNameRegEx.Match(node.ToString()).Success)
+            {
+                RecordMatchAndContext(node, node.ToString());
+            }
+
             //if (MatchLeft)
             //{
             //    if (identifierNameRegEx.Match(node.Left.ToString()).Success)

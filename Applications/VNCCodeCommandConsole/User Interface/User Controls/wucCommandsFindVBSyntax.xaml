@@ -431,7 +431,7 @@
 
             <dxlc:LayoutGroup  Header="Manual Loop"
                                View="GroupBox"
-                               IsCollapsible="True" IsCollapsed="False"
+                               IsCollapsible="True" IsCollapsed="True"
                                Orientation="Vertical">
 
                 <dxe:CheckEdit x:Name="ceIncludeTrivia" Content="Include Trivia" IsChecked="True" VerticalAlignment="Top" />
@@ -442,25 +442,6 @@
                                      SelectedIndex="0"                                                         
                                      ShowBorder="False" Background="{x:Null}">
                     </dxe:ComboBoxEdit>
-                    <!--<dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
-                                                         ValueMember="Content" 
-                                                         SelectedIndex="0"                                                         
-                                                         ShowBorder="False" Background="{x:Null}">
-                        <dxe:ListBoxEdit.StyleSettings>
-                            <dxe:RadioListBoxEditStyleSettings />
-                        </dxe:ListBoxEdit.StyleSettings>
-                        <dxe:ListBoxEdit.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </dxe:ListBoxEdit.ItemsPanel>
-                        <dxe:ListBoxEdit.Items>
-                            <dxe:ListBoxEditItem Content="StructuredTrivia" />
-                            <dxe:ListBoxEditItem Content="Node" />
-                            <dxe:ListBoxEditItem Content="Token" />
-                            <dxe:ListBoxEditItem Content="Trivia" />
-                        </dxe:ListBoxEdit.Items>
-                    </dxe:ListBoxEdit>-->
                 </dx:GroupFrame>
 
                 <dx:GroupFrame Header="Node Retrieval" VerticalAlignment="Top">
@@ -792,11 +773,9 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Output Configuration Options" 
-        	View="GroupBox" Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True" >
-            <uiuc:wucOutputOptions x:Name="outputOptions" />           
-        </dxlc:LayoutGroup>
+        <dxlc:LayoutItem>
+            <uiuc:wucOutputOptions x:Name="outputOptions" />
+        </dxlc:LayoutItem>
         
     </dxlc:LayoutControl>
     

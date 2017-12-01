@@ -106,7 +106,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
 
-        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern);
+        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern, out Boolean performedReplacement);
 
         void ProcessOperation(RewriteFileCommand command)
         {
@@ -134,8 +134,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     }
                     else
                     {
-                        sb.AppendLine("Rewriting " + filePath);
-                        sb = command(sb, filePath, targetInvocationExpression, newInvocationExpression);
+                        Boolean performedReplacement;
+
+                        sb = command(sb, filePath, targetInvocationExpression, newInvocationExpression, out performedReplacement);
+
+                        if (performedReplacement)
+                        {
+                            sb.AppendLine("Rewrote " + filePath);
+                        }
                     }
                 }
             }
@@ -146,15 +152,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
+
         #region Main Function Routines
-
-
-
+        
         #endregion
 
-        private StringBuilder CommentFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression)
+        private StringBuilder CommentFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression, out Boolean performedReplacement)
         {
             string sourceCode;
+            performedReplacement = false;
 
             using (var sr = new StreamReader(filePath))
             {
@@ -174,14 +180,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 string newFilePath = filePath + (ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "");
 
                 File.WriteAllText(newFilePath, newNode.ToFullString());
+                performedReplacement = true;
             }
 
             return sb;
         }
 
-        private StringBuilder RewriteFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression)
+        private StringBuilder RewriteFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression, out Boolean performedReplacement)
         {
             string sourceCode;
+            performedReplacement = false;
 
             using (var sr = new StreamReader(filePath))
             {
@@ -201,6 +209,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 string newFilePath = filePath + (ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "");
 
                 File.WriteAllText(newFilePath, newNode.ToFullString());
+                performedReplacement = true;
             }
 
             return sb;

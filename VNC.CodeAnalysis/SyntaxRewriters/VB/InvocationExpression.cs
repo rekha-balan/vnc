@@ -14,6 +14,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         public StringBuilder Messages;
         public string _targetInvocationExpression = null;
         public string _newInvocationExpression = null;
+        public Boolean PerformedReplacement = false;
 
         //public InvocationExpression(bool visitIntoStructuredTrivia = false) : base(visitIntoStructuredTrivia)
         //{
@@ -43,13 +44,15 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             {
                 newInvocationExpression = node.WithExpression(newExpression);
                 Messages.AppendLine(string.Format("From: >{0}< To: >{1}<", expression.ToString(), newInvocationExpression.ToString()));
+                PerformedReplacement = true;
             }
             else
             {
                 newInvocationExpression = node;
             }
 
-            return newInvocationExpression;
+            //return newInvocationExpression;
+            return base.VisitInvocationExpression(newInvocationExpression);
         }
     }
 }
