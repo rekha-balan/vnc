@@ -70,7 +70,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="ImportsStatement Walker" Click="btnImportsStatementWalker_Click"/>
+                <Button Content="ImportsStatement Walker" 
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnImportsStatementWalker_Click" />
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -101,7 +103,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="NamepspaceStatement Walker" Click="btnNamespaceStatementWalker_Click"/>
+                <Button Content="NamepspaceStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnNamespaceStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -136,7 +140,9 @@
             </dxlc:LayoutItem>
             
             <dxlc:LayoutItem>
-                <Button Content="ClassStatement Walker" Click="btnClassStatementWalker_Click"/>
+                <Button Content="ClassStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnClassStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -171,7 +177,9 @@
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem>
-                <Button Content="ModuleStatement Walker" Click="btnModuleStatementWalker_Click"/>
+                <Button Content="ModuleStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnModuleStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -202,7 +210,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="FieldDeclaration Walker" Click="btnFieldDeclarationWalker_Click"/>
+                <Button Content="FieldDeclaration Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnFieldDeclarationWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -237,7 +247,9 @@
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem>
-                <Button Content="PropertyStatement Walker" Click="btnPropertyStatementWalker_Click"/>
+                <Button Content="PropertyStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnPropertyStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -292,8 +304,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="Find Structures" 
-                    Click="btnFindStructures_Click"/>
+                <Button Content="Find Structures"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnFindStructures_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -335,7 +348,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="MethodStatement Walker" Click="btnMethodStatementWalker_Click"/>
+                <Button Content="MethodStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnMethodStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -366,7 +381,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="ParameterList Walker" Click="btnParameterListWalker_Click"/>
+                <Button Content="ParameterList Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnParameterListWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -396,7 +413,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="LocalDeclarationStatement Walker" Click="btnLocalDeclarationStatementWalker_Click"/>
+                <Button Content="LocalDeclarationStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnLocalDeclarationStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -426,7 +445,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="InvocationExpression Walker" Click="btnInvocationExpressionWalker_Click"/>
+                <Button Content="InvocationExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnInvocationExpressionWalker_Click"/>
             </dxlc:LayoutItem>
 
             <dxlc:LayoutGroup  Header="Manual Loop"
@@ -453,7 +474,9 @@
                 </dx:GroupFrame>
 
                 <dxlc:LayoutItem>
-                    <Button Content="InvocationExpression" Click="btnInvocation_Click"/>
+                    <Button Content="InvocationExpression"
+                            Style="{StaticResource SyntaxQueryButton}"
+                            Click="btnInvocation_Click"/>
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
@@ -485,7 +508,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="MemberAccessExpression Walker" Click="btnMemberAccessExpressionWalker_Click"/>
+                <Button Content="MemberAccessExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnMemberAccessExpressionWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -516,7 +541,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="ArgumentList Walker" Click="btnArgumentListWalker_Click"/>
+                <Button Content="ArgumentList Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnArgumentListWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -546,7 +573,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="VariableDeclarator Walker" Click="btnVariableDeclaratorWalker_Click"/>
+                <Button Content="VariableDeclarator Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnVariableDeclaratorWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -576,7 +605,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="ObjectCreationExpression Walker" Click="btnObjectCreationExpressionWalker_Click"/>
+                <Button Content="ObjectCreationExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnObjectCreationExpressionWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -618,7 +649,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="AssignmentStatement Walker" Click="btnAssignmentStatementWalker_Click"/>
+                <Button Content="AssignmentStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnAssignmentStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -648,7 +681,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="BinaryExpression Walker" Click="btnBinaryExpresionWalker_Click"/>
+                <Button Content="BinaryExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnBinaryExpresionWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -678,7 +713,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="SimpleAsClause Walker" Click="btnSimpleAsClauseWalker_Click"/>
+                <Button Content="SimpleAsClause Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnSimpleAsClauseWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>        
@@ -708,7 +745,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="SyntaxNode Walker" Click="btnSyntaxNodeWalker_Click"/>
+                <Button Content="SyntaxNode Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnSyntaxNodeWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -738,7 +777,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="SyntaxToken Walker" Click="btnSyntaxTokenWalker_Click"/>
+                <Button Content="SyntaxToken Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnSyntaxTokenWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -768,7 +809,9 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="SyntaxTrivia Walker" Click="btnSyntaxTriviaWalker_Click"/>
+                <Button Content="SyntaxTrivia Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnSyntaxTriviaWalker_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>

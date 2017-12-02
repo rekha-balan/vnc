@@ -53,7 +53,9 @@
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem>
-                <Button Content="Replace InvocationExpression" Click="btnRewrite_InvocationExpression_Click"/>
+                <Button Content="Replace InvocationExpression"
+                        Style="{StaticResource SyntaxRewriterButton}"
+                        Click="btnRewrite_InvocationExpression_Click"/>
             </dxlc:LayoutItem>
 
             <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
@@ -66,13 +68,18 @@
             </dxlc:LayoutItem>
             
             <dxlc:LayoutItem>
-                <Button Content="CommentOut SingleLine InvocationExpression" Click="btnCommentOut_InvocationExpression_Click"/>
+                <Button Content="CommentOut SingleLine InvocationExpression"
+                        Style="{StaticResource SyntaxRewriterButton}"
+                        Click="btnCommentOut_InvocationExpression_Click"/>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup
         	Orientation="Vertical" VerticalAlignment="Top">
+
+            <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" 
+                           IsChecked="True" VerticalAlignment="Top" />
             
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -85,7 +92,7 @@
                 </dxlc:LayoutItem>          
             </dxlc:LayoutGroup>
 
-            <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" IsChecked="True" VerticalAlignment="Top" />
+
         </dxlc:LayoutGroup>
 
     </dxlc:LayoutControl>
