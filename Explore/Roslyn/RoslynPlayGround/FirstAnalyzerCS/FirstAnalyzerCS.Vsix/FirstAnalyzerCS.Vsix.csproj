@@ -73,12 +73,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirstAnalyzerCS\FirstAnalyzerCS.csproj">
-      <Project>{27BDD43D-40C4-4948-8EC1-A7CB398D7FE6}</Project>
-      <Name>FirstAnalyzerCS</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>

@@ -24,61 +24,77 @@
     xmlns:vncX="clr-namespace:VNC.Xaml;assembly=VNC.XamlHelper" 
     xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"   
 
-    d:DesignWidth="800" d:DesignHeight="600"
+    d:DesignWidth="440" d:DesignHeight="600"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
     
-    <uiuc:wucDXBase.Resources>
-        <!--<vncX:VisToBool x:Key="VisToBool" />-->
-        <!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
+    <!--<uiuc:wucDXBase.Resources>
 
-        <CollectionViewSource x:Key="dataSource" 
-                              Source="{Binding Path=ApplicationUsage, Source={StaticResource applicationDataSet}}" />-->
 
-    </uiuc:wucDXBase.Resources>
+    </uiuc:wucDXBase.Resources>-->
 
     <dxlc:LayoutControl Orientation="Vertical" >
 
-        <dxlc:LayoutGroup Header="InvocationExpressionSyntax"
-            View="GroupBox"	Orientation="Vertical">
-             <dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teTargetInvocationExpression" >
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
-
-            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teNewInvocationExpression" >
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
+        <dxlc:LayoutGroup Header="InvocationExpressionSyntax Rewriters"
+            View="GroupBox"	Orientation="Vertical" IsCollapsed="False" IsCollapsible="True">
 
             <dxlc:LayoutItem>
-                <Button Content="Replace InvocationExpression"
-                        Style="{StaticResource SyntaxRewriterButton}"
-                        Click="btnRewrite_InvocationExpression_Click"/>
+                <dxe:CheckEdit x:Name="ceReplacementTargetUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
             </dxlc:LayoutItem>
 
-            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teComment" 
+            <dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
+
+                <!--<dxe:TextEdit x:Name="teTargetInvocationExpression" >
+                </dxe:TextEdit>-->
+                <dxe:TextEdit x:Name="teTargetInvocationExpression" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceReplacementTargetUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutGroup Header="Code Rewriters"
+                View="GroupBox"	Orientation="Vertical">
+
+                <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
+                    <dxe:TextEdit x:Name="teNewInvocationExpression" >
+                    </dxe:TextEdit>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button Content="Replace InvocationExpression"
+                            Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnRewrite_InvocationExpression_Click"/>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="Code Removers"
+                View="GroupBox"	Orientation="Vertical">
+
+                <dxlc:LayoutItem Label="Notification Comment" LabelPosition="Top">
+                    <dxe:TextEdit x:Name="teComment" 
                         Text="Commented out by CodeCommandConsole"
                         ToolTip="Accepts multiple lines"
                         TextWrapping="Wrap"
                         VerticalContentAlignment="Top"
                         AcceptsReturn="True" AcceptsTab="True" />
-            </dxlc:LayoutItem>
-            
-            <dxlc:LayoutItem>
-                <Button Content="CommentOut SingleLine InvocationExpression"
-                        Style="{StaticResource SyntaxRewriterButton}"
-                        Click="btnCommentOut_InvocationExpression_Click"/>
-            </dxlc:LayoutItem>
+                </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>
+                <dxlc:LayoutItem>
+                    <Button Content="CommentOut SingleLine InvocationExpression"
+                            Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnCommentOut_InvocationExpression_Click"/>
+                </dxlc:LayoutItem>
 
-        <dxlc:LayoutGroup Header="Logging Rewritters"
-            View="GroupBox"	Orientation="Vertical">
-            
-            <!--<dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
+            </dxlc:LayoutGroup>
+
+
+            <dxlc:LayoutGroup Header="SQL Rewriters"
+                View="GroupBox"	Orientation="Vertical">
+
+                <!--<dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
                 <dxe:TextEdit x:Name="teTargetInvocationExpression" >
                 </dxe:TextEdit>
             </dxlc:LayoutItem>
@@ -88,30 +104,30 @@
                 </dxe:TextEdit>
             </dxlc:LayoutItem>-->
 
-            <dxlc:LayoutItem>
-                <Button Content="Wrap in Debug2"
+                <dxlc:LayoutItem>
+                    <Button
                         Style="{StaticResource SyntaxRewriterButton}"
-                        Click="btnWrapInDebug2_Click"/>
-            </dxlc:LayoutItem>
+                        Click="btnWrapSQLExecuteXCallsInDALHelpers_Click">
+                        <TextBlock TextWrapping="Wrap">Wrap SQL .ExecuteX Calls in DAL.Helpers</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button
+                        Style="{StaticResource SyntaxRewriterButton}"
+                        Click="btnWrapSQLFillCallsInDALHelpers_Click">
+                        <TextBlock TextWrapping="Wrap">Wrap SQL .Fill Calls in DAL.Helpers</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
 
         </dxlc:LayoutGroup>
-        
+
         <dxlc:LayoutGroup
         	Orientation="Vertical" VerticalAlignment="Top">
-
-            <dxe:CheckEdit x:Name="ceListImpactedFilesOnly" Content="List Impacted Files Only" 
-                           IsChecked="True" VerticalAlignment="Top" />
             
-            <dxlc:LayoutGroup
-            	Orientation="Horizontal">
-                <dxe:CheckEdit x:Name="ceAddFileSuffix" Content="Add FileSuffix" IsChecked="False" />
-                <dxlc:LayoutItem Label="File Suffix" ToolTip="Added to name of modified file"
-                                 Visibility="{cb:Binding ElementName=ceAddFileSuffix, Path=IsChecked}">
-                    <dxe:TextEdit x:Name="teFileSuffix" Text="2"
-                                  Visibility="{cb:Binding ElementName=ceAddFileSuffix, Path=IsChecked}"               
-                                  IsEnabled="True"/>
-                </dxlc:LayoutItem>          
-            </dxlc:LayoutGroup>
+
 
 
         </dxlc:LayoutGroup>

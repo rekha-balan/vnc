@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public StringBuilder Messages;
         static int tabs = 0;
 
-        public DisplayInfo Display = new DisplayInfo();
+        public ConfigurationOptions Display = new ConfigurationOptions();
         //public Boolean DisplayClassOrModuleName;
         //public Boolean DisplayMethodName;
 

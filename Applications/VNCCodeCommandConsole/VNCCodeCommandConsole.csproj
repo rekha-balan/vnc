@@ -296,12 +296,12 @@
     <Compile Include="User Interface\User Controls\wucCommandsWorkspace.xaml.cs">
       <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucConfigurationOptions.cs">
+      <DependentUpon>wucConfigurationOptions.xaml</DependentUpon>	
+	</Compile>
     <Compile Include="User Interface\User Controls\wucDXBase.cs" />
     <Compile Include="User Interface\User Controls\wucFind_Picker.cs">
       <DependentUpon>wucFind_Picker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucOutputOptions.xaml.cs">
-      <DependentUpon>wucOutputOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucSourceBranch_Picker.xaml.cs">
       <DependentUpon>wucSourceBranch_Picker.xaml</DependentUpon>
@@ -433,7 +433,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Interface\User Controls\wucOutputOptions.xaml">
+    <Page Include="User Interface\User Controls\wucConfigurationOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

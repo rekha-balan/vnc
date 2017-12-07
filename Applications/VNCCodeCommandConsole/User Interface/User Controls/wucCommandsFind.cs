@@ -112,12 +112,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnInvocationExpressionInTryCatchWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayInvocationExpressionInTryCatchWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.outputOptions);
+            Helper.ProcessOperation(DisplayInvocationExpressionInTryCatchWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
         private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.outputOptions);
+            Helper.ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
         private void btnHttpContextWalker_Click(object sender, RoutedEventArgs e)
@@ -137,7 +137,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
                 (bool)ceInvocationExpressionInTryCatchUseRegEx.IsChecked, teInvocationExpressionInTryCatchRegEx.Text,
-                matches, tree, walker, CodeExplorer.outputOptions.GetDisplayInfo());
+                matches, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
         }
 
         private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
@@ -159,7 +159,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     goto PrematureExitBummer;
                 }
 
-                if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
+                if ((Boolean)CodeExplorer.configurationOptions.ceListImpactedFilesOnly.IsChecked)
                 {
                     sb.AppendLine("Would Process these files ....");
                     sb.AppendLine(string.Format("  {0}", fileNameAndPath));
@@ -191,7 +191,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 if (codeExplorerContext.cbeSourceFile.SelectedItems.Count > 0)
                 {
-                    if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
+                    if ((Boolean)CodeExplorer.configurationOptions.ceListImpactedFilesOnly.IsChecked)
                     {
                         sb.AppendLine("Would Process these files ....");
                     }
@@ -206,7 +206,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                             continue;
                         }
 
-                        if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
+                        if ((Boolean)CodeExplorer.configurationOptions.ceListImpactedFilesOnly.IsChecked)
                         {
                             sb.AppendLine(string.Format("  {0}", filePath));
                         }
@@ -249,11 +249,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             var walker = new VNCSW.VB.MultipleVariableDeclarator();
 
-            walker.HasAttributes = (bool)CodeExplorer.outputOptions.ceHasAttributes.IsChecked;
+            walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
                 (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
-                matches, tree, walker, CodeExplorer.outputOptions.GetDisplayInfo());
+                matches, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
         }
 
         #endregion

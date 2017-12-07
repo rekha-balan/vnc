@@ -40,7 +40,7 @@ namespace VNCCodeCommandConsole.User_Interface
         public static void ProcessOperation(VNCCA.Types.SearchTreeCommand command, 
             User_Controls.wucCodeExplorer codeExplorer, 
             User_Controls.wucCodeExplorerContext codeExplorerContext,
-            User_Controls.wucOutputOptions outputOptions)
+            User_Controls.wucConfigurationOptions configurationOptions)
         {
             StringBuilder sb = new StringBuilder();
             codeExplorer.teSourceCode.Clear();
@@ -55,14 +55,14 @@ namespace VNCCodeCommandConsole.User_Interface
 
             if (filesToProcess.Count > 0)
             {
-                if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
+                if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
                 {
                     sb.AppendLine("Would Search these files ....");
                 }
 
                 foreach (string filePath in filesToProcess)
                 {
-                    if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
+                    if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
                     {
                         sb.AppendLine(string.Format("  {0}", filePath));
                     }
@@ -77,11 +77,15 @@ namespace VNCCodeCommandConsole.User_Interface
                             sourceCode = sr.ReadToEnd();
                         }
 
+                        // 
+                        // This is where the action happens
+                        //
+
                         SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
                         sbFileResults = command(sbFileResults, tree, matches);
 
-                        if ((bool)outputOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
+                        if ((bool)configurationOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
                         {
                             sb.AppendLine("Searching " + filePath);
                         }
@@ -95,20 +99,20 @@ namespace VNCCodeCommandConsole.User_Interface
                 sb.AppendLine("No files selected to process");
             }
 
-            if (!(Boolean)outputOptions.ceDisplayResults.IsChecked)
+            if (!(Boolean)configurationOptions.ceDisplayResults.IsChecked)
             {
                 // If only want to see the summary ...
                 sb.Clear();
             }
 
-            if ((Boolean)outputOptions.ceDisplaySummary.IsChecked)
+            if ((Boolean)configurationOptions.ceDisplaySummary.IsChecked)
             {
                 // Add information from the matches dictionary
                 sb.AppendLine("Summary");
 
                 foreach (var item in matches.OrderBy(v => v.Key).Select(k => k.Key))
                 {
-                    if (matches[item] >= outputOptions.sbDisplaySummaryMinimum.Value)
+                    if (matches[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
                     {
                         sb.AppendLine(string.Format("Count: {0,3} {1} ", matches[item], item));
                     }

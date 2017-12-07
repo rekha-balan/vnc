@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Boolean DisplayClassOrModuleName;
         public Boolean DisplayMethodName;
 
-        DisplayInfo Display = new DisplayInfo();
+        ConfigurationOptions Display = new ConfigurationOptions();
 
         public Dictionary<string, Int32> Matches; // = new Dictionary<string, Int32>();
 

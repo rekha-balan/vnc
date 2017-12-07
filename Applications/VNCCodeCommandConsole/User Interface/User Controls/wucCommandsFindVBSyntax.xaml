@@ -817,7 +817,7 @@
         </dxlc:LayoutGroup>
 
         <!--<dxlc:LayoutItem>
-            <uiuc:wucOutputOptions x:Name="outputOptions" />
+            <uiuc:wucOutputOptions x:Name="configurationOptions" />
         </dxlc:LayoutItem>-->
         
     </dxlc:LayoutControl>

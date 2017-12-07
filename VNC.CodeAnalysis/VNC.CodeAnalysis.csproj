@@ -182,7 +182,7 @@
     <Compile Include="DesignMetrics\VB\SealedClassAndProtectedMembers.cs" />
     <Compile Include="DesignMetrics\VB\ObjectObsession.cs" />
     <Compile Include="DesignMetrics\VB\DeeplyNestedLoops.cs" />
-    <Compile Include="DisplayInfo.cs" />
+    <Compile Include="ConfigurationOptions.cs" />
     <Compile Include="Helpers\CS.cs" />
     <Compile Include="Helpers\VB.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidBoxing.cs" />
@@ -249,7 +249,8 @@
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\Helpers.cs" />
     <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
-    <Compile Include="SyntaxRewriters\VB\WrapSQLCallsInDebug2.cs" />
+    <Compile Include="SyntaxRewriters\VB\RewriterIdeas.cs" />
+    <Compile Include="SyntaxRewriters\VB\WrapSQLExecuteXCallsInDALHelper.cs" />
     <Compile Include="SyntaxRewriters\VB\MultipleVariableDeclarations.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
     <Compile Include="SyntaxRewriters\VB\CommentOutSingleLineInvocationExpression.cs" />

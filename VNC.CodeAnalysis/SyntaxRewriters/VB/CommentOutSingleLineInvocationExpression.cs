@@ -18,7 +18,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         private string _pattern;
         private string _comment;
 
-        DisplayInfo Display = new DisplayInfo();
+        ConfigurationOptions Display = new ConfigurationOptions();
 
         public CommentOutSingleLineInvocationExpression(string pattern, string comment="Removed by a button")
         {

@@ -45,7 +45,7 @@ namespace VNC.CodeAnalysis.Helpers
             return methodName;
         }
 
-        public static string GetContainingContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        public static string GetContainingContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
         {
             string ancestorContext = GetAncestorContext(node, displayInfo);
 
@@ -58,7 +58,7 @@ namespace VNC.CodeAnalysis.Helpers
             return ancestorContext + classModuleContext + methodContext + sourceContext;
         }
 
-        private static string GetSourceContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        private static string GetSourceContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
         {
             string sourceContext = "";
 
@@ -81,7 +81,7 @@ namespace VNC.CodeAnalysis.Helpers
             return sourceContext;
         }
 
-        private static string GetMethodContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        private static string GetMethodContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
         {
             string methodContext = "";
 
@@ -93,7 +93,7 @@ namespace VNC.CodeAnalysis.Helpers
             return methodContext;
         }
 
-        private static string GetClassModuleContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        private static string GetClassModuleContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
         {
             string classModuleContext = "";
 
@@ -138,7 +138,7 @@ namespace VNC.CodeAnalysis.Helpers
             return classModuleContext;
         }
 
-        private static string GetAncestorContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        private static string GetAncestorContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
         {
             string ancestorContext = "";
 
@@ -209,7 +209,7 @@ namespace VNC.CodeAnalysis.Helpers
             Dictionary<string, Int32> matches, 
             SyntaxTree syntaxTree,
             SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker, 
-            DisplayInfo displayInfo)
+            ConfigurationOptions displayInfo)
         {
             walker.Messages = sb;
 

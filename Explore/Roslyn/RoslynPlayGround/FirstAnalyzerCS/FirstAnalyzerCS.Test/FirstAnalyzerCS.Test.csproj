@@ -164,12 +164,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirstAnalyzerCS\FirstAnalyzerCS.csproj">
-      <Project>{27BDD43D-40C4-4948-8EC1-A7CB398D7FE6}</Project>
-      <Name>FirstAnalyzerCS</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>

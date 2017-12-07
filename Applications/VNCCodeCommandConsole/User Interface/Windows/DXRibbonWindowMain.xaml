@@ -27,7 +27,7 @@
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"    
     Title="Application Name" 
     Name="DXRibbonWindowMain1"
-    Width="900" Height="700"
+    Width="1200" Height="800"
     MinWidth="900" MinHeight="700"
     WindowStartupLocation="CenterScreen"
     Loaded="OnWindowLoaded" 

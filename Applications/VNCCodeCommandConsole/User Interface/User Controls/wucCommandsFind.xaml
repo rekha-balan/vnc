@@ -136,7 +136,7 @@
 
         </dxlc:LayoutGroup>
 
-        <!--<uiuc:wucOutputOptions x:Name="outputOptions" />-->
+        <!--<uiuc:wucOutputOptions x:Name="configurationOptions" />-->
         
     </dxlc:LayoutControl>
     

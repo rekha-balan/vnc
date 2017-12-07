@@ -70,12 +70,24 @@
 
                 <dxdo:LayoutGroup Name="lg_Body_dlm_lg"  AllowClose="False" AllowFloat="False" AllowDock="False" >
                     <!--<dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12"-->
-                    
-                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lp_left"
-                        AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
-                        <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
-                    </dxdo:LayoutPanel>
-                    
+
+                    <dxdo:TabbedGroup ItemWidth="300" Name="tg_Left">
+
+                        <dxdo:LayoutPanel Name="lp_CommandsFindVBSyntax" Caption="Find VB Syntax"
+                                          AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
+
+                            <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
+
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
+
+                            <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:TabbedGroup>
+
                     <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" FontSize="12" 
                                       AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
 
@@ -182,10 +194,21 @@
 
                     </dxdo:LayoutPanel>
 
-                    <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lp_right"
-                        AllowFloat="True" AllowClose="True" AllowDock="True" AllowHide="True" >
-                        <uiuc:wucOutputOptions x:Name="outputOptions" />
-                    </dxdo:LayoutPanel>
+                    <dxdo:TabbedGroup Name="tg_Right" ItemWidth="220">
+                        
+                        <dxdo:LayoutPanel Name="lp_OutputOptions" Caption="Configuration Options"
+                                          AllowFloat="True" AllowClose="True" AllowDock="True" AllowHide="True" >
+                            <uiuc:wucConfigurationOptions x:Name="configurationOptions" />
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" >
+
+                            <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
+
+                        </dxdo:LayoutPanel>
+                        
+                    </dxdo:TabbedGroup>
+
 
                 </dxdo:LayoutGroup>
 
@@ -201,17 +224,13 @@
                             <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
                         </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_FindVBSyntax" Caption="Find VB Syntax" ItemWidth="300">
+                        <!--<dxdo:LayoutPanel x:Name="lp_Commands_FindVBSyntax" Caption="Find VB Syntax" ItemWidth="300">
 
-                            <!--<uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />-->
+                            <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
 
-                        </dxdo:LayoutPanel>
+                        </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
 
-                            <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
-
-                        </dxdo:LayoutPanel>
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="300">
 
@@ -231,18 +250,18 @@
 
                     <dxdo:AutoHideGroup DockType="Right">
 
-                        <dxdo:LayoutPanel x:Name="lp_OutputOptions" Caption="Output Options" ItemWidth="200">
+                        <!--<dxdo:LayoutPanel x:Name="lp_OutputOptions" Caption="Output Options" ItemWidth="200">
 
-                            <!--<uiuc:wucOutputOptions x:Name="outputOptions" />-->
+                            --><!--<uiuc:wucOutputOptions x:Name="configurationOptions" />--><!--
 
-                        </dxdo:LayoutPanel>
+                        </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" 
+                        <!--<dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" 
                                           ItemWidth="300">
 
                             <uiuc:wucCommandsWorkspace x:Name="wucCommandsWorkspace" />
 
-                        </dxdo:LayoutPanel>
+                        </dxdo:LayoutPanel>-->
                         
                         <dxdo:LayoutPanel x:Name="lp_Commands" Caption="Commands" 
                                          ItemWidth="300" >
