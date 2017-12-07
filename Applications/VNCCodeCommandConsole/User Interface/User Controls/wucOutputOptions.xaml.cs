@@ -35,6 +35,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             VNC.CodeAnalysis.DisplayInfo displayInfo = new VNCCA.DisplayInfo();
 
+            displayInfo.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
+            displayInfo.ContainingBlock = (bool)ceDisplayContainingBlock.IsChecked;
+
             displayInfo.ClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
             displayInfo.MethodName = (bool)ceDisplayMethodName.IsChecked;
 

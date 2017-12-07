@@ -31,61 +31,61 @@ namespace VNCCodeCommandConsole.Commands
     {
         #region Main Methods
 
-        public static StringBuilder DisplayClassesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.VB.Classes.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //public static StringBuilder DisplayClassesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.VB.Classes.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        public static StringBuilder DisplayModulesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.VB.Modules.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //public static StringBuilder DisplayModulesVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.VB.Modules.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        internal static StringBuilder DisplayMethodsVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.VB.Methods.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //internal static StringBuilder DisplayMethodsVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.VB.Methods.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        public static StringBuilder DisplayStructuresVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.VB.Structures.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //public static StringBuilder DisplayStructuresVB(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.VB.Structures.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        public static StringBuilder DisplayClassesCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.CS.Classes.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //public static StringBuilder DisplayClassesCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.CS.Classes.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        internal static StringBuilder DisplayMethodsCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.CS.Methods.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //internal static StringBuilder DisplayMethodsCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.CS.Methods.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
-        public static StringBuilder DisplayStructuresCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
-        {
-            using (var stream = new StreamReader(fileNameAndPath))
-            {
-                return VNC.CodeAnalysis.SyntaxNode.CS.Structures.Display(stream, includeTrivia, statementsOnly);
-            }
-        }
+        //public static StringBuilder DisplayStructuresCS(string fileNameAndPath, Boolean includeTrivia, Boolean statementsOnly)
+        //{
+        //    using (var stream = new StreamReader(fileNameAndPath))
+        //    {
+        //        return VNC.CodeAnalysis.SyntaxNode.CS.Structures.Display(stream, includeTrivia, statementsOnly);
+        //    }
+        //}
 
         #endregion
 
@@ -104,7 +104,7 @@ namespace VNCCodeCommandConsole.Commands
 
             var tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
             walker.Visit(tree.GetRoot());
 
             return sb;
@@ -122,7 +122,7 @@ namespace VNCCodeCommandConsole.Commands
 
             var tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
             walker.Visit(tree.GetRoot());
 
             return sb;
@@ -134,7 +134,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllNode();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -147,7 +147,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllNode();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -160,7 +160,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllStructuredTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -173,7 +173,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllStructuredTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -186,7 +186,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllToken();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -199,7 +199,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllToken();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -212,7 +212,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = CS.CSharpSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.CS.AllTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 
@@ -225,7 +225,7 @@ namespace VNCCodeCommandConsole.Commands
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.AllTrivia();
-            walker.StringBuilder = sb;
+            walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
 

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using VNCCA = VNC.CodeAnalysis;
 
 namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
-    public class CommentOutSingleLineInvocationExpression : VisualBasicSyntaxRewriter
+    public class CommentOutSingleLineInvocationExpression : VNCVBSyntaxRewriterBase
     {
         public StringBuilder Messages;
 
@@ -33,35 +34,44 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
             if (expression.ToString() == _pattern)
             {
-                List<SyntaxTrivia> newTrivia = new List<SyntaxTrivia>();
-                string existingLeadingTrivia = node.GetLeadingTrivia().ToString();
-                string existingLeadingTriviaFull = node.GetLeadingTrivia().ToFullString();
-
-                string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
-                string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
-
-                // Verify this expression is on line by itself
-
-                if (Helpers.VB.IsOnLineByItself(node))
+                try
                 {
-                    // HACK(crhodes)
-                    // Figure out how to get Helpers to work here.
-                    Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
-                        Helpers.VB.GetContainingContext(node, Display),
-                        Helpers.VB.GetContainingMethod(node),
-                        node.ToString()));
+                    List<SyntaxTrivia> newTrivia = new List<SyntaxTrivia>();
+                    string existingLeadingTrivia = node.GetLeadingTrivia().ToString();
+                    string existingLeadingTriviaFull = node.GetLeadingTrivia().ToFullString();
 
-                    string startOfLineWhiteSpace = existingLeadingTrivia.Replace(System.Environment.NewLine, "");
+                    string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
+                    string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
 
-                    newTrivia.Add(SyntaxFactory.CommentTrivia(existingLeadingTriviaFull));
-                    newTrivia.Add(SyntaxFactory.CommentTrivia(Helpers.VB.MultiLineComment(_comment, startOfLineWhiteSpace)));
-                    newTrivia.Add(SyntaxFactory.CommentTrivia("' "));
+                    // Verify this expression is on line by itself
 
-                    newInvocationExpression = node.WithLeadingTrivia(newTrivia);
+                    if (VNCCA.Helpers.VB.IsOnLineByItself(node))
+                    {
+                        // HACK(crhodes)
+                        // Figure out how to get Helpers to work here.
+                        Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
+                            VNCCA.Helpers.VB.GetContainingContext(node, Display),
+                            VNCCA.Helpers.VB.GetContainingMethod(node),
+                            node.ToString()));
+
+                        string startOfLineWhiteSpace = existingLeadingTrivia.Replace(System.Environment.NewLine, "");
+
+                        newTrivia.Add(SyntaxFactory.CommentTrivia(existingLeadingTriviaFull));
+                        newTrivia.Add(SyntaxFactory.CommentTrivia(VNCCA.Helpers.VB.MultiLineComment(_comment, startOfLineWhiteSpace)));
+                        newTrivia.Add(SyntaxFactory.CommentTrivia("' "));
+
+                        newInvocationExpression = node.WithLeadingTrivia(newTrivia);
+                       
+                    }
+                    else
+                    {
+                        Messages.AppendLine(String.Format("node: >{0}< >{1}< Is NOT OnLineByItself", node.ToString(), node.ToFullString()));
+                        newInvocationExpression = node;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Messages.AppendLine(String.Format("node: >{0}< Is NOT OnLineByItself", node.ToString()));
+                    Messages.AppendLine(string.Format("Ex:{0} InnerEx:{1}", ex.ToString(), ex.InnerException.ToString()));
                 }
             }
             else

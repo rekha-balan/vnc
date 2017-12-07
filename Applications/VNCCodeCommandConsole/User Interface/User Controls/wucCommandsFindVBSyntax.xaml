@@ -27,7 +27,7 @@
     xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"
     xmlns:vcasn="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"    
 
-    d:DesignWidth="600" d:DesignHeight="800"
+    d:DesignWidth="300" d:DesignHeight="800"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
@@ -42,7 +42,7 @@
     </uiuc:wucDXBase.Resources>-->
 
 
-    <dxlc:LayoutControl Orientation="Vertical">
+    <dxlc:LayoutControl Orientation="Vertical" MinWidth="300">
 
         <dxlc:LayoutGroup Header="Find ImportsStatement Syntax" 
         	View="GroupBox"
@@ -450,7 +450,7 @@
                         Click="btnInvocationExpressionWalker_Click"/>
             </dxlc:LayoutItem>
 
-            <dxlc:LayoutGroup  Header="Manual Loop"
+            <!--<dxlc:LayoutGroup  Header="Manual Loop"
                                View="GroupBox"
                                IsCollapsible="True" IsCollapsed="True"
                                Orientation="Vertical">
@@ -479,7 +479,7 @@
                             Click="btnInvocation_Click"/>
                 </dxlc:LayoutItem>
 
-            </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>-->
 
         </dxlc:LayoutGroup>
 
@@ -816,9 +816,9 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutItem>
+        <!--<dxlc:LayoutItem>
             <uiuc:wucOutputOptions x:Name="outputOptions" />
-        </dxlc:LayoutItem>
+        </dxlc:LayoutItem>-->
         
     </dxlc:LayoutControl>
     

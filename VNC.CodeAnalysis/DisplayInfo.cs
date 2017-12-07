@@ -14,6 +14,10 @@ namespace VNC.CodeAnalysis
 
     public class DisplayInfo
     {
+        public bool SourceLocation { get; set; } = false;
+
+        public bool ContainingBlock { get; set; }
+
         public bool ClassOrModuleName { get; set; } = false;
         public bool MethodName { get; set; } = false;
 

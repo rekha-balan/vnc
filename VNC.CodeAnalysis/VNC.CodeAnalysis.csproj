@@ -243,18 +243,18 @@
     <Compile Include="Symbols.cs" />
     <Compile Include="SyntaxNode\WalkerDepth.cs" />
     <Compile Include="SyntaxNode\AdditionaNodes.cs" />
-    <Compile Include="SyntaxNode\CS\Classes.cs" />
-    <Compile Include="SyntaxNode\CS\Methods.cs" />
-    <Compile Include="SyntaxNode\CS\Structures.cs" />
     <Compile Include="SyntaxNode\VB\Classes.cs" />
-    <Compile Include="SyntaxNode\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxNode\VB\Methods.cs" />
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
-    <Compile Include="SyntaxRewriters\VB\RewriteMultipleVariableDeclarations.cs" />
+    <Compile Include="SyntaxRewriters\Helpers.cs" />
+    <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
+    <Compile Include="SyntaxRewriters\VB\WrapSQLCallsInDebug2.cs" />
+    <Compile Include="SyntaxRewriters\VB\MultipleVariableDeclarations.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
     <Compile Include="SyntaxRewriters\VB\CommentOutSingleLineInvocationExpression.cs" />
     <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\CS\VNCCSSyntaxWalkerBase.cs" />
     <Compile Include="SyntaxWalkers\CS\AllNode.cs" />
     <Compile Include="SyntaxWalkers\CS\AllStructuredTrivia.cs" />
     <Compile Include="SyntaxWalkers\CS\AllToken.cs" />
@@ -309,7 +309,9 @@
     <Analyzer Include="..\Explore\Roslyn\RoslynPlayGround\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\Explore\Roslyn\RoslynPlayGround\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SyntaxNode\CS\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug goto :debug

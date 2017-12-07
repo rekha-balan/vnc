@@ -47,7 +47,105 @@ namespace VNC.CodeAnalysis.Helpers
 
         public static string GetContainingContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
         {
+            string ancestorContext = GetAncestorContext(node, displayInfo);
+
+            string classModuleContext = GetClassModuleContext(node, displayInfo);
+
+            string methodContext = GetMethodContext(node, displayInfo);
+
+            string sourceContext = GetSourceContext(node, displayInfo);
+
+            return ancestorContext + classModuleContext + methodContext + sourceContext;
+        }
+
+        private static string GetSourceContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        {
+            string sourceContext = "";
+
+            if (displayInfo.SourceLocation)
+            {
+                var location = node.GetLocation();
+                var sourceSpan = location.SourceSpan;
+                var lineSpan = location.GetLineSpan();
+
+                //// NB.  Lines start at 0.  Add one so when we look in Visual Studio it makes sense.
+
+                //var startLine = location.GetLineSpan().StartLinePosition.Line + 1;
+                //var endLine = location.GetLineSpan().EndLinePosition.Line + 1;
+
+                sourceContext = string.Format("SourceSpan: >{0}< LineSpan: >{1}<",
+                    sourceSpan.ToString(),
+                    lineSpan.ToString());
+            }
+
+            return sourceContext;
+        }
+
+        private static string GetMethodContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        {
+            string methodContext = "";
+
+            if (displayInfo.MethodName)
+            {
+                methodContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+            }
+
+            return methodContext;
+        }
+
+        private static string GetClassModuleContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        {
+            string classModuleContext = "";
+
+            if (displayInfo.ClassOrModuleName)
+            {
+                var inClassBlock = node.Ancestors()
+                    .Where(x => x.IsKind(SyntaxKind.ClassBlock))
+                    .Cast<ClassBlockSyntax>().ToList();
+
+                var inModuleBlock = node.Ancestors()
+                    .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
+                    .Cast<ModuleBlockSyntax>().ToList();
+
+                string typeName = "unknown";
+                string className = "unknown";
+                string moduleName = "unknown";
+
+                if (inClassBlock.Count > 0)
+                {
+                    typeName = "Class";
+
+                    className = node.Ancestors()
+                        .Where(x => x.IsKind(SyntaxKind.ClassBlock))
+                        .Cast<ClassBlockSyntax>().First().ClassStatement.Identifier.ToString();
+                }
+
+                if (inModuleBlock.Count > 0)
+                {
+                    typeName = "Module";
+
+                    moduleName = node.Ancestors()
+                        .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
+                        .Cast<ModuleBlockSyntax>().First().ModuleStatement.Identifier.ToString();
+                }
+
+                classModuleContext = String.Format("{0, 8}{1,6}:({2,-25})",
+                    classModuleContext,
+                    typeName,
+                    typeName == "Class" ? className : moduleName);
+            }
+
+            return classModuleContext;
+        }
+
+        private static string GetAncestorContext(VisualBasicSyntaxNode node, DisplayInfo displayInfo)
+        {
             string ancestorContext = "";
+
+            if (displayInfo.ContainingBlock)
+            {
+                ancestorContext += GetContainingBlock(node).Kind().ToString();
+            }
 
             if (displayInfo.InTryBlock)
             {
@@ -58,7 +156,7 @@ namespace VNC.CodeAnalysis.Helpers
                 if (inTryBlock.Count > 0)
                 {
                     ancestorContext += "T ";
-                }                            
+                }
             }
 
             if (displayInfo.InWhileBlock)
@@ -102,54 +200,7 @@ namespace VNC.CodeAnalysis.Helpers
                 ancestorContext = string.Format("{0,8}", ancestorContext);
             }
 
-            string classModuleContext = "";
-
-            if (displayInfo.ClassOrModuleName)
-            {
-                var inClassBlock = node.Ancestors()
-                    .Where(x => x.IsKind(SyntaxKind.ClassBlock))
-                    .Cast<ClassBlockSyntax>().ToList();
-
-                var inModuleBlock = node.Ancestors()
-                    .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
-                    .Cast<ModuleBlockSyntax>().ToList();
-
-                string typeName = "unknown";
-                string className = "unknown";
-                string moduleName = "unknown";
-
-                if (inClassBlock.Count > 0)
-                {
-                    typeName = "Class";
-
-                    className = node.Ancestors()
-                        .Where(x => x.IsKind(SyntaxKind.ClassBlock))
-                        .Cast<ClassBlockSyntax>().First().ClassStatement.Identifier.ToString();
-                }
-
-                if (inModuleBlock.Count > 0)
-                {
-                    typeName = "Module";
-
-                    moduleName = node.Ancestors()
-                        .Where(x => x.IsKind(SyntaxKind.ModuleBlock))
-                        .Cast<ModuleBlockSyntax>().First().ModuleStatement.Identifier.ToString();
-                }
-
-                typeName = String.Format("{0, 8}{1,6}:({2,-25})",
-                    ancestorContext,
-                    typeName,
-                    typeName == "Class" ? className : moduleName);
-            }
-
-            string methodContext = "";
-
-            if (displayInfo.MethodName)
-            {
-                methodContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-            }
-
-            return ancestorContext + classModuleContext + methodContext;
+            return ancestorContext;
         }
 
         public static StringBuilder InvokeVNCSyntaxWalker(
@@ -218,6 +269,40 @@ namespace VNC.CodeAnalysis.Helpers
             {
                 result = true;
             }
+            else
+            {
+                var triviaList = node.GetLeadingTrivia().ToSyntaxTriviaList();
+
+                Boolean leadingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetLeadingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia 
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        leadingTriviaResult = true;
+                    }
+                }
+
+                Boolean trailingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetTrailingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        trailingTriviaResult = true;
+                    }
+                }
+
+                result = leadingTriviaResult & trailingTriviaResult;
+            }
 
             return result;
         }
@@ -241,5 +326,38 @@ namespace VNC.CodeAnalysis.Helpers
 
             return result.ToString();
         }
+
+        static VisualBasicSyntaxNode GetContainingBlock(VisualBasicSyntaxNode node)
+        {
+            //var block = node.Parent as VisualBasicSyntaxNode;
+            //var blockKind = block.Kind();
+            var blockKindText = node.Parent.Kind().ToString();
+
+            if (blockKindText.Contains("Block"))
+            {
+                return (VisualBasicSyntaxNode)node.Parent;
+            }
+
+            if (blockKindText == "CompilationUnit")
+            {
+                return node;
+            }
+
+            return GetContainingBlock(node.Parent as VisualBasicSyntaxNode);
+        }
+
+        //public static VisualBasicSyntaxNode GetContainingBlock(Microsoft.CodeAnalysis.SyntaxNode node)
+        //{
+        //    var block = node.Parent as VisualBasicSyntaxNode;
+        //    var blockKind = block.Kind();
+        //    var blockKindText = blockKind.GetText();
+
+        //    if (block.Kind().GetText().Contains("Block"))
+        //    {
+        //        return block;
+        //    }
+
+        //    return GetContainingBlock(node.Parent);
+        //}
     }
 }

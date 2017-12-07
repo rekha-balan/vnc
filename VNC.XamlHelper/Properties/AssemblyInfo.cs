@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("XamlHelper")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © 2014-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,15 +22,46 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("b3a17ab4-d2a2-4921-9c5b-4a3641cde545")]
 
-// Version information for an assembly consists of the following four values:
+// Version information for an assembly consists of three attributes:
+//
+//  AssemblyVersion                 - Not shown in Explorer
+//  AssemblyFileVersion             - File Version in Explorer
+//  AssemblyInformationalVersion    - Product Version in Explorer
+//
+// AssemblyVersion is required.
+// If AssemblyFileVersion is not provided it is loaded from AssemblyVersion.
+// If AssemblyInformationalVersion is not provided it is loaded from AssemblyFileVersion if provided
+// otherwise from AssemblyVersion.  It can be an arbitrary string.
+//
+// Each attribute takes a version number consisting of four parts:
 //
 //      Major Version
 //      Minor Version 
-//      Build Number
-//      Revision
+//      Build Number    - Days since 1/1/2000
+//      Revision        - Seconds since midnight/2
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
+// [assembly: AssemblyVersion("1.0.0.*")]
+//
+// AssemblyVersion History
+//
+//  Version     Date        By
+//  1.0.0.0                 Christopher Rhodes
+//      Initial Version
 [assembly: AssemblyVersion("1.0.0.0")]
+
+// AssemblyFileVersion History
+//
+//  Version     Date        By
+//  1.0.0.0     01/09/2014   Christopher Rhodes
+//      Initial Version
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// AssemblyInformationalVersion History
+//
+//  Version   Date        By
+//  1.0.0.0   mm/dd/yyyy    Developer
+//      Initial Version
+[assembly: AssemblyInformationalVersion("2017.12.05")]

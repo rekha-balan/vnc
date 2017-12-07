@@ -39,8 +39,8 @@
 
         </dxlc:LayoutGroup>
 
-        <dxlc:LayoutGroup Header="Classes" View="GroupBox" Orientation="Vertical">
-            <dxlc:LayoutItem>
+         <!--<dxlc:LayoutGroup Header="Classes" View="GroupBox" Orientation="Vertical">
+           <dxlc:LayoutItem>
                 <Button Content="All Classes" Click="btnAllClasses_Click"/>
             </dxlc:LayoutItem>
 
@@ -58,9 +58,9 @@
 
             </dxlc:LayoutGroup>
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Modules" View="GroupBox" Orientation="Vertical">
+        <!--<dxlc:LayoutGroup Header="Modules" View="GroupBox" Orientation="Vertical">
             <dxlc:LayoutItem>
                 <Button Content="All Modules" Click="btnAllModules_Click"/>
             </dxlc:LayoutItem>
@@ -78,9 +78,9 @@
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Methods" View="GroupBox" Orientation="Vertical">
+        <!--<dxlc:LayoutGroup Header="Methods" View="GroupBox" Orientation="Vertical">
             <dxlc:LayoutItem>
                 <Button Content="All Methods" Click="btnAllMethods_Click"/>
             </dxlc:LayoutItem>
@@ -98,9 +98,9 @@
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
-        <dxlc:LayoutGroup Header="Structures" View="GroupBox" Orientation="Vertical">
+        <!--<dxlc:LayoutGroup Header="Structures" View="GroupBox" Orientation="Vertical">
 
             <dxlc:LayoutItem>
                 <Button Content="All Structures" Click="btnAllStructures_Click"/>
@@ -120,7 +120,7 @@
 
             </dxlc:LayoutGroup>
 
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
 
     </dxlc:LayoutControl>
 
