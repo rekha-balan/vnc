@@ -14,6 +14,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class VNCVBSyntaxWalkerBase : VisualBasicSyntaxWalker
     {
         public StringBuilder Messages;
+        static int tabs = 0;
 
         public DisplayInfo Display = new DisplayInfo();
         //public Boolean DisplayClassOrModuleName;
@@ -24,7 +25,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         public Dictionary<string, Int32> Matches;
 
-        public VNCVBSyntaxWalkerBase() : base(SyntaxWalkerDepth.StructuredTrivia)
+        public VNCVBSyntaxWalkerBase(SyntaxWalkerDepth depth = SyntaxWalkerDepth.Node) : base(depth)
         {
 
         }
@@ -90,5 +91,37 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 Matches.Add(nodeValue, 1);
             }
         }
+
+        //public override void Visit(Microsoft.CodeAnalysis.SyntaxNode node)
+        //{
+        //    tabs++;
+        //    var indents = new String(' ', tabs * 3);
+        //    Messages.AppendLine(string.Format("{0}{1,6}{2}:>{3}<", indents, "Node:", node.Kind(), node.ToString()));
+
+        //    // Call base to visit children
+
+        //    base.Visit(node);
+        //    tabs--;
+        //}
+
+        //public override void VisitToken(Microsoft.CodeAnalysis.SyntaxToken token)
+        //{
+        //    var indents = new String(' ', tabs * 3);
+        //    Messages.AppendLine(string.Format("{0}{1,6}{2}:>{3}<", indents, "Token:", token.Kind(), token));
+
+        //    // Call base to visit children
+
+        //    base.VisitToken(token);
+        //}
+
+        //public override void VisitTrivia(Microsoft.CodeAnalysis.SyntaxTrivia trivia)
+        //{
+        //    var indents = new String(' ', tabs * 3);
+        //    Messages.AppendLine(string.Format("{0}{1,6}{2}:>{3}<", indents, "Trivia:", trivia.Kind(), trivia));
+
+        //    // Call base to visit children
+
+        //    base.VisitTrivia(trivia);
+        //}
     }
 }

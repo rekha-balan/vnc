@@ -75,6 +75,27 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Logging Rewritters"
+            View="GroupBox"	Orientation="Vertical">
+            
+            <!--<dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teTargetInvocationExpression" >
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
+                <dxe:TextEdit x:Name="teNewInvocationExpression" >
+                </dxe:TextEdit>
+            </dxlc:LayoutItem>-->
+
+            <dxlc:LayoutItem>
+                <Button Content="Wrap in Debug2"
+                        Style="{StaticResource SyntaxRewriterButton}"
+                        Click="btnWrapInDebug2_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup
         	Orientation="Vertical" VerticalAlignment="Top">
 

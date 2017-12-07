@@ -20,6 +20,8 @@ using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.LayoutControl;
 
+using VNCSR = VNC.CodeAnalysis.SyntaxRewriters;
+
 namespace VNCCodeCommandConsole.User_Interface.User_Controls
 {
     public partial class wucCommandsRewrite : wucDXBase
@@ -82,10 +84,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
+
         #region Event Handlers
+        private void btnWrapInDebug2_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(WrapSQLCallsInDebug2VB);
+        }
+
         private void btnRewrite_InvocationExpression_Click(object sender, RoutedEventArgs e)
         {
-            ProcessOperation(RewriteFileVB);
+            ProcessOperation(RewriteInvocationExpressionVB);
         }
         private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
         {
@@ -104,11 +112,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         //    //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
         //}
 
-        delegate StringBuilder SearchFileCommand(StringBuilder sb, string filePath, string pattern);
+        #region Main Function Routines
 
-        delegate StringBuilder RewriteFileCommand(StringBuilder sb, string filePath, string targetPattern, string replacementPattern, out Boolean performedReplacement);
-
-        void ProcessOperation(RewriteFileCommand command)
+        void ProcessOperation(VNC.CodeAnalysis.Types.RewriteFileCommand command)
         {
             StringBuilder sb = new StringBuilder();
             CodeExplorer.teSourceCode.Clear();
@@ -119,6 +125,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             var filesToProcess = CodeExplorerContext.GetFilesToProcess();
 
+            Dictionary<string, Int32> replacements = new Dictionary<string, int>();
+
             if (filesToProcess.Count > 0)
             {
                 if ((Boolean)ceListImpactedFilesOnly.IsChecked)
@@ -128,20 +136,27 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 foreach (string filePath in filesToProcess)
                 {
-                    if ((Boolean)ceListImpactedFilesOnly.IsChecked)
+                    try
                     {
-                        sb.AppendLine(string.Format("  {0}", filePath));
-                    }
-                    else
-                    {
-                        Boolean performedReplacement;
-
-                        sb = command(sb, filePath, targetInvocationExpression, newInvocationExpression, out performedReplacement);
-
-                        if (performedReplacement)
+                        if ((Boolean)ceListImpactedFilesOnly.IsChecked)
                         {
-                            sb.AppendLine("Rewrote " + filePath);
+                            sb.AppendLine(string.Format("  {0}", filePath));
                         }
+                        else
+                        {
+                            Boolean performedReplacement = false;
+
+                            sb = command(sb, filePath, targetInvocationExpression, newInvocationExpression, replacements, out performedReplacement);
+
+                            if (performedReplacement)
+                            {
+                                sb.AppendLine("Rewrote " + filePath);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        
                     }
                 }
             }
@@ -152,12 +167,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
-
-        #region Main Function Routines
         
         #endregion
 
-        private StringBuilder CommentFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression, out Boolean performedReplacement)
+        private StringBuilder CommentFileVB(
+            StringBuilder sb, 
+            string filePath, 
+            string targetInvocationExpression, string newInvocationExpression, 
+            Dictionary<string, int> replacements, out Boolean performedReplacement)
         {
             string sourceCode;
             performedReplacement = false;
@@ -186,7 +203,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return sb;
         }
 
-        private StringBuilder RewriteFileVB(StringBuilder sb, string filePath, string targetInvocationExpression, string newInvocationExpression, out Boolean performedReplacement)
+        private StringBuilder RewriteInvocationExpressionVB(
+            StringBuilder sb, 
+            string filePath, 
+            string targetInvocationExpression, string newInvocationExpression,
+            Dictionary<string, int> replacements, out Boolean performedReplacement)
         {
             string sourceCode;
             performedReplacement = false;
@@ -204,13 +225,41 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
 
-            if (newNode != tree.GetRoot())
-            {
-                string newFilePath = filePath + (ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "");
+            string fileSuffix = ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "";
 
-                File.WriteAllText(newFilePath, newNode.ToFullString());
-                performedReplacement = true;
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
+
+            return sb;
+        }
+
+        private StringBuilder WrapSQLCallsInDebug2VB(
+            StringBuilder sb, 
+            string filePath, 
+            string targetPattern, string notUsed,
+            Dictionary<string, int> replacements, out bool performedReplacement)
+        {
+            string sourceCode;
+            performedReplacement = false;
+
+            using (var sr = new StreamReader(filePath))
+            {
+                sourceCode = sr.ReadToEnd();
             }
+
+            SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLCallsInDebug2(targetPattern);
+
+            rewriter.Messages = sb;
+            rewriter.Replacements = replacements;
+            rewriter.Display = CodeExplorer.outputOptions.GetDisplayInfo();
+
+            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+
+            string fileSuffix = ceAddFileSuffix.IsChecked.Value ? teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
 
             return sb;
         }

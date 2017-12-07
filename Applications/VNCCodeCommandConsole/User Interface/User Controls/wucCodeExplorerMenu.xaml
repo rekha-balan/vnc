@@ -212,10 +212,10 @@
                     
                     <VirtualizingStackPanel Width="175">
 
-                        <Button Content="SyntaxExplorer1" 
+                        <!--<Button Content="SyntaxExplorer1" 
                                 Style="{StaticResource MenuButtonLeft}" 
                                 ToolTip="SyntaxExplorer1 Tool Tip"
-                                Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucSyntaxExplorer1"  />
+                                Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucSyntaxExplorer1"  />-->
 
                         <Button Content="VNCDxDocManagerBase1" 
                                 Style="{StaticResource MenuButtonLeft}" 

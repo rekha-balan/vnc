@@ -20,8 +20,8 @@
     
     xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"     
     
-    d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    d:DesignHeight="600" d:DesignWidth="200">
+    <Grid MinWidth="200" >
         <dxlc:LayoutGroup Header="Output Configuration Options" 
         	View="GroupBox" Orientation="Vertical">
 
@@ -45,12 +45,20 @@
                 Orientation="Vertical"
                 Visibility="{cb:Binding ElementName=ceDisplayContext, Path=IsChecked}">
 
+                <dxe:CheckEdit x:Name="ceDisplaySourceLocation" 
+                                Content="Source Location" 
+                                IsChecked="False" VerticalAlignment="Top" />
+
+                <dxe:CheckEdit x:Name="ceDisplayContainingBlock" 
+                                Content="ContainingBlock" 
+                                IsChecked="False" VerticalAlignment="Top" />
+
                 <dxe:CheckEdit x:Name="ceDisplayClassOrModuleName" 
-                                Content="Display Class or Module Name" 
+                                Content="Class or Module Name" 
                                 IsChecked="False" VerticalAlignment="Top" />
 
                 <dxe:CheckEdit x:Name="ceDisplayMethodName" 
-                                Content="Display Method Name" 
+                                Content="Method Name" 
                                 IsChecked="False" VerticalAlignment="Top" />
 
                 <dxe:CheckEdit x:Name="ceInTryBlock" 
@@ -73,11 +81,15 @@
             <dxlc:LayoutGroup
                 	Orientation="Vertical">
                 <dxlc:LayoutItem>
-                    <dxe:CheckEdit x:Name="ceDisplayResults" Content="Display Results" IsChecked="True"/>
+                    <dxe:CheckEdit x:Name="ceDisplayResults" 
+                                   Content="Display Results" 
+                                   IsChecked="True"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem>
-                    <dxe:CheckEdit x:Name="ceDisplaySummary" Content="Display Summary" IsChecked="True"/>
+                    <dxe:CheckEdit x:Name="ceDisplaySummary"
+                                   Content="Display Summary" 
+                                   IsChecked="True"/>
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem Label="Display Summary Minimum" 

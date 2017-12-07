@@ -112,12 +112,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnInvocationExpressionInTryCatchWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayInvocationExpressionInTryCatchWalkerVB, CodeExplorer, CodeExplorerContext, outputOptions);
+            Helper.ProcessOperation(DisplayInvocationExpressionInTryCatchWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.outputOptions);
         }
 
         private void btnVariableDeclaratorWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, outputOptions);
+            Helper.ProcessOperation(DisplayMultipleVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.outputOptions);
         }
 
         private void btnHttpContextWalker_Click(object sender, RoutedEventArgs e)
@@ -131,13 +131,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Main Function Routines
 
-        StringBuilder DisplayInvocationExpressionInTryCatchWalkerVB(StringBuilder sb, Dictionary<string, Int32> matches, SyntaxTree tree)
+        StringBuilder DisplayInvocationExpressionInTryCatchWalkerVB(StringBuilder sb, SyntaxTree tree, Dictionary<string, Int32> matches)
         {
             var walker = new VNCSW.VB.InvocationExpressionInTryCatch();
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
                 (bool)ceInvocationExpressionInTryCatchUseRegEx.IsChecked, teInvocationExpressionInTryCatchRegEx.Text,
-                matches, tree, walker, outputOptions.GetDisplayInfo());
+                matches, tree, walker, CodeExplorer.outputOptions.GetDisplayInfo());
         }
 
         private void DisplayHttpContextWalkerVB(wucCodeExplorerContext codeExplorerContext, string context)
@@ -159,7 +159,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     goto PrematureExitBummer;
                 }
 
-                if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
+                if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
                 {
                     sb.AppendLine("Would Process these files ....");
                     sb.AppendLine(string.Format("  {0}", fileNameAndPath));
@@ -191,7 +191,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                 if (codeExplorerContext.cbeSourceFile.SelectedItems.Count > 0)
                 {
-                    if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
+                    if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
                     {
                         sb.AppendLine("Would Process these files ....");
                     }
@@ -206,7 +206,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                             continue;
                         }
 
-                        if ((Boolean)outputOptions.ceListImpactedFilesOnly.IsChecked)
+                        if ((Boolean)CodeExplorer.outputOptions.ceListImpactedFilesOnly.IsChecked)
                         {
                             sb.AppendLine(string.Format("  {0}", filePath));
                         }
@@ -245,15 +245,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
-        private StringBuilder DisplayMultipleVariableDeclaratorWalkerVB(StringBuilder sb, Dictionary<string, Int32> matches, SyntaxTree tree)
+        private StringBuilder DisplayMultipleVariableDeclaratorWalkerVB(StringBuilder sb, SyntaxTree tree, Dictionary<string, Int32> matches)
         {
             var walker = new VNCSW.VB.MultipleVariableDeclarator();
 
-            walker.HasAttributes = (bool)outputOptions.ceHasAttributes.IsChecked;
+            walker.HasAttributes = (bool)CodeExplorer.outputOptions.ceHasAttributes.IsChecked;
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
                 (bool)ceVariablesUseRegEx.IsChecked, teVariableRegEx.Text,
-                matches, tree, walker, outputOptions.GetDisplayInfo());
+                matches, tree, walker, CodeExplorer.outputOptions.GetDisplayInfo());
         }
 
         #endregion

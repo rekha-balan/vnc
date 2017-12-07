@@ -79,7 +79,7 @@ namespace VNCCodeCommandConsole.User_Interface
 
                         SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-                        sbFileResults = command(sbFileResults, matches, tree);
+                        sbFileResults = command(sbFileResults, tree, matches);
 
                         if ((bool)outputOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
                         {

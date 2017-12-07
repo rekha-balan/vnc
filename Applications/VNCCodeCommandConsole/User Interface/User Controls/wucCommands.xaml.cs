@@ -109,49 +109,49 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSyntaxTree.Text = sb.ToString();
         }
 
-        private void btnAllMethods_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceMethodsIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceMethodsStatementsOnly.IsChecked.Value;
+        //private void btnAllMethods_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = ceMethodsIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = ceMethodsStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayMethodsVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayMethodsVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            CodeExplorer.teMethods.Text = sb.ToString();
-        }
+        //    CodeExplorer.teMethods.Text = sb.ToString();
+        //}
 
-        private void btnAllClasses_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceClassesIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceClassesStatementsOnly.IsChecked.Value;
+        //private void btnAllClasses_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = ceClassesIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = ceClassesStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayClassesVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayClassesVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            CodeExplorer.teClasses.Text = sb.ToString();
-        }
+        //    CodeExplorer.teClasses.Text = sb.ToString();
+        //}
 
-        private void btnAllModules_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceModulesIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceModulesStatementsOnly.IsChecked.Value;
+        //private void btnAllModules_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = ceModulesIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = ceModulesStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayModulesVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayModulesVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            CodeExplorer.teModules.Text = sb.ToString();
-        }
+        //    CodeExplorer.teModules.Text = sb.ToString();
+        //}
 
-        private void btnAllStructures_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb;
-            Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
-            Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
+        //private void btnAllStructures_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder sb;
+        //    Boolean includeTrivia = ceStructuresIncludeTrivia.IsChecked.Value;
+        //    Boolean statementsOnly = ceStructuresStatementsOnly.IsChecked.Value;
 
-            sb = Commands.Explore.DisplayStructuresVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
+        //    sb = Commands.Explore.DisplayStructuresVB(CodeExplorerContext.teSourceFile.Text, includeTrivia, statementsOnly);
 
-            CodeExplorer.teStructures.Text = sb.ToString();
-        }
+        //    CodeExplorer.teStructures.Text = sb.ToString();
+        //}
 
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
-    public class InvocationExpression : VisualBasicSyntaxRewriter
+    public class InvocationExpression : VNCVBSyntaxRewriterBase
     {
         public StringBuilder Messages;
         public string _targetInvocationExpression = null;

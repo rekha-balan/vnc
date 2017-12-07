@@ -278,7 +278,7 @@
     <Compile Include="User Interface\User Controls\wucCommandsFind.cs">
       <DependentUpon>wucCommandsFind.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\User Controls\wucCommandsFindSyntax.cs">
+    <Compile Include="User Interface\User Controls\wucCommandsFindVBSyntax.cs">
       <DependentUpon>wucCommandsFindVBSyntax.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsParse.cs">
@@ -308,9 +308,6 @@
     </Compile>
     <Compile Include="User Interface\User Controls\wucCodeExplorerContext.xaml.cs">
       <DependentUpon>wucCodeExplorerContext.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User Interface\User Controls\wucSyntaxExplorer1.xaml.cs">
-      <DependentUpon>wucSyntaxExplorer1.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucCodeExplorerMenu.cs">
       <DependentUpon>wucCodeExplorerMenu.xaml</DependentUpon>
@@ -447,10 +444,6 @@
     <Page Include="User Interface\User Controls\wucCodeExplorerContext.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="User Interface\User Controls\wucSyntaxExplorer1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Interface\User Controls\wucCodeExplorerMenu.xaml">
       <SubType>Designer</SubType>
