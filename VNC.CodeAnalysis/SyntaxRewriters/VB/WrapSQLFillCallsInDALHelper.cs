@@ -11,10 +11,10 @@ using VNCCA = VNC.CodeAnalysis;
 
 namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
-    public class WrapSQLExecuteXCallsInDALHelper : VNCVBSyntaxRewriterBase
+    public class WrapSQLFillCallsInDALHelper : VNCVBSyntaxRewriterBase
     {
 
-        public WrapSQLExecuteXCallsInDALHelper(string TargetInvocationExpression)
+        public WrapSQLFillCallsInDALHelper(string TargetInvocationExpression)
         {
             IdentifierNames = TargetInvocationExpression;
         }
@@ -28,11 +28,11 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             {
                 // We are looking for Invocations like this
                 //
-                // <something>.Execute{NonQuery,Reader,Scalar}([CommandBehavior.CloseConnection])
+                // <something>.Fill(<argument list>)
                 //
                 // e.g.
-                // dbCMD.ExecuteReader(CommandBehavior.CloseConnection)
-                // objCMD.ExecuteNonQuery(CommandBehavior.CloseConnection)
+                //  objDA.Fill(objDS, strTableName)
+                // objDataAdaptor.Fill(objDataTable)
 
                 var simpleMemberAccessExpression = node.ChildNodes().First();
                 var firstIdentifier = simpleMemberAccessExpression.ChildNodes().First();
@@ -53,6 +53,9 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
                     newTrivia.Add(SyntaxFactory.CommentTrivia(existingLeadingTriviaFull));
 
+                    // TODO(crhodes)
+                    // NB. lastIdentifier should always be Fill.  May want to put a check in.
+
                     var newExpression = SyntaxFactory.ParseExpression(string.Format("DAL.Helpers.{0}({1}{2})",                       
                         lastIdentifer, firstIdentifier,
                         argumentList.Length > 0 ? ", " + argumentList : ""));
@@ -63,8 +66,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 }
                 else
                 {
-                    Messages.AppendLine(String.Format("node: >{0}< >{1}< Is NOT OnLineByItself()", 
-                        node.ToString(), node.ToFullString()));
+                    Messages.AppendLine(String.Format("node: >{0}< >{1}< Is NOT OnLineByItself()", node.ToString(), node.ToFullString()));
                     newInvocationExpression = node;
                 }
             }

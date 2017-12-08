@@ -24,7 +24,7 @@
     xmlns:vncX="clr-namespace:VNC.Xaml;assembly=VNC.XamlHelper" 
     xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"   
 
-    d:DesignWidth="440" d:DesignHeight="600"
+    d:DesignWidth="300" d:DesignHeight="600"
     d:DesignStyle="{StaticResource myDesignStyle}"
     Title="DXLayoutControl" 
     Loaded="OnLoaded"  >
@@ -63,9 +63,10 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem>
-                    <Button Content="Replace InvocationExpression"
-                            Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnRewrite_InvocationExpression_Click"/>
+                    <Button Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnRewrite_InvocationExpression_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Replace InvocationExpression</TextBlock>                        
+                    </Button>
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
@@ -83,9 +84,10 @@
                 </dxlc:LayoutItem>
 
                 <dxlc:LayoutItem>
-                    <Button Content="CommentOut SingleLine InvocationExpression"
-                            Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnCommentOut_InvocationExpression_Click"/>
+                    <Button Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnCommentOut_InvocationExpression_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">CommentOut SingleLine InvocationExpression</TextBlock>
+                    </Button>
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
@@ -108,7 +110,7 @@
                     <Button
                         Style="{StaticResource SyntaxRewriterButton}"
                         Click="btnWrapSQLExecuteXCallsInDALHelpers_Click">
-                        <TextBlock TextWrapping="Wrap">Wrap SQL .ExecuteX Calls in DAL.Helpers</TextBlock>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Wrap SQL .ExecuteX Calls in DAL.Helpers</TextBlock>
                     </Button>
                 </dxlc:LayoutItem>
 
@@ -116,7 +118,7 @@
                     <Button
                         Style="{StaticResource SyntaxRewriterButton}"
                         Click="btnWrapSQLFillCallsInDALHelpers_Click">
-                        <TextBlock TextWrapping="Wrap">Wrap SQL .Fill Calls in DAL.Helpers</TextBlock>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Wrap SQL .Fill Calls in DAL.Helpers</TextBlock>
                     </Button>
                 </dxlc:LayoutItem>
 

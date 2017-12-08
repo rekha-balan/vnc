@@ -89,7 +89,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #region Event Handlers
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
-
+            ProcessOperation(WrapSQLFillCallsInDALHelperVB, CodeExplorer.configurationOptions);
         }
 
         private void btnWrapSQLExecuteXCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
@@ -280,6 +280,36 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
 
             return sb;
+        }
+
+        StringBuilder WrapSQLFillCallsInDALHelperVB(
+            StringBuilder sb, 
+            SyntaxTree tree, 
+            string filePath, 
+            string targetPattern, string notUsed, 
+            Dictionary<string, int> replacements, 
+            out bool performedReplacement)
+        {
+            {
+                performedReplacement = false;
+
+                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(targetPattern);
+
+                rewriter.Messages = sb;
+
+                rewriter.InitializeRegEx();
+
+                rewriter.Replacements = replacements;
+                rewriter.Display = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+                SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+
+                string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+                performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
+
+                return sb;
+            }
         }
     }
 }

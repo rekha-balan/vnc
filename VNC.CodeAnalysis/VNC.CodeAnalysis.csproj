@@ -250,6 +250,7 @@
     <Compile Include="SyntaxRewriters\Helpers.cs" />
     <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
     <Compile Include="SyntaxRewriters\VB\RewriterIdeas.cs" />
+    <Compile Include="SyntaxRewriters\VB\WrapSQLFillCallsInDALHelper.cs" />
     <Compile Include="SyntaxRewriters\VB\WrapSQLExecuteXCallsInDALHelper.cs" />
     <Compile Include="SyntaxRewriters\VB\MultipleVariableDeclarations.cs" />
     <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
