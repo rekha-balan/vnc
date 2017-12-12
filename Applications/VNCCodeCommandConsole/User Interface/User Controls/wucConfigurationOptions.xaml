@@ -36,6 +36,28 @@
                            Content="Always Display File Name" 
                            IsChecked="False" VerticalAlignment="Top" />
 
+            <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
+                <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                             ValueMember="Content" 
+                             SelectedIndex="0"                                                         
+                             ShowBorder="False" Background="{x:Null}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                    <dxe:ListBoxEdit.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </dxe:ListBoxEdit.ItemsPanel>
+                    <dxe:ListBoxEdit.Items>
+                        <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                        <dxe:ListBoxEditItem Content="Node" />
+                        <dxe:ListBoxEditItem Content="Token" />
+                        <dxe:ListBoxEditItem Content="Trivia" />
+                    </dxe:ListBoxEdit.Items>
+                </dxe:ListBoxEdit>
+            </dx:GroupFrame>
+            
             <dxlc:LayoutItem>
 
                 <dxe:CheckEdit x:Name="ceDisplayContext" 
@@ -78,7 +100,12 @@
 
                 <dxe:CheckEdit x:Name="ceInIfBlock" 
                                 Content="In If Block" 
-                                IsChecked="False" VerticalAlignment="Top" />                
+                                IsChecked="False" VerticalAlignment="Top" />
+
+                <dxe:CheckEdit x:Name="ceDisplayCRC32" 
+                                Content="CRC32" 
+                                IsChecked="False" VerticalAlignment="Top" />
+                
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutGroup

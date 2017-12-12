@@ -203,10 +203,12 @@ namespace VNC.CodeAnalysis.Helpers
             return ancestorContext;
         }
 
-        public static StringBuilder InvokeVNCSyntaxWalker(
+        public static StringBuilder InvokeVNCSyntaxWalkerOld(
             StringBuilder sb,
             Boolean useRegEx, string regEx,
-            Dictionary<string, Int32> matches, 
+            Dictionary<string, Int32> matches,
+            Dictionary<string, Int32> crcMatchesToString,
+            Dictionary<string, Int32> crcMatchesToFullString,
             SyntaxTree syntaxTree,
             SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker, 
             ConfigurationOptions displayInfo)
@@ -221,10 +223,32 @@ namespace VNC.CodeAnalysis.Helpers
             walker.InitializeRegEx();
 
             walker.Matches = matches;
+            walker.CRCMatchesToString = crcMatchesToString;
+            walker.CRCMatchesToFullString = crcMatchesToFullString;
 
             walker.Visit(syntaxTree.GetRoot());
 
             return sb;
+        }
+
+        public static StringBuilder InvokeVNCSyntaxWalker(
+            SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker,
+            SearchTreeCommandConfiguration commandConfiguration)
+        {
+            walker.Messages = commandConfiguration.Results;
+
+            walker.IdentifierNames = commandConfiguration.UseRegEx ? commandConfiguration.RegEx : ".*";
+            walker.Display = commandConfiguration.ConfigurationOptions;
+
+            walker.InitializeRegEx();
+
+            walker.Matches = commandConfiguration.Matches;
+            walker.CRCMatchesToString = commandConfiguration.CRCMatchesToString;
+            walker.CRCMatchesToFullString = commandConfiguration.CRCMatchesToFullString;
+
+            walker.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            return commandConfiguration.Results;
         }
 
         //public static StringBuilder InvokeVNCTypedSyntaxWalker(
@@ -345,19 +369,5 @@ namespace VNC.CodeAnalysis.Helpers
 
             return GetContainingBlock(node.Parent as VisualBasicSyntaxNode);
         }
-
-        //public static VisualBasicSyntaxNode GetContainingBlock(Microsoft.CodeAnalysis.SyntaxNode node)
-        //{
-        //    var block = node.Parent as VisualBasicSyntaxNode;
-        //    var blockKind = block.Kind();
-        //    var blockKindText = blockKind.GetText();
-
-        //    if (block.Kind().GetText().Contains("Block"))
-        //    {
-        //        return block;
-        //    }
-
-        //    return GetContainingBlock(node.Parent);
-        //}
     }
 }

@@ -32,9 +32,10 @@
     <dxlc:LayoutControl Orientation="Vertical">
         <dxlc:LayoutItem Label="SourceCode" LabelPosition="Top">
             <dxe:TextEdit x:Name="teSourceCode1" 
-                          Height="100"
+                          Height="200"
                           TextWrapping="Wrap"
                         VerticalContentAlignment="Top"
+                         VerticalScrollBarVisibility="Auto"
                         AcceptsReturn="True" AcceptsTab="True">
             </dxe:TextEdit>
         </dxlc:LayoutItem>

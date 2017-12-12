@@ -70,6 +70,9 @@
     <Reference Include="CalcBinding, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CalcBinding.2.3.0\lib\net45\CalcBinding.dll</HintPath>
     </Reference>
+    <Reference Include="Crc32C.NET">
+      <HintPath>..\..\..\Common\Crc32C.NET.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -297,8 +300,8 @@
       <DependentUpon>wucCommandsWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Interface\User Controls\wucConfigurationOptions.cs">
-      <DependentUpon>wucConfigurationOptions.xaml</DependentUpon>	
-	</Compile>
+      <DependentUpon>wucConfigurationOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucDXBase.cs" />
     <Compile Include="User Interface\User Controls\wucFind_Picker.cs">
       <DependentUpon>wucFind_Picker.xaml</DependentUpon>

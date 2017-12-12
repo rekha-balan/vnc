@@ -36,6 +36,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             VNC.CodeAnalysis.ConfigurationOptions configurationOptions = new VNCCA.ConfigurationOptions();
 
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
+            configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
+
             configurationOptions.ContainingBlock = (bool)ceDisplayContainingBlock.IsChecked;
 
             configurationOptions.ClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;

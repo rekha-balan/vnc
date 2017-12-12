@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.CS
 {
+
     public class VNCCSSyntaxWalkerBase : CSharpSyntaxWalker
     {
         public StringBuilder Messages;

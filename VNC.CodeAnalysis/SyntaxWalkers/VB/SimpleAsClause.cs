@@ -21,13 +21,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (identifierNameRegEx.Match(node.ToString()).Success)
             {
-                //if (FilterByType(node.Declarators.First().AsClause))
-                //{
-                RecordMatchAndContext(node, node.ToString());
-                //Messages.AppendLine(String.Format("{0} {1}",
-                //        GetNodeContext(node),
-                //        node.ToString()));
-                //}
+                RecordMatchAndContext(node, BlockType.None);
             }
 
             base.VisitSimpleAsClause(node);

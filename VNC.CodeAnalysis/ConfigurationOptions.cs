@@ -18,6 +18,7 @@ namespace VNC.CodeAnalysis
         #region Output Options
 
         public bool SourceLocation { get; set; } = false;
+        public bool CRC32 { get; set; } = false;
 
         public bool ContainingBlock { get; set; }
 

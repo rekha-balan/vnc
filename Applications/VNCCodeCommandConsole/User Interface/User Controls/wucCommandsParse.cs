@@ -96,12 +96,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private void btnParseSourceVB_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = null;
-
-            // TODO(crhodes)
-            // Need to also get our hands on SyntaxTree that got produced.
-            // Either change return type
-            // or add out parameter
-            // or add another method that returns string
+            CodeExplorer.teSyntaxTree.Text = "";
 
             // TODO(crhodes)
             // Need to also get our hands on SyntaxTree that got produced.
@@ -135,6 +130,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private void btnParseSourceCS_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = null;
+            CodeExplorer.teSyntaxTree.Text = "";
 
             // TODO(crhodes)
             // Need to also get our hands on SyntaxTree that got produced.
@@ -162,6 +158,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             CodeExplorer.teSyntaxTree.Text = sb.ToString();
+
+        }
+
+        private void teSourceCode1_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
 
         }
     }

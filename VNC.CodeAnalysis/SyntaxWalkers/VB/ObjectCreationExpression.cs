@@ -23,28 +23,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (identifierNameRegEx.Match(node.ToString()).Success)
             {
-                RecordMatchAndContext(node, node.ToString());
+                RecordMatchAndContext(node, BlockType.None);
             }
-
-            //if (MatchLeft)
-            //{
-            //    if (identifierNameRegEx.Match(node.Left.ToString()).Success)
-            //    {
-            //        Messages.AppendLine(String.Format("{0} {1}",
-            //            GetNodeContext(node),
-            //            node.ToString()));
-            //    }
-            //}
-
-            //if (MatchRight)
-            //{
-            //    if (identifierNameRegEx.Match(node.Right.ToString()).Success)
-            //    {
-            //        Messages.AppendLine(String.Format("{0} {1}",
-            //            GetNodeContext(node),
-            //            node.ToString()));
-            //    }                
-            //}
 
             base.VisitObjectCreationExpression(node);
         }

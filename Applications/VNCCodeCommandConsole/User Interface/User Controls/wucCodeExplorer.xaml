@@ -119,7 +119,10 @@
                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode" >
 
                                     <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
-                                        <dxe:TextEdit x:Name="teSourceCode" FontFamily="Consolas" />
+                                        <dxe:TextEdit x:Name="teSourceCode" 
+                                                      FontFamily="Consolas" 
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
@@ -127,7 +130,10 @@
                                 <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree" >
 
                                     <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
-                                        <dxe:TextEdit x:Name="teSyntaxTree" />
+                                        <dxe:TextEdit x:Name="teSyntaxTree"
+                                                      FontFamily="Consolas"                                                       
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>

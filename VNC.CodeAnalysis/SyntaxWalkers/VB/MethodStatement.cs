@@ -19,20 +19,15 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
             {
-                string message = node.Identifier.ToString();
+                // Let's drop the MethodName only feature.  It probably only matters if the signature is the same
+                //string message = node.Identifier.ToString();
 
-                if (ShowParameters)
-                {
-                    message = node.ToString();
-                }
+                //if (ShowParameters)
+                //{
+                //    message = node.ToString();
+                //}
 
-                //Messages.AppendLine(String.Format("{0} {1}",
-                //    GetNodeContext(node),
-                //    message));
-
-                //string nodeValue = message;
-
-                RecordMatchAndContext(node, message);
+                RecordMatchAndContext(node, BlockType.None);
             }
 
             base.VisitMethodStatement(node);

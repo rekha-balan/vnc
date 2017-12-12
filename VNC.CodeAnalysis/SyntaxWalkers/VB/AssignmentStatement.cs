@@ -23,10 +23,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 if (identifierNameRegEx.Match(node.Left.ToString()).Success)
                 {
-                    RecordMatchAndContext(node, node.ToString());
-                    //Messages.AppendLine(String.Format("{0} {1}",
-                    //    GetNodeContext(node),
-                    //    node.ToString()));
+                    RecordMatchAndContext(node, BlockType.None);
                 }
             }
 
@@ -34,10 +31,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 if (identifierNameRegEx.Match(node.Right.ToString()).Success)
                 {
-                    RecordMatchAndContext(node, node.ToString());
-                    //Messages.AppendLine(String.Format("{0} {1}",
-                    //    GetNodeContext(node),
-                    //    node.ToString()));
+                    RecordMatchAndContext(node, BlockType.None);
                 }
             }
 

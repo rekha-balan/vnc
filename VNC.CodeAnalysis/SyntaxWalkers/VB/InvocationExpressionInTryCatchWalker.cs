@@ -17,45 +17,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
             {
-                RecordMatchAndContext(node, node.ToString());
-
-                //string nodeValue = node.ToString();
-
-                //Messages.AppendLine(String.Format("{0} {1}",
-                //    GetContext(node),
-                //    nodeValue));
-
-                //if (Matches.ContainsKey(nodeValue))
-                //{
-                //    Matches[nodeValue] += 1;
-                //}
-                //else
-                //{
-                //    Matches.Add(nodeValue, 1);
-                //}
+                RecordMatchAndContext(node, BlockType.None);
             }
 
             // Call base to visit children
 
             base.VisitInvocationExpression(node);
         }
-
-        //public string GetContext(VisualBasicSyntaxNode node)
-        //{
-        //    string messageContext = "";
-
-        //    //if (Display.ClassOrModuleName)
-        //    //{
-        //        messageContext = ContainingType(node);
-        //    //}
-
-        //    //if (Display.MethodName)
-        //    //{
-        //    //    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-        //    //}
-
-        //    return messageContext;
-        //}
-
     }
 }
