@@ -51,6 +51,8 @@ namespace VNCCodeCommandConsole.Commands
             walker.Messages = sb;
             walker.Visit(tree.GetRoot());
 
+
+
             return sb;
         }
 
@@ -69,6 +71,10 @@ namespace VNCCodeCommandConsole.Commands
             var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
             walker.Messages = sb;
             walker.Visit(tree.GetRoot());
+
+            var crc32 = walker.GetCRC32();
+
+            sb.AppendFormat("CRC32:({0})", crc32);
 
             return sb;
         }
@@ -96,6 +102,10 @@ namespace VNCCodeCommandConsole.Commands
 
             walker.Visit(tree.GetRoot());
 
+            var crc32 = walker.GetCRC32();
+
+            sb.AppendFormat("CRC32:({0})", crc32);
+
             return sb;
         }
 
@@ -121,6 +131,10 @@ namespace VNCCodeCommandConsole.Commands
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
+
+            var crc32 = walker.GetCRC32();
+
+            sb.AppendFormat("CRC32:({0})", crc32);
 
             return sb;
         }
@@ -148,6 +162,10 @@ namespace VNCCodeCommandConsole.Commands
 
             walker.Visit(tree.GetRoot());
 
+            var crc32 = walker.GetCRC32();
+
+            sb.AppendFormat("CRC32:({0})", crc32);
+
             return sb;
         }
 
@@ -173,6 +191,10 @@ namespace VNCCodeCommandConsole.Commands
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
+
+            var crc32 = walker.GetCRC32();
+
+            sb.AppendFormat("CRC32:({0})", crc32);
 
             return sb;
         }

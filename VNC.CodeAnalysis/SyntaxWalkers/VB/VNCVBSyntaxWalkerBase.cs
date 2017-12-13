@@ -15,9 +15,13 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     public class VNCVBSyntaxWalkerBase : VisualBasicSyntaxWalker
     {
         public StringBuilder Messages;
+        public StringBuilder WalkerNode = new StringBuilder();
+        public StringBuilder WalkerToken = new StringBuilder();
+        public StringBuilder WalkerTrivia = new StringBuilder();
+        public StringBuilder WalkerStructuredTrivia = new StringBuilder();
         static int tabs = 0;
 
-        public ConfigurationOptions Display = new ConfigurationOptions();
+        public ConfigurationOptions _configurationOptions = new ConfigurationOptions();
         //public Boolean DisplayClassOrModuleName;
         //public Boolean DisplayMethodName;
 
@@ -27,6 +31,11 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Dictionary<string, Int32> Matches;
         public Dictionary<string, Int32> CRCMatchesToString;
         public Dictionary<string, Int32> CRCMatchesToFullString;
+
+        public string CRC32Node;
+        public string CRC32Token;
+        public string CRC32Trivia;
+        public string CRC32StructuredTrivia;
 
         ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
 
@@ -53,12 +62,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             string messageContext = "";
 
-            if (Display.ClassOrModuleName)
+            if (_configurationOptions.ClassOrModuleName)
             {
-                messageContext = Helpers.VB.GetContainingContext(node, Display);
+                messageContext = Helpers.VB.GetContainingContext(node, _configurationOptions);
             }
 
-            if (Display.MethodName)
+            if (_configurationOptions.MethodName)
             {
                 messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
             }
@@ -99,9 +108,18 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 case BlockType.ModuleBlock:
                     nodeValue = ((ModuleBlockSyntax)node).ModuleStatement.Identifier.ToString();
                     break;
+
+                case BlockType.MethodBlock:
+                    nodeValue = ((MethodBlockSyntax)node).SubOrFunctionStatement.Identifier.ToString();
+                    break;
             }
 
-            if (Display.CRC32)
+            if (_configurationOptions.ReplaceCRLF)
+            {
+                nodeValue = nodeValue.Replace("\r\n", " ");
+            }
+
+            if (_configurationOptions.CRC32)
             {
                 byte[] nodeToStringBytes = asciiEncoding.GetBytes(node.ToString());
                 byte[] nodeToFullStringBytes = asciiEncoding.GetBytes(node.ToFullString());
@@ -184,21 +202,34 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     break;
             }
 
-            if (Display.CRC32)
+            if (_configurationOptions.ReplaceCRLF)
+            {
+                nodeValue = nodeValue.Replace("\r\n", " ");
+            }
+
+            if (_configurationOptions.CRC32)
             {
                 byte[] nodeToStringBytes = asciiEncoding.GetBytes(node.ToString());
                 byte[] nodeToFullStringBytes = asciiEncoding.GetBytes(node.ToFullString());
                 string toStringCRC = Crc32CAlgorithm.Compute(nodeToStringBytes).ToString();
                 string toFullStringCRC = Crc32CAlgorithm.Compute(nodeToFullStringBytes).ToString();
 
-                Messages.AppendLine(String.Format("{0} {1,-35} CRC32:({2,10}) ({3,10})",
-                    Helpers.VB.GetContainingContext(node, Display),
-                    node.ToString(),
+                // TODO(crhodes)
+                // Decide if more useful to have CRC first or last.
+
+                //Messages.AppendLine(String.Format("{0} {1,-35} CRC32:({2,10}) ({3,10})",
+                Messages.AppendLine(String.Format("CRC32:({2,10}) ({3,10}) {0} {1,-35}",
+                    Helpers.VB.GetContainingContext(node, _configurationOptions),
+                    nodeValue,
                     toStringCRC,
                     toFullStringCRC));
 
-                string toStringKey = nodeValue + ":" + toStringCRC;
-                string toFullStringKey = nodeValue + ":" + toFullStringCRC;
+                //string toStringKey = string.Format("{0}:({1,10})", nodeValue, toStringCRC);
+                //string toFullStringKey = string.Format("{0}:({1,10})", nodeValue, toFullStringCRC);
+
+                string toStringKey = string.Format("({0,10}):{1}", toStringCRC, nodeValue);
+                string toFullStringKey = string.Format("({0,10}):{1}", toFullStringCRC, nodeValue);
+
 
                 // The Node
 
@@ -225,7 +256,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             else
             {
                 Messages.AppendLine(String.Format("{0} {1}",
-                    Helpers.VB.GetContainingContext(node, Display),
+                    Helpers.VB.GetContainingContext(node, _configurationOptions),
                     nodeValue));
             }
 
@@ -249,21 +280,28 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         /// <param name="nodeValue"></param>
         public void RecordMatchAndContext(VisualBasicSyntaxNode node, string nodeValue)
         {
-            if (Display.CRC32)
+            if (_configurationOptions.CRC32)
             {
                 byte[] nodeToStringBytes = asciiEncoding.GetBytes(node.ToString());
                 byte[] nodeToFullStringBytes = asciiEncoding.GetBytes(node.ToFullString());
                 string toStringCRC = Crc32CAlgorithm.Compute(nodeToStringBytes).ToString();
                 string toFullStringCRC = Crc32CAlgorithm.Compute(nodeToFullStringBytes).ToString();
 
-                Messages.AppendLine(String.Format("{0} {1,-35} CRC32:({2,10}) ({3,10})",
-                    Helpers.VB.GetContainingContext(node, Display),
+                // TODO(crhodes)
+                // Decide if more useful to have CRC first or last.
+
+                //Messages.AppendLine(String.Format("{0} {1,-35} CRC32:({2,10}) ({3,10})",
+                Messages.AppendLine(String.Format("CRC32:({2,10}) ({3,10}) {0} {1,-35}",
+                    Helpers.VB.GetContainingContext(node, _configurationOptions),
                     nodeValue,
                     toStringCRC,
                     toFullStringCRC));
 
-                string toStringKey = nodeValue + ":" + toStringCRC;
-                string toFullStringKey = nodeValue + ":" + toFullStringCRC;
+                //string toStringKey = string.Format("{0}:({1,10})", nodeValue, toStringCRC);
+                //string toFullStringKey = string.Format("{0}:({1,10})", nodeValue, toFullStringCRC);
+
+                string toStringKey = string.Format("({0,10}):{1}", toStringCRC, nodeValue);
+                string toFullStringKey = string.Format("({0,10}):{1}", toFullStringCRC, nodeValue);
 
                 // The Node
 
@@ -290,7 +328,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             else
             {
                 Messages.AppendLine(String.Format("{0} {1}",
-                    Helpers.VB.GetContainingContext(node, Display),
+                    Helpers.VB.GetContainingContext(node, _configurationOptions),
                     nodeValue));
             }
 

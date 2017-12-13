@@ -295,8 +295,6 @@
                                     ToolTip="Supports Regular Expressions"/>
                         </dxlc:LayoutItem>
 
-
-
                     </dxlc:LayoutGroup>
 
                 </dxlc:LayoutGroup>
@@ -338,9 +336,9 @@
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
-                <dxlc:LayoutItem>
+                <!--<dxlc:LayoutItem>
                     <dxe:CheckEdit x:Name="ceShowMethodParameters" Content="Show Method Parameters" IsChecked="False" />
-                </dxlc:LayoutItem>
+                </dxlc:LayoutItem>-->
 
                 <dxlc:LayoutItem>
                     <dxe:CheckEdit x:Name="ceShowMethodBlock" Content="Show Method Block" IsChecked="False" />

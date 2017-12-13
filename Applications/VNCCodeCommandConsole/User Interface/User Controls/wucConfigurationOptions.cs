@@ -37,6 +37,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
+            configurationOptions.ReplaceCRLF = (bool)ceReplaceCRLF.IsChecked;
 
             configurationOptions.ContainingBlock = (bool)ceDisplayContainingBlock.IsChecked;
 

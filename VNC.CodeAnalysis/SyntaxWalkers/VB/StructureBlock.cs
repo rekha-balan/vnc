@@ -91,43 +91,43 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                         switch (asClauseType.ToString())
                         {
                             case "Boolean":
-                                if (Display.Boolean) addField = true;
+                                if (_configurationOptions.Boolean) addField = true;
                                 break;
 
                             case "Date":
-                                if (Display.Date) addField = true;
+                                if (_configurationOptions.Date) addField = true;
                                 break;
 
                             case "DateTime":
-                                if (Display.DateTime) addField = true;
+                                if (_configurationOptions.DateTime) addField = true;
                                 break;
 
                             case "Int16":
-                                if (Display.Int16) addField = true;
+                                if (_configurationOptions.Int16) addField = true;
                                 break;
 
                             case "Int32":
-                                if (Display.Int32) addField = true;
+                                if (_configurationOptions.Int32) addField = true;
                                 break;
 
                             case "Integer":
-                                if (Display.Integer) addField = true;
+                                if (_configurationOptions.Integer) addField = true;
                                 break;
 
                             case "Long":
-                                if (Display.Long) addField = true;
+                                if (_configurationOptions.Long) addField = true;
                                 break;
 
                             case "Single":
-                                if (Display.Single) addField = true;
+                                if (_configurationOptions.Single) addField = true;
                                 break;
 
                             case "String":
-                                if (Display.String) addField = true;
+                                if (_configurationOptions.String) addField = true;
                                 break;
 
                             default:
-                                    if (Display.OtherTypes && !displayStructure) addField = true;
+                                    if (_configurationOptions.OtherTypes && !displayStructure) addField = true;
 
                                     break;
                         }                            
@@ -158,12 +158,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 {
                     string messageContext = "";
 
-                    if (Display.ClassOrModuleName)
+                    if (_configurationOptions.ClassOrModuleName)
                     {
-                        messageContext = Helpers.VB.GetContainingContext(node, Display);
+                        messageContext = Helpers.VB.GetContainingContext(node, _configurationOptions);
                     }
 
-                    if (Display.MethodName)
+                    if (_configurationOptions.MethodName)
                     {
                         messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
                     }

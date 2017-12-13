@@ -154,6 +154,11 @@ namespace VNCCodeCommandConsole.User_Interface
             codeExplorer.teSourceCode.InvalidateVisual();
             //CodeExplorer.teSourceCode.Text = "";
 
+            //codeExplorer.teSyntaxNode.Clear();
+            //codeExplorer.teSyntaxToken.Clear();
+            //codeExplorer.teSyntaxTrivia.Clear();
+            //codeExplorer.teSyntaxStructuredTrivia.Clear();
+
             string projectFullPath = codeExplorerContext.teProjectFile.Text;
 
             var filesToProcess = codeExplorerContext.GetFilesToProcess();
@@ -235,25 +240,29 @@ namespace VNCCodeCommandConsole.User_Interface
                     }
                 }
 
-                sb.AppendLine("CRC ToString Summary");
-
-                foreach (var item in crcMatchesToString.OrderBy(v => v.Key).Select(k => k.Key))
+                if ((Boolean)configurationOptions.ceDisplayCRC32.IsChecked)
                 {
-                    if (crcMatchesToString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+                    sb.AppendLine("CRC ToString Summary");
+
+                    foreach (var item in crcMatchesToString.OrderBy(v => v.Key).Select(k => k.Key))
                     {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
+                        if (crcMatchesToString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+                        {
+                            sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
+                        }
+                    }
+
+                    sb.AppendLine("CRC ToFullString Summary");
+
+                    foreach (var item in crcMatchesToFullString.OrderBy(v => v.Key).Select(k => k.Key))
+                    {
+                        if (crcMatchesToFullString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+                        {
+                            sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
+                        }
                     }
                 }
 
-                sb.AppendLine("CRC ToFullString Summary");
-
-                foreach (var item in crcMatchesToFullString.OrderBy(v => v.Key).Select(k => k.Key))
-                {
-                    if (crcMatchesToFullString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
-                    {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
-                    }
-                }
             }
 
             codeExplorer.teSourceCode.Text = sb.ToString();

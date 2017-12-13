@@ -30,7 +30,7 @@
 
     </uiuc:wucDXBase.Resources>
 
-    <dxlc:LayoutControl Name="lc_Root" 
+        <dxlc:LayoutControl Name="lc_Root"                          
                       Orientation="Vertical"
                       Background="Transparent"
                       VerticalAlignment="Stretch"
@@ -68,7 +68,7 @@
             <dxdo:DockLayoutManager 
                 Name="lg_Body_dlm" dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
 
-                <dxdo:LayoutGroup Name="lg_Body_dlm_lg"  AllowClose="False" AllowFloat="False" AllowDock="False" >
+                <dxdo:LayoutGroup Name="lg_Body_dlm_lg"  AllowClose="False" AllowFloat="False" AllowDock="False"  >
                     <!--<dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" MaxHeight="1200" FontSize="12"-->
 
                     <dxdo:TabbedGroup ItemWidth="300" Name="tg_Left">
@@ -89,12 +89,13 @@
                     </dxdo:TabbedGroup>
 
                     <dxdo:LayoutPanel Name="lg_Body_dlm_lg_lpRoot" FontSize="12" 
-                                      AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
+                                      AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False"  >
 
                         <dxlc:LayoutControl
                             Orientation="Vertical" StretchContentVertically="False" Background="Transparent" >
 
-                            <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs" >
+                            <dxlc:LayoutGroup Name="groupContainer"
+                                              Orientation="Vertical" View="Tabs" >
 
                                 <dxlc:LayoutGroup.GroupBoxStyle>
                                     <Style TargetType="dxlc:GroupBox">
@@ -111,16 +112,18 @@
                                 <dxlc:LayoutGroup  Header="Sources" x:Name="lg_CodeExplorerContext"  >
 
                                     <!--<dxlc:LayoutItem>-->
-                                    <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext"  />
+                                    <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
                                     <!--</dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode" >
+                                <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
 
-                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
+                                    <dxlc:LayoutItem >
                                         <dxe:TextEdit x:Name="teSourceCode" 
                                                       FontFamily="Consolas" 
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
@@ -129,70 +132,81 @@
 
                                 <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree" >
 
-                                    <dxlc:LayoutItem ScrollViewer.CanContentScroll="True" >
+                                    <dxlc:LayoutItem  >
                                         <dxe:TextEdit x:Name="teSyntaxTree"
-                                                      FontFamily="Consolas"                                                       
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="Workspace" Name="lg_Workspace">
+                                <dxlc:LayoutGroup Header="SyntaxNode" Name="lg_SyntaxNode" >
 
-                                    <dxlc:LayoutItem MaxHeight="600">
-                                        <dxe:TextEdit x:Name="teWorkspace" />
+                                    <dxlc:LayoutItem  >
+                                        <dxe:TextEdit x:Name="teSyntaxNode"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
                                 </dxlc:LayoutGroup>
 
-                                <!--<dxlc:LayoutGroup Header="Classes" Name="lg_Classes">
+                                <dxlc:LayoutGroup Header="SyntaxToken" Name="lg_SyntaxToken" >
 
-                                    <dxlc:LayoutItem MaxHeight="600">
-                                        <dxe:TextEdit x:Name="teClasses" />
+                                    <dxlc:LayoutItem  >
+                                        <dxe:TextEdit x:Name="teSyntaxToken"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
-                                </dxlc:LayoutGroup>-->
+                                </dxlc:LayoutGroup>
 
-                                <!--<dxlc:LayoutGroup Header="Modules" Name="lg_Modules">
+                                <dxlc:LayoutGroup Header="SyntaxTrivia" Name="lg_SyntaxTrivia" >
 
-                                    <dxlc:LayoutItem MaxHeight="600">
-                                        <dxe:TextEdit x:Name="teModules" />
+                                    <dxlc:LayoutItem  >
+                                        <dxe:TextEdit x:Name="teSyntaxTrivia"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
                                     </dxlc:LayoutItem>
 
-                                </dxlc:LayoutGroup>-->
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="SyntaxStructuredTrivia" Name="lg_SyntaxStructuredTrivia" >
+
+                                    <dxlc:LayoutItem  >
+                                        <dxe:TextEdit x:Name="teSyntaxStructuredTrivia"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"/>
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup>
                                 
-                                <!--<dxlc:LayoutGroup Header="Methods" Name="lg_Methods">
+                                <dxlc:LayoutGroup Header="Workspace" Name="lg_Workspace">
 
                                     <dxlc:LayoutItem>
-                                        <dxe:TextEdit x:Name="teMethods" />
+                                        <dxe:TextEdit x:Name="teWorkspace"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"                                                      />
                                     </dxlc:LayoutItem>
 
-                                </dxlc:LayoutGroup>-->
-
-                                <!--<dxlc:LayoutGroup Header="Structures" Name="lg_Structures">
-
-                                    <dxlc:LayoutItem>
-                                        <dxe:TextEdit x:Name="teStructures" />
-                                    </dxlc:LayoutItem>
-
-                                </dxlc:LayoutGroup>-->
-
-                                <!--<dxlc:LayoutGroup Header="X Stuff" Name="lg_X">
-
-                                    <dxlc:LayoutItem>
-
-                                    </dxlc:LayoutItem>
-
-                                </dxlc:LayoutGroup>-->
-
-                                <!--<dxlc:LayoutGroup Header="Y Stuff" Name="lg_Y">
-
-                                    <dxlc:LayoutItem>
-
-                                    </dxlc:LayoutItem>
-
-                                </dxlc:LayoutGroup>-->
+                                </dxlc:LayoutGroup>
 
                             </dxlc:LayoutGroup>
 
@@ -204,7 +218,9 @@
                         
                         <dxdo:LayoutPanel Name="lp_OutputOptions" Caption="Configuration Options"
                                           AllowFloat="True" AllowClose="True" AllowDock="True" AllowHide="True" >
+                            
                             <uiuc:wucConfigurationOptions x:Name="configurationOptions" />
+                            
                         </dxdo:LayoutPanel>
 
                         <dxdo:LayoutPanel x:Name="lp_Commands_Workspace" Caption="Workspace Info" >
@@ -215,36 +231,17 @@
                         
                     </dxdo:TabbedGroup>
 
-
                 </dxdo:LayoutGroup>
 
                 <dxdo:DockLayoutManager.AutoHideGroups>
 
                     <dxdo:AutoHideGroup DockType="Left">
 
-                        <!--<dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
-                            <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
-                        </dxdo:LayoutPanel>-->
-
-                        <!--<dxdo:LayoutPanel x:Name="lp_LeftStuff" Caption="CodeExplorer Content" ItemWidth="400" >
-                            <uiuc:wucCodeExplorerContext x:Name="wucCodeExplorerContext" />
-                        </dxdo:LayoutPanel>-->
-
-                        <!--<dxdo:LayoutPanel x:Name="lp_Commands_FindVBSyntax" Caption="Find VB Syntax" ItemWidth="300">
-
-                            <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
-
-                        </dxdo:LayoutPanel>-->
-
-
-
                         <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="300">
 
                             <uiuc:wucCommandsRewrite x:Name="wucCommandsRewrite" />
 
                         </dxdo:LayoutPanel>
-
-
 
                     </dxdo:AutoHideGroup>
 
@@ -311,8 +308,6 @@
                     </dxdo:AutoHideGroup>
 
                     <dxdo:AutoHideGroup DockType="Bottom">
-
- 
 
                     </dxdo:AutoHideGroup>
                     

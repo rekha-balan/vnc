@@ -57,7 +57,25 @@
                     </dxe:ListBoxEdit.Items>
                 </dxe:ListBoxEdit>
             </dx:GroupFrame>
-            
+
+            <dxlc:LayoutItem>
+                 <dxe:CheckEdit x:Name="ceDisplaySourceLocation" 
+                                    Content="Display Source Location" 
+                                    IsChecked="False" VerticalAlignment="Top" />           	
+            </dxlc:LayoutItem>
+ 
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceDisplayCRC32" 
+                                    Content="Display CRC32" 
+                                    IsChecked="False" VerticalAlignment="Top" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceReplaceCRLF" 
+                                    Content="Replace CRLF in Key" 
+                                    IsChecked="False" VerticalAlignment="Top" />
+            </dxlc:LayoutItem>
+
             <dxlc:LayoutItem>
 
                 <dxe:CheckEdit x:Name="ceDisplayContext" 
@@ -69,10 +87,6 @@
                 View="GroupBox"
                 Orientation="Vertical"
                 Visibility="{cb:Binding ElementName=ceDisplayContext, Path=IsChecked}">
-
-                <dxe:CheckEdit x:Name="ceDisplaySourceLocation" 
-                                Content="Source Location" 
-                                IsChecked="False" VerticalAlignment="Top" />
 
                 <dxe:CheckEdit x:Name="ceDisplayContainingBlock" 
                                 Content="ContainingBlock" 
@@ -101,15 +115,12 @@
                 <dxe:CheckEdit x:Name="ceInIfBlock" 
                                 Content="In If Block" 
                                 IsChecked="False" VerticalAlignment="Top" />
-
-                <dxe:CheckEdit x:Name="ceDisplayCRC32" 
-                                Content="CRC32" 
-                                IsChecked="False" VerticalAlignment="Top" />
-                
+            
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutGroup
                 	Orientation="Vertical">
+                
                 <dxlc:LayoutItem>
                     <dxe:CheckEdit x:Name="ceDisplayResults" 
                                    Content="Display Results" 

@@ -584,7 +584,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             {
                 walker = new VNCSW.VB.MethodStatement();
                 //(walker as VNCSW.VB.MethodStatement).ShowParameters = (Boolean)ceShowMethodParameters.IsChecked;
-                ((VNCSW.VB.MethodStatement)walker).ShowParameters = (Boolean)ceShowMethodParameters.IsChecked;
+                //((VNCSW.VB.MethodStatement)walker).ShowParameters = (Boolean)ceShowMethodParameters.IsChecked;
             }
 
             //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
@@ -595,8 +595,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             commandConfiguration.RegEx = teMethodStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
+            StringBuilder results = VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
                 commandConfiguration);
+
+            // We may have done a deep dive on a method.  Go grab the results.
+
+            CodeExplorer.teSyntaxNode.Text = walker.WalkerNode.ToString();
+            CodeExplorer.teSyntaxToken.Text = walker.WalkerToken.ToString();
+            CodeExplorer.teSyntaxTrivia.Text = walker.WalkerTrivia.ToString();
+            CodeExplorer.teSyntaxStructuredTrivia.Text = walker.WalkerStructuredTrivia.ToString();
+
+            return results;
         }
 
         private StringBuilder DisplayModuleStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)

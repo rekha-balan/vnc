@@ -346,7 +346,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                         }
                         else
                         {
-                            filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath);
+                            filesToProcess.AddRange(VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath));
+                            //filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath);
                             //var project = workSpace.OpenProjectAsync(projectPath).Result;
 
                             //Microsoft.CodeAnalysis.Project project = null;

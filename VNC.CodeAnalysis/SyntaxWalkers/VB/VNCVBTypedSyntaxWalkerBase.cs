@@ -34,7 +34,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             Boolean addField = false;
 
-            if (asClause == null || Display.AllTypes)
+            if (asClause == null || _configurationOptions.AllTypes)
             {
                 addField = true;
             }
@@ -43,51 +43,51 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 switch (asClause.Type().ToString())
                 {
                     case "Boolean":
-                        if (Display.Boolean) addField = true;
+                        if (_configurationOptions.Boolean) addField = true;
                         break;
 
                     case "Byte":
-                        if (Display.Byte) addField = true;
+                        if (_configurationOptions.Byte) addField = true;
                         break;
 
                     case "DataTable":
-                        if (Display.DataTable) addField = true;
+                        if (_configurationOptions.DataTable) addField = true;
                         break;
 
                     case "Date":
-                        if (Display.Date) addField = true;
+                        if (_configurationOptions.Date) addField = true;
                         break;
 
                     case "DateTime":
-                        if (Display.DateTime) addField = true;
+                        if (_configurationOptions.DateTime) addField = true;
                         break;
 
                     case "Int16":
-                        if (Display.Int16) addField = true;
+                        if (_configurationOptions.Int16) addField = true;
                         break;
 
                     case "Int32":
-                        if (Display.Int32) addField = true;
+                        if (_configurationOptions.Int32) addField = true;
                         break;
 
                     case "Integer":
-                        if (Display.Integer) addField = true;
+                        if (_configurationOptions.Integer) addField = true;
                         break;
 
                     case "Long":
-                        if (Display.Long) addField = true;
+                        if (_configurationOptions.Long) addField = true;
                         break;
 
                     case "Single":
-                        if (Display.Single) addField = true;
+                        if (_configurationOptions.Single) addField = true;
                         break;
 
                     case "String":
-                        if (Display.String) addField = true;
+                        if (_configurationOptions.String) addField = true;
                         break;
 
                     default:
-                        if (Display.OtherTypes) addField = true;
+                        if (_configurationOptions.OtherTypes) addField = true;
                         //if (IsOtherType && !displayStructure) addField = true;
 
                         break;

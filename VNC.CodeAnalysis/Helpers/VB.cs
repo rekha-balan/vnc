@@ -218,7 +218,7 @@ namespace VNC.CodeAnalysis.Helpers
             //walker.Display.ClassOrModuleName = displayInfo.ClassOrModuleName;
             //walker.Display.MethodName = displayInfo.MethodName;
             walker.IdentifierNames = useRegEx ? regEx : ".*";
-            walker.Display = displayInfo;
+            walker._configurationOptions = displayInfo;
 
             walker.InitializeRegEx();
 
@@ -235,10 +235,13 @@ namespace VNC.CodeAnalysis.Helpers
             SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker,
             SearchTreeCommandConfiguration commandConfiguration)
         {
-            walker.Messages = commandConfiguration.Results;
+            StringBuilder results = new StringBuilder();
+
+            //walker.Messages = commandConfiguration.Results;
+            walker.Messages = results;
 
             walker.IdentifierNames = commandConfiguration.UseRegEx ? commandConfiguration.RegEx : ".*";
-            walker.Display = commandConfiguration.ConfigurationOptions;
+            walker._configurationOptions = commandConfiguration.ConfigurationOptions;
 
             walker.InitializeRegEx();
 
@@ -247,6 +250,16 @@ namespace VNC.CodeAnalysis.Helpers
             walker.CRCMatchesToFullString = commandConfiguration.CRCMatchesToFullString;
 
             walker.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            if (results.Length > 0)
+            {
+                results.AppendFormat("CRC32Node:            {0}\n", walker.CRC32Node);
+                results.AppendFormat("CRC32Token:           {0}\n", walker.CRC32Token);
+                results.AppendFormat("CRC32Trivia:          {0}\n", walker.CRC32Trivia);
+                results.AppendFormat("CRC32StructuredTrivia:{0}\n", walker.CRC32StructuredTrivia);
+
+                commandConfiguration.Results.AppendLine(results.ToString());
+            }
 
             return commandConfiguration.Results;
         }
