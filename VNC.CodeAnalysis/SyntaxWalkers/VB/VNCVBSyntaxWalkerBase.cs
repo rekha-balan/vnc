@@ -19,11 +19,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public StringBuilder WalkerToken = new StringBuilder();
         public StringBuilder WalkerTrivia = new StringBuilder();
         public StringBuilder WalkerStructuredTrivia = new StringBuilder();
-        static int tabs = 0;
+        //static int tabs = 0;
 
         public ConfigurationOptions _configurationOptions = new ConfigurationOptions();
-        //public Boolean DisplayClassOrModuleName;
-        //public Boolean DisplayMethodName;
 
         public string IdentifierNames;
         internal Regex identifierNameRegEx;
@@ -175,36 +173,51 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public void RecordMatchAndContext(VisualBasicSyntaxNode node, BlockType blockType)
         {
             string nodeValue = "";
+            string nodeKey = "";
 
             // Produce a useful string to use for the Matches dictionary
             // Don't want to use a long string
+            //
+            // Also handle display of full block for some SyntaxNodes
 
             switch (blockType)
             {
                 case BlockType.None:
                     nodeValue = node.ToString();
+                    nodeKey = nodeValue;
                     break;
 
                 case BlockType.NamespaceBlock:
-                    nodeValue = ((NamespaceBlockSyntax)node).NamespaceStatement.Name.ToString();
+                    nodeValue = ((NamespaceBlockSyntax)node).ToString();
+                    // TODO(crhodes)
+                    // May want to remove .Name
+                    nodeKey = ((NamespaceBlockSyntax)node).NamespaceStatement.Name.ToString();
                     break;
 
                 case BlockType.ClassBlock:
-                    nodeValue = ((ClassBlockSyntax)node).ClassStatement.Identifier.ToString();
+                    nodeValue = ((ClassBlockSyntax)node).ToString();
+                    // TODO(crhodes)
+                    // May want to remove .Identifier
+                    nodeKey = ((ClassBlockSyntax)node).ClassStatement.Identifier.ToString(); ;
                     break;
 
                 case BlockType.ModuleBlock:
-                    nodeValue = ((ModuleBlockSyntax)node).ModuleStatement.Identifier.ToString();
+                    nodeValue = ((ModuleBlockSyntax)node).ToString();
+                    nodeKey = ((ModuleBlockSyntax)node).ModuleStatement.ToString();
                     break;
 
                 case BlockType.MethodBlock:
-                    nodeValue = ((MethodBlockSyntax)node).SubOrFunctionStatement.Identifier.ToString();
+                    nodeValue = ((MethodBlockSyntax)node).ToString();
+                    nodeKey = ((MethodBlockSyntax)node).SubOrFunctionStatement.ToString(); ;
                     break;
             }
 
             if (_configurationOptions.ReplaceCRLF)
             {
-                nodeValue = nodeValue.Replace("\r\n", " ");
+                // TODO(crhodes)
+                // This may not work if we want to see the block
+
+                nodeKey = nodeKey.Replace("\r\n", " ");
             }
 
             if (_configurationOptions.CRC32)
@@ -227,8 +240,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 //string toStringKey = string.Format("{0}:({1,10})", nodeValue, toStringCRC);
                 //string toFullStringKey = string.Format("{0}:({1,10})", nodeValue, toFullStringCRC);
 
-                string toStringKey = string.Format("({0,10}):{1}", toStringCRC, nodeValue);
-                string toFullStringKey = string.Format("({0,10}):{1}", toFullStringCRC, nodeValue);
+                string toStringKey = string.Format("({0,10}):{1}", toStringCRC, nodeKey);
+                string toFullStringKey = string.Format("({0,10}):{1}", toFullStringCRC, nodeKey);
 
 
                 // The Node
@@ -263,13 +276,13 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             // TODO(crhodes)
             // May want to just use the CRC stuff
 
-            if (Matches.ContainsKey(nodeValue))
+            if (Matches.ContainsKey(nodeKey))
             {
-                Matches[nodeValue] += 1;
+                Matches[nodeKey] += 1;
             }
             else
             {
-                Matches.Add(nodeValue, 1);
+                Matches.Add(nodeKey, 1);
             }
         }
 

@@ -13,9 +13,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class StructureBlock : VNCVBTypedSyntaxWalkerBase
     {
-        /// <summary>
-        /// Regular Expression
-        /// </summary>
+        // TODO(crhodes)
+        // This was one of the first walkers.  Lots of opportunities to leverage some of the enhancements
+        // in VNCVB[Typed]SyntaxWalkerBase, e.g. RecordMatchAndContext
+
         public string StructureNames;
         /// <summary>
         /// Regular Expression
@@ -57,18 +58,11 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         public override void VisitStructureBlock(StructureBlockSyntax node)
         {
-            //var nodeInitializer = node.Initializer;
-            //var nodeAsClause = node.AsClause;
-            //var nodeNames = node.Names;
-            //var asType = node.AsClause.Type().ToString();
 
             if (structureNameRegEx.Match(node.StructureStatement.Identifier.Text).Success)
             {
                 StringBuilder messageFields = new StringBuilder();
                 Boolean displayStructure = AllFieldTypes;
-
-                //Messages.AppendLine(node.StructureStatement.Identifier.Text);
-                //message.AppendLine(node.StructureStatement.ToString());
 
                 if (ShowFields)
                 {

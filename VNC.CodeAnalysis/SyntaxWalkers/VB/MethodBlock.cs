@@ -24,12 +24,15 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 var walkerTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia);
                 var walkerStructuredTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
 
-                var descendantNodes = node.DescendantNodes();
-                var descendantNodesAndSelf = node.DescendantNodesAndSelf();
-                var descendantNodesAndTokens = node.DescendantNodesAndTokens();
-                var descendantNodesAndTokensAndSelf = node.DescendantNodesAndTokensAndSelf();
-                var descendantTokens = node.DescendantTokens();
-                var descendantTrivia = node.DescendantTrivia();
+                // Get the contained MethodStatement
+
+                var methodStatement = node.DescendantNodes().First();
+
+                //var descendantNodesAndSelf = node.DescendantNodesAndSelf();
+                //var descendantNodesAndTokens = node.DescendantNodesAndTokens();
+                //var descendantNodesAndTokensAndSelf = node.DescendantNodesAndTokensAndSelf();
+                //var descendantTokens = node.DescendantTokens();
+                //var descendantTrivia = node.DescendantTrivia();
 
                  StringBuilder internalMessages = new StringBuilder();
 
@@ -43,37 +46,35 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 walkerTrivia.Messages = internalMessages;
                 walkerStructuredTrivia.Messages = internalMessages;
 
+                // Nodes
 
-                //Messages.AppendLine("\nCall walkerNode.Visit()\n");
-                walkerNode.Visit(node.DescendantNodes().First());
+                walkerNode.Visit(methodStatement);
                 CRC32Node = walkerNode.GetCRC32();
                 WalkerNode.AppendLine(walkerNode.Messages.ToString());
 
-                //Messages.AppendLine(internalMessages.ToString());
-
                 internalMessages.Clear();
 
-                //Messages.AppendLine("\nCall walkerToken.Visit()\n");
-                walkerToken.Visit(node.DescendantNodes().First());
+                // Tokens
+
+                walkerToken.Visit(methodStatement);
                 CRC32Token = walkerToken.GetCRC32();
                 WalkerToken.AppendLine(walkerNode.Messages.ToString());
-                //Messages.AppendLine(internalMessages.ToString());
 
                 internalMessages.Clear();
 
-                //Messages.AppendLine("\nCall walkerTrivia.Visit()\n");
-                walkerTrivia.Visit(node.DescendantNodes().First());
+                // Trivia
+
+                walkerTrivia.Visit(methodStatement);
                 CRC32Trivia = walkerTrivia.GetCRC32();
                 WalkerTrivia.AppendLine(internalMessages.ToString());
-                //Messages.AppendLine(internalMessages.ToString());
 
                 internalMessages.Clear();
 
-                //Messages.AppendLine("\nCall walkerStructuredTrivia.Visit()\n");
-                walkerStructuredTrivia.Visit(node.DescendantNodes().First());
+                // Structured Trivia
+
+                walkerStructuredTrivia.Visit(methodStatement);
                 CRC32StructuredTrivia = walkerStructuredTrivia.GetCRC32();
                 WalkerStructuredTrivia.AppendLine(internalMessages.ToString());
-                //Messages.AppendLine(internalMessages.ToString());
             }
 
             base.VisitMethodBlock(node);

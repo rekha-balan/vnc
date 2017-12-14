@@ -16,20 +16,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         //public Boolean AllTypes = false;
         public Boolean HasAttributes = false;
 
-        //public Boolean IsBoolean = false;
-        //public Boolean IsByte = false;
-        //public Boolean IsDate = false;
-        //public Boolean IsDataTable = false;
-        //public Boolean IsDateTime = false;
-        //public Boolean IsInt16 = false;
-        //public Boolean IsInt32 = false;
-        //public Boolean IsInteger = false;
-        //public Boolean IsLong = false;
-        //public Boolean IsSingle = false;
-        //public Boolean IsString = false;
-
-        //public Boolean IsOtherType = false;
-
         internal bool FilterByType(AsClauseSyntax asClause)
         {
             Boolean addField = false;

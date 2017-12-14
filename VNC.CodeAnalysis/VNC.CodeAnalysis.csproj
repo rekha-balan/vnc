@@ -253,6 +253,7 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\Helpers.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveInvocationExpression.cs" />
     <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
     <Compile Include="SyntaxRewriters\VB\RewriterIdeas.cs" />
     <Compile Include="SyntaxRewriters\VB\WrapSQLFillCallsInDALHelper.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
     <Compile Include="SyntaxWalkers\CS\VisitAll.cs" />
     <Compile Include="SyntaxWalkers\CS\VNCCSSyntaxWalkerBase.cs" />
+    <Compile Include="SyntaxWalkers\VB\AsNewClause.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />
@@ -272,7 +274,7 @@
     <Compile Include="SyntaxWalkers\VB\InvocationExpressionInTryCatchWalker.cs" />
     <Compile Include="SyntaxWalkers\VB\ObjectCreationExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
-    <Compile Include="SyntaxWalkers\VB\ConcatenateExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\BinaryExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\SimpleAsClause.cs" />
     <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\MethodStatementNames.cs" />

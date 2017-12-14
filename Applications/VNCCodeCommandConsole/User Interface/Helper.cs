@@ -37,112 +37,112 @@ namespace VNCCodeCommandConsole.User_Interface
             }
         }
 
-        public static void ProcessOperationOld(VNCCA.Types.SearchTreeCommandOld command, 
-            User_Controls.wucCodeExplorer codeExplorer, 
-            User_Controls.wucCodeExplorerContext codeExplorerContext,
-            User_Controls.wucConfigurationOptions configurationOptions)
-        {
-            StringBuilder sb = new StringBuilder();
-            codeExplorer.teSourceCode.Clear();
-            codeExplorer.teSourceCode.InvalidateVisual();
-            //CodeExplorer.teSourceCode.Text = "";
+        //public static void ProcessOperationOld(VNCCA.Types.SearchTreeCommandOld command, 
+        //    User_Controls.wucCodeExplorer codeExplorer, 
+        //    User_Controls.wucCodeExplorerContext codeExplorerContext,
+        //    User_Controls.wucConfigurationOptions configurationOptions)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    codeExplorer.teSourceCode.Clear();
+        //    codeExplorer.teSourceCode.InvalidateVisual();
+        //    //CodeExplorer.teSourceCode.Text = "";
 
-            string projectFullPath = codeExplorerContext.teProjectFile.Text;
+        //    string projectFullPath = codeExplorerContext.teProjectFile.Text;
 
-            var filesToProcess = codeExplorerContext.GetFilesToProcess();
+        //    var filesToProcess = codeExplorerContext.GetFilesToProcess();
 
-            Dictionary<string, Int32> matches = new Dictionary<string, int>();
-            Dictionary<string, Int32> crcMatchesToString = new Dictionary<string, int>();
-            Dictionary<string, Int32> crcMatchesToFullString = new Dictionary<string, int>();
+        //    Dictionary<string, Int32> matches = new Dictionary<string, int>();
+        //    Dictionary<string, Int32> crcMatchesToString = new Dictionary<string, int>();
+        //    Dictionary<string, Int32> crcMatchesToFullString = new Dictionary<string, int>();
 
-            if (filesToProcess.Count > 0)
-            {
-                if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
-                {
-                    sb.AppendLine("Would Search these files ....");
-                }
+        //    if (filesToProcess.Count > 0)
+        //    {
+        //        if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
+        //        {
+        //            sb.AppendLine("Would Search these files ....");
+        //        }
 
-                foreach (string filePath in filesToProcess)
-                {
-                    if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
-                    {
-                        sb.AppendLine(string.Format("  {0}", filePath));
-                    }
-                    else
-                    {
-                        StringBuilder sbFileResults = new StringBuilder();
+        //        foreach (string filePath in filesToProcess)
+        //        {
+        //            if ((Boolean)configurationOptions.ceListImpactedFilesOnly.IsChecked)
+        //            {
+        //                sb.AppendLine(string.Format("  {0}", filePath));
+        //            }
+        //            else
+        //            {
+        //                StringBuilder sbFileResults = new StringBuilder();
 
-                        var sourceCode = "";
+        //                var sourceCode = "";
 
-                        using (var sr = new System.IO.StreamReader(filePath))
-                        {
-                            sourceCode = sr.ReadToEnd();
-                        }
+        //                using (var sr = new System.IO.StreamReader(filePath))
+        //                {
+        //                    sourceCode = sr.ReadToEnd();
+        //                }
 
-                        // 
-                        // This is where the action happens
-                        //
+        //                // 
+        //                // This is where the action happens
+        //                //
 
-                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+        //                SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-                        sbFileResults = command(sbFileResults, tree, matches, crcMatchesToString, crcMatchesToFullString);
+        //                sbFileResults = command(sbFileResults, tree, matches, crcMatchesToString, crcMatchesToFullString);
 
-                        if ((bool)configurationOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
-                        {
-                            sb.AppendLine("Searching " + filePath);
-                        }
+        //                if ((bool)configurationOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
+        //                {
+        //                    sb.AppendLine("Searching " + filePath);
+        //                }
 
-                        sb.Append(sbFileResults.ToString());
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("No files selected to process");
-            }
+        //                sb.Append(sbFileResults.ToString());
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        sb.AppendLine("No files selected to process");
+        //    }
 
-            if (!(Boolean)configurationOptions.ceDisplayResults.IsChecked)
-            {
-                // If only want to see the summary ...
-                sb.Clear();
-            }
+        //    if (!(Boolean)configurationOptions.ceDisplayResults.IsChecked)
+        //    {
+        //        // If only want to see the summary ...
+        //        sb.Clear();
+        //    }
 
-            if ((Boolean)configurationOptions.ceDisplaySummary.IsChecked)
-            {
-                // Add information from the matches dictionary
-                sb.AppendLine("Summary");
+        //    if ((Boolean)configurationOptions.ceDisplaySummary.IsChecked)
+        //    {
+        //        // Add information from the matches dictionary
+        //        sb.AppendLine("Summary");
 
-                foreach (var item in matches.OrderBy(v => v.Key).Select(k => k.Key))
-                {
-                    if (matches[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
-                    {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", matches[item], item));
-                    }
-                }
+        //        foreach (var item in matches.OrderBy(v => v.Key).Select(k => k.Key))
+        //        {
+        //            if (matches[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+        //            {
+        //                sb.AppendLine(string.Format("Count: {0,3} {1} ", matches[item], item));
+        //            }
+        //        }
 
-                sb.AppendLine("CRC ToString Summary");
+        //        sb.AppendLine("CRC ToString Summary");
 
-                foreach (var item in crcMatchesToString.OrderBy(v => v.Key).Select(k => k.Key))
-                {
-                    if (crcMatchesToString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
-                    {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
-                    }
-                }
+        //        foreach (var item in crcMatchesToString.OrderBy(v => v.Key).Select(k => k.Key))
+        //        {
+        //            if (crcMatchesToString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+        //            {
+        //                sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
+        //            }
+        //        }
 
-                sb.AppendLine("CRC ToFullString Summary");
+        //        sb.AppendLine("CRC ToFullString Summary");
 
-                foreach (var item in crcMatchesToFullString.OrderBy(v => v.Key).Select(k => k.Key))
-                {
-                    if (crcMatchesToFullString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
-                    {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
-                    }
-                }
-            }
+        //        foreach (var item in crcMatchesToFullString.OrderBy(v => v.Key).Select(k => k.Key))
+        //        {
+        //            if (crcMatchesToFullString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
+        //            {
+        //                sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
+        //            }
+        //        }
+        //    }
 
-            codeExplorer.teSourceCode.Text = sb.ToString();
-        }
+        //    codeExplorer.teSourceCode.Text = sb.ToString();
+        //}
 
         public static void ProcessOperation(VNCCA.Types.SearchTreeCommand searchTreeCommand,
             User_Controls.wucCodeExplorer codeExplorer,
@@ -154,10 +154,14 @@ namespace VNCCodeCommandConsole.User_Interface
             codeExplorer.teSourceCode.InvalidateVisual();
             //CodeExplorer.teSourceCode.Text = "";
 
-            //codeExplorer.teSyntaxNode.Clear();
-            //codeExplorer.teSyntaxToken.Clear();
-            //codeExplorer.teSyntaxTrivia.Clear();
-            //codeExplorer.teSyntaxStructuredTrivia.Clear();
+            codeExplorer.teSyntaxNode.Clear();
+            codeExplorer.teSyntaxToken.Clear();
+            codeExplorer.teSyntaxTrivia.Clear();
+            codeExplorer.teSyntaxStructuredTrivia.Clear();
+
+            codeExplorer.teSummary.Clear();
+            codeExplorer.teSummaryCRCToString.Clear();
+            codeExplorer.teSummaryCRCToFullString.Clear();
 
             string projectFullPath = codeExplorerContext.teProjectFile.Text;
 
@@ -227,45 +231,59 @@ namespace VNCCodeCommandConsole.User_Interface
                 sb.Clear();
             }
 
+            codeExplorer.teSourceCode.Text = sb.ToString();
+
             if ((Boolean)configurationOptions.ceDisplaySummary.IsChecked)
             {
+                StringBuilder summary = new StringBuilder();
+
                 // Add information from the matches dictionary
-                sb.AppendLine("Summary");
+                summary.AppendLine("\n*** Summary ***\n");
 
                 foreach (var item in matches.OrderBy(v => v.Key).Select(k => k.Key))
                 {
                     if (matches[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
                     {
-                        sb.AppendLine(string.Format("Count: {0,3} {1} ", matches[item], item));
+                        summary.AppendLine(string.Format("Count: {0,3} {1} ", matches[item], item));
                     }
                 }
 
+                codeExplorer.teSummary.Text = summary.ToString();
+
                 if ((Boolean)configurationOptions.ceDisplayCRC32.IsChecked)
                 {
-                    sb.AppendLine("CRC ToString Summary");
+                    summary.Clear();
+
+                    summary.AppendLine("\n*** CRC ToString Summary *** \n");
 
                     foreach (var item in crcMatchesToString.OrderBy(v => v.Key).Select(k => k.Key))
                     {
                         if (crcMatchesToString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
                         {
-                            sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
+                            summary.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToString[item], item));
                         }
                     }
 
-                    sb.AppendLine("CRC ToFullString Summary");
+                    codeExplorer.teSummaryCRCToString.Text = summary.ToString();
+
+                    summary.Clear();
+
+                    summary.AppendLine("\n*** CRC ToFullString Summary ***\n");
 
                     foreach (var item in crcMatchesToFullString.OrderBy(v => v.Key).Select(k => k.Key))
                     {
                         if (crcMatchesToFullString[item] >= configurationOptions.sbDisplaySummaryMinimum.Value)
                         {
-                            sb.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
+                            summary.AppendLine(string.Format("Count: {0,3} {1} ", crcMatchesToFullString[item], item));
                         }
                     }
+
+                    codeExplorer.teSummaryCRCToString.Text = summary.ToString();
                 }
 
             }
 
-            codeExplorer.teSourceCode.Text = sb.ToString();
+
         }
     }
 }

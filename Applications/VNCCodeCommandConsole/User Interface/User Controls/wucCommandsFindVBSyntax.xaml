@@ -686,6 +686,38 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find AsNewClause Syntax" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceAsNewClauseUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="AsClause">
+                        <dxe:TextEdit x:Name="teAsNewClauseRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceAsNewClauseUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="AsNewClause Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnAsNewClauseWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find SimpleAsClause Syntax" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
@@ -700,7 +732,7 @@
                                        IsChecked="False"/>
                     </dxlc:LayoutItem>
 
-                    <dxlc:LayoutItem Label="Assignments">
+                    <dxlc:LayoutItem Label="AsClause">
                         <dxe:TextEdit x:Name="teSimpleAsClauseRegEx" Text=".*"
                                       IsEnabled="{cb:Binding ElementName=ceSimpleAsClauseUseRegEx, Path=IsChecked, Mode=OneWay}"
                                       ToolTip="Supports Regular Expressions"/>

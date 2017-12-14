@@ -92,10 +92,10 @@
                                       AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False"  >
 
                         <dxlc:LayoutControl
-                            Orientation="Vertical" StretchContentVertically="False" Background="Transparent" >
+                            Orientation="Vertical" StretchContentVertically="True" Background="Transparent" >
 
                             <dxlc:LayoutGroup Name="groupContainer"
-                                              Orientation="Vertical" View="Tabs" >
+                                              Orientation="Vertical" View="Tabs"  >
 
                                 <dxlc:LayoutGroup.GroupBoxStyle>
                                     <Style TargetType="dxlc:GroupBox">
@@ -118,95 +118,137 @@
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SourceCode" Name="lg_SourceCode">
-
-                                    <dxlc:LayoutItem >
-                                        <dxe:TextEdit x:Name="teSourceCode" 
+                                    <dxe:TextEdit x:Name="teSourceCode" 
                                                       FontFamily="Consolas" 
                                                       VerticalAlignment="Stretch"
-                                                      VerticalContentAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                     
                                                       VerticalScrollBarVisibility="Auto"
+                                                  TextWrapping="Wrap"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem >
+
+                                    </dxlc:LayoutItem>-->
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Summary" Name="lg_Summary">
+                                    <dxe:TextEdit x:Name="teSummary"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"   />
+                                    <!--<dxlc:LayoutItem>
+                                                   
+                                    </dxlc:LayoutItem>-->
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Summary CRC ToString" Name="lg_CRCToString">
+                                    <dxe:TextEdit x:Name="teSummaryCRCToString"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"   />
+                                    <!--<dxlc:LayoutItem>
+                                                   
+                                    </dxlc:LayoutItem>-->
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Summary CRC ToFullString" Name="lg_CRCToFullString">
+                                    <dxe:TextEdit x:Name="teSummaryCRCToFullString"
+                                                      FontFamily="Consolas"
+                                                      VerticalAlignment="Stretch"
+                                                      VerticalContentAlignment="Stretch"                                                      
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Auto"   />
+                                    <!--<dxlc:LayoutItem>
+                                                   
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SyntaxTree" Name="lg_SyntaxTree" >
-
-                                    <dxlc:LayoutItem  >
-                                        <dxe:TextEdit x:Name="teSyntaxTree"
+                                    <dxe:TextEdit x:Name="teSyntaxTree"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem  >
+
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SyntaxNode" Name="lg_SyntaxNode" >
-
-                                    <dxlc:LayoutItem  >
-                                        <dxe:TextEdit x:Name="teSyntaxNode"
+                                    <dxe:TextEdit x:Name="teSyntaxNode"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem  >
+
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SyntaxToken" Name="lg_SyntaxToken" >
-
-                                    <dxlc:LayoutItem  >
-                                        <dxe:TextEdit x:Name="teSyntaxToken"
+                                    <dxe:TextEdit x:Name="teSyntaxToken"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem  >
+
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SyntaxTrivia" Name="lg_SyntaxTrivia" >
-
-                                    <dxlc:LayoutItem  >
                                         <dxe:TextEdit x:Name="teSyntaxTrivia"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem  >
+
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="SyntaxStructuredTrivia" Name="lg_SyntaxStructuredTrivia" >
-
-                                    <dxlc:LayoutItem  >
                                         <dxe:TextEdit x:Name="teSyntaxStructuredTrivia"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
                                                       HorizontalScrollBarVisibility="Auto"/>
-                                    </dxlc:LayoutItem>
+                                    <!--<dxlc:LayoutItem  >
+
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
                                 
                                 <dxlc:LayoutGroup Header="Workspace" Name="lg_Workspace">
-
-                                    <dxlc:LayoutItem>
                                         <dxe:TextEdit x:Name="teWorkspace"
                                                       FontFamily="Consolas"
                                                       VerticalAlignment="Stretch"
                                                       VerticalContentAlignment="Stretch"                                                      
                                                       VerticalScrollBarVisibility="Auto"
-                                                      HorizontalScrollBarVisibility="Auto"                                                      />
-                                    </dxlc:LayoutItem>
+                                                      HorizontalScrollBarVisibility="Auto"   />
+                                    <!--<dxlc:LayoutItem>
+                                                   
+                                    </dxlc:LayoutItem>-->
 
                                 </dxlc:LayoutGroup>
+
+
 
                             </dxlc:LayoutGroup>
 
@@ -303,7 +345,6 @@
                             <uiuc:wucCommandsPerformance x:Name="wucCommandsPerformance" />
 
                         </dxdo:LayoutPanel>
-
 
                     </dxdo:AutoHideGroup>
 

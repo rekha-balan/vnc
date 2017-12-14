@@ -16,6 +16,7 @@ using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.LayoutControl;
 using Microsoft.CodeAnalysis.VisualBasic;
 using System.Xml.Linq;
+using VNC.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 
@@ -28,9 +29,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
     {
         #region Enums, Fields, Properties
         private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
-        #endregion
+        private const string LOG_APPNAME = Common.LOG_APPNAME;
 
-        #region Initialization and Load
+        #endregion
 
         #region Constructors
 
@@ -52,7 +53,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
             //#endif
         }
-        #endregion
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        #region Initialization
+        #region Initialization and Load
 
         internal override void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -89,13 +89,31 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
             //#endif
         }
+
         #endregion
 
-        #region Private Methods
+        #region Event Handlers
 
-        private void btnArgumentListWalker_Click(object sender, RoutedEventArgs e)
+        private void btnAsNewClauseWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayArgumentListWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+            Helper.ProcessOperation(DisplayAsNewClauseVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+
+        private void btnFindStructures_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayStructureBlockWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+        private void btnFieldDeclarationWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayFieldDeclarationWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+        private void btnClassStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayClassStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+        private void btnBinaryExpresionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayBinaryExpressiontWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
         private void btnAssignmentStatementWalker_Click(object sender, RoutedEventArgs e)
@@ -103,24 +121,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             Helper.ProcessOperation(DisplayAssignmentStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
-        private void btnBinaryExpresionWalker_Click(object sender, RoutedEventArgs e)
+        private void btnArgumentListWalker_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ProcessOperation(DisplayBinaryExpressiontWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
-        }
-
-        private void btnClassStatementWalker_Click(object sender, RoutedEventArgs e)
-        {
-            Helper.ProcessOperation(DisplayClassStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
-        }
-
-        private void btnFieldDeclarationWalker_Click(object sender, RoutedEventArgs e)
-        {
-            Helper.ProcessOperation(DisplayFieldDeclarationWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
-        }
-
-        private void btnFindStructures_Click(object sender, RoutedEventArgs e)
-        {
-            Helper.ProcessOperation(DisplayStructureBlockWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+            Helper.ProcessOperation(DisplayArgumentListWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
         private void btnImportsStatementWalker_Click(object sender, RoutedEventArgs e)
@@ -198,30 +201,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             Helper.ProcessOperation(DisplayVariableDeclaratorWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
-        private const string LOG_APPNAME = Common.LOG_APPNAME;
+
         #endregion
 
-        //private void btnInvocation_Click(object sender, RoutedEventArgs e)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    CodeExplorer.teSourceCode.Clear();
+        #region Private Methods
 
-        //    var sourceCode = "";
 
-        //    using (var sr = new StreamReader(CodeExplorerContext.teSourceFile.Text))
-        //    {
-        //        sourceCode = sr.ReadToEnd();
-        //    }
+        
 
-        //    string identifier = teInvocationExpressionRegEx.Text;
-
-        //    Boolean includeTrivia = ceIncludeTrivia.IsChecked.Value;
-        //    var additionalLocations = (VNCCA.SyntaxNode.AdditionalNodes)lbeNodes.SelectedIndex;
-
-        //    //sb = VNCCA.SyntaxNode.VB.InvocationExpression.Display(sourceCode, identifier, includeTrivia, additionalLocations);
-
-        //    CodeExplorer.teSourceCode.Text = sb.ToString();
-        //}
+        #endregion
 
 
         #region Main Function Routines
@@ -229,6 +217,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private StringBuilder DisplayMemberAccessExpressionWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.MemberAccessExpression();
+
+            // TODO(crhodes)
+            // Leaving this comment in to show the progression from too many arguments to commandConfiguration class.
+            // Adding another argument was a pain.  Had to change too many places.  Adding another thing is now easy.
 
             //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
             //    (bool)ceMemberAccessExpressionUseRegEx.IsChecked, teMemberAccessExpressionRegEx.Text,
@@ -238,104 +230,84 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             commandConfiguration.RegEx = teMemberAccessExpressionRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplaySyntaxNodeWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.SyntaxNode();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceSyntaxNodeUseRegEx.IsChecked, teSyntaxNodeRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceSyntaxNodeUseRegEx.IsChecked;
             commandConfiguration.RegEx = teSyntaxNodeRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplaySyntaxTokenWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.SyntaxToken();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceSyntaxTokenUseRegEx.IsChecked, teSyntaxTokenRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceSyntaxTokenUseRegEx.IsChecked;
             commandConfiguration.RegEx = teSyntaxTokenRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
+
+        StringBuilder DisplayAsNewClauseVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            var walker = new VNCSW.VB.AsNewClause();
+
+            commandConfiguration.UseRegEx = (bool)ceAsNewClauseUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teAsNewClauseRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplaySimpleAsClauseWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.SimpleAsClause();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceSimpleAsClauseUseRegEx.IsChecked, teSimpleAsClauseRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceSimpleAsClauseUseRegEx.IsChecked;
             commandConfiguration.RegEx = teSimpleAsClauseRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplayObjectCreationExpressionWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.ObjectCreationExpression();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceObjectCreationExpressionUseRegEx.IsChecked, teObjectCreationExpressionRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceObjectCreationExpressionUseRegEx.IsChecked;
             commandConfiguration.RegEx = teObjectCreationExpressionRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplaySyntaxTriviaWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.SyntaxTrivia();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceSyntaxTriviaUseRegEx.IsChecked, teSyntaxTriviaRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceSyntaxTriviaUseRegEx.IsChecked;
             commandConfiguration.RegEx = teSyntaxTriviaRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayBinaryExpressiontWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.BinaryExpression();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceBinaryExpressionUseRegEx.IsChecked, teBinaryExpressionRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceBinaryExpressionUseRegEx.IsChecked;
             commandConfiguration.RegEx = teBinaryExpressionRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
         StringBuilder DisplayAssignmentStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
@@ -343,16 +315,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             walker.MatchLeft = (bool)ceAssignmentStatementMatchLeft.IsChecked;
             walker.MatchRight = (bool)ceAssignmentStatementMatchRight.IsChecked;
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceAssignmentStatementUseRegEx.IsChecked, teAssignmentStatementRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceAssignmentStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teAssignmentStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         StringBuilder DisplayLocalDeclarationStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -361,16 +328,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceLocalDeclarationStatementUseRegEx.IsChecked, teLocalDeclarationStatementRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceLocalDeclarationStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teLocalDeclarationStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayStructureBlockWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -385,16 +347,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             walker.FieldNames = (bool)ceStructureFieldsUseRegEx.IsChecked ? teStructureFieldsRegEx.Text : ".*";
             walker.StructureNames = (bool)ceStructuresUseRegEx.IsChecked ? teStructureRegEx.Text : ".*";
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceStructuresUseRegEx.IsChecked, teStructureRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceStructuresUseRegEx.IsChecked;
             commandConfiguration.RegEx = teStructureRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayVariableDeclaratorWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -403,64 +360,44 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceVariableDeclaratorUseRegEx.IsChecked, teVariableDeclaratorRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceVariableDeclaratorUseRegEx.IsChecked;
             commandConfiguration.RegEx = teVariableDeclaratorRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayInvocationExpressionWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.InvocationExpression();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceInvocationExpressionUseRegEx.IsChecked, teInvocationExpressionRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceInvocationExpressionUseRegEx.IsChecked;
             commandConfiguration.RegEx = teInvocationExpressionRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayParameterListWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.ParameterList();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceParameterListUseRegEx.IsChecked, teParameterListRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceParameterListUseRegEx.IsChecked;
             commandConfiguration.RegEx = teParameterListRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayArgumentListWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             var walker = new VNCSW.VB.ArgumentList();
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceArgumentListUseRegEx.IsChecked, teArgumentListRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceArgumentListUseRegEx.IsChecked;
             commandConfiguration.RegEx = teArgumentListRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayPropertyStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -478,16 +415,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)cePropertyStatementUseRegEx.IsChecked, tePropertyStatementRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)cePropertyStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = tePropertyStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayFieldDeclarationWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -498,16 +430,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceFieldDeclarationUseRegEx.IsChecked, teFieldDeclarationRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceFieldDeclarationUseRegEx.IsChecked;
             commandConfiguration.RegEx = teFieldDeclarationRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayClassStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
@@ -523,33 +450,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNCSW.VB.ClassStatement();
             }
 
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceClassStatementUseRegEx.IsChecked, teClassStatementRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceClassStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teClassStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
-
-        //private StringBuilder DisplayImportsStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
-        //{
-        //    var walker = new VNCSW.VB.ImportsStatement();
-
-        //    //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalkerOld(sb,
-        //    //    (bool)ceImportsStatementUseRegEx.IsChecked, teImportsStatementRegEx.Text,
-        //    //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
-        //    commandConfiguration.UseRegEx = (bool)ceImportsStatementUseRegEx.IsChecked;
-        //    commandConfiguration.RegEx = teImportsStatementRegEx.Text;
-        //    commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
-
-        //    return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-        //        commandConfiguration);
-        //}
 
         private StringBuilder DisplayImportsStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
@@ -568,42 +474,37 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             commandConfiguration.RegEx = teImportsStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 
         private StringBuilder DisplayMethodStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
             VNCSW.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
-            if ((bool)ceShowMethodBlock.IsChecked)
-            {
-                walker = new VNCSW.VB.MethodBlock();
-            }
-            else
-            {
-                walker = new VNCSW.VB.MethodStatement();
-                //(walker as VNCSW.VB.MethodStatement).ShowParameters = (Boolean)ceShowMethodParameters.IsChecked;
-                //((VNCSW.VB.MethodStatement)walker).ShowParameters = (Boolean)ceShowMethodParameters.IsChecked;
-            }
-
-            //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-            //    (bool)ceMethodStatementUseRegEx.IsChecked, teMethodStatementRegEx.Text,
-            //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
-
             commandConfiguration.UseRegEx = (bool)ceMethodStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teMethodStatementRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
-            StringBuilder results = VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
-                commandConfiguration);
+            if ((bool)ceShowMethodBlock.IsChecked)
+            {
+                walker = new VNCSW.VB.MethodBlock();
+                commandConfiguration.ConfigurationOptions.ShowBlockCRC = true;
+            }
+            else
+            {
+                walker = new VNCSW.VB.MethodStatement();
+            }
+
+            StringBuilder results = VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
 
             // We may have done a deep dive on a method.  Go grab the results.
+            // TODO(crhodes)
+            // This might only be if in MethodBlock mode.  See above.
 
-            CodeExplorer.teSyntaxNode.Text = walker.WalkerNode.ToString();
-            CodeExplorer.teSyntaxToken.Text = walker.WalkerToken.ToString();
-            CodeExplorer.teSyntaxTrivia.Text = walker.WalkerTrivia.ToString();
-            CodeExplorer.teSyntaxStructuredTrivia.Text = walker.WalkerStructuredTrivia.ToString();
+            CodeExplorer.teSyntaxNode.Text += walker.WalkerNode.ToString();
+            CodeExplorer.teSyntaxToken.Text += walker.WalkerToken.ToString();
+            CodeExplorer.teSyntaxTrivia.Text += walker.WalkerTrivia.ToString();
+            CodeExplorer.teSyntaxStructuredTrivia.Text += walker.WalkerStructuredTrivia.ToString();
 
             return results;
         }

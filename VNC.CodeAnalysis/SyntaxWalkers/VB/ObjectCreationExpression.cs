@@ -13,9 +13,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class ObjectCreationExpression : VNCVBSyntaxWalkerBase
     {
-        //public Boolean MatchLeft = true;
-
-        //public Boolean MatchRight = true;
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {

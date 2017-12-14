@@ -11,10 +11,10 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
     public class InvocationExpression : VNCVBSyntaxRewriterBase
     {
-        public StringBuilder Messages;
-        public string _targetInvocationExpression = null;
+        //public StringBuilder Messages;
+        //public string _targetInvocationExpression = null;
         public string _newInvocationExpression = null;
-        public Boolean PerformedReplacement = false;
+        //public Boolean PerformedReplacement = false;
 
         //public InvocationExpression(bool visitIntoStructuredTrivia = false) : base(visitIntoStructuredTrivia)
         //{

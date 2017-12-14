@@ -19,6 +19,9 @@ namespace VNC.CodeAnalysis
 
         public bool SourceLocation { get; set; } = false;
         public bool CRC32 { get; set; } = false;
+
+        public bool ShowBlockCRC { get; set; } = false;
+
         public bool ReplaceCRLF { get; set; } = false;
 
 

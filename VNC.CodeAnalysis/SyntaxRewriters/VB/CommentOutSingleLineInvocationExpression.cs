@@ -13,12 +13,12 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
     public class CommentOutSingleLineInvocationExpression : VNCVBSyntaxRewriterBase
     {
-        public StringBuilder Messages;
+        //public StringBuilder Messages;
 
         private string _pattern;
         private string _comment;
 
-        ConfigurationOptions Display = new ConfigurationOptions();
+        //ConfigurationOptions Display = new ConfigurationOptions();
 
         public CommentOutSingleLineInvocationExpression(string pattern, string comment="Removed by a button")
         {

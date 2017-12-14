@@ -11,6 +11,7 @@ namespace VNCCodeCommandConsole
     {
         public const string PROJECT_NAME = "VNCCodeCommandConsole";
         public const string LOG_APPNAME = "VNCCodeCommandConsole";
+        public const string APPNAME = "Code Command Console";
 
         public const string cCONFIG_FILE = @"C:\temp\CodeCommandConsole_Config.xml";
 

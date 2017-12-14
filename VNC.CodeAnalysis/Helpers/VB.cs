@@ -253,10 +253,13 @@ namespace VNC.CodeAnalysis.Helpers
 
             if (results.Length > 0)
             {
-                results.AppendFormat("CRC32Node:            {0}\n", walker.CRC32Node);
-                results.AppendFormat("CRC32Token:           {0}\n", walker.CRC32Token);
-                results.AppendFormat("CRC32Trivia:          {0}\n", walker.CRC32Trivia);
-                results.AppendFormat("CRC32StructuredTrivia:{0}\n", walker.CRC32StructuredTrivia);
+                if (commandConfiguration.ConfigurationOptions.ShowBlockCRC)
+                {
+                    results.AppendFormat("CRC32Node:            {0}\n", walker.CRC32Node);
+                    results.AppendFormat("CRC32Token:           {0}\n", walker.CRC32Token);
+                    results.AppendFormat("CRC32Trivia:          {0}\n", walker.CRC32Trivia);
+                    results.AppendFormat("CRC32StructuredTrivia:{0}\n", walker.CRC32StructuredTrivia);
+                }
 
                 commandConfiguration.Results.AppendLine(results.ToString());
             }

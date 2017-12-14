@@ -12,7 +12,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
     public class MultipleVariableDeclarations : VNCVBSyntaxRewriterBase
     {
-        public StringBuilder Messages;
+        //public StringBuilder Messages;
 
         //private string _pattern;
         private string _comment;

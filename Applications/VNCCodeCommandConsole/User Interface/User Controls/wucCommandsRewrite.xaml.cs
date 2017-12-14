@@ -87,6 +87,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
 
         #region Event Handlers
+        private void btnRemove_InvocationExpression_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(Remove_InvocationExpressionVB, CodeExplorer.configurationOptions);
+        }
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(WrapSQLFillCallsInDALHelperVB, CodeExplorer.configurationOptions);
@@ -103,7 +107,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         }
         private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
         {
-            ProcessOperation(CommentFileVB, CodeExplorer.configurationOptions);
+            ProcessOperation(CommentOut_InvocationExpressionVB, CodeExplorer.configurationOptions);
         }
 
         //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
@@ -201,7 +205,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder CommentFileVB(
+        private StringBuilder CommentOut_InvocationExpressionVB(
             StringBuilder sb,
             SyntaxTree tree,
             string filePath,
@@ -212,6 +216,36 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             performedReplacement = false;
 
             var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(targetInvocationExpression, teComment.Text);
+
+            rewriter.Messages = sb;
+
+            rewriter.IdentifierNames = (bool)ceReplacementTargetUseRegEx.IsChecked ? teTargetInvocationExpression.Text : ".*";
+            rewriter.InitializeRegEx();
+
+            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+
+            if (newNode != tree.GetRoot())
+            {
+                string newFilePath = filePath + (CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "");
+
+                File.WriteAllText(newFilePath, newNode.ToFullString());
+                performedReplacement = true;
+            }
+
+            return sb;
+        }
+
+        private StringBuilder Remove_InvocationExpressionVB(
+            StringBuilder sb,
+            SyntaxTree tree,
+            string filePath,
+            string targetInvocationExpression, string newInvocationExpression,
+            Dictionary<string, int> replacements, out Boolean performedReplacement)
+        {
+
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveInvocationExpression(targetInvocationExpression, teComment.Text);
 
             rewriter.Messages = sb;
 

@@ -90,6 +90,13 @@
                     </Button>
                 </dxlc:LayoutItem>
 
+                <dxlc:LayoutItem>
+                    <Button Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnRemove_InvocationExpression_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove SingleLine InvocationExpression</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+                
             </dxlc:LayoutGroup>
 
 

@@ -116,6 +116,11 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
 
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+
+                // TODO(crhodes)
+                // This should come from config file.  Add a property.
+
+                this.Title = Common.APPNAME;
             }
             catch (Exception ex)
             {
