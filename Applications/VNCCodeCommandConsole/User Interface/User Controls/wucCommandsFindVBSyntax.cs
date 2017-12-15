@@ -107,14 +107,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             Helper.ProcessOperation(DisplayStructureBlockWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
+
         private void btnFieldDeclarationWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayFieldDeclarationWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
+
         private void btnClassStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayClassStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
+
         private void btnBinaryExpresionWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayBinaryExpressiontWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
@@ -132,7 +135,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void btnImportsStatementWalker_Click(object sender, RoutedEventArgs e)
         {
-            //Helper.ProcessOperation(DisplayImportsStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
             Helper.ProcessOperation(DisplayImportsStatementWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
@@ -536,13 +538,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 walker = new VNCSW.VB.ModuleStatement();
             }
 
-                //return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(sb,
-                //    (bool)ceModuleStatementUseRegEx.IsChecked, teModuleStatementRegEx.Text,
-                //    matches, crcMatchesToString, crcMatchesToFullString, tree, walker, CodeExplorer.configurationOptions.GetConfigurationInfo());
 
-                commandConfiguration.UseRegEx = (bool)ceModuleStatementUseRegEx.IsChecked;
-                commandConfiguration.RegEx = teModuleStatementRegEx.Text;
-                commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+            commandConfiguration.UseRegEx = (bool)ceModuleStatementUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teModuleStatementRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker,
                 commandConfiguration);

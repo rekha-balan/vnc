@@ -203,37 +203,6 @@ namespace VNC.CodeAnalysis.Helpers
             return ancestorContext;
         }
 
-        // Moved the ton of parameters to SearchTreeCommandConfiguration
-
-        //public static StringBuilder InvokeVNCSyntaxWalkerOld(
-        //    StringBuilder sb,
-        //    Boolean useRegEx, string regEx,
-        //    Dictionary<string, Int32> matches,
-        //    Dictionary<string, Int32> crcMatchesToString,
-        //    Dictionary<string, Int32> crcMatchesToFullString,
-        //    SyntaxTree syntaxTree,
-        //    SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker, 
-        //    ConfigurationOptions displayInfo)
-        //{
-        //    walker.Messages = sb;
-
-        //    //walker.Display.ClassOrModuleName = displayInfo.ClassOrModuleName;
-        //    //walker.Display.MethodName = displayInfo.MethodName;
-        //    walker.IdentifierNames = useRegEx ? regEx : ".*";
-        //    walker._configurationOptions = displayInfo;
-
-        //    walker.identifierNameRegEx = Common.InitializeRegEx(walker.IdentifierNames, walker.Messages, RegexOptions.IgnoreCase);
-        //    //walker.InitializeRegEx();
-
-        //    walker.Matches = matches;
-        //    walker.CRCMatchesToString = crcMatchesToString;
-        //    walker.CRCMatchesToFullString = crcMatchesToFullString;
-
-        //    walker.Visit(syntaxTree.GetRoot());
-
-        //    return sb;
-        //}
-
         public static StringBuilder InvokeVNCSyntaxWalker(
             SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker,
             SearchTreeCommandConfiguration commandConfiguration)
@@ -307,32 +276,6 @@ namespace VNC.CodeAnalysis.Helpers
 
             return commandConfiguration.Results;
         }
-
-        //public static StringBuilder InvokeVNCTypedSyntaxWalker(
-        //    StringBuilder sb,
-        //    Boolean useRegEx, string regEx,
-        //    Dictionary<string, Int32> matches, 
-        //    SyntaxTree syntaxTree,
-        //    SyntaxWalkers.VB.VNCVBTypedSyntaxWalkerBase walker, DisplayInfo displayInfo)
-        //{
-        //    //walker.AllTypes = displayInfo.AllTypes;
-
-        //    //walker.IsByte = displayInfo.Byte;
-        //    //walker.IsBoolean = displayInfo.Boolean;
-        //    //walker.IsDate = displayInfo.Date;
-        //    //walker.IsDataTable = displayInfo.DataTable;
-        //    //walker.IsDateTime = displayInfo.DateTime;
-        //    //walker.IsInt16 = displayInfo.Int16;
-        //    //walker.IsInt32 = displayInfo.Int32;
-        //    //walker.IsInteger = displayInfo.Integer;
-        //    //walker.IsLong = displayInfo.Long;
-        //    //walker.IsSingle = displayInfo.Single;
-        //    //walker.IsString = displayInfo.String;
-
-        //    //walker.IsOtherType = displayInfo.OtherTypes;
-
-        //    return InvokeVNCSyntaxWalker(sb, useRegEx, regEx, matches, syntaxTree, walker, displayInfo);
-        //}
 
         // TODO(crhodes)
         // Not sure we need the typed versions.  Maybe just the VisualBasicSyntaxNode version

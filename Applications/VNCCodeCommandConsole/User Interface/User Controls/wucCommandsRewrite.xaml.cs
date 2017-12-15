@@ -87,15 +87,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
 
         #region Event Handlers
-        //private void btnRemove_FieldDeclaration_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ProcessOperation(Remove_FieldDeclarationVB, CodeExplorer.configurationOptions);
-        //}
-
-        //private void btnRemove_ExpressionStatement_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ProcessOperation(Remove_ExpressionStatementVB, CodeExplorer.configurationOptions);
-        //}
 
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
@@ -112,22 +103,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             ProcessOperation(RewriteInvocationExpressionVB, CodeExplorer.configurationOptions);
         }
 
-        //private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ProcessOperation(CommentOut_InvocationExpressionVB, CodeExplorer.configurationOptions);
-        //}
-
-        //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
-        //{
-        //    //CustomFormat.FormatStorageColumns(e);
-        //}
-
         #endregion
-
-        //private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
-        //{
-        //    //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
-        //}
 
         #region Main Function Routines
 
@@ -223,57 +199,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        //private StringBuilder CommentOut_InvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        //{          
-        //    performedReplacement = false;
-
-        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(commandConfiguration.TargetPattern, teComment.Text);
-
-        //    rewriter.Messages = commandConfiguration.Results;
-
-        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-        //    return commandConfiguration.Results;
-        //}
-
-        //private StringBuilder Remove_ExpressionStatementVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        //{
-        //    performedReplacement = false;
-
-        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveExpressionStatement(commandConfiguration.TargetPattern, teComment.Text);
-
-        //    rewriter.Messages = commandConfiguration.Results;
-
-        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-        //    return commandConfiguration.Results;
-        //}
-
-        //StringBuilder Remove_FieldDeclarationVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        //{
-        //    performedReplacement = false;
-
-        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
-        //        commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
-
-        //    rewriter.Messages = commandConfiguration.Results;
-
-        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-        //    return commandConfiguration.Results;
-        //}
 
         private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {

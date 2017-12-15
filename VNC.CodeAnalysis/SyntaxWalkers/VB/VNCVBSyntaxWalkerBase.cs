@@ -54,20 +54,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         }
 
-        //public virtual void InitializeRegEx()
-        //{
-        //    try
-        //    {
-        //        identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
-        //            IdentifierNames, ex.Message));
-        //        identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
-        //    }
-        //}
-
         public string GetNodeContext(VisualBasicSyntaxNode node)
         {
             string messageContext = "";

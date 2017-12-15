@@ -160,10 +160,5 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSyntaxTree.Text = sb.ToString();
 
         }
-
-        private void teSourceCode1_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
-        }
     }
 }
