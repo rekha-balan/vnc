@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,6 +18,56 @@ namespace VNCCodeCommandConsole
         private static int BASE_ERRORNUMBER = ErrorNumbers.APPERROR;
         private const string LOG_APPNAME = Common.LOG_APPNAME;
 
+        public App()
+        {
+            var defaultThemes = Theme.Themes;
+
+            Theme.RemoveTheme(Theme.Office2007BlackName);
+            Theme.RemoveTheme(Theme.Office2007BlueName);
+            Theme.RemoveTheme(Theme.Office2007SilverName);
+
+            Theme.RemoveTheme(Theme.Office2010BlackName);
+            Theme.RemoveTheme(Theme.Office2010BlueName);
+            Theme.RemoveTheme(Theme.Office2010SilverName);
+
+            Theme.RemoveTheme(Theme.Office2013Name);
+            Theme.RemoveTheme(Theme.Office2013TouchName);
+            Theme.RemoveTheme(Theme.Office2013LightGrayName);
+            Theme.RemoveTheme(Theme.Office2013LightGrayTouchName);
+            Theme.RemoveTheme(Theme.Office2013DarkGrayName);
+            Theme.RemoveTheme(Theme.Office2013DarkGrayTouchName);
+
+            Theme.RemoveTheme(Theme.Office2016ColorfulName);
+            Theme.RemoveTheme(Theme.Office2016ColorfulTouchName);
+            Theme.RemoveTheme(Theme.Office2016WhiteTouchName);
+            Theme.RemoveTheme(Theme.Office2016BlackTouchName);
+
+            Theme.RemoveTheme(Theme.DXStyleName);
+            Theme.RemoveTheme(Theme.DeepBlueName);
+            Theme.RemoveTheme(Theme.SevenName);
+            Theme.RemoveTheme(Theme.VS2010Name);
+            Theme.RemoveTheme(Theme.TouchlineDarkName);
+            Theme.RemoveTheme(Theme.LightGrayName);
+            Theme.RemoveTheme(Theme.HybridAppName);
+
+            var newThemes = Theme.Themes;
+
+            // TODO(crhodes)
+            // Cannot loop across and delete themes.  Read-Only collection.
+            // Add to manually remove above.  ;(
+
+            //foreach (var theme in defaultThemes)
+            //{
+            //    var name = theme.Name;
+
+            //    if (name.Contains("2013") || name.Contains("2010") || name.Contains("2007"))
+            //    {
+            //        Theme.RemoveTheme(name);
+            //    }
+            //}
+
+            ApplicationThemeHelper.ApplicationThemeName = Data.Config.DefaultUITheme;
+        }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

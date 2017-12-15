@@ -64,7 +64,6 @@
 
                 <dxb:BarEditItem Name="bei_DetailViewMode" 
                                  Content="DetailViewMode" 
-                                 EditWidth="100" 
                                  ClosePopupOnChangingEditValue="True" 
                                  EditValueChanged="bei_DetailViewMode_EditValueChanged" >
                     <dxb:BarEditItem.EditSettings>
@@ -81,7 +80,6 @@
 
                 <dxb:BarEditItem Name="bei_VisualTheme" 
                                  Content="Visual Theme" 
-                                 EditWidth="100" 
                                  ClosePopupOnChangingEditValue="True" 
                                  EditValueChanged="bei_VisualTheme_EditValueChanged" >
                     <dxb:BarEditItem.EditSettings>

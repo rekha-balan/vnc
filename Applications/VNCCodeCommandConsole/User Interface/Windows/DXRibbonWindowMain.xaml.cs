@@ -103,7 +103,19 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
                 //theme.AssemblyName = "DevExpress.Xpf.Themes.Halloween.v12.2";
                 //Theme.RegisterTheme(theme);
 
-                ApplicationThemeHelper.ApplicationThemeName = Data.Config.DefaultUITheme;
+                //ApplicationThemeHelper.ApplicationThemeName = Data.Config.DefaultUITheme;
+
+                //foreach (var theme in Theme.Themes)
+                //{
+                //    var name = theme.Name;
+
+                //    if (name.Contains("2013") || name.Contains("2010") || name.Contains("2007"))
+                //    {
+                //        Theme.RemoveTheme(name);
+                //    }
+                //}
+
+                //ApplicationThemeHelper.ApplicationThemeName = Data.Config.DefaultUITheme;
 
                 //int primaryScreenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
                 //int primaryScreenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
