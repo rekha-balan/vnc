@@ -116,9 +116,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             string projectFullPath = CodeExplorerContext.teProjectFile.Text;
 
-            string newInvocationExpression = teNewInvocationExpression.Text;
-            string targetInvocationExpression = teTargetInvocationExpression.Text;
-
             var filesToProcess = CodeExplorerContext.GetFilesToProcess();
 
             Dictionary<string, Int32> replacements = new Dictionary<string, int>();
@@ -164,7 +161,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                             rewriteFileCommandConfiguration.Replacements = replacements;
 
                             rewriteFileCommandConfiguration.UseRegEx = (bool)ceReplacementTargetUseRegEx.IsChecked;
-                            rewriteFileCommandConfiguration.TargetPattern = teTargetInvocationExpression.Text;
+                            rewriteFileCommandConfiguration.TargetPattern = teTargetExpression.Text;
+                            rewriteFileCommandConfiguration.ReplacementPattern = teReplacementInvocationExpression.Text;
+
                             rewriteFileCommandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
                             sbFileResults = command(rewriteFileCommandConfiguration, out performedReplacement);
@@ -208,6 +207,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
 
             rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
 
             rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
@@ -230,6 +230,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
             rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
 
             SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
@@ -250,6 +251,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
                 rewriter.Messages = commandConfiguration.Results;
+                rewriter.Replacements = commandConfiguration.Replacements;
 
                 SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
