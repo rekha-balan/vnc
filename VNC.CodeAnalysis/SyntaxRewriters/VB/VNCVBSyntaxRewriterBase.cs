@@ -16,27 +16,27 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
     {
         public StringBuilder Messages;
 
-        public ConfigurationOptions Display = new ConfigurationOptions();
-        public string _targetInvocationExpression = null;
-        //public string _newInvocationExpression = null;
+        public ConfigurationOptions _configurationOptions = new ConfigurationOptions();
+
         public Boolean PerformedReplacement = false;
 
-        public string IdentifierNames;
-        internal Regex identifierNameRegEx;
+        internal string _comment;
+        internal SyntaxNode.FieldDeclarationLocation _declarationLocation;
+        internal Boolean _commentOutOnly = true;
+
+        private string _targetPattern;
+        internal Regex _targetPatternRegEx;
 
         public Dictionary<string, Int32> Replacements;
 
-        public virtual void InitializeRegEx()
+         public string TargetPattern
         {
-            try
+            get => _targetPattern;
+
+            set
             {
-                identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
-            }
-            catch (Exception ex)
-            {
-                Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
-                    IdentifierNames, ex.Message));
-                identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
+                _targetPattern = value;
+                _targetPatternRegEx = VNC.CodeAnalysis.Helpers.Common.InitializeRegEx(_targetPattern, Messages, RegexOptions.IgnoreCase);
             }
         }
 
@@ -44,12 +44,12 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         {
             string messageContext = "";
 
-            if (Display.ClassOrModuleName)
+            if (_configurationOptions.ClassOrModuleName)
             {
-                messageContext = VNCCA.Helpers.VB.GetContainingContext(node, Display);
+                messageContext = VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions);
             }
 
-            if (Display.MethodName)
+            if (_configurationOptions.MethodName)
             {
                 messageContext += string.Format(" Method:({0, -35})", VNCCA.Helpers.VB.GetContainingMethod(node));
             }
@@ -75,7 +75,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         public void RecordMatchAndContext(VisualBasicSyntaxNode node, string nodeValue)
         {
             Messages.AppendLine(String.Format("{0} {1}",
-                VNCCA.Helpers.VB.GetContainingContext(node, Display),
+                VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions),
                 nodeValue));
 
             if (Replacements.ContainsKey(nodeValue))
@@ -91,7 +91,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         public void RecordReplacementAndContext(VisualBasicSyntaxNode node, string oldNodeValue, string newNodeValue)
         {
             Messages.AppendLine(String.Format("{0} From:>{1}< To:>{2}<",
-                VNCCA.Helpers.VB.GetContainingContext(node, Display),
+                VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions),
                 oldNodeValue,
                 newNodeValue));
 

@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitNamespaceStatement(NamespaceStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Name.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Name.ToString()).Success)
             {
                 RecordMatch(node, BlockType.None);
             }

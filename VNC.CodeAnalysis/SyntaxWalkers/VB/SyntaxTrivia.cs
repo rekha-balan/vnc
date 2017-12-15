@@ -21,7 +21,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (! String.IsNullOrWhiteSpace(trivia.ToString()))
             {
-                if (identifierNameRegEx.Match(trivia.ToString()).Success)
+                if (_targetPatternRegEx.Match(trivia.ToString()).Success)
                 {
                     Messages.AppendLine(String.Format("{0} >{1}<",
                         //GetNodeContext(trivia.SyntaxTree),

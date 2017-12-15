@@ -36,7 +36,7 @@
 
     <dxlc:LayoutControl Orientation="Vertical" >
 
-        <dxlc:LayoutGroup Header="InvocationExpressionSyntax Rewriters"
+        <dxlc:LayoutGroup Header="Syntax Rewriters"
             View="GroupBox"	Orientation="Vertical" IsCollapsed="False" IsCollapsible="True">
 
             <dxlc:LayoutItem>
@@ -71,7 +71,7 @@
 
             </dxlc:LayoutGroup>
 
-            <dxlc:LayoutGroup Header="Code Removers"
+            <!--<dxlc:LayoutGroup Header="Code Removers"
                 View="GroupBox"	Orientation="Vertical">
 
                 <dxlc:LayoutItem Label="Notification Comment" LabelPosition="Top">
@@ -92,13 +92,19 @@
 
                 <dxlc:LayoutItem>
                     <Button Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnRemove_InvocationExpression_Click">
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove SingleLine InvocationExpression</TextBlock>
+                            Click="btnRemove_ExpressionStatement_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove ExpressionStatement</TextBlock>
                     </Button>
                 </dxlc:LayoutItem>
-                
-            </dxlc:LayoutGroup>
 
+                <dxlc:LayoutItem>
+                    <Button Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnRemove_FieldDeclaration_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove FieldDeclaration</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>-->
 
             <dxlc:LayoutGroup Header="SQL Rewriters"
                 View="GroupBox"	Orientation="Vertical">

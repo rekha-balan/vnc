@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitMethodBlock(MethodBlockSyntax node)
         {
-            if (identifierNameRegEx.Match(node.SubOrFunctionStatement.Identifier.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.SubOrFunctionStatement.Identifier.ToString()).Success)
             {
                 RecordMatchAndContext(node, BlockType.MethodBlock);
 

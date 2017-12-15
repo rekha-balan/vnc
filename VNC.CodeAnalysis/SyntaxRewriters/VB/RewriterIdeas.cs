@@ -21,7 +21,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public RewriterIdeas(string TargetInvocationExpression)
         {
-            _targetInvocationExpression = TargetInvocationExpression;
+            TargetPattern = TargetInvocationExpression;
             //_newInvocationExpression = NewInvocationExpression;
         }
 
@@ -33,7 +33,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            if (_targetInvocationExpression == null)
+            if (TargetPattern == null)
             {
                 return node;
             }
@@ -47,7 +47,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
             // Decide if want to use RegEx here.
 
-            if (expression.ToString() == _targetInvocationExpression)
+            if (expression.ToString() == TargetPattern)
             {
                 var location = node.GetLocation();
                 var startLine = location.GetLineSpan().StartLinePosition.Line;
@@ -200,13 +200,12 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 VariableDeclaratorSyntax declaratorSyntax = SyntaxFactory.VariableDeclarator(modifiedIdentifer);
                 return SyntaxFactory.LocalDeclarationStatement(dimKeyword, declarators);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
             }
+
             return null;
-
-
         }
 
         LocalDeclarationStatementSyntax GetLogStartSyntax()
@@ -246,10 +245,11 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 var logStartSyntaxA = (LocalDeclarationStatementSyntax)logStartSyntax;
                 return logStartSyntaxA;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
             }
+
             return null;
         }
 

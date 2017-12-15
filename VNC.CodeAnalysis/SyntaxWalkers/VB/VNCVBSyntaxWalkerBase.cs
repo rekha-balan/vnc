@@ -23,8 +23,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         public ConfigurationOptions _configurationOptions = new ConfigurationOptions();
 
-        public string IdentifierNames;
-        internal Regex identifierNameRegEx;
+        private string _targetPattern;
+        internal Regex _targetPatternRegEx;
 
         public Dictionary<string, Int32> Matches;
         public Dictionary<string, Int32> CRCMatchesToString;
@@ -37,24 +37,36 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
 
+       
+        public string TargetPattern
+        {
+            get => _targetPattern;
+
+            set
+            {
+                _targetPattern = value;
+                Helpers.Common.InitializeRegEx(_targetPattern, Messages, RegexOptions.IgnoreCase);
+            }
+        }
+
         public VNCVBSyntaxWalkerBase(SyntaxWalkerDepth depth = SyntaxWalkerDepth.Node) : base(depth)
         {
 
         }
 
-        public virtual void InitializeRegEx()
-        {
-            try
-            {
-                identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
-            }
-            catch (Exception ex)
-            {
-                Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
-                    IdentifierNames, ex.Message));
-                identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
-            }
-        }
+        //public virtual void InitializeRegEx()
+        //{
+        //    try
+        //    {
+        //        identifierNameRegEx = new Regex(IdentifierNames, RegexOptions.IgnoreCase);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Messages.AppendLine(string.Format("Error in IdentifierNames RegEx >{0}< Error:({1}), using >.*<",
+        //            IdentifierNames, ex.Message));
+        //        identifierNameRegEx = new Regex(".*", RegexOptions.IgnoreCase);
+        //    }
+        //}
 
         public string GetNodeContext(VisualBasicSyntaxNode node)
         {

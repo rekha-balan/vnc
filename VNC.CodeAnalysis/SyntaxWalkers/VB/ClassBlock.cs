@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitClassBlock(ClassBlockSyntax node)
         {
-            if (identifierNameRegEx.Match(node.ClassStatement.Identifier.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.ClassStatement.Identifier.ToString()).Success)
             {
                 RecordMatch(node, BlockType.ClassBlock);
             }

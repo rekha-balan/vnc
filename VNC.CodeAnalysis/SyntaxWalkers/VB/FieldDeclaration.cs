@@ -17,12 +17,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if ( ! node.Parent.IsKind(SyntaxKind.StructureBlock))
             {
-                if (identifierNameRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
+                if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
                 {
                     // TODO(crhodes)
                     // Handle multiple declarations on each line
 
-                    if (identifierNameRegEx.Match(node.Declarators.First().Names.First().ToString()).Success)
+                    if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().ToString()).Success)
                     {
                         if (FilterByType(node.Declarators.First().AsClause))
                         {

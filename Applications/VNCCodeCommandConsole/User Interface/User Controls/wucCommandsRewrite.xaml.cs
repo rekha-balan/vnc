@@ -87,10 +87,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
 
         #region Event Handlers
-        private void btnRemove_InvocationExpression_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessOperation(Remove_InvocationExpressionVB, CodeExplorer.configurationOptions);
-        }
+        //private void btnRemove_FieldDeclaration_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ProcessOperation(Remove_FieldDeclarationVB, CodeExplorer.configurationOptions);
+        //}
+
+        //private void btnRemove_ExpressionStatement_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ProcessOperation(Remove_ExpressionStatementVB, CodeExplorer.configurationOptions);
+        //}
+
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(WrapSQLFillCallsInDALHelperVB, CodeExplorer.configurationOptions);
@@ -105,10 +111,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             ProcessOperation(RewriteInvocationExpressionVB, CodeExplorer.configurationOptions);
         }
-        private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessOperation(CommentOut_InvocationExpressionVB, CodeExplorer.configurationOptions);
-        }
+
+        //private void btnCommentOut_InvocationExpression_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ProcessOperation(CommentOut_InvocationExpressionVB, CodeExplorer.configurationOptions);
+        //}
 
         //private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
         //{
@@ -174,7 +181,18 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                             SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-                            sbFileResults = command(sbFileResults, tree, filePath, targetInvocationExpression, newInvocationExpression, replacements, out performedReplacement);
+                            VNCCA.RewriteFileCommandConfiguration rewriteFileCommandConfiguration = new VNCCA.RewriteFileCommandConfiguration();
+                            rewriteFileCommandConfiguration.Results = sbFileResults;
+                            rewriteFileCommandConfiguration.SyntaxTree = tree;
+                            rewriteFileCommandConfiguration.FilePath = filePath;
+                            rewriteFileCommandConfiguration.Replacements = replacements;
+
+                            rewriteFileCommandConfiguration.UseRegEx = (bool)ceReplacementTargetUseRegEx.IsChecked;
+                            rewriteFileCommandConfiguration.TargetPattern = teTargetInvocationExpression.Text;
+                            rewriteFileCommandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+                            sbFileResults = command(rewriteFileCommandConfiguration, out performedReplacement);
+                            //sbFileResults = command(sbFileResults, tree, filePath, targetInvocationExpression, newInvocationExpression, replacements, out performedReplacement);
 
                             if ((bool)configurationOptions.ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
                             {
@@ -205,144 +223,116 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder CommentOut_InvocationExpressionVB(
-            StringBuilder sb,
-            SyntaxTree tree,
-            string filePath,
-            string targetInvocationExpression, string newInvocationExpression, 
-            Dictionary<string, int> replacements, out Boolean performedReplacement)
-        {
-            
-            performedReplacement = false;
+        //private StringBuilder CommentOut_InvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{          
+        //    performedReplacement = false;
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(targetInvocationExpression, teComment.Text);
+        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(commandConfiguration.TargetPattern, teComment.Text);
 
-            rewriter.Messages = sb;
+        //    rewriter.Messages = commandConfiguration.Results;
 
-            rewriter.IdentifierNames = (bool)ceReplacementTargetUseRegEx.IsChecked ? teTargetInvocationExpression.Text : ".*";
-            rewriter.InitializeRegEx();
+        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
-            if (newNode != tree.GetRoot())
-            {
-                string newFilePath = filePath + (CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "");
+        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
-                File.WriteAllText(newFilePath, newNode.ToFullString());
-                performedReplacement = true;
-            }
+        //    return commandConfiguration.Results;
+        //}
 
-            return sb;
-        }
+        //private StringBuilder Remove_ExpressionStatementVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{
+        //    performedReplacement = false;
 
-        private StringBuilder Remove_InvocationExpressionVB(
-            StringBuilder sb,
-            SyntaxTree tree,
-            string filePath,
-            string targetInvocationExpression, string newInvocationExpression,
-            Dictionary<string, int> replacements, out Boolean performedReplacement)
-        {
+        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveExpressionStatement(commandConfiguration.TargetPattern, teComment.Text);
 
-            performedReplacement = false;
+        //    rewriter.Messages = commandConfiguration.Results;
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveInvocationExpression(targetInvocationExpression, teComment.Text);
+        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            rewriter.Messages = sb;
+        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
-            rewriter.IdentifierNames = (bool)ceReplacementTargetUseRegEx.IsChecked ? teTargetInvocationExpression.Text : ".*";
-            rewriter.InitializeRegEx();
+        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
-            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+        //    return commandConfiguration.Results;
+        //}
 
-            if (newNode != tree.GetRoot())
-            {
-                string newFilePath = filePath + (CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "");
+        //StringBuilder Remove_FieldDeclarationVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{
+        //    performedReplacement = false;
 
-                File.WriteAllText(newFilePath, newNode.ToFullString());
-                performedReplacement = true;
-            }
+        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
+        //        commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
 
-            return sb;
-        }
+        //    rewriter.Messages = commandConfiguration.Results;
 
-        private StringBuilder RewriteInvocationExpressionVB(
-            StringBuilder sb, 
-            SyntaxTree tree,
-            string filePath, 
-            string targetInvocationExpression, string newInvocationExpression,
-            Dictionary<string, int> replacements, out Boolean performedReplacement)
+        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+        //    return commandConfiguration.Results;
+        //}
+
+        private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {
             performedReplacement = false;
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(targetInvocationExpression, newInvocationExpression);
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
+                commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
 
-            rewriter.Messages = sb;
+            rewriter.Messages = commandConfiguration.Results;
 
-            rewriter.InitializeRegEx();
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
             string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
 
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
-            return sb;
+            return commandConfiguration.Results;
         }
 
-        private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(
-            StringBuilder sb, 
-            SyntaxTree tree,
-            string filePath, 
-            string targetPattern, string notUsed,
-            Dictionary<string, int> replacements, out bool performedReplacement)
+        private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {
             performedReplacement = false;
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(targetPattern);
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(
+                commandConfiguration.TargetPattern);
 
-            rewriter.Messages = sb;
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            rewriter.InitializeRegEx();
+            rewriter.Messages = commandConfiguration.Results;
 
-            rewriter.Replacements = replacements;
-            rewriter.Display = CodeExplorer.configurationOptions.GetConfigurationInfo();
-
-            SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
             string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
 
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
-            return sb;
+            return commandConfiguration.Results;
         }
 
-        StringBuilder WrapSQLFillCallsInDALHelperVB(
-            StringBuilder sb, 
-            SyntaxTree tree, 
-            string filePath, 
-            string targetPattern, string notUsed, 
-            Dictionary<string, int> replacements, 
-            out bool performedReplacement)
+        StringBuilder WrapSQLFillCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {
             {
                 performedReplacement = false;
 
-                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(targetPattern);
+                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(commandConfiguration.TargetPattern);
 
-                rewriter.Messages = sb;
+                rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-                rewriter.InitializeRegEx();
+                rewriter.Messages = commandConfiguration.Results;
 
-                rewriter.Replacements = replacements;
-                rewriter.Display = CodeExplorer.configurationOptions.GetConfigurationInfo();
-
-                SyntaxNode newNode = rewriter.Visit(tree.GetRoot());
+                SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
                 string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
 
-                performedReplacement = VNCSR.Helpers.SaveFileChanges(filePath, tree, newNode, fileSuffix);
+                performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
-                return sb;
+                return commandConfiguration.Results;
             }
         }
     }

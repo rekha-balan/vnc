@@ -186,6 +186,7 @@
     <Compile Include="DesignMetrics\VB\ObjectObsession.cs" />
     <Compile Include="DesignMetrics\VB\DeeplyNestedLoops.cs" />
     <Compile Include="ConfigurationOptions.cs" />
+    <Compile Include="Helpers\Common.cs" />
     <Compile Include="Helpers\CS.cs" />
     <Compile Include="Helpers\VB.cs" />
     <Compile Include="PerformanceMetrics\CS\AvoidBoxing.cs" />
@@ -243,8 +244,10 @@
     <Compile Include="QualityMetrics\VB\MultipleReturnStatements.cs" />
     <Compile Include="QualityMetrics\VB\UnusedMethodParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RewriteFileCommandConfiguration.cs" />
     <Compile Include="SearchFileCommandConfiguration.cs" />
     <Compile Include="SearchTreeCommandConfiguration.cs" />
+    <Compile Include="RewriteTreeCommandConfiguration.cs" />
     <Compile Include="Symbols.cs" />
     <Compile Include="SyntaxNode\WalkerDepth.cs" />
     <Compile Include="SyntaxNode\AdditionaNodes.cs" />
@@ -253,7 +256,8 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\Helpers.cs" />
-    <Compile Include="SyntaxRewriters\VB\RemoveInvocationExpression.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveFieldDeclaration.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveExpressionStatement.cs" />
     <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
     <Compile Include="SyntaxRewriters\VB\RewriterIdeas.cs" />
     <Compile Include="SyntaxRewriters\VB\WrapSQLFillCallsInDALHelper.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="SyntaxWalkers\CS\VisitAll.cs" />
     <Compile Include="SyntaxWalkers\CS\VNCCSSyntaxWalkerBase.cs" />
     <Compile Include="SyntaxWalkers\VB\AsNewClause.cs" />
+    <Compile Include="SyntaxWalkers\VB\ExpressionStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />

@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitImportsStatement(ImportsStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.ImportsClauses.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.ImportsClauses.ToString()).Success)
             {
                 RecordMatchAndContext(node, BlockType.None);
             }

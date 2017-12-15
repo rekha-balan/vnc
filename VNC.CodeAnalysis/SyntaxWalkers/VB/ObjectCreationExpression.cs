@@ -18,7 +18,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             var n = node;
 
-            if (identifierNameRegEx.Match(node.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.ToString()).Success)
             {
                 RecordMatchAndContext(node, BlockType.None);
             }

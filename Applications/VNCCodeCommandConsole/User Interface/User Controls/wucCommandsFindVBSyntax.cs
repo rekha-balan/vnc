@@ -93,6 +93,10 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnExpressionStatementWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayExpressionStatementVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
 
         private void btnAsNewClauseWalker_Click(object sender, RoutedEventArgs e)
         {
@@ -213,6 +217,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
 
         #region Main Function Routines
+        StringBuilder DisplayExpressionStatementVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            var walker = new VNCSW.VB.ExpressionStatement();
+
+            commandConfiguration.UseRegEx = (bool)ceExpressionStatementUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teExpressionStatementRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
 
         private StringBuilder DisplayMemberAccessExpressionWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {

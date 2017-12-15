@@ -108,6 +108,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             wucCommandsRewrite.CodeExplorer = this;
             wucCommandsRewrite.CodeExplorerContext = wucCodeExplorerContext;
 
+            wucCommandsRemove.CodeExplorer = this;
+            wucCommandsRemove.CodeExplorerContext = wucCodeExplorerContext;
+
             wucCommandsWorkspace.CodeExplorer = this;
             wucCommandsWorkspace.CodeExplorerContext = wucCodeExplorerContext;
         }

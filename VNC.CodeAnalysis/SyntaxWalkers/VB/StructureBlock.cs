@@ -31,7 +31,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         private Regex fieldNameRegEx;
 
 
-        public override void InitializeRegEx()
+        public void InitializeRegEx()
         {
             try
             {

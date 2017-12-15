@@ -21,7 +21,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (MatchLeft)
             {
-                if (identifierNameRegEx.Match(node.Left.ToString()).Success)
+                if (_targetPatternRegEx.Match(node.Left.ToString()).Success)
                 {
                     RecordMatchAndContext(node, BlockType.None);
                 }
@@ -29,7 +29,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (MatchRight)
             {
-                if (identifierNameRegEx.Match(node.Right.ToString()).Success)
+                if (_targetPatternRegEx.Match(node.Right.ToString()).Success)
                 {
                     RecordMatchAndContext(node, BlockType.None);
                 }

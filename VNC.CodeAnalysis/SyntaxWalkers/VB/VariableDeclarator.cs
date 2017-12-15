@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Names.First().ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Names.First().ToString()).Success)
             {
                 if (FilterByType(node.AsClause))
                 {

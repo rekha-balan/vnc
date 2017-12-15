@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Expression.ToString()).Success)
             {
                 RecordMatchAndContext(node, BlockType.None);
             }

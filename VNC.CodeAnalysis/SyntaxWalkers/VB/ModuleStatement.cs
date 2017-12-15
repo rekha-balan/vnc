@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitModuleStatement(ModuleStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Identifier.ToString()).Success)
             {
                 RecordMatch(node, BlockType.None);
             }

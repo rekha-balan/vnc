@@ -73,7 +73,7 @@ namespace VNC.CodeAnalysis.Helpers
                 //var startLine = location.GetLineSpan().StartLinePosition.Line + 1;
                 //var endLine = location.GetLineSpan().EndLinePosition.Line + 1;
 
-                sourceContext = string.Format("SourceSpan: >{0}< LineSpan: >{1}<",
+                sourceContext = string.Format("SourceSpan: {0} LineSpan: {1}",
                     sourceSpan.ToString(),
                     lineSpan.ToString());
             }
@@ -203,33 +203,36 @@ namespace VNC.CodeAnalysis.Helpers
             return ancestorContext;
         }
 
-        public static StringBuilder InvokeVNCSyntaxWalkerOld(
-            StringBuilder sb,
-            Boolean useRegEx, string regEx,
-            Dictionary<string, Int32> matches,
-            Dictionary<string, Int32> crcMatchesToString,
-            Dictionary<string, Int32> crcMatchesToFullString,
-            SyntaxTree syntaxTree,
-            SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker, 
-            ConfigurationOptions displayInfo)
-        {
-            walker.Messages = sb;
+        // Moved the ton of parameters to SearchTreeCommandConfiguration
 
-            //walker.Display.ClassOrModuleName = displayInfo.ClassOrModuleName;
-            //walker.Display.MethodName = displayInfo.MethodName;
-            walker.IdentifierNames = useRegEx ? regEx : ".*";
-            walker._configurationOptions = displayInfo;
+        //public static StringBuilder InvokeVNCSyntaxWalkerOld(
+        //    StringBuilder sb,
+        //    Boolean useRegEx, string regEx,
+        //    Dictionary<string, Int32> matches,
+        //    Dictionary<string, Int32> crcMatchesToString,
+        //    Dictionary<string, Int32> crcMatchesToFullString,
+        //    SyntaxTree syntaxTree,
+        //    SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker, 
+        //    ConfigurationOptions displayInfo)
+        //{
+        //    walker.Messages = sb;
 
-            walker.InitializeRegEx();
+        //    //walker.Display.ClassOrModuleName = displayInfo.ClassOrModuleName;
+        //    //walker.Display.MethodName = displayInfo.MethodName;
+        //    walker.IdentifierNames = useRegEx ? regEx : ".*";
+        //    walker._configurationOptions = displayInfo;
 
-            walker.Matches = matches;
-            walker.CRCMatchesToString = crcMatchesToString;
-            walker.CRCMatchesToFullString = crcMatchesToFullString;
+        //    walker.identifierNameRegEx = Common.InitializeRegEx(walker.IdentifierNames, walker.Messages, RegexOptions.IgnoreCase);
+        //    //walker.InitializeRegEx();
 
-            walker.Visit(syntaxTree.GetRoot());
+        //    walker.Matches = matches;
+        //    walker.CRCMatchesToString = crcMatchesToString;
+        //    walker.CRCMatchesToFullString = crcMatchesToFullString;
 
-            return sb;
-        }
+        //    walker.Visit(syntaxTree.GetRoot());
+
+        //    return sb;
+        //}
 
         public static StringBuilder InvokeVNCSyntaxWalker(
             SyntaxWalkers.VB.VNCVBSyntaxWalkerBase walker,
@@ -240,10 +243,11 @@ namespace VNC.CodeAnalysis.Helpers
             //walker.Messages = commandConfiguration.Results;
             walker.Messages = results;
 
-            walker.IdentifierNames = commandConfiguration.UseRegEx ? commandConfiguration.RegEx : ".*";
+            walker.TargetPattern = commandConfiguration.UseRegEx ? commandConfiguration.RegEx : ".*";
             walker._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            walker.InitializeRegEx();
+            walker._targetPatternRegEx = Common.InitializeRegEx(walker.TargetPattern, walker.Messages, RegexOptions.IgnoreCase);
+            //walker.InitializeRegEx();
 
             walker.Matches = commandConfiguration.Matches;
             walker.CRCMatchesToString = commandConfiguration.CRCMatchesToString;
@@ -260,6 +264,43 @@ namespace VNC.CodeAnalysis.Helpers
                     results.AppendFormat("CRC32Trivia:          {0}\n", walker.CRC32Trivia);
                     results.AppendFormat("CRC32StructuredTrivia:{0}\n", walker.CRC32StructuredTrivia);
                 }
+
+                commandConfiguration.Results.AppendLine(results.ToString());
+            }
+
+            return commandConfiguration.Results;
+        }
+
+        public static StringBuilder InvokeVNCSyntaxRewriter(
+            SyntaxRewriters.VB.VNCVBSyntaxRewriterBase rewriter,
+            RewriteTreeCommandConfiguration commandConfiguration)
+        {
+            StringBuilder results = new StringBuilder();
+
+            //walker.Messages = commandConfiguration.Results;
+            rewriter.Messages = results;
+
+            rewriter.TargetPattern = commandConfiguration.UseRegEx ? commandConfiguration.TargetPattern : ".*";
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            rewriter._targetPatternRegEx = Common.InitializeRegEx(rewriter.TargetPattern, rewriter.Messages, RegexOptions.IgnoreCase);
+            //walker.InitializeRegEx();
+
+            rewriter.Replacements = commandConfiguration.Replacements;
+            //rewriter.CRCMatchesToString = commandConfiguration.CRCMatchesToString;
+            //rewriter.CRCMatchesToFullString = commandConfiguration.CRCMatchesToFullString;
+
+            rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            if (results.Length > 0)
+            {
+                //if (commandConfiguration.ConfigurationOptions.ShowBlockCRC)
+                //{
+                //    results.AppendFormat("CRC32Node:            {0}\n", walker.CRC32Node);
+                //    results.AppendFormat("CRC32Token:           {0}\n", walker.CRC32Token);
+                //    results.AppendFormat("CRC32Trivia:          {0}\n", walker.CRC32Trivia);
+                //    results.AppendFormat("CRC32StructuredTrivia:{0}\n", walker.CRC32StructuredTrivia);
+                //}
 
                 commandConfiguration.Results.AppendLine(results.ToString());
             }
@@ -293,6 +334,9 @@ namespace VNC.CodeAnalysis.Helpers
         //    return InvokeVNCSyntaxWalker(sb, useRegEx, regEx, matches, syntaxTree, walker, displayInfo);
         //}
 
+        // TODO(crhodes)
+        // Not sure we need the typed versions.  Maybe just the VisualBasicSyntaxNode version
+
         public static Boolean IsOnLineByItself(InvocationExpressionSyntax node)
         {
             Boolean result = false;
@@ -320,6 +364,114 @@ namespace VNC.CodeAnalysis.Helpers
                     var triviaKind = syntaxTrivia.Kind();
 
                     if (triviaKind == SyntaxKind.EndOfLineTrivia 
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        leadingTriviaResult = true;
+                    }
+                }
+
+                Boolean trailingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetTrailingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        trailingTriviaResult = true;
+                    }
+                }
+
+                result = leadingTriviaResult & trailingTriviaResult;
+            }
+
+            return result;
+        }
+
+        public static Boolean IsOnLineByItself(ExpressionStatementSyntax node)
+        {
+            Boolean result = false;
+
+            // Seems like Trivia is Trivia  No notion of with our without :)
+
+            string existingLeadingTrivia = node.GetLeadingTrivia().ToString();
+            //string existingLeadingTriviaFull = node.GetLeadingTrivia().ToFullString();
+
+            string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
+            //string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
+
+            if (String.IsNullOrWhiteSpace(existingLeadingTrivia) && String.IsNullOrWhiteSpace(existingTrailingTrivia))
+            {
+                result = true;
+            }
+            else
+            {
+                var triviaList = node.GetLeadingTrivia().ToSyntaxTriviaList();
+
+                Boolean leadingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetLeadingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        leadingTriviaResult = true;
+                    }
+                }
+
+                Boolean trailingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetTrailingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia
+                        || triviaKind == SyntaxKind.WhitespaceTrivia
+                        || triviaKind == SyntaxKind.CommentTrivia)
+                    {
+                        trailingTriviaResult = true;
+                    }
+                }
+
+                result = leadingTriviaResult & trailingTriviaResult;
+            }
+
+            return result;
+        }
+
+        public static Boolean IsOnLineByItself(VisualBasicSyntaxNode node)
+        {
+            Boolean result = false;
+
+            // Seems like Trivia is Trivia  No notion of with our without :)
+
+            string existingLeadingTrivia = node.GetLeadingTrivia().ToString();
+            //string existingLeadingTriviaFull = node.GetLeadingTrivia().ToFullString();
+
+            string existingTrailingTrivia = node.GetTrailingTrivia().ToString();
+            //string existingTrailingTriviaFull = node.GetTrailingTrivia().ToFullString();
+
+            if (String.IsNullOrWhiteSpace(existingLeadingTrivia) && String.IsNullOrWhiteSpace(existingTrailingTrivia))
+            {
+                result = true;
+            }
+            else
+            {
+                var triviaList = node.GetLeadingTrivia().ToSyntaxTriviaList();
+
+                Boolean leadingTriviaResult = false;
+
+                foreach (SyntaxTrivia syntaxTrivia in node.GetLeadingTrivia().ToSyntaxTriviaList())
+                {
+                    var triviaKind = syntaxTrivia.Kind();
+
+                    if (triviaKind == SyntaxKind.EndOfLineTrivia
                         || triviaKind == SyntaxKind.WhitespaceTrivia
                         || triviaKind == SyntaxKind.CommentTrivia)
                     {

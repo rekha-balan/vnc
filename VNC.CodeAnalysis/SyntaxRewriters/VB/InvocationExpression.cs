@@ -11,39 +11,36 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 {
     public class InvocationExpression : VNCVBSyntaxRewriterBase
     {
-        //public StringBuilder Messages;
-        //public string _targetInvocationExpression = null;
         public string _newInvocationExpression = null;
-        //public Boolean PerformedReplacement = false;
-
-        //public InvocationExpression(bool visitIntoStructuredTrivia = false) : base(visitIntoStructuredTrivia)
-        //{
-
-        //}
 
         public InvocationExpression(string TargetInvocationExpression, string NewInvocationExpression)
         {
-            _targetInvocationExpression = TargetInvocationExpression;
+            TargetPattern = TargetInvocationExpression;
             _newInvocationExpression = NewInvocationExpression;
         }
 
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            if (_targetInvocationExpression == null || _newInvocationExpression == null)
+            if (TargetPattern == null || _newInvocationExpression == null)
             {
                 return node;
             }
 
-            //Microsoft.CodeAnalysis.SyntaxNode newInvocation = null;
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression;
 
             var newExpression = SyntaxFactory.IdentifierName(_newInvocationExpression);
 
-            if (expression.ToString() == _targetInvocationExpression)
+            // We could relax this to use regular expressions but that seems like more risk.
+
+            //if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
+
+            if (expression.ToString() == TargetPattern)
             {
                 newInvocationExpression = node.WithExpression(newExpression);
-                Messages.AppendLine(string.Format("From: >{0}< To: >{1}<", expression.ToString(), newInvocationExpression.ToString()));
+
+                //Messages.AppendLine(string.Format("From: >{0}< To: >{1}<", expression.ToString(), newInvocationExpression.ToString()));
+                RecordReplacementAndContext(node, expression.ToString(), newInvocationExpression.ToString());
                 PerformedReplacement = true;
             }
             else
@@ -51,7 +48,8 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 newInvocationExpression = node;
             }
 
-            //return newInvocationExpression;
+            // Call base to replace children
+
             return base.VisitInvocationExpression(newInvocationExpression);
         }
     }

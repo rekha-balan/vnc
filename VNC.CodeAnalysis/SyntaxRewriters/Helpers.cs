@@ -11,15 +11,19 @@ namespace VNC.CodeAnalysis.SyntaxRewriters
 {
     public class Helpers
     {
-        public static bool SaveFileChanges(string filePath, SyntaxTree tree, Microsoft.CodeAnalysis.SyntaxNode newNode, string fileSuffix)
+        public static bool SaveFileChanges(RewriteFileCommandConfiguration commandConfiguration, Microsoft.CodeAnalysis.SyntaxNode newNode)
         {
             Boolean performedReplacement = false;
 
-            if (newNode != tree.GetRoot())
+            if (newNode != commandConfiguration.SyntaxTree.GetRoot())
             {
-                string newFilePath = filePath + fileSuffix;
+
+                string fileSuffix = commandConfiguration.ConfigurationOptions.AddFileSuffix ? commandConfiguration.ConfigurationOptions.FileSuffix : "";
+
+                string newFilePath = commandConfiguration.FilePath + fileSuffix;
 
                 File.WriteAllText(newFilePath, newNode.ToFullString());
+
                 performedReplacement = true;
             }
 

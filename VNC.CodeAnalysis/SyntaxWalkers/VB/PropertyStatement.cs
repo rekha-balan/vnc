@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitPropertyStatement(PropertyStatementSyntax node)
         {
-            if (identifierNameRegEx.Match(node.Identifier.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Identifier.ToString()).Success)
             {
                 if (FilterByType(node.AsClause))
                 {

@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public WrapSQLFillCallsInDALHelper(string TargetInvocationExpression)
         {
-            IdentifierNames = TargetInvocationExpression;
+            TargetPattern = TargetInvocationExpression;
         }
 
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
@@ -24,16 +24,16 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression = node;
 
-            if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
-            {
-                // We are looking for Invocations like this
-                //
-                // <something>.Fill(<argument list>)
-                //
-                // e.g.
-                //  objDA.Fill(objDS, strTableName)
-                // objDataAdaptor.Fill(objDataTable)
+            // We are looking for Invocations like this
+            //
+            // <something>.Fill(<argument list>)
+            //
+            // e.g.
+            //  objDA.Fill(objDS, strTableName)
+            // objDataAdaptor.Fill(objDataTable)
 
+            if (_targetPatternRegEx.Match(node.Expression.ToString()).Success)
+            {
                 var simpleMemberAccessExpression = node.ChildNodes().First();
                 var firstIdentifier = simpleMemberAccessExpression.ChildNodes().First();
                 var lastIdentifer = simpleMemberAccessExpression.ChildNodes().Last();

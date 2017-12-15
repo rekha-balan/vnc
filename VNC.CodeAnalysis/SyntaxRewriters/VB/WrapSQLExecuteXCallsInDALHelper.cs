@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public WrapSQLExecuteXCallsInDALHelper(string TargetInvocationExpression)
         {
-            IdentifierNames = TargetInvocationExpression;
+            TargetPattern = TargetInvocationExpression;
         }
 
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
@@ -24,7 +24,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
             var expression = node.Expression;
             InvocationExpressionSyntax newInvocationExpression = node;
 
-            if (identifierNameRegEx.Match(node.Expression.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.Expression.ToString()).Success)
             {
                 // We are looking for Invocations like this
                 //

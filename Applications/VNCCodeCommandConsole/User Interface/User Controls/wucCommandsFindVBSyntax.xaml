@@ -418,6 +418,39 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find ExpressionStatement Syntax" 
+            View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceExpressionStatementUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teExpressionStatementRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceExpressionStatementUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+                
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="ExpressionStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnExpressionStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find InvocationExpression Syntax" 
             View="GroupBox"
             Orientation="Vertical"

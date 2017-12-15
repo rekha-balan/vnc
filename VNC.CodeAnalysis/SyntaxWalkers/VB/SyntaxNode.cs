@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void Visit(Microsoft.CodeAnalysis.SyntaxNode node)
         {
-            if (identifierNameRegEx.Match(node.ToString()).Success)
+            if (_targetPatternRegEx.Match(node.ToString()).Success)
             {
                 Messages.AppendLine(String.Format("{0} >{1}<",
                     GetNodeContext((VisualBasicSyntaxNode)node),

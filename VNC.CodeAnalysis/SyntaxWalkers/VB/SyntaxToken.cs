@@ -15,7 +15,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitToken(Microsoft.CodeAnalysis.SyntaxToken token)
         {
-            if (identifierNameRegEx.Match(token.ToString()).Success)
+            if (_targetPatternRegEx.Match(token.ToString()).Success)
             {
                 Messages.AppendLine(String.Format("{0} >{1}<",
                     //GetNodeContext(token),

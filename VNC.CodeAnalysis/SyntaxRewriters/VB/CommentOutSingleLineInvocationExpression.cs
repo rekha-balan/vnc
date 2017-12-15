@@ -50,7 +50,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                         // HACK(crhodes)
                         // Figure out how to get Helpers to work here.
                         Messages.AppendLine(String.Format("Commenting out {0} Method:({1,-35}) {2}",
-                            VNCCA.Helpers.VB.GetContainingContext(node, Display),
+                            VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions),
                             VNCCA.Helpers.VB.GetContainingMethod(node),
                             node.ToString()));
 
