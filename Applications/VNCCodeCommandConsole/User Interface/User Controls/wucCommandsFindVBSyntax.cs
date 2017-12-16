@@ -440,9 +440,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private StringBuilder DisplayFieldDeclarationWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)
         {
+            VNCCA.SyntaxNode.FieldDeclarationLocation fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
+
+            // TODO(crhodes)
+            // Go look at EyeOnLife and see how to do this in a cleaner way.
+
+            switch (lbeFieldDeclarationLocation.EditValue.ToString())
+            {
+                case "Class":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
+                    break;
+
+                case "Module":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Module;
+                    break;
+
+                case "Structure":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Structure;
+                    break;
+            }
             VNCSW.VB.VNCVBTypedSyntaxWalkerBase walker = null;
 
-            walker = new VNCSW.VB.FieldDeclaration();
+            walker = new VNCSW.VB.FieldDeclaration(fieldDeclarationLocation);
 
             walker.HasAttributes = (bool)CodeExplorer.configurationOptions.ceHasAttributes.IsChecked;
 

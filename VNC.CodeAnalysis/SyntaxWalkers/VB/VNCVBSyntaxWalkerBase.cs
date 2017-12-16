@@ -26,6 +26,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         private string _targetPattern;
         internal Regex _targetPatternRegEx;
 
+        internal VNC.CodeAnalysis.SyntaxNode.FieldDeclarationLocation _declarationLocation;
+
         public Dictionary<string, Int32> Matches;
         public Dictionary<string, Int32> CRCMatchesToString;
         public Dictionary<string, Int32> CRCMatchesToFullString;

@@ -16,7 +16,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         //public StringBuilder Messages;
 
         private string _pattern;
-        private string _comment;
+        //private string _comment;
 
         //ConfigurationOptions Display = new ConfigurationOptions();
 

@@ -13,10 +13,44 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class FieldDeclaration : VNCVBTypedSyntaxWalkerBase
     {
+        public FieldDeclaration(VNC.CodeAnalysis.SyntaxNode.FieldDeclarationLocation declarationLocation)
+        {
+            _declarationLocation = declarationLocation;
+        }
+
+
         public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
         {
-            if ( ! node.Parent.IsKind(SyntaxKind.StructureBlock))
+            // Verify we have the correct context for the Field Declaration
+
+            var parent = node.Parent;
+
+            switch (_declarationLocation)
             {
+                case VNC.CodeAnalysis.SyntaxNode.FieldDeclarationLocation.Class:
+                    if (parent.Kind() != SyntaxKind.ClassBlock)
+                    {
+                        return;
+                    }
+                    break;
+
+                case VNC.CodeAnalysis.SyntaxNode.FieldDeclarationLocation.Module:
+                    if (parent.Kind() != SyntaxKind.ModuleBlock)
+                    {
+                        return;
+                    }
+                    break;
+
+                case VNC.CodeAnalysis.SyntaxNode.FieldDeclarationLocation.Structure:
+                    if (parent.Kind() != SyntaxKind.StructureBlock)
+                    {
+                        return;
+                    }
+                    break;
+            }
+
+            //if ( ! node.Parent.IsKind(SyntaxKind.StructureBlock))
+            //{
                 if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
                 {
                     // TODO(crhodes)
@@ -30,7 +64,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                         }
                     }
                 }
-            }
+            //}
 
             base.VisitFieldDeclaration(node);
         }

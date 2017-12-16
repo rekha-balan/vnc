@@ -85,7 +85,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-
         #region Event Handlers
         private void btnRemove_FieldDeclaration_Click(object sender, RoutedEventArgs e)
         {
