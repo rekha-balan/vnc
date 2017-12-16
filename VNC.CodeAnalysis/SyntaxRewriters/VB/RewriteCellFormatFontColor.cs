@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+
+namespace VNC.CodeAnalysis.SyntaxRewriters.VB
+{
+    public class RewriteCellFormatFontColor : VNCVBSyntaxRewriterBase
+    {
+        public string _newInvocationExpression = null;
+
+        public RewriteCellFormatFontColor(string TargetInvocationExpression)
+        {
+            TargetPattern = TargetInvocationExpression;
+        }
+
+        public override Microsoft.CodeAnalysis.SyntaxNode VisitAssignmentStatement(AssignmentStatementSyntax node)
+        {
+            if (TargetPattern == null)
+            {
+                return node;
+            }
+
+            AssignmentStatementSyntax newNode;
+
+            // We are hoping that specifying CellFormat.Font.Color is enough
+
+            if (_targetPatternRegEx.Match(node.Left.ToString()).Success)
+            {
+                var leftSide = node.Left;
+                var rightSide = node.Right;
+
+                var leftChildren = leftSide.ChildNodesAndTokens();
+                var lastIdentifier = leftSide.ChildNodesAndTokens().Last();
+
+                var newRightSideInvocationExpression = SyntaxFactory.ParseExpression(
+                    string.Format("Infragistics.Documents.Excel.WorkbookColorInfo({0})",
+                    rightSide.ToString()
+                    ));
+
+                var newLeftSideSimpleMemberAccessExpression = SyntaxFactory.ParseExpression(
+                    string.Format("{0}.{1}",
+                        ((MemberAccessExpressionSyntax)leftSide).Expression.ToString(),
+                        "ColorInfo "));
+
+                newNode = node.WithLeft(newLeftSideSimpleMemberAccessExpression);
+
+                newNode = newNode.WithRight(newRightSideInvocationExpression).WithTriviaFrom(node);
+
+                RecordReplacementAndContext(node, node.ToString(), newNode.ToString());
+
+                //newNode = node;
+                PerformedReplacement = true;
+            }
+            else
+            {
+                newNode = node;
+            }
+
+            // Call base to replace children
+
+            return base.VisitAssignmentStatement(newNode);
+        }
+    }
+}
