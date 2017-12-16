@@ -22,7 +22,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
         public override Microsoft.CodeAnalysis.SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var expression = node.Expression;
-            InvocationExpressionSyntax newInvocationExpression = node;
+            InvocationExpressionSyntax newNode = node;
 
             if (_targetPatternRegEx.Match(node.Expression.ToString()).Success)
             {
@@ -57,23 +57,23 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                         lastIdentifer, firstIdentifier,
                         argumentList.Length > 0 ? ", " + argumentList : ""));
 
-                    newInvocationExpression = (InvocationExpressionSyntax)newExpression.WithTriviaFrom(node);
+                    newNode = (InvocationExpressionSyntax)newExpression.WithTriviaFrom(node);
 
-                    RecordReplacementAndContext(node, node.ToString(), newInvocationExpression.ToString());
+                    RecordReplacementAndContext(node, node.ToString(), newNode.ToString());
                 }
                 else
                 {
                     Messages.AppendLine(String.Format("node: >{0}< >{1}< Is NOT OnLineByItself()", 
                         node.ToString(), node.ToFullString()));
-                    newInvocationExpression = node;
+                    newNode = node;
                 }
             }
             else
             {
-                newInvocationExpression = node;
+                newNode = node;
             }
 
-            return base.VisitInvocationExpression(newInvocationExpression);
+            return base.VisitInvocationExpression(newNode);
         }       
     }
 }

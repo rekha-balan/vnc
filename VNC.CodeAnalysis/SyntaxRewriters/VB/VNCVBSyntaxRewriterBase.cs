@@ -90,7 +90,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
         public void RecordReplacementAndContext(VisualBasicSyntaxNode node, string oldNodeValue, string newNodeValue)
         {
-            Messages.AppendLine(String.Format("{0} From:>{1}< To:>{2}<",
+            Messages.AppendLine(String.Format("{0} From:>{1}<\n   To:>{2}<",
                 VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions),
                 oldNodeValue,
                 newNodeValue));

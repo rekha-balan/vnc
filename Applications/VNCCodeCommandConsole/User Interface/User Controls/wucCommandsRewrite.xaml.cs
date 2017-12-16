@@ -85,8 +85,13 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-
         #region Event Handlers
+        private void btnRewriteCellFormatFontColor_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(RewriteCellFormatFontColorVB, CodeExplorer.configurationOptions);
+        }
+
+
 
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
@@ -198,6 +203,26 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
+        private StringBuilder RewriteCellFormatFontColorVB(VNC.CodeAnalysis.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RewriteCellFormatFontColor(
+                commandConfiguration.TargetPattern);
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
 
         private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {

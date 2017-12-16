@@ -135,6 +135,14 @@
                     </Button>
                 </dxlc:LayoutItem>
 
+                <dxlc:LayoutItem>
+                    <Button
+                        Style="{StaticResource SyntaxRewriterButton}"
+                        Click="btnRewriteCellFormatFontColor_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Rewrite CellFormat.Font.Color</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
             </dxlc:LayoutGroup>
 
         </dxlc:LayoutGroup>
