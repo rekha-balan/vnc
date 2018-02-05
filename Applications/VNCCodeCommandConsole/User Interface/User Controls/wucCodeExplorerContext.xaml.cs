@@ -22,7 +22,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         public wucCodeExplorerContext()
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
+            long startTicks = VNC.AppLog.Trace15("Start", LOG_APPNAME);
 #endif
             try
             {
@@ -34,7 +34,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 MessageBox.Show(ex.InnerException.ToString());
             }
 #if TRACE
-            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
+            VNC.AppLog.Trace15("End", LOG_APPNAME, startTicks);
 #endif
         }
 
@@ -58,7 +58,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         internal override void OnLoaded(object sender, RoutedEventArgs e)
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
+            long startTicks = VNC.AppLog.Trace15("Start", LOG_APPNAME);
 #endif
             // Cheat and force outcome if not using dat
             Common.DataFullyLoaded = true;
@@ -81,7 +81,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 MessageBox.Show(ex.ToString());
             }
 #if TRACE
-            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
+            VNC.AppLog.Trace15("End", LOG_APPNAME, startTicks);
 #endif
         }
 
@@ -146,10 +146,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             {
                 var s = (ComboBoxEdit)sender;
 
-                var a = sender.GetType();
-                var b = e.GetType();
-                var c = e.NewValue;
-
                 if (s.SelectedItems.Count() == 1)
                 {
                     XElement solution = (XElement)s.SelectedItem;
@@ -208,8 +204,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             try
             {
                 var s = (ComboBoxEdit)sender;
-                var e1 = e.NewValue;
-                var e2 = e.OldValue;
 
                 if (s.SelectedItems.Count() == 1)
                 {
@@ -252,10 +246,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             try
             {
                 var s = (ComboBoxEdit)sender;
-                var e1 = e.NewValue;
-                var e2 = e.OldValue;
-
-                var e3 = e1.GetType();
 
                 if (s.SelectedItems.Count() == 1)
                 {
@@ -316,73 +306,36 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
             else if (cbeProjectFile.SelectedItems.Count > 1)
             {
-                //using (var workSpace = MSBuildWorkspace.Create())
-                //{
-                    foreach (XElement projectElement in cbeProjectFile.SelectedItems)
+                foreach (XElement projectElement in cbeProjectFile.SelectedItems)
+                {
+                    string fileName = projectElement.Attribute("FileName").Value;
+                    string folderPath = projectElement.Attribute("FolderPath").Value;
+                    string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
+                    string projectPath = "";
+
+                    projectPath = fileName != "" ? sourcePath + "\\" + fileName : "";
+
+                    if (projectPath == "")
                     {
-                        string fileName = projectElement.Attribute("FileName").Value;
-                        string folderPath = projectElement.Attribute("FolderPath").Value;
-                        string sourcePath = teRepositoryPath.Text + "\\" + folderPath;
-                        string projectPath = "";
+                        // No project file exists, so look across all the SourceFile elements
 
-                        projectPath = fileName != "" ? sourcePath + "\\" + fileName : "";
-
-                        if (projectPath == "")
+                        foreach (XElement sourceFile in projectElement.Elements("SourceFile"))
                         {
-                            // No project file exists, so look across all the SourceFile elements
+                            // NB. The file names are added manually so we don't have to exclude any.
+                            string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
 
-                            foreach (XElement sourceFile in projectElement.Elements("SourceFile"))
-                            {
-                                //string sourceFileName = sourceFile.Attribute("FileName").Value;
-                                //string sourceFolderPath = sourceFile.Attribute("FolderPath").Value;
-
-                                //string filePath = sourcePath + "\\" + sourceFolderPath + "\\" + sourceFileName;
-
-                                // NB. The file names are added manually so we don't have to exclude any.
-                                string fileFullPath = sourcePath + "\\" + GetFilePath(sourceFile);
-
-                                filesToProcess.Add(fileFullPath);
-                            }
-                        }
-                        else
-                        {
-                            filesToProcess.AddRange(VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath));
-                            //filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath);
-                            //var project = workSpace.OpenProjectAsync(projectPath).Result;
-
-                            //Microsoft.CodeAnalysis.Project project = null;
-
-                            //project = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath)).Result;
-
-
-                            //Microsoft.CodeAnalysis.Project project = null;
-
-                            //var foo = Task.Run(async () => project = await workSpace.OpenProjectAsync(projectPath));
-
-                            //foo.Wait();
-
-                            //VNC.CodeAnalysis.Workspace.Helper.
-                            //VNC.CodeAnalysis.Workspace.Helper.AddSourceFilesFromVBProject(filesToProcess, project);
-                            //AddFilesFromProject(filesToProcess, project);
+                            filesToProcess.Add(fileFullPath);
                         }
                     }
-                //}
+                    else
+                    {
+                        filesToProcess.AddRange(VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectPath));
+                    }
+                }
             }
             else if (projectFullPath != "")
             {
                 filesToProcess = VNC.CodeAnalysis.Workspace.Helper.GetSourceFilesToProcessFromVSProject(projectFullPath);
-                //using (var workSpace = MSBuildWorkspace.Create())
-                //{
-
-                //    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
-
-                //    //Microsoft.CodeAnalysis.Project project = null;
-
-                //    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
-                //    VNC.CodeAnalysis.Workspace.Helper.AddSourceFilesFromVBProject(filesToProcess, project);
-
-                //    //AddFilesFromProject(filesToProcess, project);
-                //}
             }
             else if (cbeSourceFile.SelectedItems.Count > 0)
             {
@@ -420,40 +373,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             return filesToProcess;
         }
 
-        //private static void AddFilesFromProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
-        //{
-        //    foreach (var document in project.Documents)
-        //    {
-        //        string filePath = document.FilePath;
-
-        //        if (filePath.ToLower().Contains("designer"))
-        //        {
-        //            continue;
-        //        }
-
-        //        if (filePath.Contains("My Project"))
-        //        {
-        //            continue;
-        //        }
-
-        //        if (document.Name == "Assembly.vb")
-        //        {
-        //            continue;
-        //        }
-
-        //        if (document.Name.EndsWith(".vb"))
-        //        {
-        //            filesToProcess.Add(filePath);
-        //        }
-        //    }
-        //}
-
         private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.Filter = "VB Source (*.vb)|*.vb|CS Source (*.cs)|*.cs|All files (*.*)|*.*";
-            //openFileDialog1.Filter = "A files (*.xml)|*.xml|All files (*.*)|*.*";
 
             openFileDialog1.FileName = "";
 

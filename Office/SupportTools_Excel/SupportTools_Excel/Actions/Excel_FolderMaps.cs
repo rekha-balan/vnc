@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using VNC;
 using Microsoft.Office.Interop.Excel;
+using Crc32C;
 
 namespace SupportTools_Excel.Actions
 {
@@ -48,6 +49,8 @@ namespace SupportTools_Excel.Actions
         private static int _Row;
 
         private static int _Column;
+
+        private static Boolean _CalculateCRC;
 
         private static string _StartingFolder;
         private static bool _LimitLevels;
@@ -147,6 +150,7 @@ namespace SupportTools_Excel.Actions
             _ShowFolders = frmF.chkShowFolders.Checked;
             _SkipFoldersWithNoFiles = frmF.chkSkipFoldersWithNoFiles.Checked;
             _TableSyleOuput = frmF.chkTableStyleOutput.Checked;
+            _CalculateCRC = frmF.chkCalculateCRC.Checked;
 
             _FolderMatchColor = RGB(frmF.pnlFolderHighlightColor.BackColor.R, frmF.pnlFolderHighlightColor.BackColor.G, frmF.pnlFolderHighlightColor.BackColor.B);
             _PathTooLongColor = RGB(frmF.pnlPathTooLongColor.BackColor.R, frmF.pnlPathTooLongColor.BackColor.G, frmF.pnlPathTooLongColor.BackColor.B);
@@ -873,9 +877,33 @@ namespace SupportTools_Excel.Actions
                 // HACK(crhodes)
                 // This let's us come back and wrap a table around everything to see if there are duplicate files.
                 formatRange.Value = string.Format("{0}", fileInfo.DirectoryName);
-                formatRange.Offset[0,1].Value = string.Format("{0}", fileInfo.Name);
+                formatRange.Offset[0, 1].Value = string.Format("{0}", fileInfo.Name);
                 formatRange.Offset[0, 1].Font.Size = fontSize;
                 formatRange.Offset[0, 1].Font.Color = fontColor;
+
+                if (_CalculateCRC)
+                {
+
+                    try
+                    {
+                        using (var fileStream = fileInfo.OpenRead())
+                        {
+                            byte[] fileBytes = File.ReadAllBytes(fileInfo.FullName);
+
+                            formatRange.Offset[0, 2].Value = Crc32CAlgorithm.Compute(fileBytes).ToString();
+                        }
+                    }
+                    catch (System.IO.IOException ioex)
+                    {
+                        formatRange.Offset[0, 2].Value = ioex.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        var et = ex.GetType();
+                        var be = ex.GetBaseException();
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
             }
 
             formatRange.Font.Bold = makeBold;

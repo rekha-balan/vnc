@@ -88,7 +88,7 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
         public DXRibbonWindowMain()
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Enter", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 0);
+            long startTicks = VNC.AppLog.Trace15("Enter", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 0);
 #endif
 
             try
@@ -140,7 +140,7 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
                 MessageBox.Show(ex.InnerException.ToString());
             }
 #if TRACE
-            VNC.AppLog.Trace5("Exit", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 2, startTicks);
+            VNC.AppLog.Trace15("Exit", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 2, startTicks);
 #endif
         }
         #endregion
@@ -150,7 +150,7 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Enter", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 0);
+            long startTicks = VNC.AppLog.Trace15("Enter", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 0);
 #endif
             // Do not load your data at design time.
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
@@ -176,7 +176,7 @@ namespace VNCCodeCommandConsole.User_Interface.Windows
             Common.RowDetailMode = Data.Config.RowDetailMode;
 
 #if TRACE
-            VNC.AppLog.Trace5("Exit", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 2, startTicks);
+            VNC.AppLog.Trace15("Exit", Common.LOG_APPNAME, CLASS_BASE_ERRORNUMBER + 2, startTicks);
 #endif
         }
 

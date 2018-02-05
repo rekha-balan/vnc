@@ -10,10 +10,15 @@ using Microsoft.CodeAnalysis.MSBuild;
 
 namespace VNC.CodeAnalysis.Workspace
 {
+
     public static class Helper
     {
+        private static int CLASS_BASE_ERRORNUMBER = ErrorNumbers.HELPER;
+        private const string LOG_APPNAME = ErrorNumbers.CLASSNAME;
+
         public static List<String> GetSourceFilesToProcessFromConfigFile(string configFileFullPath, string branchName, string solutionName, string projectName)
         {
+
             List<String> filesToProcess = null;
             string sourcePath = string.Empty;
             string projectFolderPath = string.Empty;
@@ -96,6 +101,8 @@ namespace VNC.CodeAnalysis.Workspace
 
         public static List<String> GetSourceFilesToProcessFromVSProject(string projectFullPath)
         {
+            VNC.AppLog.Trace(string.Format("projectFullPath:({0})", projectFullPath), LOG_APPNAME);
+
             List<String> filesToProcess = new List<string>();
 
 
@@ -104,32 +111,39 @@ namespace VNC.CodeAnalysis.Workspace
             // If a ProjectFile is available, use it to get the list of files
             // Otherwise return the files selected in cbeSourceFiles.
 
-            using (var workSpace = MSBuildWorkspace.Create())
+            try
             {
-                var project = workSpace.OpenProjectAsync(projectFullPath).Result;
-
-                //Microsoft.CodeAnalysis.Project project = null;
-
-                //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
-
-                FileInfo fileInfo = new FileInfo(projectFullPath);
-
-                switch (fileInfo.Extension)
+                using (var workSpace = MSBuildWorkspace.Create())
                 {
-                    case ".csproj":
-                        AddSourceFilesFromCSProject(filesToProcess, project);
-                        break;
+                    var project = workSpace.OpenProjectAsync(projectFullPath).Result;
 
-                    case ".vbproj":
-                        AddSourceFilesFromVBProject(filesToProcess, project);
-                        break;
+                    //Microsoft.CodeAnalysis.Project project = null;
 
-                    default:
-                        // TODO(crhodes)
-                        // How to handle unsupported project types
-                        break;
+                    //Task.Run(async () => project = await workSpace.OpenProjectAsync(projectFullPath));
+
+                    FileInfo fileInfo = new FileInfo(projectFullPath);
+
+                    switch (fileInfo.Extension)
+                    {
+                        case ".csproj":
+                            AddSourceFilesFromCSProject(filesToProcess, project);
+                            break;
+
+                        case ".vbproj":
+                            AddSourceFilesFromVBProject(filesToProcess, project);
+                            break;
+
+                        default:
+                            // TODO(crhodes)
+                            // How to handle unsupported project types
+                            break;
+                    }
+
                 }
-
+            }
+            catch (Exception ex)
+            {
+                VNC.AppLog.Error(ex, LOG_APPNAME);
             }
 
             return filesToProcess;
@@ -137,6 +151,8 @@ namespace VNC.CodeAnalysis.Workspace
 
         public static void AddSourceFilesFromVBProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)
         {
+            VNC.AppLog.Trace1(string.Format("Enter: project.Path:({0})", project.FilePath), LOG_APPNAME);
+
             foreach (var document in project.Documents)
             {
                 string filePath = document.FilePath;
@@ -165,6 +181,8 @@ namespace VNC.CodeAnalysis.Workspace
                     filesToProcess.Add(filePath);
                 }
             }
+
+            VNC.AppLog.Trace(string.Format("Exit: Count({0})", filesToProcess.Count), LOG_APPNAME);
         }
 
         public static void AddSourceFilesFromCSProject(List<string> filesToProcess, Microsoft.CodeAnalysis.Project project)

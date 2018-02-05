@@ -28,7 +28,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         public wucCommandsPerformance()
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
+            long startTicks = VNC.AppLog.Trace15("Start", LOG_APPNAME);
 #endif
             try
             {
@@ -40,7 +40,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 MessageBox.Show(ex.InnerException.ToString());
             }
 #if TRACE
-            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
+            VNC.AppLog.Trace15("End", LOG_APPNAME, startTicks);
 #endif
         }
 
@@ -51,7 +51,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         internal override void OnLoaded(object sender, RoutedEventArgs e)
         {
 #if TRACE
-            long startTicks = VNC.AppLog.Trace5("Start", LOG_APPNAME);
+            long startTicks = VNC.AppLog.Trace15("Start", LOG_APPNAME);
 #endif
             // Cheat and force outcome if not using dat
             Common.DataFullyLoaded = true;
@@ -71,7 +71,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 MessageBox.Show(ex.ToString());
             }
 #if TRACE
-            VNC.AppLog.Trace5("End", LOG_APPNAME, startTicks);
+            VNC.AppLog.Trace15("End", LOG_APPNAME, startTicks);
 #endif
         }
 

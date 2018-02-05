@@ -38,15 +38,20 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                 var leftChildren = leftSide.ChildNodesAndTokens();
                 var lastIdentifier = leftSide.ChildNodesAndTokens().Last();
 
-                var newRightSideInvocationExpression = SyntaxFactory.ParseExpression(
-                    string.Format("Infragistics.Documents.Excel.WorkbookColorInfo({0})",
-                    rightSide.ToString()
-                    ));
+                //e.Worksheet.Rows(intCurrentRowIdx).Cells(0).CellFormat.Font.ColorInfo = New ColorInfo(Color.FromArgb(0, 64, 128))
+                //e.Worksheet.Rows(intCurrentRowIdx).Cells(0).CellFormat.Font.ColorInfo = New Infragistics.Documents.Excel.WorkbookColorInfo(Color.FromArgb(0, 64, 128))
 
                 var newLeftSideSimpleMemberAccessExpression = SyntaxFactory.ParseExpression(
                     string.Format("{0}.{1}",
                         ((MemberAccessExpressionSyntax)leftSide).Expression.ToString(),
                         "ColorInfo "));
+
+                var newRightSideInvocationExpression = SyntaxFactory.ParseExpression(
+                    string.Format("New Infragistics.Documents.Excel.WorkbookColorInfo({0})",
+                    rightSide.ToString()
+                    ));
+
+
 
                 newNode = node.WithLeft(newLeftSideSimpleMemberAccessExpression);
 

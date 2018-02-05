@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gbContents = new System.Windows.Forms.GroupBox();
+            this.chkTableStyleOutput = new System.Windows.Forms.CheckBox();
             this.pnlPatternMatchFileColor = new System.Windows.Forms.Panel();
             this.Label16 = new System.Windows.Forms.Label();
             this.pnlFolderHighlightColor = new System.Windows.Forms.Panel();
@@ -91,7 +92,7 @@
             this.cmdCreateFolderMap = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.chkTableStyleOutput = new System.Windows.Forms.CheckBox();
+            this.chkCalculateCRC = new System.Windows.Forms.CheckBox();
             this.gbContents.SuspendLayout();
             this.GroupBox2.SuspendLayout();
             this.gbStartingFolder.SuspendLayout();
@@ -100,6 +101,7 @@
             // 
             // gbContents
             // 
+            this.gbContents.Controls.Add(this.chkCalculateCRC);
             this.gbContents.Controls.Add(this.chkTableStyleOutput);
             this.gbContents.Controls.Add(this.pnlPatternMatchFileColor);
             this.gbContents.Controls.Add(this.Label16);
@@ -122,32 +124,37 @@
             this.gbContents.Controls.Add(this.txtLimitLevel);
             this.gbContents.Controls.Add(this.txtGroupLevel);
             this.gbContents.Controls.Add(this.Label8);
-            this.gbContents.Location = new System.Drawing.Point(20, 127);
-            this.gbContents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbContents.Location = new System.Drawing.Point(10, 66);
             this.gbContents.Name = "gbContents";
-            this.gbContents.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbContents.Size = new System.Drawing.Size(724, 453);
+            this.gbContents.Size = new System.Drawing.Size(362, 236);
             this.gbContents.TabIndex = 11;
             this.gbContents.TabStop = false;
             this.gbContents.Text = "Contents";
             // 
+            // chkTableStyleOutput
+            // 
+            this.chkTableStyleOutput.Location = new System.Drawing.Point(8, 209);
+            this.chkTableStyleOutput.Name = "chkTableStyleOutput";
+            this.chkTableStyleOutput.Size = new System.Drawing.Size(121, 24);
+            this.chkTableStyleOutput.TabIndex = 31;
+            this.chkTableStyleOutput.Text = "Table Style Output";
+            this.ToolTips.SetToolTip(this.chkTableStyleOutput, "Format output for table");
+            // 
             // pnlPatternMatchFileColor
             // 
             this.pnlPatternMatchFileColor.BackColor = System.Drawing.Color.Lime;
-            this.pnlPatternMatchFileColor.Location = new System.Drawing.Point(652, 315);
-            this.pnlPatternMatchFileColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlPatternMatchFileColor.Location = new System.Drawing.Point(326, 164);
             this.pnlPatternMatchFileColor.Name = "pnlPatternMatchFileColor";
-            this.pnlPatternMatchFileColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlPatternMatchFileColor.Size = new System.Drawing.Size(25, 17);
             this.pnlPatternMatchFileColor.TabIndex = 29;
             this.pnlPatternMatchFileColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label16
             // 
             this.Label16.AutoSize = true;
-            this.Label16.Location = new System.Drawing.Point(420, 321);
-            this.Label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label16.Location = new System.Drawing.Point(210, 167);
             this.Label16.Name = "Label16";
-            this.Label16.Size = new System.Drawing.Size(220, 25);
+            this.Label16.Size = new System.Drawing.Size(107, 13);
             this.Label16.TabIndex = 30;
             this.Label16.Text = "Folder Highlight Color";
             this.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -155,49 +162,44 @@
             // pnlFolderHighlightColor
             // 
             this.pnlFolderHighlightColor.BackColor = System.Drawing.Color.Lime;
-            this.pnlFolderHighlightColor.Location = new System.Drawing.Point(652, 198);
-            this.pnlFolderHighlightColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlFolderHighlightColor.Location = new System.Drawing.Point(326, 103);
             this.pnlFolderHighlightColor.Name = "pnlFolderHighlightColor";
-            this.pnlFolderHighlightColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlFolderHighlightColor.Size = new System.Drawing.Size(25, 17);
             this.pnlFolderHighlightColor.TabIndex = 27;
             this.pnlFolderHighlightColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label15
             // 
             this.Label15.AutoSize = true;
-            this.Label15.Location = new System.Drawing.Point(420, 206);
-            this.Label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label15.Location = new System.Drawing.Point(210, 107);
             this.Label15.Name = "Label15";
-            this.Label15.Size = new System.Drawing.Size(220, 25);
+            this.Label15.Size = new System.Drawing.Size(107, 13);
             this.Label15.TabIndex = 28;
             this.Label15.Text = "Folder Highlight Color";
             this.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtFolderMatchPattern
             // 
-            this.txtFolderMatchPattern.Location = new System.Drawing.Point(12, 248);
-            this.txtFolderMatchPattern.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFolderMatchPattern.Location = new System.Drawing.Point(6, 129);
             this.txtFolderMatchPattern.Name = "txtFolderMatchPattern";
-            this.txtFolderMatchPattern.Size = new System.Drawing.Size(686, 31);
+            this.txtFolderMatchPattern.Size = new System.Drawing.Size(345, 20);
             this.txtFolderMatchPattern.TabIndex = 26;
             this.ToolTips.SetToolTip(this.txtFolderMatchPattern, "Regular Expression to match folders");
             // 
             // chkPatternMatchFolderHighlight
             // 
-            this.chkPatternMatchFolderHighlight.Location = new System.Drawing.Point(16, 196);
-            this.chkPatternMatchFolderHighlight.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkPatternMatchFolderHighlight.Location = new System.Drawing.Point(8, 102);
             this.chkPatternMatchFolderHighlight.Name = "chkPatternMatchFolderHighlight";
-            this.chkPatternMatchFolderHighlight.Size = new System.Drawing.Size(420, 46);
+            this.chkPatternMatchFolderHighlight.Size = new System.Drawing.Size(210, 24);
             this.chkPatternMatchFolderHighlight.TabIndex = 25;
             this.chkPatternMatchFolderHighlight.Text = "RegEx Pattern Match Folder Highlight";
             this.chkPatternMatchFolderHighlight.CheckedChanged += new System.EventHandler(this.chkPatternMatchFolderHighlight_CheckedChanged);
             // 
             // chkSkipFoldersWithNoFiles
             // 
-            this.chkSkipFoldersWithNoFiles.Location = new System.Drawing.Point(382, 138);
-            this.chkSkipFoldersWithNoFiles.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkSkipFoldersWithNoFiles.Location = new System.Drawing.Point(191, 72);
             this.chkSkipFoldersWithNoFiles.Name = "chkSkipFoldersWithNoFiles";
-            this.chkSkipFoldersWithNoFiles.Size = new System.Drawing.Size(324, 46);
+            this.chkSkipFoldersWithNoFiles.Size = new System.Drawing.Size(162, 24);
             this.chkSkipFoldersWithNoFiles.TabIndex = 24;
             this.chkSkipFoldersWithNoFiles.Text = "Skip Folders with No Files";
             this.chkSkipFoldersWithNoFiles.CheckedChanged += new System.EventHandler(this.chkSkipFoldersWithNoFiles_CheckedChanged);
@@ -205,10 +207,9 @@
             // chkPatternMatchFileOutput
             // 
             this.chkPatternMatchFileOutput.Enabled = false;
-            this.chkPatternMatchFileOutput.Location = new System.Drawing.Point(16, 312);
-            this.chkPatternMatchFileOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkPatternMatchFileOutput.Location = new System.Drawing.Point(8, 162);
             this.chkPatternMatchFileOutput.Name = "chkPatternMatchFileOutput";
-            this.chkPatternMatchFileOutput.Size = new System.Drawing.Size(390, 46);
+            this.chkPatternMatchFileOutput.Size = new System.Drawing.Size(195, 24);
             this.chkPatternMatchFileOutput.TabIndex = 23;
             this.chkPatternMatchFileOutput.Text = "RegEx Pattern Match File Output";
             this.chkPatternMatchFileOutput.CheckedChanged += new System.EventHandler(this.chkPatternMatchFileOutput_CheckedChanged);
@@ -216,30 +217,27 @@
             // txtFileMatchPattern
             // 
             this.txtFileMatchPattern.Enabled = false;
-            this.txtFileMatchPattern.Location = new System.Drawing.Point(16, 363);
-            this.txtFileMatchPattern.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFileMatchPattern.Location = new System.Drawing.Point(8, 189);
             this.txtFileMatchPattern.Name = "txtFileMatchPattern";
-            this.txtFileMatchPattern.Size = new System.Drawing.Size(682, 31);
+            this.txtFileMatchPattern.Size = new System.Drawing.Size(343, 20);
             this.txtFileMatchPattern.TabIndex = 2;
             this.ToolTips.SetToolTip(this.txtFileMatchPattern, "Regular Expression to match files");
             // 
             // pnlNoAccessColor
             // 
             this.pnlNoAccessColor.BackColor = System.Drawing.Color.Violet;
-            this.pnlNoAccessColor.Location = new System.Drawing.Point(202, 27);
-            this.pnlNoAccessColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlNoAccessColor.Location = new System.Drawing.Point(101, 14);
             this.pnlNoAccessColor.Name = "pnlNoAccessColor";
-            this.pnlNoAccessColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlNoAccessColor.Size = new System.Drawing.Size(25, 17);
             this.pnlNoAccessColor.TabIndex = 20;
             this.pnlNoAccessColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label14
             // 
             this.Label14.AutoSize = true;
-            this.Label14.Location = new System.Drawing.Point(18, 31);
-            this.Label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label14.Location = new System.Drawing.Point(9, 16);
             this.Label14.Name = "Label14";
-            this.Label14.Size = new System.Drawing.Size(166, 25);
+            this.Label14.Size = new System.Drawing.Size(83, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "NoAccess Color";
             this.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -248,10 +246,9 @@
             // 
             this.chkShowFolders.Checked = true;
             this.chkShowFolders.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkShowFolders.Location = new System.Drawing.Point(16, 138);
-            this.chkShowFolders.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkShowFolders.Location = new System.Drawing.Point(8, 72);
             this.chkShowFolders.Name = "chkShowFolders";
-            this.chkShowFolders.Size = new System.Drawing.Size(186, 46);
+            this.chkShowFolders.Size = new System.Drawing.Size(93, 24);
             this.chkShowFolders.TabIndex = 20;
             this.chkShowFolders.Text = "Show Folders";
             this.chkShowFolders.CheckedChanged += new System.EventHandler(this.chkShowFolders_CheckedChanged);
@@ -259,35 +256,33 @@
             // pnlPathTooLongColor
             // 
             this.pnlPathTooLongColor.BackColor = System.Drawing.Color.Cyan;
-            this.pnlPathTooLongColor.Location = new System.Drawing.Point(502, 23);
-            this.pnlPathTooLongColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlPathTooLongColor.Location = new System.Drawing.Point(251, 12);
             this.pnlPathTooLongColor.Name = "pnlPathTooLongColor";
-            this.pnlPathTooLongColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlPathTooLongColor.Size = new System.Drawing.Size(25, 17);
             this.pnlPathTooLongColor.TabIndex = 19;
             this.pnlPathTooLongColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // spnLimitLevel
             // 
-            this.spnLimitLevel.Location = new System.Drawing.Point(278, 83);
+            this.spnLimitLevel.Location = new System.Drawing.Point(139, 43);
             this.spnLimitLevel.Name = "spnLimitLevel";
-            this.spnLimitLevel.Size = new System.Drawing.Size(16, 38);
+            this.spnLimitLevel.Size = new System.Drawing.Size(16, 20);
             this.spnLimitLevel.TabIndex = 5;
             this.spnLimitLevel.ValueChanged += new System.EventHandler(this.spnLimitLevel_ValueChanged);
             // 
             // spnGroupLevel
             // 
-            this.spnGroupLevel.Location = new System.Drawing.Point(660, 87);
+            this.spnGroupLevel.Location = new System.Drawing.Point(330, 45);
             this.spnGroupLevel.Name = "spnGroupLevel";
-            this.spnGroupLevel.Size = new System.Drawing.Size(16, 38);
+            this.spnGroupLevel.Size = new System.Drawing.Size(16, 20);
             this.spnGroupLevel.TabIndex = 4;
             this.spnGroupLevel.ValueChanged += new System.EventHandler(this.spnGroupLevel_ValueChanged);
             // 
             // chkShowFiles
             // 
-            this.chkShowFiles.Location = new System.Drawing.Point(214, 138);
-            this.chkShowFiles.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkShowFiles.Location = new System.Drawing.Point(107, 72);
             this.chkShowFiles.Name = "chkShowFiles";
-            this.chkShowFiles.Size = new System.Drawing.Size(208, 46);
+            this.chkShowFiles.Size = new System.Drawing.Size(104, 24);
             this.chkShowFiles.TabIndex = 3;
             this.chkShowFiles.Text = "Show Files";
             this.ToolTips.SetToolTip(this.chkShowFiles, "Output contains files");
@@ -295,40 +290,36 @@
             // 
             // chkGroupResults
             // 
-            this.chkGroupResults.Location = new System.Drawing.Point(382, 79);
-            this.chkGroupResults.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkGroupResults.Location = new System.Drawing.Point(191, 41);
             this.chkGroupResults.Name = "chkGroupResults";
-            this.chkGroupResults.Size = new System.Drawing.Size(208, 46);
+            this.chkGroupResults.Size = new System.Drawing.Size(104, 24);
             this.chkGroupResults.TabIndex = 2;
             this.chkGroupResults.Text = "Group Results";
             this.chkGroupResults.CheckedChanged += new System.EventHandler(this.chkGroupResults_CheckedChanged);
             // 
             // chkLimitLevels
             // 
-            this.chkLimitLevels.Location = new System.Drawing.Point(16, 79);
-            this.chkLimitLevels.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkLimitLevels.Location = new System.Drawing.Point(8, 41);
             this.chkLimitLevels.Name = "chkLimitLevels";
-            this.chkLimitLevels.Size = new System.Drawing.Size(178, 46);
+            this.chkLimitLevels.Size = new System.Drawing.Size(89, 24);
             this.chkLimitLevels.TabIndex = 1;
             this.chkLimitLevels.Text = "Limit Levels";
             this.chkLimitLevels.CheckedChanged += new System.EventHandler(this.chkLimitLevels_CheckedChanged);
             // 
             // txtLimitLevel
             // 
-            this.txtLimitLevel.Location = new System.Drawing.Point(214, 83);
-            this.txtLimitLevel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtLimitLevel.Location = new System.Drawing.Point(107, 43);
             this.txtLimitLevel.Name = "txtLimitLevel";
-            this.txtLimitLevel.Size = new System.Drawing.Size(44, 31);
+            this.txtLimitLevel.Size = new System.Drawing.Size(24, 20);
             this.txtLimitLevel.TabIndex = 2;
             this.txtLimitLevel.Text = "1";
             this.txtLimitLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtGroupLevel
             // 
-            this.txtGroupLevel.Location = new System.Drawing.Point(596, 87);
-            this.txtGroupLevel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtGroupLevel.Location = new System.Drawing.Point(298, 45);
             this.txtGroupLevel.Name = "txtGroupLevel";
-            this.txtGroupLevel.Size = new System.Drawing.Size(44, 31);
+            this.txtGroupLevel.Size = new System.Drawing.Size(24, 20);
             this.txtGroupLevel.TabIndex = 1;
             this.txtGroupLevel.Text = "1";
             this.txtGroupLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -336,10 +327,9 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(286, 31);
-            this.Label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label8.Location = new System.Drawing.Point(143, 16);
             this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(198, 25);
+            this.Label8.Size = new System.Drawing.Size(99, 13);
             this.Label8.TabIndex = 8;
             this.Label8.Text = "PathTooLong Color";
             this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -347,20 +337,18 @@
             // pnlMonthAccessedColor
             // 
             this.pnlMonthAccessedColor.BackColor = System.Drawing.Color.Blue;
-            this.pnlMonthAccessedColor.Location = new System.Drawing.Point(652, 219);
-            this.pnlMonthAccessedColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlMonthAccessedColor.Location = new System.Drawing.Point(326, 114);
             this.pnlMonthAccessedColor.Name = "pnlMonthAccessedColor";
-            this.pnlMonthAccessedColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlMonthAccessedColor.Size = new System.Drawing.Size(25, 17);
             this.pnlMonthAccessedColor.TabIndex = 19;
             this.pnlMonthAccessedColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label13
             // 
             this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(346, 188);
-            this.Label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label13.Location = new System.Drawing.Point(173, 98);
             this.Label13.Name = "Label13";
-            this.Label13.Size = new System.Drawing.Size(294, 25);
+            this.Label13.Size = new System.Drawing.Size(144, 13);
             this.Label13.TabIndex = 20;
             this.Label13.Text = "Illegal FileName Length Color";
             this.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -368,10 +356,9 @@
             // chkFileNameLength
             // 
             this.chkFileNameLength.AutoSize = true;
-            this.chkFileNameLength.Location = new System.Drawing.Point(16, 187);
-            this.chkFileNameLength.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkFileNameLength.Location = new System.Drawing.Point(8, 97);
             this.chkFileNameLength.Name = "chkFileNameLength";
-            this.chkFileNameLength.Size = new System.Drawing.Size(274, 29);
+            this.chkFileNameLength.Size = new System.Drawing.Size(140, 17);
             this.chkFileNameLength.TabIndex = 18;
             this.chkFileNameLength.Text = "Check FileName Length";
             this.chkFileNameLength.UseVisualStyleBackColor = true;
@@ -380,50 +367,45 @@
             // pnlMonthWrittenColor
             // 
             this.pnlMonthWrittenColor.BackColor = System.Drawing.Color.Green;
-            this.pnlMonthWrittenColor.Location = new System.Drawing.Point(652, 150);
-            this.pnlMonthWrittenColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlMonthWrittenColor.Location = new System.Drawing.Point(326, 78);
             this.pnlMonthWrittenColor.Name = "pnlMonthWrittenColor";
-            this.pnlMonthWrittenColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlMonthWrittenColor.Size = new System.Drawing.Size(25, 17);
             this.pnlMonthWrittenColor.TabIndex = 19;
             this.pnlMonthWrittenColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // pnlMonthCreatedColor
             // 
             this.pnlMonthCreatedColor.BackColor = System.Drawing.Color.Red;
-            this.pnlMonthCreatedColor.Location = new System.Drawing.Point(652, 92);
-            this.pnlMonthCreatedColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlMonthCreatedColor.Location = new System.Drawing.Point(326, 48);
             this.pnlMonthCreatedColor.Name = "pnlMonthCreatedColor";
-            this.pnlMonthCreatedColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlMonthCreatedColor.Size = new System.Drawing.Size(25, 17);
             this.pnlMonthCreatedColor.TabIndex = 19;
             this.pnlMonthCreatedColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // pnlDefaultColor
             // 
             this.pnlDefaultColor.BackColor = System.Drawing.Color.Black;
-            this.pnlDefaultColor.Location = new System.Drawing.Point(652, 29);
-            this.pnlDefaultColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlDefaultColor.Location = new System.Drawing.Point(326, 15);
             this.pnlDefaultColor.Name = "pnlDefaultColor";
-            this.pnlDefaultColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlDefaultColor.Size = new System.Drawing.Size(25, 17);
             this.pnlDefaultColor.TabIndex = 18;
             this.pnlDefaultColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // pnlIllegalCharactersColor
             // 
             this.pnlIllegalCharactersColor.BackColor = System.Drawing.Color.Orange;
-            this.pnlIllegalCharactersColor.Location = new System.Drawing.Point(652, 27);
-            this.pnlIllegalCharactersColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlIllegalCharactersColor.Location = new System.Drawing.Point(326, 14);
             this.pnlIllegalCharactersColor.Name = "pnlIllegalCharactersColor";
-            this.pnlIllegalCharactersColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlIllegalCharactersColor.Size = new System.Drawing.Size(25, 17);
             this.pnlIllegalCharactersColor.TabIndex = 19;
             this.pnlIllegalCharactersColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(30, 100);
-            this.Label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label6.Location = new System.Drawing.Point(15, 52);
             this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(225, 25);
+            this.Label6.Size = new System.Drawing.Size(112, 13);
             this.Label6.TabIndex = 17;
             this.Label6.Text = "Months Since Created";
             this.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -431,20 +413,18 @@
             // pnlIllegalFileNameLengthColor
             // 
             this.pnlIllegalFileNameLengthColor.BackColor = System.Drawing.Color.Cyan;
-            this.pnlIllegalFileNameLengthColor.Location = new System.Drawing.Point(652, 181);
-            this.pnlIllegalFileNameLengthColor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlIllegalFileNameLengthColor.Location = new System.Drawing.Point(326, 94);
             this.pnlIllegalFileNameLengthColor.Name = "pnlIllegalFileNameLengthColor";
-            this.pnlIllegalFileNameLengthColor.Size = new System.Drawing.Size(50, 33);
+            this.pnlIllegalFileNameLengthColor.Size = new System.Drawing.Size(25, 17);
             this.pnlIllegalFileNameLengthColor.TabIndex = 19;
             this.pnlIllegalFileNameLengthColor.DoubleClick += new System.EventHandler(this.ColorBox_DoubleClick);
             // 
             // Label12
             // 
             this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(14, 237);
-            this.Label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label12.Location = new System.Drawing.Point(7, 123);
             this.Label12.Name = "Label12";
-            this.Label12.Size = new System.Drawing.Size(279, 25);
+            this.Label12.Size = new System.Drawing.Size(137, 13);
             this.Label12.TabIndex = 17;
             this.Label12.Text = "Maximum File Name Length";
             this.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -463,49 +443,43 @@
             this.GroupBox2.Controls.Add(this.Label10);
             this.GroupBox2.Controls.Add(this.txtIllegalFileCharacters);
             this.GroupBox2.Controls.Add(this.Label9);
-            this.GroupBox2.Location = new System.Drawing.Point(20, 880);
-            this.GroupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GroupBox2.Location = new System.Drawing.Point(10, 458);
             this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.GroupBox2.Size = new System.Drawing.Size(724, 281);
+            this.GroupBox2.Size = new System.Drawing.Size(362, 146);
             this.GroupBox2.TabIndex = 15;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "SharePoint Information";
             // 
             // txtMaxFileNameLength
             // 
-            this.txtMaxFileNameLength.Location = new System.Drawing.Point(310, 231);
-            this.txtMaxFileNameLength.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMaxFileNameLength.Location = new System.Drawing.Point(155, 120);
             this.txtMaxFileNameLength.Name = "txtMaxFileNameLength";
-            this.txtMaxFileNameLength.Size = new System.Drawing.Size(98, 31);
+            this.txtMaxFileNameLength.Size = new System.Drawing.Size(51, 20);
             this.txtMaxFileNameLength.TabIndex = 16;
             // 
             // Label11
             // 
             this.Label11.AutoSize = true;
-            this.Label11.Location = new System.Drawing.Point(48, 127);
-            this.Label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label11.Location = new System.Drawing.Point(24, 66);
             this.Label11.Name = "Label11";
-            this.Label11.Size = new System.Drawing.Size(246, 25);
+            this.Label11.Size = new System.Drawing.Size(120, 13);
             this.Label11.TabIndex = 15;
             this.Label11.Text = "Illegal Folder Characters";
             this.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtIllegalFolderCharacters
             // 
-            this.txtIllegalFolderCharacters.Location = new System.Drawing.Point(310, 121);
-            this.txtIllegalFolderCharacters.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtIllegalFolderCharacters.Location = new System.Drawing.Point(155, 63);
             this.txtIllegalFolderCharacters.Name = "txtIllegalFolderCharacters";
-            this.txtIllegalFolderCharacters.Size = new System.Drawing.Size(266, 31);
+            this.txtIllegalFolderCharacters.Size = new System.Drawing.Size(135, 20);
             this.txtIllegalFolderCharacters.TabIndex = 14;
             // 
             // chkIllegalCharacters
             // 
             this.chkIllegalCharacters.AutoSize = true;
-            this.chkIllegalCharacters.Location = new System.Drawing.Point(16, 33);
-            this.chkIllegalCharacters.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkIllegalCharacters.Location = new System.Drawing.Point(8, 17);
             this.chkIllegalCharacters.Name = "chkIllegalCharacters";
-            this.chkIllegalCharacters.Size = new System.Drawing.Size(309, 29);
+            this.chkIllegalCharacters.Size = new System.Drawing.Size(156, 17);
             this.chkIllegalCharacters.TabIndex = 13;
             this.chkIllegalCharacters.Text = "Check for Illegal Characters";
             this.chkIllegalCharacters.UseVisualStyleBackColor = true;
@@ -514,39 +488,35 @@
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(74, 79);
-            this.Label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label10.Location = new System.Drawing.Point(37, 41);
             this.Label10.Name = "Label10";
-            this.Label10.Size = new System.Drawing.Size(220, 25);
+            this.Label10.Size = new System.Drawing.Size(107, 13);
             this.Label10.TabIndex = 12;
             this.Label10.Text = "Illegal File Characters";
             this.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtIllegalFileCharacters
             // 
-            this.txtIllegalFileCharacters.Location = new System.Drawing.Point(310, 73);
-            this.txtIllegalFileCharacters.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtIllegalFileCharacters.Location = new System.Drawing.Point(155, 38);
             this.txtIllegalFileCharacters.Name = "txtIllegalFileCharacters";
-            this.txtIllegalFileCharacters.Size = new System.Drawing.Size(266, 31);
+            this.txtIllegalFileCharacters.Size = new System.Drawing.Size(135, 20);
             this.txtIllegalFileCharacters.TabIndex = 11;
             // 
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(404, 35);
-            this.Label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label9.Location = new System.Drawing.Point(202, 18);
             this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(236, 25);
+            this.Label9.Size = new System.Drawing.Size(115, 13);
             this.Label9.TabIndex = 10;
             this.Label9.Text = "Illegal Characters Color";
             this.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtStartingFolder
             // 
-            this.txtStartingFolder.Location = new System.Drawing.Point(16, 37);
-            this.txtStartingFolder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtStartingFolder.Location = new System.Drawing.Point(8, 19);
             this.txtStartingFolder.Name = "txtStartingFolder";
-            this.txtStartingFolder.Size = new System.Drawing.Size(552, 31);
+            this.txtStartingFolder.Size = new System.Drawing.Size(278, 20);
             this.txtStartingFolder.TabIndex = 0;
             this.ToolTips.SetToolTip(this.txtStartingFolder, "Enter folder or click Pick.  Pick starts from what is entered.");
             // 
@@ -554,21 +524,18 @@
             // 
             this.gbStartingFolder.Controls.Add(this.btnSelectFolder);
             this.gbStartingFolder.Controls.Add(this.txtStartingFolder);
-            this.gbStartingFolder.Location = new System.Drawing.Point(20, 21);
-            this.gbStartingFolder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbStartingFolder.Location = new System.Drawing.Point(10, 11);
             this.gbStartingFolder.Name = "gbStartingFolder";
-            this.gbStartingFolder.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbStartingFolder.Size = new System.Drawing.Size(718, 94);
+            this.gbStartingFolder.Size = new System.Drawing.Size(359, 49);
             this.gbStartingFolder.TabIndex = 16;
             this.gbStartingFolder.TabStop = false;
             this.gbStartingFolder.Text = "Starting Folder";
             // 
             // btnSelectFolder
             // 
-            this.btnSelectFolder.Location = new System.Drawing.Point(596, 33);
-            this.btnSelectFolder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSelectFolder.Location = new System.Drawing.Point(298, 17);
             this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(106, 44);
+            this.btnSelectFolder.Size = new System.Drawing.Size(53, 23);
             this.btnSelectFolder.TabIndex = 1;
             this.btnSelectFolder.Text = "Pick";
             this.btnSelectFolder.UseVisualStyleBackColor = true;
@@ -594,40 +561,36 @@
             this.GroupBox1.Controls.Add(this.Label2);
             this.GroupBox1.Controls.Add(this.Label1);
             this.GroupBox1.Controls.Add(this.chkColorCodeDates);
-            this.GroupBox1.Location = new System.Drawing.Point(20, 592);
-            this.GroupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GroupBox1.Location = new System.Drawing.Point(10, 308);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.GroupBox1.Size = new System.Drawing.Size(724, 279);
+            this.GroupBox1.Size = new System.Drawing.Size(362, 145);
             this.GroupBox1.TabIndex = 14;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Date Information";
             // 
             // txtMonthsSinceCreated
             // 
-            this.txtMonthsSinceCreated.Location = new System.Drawing.Point(274, 94);
-            this.txtMonthsSinceCreated.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMonthsSinceCreated.Location = new System.Drawing.Point(137, 49);
             this.txtMonthsSinceCreated.Name = "txtMonthsSinceCreated";
-            this.txtMonthsSinceCreated.Size = new System.Drawing.Size(44, 31);
+            this.txtMonthsSinceCreated.Size = new System.Drawing.Size(24, 20);
             this.txtMonthsSinceCreated.TabIndex = 16;
             this.txtMonthsSinceCreated.Text = "1";
             this.txtMonthsSinceCreated.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // spnMonthsSinceCreated
             // 
-            this.spnMonthsSinceCreated.Location = new System.Drawing.Point(338, 92);
+            this.spnMonthsSinceCreated.Location = new System.Drawing.Point(169, 48);
             this.spnMonthsSinceCreated.Name = "spnMonthsSinceCreated";
-            this.spnMonthsSinceCreated.Size = new System.Drawing.Size(16, 40);
+            this.spnMonthsSinceCreated.Size = new System.Drawing.Size(16, 21);
             this.spnMonthsSinceCreated.TabIndex = 15;
             this.spnMonthsSinceCreated.ValueChanged += new System.EventHandler(this.spnMonthsSinceCreated_ValueChanged);
             // 
             // Label7
             // 
             this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(492, 100);
-            this.Label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label7.Location = new System.Drawing.Point(246, 52);
             this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(145, 25);
+            this.Label7.Size = new System.Drawing.Size(71, 13);
             this.Label7.TabIndex = 14;
             this.Label7.Text = "Created Color";
             this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -635,10 +598,9 @@
             // Label5
             // 
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(30, 163);
-            this.Label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label5.Location = new System.Drawing.Point(15, 85);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(217, 25);
+            this.Label5.Size = new System.Drawing.Size(109, 13);
             this.Label5.TabIndex = 12;
             this.Label5.Text = "Months Since Written";
             this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -646,57 +608,53 @@
             // Label4
             // 
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(18, 227);
-            this.Label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label4.Location = new System.Drawing.Point(9, 118);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(243, 25);
+            this.Label4.Size = new System.Drawing.Size(122, 13);
             this.Label4.TabIndex = 11;
             this.Label4.Text = "Months Since Accessed";
             this.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtMonthsSinceAccessed
             // 
-            this.txtMonthsSinceAccessed.Location = new System.Drawing.Point(274, 221);
-            this.txtMonthsSinceAccessed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMonthsSinceAccessed.Location = new System.Drawing.Point(137, 115);
             this.txtMonthsSinceAccessed.Name = "txtMonthsSinceAccessed";
-            this.txtMonthsSinceAccessed.Size = new System.Drawing.Size(44, 31);
+            this.txtMonthsSinceAccessed.Size = new System.Drawing.Size(24, 20);
             this.txtMonthsSinceAccessed.TabIndex = 10;
             this.txtMonthsSinceAccessed.Text = "1";
             this.txtMonthsSinceAccessed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtMonthsSinceWritten
             // 
-            this.txtMonthsSinceWritten.Location = new System.Drawing.Point(274, 158);
-            this.txtMonthsSinceWritten.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMonthsSinceWritten.Location = new System.Drawing.Point(137, 82);
             this.txtMonthsSinceWritten.Name = "txtMonthsSinceWritten";
-            this.txtMonthsSinceWritten.Size = new System.Drawing.Size(44, 31);
+            this.txtMonthsSinceWritten.Size = new System.Drawing.Size(24, 20);
             this.txtMonthsSinceWritten.TabIndex = 9;
             this.txtMonthsSinceWritten.Text = "1";
             this.txtMonthsSinceWritten.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // spnMonthsSinceAccessed
             // 
-            this.spnMonthsSinceAccessed.Location = new System.Drawing.Point(338, 221);
+            this.spnMonthsSinceAccessed.Location = new System.Drawing.Point(169, 115);
             this.spnMonthsSinceAccessed.Name = "spnMonthsSinceAccessed";
-            this.spnMonthsSinceAccessed.Size = new System.Drawing.Size(16, 38);
+            this.spnMonthsSinceAccessed.Size = new System.Drawing.Size(16, 20);
             this.spnMonthsSinceAccessed.TabIndex = 8;
             this.spnMonthsSinceAccessed.ValueChanged += new System.EventHandler(this.spnMonthsSinceAccessed_ValueChanged);
             // 
             // spnMonthsSinceWritten
             // 
-            this.spnMonthsSinceWritten.Location = new System.Drawing.Point(338, 158);
+            this.spnMonthsSinceWritten.Location = new System.Drawing.Point(169, 82);
             this.spnMonthsSinceWritten.Name = "spnMonthsSinceWritten";
-            this.spnMonthsSinceWritten.Size = new System.Drawing.Size(16, 38);
+            this.spnMonthsSinceWritten.Size = new System.Drawing.Size(16, 20);
             this.spnMonthsSinceWritten.TabIndex = 7;
             this.spnMonthsSinceWritten.ValueChanged += new System.EventHandler(this.spnMonthsSinceWritten_ValueChanged);
             // 
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(472, 227);
-            this.Label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label3.Location = new System.Drawing.Point(236, 118);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(163, 25);
+            this.Label3.Size = new System.Drawing.Size(81, 13);
             this.Label3.TabIndex = 6;
             this.Label3.Text = "Accessed Color";
             this.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -704,10 +662,9 @@
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(498, 158);
-            this.Label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label2.Location = new System.Drawing.Point(249, 82);
             this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(137, 25);
+            this.Label2.Size = new System.Drawing.Size(68, 13);
             this.Label2.TabIndex = 5;
             this.Label2.Text = "Written Color";
             this.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -715,10 +672,9 @@
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(510, 37);
-            this.Label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label1.Location = new System.Drawing.Point(255, 19);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(125, 25);
+            this.Label1.Size = new System.Drawing.Size(62, 13);
             this.Label1.TabIndex = 4;
             this.Label1.Text = "Defalt Color";
             this.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -726,10 +682,9 @@
             // chkColorCodeDates
             // 
             this.chkColorCodeDates.AutoSize = true;
-            this.chkColorCodeDates.Location = new System.Drawing.Point(16, 37);
-            this.chkColorCodeDates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkColorCodeDates.Location = new System.Drawing.Point(8, 19);
             this.chkColorCodeDates.Name = "chkColorCodeDates";
-            this.chkColorCodeDates.Size = new System.Drawing.Size(214, 29);
+            this.chkColorCodeDates.Size = new System.Drawing.Size(109, 17);
             this.chkColorCodeDates.TabIndex = 0;
             this.chkColorCodeDates.Text = "Color Code Dates";
             this.chkColorCodeDates.UseVisualStyleBackColor = true;
@@ -737,10 +692,9 @@
             // 
             // cmdCreateFolderMap
             // 
-            this.cmdCreateFolderMap.Location = new System.Drawing.Point(516, 1177);
-            this.cmdCreateFolderMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmdCreateFolderMap.Location = new System.Drawing.Point(258, 612);
             this.cmdCreateFolderMap.Name = "cmdCreateFolderMap";
-            this.cmdCreateFolderMap.Size = new System.Drawing.Size(224, 44);
+            this.cmdCreateFolderMap.Size = new System.Drawing.Size(112, 23);
             this.cmdCreateFolderMap.TabIndex = 13;
             this.cmdCreateFolderMap.Text = "Create Folder Map";
             this.cmdCreateFolderMap.Click += new System.EventHandler(this.cmdCreateFolderMap_Click);
@@ -748,36 +702,33 @@
             // cmdCancel
             // 
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(376, 1177);
-            this.cmdCancel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmdCancel.Location = new System.Drawing.Point(188, 612);
             this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(128, 44);
+            this.cmdCancel.Size = new System.Drawing.Size(64, 23);
             this.cmdCancel.TabIndex = 12;
             this.cmdCancel.Text = "Cancel";
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
-            // chkTableStyleOutput
+            // chkCalculateCRC
             // 
-            this.chkTableStyleOutput.Location = new System.Drawing.Point(15, 402);
-            this.chkTableStyleOutput.Margin = new System.Windows.Forms.Padding(6);
-            this.chkTableStyleOutput.Name = "chkTableStyleOutput";
-            this.chkTableStyleOutput.Size = new System.Drawing.Size(242, 46);
-            this.chkTableStyleOutput.TabIndex = 31;
-            this.chkTableStyleOutput.Text = "Table Style Output";
-            this.ToolTips.SetToolTip(this.chkTableStyleOutput, "Format output for table");
+            this.chkCalculateCRC.Location = new System.Drawing.Point(139, 209);
+            this.chkCalculateCRC.Name = "chkCalculateCRC";
+            this.chkCalculateCRC.Size = new System.Drawing.Size(121, 24);
+            this.chkCalculateCRC.TabIndex = 32;
+            this.chkCalculateCRC.Text = "Calculate CRC";
+            this.ToolTips.SetToolTip(this.chkCalculateCRC, "Format output for table");
             // 
             // frmExcel_FolderMaps
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 1273);
+            this.ClientSize = new System.Drawing.Size(383, 662);
             this.Controls.Add(this.gbContents);
             this.Controls.Add(this.GroupBox2);
             this.Controls.Add(this.gbStartingFolder);
             this.Controls.Add(this.GroupBox1);
             this.Controls.Add(this.cmdCreateFolderMap);
             this.Controls.Add(this.cmdCancel);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "frmExcel_FolderMaps";
             this.Text = "frmExcel_FolderMaps";
             this.Load += new System.EventHandler(this.frmExcel_FolderMaps_Load);
@@ -858,5 +809,6 @@
         internal System.Windows.Forms.Button cmdCreateFolderMap;
         internal System.Windows.Forms.Button cmdCancel;
         internal System.Windows.Forms.CheckBox chkTableStyleOutput;
+        internal System.Windows.Forms.CheckBox chkCalculateCRC;
     }
 }
