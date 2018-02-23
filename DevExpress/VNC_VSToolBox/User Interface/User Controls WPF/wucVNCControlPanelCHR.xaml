@@ -1,0 +1,406 @@
+﻿<Grid x:Class="VNC_VSToolBox.User_Interface.User_Controls_WPF.wucVNCControlPanelCHR"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"       
+      
+    xmlns:local="clr-namespace:VNC_VSToolBox.User_Interface.User_Controls_WPF"
+    mc:Ignorable="d" 
+    d:DesignHeight="600" d:DesignWidth="400">
+    <Grid.Resources>
+        <Style x:Key="ActionButtonWide" TargetType="Button">
+            <Setter  Property="Margin" Value="5" />
+        </Style>        
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter  Property="Margin" Value="5" />
+            <!--<Setter  Property="Width" Value="85" />-->
+        </Style>
+    </Grid.Resources>
+
+    <!--<Grid>-->
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>-->
+        
+        <dxlc:LayoutControl x:Name="layoutItems"
+                        Orientation="Vertical"
+                        Background="White">
+
+            <dxlc:LayoutGroup Header="Risky (Not Implemented) Stuff"
+                              View="GroupBox" Orientation="Vertical"
+                              VerticalAlignment="Top"
+                              IsCollapsible="True" IsCollapsed="True">
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddLoggingToSolution"
+                        Style="{StaticResource ActionButtonWide}"
+                        Click="btnAddLoggingToSolution_Click" Background="Red" >
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Add Logging to Solution">Add Logging to Solution</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddLoggingToProject" 
+                            Style="{StaticResource ActionButtonWide}"                
+                            Grid.Row="2" Click="btnAddLoggingToProject_Click" Background="OrangeRed">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Add Logging to Project">Add Logging to Project</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="Project Level Actions"
+                              View="GroupBox" Orientation="Vertical"
+                              VerticalAlignment="Top"
+                              IsCollapsible="True" IsCollapsed="True">
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddImportToProject" 
+                            Style="{StaticResource ActionButtonWide}"                
+                            Click="btnAddImportToProject_Click" Background="OrangeRed">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Add Import to Project">Add Import to Project</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="Display Information"
+                              View="GroupBox" Orientation="Vertical"
+                              VerticalAlignment="Top"
+                              IsCollapsible="True" IsCollapsed="True">
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplaySolutionInfo" 
+                            Click="btnDisplaySolutionInfo_Click"  Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display Solution Info">Display Solution Info</TextBlock>
+                    </Button>                
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplayProjectSummaryInfo" 
+                            Click="btnDisplayProjectSummaryInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display Project Summary Info">Display Project Summary Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplayProjectDetailInfo" 
+                            Click="btnDisplayProjectDetailInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display Project Detail Info">Display Project Detail Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplaySourceFileInfo" 
+                            Click="btnDisplaySourceFileInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display SourceFile Info">Display SourceFile Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                   <Button x:Name="btnDisplayFileNodeInfo" 
+                            Click="btnDisplayFileNodeInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display FileNode Info">Display FileNode Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplayContextInfo" 
+                            Click="btnDisplayContextInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display Context Info">Display Context Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnDisplayMethodInfo" 
+                            Click="btnDisplayMethodInfo_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Display Method Info">Display Method Info</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="File Level Operations"
+                              View="GroupBox" Orientation="Horizontal"
+                              VerticalAlignment="Top"
+                              IsCollapsible="True" IsCollapsed="True">
+            
+                <dxlc:LayoutItem>
+                     <Button x:Name="btnInstrumentClass" 
+                            Background="#9370DB"
+                            Click="btnInstrumentClass_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                   ToolTip="Instrument Class">Instrument Class</TextBlock>
+                    </Button>               
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnInstrumentModule" 
+                            Background="#1E90FF"
+                            Click="btnInstrumentModule_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                   ToolTip="Instrument Module">Instrument Module</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="File Preparation Operations"
+                                  View="GroupBox" Orientation="Vertical"
+                                  VerticalAlignment="Top"
+                                  IsCollapsible="True" IsCollapsed="False">
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnImportsEaseCore" 
+                            Background="Green"
+                            Click="btnImportsEaseCore_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                   ToolTip="Imports EaseCore">Imports EaseCore</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnInsertLoggingProperties" 
+                            Background="Green"
+                            Click="btnInsertLoggingProperties_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                   ToolTip="Isert Logging Properties">Insert Logging Properties</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnInsertDefaultRegions" 
+                            Background="Green"
+                            Click="btnInsertDefaultRegions_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                   ToolTip="Insert Default Regions">Insert Default Regions</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="Add Logging Operations"
+                                  View="GroupBox" Orientation="Vertical"
+                                  VerticalAlignment="Top"
+                                  IsCollapsible="True" IsCollapsed="False">
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddLoggingToClass" 
+                            Background="#00FFFF"
+                            Click="btnAddLoggingToClass_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                   ToolTip="Add Logging to Class">Add Logging to Class</TextBlock>
+                    </Button>                
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Orientation="Horizontal">
+
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddEnterLoggingToClass" 
+                                Background="#00FFFF"
+                                Click="btnAddEnterLoggingToClass_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                       ToolTip="Add Enter Logging to Class">Add Enter Logging to Class</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddExitLoggingToClass" 
+                                Background="#00FFFF"
+                                Click="btnAddExitLoggingToClass_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                                       ToolTip="Add Exit Logging to Class">Add Exit Logging to Class</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+                
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddLoggingToModule" 
+                            Background="#00FFFF"
+                            Click="btnAddLoggingToModule_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                       ToolTip="Add Logging to Module">Add Logging to Module</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Orientation="Horizontal">
+
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddEnterLoggingToModule" 
+                                Background="#00FFFF"
+                                Click="btnAddEnterLoggingToModule_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                           ToolTip="Add Enter Logging to Module">Add Enter Logging to Module</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddExitLoggingToModule" 
+                                Background="#00FFFF"
+                                Click="btnAddExitLoggingToModule_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                           ToolTip="Add Exit Logging to Module">Add Exit Logging to Module</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+                           
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddLoggingToMethod" 
+                            Background="Green"
+                            Click="btnAddLoggingToMethod_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                       ToolTip="Add Logging to Method">Add Logging to Method</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddEnterLoggingToMethod" 
+                                Background="Green"
+                                Click="btnAddEnterLoggingToMethod_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                           ToolTip="Add Enter Logging to Method">Add Enter Logging to Method</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+                    
+                    <dxlc:LayoutItem>
+                        <Button x:Name="btnAddExitLoggingToMethod" 
+                                Background="Green"
+                                Click="btnAddExitLoggingToMethod_Click" Style="{StaticResource ActionButton}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                           ToolTip="Add Exit Logging to Method">Add Exit Logging to Method</TextBlock>
+                        </Button>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup Header="Add Paramters to Enter/Exit logging"
+                                  View="GroupBox" Orientation="Vertical"
+                                  VerticalAlignment="Top"
+                                  IsCollapsible="True" IsCollapsed="False">
+            
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddParametersToEnterTrace" 
+                        Background="Green"
+                        Click="btnAddParametersToEnterTrace_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                               ToolTip="Add ByVal Method Parameters to enter Trace.  Select Enter then push button">Add ByVal Method Parameters to Enter Trace</TextBlock>
+                    </Button>                
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnAddParametersToExitTrace" 
+                        Background="Cyan"
+                        Click="btnAddParametersToExitTrace_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                               ToolTip="Add ByRef Method Parameters to Exit Trace.  Select Exit then push button">Add ByRef Method Parameters to Exit Trace</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnClipboardToExitTrace" 
+                        Background="Cyan"
+                        Click="btnClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                               ToolTip="Add Clipboard to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Clipboard to Exit Trace</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnCountClipboardToExitTrace" 
+                        Background="Cyan"
+                        Click="btnCountClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                            ToolTip="Add Count(Clipboard) to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Count(Clipboard) to Exit Trace</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+            
+            </dxlc:LayoutGroup>
+
+        <!--<StackPanel Orientation="Vertical" Grid.Row="1">
+            
+                <Button x:Name="btnAddParametersToEnterTrace" 
+                    Background="Green"
+                    Click="btnAddParametersToEnterTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add ByVal Method Parameters to enter Trace.  Select Enter then push button">Add ByVal Method Parameters to Enter Trace</TextBlock>
+                </Button>                
+
+                <Button x:Name="btnAddParametersToExitTrace" 
+                    Background="Cyan"
+                    Click="btnAddParametersToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add ByRef Method Parameters to Exit Trace.  Select Exit then push button">Add ByRef Method Parameters to Exit Trace</TextBlock>
+                </Button>
+
+                <Button x:Name="btnClipboardToExitTrace" 
+                    Background="Cyan"
+                    Click="btnClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                           ToolTip="Add Clipboard to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Clipboard to Exit Trace</TextBlock>
+                </Button>
+
+                <Button x:Name="btnCountClipboardToExitTrace" 
+                    Background="Cyan"
+                    Click="btnCountClipboardToExitTrace_Click" Style="{StaticResource ActionButton}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                        ToolTip="Add Count(Clipboard) to Exit Trace.  Get Item on Clipboard, Select Exit, then push button">Add Count(Clipboard) to Exit Trace</TextBlock>
+                </Button>
+
+        </StackPanel>-->
+            
+        <dxlc:LayoutGroup Header="Configuration and Control"
+                            View="GroupBox" Orientation="Vertical"
+                            VerticalAlignment="Top"
+                            IsCollapsible="True" IsCollapsed="True">
+                <dxlc:LayoutItem>
+                    <StackPanel Orientation="Horizontal" Background="Bisque">
+                        <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>
+                        <CheckBox x:Name="ckDisplayDebugMessages" Margin="5" IsChecked="False">Display Debug Messages</CheckBox>
+                    </StackPanel>                    
+                </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <Button x:Name="btnClearListBox"
+                            Margin="5"
+                            Click="btnClearListBox_Click">Clear Debug Window</Button>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
+        <!--<StackPanel Grid.Row="2" Orientation="Horizontal" Background="Bisque">
+                <CheckBox x:Name="ckDeveloperMode" Margin="5" IsChecked="True">Developer Mode</CheckBox>
+                <CheckBox x:Name="ckDisplayDebugMessages" Margin="5" IsChecked="False">Display Debug Messages</CheckBox>
+
+            <Button x:Name="btnClearListBox"
+                            Margin="5"
+                            Click="btnClearListBox_Click">Clear Debug Window</Button>
+        </StackPanel>-->
+            
+            <ListBox x:Name="lbDebugWindow" FontFamily="Lucida Console" />
+        </dxlc:LayoutControl>
+   
+    <!--</Grid>-->
+</Grid>
