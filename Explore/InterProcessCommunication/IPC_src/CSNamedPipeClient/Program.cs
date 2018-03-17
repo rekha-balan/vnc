@@ -71,7 +71,10 @@ class Program
 
         // [-or-]
 
-        BCLSystemIOPipeClient();
+        do
+        {
+            BCLSystemIOPipeClient();            
+        } while (Console.ReadLine() != "x");
     }
 
     static void PInvokeNativePipeClient()
@@ -87,6 +90,7 @@ class Program
             );
 
         IntPtr hPipe;
+
         while (true)
         {
             hPipe = PipeNative.CreateFile(
@@ -173,29 +177,29 @@ class Program
 
         // Receive the response from the server.
 
-        cbReplyBytes = BUFFER_SIZE;
-        do
-        {
-            bResult = PipeNative.ReadFile(      // Read from the pipe.
-                hPipe,                          // Handle of the pipe
-                bReply,                         // Buffer to receive the reply
-                cbReplyBytes,                   // Size of buffer 
-                out cbBytesRead,                // Number of bytes read 
-                IntPtr.Zero);                   // Not overlapped 
+        //cbReplyBytes = BUFFER_SIZE;
+        //do
+        //{
+        //    bResult = PipeNative.ReadFile(      // Read from the pipe.
+        //        hPipe,                          // Handle of the pipe
+        //        bReply,                         // Buffer to receive the reply
+        //        cbReplyBytes,                   // Size of buffer 
+        //        out cbBytesRead,                // Number of bytes read 
+        //        IntPtr.Zero);                   // Not overlapped 
 
-            if (!bResult &&
-                PipeNative.GetLastError() != PipeNative.ERROR_MORE_DATA)
-            {
-                Console.WriteLine("ReadFile failed w/err 0x{0:X}",
-                    PipeNative.GetLastError());
-                break;
-            }
+        //    if (!bResult &&
+        //        PipeNative.GetLastError() != PipeNative.ERROR_MORE_DATA)
+        //    {
+        //        Console.WriteLine("ReadFile failed w/err 0x{0:X}",
+        //            PipeNative.GetLastError());
+        //        break;
+        //    }
 
-            strMessage = Encoding.Unicode.GetString(bReply).TrimEnd('\0');
-            Console.WriteLine("Receives {0} bytes; Message: \"{1}\"",
-                cbBytesRead, strMessage);
+        //    strMessage = Encoding.Unicode.GetString(bReply).TrimEnd('\0');
+        //    Console.WriteLine("Receives {0} bytes; Message: \"{1}\"",
+        //        cbBytesRead, strMessage);
 
-        } while (!bResult);  // Repeat loop if ERROR_MORE_DATA 
+        //} while (!bResult);  // Repeat loop if ERROR_MORE_DATA 
 
 
         /////////////////////////////////////////////////////////////////////

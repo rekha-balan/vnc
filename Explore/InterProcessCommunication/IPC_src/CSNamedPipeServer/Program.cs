@@ -170,6 +170,7 @@ class Program
             // Receive one message from the pipe.
 
             cbRequestBytes = BUFFER_SIZE;
+            
             bResult = PipeNative.ReadFile(      // Read from the pipe.
                 hPipe,                          // Handle of the pipe
                 bRequest,                       // Buffer to receive data
@@ -177,8 +178,8 @@ class Program
                 out cbBytesRead,                // Number of bytes read
                 IntPtr.Zero);                   // Not overlapped I/O
 
-            if (!bResult/*Failed*/ || cbBytesRead == 0/*Finished*/)
-                break;
+            //if (!bResult/*Failed*/) // || cbBytesRead == 0/*Finished*/)
+            //    break;
 
             // Unicode-encode the byte array and trim all the '\0' chars at 
             // the end.
@@ -186,32 +187,32 @@ class Program
             Console.WriteLine("Receives {0} bytes; Message: \"{1}\"",
                 cbBytesRead, strMessage);
 
-            // Prepare the response.
+            //// Prepare the response.
 
-            // '\0' is appended in the end because the client may be a native
-            // C++ program.
-            strMessage = "Default response from server\0";
-            bReply = Encoding.Unicode.GetBytes(strMessage);
-            cbReplyBytes = (uint)bReply.Length;
+            //// '\0' is appended in the end because the client may be a native
+            //// C++ program.
+            //strMessage = "Default response from server\0";
+            //bReply = Encoding.Unicode.GetBytes(strMessage);
+            //cbReplyBytes = (uint)bReply.Length;
 
-            // Write the response to the pipe.
+            //// Write the response to the pipe.
 
-            bResult = PipeNative.WriteFile(     // Write to the pipe.
-                hPipe,                          // Handle of the pipe
-                bReply,                         // Buffer to write to 
-                cbReplyBytes,                   // Number of bytes to write 
-                out cbBytesWritten,             // Number of bytes written 
-                IntPtr.Zero);                   // Not overlapped I/O 
+            //bResult = PipeNative.WriteFile(     // Write to the pipe.
+            //    hPipe,                          // Handle of the pipe
+            //    bReply,                         // Buffer to write to 
+            //    cbReplyBytes,                   // Number of bytes to write 
+            //    out cbBytesWritten,             // Number of bytes written 
+            //    IntPtr.Zero);                   // Not overlapped I/O 
 
-            if (!bResult/*Failed*/ || cbReplyBytes != cbBytesWritten/*Failed*/)
-            {
-                Console.WriteLine("WriteFile failed w/err 0x{0:X}",
-                    PipeNative.GetLastError());
-                break;
-            }
+            //if (!bResult/*Failed*/ || cbReplyBytes != cbBytesWritten/*Failed*/)
+            //{
+            //    Console.WriteLine("WriteFile failed w/err 0x{0:X}",
+            //        PipeNative.GetLastError());
+            //    break;
+            //}
 
-            Console.WriteLine("Replies {0} bytes; Message: \"{1}\"",
-                cbBytesWritten, strMessage.TrimEnd('\0'));
+            //Console.WriteLine("Replies {0} bytes; Message: \"{1}\"",
+            //    cbBytesWritten, strMessage.TrimEnd('\0'));
         }
 
 
@@ -221,7 +222,7 @@ class Program
         // handle to this pipe instance.
         // 
 
-        PipeNative.FlushFileBuffers(hPipe);
+        //PipeNative.FlushFileBuffers(hPipe);
         PipeNative.DisconnectNamedPipe(hPipe);
         PipeNative.CloseHandle(hPipe);
     }
