@@ -11,7 +11,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VNC")]
 [assembly: AssemblyProduct("SupportTools_Visio")]
-[assembly: AssemblyCopyright("Copyright © VNC 2010-2017")]
+[assembly: AssemblyCopyright("Copyright © VNC 2010-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -65,4 +65,4 @@ using System.Security;
 //  Version   Date          By
 //  1.0.0.0   mm/dd/yyyy    Christopher Rhodes
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2017.11.23A")]
+[assembly: AssemblyInformationalVersion("2018.02.05A")]

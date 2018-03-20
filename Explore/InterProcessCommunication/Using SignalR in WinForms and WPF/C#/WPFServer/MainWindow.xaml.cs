@@ -20,7 +20,7 @@ namespace WPFServer
     public partial class MainWindow : Window
     {
         public IDisposable SignalR { get; set; }
-        const string ServerURI = "http://localhost:8080";
+        const string ServerURI = "http://localhost:8095";
 
         public MainWindow()
         {
@@ -67,6 +67,7 @@ namespace WPFServer
             this.Dispatcher.Invoke(() => ButtonStop.IsEnabled = true);
             WriteToConsole("Server started at " + ServerURI);
         }
+
         ///This method adds a line to the RichTextBoxConsole control, using Dispatcher.Invoke if used
         /// from a SignalR hub thread rather than the UI thread.
         public void WriteToConsole(String message)
@@ -78,9 +79,11 @@ namespace WPFServer
                 );
                 return;
             }
+
             RichTextBoxConsole.AppendText(message + "\r");
         }
     }
+
     /// <summary>
     /// Used by OWIN's startup process. 
     /// </summary>
@@ -92,6 +95,7 @@ namespace WPFServer
             app.MapSignalR();
         }
     }
+
     /// <summary>
     /// Echoes messages sent using the Send message by calling the
     /// addMessage method on the client. Also reports to the console
@@ -103,6 +107,7 @@ namespace WPFServer
         {
             Clients.All.addMessage(name, message);
         }
+
         public override Task OnConnected()
         {
             //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class

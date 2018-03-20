@@ -22,7 +22,7 @@ namespace SupportTools_Excel
     {
         new public const string PROJECT_NAME = "SupportTools_Excel";
 
-        public const string cCONFIG_FILE = @"C:\temp\SupportTools_Config.xml";
+        public const string cCONFIG_FILE = @"C:\temp\SupportTools_Excel.xml";
 
         public static VNC.AddinHelper.Excel ExcelHelper = new VNC.AddinHelper.Excel();
         public static Events.ExcelAppEvents AppEvents;

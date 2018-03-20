@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveViewListener", "LiveViewListener\LiveViewListener.csproj", "{C768E5C9-D141-4920-9282-749766506E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveViewListenerServiceHost", "LiveViewListenerServiceHost\LiveViewListenerServiceHost.csproj", "{9AEE7261-2B46-4776-8899-AB66B1B667D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveViewListenerServiceLib", "LiveViewListenerServiceLib\LiveViewListenerServiceLib.csproj", "{BD249056-565D-46FF-87B6-51E41AB6FFEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveViewListenerClientConsoleApp", "LiveViewListenerClientConsoleApp\LiveViewListenerClientConsoleApp.csproj", "{12B70FE3-EE68-4BC3-BC85-488261135A8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRListener", "SignalRListener\SignalRListener.csproj", "{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C768E5C9-D141-4920-9282-749766506E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C768E5C9-D141-4920-9282-749766506E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C768E5C9-D141-4920-9282-749766506E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C768E5C9-D141-4920-9282-749766506E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AEE7261-2B46-4776-8899-AB66B1B667D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEE7261-2B46-4776-8899-AB66B1B667D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEE7261-2B46-4776-8899-AB66B1B667D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEE7261-2B46-4776-8899-AB66B1B667D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD249056-565D-46FF-87B6-51E41AB6FFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD249056-565D-46FF-87B6-51E41AB6FFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD249056-565D-46FF-87B6-51E41AB6FFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD249056-565D-46FF-87B6-51E41AB6FFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B70FE3-EE68-4BC3-BC85-488261135A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B70FE3-EE68-4BC3-BC85-488261135A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B70FE3-EE68-4BC3-BC85-488261135A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B70FE3-EE68-4BC3-BC85-488261135A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3C75B34-EB6D-4E41-9970-817BF43F4F20}
+	EndGlobalSection
+EndGlobal

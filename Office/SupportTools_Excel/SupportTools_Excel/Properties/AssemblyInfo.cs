@@ -11,7 +11,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VNC")]
 [assembly: AssemblyProduct("SupportTools_Excel")]
-[assembly: AssemblyCopyright("Copyright @ VNC 2000-2017")]
+[assembly: AssemblyCopyright("Copyright @ VNC 2000-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -65,4 +65,4 @@ using System.Security;
 //  Version   Date        By
 //  1.0.0.0   mm/dd/yyyy    Developer
 //      Initial Version
-[assembly: AssemblyInformationalVersion("2018.01.03A")]
+[assembly: AssemblyInformationalVersion("2018.02.12A")]
