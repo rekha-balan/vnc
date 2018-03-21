@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{48EDD767-9022-4C27-A5E6-F3520B1067CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TeamDiagnostics.TestSource.After</RootNamespace>
+    <AssemblyName>TeamDiagnostics.TestSource.After</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInAwait.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInForEachNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInForEachWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInIfNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInIfWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInMethod.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInMethodWIthOtherCode.cs" />
+    <Compile Include="Design\EmptyCatchClause\0_RemoveTryCatch\EmptyCatchClauseInProperty.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInAwait.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInForEachNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInForEachWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInIfNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInIfWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInMethod.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInMethodWIthOtherCode.cs" />
+    <Compile Include="Design\EmptyCatchClause\1_RemoveTryCatchWithComment\EmptyCatchClauseInProperty.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInAwait.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInForEachNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInForEachWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInIfNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInIfWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInMethod.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInMethodWIthOtherCode.cs" />
+    <Compile Include="Design\EmptyCatchClause\2_RemoveTryCatchAndBlock\EmptyCatchClauseInProperty.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInAwait.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInForEachNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInForEachWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInIfNoBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInIfWithBraces.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInMethod.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInMethodWIthOtherCode.cs" />
+    <Compile Include="Design\EmptyCatchClause\3_AddExceptionAndRethrow\EmptyCatchClauseInProperty.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
