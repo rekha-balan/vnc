@@ -22,6 +22,8 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Hosting;
 using Owin;
 
+using VNC.Logging.CustomTraceListeners.ServiceReference1;
+
 namespace VNC.Logging.CustomTraceListeners
 {
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
@@ -44,41 +46,18 @@ namespace VNC.Logging.CustomTraceListeners
         private int iStepInt = 1;
         private int iEventID = 0;
 
-        //private LiveViewClient client = null;
+        private LiveViewClient client = null;
 
         public IDisposable SignalR { get; set; }
 
-        //const string ServerURI = "http://localhost:8090";
-
-        ///// <summary>
-        ///// default constructor
-        ///// </summary>
-        //public SignalRListener()
-        //{
-        //    //client = new LiveViewClient();
-        //    Task.Run(() => StartServer());
-        //}
-
-        ///// <summary>
-        ///// Starts the server and checks for error thrown when another server is already 
-        ///// running. This method is called asynchronously from Button_Start.
-        ///// </summary>
-        //private void StartServer()
-        //{
-        //    try
-        //    {
-        //        SignalR = WebApp.Start(ServerURI);
-        //    }
-        //    catch (TargetInvocationException)
-        //    {
-        //        //WriteToConsole("A server is already running at " + ServerURI);
-        //        //this.Dispatcher.Invoke(() => ButtonStart.IsEnabled = true);
-        //        return;
-        //    }
-
-        //    //this.Dispatcher.Invoke(() => ButtonStop.IsEnabled = true);
-        //    //WriteToConsole("Server started at " + ServerURI);
-        //}
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        public SignalRListener()
+        {
+            client = new LiveViewClient();
+            ConnectAsync();
+        }
 
         /// <summary>
         /// This name is simply added to sent messages to identify the user; this 
@@ -86,7 +65,7 @@ namespace VNC.Logging.CustomTraceListeners
         /// </summary>
         public String UserName { get; set; }
         public IHubProxy HubProxy { get; set; }
-        const string ServerURI = "http://localhost:8090/signalr";
+        const string ServerURI = "http://localhost:8095/signalr";
         public HubConnection Connection { get; set; }
 
         /// <summary>
@@ -100,14 +79,16 @@ namespace VNC.Logging.CustomTraceListeners
         }
         public override void Write(string message)
         {
-            HubProxy.Invoke("Send", message);
-            //client.DisplayLogEntry(message);
+            message = message + "*W*";
+            client.DisplayLogEntry(message);
+            HubProxy.Invoke("Send", "SignalRListener", message);
         }
 
         public override void WriteLine(string message)
         {
-            HubProxy.Invoke("Send", message);
-            //client.DisplayLogEntry(message);
+            message = message + "*WL*";
+            client.DisplayLogEntry(message);
+            HubProxy.Invoke("Send", "SignalRListener", message);
         }
 
         /// <summary>
@@ -373,7 +354,7 @@ namespace VNC.Logging.CustomTraceListeners
     /// <summary>
     /// Used by OWIN's startup process. 
     /// </summary>
-    class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {

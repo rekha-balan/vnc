@@ -14,7 +14,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 
-using VNC.Logging.CustomTraceListener.ServiceReference1;
+using VNC.Logging.CustomTraceListeners.ServiceReference1;
 
 namespace VNC.Logging.CustomTraceListeners
 {
