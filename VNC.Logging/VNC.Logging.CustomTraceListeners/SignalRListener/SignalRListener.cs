@@ -22,6 +22,8 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Hosting;
 using Owin;
 
+//using EaseCore;
+
 using VNC.Logging.CustomTraceListeners.ServiceReference1;
 
 namespace VNC.Logging.CustomTraceListeners
@@ -29,6 +31,10 @@ namespace VNC.Logging.CustomTraceListeners
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
     public class SignalRListener : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
     {
+        //private const Int32 BASE_ERRORNUMBER = EaseCore.ErrorNumbers.EASECLASS;
+        //private const string LOG_APPNAME = "SIGNALRLISTENER";
+        private const string LOG_APPNAME = "EASECORE";
+
         private string sLoggingDbConString = string.Empty;
         private int iSQLCommandTimeoutInSecs = 300;
         private string sEntryID = string.Empty;
@@ -55,7 +61,9 @@ namespace VNC.Logging.CustomTraceListeners
         /// </summary>
         public SignalRListener()
         {
-            client = new LiveViewClient();
+            //Log.Info("SignalRListener()", LOG_APPNAME);
+
+            //client = new LiveViewClient();
             ConnectAsync();
         }
 
@@ -66,6 +74,8 @@ namespace VNC.Logging.CustomTraceListeners
         public String UserName { get; set; }
         public IHubProxy HubProxy { get; set; }
         const string ServerURI = "http://localhost:8095/signalr";
+        const string SignalRListenerUser = "SRL";   // This identifies this user to the Hub
+
         public HubConnection Connection { get; set; }
 
         /// <summary>
@@ -79,16 +89,32 @@ namespace VNC.Logging.CustomTraceListeners
         }
         public override void Write(string message)
         {
-            message = message + "*W*";
-            client.DisplayLogEntry(message);
-            HubProxy.Invoke("Send", "SignalRListener", message);
+            try
+            {
+                //message = message + "*W*";
+                //client.DisplayLogEntry(message);  // Named pipes
+                HubProxy.Invoke("Send", SignalRListenerUser, message);
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex, LOG_APPNAME);
+                //client.DisplayLogEntry(string.Format("SRLWex: {0}", ex.ToString()));
+            }
         }
 
         public override void WriteLine(string message)
         {
-            message = message + "*WL*";
-            client.DisplayLogEntry(message);
-            HubProxy.Invoke("Send", "SignalRListener", message);
+            try
+            {
+                //message = message + "*WL*";
+                //client.DisplayLogEntry(message); named pipes
+                HubProxy.Invoke("Send", SignalRListenerUser, message);
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex, LOG_APPNAME);
+                //client.DisplayLogEntry(string.Format("SRLWLex: {0}", ex.ToString()));
+            }
         }
 
         /// <summary>
@@ -115,8 +141,10 @@ namespace VNC.Logging.CustomTraceListeners
             {
                 await Connection.Start();
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
+                //Log.Error(string.Format("SRLCAex: {0}", ex.ToString()), LOG_APPNAME);
+                //client.DisplayLogEntry(string.Format("SRLCAex: {0}", ex.ToString()));
                 //StatusText.Content = "Unable to connect to server: Start server before connecting clients.";
                 //No connection: Don't enable Send button or show chat UI
                 return;
@@ -213,7 +241,8 @@ namespace VNC.Logging.CustomTraceListeners
                 }
                 catch (Exception ex)
                 {
-                    throw new LoggingException(ex.Message);
+                    //Log.Error(ex, LOG_APPNAME);
+                    //throw new LoggingException(ex.Message);
                     //EventLog.WriteEntry("CustomDatabaseTraceListener", ex.Message, EventLogEntryType.Information);
 
                 }
@@ -280,7 +309,8 @@ namespace VNC.Logging.CustomTraceListeners
             }
             catch (Exception ex)
             {
-                throw new LoggingException(ex.Message);
+                //Log.Error(ex, LOG_APPNAME);
+                //throw new LoggingException(ex.Message);
                 //EventLog.WriteEntry("CustomDatabaseTraceListener", ex.Message, EventLogEntryType.Error);
             }
             finally
@@ -330,7 +360,8 @@ namespace VNC.Logging.CustomTraceListeners
             }
             catch (Exception ex)
             {
-                throw new LoggingException(ex.Message);
+                //Log.Error(ex, LOG_APPNAME);
+                //throw new LoggingException(ex.Message);
                 //EventLog.WriteEntry("CustomDatabaseTraceListener", ex.Message, EventLogEntryType.Error);
             }
             finally

@@ -20,7 +20,7 @@ namespace WPFServer
     public partial class MainWindow : Window
     {
         public IDisposable SignalR { get; set; }
-        const string ServerURI = "http://localhost:8095";
+        string ServerURI = "http://localhost:8095";
 
         public MainWindow()
         {
@@ -34,6 +34,7 @@ namespace WPFServer
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
             WriteToConsole("Starting server...");
+            ServerURI = tbServerURI.Text;
             ButtonStart.IsEnabled = false;            
             Task.Run(() => StartServer());
         }
@@ -58,7 +59,7 @@ namespace WPFServer
             {
                 SignalR = WebApp.Start(ServerURI);
             }
-            catch (TargetInvocationException)
+            catch (TargetInvocationException ex)
             {
                 WriteToConsole("A server is already running at " + ServerURI);
                 this.Dispatcher.Invoke(() => ButtonStart.IsEnabled = true);

@@ -184,6 +184,15 @@
                 <!-- Standard Stuff -->
 
                 <dxb:BarButtonItem 
+                    Name="bbi_CodeExplorer" 
+                    Content="CodeExplorer" 
+                    Hint="CodeExplorer with Docking Windowsr"
+                    Glyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucCodeExplorer"/>
+
+                <dxb:BarButtonItem 
                     Name="bbi_UI1" 
                     Content="UI1"
                     Hint="Hint about UI 1"
@@ -240,15 +249,15 @@
                     Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucCodeExplorerMenu"/>
                 
                 <!-- Beta Stuff -->
-                
+
                 <dxb:BarButtonItem 
-                    Name="bbi_CodeExplorer" 
-                    Content="CodeExplorer" 
-                    Hint="CodeExplorer with Docking Windowsr"
+                    Name="bbi_LiveLogViewer" 
+                    Content="LiveLogViewer" 
+                    Hint="LiveLogViewer with Docking Windowsr"
                     Glyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
                     LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
                     ItemClick="OnShowInCurrentWindow_Click" 
-                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucCodeExplorer"/>
+                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucLiveLogViewer"/>
 
                 <dxb:BarButtonItem 
                     Name="bbi_Beta1" 
@@ -349,9 +358,9 @@
                 <dxb:BarSubItem Name="bsi_Beta" Content="BETA Ideas" Alignment="Far"
                                 IsVisible="{Binding Path=(local:Common.IsBetaUser)}" 
                                 IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
+                    <dxb:BarButtonItemLink BarItemName="bbi_LiveLogViewer" IsVisible="True" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta2" />
-                    <dxb:BarButtonItemLink BarItemName="bbi_CodeExplorerMenu" />
                 </dxb:BarSubItem>
 
                 <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >
