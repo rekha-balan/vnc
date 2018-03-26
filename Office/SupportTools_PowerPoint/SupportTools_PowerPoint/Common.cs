@@ -18,6 +18,8 @@ namespace SupportTools_PowerPoint
         //public static Microsoft.Office.Tools.CustomTaskPane TaskPaneHelp;
 
         public static Microsoft.Office.Tools.CustomTaskPane TaskPaneAppUtil;
+        public static Microsoft.Office.Tools.CustomTaskPane TaskPanePowerPointUtil;
+
 
         public static Microsoft.Office.Tools.CustomTaskPane TaskPaneComplianceUtil;
 

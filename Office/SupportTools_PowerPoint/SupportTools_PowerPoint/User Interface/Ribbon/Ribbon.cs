@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Office.Tools.Ribbon;
-using VNC;
+using VNCHlp = VNC.AddinHelper;
 
 namespace SupportTools_PowerPoint
 {
@@ -15,6 +15,16 @@ namespace SupportTools_PowerPoint
         }
 
         #region Event Handlers
+        private void btnPowerPointUtil_Click(object sender, RibbonControlEventArgs e)
+        {
+            Common.TaskPanePowerPointUtil = VNCHlp.TaskPaneUtil.GetTaskPane(
+                () => new User_Interface.Task_Panes.TaskPane_PowerPointUtil(), "Log Parser",
+                Globals.ThisAddIn.CustomTaskPanes, Globals.ThisAddIn.Application.HWND.ToString());
+
+            // This works if the minimum size for the control has been set.
+            Common.TaskPanePowerPointUtil.Width = Common.TaskPanePowerPointUtil.Control.Width;
+            Common.TaskPanePowerPointUtil.Visible = !Common.TaskPanePowerPointUtil.Visible;
+        }
 
         private void btnAddInInfo_Click(object sender, RibbonControlEventArgs e)
         {
@@ -135,8 +145,5 @@ namespace SupportTools_PowerPoint
         }
 
         #endregion
-
-
-
     }
 }

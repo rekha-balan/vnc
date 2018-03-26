@@ -49,6 +49,7 @@
             this.grpHelp = this.Factory.CreateRibbonGroup();
             this.btnAddInInfo = this.Factory.CreateRibbonButton();
             this.btnDeveloperMode = this.Factory.CreateRibbonButton();
+            this.btnPowerPointUtil = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tabSupportTools.SuspendLayout();
             this.grpTaskPanes.SuspendLayout();
@@ -79,6 +80,7 @@
             // grpTaskPanes
             // 
             this.grpTaskPanes.Items.Add(this.btnAppUtilities);
+            this.grpTaskPanes.Items.Add(this.btnPowerPointUtil);
             this.grpTaskPanes.Items.Add(this.separator1);
             this.grpTaskPanes.Items.Add(this.btnComplianceUtilities);
             this.grpTaskPanes.Label = "Task Panes";
@@ -159,6 +161,12 @@
             this.btnDeveloperMode.Name = "btnDeveloperMode";
             this.btnDeveloperMode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnDeveloperMode_Click);
             // 
+            // btnPowerPointUtil
+            // 
+            this.btnPowerPointUtil.Label = "PowerPoint Utilities WPF";
+            this.btnPowerPointUtil.Name = "btnPowerPointUtil";
+            this.btnPowerPointUtil.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnPowerPointUtil_Click);
+            // 
             // Ribbon
             // 
             this.Name = "Ribbon";
@@ -197,6 +205,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnAppUtilities;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnComplianceUtilities;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPowerPointUtil;
     }
 
     partial class ThisRibbonCollection
