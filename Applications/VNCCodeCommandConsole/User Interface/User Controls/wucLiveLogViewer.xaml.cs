@@ -267,9 +267,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //Handle incoming event from server: use Invoke to write to console from SignalR's thread
             HubProxy.On<string, string>("AddMessage", (name, message) =>
                 this.Dispatcher.Invoke(() =>
-                //lbeLogStream.Items.Add( String.Format("{0}: {1}\r", name, message))
-                //teLogStream.Text += String.Format("{0}: {1}\r", name, message)
-                rtbLogStream.AppendText(String.Format("{0}: {1}\r", name, message))
+                teLogStream.Text += String.Format("{0}: {1}\r", name, message)
+                //rtbLogStream.AppendText(String.Format("{0}: {1}\r", name, message))
                 )
             );
             try
@@ -288,9 +287,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             ChatPanel.Visibility = Visibility.Visible;
             ButtonSend.IsEnabled = true;
             TextBoxMessage.Focus();
-            //teLogStream.Text += "Connected to server at " + ServerURI + "\r";
-            //lbeLogStream.Items.Add("Connected to server at " + ServerURI + "\r");
-            rtbLogStream.AppendText("Connected to server at " + ServerURI + "\r");
+            teLogStream.Text += "Connected to server at " + ServerURI + "\r";
+            //rtbLogStream.AppendText("Connected to server at " + ServerURI + "\r");
         }
 
         /// <summary>
@@ -320,7 +318,18 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void rtbLogStream_TextChanged(object sender, TextChangedEventArgs e)
         {
-            rtbLogStream.ScrollToEnd();
+            //rtbLogStream.ScrollToEnd();
+        }
+
+        private void teLogStream_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            teLogStream.Focus();
+            teLogStream.SelectionStart = teLogStream.Text.Length;
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            teLogStream.Clear();
         }
 
 

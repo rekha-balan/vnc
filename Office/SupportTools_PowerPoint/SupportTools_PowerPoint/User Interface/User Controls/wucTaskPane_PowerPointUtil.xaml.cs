@@ -278,19 +278,23 @@ namespace SupportTools_PowerPoint.User_Interface.User_Controls
 
             string hyperLinkType = hyperlink.Type.ToString();
 
-            Common.WriteToWatchWindow(string.Format("Id:{0,-6}  Name:{1,-20}  ForeColor:{2,-10}  BackColor:{3,-10}   DashStyle:{4,-10}   TextFrame:{5,-20}   TextFrame2:{6,-20}",
+            Common.WriteToWatchWindow(string.Format("Id:{0,-3}  Name:{1,-20}  ForeColor:{2,-10}  BackColor:{3,-10}   DashStyle:{4,-10}   TextFrame:{5,-20}   TextFrame2:{6,-20}",
                 Id, name, foreColor, BackColor, dashStyle, textFrame, textFrame2));
 
-            Common.WriteToWatchWindow(string.Format("Id:{0,-6}  textFrameHyperlinkAddress:{1,-20}  textFrameHyperlinkSubAddress:{2,-10}",
+            Common.WriteToWatchWindow(string.Format("Id:{0,-3}  textFrameHyperlinkAddress:{1,-20}  textFrameHyperlinkSubAddress:{2,-10}",
                 Id, textFrameHyperlinkAddress, textFrameHyperlinkSubAddress));
 
-            Common.WriteToWatchWindow(string.Format("Id:{0,-6}  hyperLinkAddress:{1,-20}  hyperLinkSubAddress:{2,-10}  hyperLinkType:{3,-10}",
+            Common.WriteToWatchWindow(string.Format("Id:{0,-3}  hyperLinkAddress:{1,-20}  hyperLinkSubAddress:{2,-10}  hyperLinkType:{3,-10}",
                 Id, hyperLinkAddress, hyperLinkSubAddress, hyperLinkType));
         }
         void DisplaySlideInfo(Slide slide)
         {
-            Common.WriteToWatchWindow(string.Format("ID: {0,6}  Name: {1, 20}  Master Name: {2, 20}",
-                slide.SlideID, slide.Name, slide.Master.Name));
+            PpSlideLayout ppSlideLayout = slide.Layout;
+            Master master = slide.Master;
+            var customLayout = slide.CustomLayout;
+
+            Common.WriteToWatchWindow(string.Format("ID: {0, -3}  Name: >{1, 20}<  Master Name: >{2, 20}<  ppSlideLayout: >{3}<  CustomLayout: >{4}<",
+                slide.SlideID, slide.Name, master.Name, ppSlideLayout.ToString(), customLayout.Name));
         }
 
         #endregion

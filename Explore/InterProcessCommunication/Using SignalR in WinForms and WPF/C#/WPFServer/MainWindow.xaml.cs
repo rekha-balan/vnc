@@ -83,6 +83,11 @@ namespace WPFServer
 
             RichTextBoxConsole.AppendText(message + "\r");
         }
+
+        private void tbServerURI_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ServerURI = tbServerURI.Text;
+        }
     }
 
     /// <summary>
@@ -106,7 +111,23 @@ namespace WPFServer
     {
         public void Send(string name, string message)
         {
-            Clients.All.addMessage(name, message);
+            //switch (name)
+            //{
+                //case "SRL":
+                //    Clients.All.addUserMessage("", message);
+
+                //    //Clients.All.addMessage(message);
+                //    break;
+
+                //default:
+                    Clients.All.addUserMessage(name, message);
+                    //break;
+            //}
+
+        }
+        public void Send(string message)
+        {
+            Clients.All.addMessage(message);
         }
 
         public override Task OnConnected()

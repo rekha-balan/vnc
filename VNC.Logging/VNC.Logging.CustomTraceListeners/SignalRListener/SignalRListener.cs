@@ -93,7 +93,8 @@ namespace VNC.Logging.CustomTraceListeners
             {
                 //message = message + "*W*";
                 //client.DisplayLogEntry(message);  // Named pipes
-                HubProxy.Invoke("Send", SignalRListenerUser, message);
+                //HubProxy.Invoke("Send", SignalRListenerUser, message);
+                HubProxy.Invoke("Send",  message);
             }
             catch (Exception ex)
             {
@@ -108,7 +109,8 @@ namespace VNC.Logging.CustomTraceListeners
             {
                 //message = message + "*WL*";
                 //client.DisplayLogEntry(message); named pipes
-                HubProxy.Invoke("Send", SignalRListenerUser, message);
+                //HubProxy.Invoke("Send", SignalRListenerUser, message);
+                HubProxy.Invoke("Send", message);
             }
             catch (Exception ex)
             {
@@ -398,7 +400,12 @@ namespace VNC.Logging.CustomTraceListeners
     {
         public void Send(string name, string message)
         {
-            Clients.All.addMessage(name, message);
+            Clients.All.addUserMessage(name, message);
+        }
+
+        public void Send(string message)
+        {
+            Clients.All.addMessage(message);
         }
 
         //public override Task OnConnected()

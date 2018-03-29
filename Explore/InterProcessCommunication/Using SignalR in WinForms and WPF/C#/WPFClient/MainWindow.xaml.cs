@@ -35,6 +35,13 @@ namespace WPFClient
             TextBoxMessage.Focus();
         }
 
+        private void btnSendAnoymous_Click(object sender, RoutedEventArgs e)
+        {
+            HubProxy.Invoke("Send", TextBoxMessage.Text);
+            TextBoxMessage.Text = String.Empty;
+            TextBoxMessage.Focus();
+        }
+
         /// <summary>
         /// Creates and connects the hub connection and hub proxy. This method
         /// is called asynchronously from SignInButton_Click.
@@ -45,9 +52,15 @@ namespace WPFClient
             Connection.Closed += Connection_Closed;
             HubProxy = Connection.CreateHubProxy("MyHub");
             //Handle incoming event from server: use Invoke to write to console from SignalR's thread
-            HubProxy.On<string, string>("AddMessage", (name, message) =>
+            HubProxy.On<string, string>("AddUserMessage", (name, message) =>
                 this.Dispatcher.Invoke(() =>
                     RichTextBoxConsole.AppendText(String.Format("{0}: {1}\r", name, message))
+                )
+            );
+
+            HubProxy.On<string>("AddMessage", (message) =>
+                this.Dispatcher.Invoke(() =>
+                    RichTextBoxConsole.AppendText(String.Format("{0}\r", message))
                 )
             );
             try
@@ -65,6 +78,7 @@ namespace WPFClient
             SignInPanel.Visibility = Visibility.Collapsed;
             ChatPanel.Visibility = Visibility.Visible;
             ButtonSend.IsEnabled = true;
+            ButtonSendAnoymous.IsEnabled = true;
             TextBoxMessage.Focus();
             RichTextBoxConsole.AppendText("Connected to server at " + ServerURI + "\r");
         }
@@ -102,6 +116,8 @@ namespace WPFClient
                 Connection.Stop();
                 Connection.Dispose();
             }
-        }  
+        }
+
+
     }
 }
