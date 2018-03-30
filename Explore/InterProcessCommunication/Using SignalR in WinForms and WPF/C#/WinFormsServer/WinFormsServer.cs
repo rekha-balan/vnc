@@ -120,10 +120,18 @@ namespace SignalRChat
             Program.MainForm.WriteToConsole("Client connected: " + Context.ConnectionId);
             return base.OnConnected();
         }
-        public override Task OnDisconnected()
+
+        public override Task OnDisconnected(bool stopCalled)
         {
             Program.MainForm.WriteToConsole("Client disconnected: " + Context.ConnectionId);
-            return base.OnDisconnected();
+
+            return base.OnDisconnected(stopCalled);
         }
+
+        //public override Task OnDisconnected()
+        //{
+        //    Program.MainForm.WriteToConsole("Client disconnected: " + Context.ConnectionId);
+        //    return base.OnDisconnected();
+        //}
     }
 }

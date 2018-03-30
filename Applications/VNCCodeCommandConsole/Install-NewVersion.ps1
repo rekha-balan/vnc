@@ -1,3 +1,4 @@
+cd C:\GitHub\VNC\Applications\VNCCodeCommandConsole
 
 $destination = "C:\Public\CCC Release"
 $SourcePath = ".\bin\Release\*"
@@ -13,6 +14,7 @@ $SourcePath = ".\bin\Release\*"
 # {
     # Copy-Item -Path $sourceFile -Destination $file
 # }
+"Installing new CodeCommandConsole to $destination"
 
-Copy-Item -Path $sourcePath -Destination  $destination
+Copy-Item -Path $sourcePath -Recurse -Force -Destination  $destination
 # Copy-Item 

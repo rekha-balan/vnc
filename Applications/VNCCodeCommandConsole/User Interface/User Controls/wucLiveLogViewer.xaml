@@ -162,7 +162,7 @@
                                                  HorizontalAlignment="Right">
                                                  
                                                 <dxe:SpinEdit x:Name="sbFontSize" 
-                                                    MinValue="8" Value="8" HorizontalAlignment="Right" /> 
+                                                    MinValue="8" Value="10" HorizontalAlignment="Right" /> 
                                                 
                                             </dxlc:LayoutItem>
                                         </dxlc:LayoutGroup>

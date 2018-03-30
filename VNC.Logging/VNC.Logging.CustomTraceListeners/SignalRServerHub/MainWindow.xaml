@@ -1,0 +1,21 @@
+﻿<Window x:Class="SignalRServerHub.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF SignalR Server" Height="319" Width="343  ">
+    <Grid>
+        <StackPanel>
+        <TextBox x:Name="tbServerURI" Text="http://localhost:8095" VerticalAlignment="Top" TextChanged="tbServerURI_TextChanged" />
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonStart" Content="Start" HorizontalAlignment="Left" Width="100" Click="ButtonStart_Click"/>
+                <Button x:Name="ButtonStop" Content="Stop" HorizontalAlignment="Right" Width="100" Click="ButtonStop_Click" IsEnabled="False"/>
+
+            </StackPanel>
+            <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Margin="10,35,10,10" VerticalAlignment="Stretch" Width="315">
+                <FlowDocument>
+                    <Paragraph>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </StackPanel>
+    </Grid>
+</Window>
