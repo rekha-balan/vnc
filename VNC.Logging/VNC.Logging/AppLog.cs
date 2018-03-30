@@ -221,7 +221,7 @@ namespace VNC
             }
         }
 
-        //[DebuggerStepThrough]
+        [DebuggerStepThrough]
         private static void InternalWrite(string message, TraceEventType severity, string category, LoggingPriority priority, string className, string methodName, string callingAssemblyName, bool showStack, int EventId)
         {
             string str = "";
@@ -262,7 +262,7 @@ namespace VNC
             }
         }
 
-        //[DebuggerStepThrough]
+        [DebuggerStepThrough]
         private static void InternalWrite(string message, TraceEventType severity, string category, LoggingPriority priority, string className, string methodName, string callingAssemblyName, bool showStack, long startTicks)
         {
             string str = "";

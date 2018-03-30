@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveViewListenerClientConso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRListener", "SignalRListener\SignalRListener.csproj", "{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{40C56846-04AF-457A-A68F-EBCABD765E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRServerHub", "SignalRServerHub\SignalRServerHub.csproj", "{29A0847C-A71D-4C3B-932F-9B472C0908C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60A3078C-1B2F-4809-93FF-ED5BCDDDD38B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
