@@ -26,14 +26,14 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
     /// <summary>
     /// Interaction logic for wndDX_ExploreInstances.xaml
     /// </summary>
-    public partial class wucLiveLogViewer : wucDXBase
+    public partial class wucLiveLogEditor : wucDXBase
     {
         public String UserName { get; set; }
         public IHubProxy HubProxy { get; set; }
         //private string ServerURI = "http://localhost:8095/signalr";
         public HubConnection Connection { get; set; }
 
-        public wucLiveLogViewer()
+        public wucLiveLogEditor()
         {
             try
             {
@@ -115,8 +115,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             HubProxy.On<string, string>("AddUserMessage", (name, message) =>
                 this.Dispatcher.Invoke(() =>
                 {
-                    teLogStream.Text += String.Format("{0}: {1}\n", name, message);
-                    //recLogStream.Text += String.Format("{0}: {1}\n", name, message);
+                    //teLogStream.Text += String.Format("{0}: {1}\n", name, message);
+                    recLogStream.Text += String.Format("{0}: {1}\n", name, message);
                 }
                 )
             );
@@ -124,8 +124,44 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             HubProxy.On<string>("AddMessage", (message) =>
                 this.Dispatcher.Invoke(() =>
                 {
-                    teLogStream.Text += String.Format("{0}\n", message);
-                })
+                    //teLogStream.Text += String.Format("{0}\n", message);
+                    recLogStream.Text += String.Format("{0}\r", message);
+
+
+                    //if (message.Contains("1002"))
+                    //{
+                    //    Document doc = recLogStream.Document;
+                    //    DocumentPosition docPosition = doc.CaretPosition;
+                    //    //recLogStream.Document.InsertRtfText(docPosition, message);
+                    //    string boldLeader = @"{\rtlch\fcs1 \ab\af0\afs48 \ltrch\fcs0 \b\fs48\cf1\insrsid5995062 }";
+                    //    string boldTrailer = @"{\rtlch\fcs1 \ab\af0\afs48 \ltrch\fcs0 \b\fs48\insrsid5995062 \par }";
+
+                    //    string formattedMessage = string.Format("{0}{1}{2}\n", boldLeader, message, boldTrailer);
+
+                    //    doc.BeginUpdate();
+
+                    //    recLogStream.Document.AppendRtfText(formattedMessage);
+
+                    //    doc.EndUpdate();
+                    //    //recLogStream.Document.InsertRtfText(docPosition, formattedMessage);
+
+                    //    //recLogStream.RtfText += formattedMessage;
+
+                    //    //Range range = new Range();
+
+                    //    //CharacterProperties cp = doc.BeginUpdateCharacters(docPosition.);
+
+                    //    //recLogStream.RtfText += range.ToString();
+                    //}
+                    //else
+                    //{
+
+                    //    recLogStream.Document.AppendRtfText(string.Format("{0}\n", message));
+                    //    //recLogStream.RtfText += String.Format("{0}\n", message);
+                    //}
+                }
+
+                )
             );
 
             try
@@ -144,8 +180,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             ChatPanel.Visibility = Visibility.Visible;
             ButtonSend.IsEnabled = true;
             TextBoxMessage.Focus();
-            teLogStream.Text += "Connected to server at " + ServerURI + "\r";
-            //recLogStream.Text += "Connected to server at " + ServerURI + "\r";
+            //teLogStream.Text += "Connected to server at " + ServerURI + "\r";
+            recLogStream.Text += "Connected to server at " + ServerURI + "\r";
             //rtbLogStream.AppendText("Connected to server at " + ServerURI + "\r");
         }
 
@@ -172,16 +208,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
         }
 
-        private void teLogStream_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-            teLogStream.Focus();
-            teLogStream.SelectionStart = teLogStream.Text.Length;
-        }
+        //private void teLogStream_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        //{
+        //    teLogStream.Focus();
+        //    teLogStream.SelectionStart = teLogStream.Text.Length;
+        //}
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            teLogStream.Clear();
-            //recLogStream.Text = "";
+            //teLogStream.Clear();
+            recLogStream.Text = "";
         }
 
         private void recLogStream_TextChanged(object sender, EventArgs e)

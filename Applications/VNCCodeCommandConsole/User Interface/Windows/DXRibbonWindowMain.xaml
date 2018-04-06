@@ -258,6 +258,15 @@
                     LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
                     ItemClick="OnShowInCurrentWindow_Click" 
                     Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucLiveLogViewer"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_LiveLogEditor" 
+                    Content="LiveLogEditor" 
+                    Hint="LiveLogEditor with Docking Windowsr"
+                    Glyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    LargeGlyph="/VNCCodeCommandConsole;component/Resources/Icons/application.ico"
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="VNCCodeCommandConsole.User_Interface.User_Controls.wucLiveLogEditor"/>                
 
                 <dxb:BarButtonItem 
                     Name="bbi_Beta1" 
@@ -359,6 +368,7 @@
                                 IsVisible="{Binding Path=(local:Common.IsBetaUser)}" 
                                 IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
                     <dxb:BarButtonItemLink BarItemName="bbi_LiveLogViewer" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_LiveLogEditor" IsVisible="True" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta1" />
                     <dxb:BarButtonItemLink BarItemName="bbi_Beta2" />
                 </dxb:BarSubItem>
