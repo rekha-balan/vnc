@@ -1,0 +1,1 @@
+get-item env:path | select-object value | split-string -Separator ";" | sort-object

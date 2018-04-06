@@ -1,0 +1,22 @@
+get-childitem -path . -filter *.cs -recurse | select-string message
+
+Get-ChildItem .\ -include bin,obj,Backup,_UpgradeReport_Files,Debug,ipch -Recurse | foreach ($_) { remove-item $_.fullname -Force -Recurse }
+
+To process MCR files
+
+select-string "A43825" * | foreach-object {$_.Line}
+select-string "A43825" * | % {$_.Path}
+
+Note the difference in output type.
+
+PS:31 >select-string "A43825" * | % {$_.Line} | get-member
+
+   TypeName: System.String
+   
+PS:33 >select-string "A43825" * | % { [xml] $_.Line} | get-member
+
+   TypeName: System.Xml.XmlDocument
+
+# Get all PowerShell commands
+
+get-Help * | select-object name,synopsis | sort-object name | format-table -Auto
