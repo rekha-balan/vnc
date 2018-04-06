@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1d269df9-79c1-42ed-b612-482292c61a18" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8090/LiveViewListenerService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LiveViewListenerService.wsdl" MetadataType="Wsdl" ID="63b35b18-3392-4c31-b59b-bd4de2745abc" SourceId="1" SourceUrl="http://localhost:8090/LiveViewListenerService?wsdl=wsdl0" />
+    <MetadataFile FileName="LiveViewListenerService.xsd" MetadataType="Schema" ID="aa38c89c-fb27-4e7e-9fc0-01129e261d71" SourceId="1" SourceUrl="http://localhost:8090/LiveViewListenerService?xsd=xsd0" />
+    <MetadataFile FileName="LiveViewListenerService1.wsdl" MetadataType="Wsdl" ID="c359d801-f914-4a1a-a85b-7424d12cfffc" SourceId="1" SourceUrl="http://localhost:8090/LiveViewListenerService?wsdl" />
+    <MetadataFile FileName="LiveViewListenerService.disco" MetadataType="Disco" ID="f5375092-e818-42e7-9fbd-b78b8a0b114f" SourceId="1" SourceUrl="http://localhost:8090/LiveViewListenerService?disco" />
+    <MetadataFile FileName="LiveViewListenerService1.xsd" MetadataType="Schema" ID="0b84fddb-32a4-46d4-bb12-eb353fcc2376" SourceId="1" SourceUrl="http://localhost:8090/LiveViewListenerService?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

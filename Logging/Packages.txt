@@ -1,0 +1,4 @@
+﻿Install-Package
+EnterpriseLibrary.Logging -Version 5.0.505.1
+Microsoft.AspNet.SignalR.Client
+Microsoft.Owin.Cors -Verison 3.1.0

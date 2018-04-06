@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TestLogging", "TestLogging\TestLogging.vbproj", "{D9644A1B-913F-4A7E-83E3-6561EED3086D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLoggingDLL", "TestLoggingDLL\TestLoggingDLL.csproj", "{DD4C82B5-F59D-4015-8F6B-505B09A4F86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLoggingSimple", "TestLoggingSimple\TestLoggingSimple.csproj", "{CC4C34F2-82FC-4EB3-91AC-539DD75AA9C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNC.Logging", "VNC.Logging.csproj", "{0A14CB8D-94E2-4BD4-BAB3-1DC242D49F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{40C56846-04AF-457A-A68F-EBCABD765E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRServerHub", "SignalRServerHub\SignalRServerHub.csproj", "{29A0847C-A71D-4C3B-932F-9B472C0908C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9644A1B-913F-4A7E-83E3-6561EED3086D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9644A1B-913F-4A7E-83E3-6561EED3086D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9644A1B-913F-4A7E-83E3-6561EED3086D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9644A1B-913F-4A7E-83E3-6561EED3086D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD4C82B5-F59D-4015-8F6B-505B09A4F86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4C82B5-F59D-4015-8F6B-505B09A4F86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4C82B5-F59D-4015-8F6B-505B09A4F86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4C82B5-F59D-4015-8F6B-505B09A4F86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4C34F2-82FC-4EB3-91AC-539DD75AA9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4C34F2-82FC-4EB3-91AC-539DD75AA9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4C34F2-82FC-4EB3-91AC-539DD75AA9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4C34F2-82FC-4EB3-91AC-539DD75AA9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A14CB8D-94E2-4BD4-BAB3-1DC242D49F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A14CB8D-94E2-4BD4-BAB3-1DC242D49F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A14CB8D-94E2-4BD4-BAB3-1DC242D49F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A14CB8D-94E2-4BD4-BAB3-1DC242D49F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C56846-04AF-457A-A68F-EBCABD765E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A0847C-A71D-4C3B-932F-9B472C0908C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35
+		SolutionGuid = {5AE4CD92-54C9-48E8-9929-85E0A5F5538F}
+	EndGlobalSection
+EndGlobal
