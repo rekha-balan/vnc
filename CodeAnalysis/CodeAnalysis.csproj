@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D21B031-3BFE-44B1-A622-D500230F90A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VNC.CodeAnalysis</RootNamespace>
+    <AssemblyName>VNC.CodeAnalysis</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalcBinding, Version=2.3.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\CalcBinding.2.3.0.1\lib\net45\CalcBinding.dll</HintPath>
+    </Reference>
+    <Reference Include="Crc32C.NET, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Crc32C.NET.1.0.5.0\lib\net20\Crc32C.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DynamicExpresso.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\DynamicExpresso.Core.2.0.0\lib\net461\DynamicExpresso.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.CSharp.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.CSharp.Workspaces.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.VisualBasic.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.VisualBasic.Workspaces.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.7.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.7.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Composition.AttributedModel.1.1.0\lib\netstandard2.0\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Convention, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Composition.Convention.1.1.0\lib\netstandard2.0\System.Composition.Convention.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Composition.Hosting.1.1.0\lib\netstandard2.0\System.Composition.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Composition.Runtime.1.1.0\lib\netstandard2.0\System.Composition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Composition.TypedParts.1.1.0\lib\netstandard2.0\System.Composition.TypedParts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Reflection.Metadata.1.5.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Applications\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="VNC.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e85d2f854dfd286, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\VNC.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.XamlHelper">
+      <HintPath>..\Common\VNC.XamlHelper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DesignMetrics\CS\AbstractTypesWithConstructors.cs" />
+    <Compile Include="DesignMetrics\CS\DataClasses.cs" />
+    <Compile Include="DesignMetrics\CS\DeeplyNestedIfBlocks.cs" />
+    <Compile Include="DesignMetrics\CS\DeeplyNestedLoops.cs" />
+    <Compile Include="DesignMetrics\CS\EmptyInterfaces.cs" />
+    <Compile Include="DesignMetrics\CS\LocalClasses.cs" />
+    <Compile Include="DesignMetrics\CS\LongListOfSwitches.cs" />
+    <Compile Include="DesignMetrics\CS\LotsOfMethodOverloads.cs" />
+    <Compile Include="DesignMetrics\CS\ObjectObsession.cs" />
+    <Compile Include="DesignMetrics\CS\OutParameters.cs" />
+    <Compile Include="DesignMetrics\CS\RefusedBequest.cs" />
+    <Compile Include="DesignMetrics\CS\SealedClassAndProtectedMembers.cs" />
+    <Compile Include="DesignMetrics\CS\StaticMembersOnGenericTypes.cs" />
+    <Compile Include="DesignMetrics\CS\TooManyParametersOnGenericTypes.cs" />
+    <Compile Include="DesignMetrics\VB\StaticMembersOnGenericTypes.cs" />
+    <Compile Include="DesignMetrics\VB\TooManyParametersOnGenericTypes.cs" />
+    <Compile Include="DesignMetrics\VB\EmptyInterfaces.cs" />
+    <Compile Include="DesignMetrics\VB\LotsOfMethodOverloads.cs" />
+    <Compile Include="DesignMetrics\VB\RefusedBequest.cs" />
+    <Compile Include="DesignMetrics\VB\LocalClasses.cs" />
+    <Compile Include="DesignMetrics\VB\DataClasses.cs" />
+    <Compile Include="DesignMetrics\VB\LongListOfSwitches.cs" />
+    <Compile Include="DesignMetrics\VB\DeeplyNestedIfBlocks.cs" />
+    <Compile Include="DesignMetrics\VB\OutParameters.cs" />
+    <Compile Include="DesignMetrics\VB\AbstractTypesWithConstructors.cs" />
+    <Compile Include="DesignMetrics\VB\SealedClassAndProtectedMembers.cs" />
+    <Compile Include="DesignMetrics\VB\ObjectObsession.cs" />
+    <Compile Include="DesignMetrics\VB\DeeplyNestedLoops.cs" />
+    <Compile Include="ConfigurationOptions.cs" />
+    <Compile Include="ErrorNumbers.cs" />
+    <Compile Include="Helpers\Common.cs" />
+    <Compile Include="Helpers\CS.cs" />
+    <Compile Include="Helpers\VB.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidBoxing.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidExcessiveLocalVariables.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidUnnecessaryProjections.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidUsingDynamicByDefault.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidUsingEmptyStringsToFindZeroLengthStrings.cs" />
+    <Compile Include="PerformanceMetrics\CS\AvoidVolatileDeclarations.cs" />
+    <Compile Include="PerformanceMetrics\CS\DoNotReturnArrayFromProperty.cs" />
+    <Compile Include="PerformanceMetrics\CS\DoNotUseObjectArrayInParams.cs" />
+    <Compile Include="PerformanceMetrics\CS\DoNotUseThreadAbortOrThreadSuspend.cs" />
+    <Compile Include="PerformanceMetrics\CS\PreferJaggedArraysOverMultidimensionalArrays.cs" />
+    <Compile Include="PerformanceMetrics\CS\PreferLiteralsOverEvaluation.cs" />
+    <Compile Include="PerformanceMetrics\CS\ValueTypesShouldOverrideEqualsAndGetHashCode.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidBoxing.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidExcessiveLocalVariables.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidUnnecessaryProjections.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidUsingDynamicByDefault.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidUsingEmptyStringsToFindZeroLengthStrings.cs" />
+    <Compile Include="PerformanceMetrics\VB\AvoidVolatileDeclarations.cs" />
+    <Compile Include="PerformanceMetrics\VB\DoNotReturnArrayFromProperty.cs" />
+    <Compile Include="PerformanceMetrics\VB\DoNotUseObjectArrayInParams.cs" />
+    <Compile Include="PerformanceMetrics\VB\DoNotUseThreadAbortOrThreadSuspend.cs" />
+    <Compile Include="PerformanceMetrics\VB\PreferJaggedArraysOverMultidimensionalArrays.cs" />
+    <Compile Include="PerformanceMetrics\VB\PreferLiteralsOverEvaluation.cs" />
+    <Compile Include="PerformanceMetrics\VB\ValueTypesShouldOverrideEqualsAndGetHashCode.cs" />
+    <Compile Include="QualityMetrics\CS\CodeToCommentRatio.cs" />
+    <Compile Include="QualityMetrics\CS\ControlFlags.cs" />
+    <Compile Include="QualityMetrics\CS\FragmentedConditions.cs" />
+    <Compile Include="QualityMetrics\CS\GoToLabels.cs" />
+    <Compile Include="QualityMetrics\CS\HungarianVariableNames.cs" />
+    <Compile Include="QualityMetrics\CS\LadderIfStatements.cs" />
+    <Compile Include="QualityMetrics\CS\LargeClass.cs" />
+    <Compile Include="QualityMetrics\CS\LinesOfCode.cs" />
+    <Compile Include="QualityMetrics\CS\LongParameterList.cs" />
+    <Compile Include="QualityMetrics\CS\LotsOfLocalVariables.cs" />
+    <Compile Include="QualityMetrics\CS\MagicNumbersInCondition.cs" />
+    <Compile Include="QualityMetrics\CS\MagicNumbersInIndex.cs" />
+    <Compile Include="QualityMetrics\CS\MagicNumbersInMath.cs" />
+    <Compile Include="QualityMetrics\CS\MultipleReturnStatements.cs" />
+    <Compile Include="QualityMetrics\CS\UnusedMethodParameters.cs" />
+    <Compile Include="QualityMetrics\VB\CodeToCommentRatio.cs" />
+    <Compile Include="QualityMetrics\VB\ControlFlags.cs" />
+    <Compile Include="QualityMetrics\VB\FragmentedConditions.cs" />
+    <Compile Include="QualityMetrics\VB\GoToLabels.cs" />
+    <Compile Include="QualityMetrics\VB\HungarianVariableNames.cs" />
+    <Compile Include="QualityMetrics\VB\LadderIfStatements.cs" />
+    <Compile Include="QualityMetrics\VB\LargeClass.cs" />
+    <Compile Include="QualityMetrics\VB\LinesOfCode.cs" />
+    <Compile Include="QualityMetrics\VB\LongParameterList.cs" />
+    <Compile Include="QualityMetrics\VB\LotsOfLocalVariables.cs" />
+    <Compile Include="QualityMetrics\VB\MagicNumbersInCondition.cs" />
+    <Compile Include="QualityMetrics\VB\MagicNumbersInIndex.cs" />
+    <Compile Include="QualityMetrics\VB\MagicNumbersInMath.cs" />
+    <Compile Include="QualityMetrics\VB\MultipleReturnStatements.cs" />
+    <Compile Include="QualityMetrics\VB\UnusedMethodParameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RewriteFileCommandConfiguration.cs" />
+    <Compile Include="SearchFileCommandConfiguration.cs" />
+    <Compile Include="SearchTreeCommandConfiguration.cs" />
+    <Compile Include="RewriteTreeCommandConfiguration.cs" />
+    <Compile Include="Symbols.cs" />
+    <Compile Include="SyntaxNode\WalkerDepth.cs" />
+    <Compile Include="SyntaxNode\AdditionaNodes.cs" />
+    <Compile Include="SyntaxNode\VB\Classes.cs" />
+    <Compile Include="SyntaxNode\VB\Methods.cs" />
+    <Compile Include="SyntaxNode\VB\Modules.cs" />
+    <Compile Include="SyntaxNode\VB\Structures.cs" />
+    <Compile Include="SyntaxRewriters\Helpers.cs" />
+    <Compile Include="SyntaxRewriters\VB\RewriteCellFormatFontColor.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveFieldDeclaration.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveExpressionStatement.cs" />
+    <Compile Include="SyntaxRewriters\VB\VNCVBSyntaxRewriterBase.cs" />
+    <Compile Include="SyntaxRewriters\VB\RewriterIdeas.cs" />
+    <Compile Include="SyntaxRewriters\VB\WrapSQLFillCallsInDALHelper.cs" />
+    <Compile Include="SyntaxRewriters\VB\WrapSQLExecuteXCallsInDALHelper.cs" />
+    <Compile Include="SyntaxRewriters\VB\MultipleVariableDeclarations.cs" />
+    <Compile Include="SyntaxRewriters\CS\MyRewriter.cs" />
+    <Compile Include="SyntaxRewriters\VB\CommentOutSingleLineInvocationExpression.cs" />
+    <Compile Include="SyntaxRewriters\VB\InvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\CS\VisitAll.cs" />
+    <Compile Include="SyntaxWalkers\CS\VNCCSSyntaxWalkerBase.cs" />
+    <Compile Include="SyntaxWalkers\VB\AsNewClause.cs" />
+    <Compile Include="SyntaxWalkers\VB\ExpressionStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
+    <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />
+    <Compile Include="SyntaxWalkers\VB\VIsitAll.cs" />
+    <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
+    <Compile Include="SyntaxWalkers\VB\MemberAccessExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\InvocationExpressionInTryCatchWalker.cs" />
+    <Compile Include="SyntaxWalkers\VB\ObjectCreationExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\AssignmentStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\BinaryExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\SimpleAsClause.cs" />
+    <Compile Include="SyntaxWalkers\VB\LocalDeclarationStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\MethodStatementNames.cs" />
+    <Compile Include="SyntaxWalkers\VB\Parameter.cs" />
+    <Compile Include="SyntaxWalkers\VB\ParameterList.cs" />
+    <Compile Include="SyntaxWalkers\VB\PropertyBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\PropertyStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\FieldDeclaration.cs" />
+    <Compile Include="SyntaxWalkers\VB\ModuleBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\ModuleStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\MethodStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\MethodBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\HttpContextCurrentInvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\ClassBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\ClassStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\NamespaceStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\ImportsStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\StructureBlock.cs" />
+    <Compile Include="SyntaxWalkers\VB\MultipleVariableDeclarator.cs" />
+    <Compile Include="SyntaxWalkers\VB\VariableDeclarator.cs" />
+    <Compile Include="SyntaxWalkers\VB\InvocationExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\VNCVBTypedSyntaxWalkerBase.cs" />
+    <Compile Include="SyntaxWalkers\VB\VNCVBSyntaxWalkerBase.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="Workspace\Document.cs" />
+    <Compile Include="Workspace\Helper.cs" />
+    <Compile Include="Workspace\Project.cs" />
+    <Compile Include="Workspace\Solution.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SyntaxNode\CS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\Applications\packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\Applications\packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug goto :debug
+
+:release
+copy $(TargetName).* ..\..\..\Common\
+
+goto :exit
+
+:debug
+copy $(TargetName).* ..\..\..\Common\$(ConfigurationName)\
+
+:exit</PostBuildEvent>
+  </PropertyGroup>
+</Project>

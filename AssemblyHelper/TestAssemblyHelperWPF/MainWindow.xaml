@@ -1,0 +1,45 @@
+﻿<Window x:Class="TestAssemblyHelperWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="552">
+    <Window.Resources>
+        <Style x:Key="Buttons" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="10,5,10,5" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <Label Content="Assembly Path" />
+            <TextBox Name="txtAssemblyPath" 
+                     Margin="10,5,10,5"
+                     Text="C:\Ease Inc\Installation\builds\7.0\master\7.0.0.1350\client\EASE7_ClientApps_7.0.0.1350\EaseCore.dll" />
+            <Button Name="btnDisplayAssemblyInfo" 
+                    Content="Display Assembly Info"
+                    Style="{StaticResource Buttons}"
+                    Click="btnDisplayAssemblyInfo_Click" />
+
+            <Button x:Name="btnDomainReflection"  
+                    Content="Test Domain Reflection" 
+                    Style="{StaticResource Buttons}"
+                    Click="btnDomainReflection_Click"/>
+
+            <Button x:Name="btnAssemblyReflection"
+                    Content="Test Assembly Reflection" 
+                    Style="{StaticResource Buttons}"
+                    Click="btnAssemblyReflection_Click" />
+
+            </StackPanel>
+        <StackPanel Grid.Row="1">
+        <Label Content="Output" />
+            <TextBox Name="txtOutput" 
+                     Margin="10"
+                     VerticalScrollBarVisibility="Auto" />            
+        </StackPanel>
+
+    </Grid>
+</Window>

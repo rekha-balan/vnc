@@ -1,0 +1,13 @@
+﻿<dx:DXWindow
+    x:Class="VNCAssemblyViewer.User_Interface.Windows.dxwUserControlHost"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:uiuc="clr-namespace:VNCAssemblyViewer.User_Interface.User_Controls"     
+    Title="Need Title" 
+    Icon="/VNCAssemblyViewer;component/Resources/Icons/Application.ico" 
+    Width="600" Height="400" >
+    <Grid Name="g_UserControlContainer" >
+        <!-- User Controls get loaded here -->
+    </Grid>
+</dx:DXWindow>

@@ -1,0 +1,303 @@
+﻿<UserControl 
+    x:Class="VNCAssemblyViewer.User_Interface.User_Controls.wuc3DUI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"  
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxch="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"         
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    
+    xmlns:xamlTransitions="clr-namespace:XamlTransitions;assembly=VNC.XamlHelper"    
+    xmlns:local="clr-namespace:VNCAssemblyViewer"  
+    mc:Ignorable="d" 
+    d:DesignWidth="800" d:DesignHeight="600" 
+    Initialized="UserControl_Initialized"  >
+    <UserControl.Resources>
+        
+        <ResourceDictionary>
+            
+            <!--<FontFamily x:Key="FontFamilyBrand1">#Helvetica Neue LT Std 67</FontFamily>-->
+            
+            <!--<CollectionViewSource x:Key="instancesViewSource" Source="Common.ApplicationDataSet.Instances"/>-->
+            
+            <!--<DataTemplate x:Key="InstanceHeaderTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  />
+                        <ColumnDefinition  />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="40"/>
+                        <RowDefinition  Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
+                        <TextBlock Name="instanceName" Text="{Binding Path=InstanceName}"  
+                           FontSize="24" FontFamily="{StaticResource FontFamilyBrand1}" 
+                           Foreground="#3E3E3E"   />
+                        <TextBlock Name="engineEdition" Text="{Binding Path=EngineEdition}"  
+                           FontSize="24" FontFamily="{StaticResource FontFamilyBrand1}" 
+                           Foreground="#3E3E3E"  Margin="10,0,0,0" />
+                    </StackPanel>
+                    <TextBlock Name="netName" Text="{Binding Path=NetName}" 
+                       Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" FontSize="18" FontFamily="{StaticResource FontFamilyBrand1}" Foreground="#959595" />
+                    <TextBlock Name="isClustered" Text="{Binding Path=IsClustered}" 
+                       Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" FontSize="18" FontFamily="{StaticResource FontFamilyBrand1}" Foreground="#3E3E3E" />
+                    <TextBlock Name="Processors" Text="{Binding Path=Processors}" 
+                       Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" FontSize="18" FontFamily="{StaticResource FontFamilyBrand1}" Foreground="#959595" />
+
+                </Grid>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="instanceListTemplate">
+                <Border Margin="5" BorderThickness="2" BorderBrush="Orange" CornerRadius="2">
+                    <Grid Margin="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding InstanceName}" Grid.Column="0" Foreground="Black" />
+                        <TextBlock Text="{Binding Edition}" Grid.Column="1" Foreground="Black" />
+                    </Grid>
+                </Border>
+            </DataTemplate>-->
+        
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    
+    <Grid Grid.Row="0" Visibility="Visible">
+        <!-- Be careful if changing column widths -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="250"   x:Name="Master3DColumnDefinition" />
+            <ColumnDefinition  Width="0.25*" x:Name="MasterColumnDefinition" />
+            <ColumnDefinition  Width="0.5*"  x:Name="DetailColumnDefinition"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <!-- If want a menu Try to avoid this -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Master -->
+
+        <Grid x:Name="Master" 
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  
+            Margin="0,0,5,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <dxlc:LayoutControl x:Name="MasterView2DWrapperFor3DSnap">
+                <dxlc:LayoutControl.RenderTransform>
+                    <TranslateTransform x:Name="MasterView2DWrapperTranslate" />
+                </dxlc:LayoutControl.RenderTransform>
+
+                <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Master" x:Name="MasterView2D">
+
+                    <TextBlock Text="Main"/>
+
+                    <ListBox x:Name="List3DOverlay" 
+                        Style="{StaticResource LooklessListBox}" 
+                        SelectionChanged="OnServer3DOverlaySelectionChanged" 
+                        IsSynchronizedWithCurrentItem="True" 
+                        ItemContainerStyle="{StaticResource SmallMasterListItem}" 
+                        Opacity="0.0" Visibility="Collapsed" Grid.RowSpan="1">
+                        <ListBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.22" ScaleY="1.1" />
+                                <SkewTransform CenterX="0" CenterY="0" AngleX="0" AngleY="-5" />
+                                <TranslateTransform X="135" Y="20" />
+                            </TransformGroup>
+                        </ListBox.RenderTransform>
+                    </ListBox>
+                    
+                </dxlc:LayoutGroup>
+
+                <xamlTransitions:Rotate3D 
+                    x:Name="Rotater3DTransition" 
+                    xamlTransitions:Rotate3D.DurationTime="0.60" 
+                    d:IsHidden="true" 
+                    xamlTransitions:Rotate3D.ScaleX="0.8450" 
+                    xamlTransitions:Rotate3D.ScaleY="1.0" 
+                    xamlTransitions:Rotate3D.TranslateX="0.000" 
+                    xamlTransitions:Rotate3D.TranslateY="0.000" 
+                    xamlTransitions:Rotate3D.ScaleXTo="0.45" 
+                    xamlTransitions:Rotate3D.ScaleYTo="1.10" 
+                    xamlTransitions:Rotate3D.TranslateXTo="-0.33" 
+                    Visibility="Collapsed" 
+                    Grid.RowSpan="1" />
+                
+            </dxlc:LayoutControl>
+            
+            <!--<Grid x:Name="MasterView2DWrapperFor3DSnap" 
+                  Margin="0,0,0,0" 
+                  Grid.RowSpan="1">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="MasterView2DWrapperTranslate" />
+                </Grid.RenderTransform>
+                <Grid x:Name="MasterView2D" 
+                    Margin="0,0,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition  />
+                    </Grid.RowDefinitions>
+
+                    <ContentControl x:Name="MasterBackgroundContent" 
+                        Margin="0,0,0,0" 
+                        Grid.RowSpan="1" Grid.ColumnSpan="2" 
+                        Template="{StaticResource MasterBackgroundTemplate}" />
+                    
+                     --><!--Content Goes Here--><!-- 
+                    
+                    <ListBox x:Name="InstanceList" 
+                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                        ClipToBounds="False" 
+                        Margin="15,40,12,15"                             
+                           
+                        SelectionChanged="OnInstanceSelectionChanged" 
+                        IsSynchronizedWithCurrentItem="True" >
+                    </ListBox>
+                                      
+                </Grid>
+                
+            </Grid>
+
+            <xamlTransitions:Rotate3D 
+                x:Name="Rotater3DTransition" 
+                xamlTransitions:Rotate3D.DurationTime="0.60" 
+                d:IsHidden="true" 
+                xamlTransitions:Rotate3D.ScaleX="0.8450" 
+                xamlTransitions:Rotate3D.ScaleY="1.0" 
+                xamlTransitions:Rotate3D.TranslateX="0.000" 
+                xamlTransitions:Rotate3D.TranslateY="0.000" 
+                xamlTransitions:Rotate3D.ScaleXTo="0.45" 
+                xamlTransitions:Rotate3D.ScaleYTo="1.10" 
+                xamlTransitions:Rotate3D.TranslateXTo="-0.33" 
+                Visibility="Collapsed" 
+                Grid.RowSpan="1" />
+           
+            <ListBox x:Name="List3DOverlay" 
+                Style="{StaticResource LooklessListBox}" 
+                SelectionChanged="OnServer3DOverlaySelectionChanged" 
+                IsSynchronizedWithCurrentItem="True" 
+                ItemContainerStyle="{StaticResource SmallMasterListItem}" 
+                Opacity="0.0" Visibility="Collapsed" Grid.RowSpan="1">
+                <ListBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.22" ScaleY="1.1" />
+                        <SkewTransform CenterX="0" CenterY="0" AngleX="0" AngleY="-5" />
+                        <TranslateTransform X="135" Y="20" />
+                    </TransformGroup>
+                </ListBox.RenderTransform>
+            </ListBox>-->
+            
+        </Grid>
+
+        <!-- DetailMain -->
+
+        <!--<dxlc:LayoutControl x:Name="Detail" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1">-->
+            
+        <Grid x:Name="DetailMain" 
+            Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"
+            Margin="0,0,0,0"  >
+
+             <!--The Detail pane has a front a back.  Set Hidden to True on one but not both during design time--> 
+
+            <dxlc:LayoutControl x:Name="DetailFront2DWrapper" d:IsHidden="False" Grid.Column="1">
+                <dxlc:LayoutControl.RenderTransform>
+                    <TranslateTransform x:Name="DetailFront2DWrapperTranslate" />
+                </dxlc:LayoutControl.RenderTransform>
+
+                <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="DetailFront2DWraper">
+
+
+                <TextBlock Text="DetailBack2DWrapper"/>
+                    <Button 
+                        x:Name="DetailsButton" 
+                        Click="OnDetailsButton" 
+                        Grid.Row="4" 
+                        Content="Goto Details"  
+                        Margin="10,0,17,18" 
+                        VerticalAlignment="Bottom" 
+                        Height="33" />
+
+
+                </dxlc:LayoutGroup>
+
+                <xamlTransitions:Flip3D x:Name="Overview3D" 
+                    d:IsHidden="True" 
+                    xamlTransitions:Flip3D.ScaleX="0.717" 
+                    xamlTransitions:Flip3D.ScaleY="1.000" 
+                    xamlTransitions:Flip3D.TranslateX="-0.014" 
+                    xamlTransitions:Flip3D.TranslateY="0.013" 
+                    FlipCompleted="Overview3D_FlipCompleted" 
+                    Margin="5,5,-5,-5"  
+                    Visibility="Collapsed" />                
+            </dxlc:LayoutControl>
+            
+            <dxlc:LayoutControl x:Name="DetailBack2DWrapper" d:IsHidden="True" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                <dxlc:LayoutControl.RenderTransform>
+                    <TranslateTransform x:Name="DetailBack2DWrapperTranslate" />
+                </dxlc:LayoutControl.RenderTransform>
+
+                <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="DetailBack2DWrapper">
+                    <TextBlock Text="DetailBack2DWrapper"/>
+                    <Button 
+                            x:Name="BackToOverview" 
+                            Content="Back to Overview" 
+                            Grid.Row="3" 
+                            Click="OnBackToOverview" 
+                            VerticalAlignment="Center" 
+                            Margin="10,0,0,0" 
+                            Height="30" 
+                            Grid.ColumnSpan="3"/>
+                </dxlc:LayoutGroup>
+                
+            </dxlc:LayoutControl>
+            
+            <xamlTransitions:Rotate3D 
+                x:Name="DetailRotater3DTransition" 
+                d:IsHidden="true" Visibility="Collapsed"
+                xamlTransitions:Rotate3D.ScaleX="0.71" 
+                xamlTransitions:Rotate3D.ScaleY="0.995" 
+                xamlTransitions:Rotate3D.TranslateX="-0.0052" 
+                xamlTransitions:Rotate3D.TranslateY="-0.010"  
+                xamlTransitions:Rotate3D.ScaleXBack="0.715" 
+                xamlTransitions:Rotate3D.ScaleYBack="0.66" 
+                xamlTransitions:Rotate3D.TranslateXBack="0.000" 
+                xamlTransitions:Rotate3D.TranslateYBack="0.000"  />
+
+        </Grid>
+        <!--</dxlc:LayoutControl>-->
+
+        <GridSplitter x:Name="GridSplitter" 
+            Grid.Row="1" Grid.Column="1" 
+            Margin="0,4,1,1" 
+            Width="5" 
+            Background="{x:Null}" 
+            Visibility="Hidden" />
+
+    </Grid>
+
+</UserControl>
