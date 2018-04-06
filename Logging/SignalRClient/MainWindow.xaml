@@ -4,9 +4,10 @@
         Title="WPF SignalR Client" Height="552" Width="517" MinWidth="517" MinHeight="552" ResizeMode="CanResizeWithGrip" Closing="WPFClient_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="297*"/>
-            <ColumnDefinition Width="214*"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="314*"/>
         </Grid.ColumnDefinitions>
+        
         <StackPanel x:Name="SignInPanel" Margin="10,0" MaxWidth="550" Grid.ColumnSpan="2">
             <TextBox x:Name="tbServerURI" Text="http://localhost:8095/signalr" VerticalAlignment="Top" />
             <Label Content="Enter user name:"/>
@@ -28,9 +29,25 @@
             <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Height="461" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,10" IsReadOnly="True"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-            <Label Content="DelayMS" />
-            <TextBox x:Name="tbDelayMS">100</TextBox>
-            <Button x:Name="btnLog" Content="Log" Click="btnLog_Click"></Button>
+            <Label Content="DelayMS" VerticalContentAlignment="Center" />
+            <TextBox x:Name="tbDelayMS" VerticalContentAlignment="Center">100</TextBox>
+            <Button x:Name="btnLog" Content="Log Delay" Click="btnLog_Click" />
+            
+            <StackPanel>
+                <Button Content="Debug" Click="Debug_Click" />
+                <Button Content="Debug1" Click="Debug1_Click"/>
+                <Button Content="Debug2" Click="Debug2_Click" />
+                <Button Content="Debug3" Click="Debug3_Click" />
+                <Button Content="Debug4" Click="Debug4_Click" />
+            </StackPanel>
+            <StackPanel>
+                <Button Content="Trace" Click="Trace_Click" />
+                <Button Content="Trace1" Click="Trace1_Click"/>
+                <Button Content="Trace2" Click="Trace2_Click" />
+                <Button Content="Trace3" Click="Trace3_Click" />
+                <Button Content="Trace4" Click="Trace4_Click" />
+            </StackPanel>
+         
         </StackPanel>
     </Grid>
 </Window>

@@ -14,29 +14,28 @@ using VNC.Logging.Configuration;
 
 namespace VNC.Logging.Filters
 {
-    [ConfigurationElementType(typeof(PerformanceFilterData))]
-    public class PerformanceFilter : Microsoft.Practices.EnterpriseLibrary.Logging.Filters.LogFilter
+    [ConfigurationElementType(typeof(DurationFilterData))]
+    public class DurationFilter : Microsoft.Practices.EnterpriseLibrary.Logging.Filters.LogFilter
     {
         private double maxDuration = -1; // Log if greater than this time.
 
         string[] _supportedCustomAttributes = new string[] {
-            "maxDuration", "MaxDuration", "maxduration",
-            "suppressNoDuration", "SuppressNoDuration", "suppressnoduration" };
+            "maxDuration", "MaxDuration", "maxduration" };
 
         /// <summary>
         /// Initializes a new instance of <see cref="LogFilter"/>.
         /// </summary>
         /// <param name="name">The name for the log filter.</param>
-        public PerformanceFilter(string name) : base(name)
+        public DurationFilter(string name) : base(name)
         {
         }
 
-        public PerformanceFilter(NameValueCollection nvPairs) : this("PerformanceFilter", -1)
+        public DurationFilter(NameValueCollection nvPairs) : this("DurationFilter", -1)
         {
 
         }
 
-        public PerformanceFilter(string name, double maxDuration) : base(name)
+        public DurationFilter(string name, double maxDuration) : base(name)
         {
             this.maxDuration = maxDuration;
         }

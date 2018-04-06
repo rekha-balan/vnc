@@ -93,8 +93,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\PerformanceFilterData.cs" />
-    <Compile Include="Filters\PerformanceFilter.cs" />
+    <Compile Include="Configuration\LevelFilterData.cs" />
+    <Compile Include="Configuration\DurationFilterData.cs" />
+    <Compile Include="Filters\LevelFilter.cs" />
+    <Compile Include="Filters\DurationFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppLog.cs">
       <AutoGen>True</AutoGen>

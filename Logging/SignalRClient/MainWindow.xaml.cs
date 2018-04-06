@@ -128,5 +128,55 @@ namespace SignalRClient
 
             VNC.AppLog.Info("Exit", "SignalRClient", startTicks);
         }
+
+        private void Debug_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Debug("Debug", "SignalRClient");
+        }
+
+        private void Debug1_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Debug1("Debug", "SignalRClient");
+        }
+
+        private void Debug2_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Debug2("Debug2", "SignalRClient");
+        }
+
+        private void Debug3_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Debug3("Debug3", "SignalRClient");
+        }
+
+        private void Debug4_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Debug4("Debug4", "SignalRClient");
+        }
+
+        private void Trace_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Trace("Trace", "SignalRClient");
+        }
+
+        private void Trace1_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Trace1("Trace1", "SignalRClient");
+        }
+
+        private void Trace2_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Trace2("Trace2", "SignalRClient");
+        }
+
+        private void Trace3_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Trace3("Trace3", "SignalRClient");
+        }
+
+        private void Trace4_Click(object sender, RoutedEventArgs e)
+        {
+            VNC.AppLog.Trace4("Trace4", "SignalRClient");
+        }
     }
 }

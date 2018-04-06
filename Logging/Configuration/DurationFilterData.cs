@@ -26,7 +26,7 @@ namespace VNC.Logging.Configuration
     //[ResourceDescription(typeof(DesignResources), "PerformanceFilterDataDescription")]
     //[ResourceDisplayName(typeof(DesignResources), "PerformanceFilterDataDisplayName")]
     //[ElementValidation(LoggingDesignTime.ValidatorTypes.LogPriorityMinMaxValidatorType)]
-    public class PerformanceFilterData : Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.LogFilterData
+    public class DurationFilterData : Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.LogFilterData
     {
         //private const string minimumPriorityProperty = "minimumPriority";
         //private const string maximumPriorityProperty = "maximumPriority";
@@ -35,16 +35,16 @@ namespace VNC.Logging.Configuration
         /// <summary>
         /// Initializes a new <see cref="PriorityFilterData"/>.
         /// </summary>
-        public PerformanceFilterData()
+        public DurationFilterData()
         {
-            Type = typeof(PerformanceFilter);
+            Type = typeof(DurationFilter);
         }
 
         /// <summary>
         /// Initializes a new <see cref="PriorityFilterData"/> with a minimum priority.
         /// </summary>
         /// <param name="minimumPriority">The minimum priority.</param>
-        public PerformanceFilterData(double maxDuration)
+        public DurationFilterData(double maxDuration)
             : this("maxDuration", maxDuration)
         {
         }
@@ -54,8 +54,8 @@ namespace VNC.Logging.Configuration
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="minimumPriority">The minimum priority.</param>
-        public PerformanceFilterData(string name, double maxDuration)
-            : base(name, typeof(PerformanceFilter))
+        public DurationFilterData(string name, double maxDuration)
+            : base(name, typeof(DurationFilter))
         {
             this.MaxDuration = maxDuration;
         }
@@ -84,7 +84,7 @@ namespace VNC.Logging.Configuration
         {
             yield return
                 new TypeRegistration<ILogFilter>(
-                    () => new PerformanceFilter(this.Name, this.MaxDuration))
+                    () => new DurationFilter(this.Name, this.MaxDuration))
                 {
                     Name = this.Name,
                     Lifetime = TypeRegistrationLifetime.Transient
