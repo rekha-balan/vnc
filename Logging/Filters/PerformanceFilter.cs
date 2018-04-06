@@ -17,7 +17,7 @@ namespace VNC.Logging.Filters
     [ConfigurationElementType(typeof(PerformanceFilterData))]
     public class PerformanceFilter : Microsoft.Practices.EnterpriseLibrary.Logging.Filters.LogFilter
     {
-        //private double maxDuration = -1; // Log if greater than this time.
+        private double maxDuration = -1; // Log if greater than this time.
 
         string[] _supportedCustomAttributes = new string[] {
             "maxDuration", "MaxDuration", "maxduration",
@@ -38,31 +38,9 @@ namespace VNC.Logging.Filters
 
         public PerformanceFilter(string name, double maxDuration) : base(name)
         {
-
+            this.maxDuration = maxDuration;
         }
 
-        //public double MaxDuration
-        //{
-        //    get
-        //    {
-        //        if (maxDuration < 0)
-        //        {
-        //            // Initialize from the custom attributes
-
-                    
-                    
-        //            //var key = Attributes.Keys.Cast<string>().
-        //            //FirstOrDefault(s => string.Equals(s, "maxduration", StringComparison.InvariantCultureIgnoreCase));
-
-        //            //if (!string.IsNullOrWhiteSpace(key))
-        //            //{
-        //            //    double.TryParse(Attributes[key], out maxDuration);
-        //            //}
-        //        }
-
-        //        return maxDuration;
-        //    }
-        //}
         /// <summary>
         /// Test to see if a message meets the criteria to be processed. 
         /// </summary>
@@ -76,7 +54,7 @@ namespace VNC.Logging.Filters
 
                 double duration = (double)log.ExtendedProperties["Duration"];
 
-                if (duration > 0.100)
+                if (duration > MaxDuration)
                 {
                     return true;
                 }
@@ -90,6 +68,11 @@ namespace VNC.Logging.Filters
             {
                 return false;
             }
+        }
+
+        public double MaxDuration
+        {
+            get { return maxDuration; }
         }
     }
 }

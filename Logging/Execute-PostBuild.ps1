@@ -181,13 +181,14 @@ function Func1()
     if ($Configuration -eq "Debug")
     {
         $destinations = @(
-	        "..\Common2\Debug"
+	        "..\Common\Debug"
 	        )
     }
     else
     {
         $destinations = @(
-	        "..\Common2"
+	        "..\Common",
+			"C:\Public\SignalRListener"
 	        )
     }
 
