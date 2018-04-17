@@ -1,0 +1,24 @@
+﻿<Window x:Class="ExploreReDimPerformance.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExploreReDimPerformance"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="400">
+    <Grid>
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Center">
+            <Label FontSize="32">Iterations</Label>
+            <TextBox x:Name="txtIterations">1000</TextBox>
+
+            <Label>Allocate Int32</Label>
+            <Button x:Name="btnArray" Click="btnArray_Click">Array() As Int32</Button>
+            <Button x:Name="btnList" Click="btnList_Click">List(Of Int32)</Button>
+            <Label>Allocate Big Payload (Structure)</Label>
+            <Button x:Name="btnArrayStruct" Click="btnArrayStruct_Click">Array() As Struct</Button>
+            <Button x:Name="btnListStruct" Click="btnListStruct_Click">List(Of Struct)</Button>
+
+            <TextBlock x:Name="txtTime" FontSize="128" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>
