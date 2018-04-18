@@ -8,15 +8,42 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
+    <UserControl.Resources>
+        <!--<DataTemplate x:Key="CustomerTemplate">
+            <Border BorderThickness="3"
+                    BorderBrush="Blue">
+                <StackPanel>
+                    <TextBlock Text="{Binding FirstName}" />
+                    <TextBlock Text="{Binding LastName}" />
+                    <TextBlock Text="{Binding Phone}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>-->
+        <DataTemplate DataType="{x:Type data:Customer}">
+            <Border BorderThickness="3"
+                    BorderBrush="Blue">
+                <StackPanel>
+                    <TextBlock Text="{Binding FirstName}" />
+                    <TextBlock Text="{Binding LastName}" />
+                    <TextBlock Text="{Binding Phone}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>        
+    </UserControl.Resources>    
     <UserControl.DataContext>
         <cust:CustomerListViewModel />
     </UserControl.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="103*" />
+            <RowDefinition Height="47*" />
+        </Grid.RowDefinitions>        
         <DataGrid x:Name="customerDataGrid"
                   AutoGenerateColumns="False"
                   EnableRowVirtualization="True"
                   ItemsSource="{Binding Customers}"
-                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  Margin="0,0,0,3">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="firstNameColumn"
                                     Binding="{Binding FirstName}"
@@ -32,5 +59,11 @@
                                     Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
+        <!--<ListBox ItemsSource="{Binding Customers}"
+                 ItemTemplate="{StaticResource CustomerTemplate}"
+                 Grid.Row="1" />-->
+        <ListBox ItemsSource="{Binding Customers}"
+                 Grid.Row="1" />
     </Grid>
 </UserControl>
+
