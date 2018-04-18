@@ -24,7 +24,7 @@ namespace Zza.Data
             }
             set
             {
-                _firstName = value;
+                    _firstName = value;
             }
         }
 
