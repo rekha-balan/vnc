@@ -255,7 +255,7 @@
     <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />
-    <Compile Include="SyntaxWalkers\VB\VIsitAll.cs" />
+    <Compile Include="SyntaxWalkers\VB\VisitAll.cs" />
     <Compile Include="SyntaxWalkers\VB\ArgumentList.cs" />
     <Compile Include="SyntaxWalkers\VB\MemberAccessExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\InvocationExpressionInTryCatchWalker.cs" />

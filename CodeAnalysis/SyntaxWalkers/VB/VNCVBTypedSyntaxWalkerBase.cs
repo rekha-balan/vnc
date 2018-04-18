@@ -16,6 +16,11 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         //public Boolean AllTypes = false;
         public Boolean HasAttributes = false;
 
+        public VNCVBTypedSyntaxWalkerBase(SyntaxWalkerDepth depth = SyntaxWalkerDepth.Node) : base(depth)
+        {
+
+        }
+
         internal bool FilterByType(AsClauseSyntax asClause)
         {
             Boolean addField = false;

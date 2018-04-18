@@ -21,8 +21,16 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
         ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
 
-        public VisitAll(SyntaxWalkerDepth depth = SyntaxWalkerDepth.StructuredTrivia) : base(depth)
-        {      
+        bool displayNodeKind = false;
+        bool displayNodeValue = false;
+        bool displayFormattedOutput = false;
+
+        public VisitAll(SyntaxWalkerDepth depth = SyntaxWalkerDepth.StructuredTrivia,
+            bool display_NodeKind = true, bool display_NodeValue = false, bool display_FormattedOutput = false) : base(depth)
+        {
+            displayNodeKind = display_NodeKind;
+            displayNodeValue = display_NodeValue;
+            displayFormattedOutput = display_FormattedOutput;
         }
 
         public string GetCRC32()
@@ -38,8 +46,24 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void Visit(Microsoft.CodeAnalysis.SyntaxNode node)
         {
             tabs++;
-            var indents = new String(' ', tabs * tabWidth);
-            Messages.AppendLine(string.Format("Node:{0}{1}:>{2}<", indents, node.Kind(), node.ToString()));
+
+            if (node.Kind() != SyntaxKind.CompilationUnit)
+            {
+                var indents = new String(' ', tabs * tabWidth);
+
+                if (displayFormattedOutput)
+                {
+                    Messages.AppendLine(string.Format("Node:{0}{1}:>{2}<", indents, 
+                        displayNodeKind ? node.Kind().ToString() : "",
+                        displayNodeValue ? node.ToString() : ""));
+                }
+                else
+                {
+                    Messages.AppendLine(string.Format("Node:{0}:>{1}<",
+                        displayNodeKind ? node.Kind().ToString() : "",
+                        displayNodeValue ? node.ToString() : ""));
+                }
+            }
 
             // Call base to visit children
 
@@ -50,7 +74,19 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitToken(Microsoft.CodeAnalysis.SyntaxToken token)
         {
             var indents = new String(' ', tabs * tabWidth);
-            Messages.AppendLine(string.Format("Token:{0}{1}:>{2}<", indents, token.Kind(), token));
+
+            if (displayFormattedOutput)
+            {
+                Messages.AppendLine(string.Format("Token:{0}{1}:>{2}<", indents,
+                        displayNodeKind ? token.Kind().ToString() : "",
+                        displayNodeValue ? token.ToString() : ""));
+            }
+            else
+            {
+                Messages.AppendLine(string.Format("Token:{0}:>{1}<",
+                        displayNodeKind ? token.Kind().ToString() : "",
+                        displayNodeValue ? token.ToString() : ""));
+            }
 
             // Call base to visit children
 
@@ -60,7 +96,19 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public override void VisitTrivia(Microsoft.CodeAnalysis.SyntaxTrivia trivia)
         {
             var indents = new String(' ', tabs * tabWidth);
-            Messages.AppendLine(string.Format("Trivia:{0}{1}:>{2}<", indents, trivia.Kind(), trivia));
+
+            if (displayFormattedOutput)
+            {
+                Messages.AppendLine(string.Format("Trivia:{0}{1}:>{2}<", indents,
+                        displayNodeKind ? trivia.Kind().ToString() : "",
+                        displayNodeValue ? trivia.ToString() : ""));
+            }
+            else
+            {
+                Messages.AppendLine(string.Format("Trivia:{0}:>{1}<",
+                        displayNodeKind ? trivia.Kind().ToString() : "",
+                        displayNodeValue ? trivia.ToString() : ""));
+            }
 
             // Call base to visit children
 
