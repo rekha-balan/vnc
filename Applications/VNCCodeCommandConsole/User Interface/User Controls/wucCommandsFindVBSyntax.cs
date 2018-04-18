@@ -93,6 +93,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+
         private void btnExpressionStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayExpressionStatementVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
@@ -151,6 +152,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         private void btnMemberAccessExpressionWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayMemberAccessExpressionWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+
+        private void btnMethodBlockWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayMethodBlockWalkerVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
         }
 
         private void btnMethodStatementWalker_Click(object sender, RoutedEventArgs e)
@@ -510,6 +516,42 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
+
+        StringBuilder DisplayMethodBlockWalkerVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            VNCSW.VB.VNCVBTypedSyntaxWalkerBase walker = null;
+
+            commandConfiguration.UseRegEx = (bool)ceMethodBlockUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teMethodBlockRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            // TODO(crhodes)
+            // Maybe figure out how to suppress showing of block.
+
+            //if ((bool)ceShowMethodBlock2.IsChecked)
+            //{
+            walker = new VNCSW.VB.MethodBlock(SyntaxWalkerDepth.Node, 
+                (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
+            commandConfiguration.ConfigurationOptions.ShowBlockCRC = true;
+            //}
+            //else
+            //{
+            //    walker = new VNCSW.VB.MethodStatement();
+            //}
+
+            StringBuilder results = VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+
+            // We may have done a deep dive on a method.  Go grab the results.
+            // TODO(crhodes)
+            // This might only be if in MethodBlock mode.  See above.
+
+            CodeExplorer.teSyntaxNode.Text += walker.WalkerNode.ToString();
+            CodeExplorer.teSyntaxToken.Text += walker.WalkerToken.ToString();
+            CodeExplorer.teSyntaxTrivia.Text += walker.WalkerTrivia.ToString();
+            CodeExplorer.teSyntaxStructuredTrivia.Text += walker.WalkerStructuredTrivia.ToString();
+
+            return results;
         }
 
         private StringBuilder DisplayMethodStatementWalkerVB(VNCCA.SearchTreeCommandConfiguration commandConfiguration)

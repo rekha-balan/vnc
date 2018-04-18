@@ -92,12 +92,12 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthNode(string sourceCode)
+        internal static StringBuilder ParseVBDepthNode(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node, displayNodeKind, displayNodeValue, displayFormattedOutput);
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -122,12 +122,12 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBStructuredTrivia(string sourceCode)
+        internal static StringBuilder ParseVBStructuredTrivia(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -152,12 +152,12 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthToken(string sourceCode)
+        internal static StringBuilder ParseVBDepthToken(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token, displayNodeKind, displayNodeValue, displayFormattedOutput);
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -182,12 +182,12 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthTrivia(string sourceCode)
+        internal static StringBuilder ParseVBDepthTrivia(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());

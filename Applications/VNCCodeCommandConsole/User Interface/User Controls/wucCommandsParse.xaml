@@ -32,7 +32,7 @@
     <dxlc:LayoutControl Orientation="Vertical">
         <dxlc:LayoutItem Label="SourceCode" LabelPosition="Top">
             <dxe:TextEdit x:Name="teSourceCode1" 
-                          Height="200"
+                          Height="300"
                           TextWrapping="Wrap"
                         VerticalContentAlignment="Top"
                          VerticalScrollBarVisibility="Auto"
@@ -94,6 +94,23 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup
+        	Orientation="Vertical" HorizontalAlignment="Left">
+            
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceDisplay_NodeKind" Content="Display Node Kind" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceDisplay_NodeValue" Content="Display Node Value" />
+            </dxlc:LayoutItem>
+
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ceDisplay_FormattedOutput" Content="Display Formatted Output" />
+            </dxlc:LayoutItem>
+        
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutItem>
             <Button Content="Parse CS" Click="btnParseSourceCS_Click"/>
         </dxlc:LayoutItem>

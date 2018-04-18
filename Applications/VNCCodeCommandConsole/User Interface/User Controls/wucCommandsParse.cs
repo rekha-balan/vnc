@@ -107,19 +107,23 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             switch (lbeSyntaxWalkerDepth.EditValue.ToString())
             {
                 case "Node":
-                    sb = Commands.Explore.ParseVBDepthNode(teSourceCode1.Text);
+                    sb = Commands.Explore.ParseVBDepthNode(teSourceCode1.Text, 
+                        (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
                     break;
 
                 case "StructuredTrivia":
-                    sb = Commands.Explore.ParseVBStructuredTrivia(teSourceCode1.Text);
+                    sb = Commands.Explore.ParseVBStructuredTrivia(teSourceCode1.Text,
+                        (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
                     break;
 
                 case "Token":
-                    sb = Commands.Explore.ParseVBDepthToken(teSourceCode1.Text);
+                    sb = Commands.Explore.ParseVBDepthToken(teSourceCode1.Text,
+                        (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
                     break;
 
                 case "Trivia":
-                    sb = Commands.Explore.ParseVBDepthTrivia(teSourceCode1.Text);
+                    sb = Commands.Explore.ParseVBDepthTrivia(teSourceCode1.Text,
+                        (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
                     break;
             }
 

@@ -329,6 +329,67 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find MethodBlock Syntax" 
+        	View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="False">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceMethodBlockUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Methods">
+                        <dxe:TextEdit x:Name="teMethodBlockRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceMethodBlockUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup
+            	Orientation="Vertical">
+                <!--<dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceShowMethodParameters" Content="Show Method Parameters" IsChecked="False" />
+                </dxlc:LayoutItem>-->
+
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceShowMethodBlock2" Content="Show Method Block" IsChecked="False" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup
+        	        Orientation="Vertical" HorizontalAlignment="Left">
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_NodeKind" Content="Display Node Kind" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_NodeValue" Content="Display Node Value" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_FormattedOutput" Content="Display Formatted Output" />
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="MethodBlock Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnMethodBlockWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
@@ -366,13 +427,12 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="MethodStatement Walker"
+                <Button Content="MethodBlock Walker"
                         Style="{StaticResource SyntaxQueryButton}"
                         Click="btnMethodStatementWalker_Click"/>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>
-
+        </dxlc:LayoutGroup>        
         <dxlc:LayoutGroup Header="Find ParameterList Syntax" 
         	View="GroupBox"
             Orientation="Vertical"

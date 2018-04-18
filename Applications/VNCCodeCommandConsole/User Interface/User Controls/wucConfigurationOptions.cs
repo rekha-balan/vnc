@@ -35,6 +35,27 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             VNC.CodeAnalysis.ConfigurationOptions configurationOptions = new VNCCA.ConfigurationOptions();
 
+            var foo = lbeSyntaxWalkerDepth.EditValue;
+
+            switch (lbeSyntaxWalkerDepth.EditValue)
+            {
+                case "Node":
+                    configurationOptions.SyntaxWalkerDepth = Microsoft.CodeAnalysis.SyntaxWalkerDepth.Node;
+                    break;
+
+                case "Token":
+                    configurationOptions.SyntaxWalkerDepth = Microsoft.CodeAnalysis.SyntaxWalkerDepth.Token;
+                    break;
+
+                case "Trivia":
+                    configurationOptions.SyntaxWalkerDepth = Microsoft.CodeAnalysis.SyntaxWalkerDepth.Trivia;
+                    break;
+
+                case "StructureTrivia":
+                    configurationOptions.SyntaxWalkerDepth = Microsoft.CodeAnalysis.SyntaxWalkerDepth.StructuredTrivia;
+                    break;
+            }
+     
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
             configurationOptions.ReplaceCRLF = (bool)ceReplaceCRLF.IsChecked;
