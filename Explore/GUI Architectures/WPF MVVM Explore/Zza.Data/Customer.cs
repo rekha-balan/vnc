@@ -14,7 +14,20 @@ namespace Zza.Data
         [Key]
         public Guid Id { get; set; }
         public Guid? StoreId { get; set; }
-        public string FirstName { get; set; }
+
+        string _firstName;
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                    _firstName = value;
+            }
+        }
+
         public string LastName { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
         public string Phone { get; set; }
