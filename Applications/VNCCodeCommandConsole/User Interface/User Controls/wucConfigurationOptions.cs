@@ -59,59 +59,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             configurationOptions.AdditionalNodeAnalysis = (VNCCA.SyntaxNode.AdditionalNodes)lbeAdditionalNodes.EditValue;
 
-            //switch (lbeAdditionalNodes.EditValue)
-            //{
-            //    case "None":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.None;
-            //        break;
-
-            //    case "Ancestors":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.Ancestors;
-            //        break;
-
-            //    case "AncestorsAndSelf":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.AncestorsAndSelf;
-            //        break;
-
-            //    case "ChildNodes":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildNodes;
-            //        break;
-
-            //    case "ChildNodesAndTokens":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildNodesAndTokens;
-            //        break;
-
-            //    case "ChildTokens":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildTokens;
-            //        break;
-
-            //    case "DescendantNodes":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodes;
-            //        break;
-
-            //    case "DescendantNodesAndSelf":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndSelf;
-            //        break;
-
-            //    case "DescendantNodesAndTokens":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndTokens;
-            //        break;
-
-            //    case "DescendantNodesAndTokensAndSelf":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndTokensAndSelf;
-            //        break;
-
-            //    case "DescendantTokens":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantTokens;
-            //        break;
-
-            //    case "DescendantTrivia":
-            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantTrivia;
-            //        break;
-
-            //    default:
-            //        break;
-            //}
+            configurationOptions.DisplayNodeKind = (bool)ceDisplay_NodeKind.IsChecked;
+            configurationOptions.DisplayNodeValue = (bool)ceDisplay_NodeValue.IsChecked;
+            configurationOptions.DisplayFormattedOutput = (bool)ceDisplay_FormattedOutput.IsChecked;
 
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;

@@ -33,6 +33,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public Dictionary<string, Int32> CRCMatchesToFullString;
 
         public string CRC32Node;
+        public string CRC32NodeKind;
         public string CRC32Token;
         public string CRC32Trivia;
         public string CRC32StructuredTrivia;
@@ -283,6 +284,206 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 Matches.Add(nodeKey, 1);
             }
+
+            // This was first done in MethodBlock.  Now incorporating it generally.
+
+            // Everything below here is an attempt to determine if a method 
+            // is Syntactically the same as another method.
+            //
+            // Some challenges.
+            // If only nodes kinds are evaluated things will show as the same even if different names or trivia
+            //
+            // If NodeValues are considered, at least two problems occur.
+            // 1. If we evaluate the body of the method, any trivia in the body is evaluated.
+            // 2. If we we don't evaluate the body, we have to iterate across the descendants
+
+            //var walkerNode = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node);
+            //var walkerToken = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token);
+            //var walkerTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia);
+            //var walkerStructuredTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
+
+            // Get the contained MethodStatement
+
+            IEnumerable<Microsoft.CodeAnalysis.SyntaxNode> analysisNodes = null;
+            IEnumerable<Microsoft.CodeAnalysis.SyntaxToken> analysisTokens = null;
+            IEnumerable<Microsoft.CodeAnalysis.SyntaxTrivia> analysisTrivia = null;
+            IEnumerable<Microsoft.CodeAnalysis.SyntaxNodeOrToken> analysisNodesOrTokens = null;
+
+            ChildSyntaxList childAnalysisNodes;
+
+            switch (_configurationOptions.AdditionalNodeAnalysis)
+            {
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.Ancestors:
+                    analysisNodes = node.Ancestors();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.AncestorsAndSelf:
+                    analysisNodes = node.AncestorsAndSelf();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.ChildNodes:
+                    analysisNodes = node.ChildNodes();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.ChildNodesAndTokens:
+                    childAnalysisNodes = node.ChildNodesAndTokens();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.ChildTokens:
+                    analysisTokens = node.ChildTokens();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantNodes:
+                    analysisNodes = node.DescendantNodes();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantNodesAndSelf:
+                    analysisNodes = node.DescendantNodesAndSelf();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantNodesAndTokens:
+                    analysisNodesOrTokens = node.DescendantNodesAndTokens();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantNodesAndTokensAndSelf:
+                    analysisNodesOrTokens = node.DescendantNodesAndTokensAndSelf();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantTokens:
+                    analysisTokens = node.DescendantTokens();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.DescendantTrivia:
+                    analysisTrivia = node.DescendantTrivia();
+                    break;
+
+                case CodeAnalysis.SyntaxNode.AdditionalNodes.None:
+                    break;
+
+                default:
+                    // ??
+                    break;
+            }
+
+            StringBuilder analysisNodeKind = new StringBuilder();
+            StringBuilder analysisNodeValue = new StringBuilder();
+
+            bool displayAnalysisOutput = _configurationOptions.DisplayNodeKind || _configurationOptions.DisplayNodeValue;
+
+
+            // TODO(crhodes)
+            // See if we can using some clever casting to handle this more generically
+            //
+            // analysisNodes
+            // analysisTokens
+            // analysisTrivia
+            // analysisNodesOrTokens
+
+            if (analysisNodes != null)
+            {
+                if (displayAnalysisOutput) { Messages.AppendLine(">>> AnalysisNodes >>>"); }
+
+                foreach (var item in analysisNodes)
+                {
+                    var isBlock = item.Kind().ToString().Contains("Block");
+
+                    analysisNodeKind.AppendLine(string.Format("{0}", item.Kind().ToString()));
+
+                    // Blocks bring along everything including trivia which messes up the CRC.  Just use "BLOCK"
+
+                    analysisNodeValue.AppendLine(string.Format("{0}", isBlock ? "BLOCK" : item.ToString()));
+
+                    if (displayAnalysisOutput)
+                    {
+                        Messages.AppendLine(string.Format("Node:{0}:>{1}<",
+                            _configurationOptions.DisplayNodeKind ? item.Kind().ToString() : "",
+                            _configurationOptions.DisplayNodeValue ? isBlock ? "BLOCK" : item.ToString() : ""));
+                    }
+                }
+
+                if (displayAnalysisOutput) { Messages.AppendLine("<<< AnalysisNodes <<<"); }
+            }
+
+            if (analysisTokens != null)
+            {
+                if (displayAnalysisOutput) { Messages.AppendLine(">>> AnalysisTokens >>>"); }
+
+                foreach (var item in analysisTokens)
+                {
+                    var isBlock = item.Kind().ToString().Contains("Block");
+
+                    analysisNodeKind.AppendLine(string.Format("{0}", item.Kind().ToString()));
+
+                    // Blocks bring along everything including trivia which messes up the CRC.  Just use "BLOCK"
+
+                    analysisNodeValue.AppendLine(string.Format("{0}", isBlock ? "BLOCK" : item.ToString()));
+
+                    if (displayAnalysisOutput)
+                    {
+                        Messages.AppendLine(string.Format("Node:{0}:>{1}<",
+                            _configurationOptions.DisplayNodeKind ? item.Kind().ToString() : "",
+                            _configurationOptions.DisplayNodeValue ? isBlock ? "BLOCK" : item.ToString() : ""));
+                    }
+                }
+
+                if (displayAnalysisOutput) { Messages.AppendLine("<<< AnalysisTokens <<<"); }
+            }
+
+            if (analysisTrivia != null)
+            {
+                if (displayAnalysisOutput) { Messages.AppendLine(">>> AnalysisTrivia >>>"); }
+
+                foreach (var item in analysisTrivia)
+                {
+                    var isBlock = item.Kind().ToString().Contains("Block");
+
+                    analysisNodeKind.AppendLine(string.Format("{0}", item.Kind().ToString()));
+
+                    // Blocks bring along everything including trivia which messes up the CRC.  Just use "BLOCK"
+
+                    analysisNodeValue.AppendLine(string.Format("{0}", isBlock ? "BLOCK" : item.ToString()));
+
+                    if (displayAnalysisOutput)
+                    {
+                        Messages.AppendLine(string.Format("Node:{0}:>{1}<",
+                            _configurationOptions.DisplayNodeKind ? item.Kind().ToString() : "",
+                            _configurationOptions.DisplayNodeValue ? isBlock ? "BLOCK" : item.ToString() : ""));
+                    }
+                }
+
+                if (displayAnalysisOutput) { Messages.AppendLine("<<< AnalysisTrivia <<<"); }
+            }
+
+            if (analysisNodesOrTokens != null)
+            {
+                if (displayAnalysisOutput) { Messages.AppendLine(">>> AnalysisNodesOrTokens >>>"); }
+
+                foreach (var item in analysisNodesOrTokens)
+                {
+                    var isBlock = item.Kind().ToString().Contains("Block");
+
+                    analysisNodeKind.AppendLine(string.Format("{0}", item.Kind().ToString()));
+
+                    // Blocks bring along everything including trivia which messes up the CRC.  Just use "BLOCK"
+
+                    analysisNodeValue.AppendLine(string.Format("{0}", isBlock ? "BLOCK" : item.ToString()));
+
+                    if (displayAnalysisOutput)
+                    {
+                        Messages.AppendLine(string.Format("Node:{0}:>{1}<",
+                            _configurationOptions.DisplayNodeKind ? item.Kind().ToString() : "",
+                            _configurationOptions.DisplayNodeValue ? isBlock ? "BLOCK" : item.ToString() : ""));
+                    }
+                }
+
+                if (displayAnalysisOutput) { Messages.AppendLine("<<< AnalysisNodesOrTokens <<<"); }
+            }
+
+            byte[] analysisToBytes = asciiEncoding.GetBytes(analysisNodeKind.ToString());
+            CRC32Node = Crc32CAlgorithm.Compute(analysisToBytes).ToString();
+
+            analysisToBytes = asciiEncoding.GetBytes(analysisNodeValue.ToString());
+            CRC32NodeKind = Crc32CAlgorithm.Compute(analysisToBytes).ToString();
         }
 
         /// <summary>

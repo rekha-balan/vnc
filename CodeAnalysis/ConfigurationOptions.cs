@@ -33,7 +33,7 @@ namespace VNC.CodeAnalysis
 
         public bool CRC32 { get; set; } = false;
 
-        public bool ShowBlockCRC { get; set; } = false;
+        public bool ShowAnalysisCRC { get; set; } = false;
 
         public bool ReplaceCRLF { get; set; } = false;
 
