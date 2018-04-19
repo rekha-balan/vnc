@@ -101,7 +101,9 @@
                     <!--</dxlc:LayoutGroup>-->
                 </dxlc:LayoutGroup>
             </dx:GroupFrame>
+            
             <dxlc:LayoutItem>
+                
                 <dxe:CheckEdit x:Name="ceReplaceCRLF" 
                                     Content="Replace CRLF in Key" 
                                     IsChecked="False" VerticalAlignment="Top" />
@@ -109,8 +111,15 @@
 
             <dxlc:LayoutItem>
 
+                <dxe:CheckEdit x:Name="ceDisplay_NodeParent" 
+                                Content="Display Node Parent" 
+                                IsChecked="False" />
+            </dxlc:LayoutItem>
+            
+            <dxlc:LayoutItem>
+
                 <dxe:CheckEdit x:Name="ceDisplayContext" 
-                                Content="DisplayContext" 
+                                Content="Display Context" 
                                 IsChecked="False" />
             </dxlc:LayoutItem>
 

@@ -285,6 +285,11 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                 Matches.Add(nodeKey, 1);
             }
 
+            if (_configurationOptions.DisplayNodeParent)
+            {
+                Messages.AppendLine(String.Format("NodeParent:>{0}<", node.Parent.ToString()));
+            }
+
             // This was first done in MethodBlock.  Now incorporating it generally.
 
             // Everything below here is an attempt to determine if a method 

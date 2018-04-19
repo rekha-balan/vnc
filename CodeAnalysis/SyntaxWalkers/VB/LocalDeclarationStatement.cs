@@ -15,12 +15,9 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
     {
         public override void VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
         {
-            if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
+            foreach (var declarator in node.Declarators)
             {
-                // TODO(crhodes)
-                // Need to handle multiple declarations.  For now, just pay attention to first
-
-                if (_targetPatternRegEx.Match(node.Declarators.First().ToString()).Success)
+                if (_targetPatternRegEx.Match(declarator.Names.First().Identifier.ToString()).Success)
                 {
                     if (FilterByType(node.Declarators.First().AsClause))
                     {

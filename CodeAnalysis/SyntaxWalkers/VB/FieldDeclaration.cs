@@ -49,22 +49,16 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     break;
             }
 
-            //if ( ! node.Parent.IsKind(SyntaxKind.StructureBlock))
-            //{
-                if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().Identifier.ToString()).Success)
+            foreach (var declarator in node.Declarators)
+            {
+                if (_targetPatternRegEx.Match(declarator.Names.First().Identifier.ToString()).Success)
                 {
-                    // TODO(crhodes)
-                    // Handle multiple declarations on each line
-
-                    if (_targetPatternRegEx.Match(node.Declarators.First().Names.First().ToString()).Success)
+                    if (FilterByType(node.Declarators.First().AsClause))
                     {
-                        if (FilterByType(node.Declarators.First().AsClause))
-                        {
-                            RecordMatchAndContext(node, BlockType.None);
-                        }
+                        RecordMatchAndContext(node, BlockType.None);
                     }
                 }
-            //}
+            }
 
             base.VisitFieldDeclaration(node);
         }

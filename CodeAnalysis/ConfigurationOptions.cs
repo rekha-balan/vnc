@@ -27,7 +27,7 @@ namespace VNC.CodeAnalysis
 
         public bool DisplayFormattedOutput { get; set; } = false;
 
-
+        public bool DisplayNodeParent { get; set; } = false;
 
         public bool SourceLocation { get; set; } = false;
 
