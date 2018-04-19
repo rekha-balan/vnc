@@ -36,6 +36,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                 // Get the contained MethodStatement
 
+                var co = _configurationOptions.AdditionalNodeAnalysis;
                 var methodStatement = node.DescendantNodes().First();
 
                 var descendantNodes = node.DescendantNodes();
