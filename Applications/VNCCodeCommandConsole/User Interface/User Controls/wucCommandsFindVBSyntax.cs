@@ -532,7 +532,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //if ((bool)ceShowMethodBlock2.IsChecked)
             //{
             walker = new VNCSW.VB.MethodBlock();
-            commandConfiguration.ConfigurationOptions.ShowBlockCRC = true;
+            //commandConfiguration.ConfigurationOptions.ShowAnalysisCRC = true;
             //}
             //else
             //{
@@ -564,7 +564,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             if ((bool)ceShowMethodBlock.IsChecked)
             {
                 walker = new VNCSW.VB.MethodBlock();
-                commandConfiguration.ConfigurationOptions.ShowBlockCRC = true;
+                //commandConfiguration.ConfigurationOptions.ShowAnalysisCRC = true;
             }
             else
             {

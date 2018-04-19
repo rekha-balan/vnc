@@ -61,13 +61,7 @@
                 </dxe:ListBoxEdit>
             </dx:GroupFrame>
 
-            <dx:GroupFrame Header="Additional Node Analysis" VerticalAlignment="Top">
-                <dxe:ComboBoxEdit Name="lbeAdditionalNodes" 
-                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
-                                 SelectedIndex="0"                                                         
-                                 ShowBorder="False" Background="{x:Null}">
-                </dxe:ComboBoxEdit>
-            </dx:GroupFrame>
+
             
             <dxlc:LayoutItem>
                  <dxe:CheckEdit x:Name="ceDisplaySourceLocation" 
@@ -80,7 +74,33 @@
                                     Content="Display CRC32" 
                                     IsChecked="False" VerticalAlignment="Top" />
             </dxlc:LayoutItem>
+                
+            <dx:GroupFrame Header="Additional Node Analysis" VerticalAlignment="Top"
+                           Visibility="{cb:Binding ElementName=ceDisplayCRC32, Path=IsChecked}">
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
 
+                    <dxe:ComboBoxEdit Name="lbeAdditionalNodes" 
+                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
+                                 SelectedIndex="0"                                                         
+                                 ShowBorder="False" Background="{x:Null}">
+                    </dxe:ComboBoxEdit>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_NodeKind" Content="Display Node Kind" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_NodeValue" Content="Display Node Value" />
+                    </dxlc:LayoutItem>
+
+                    <!--<dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceDisplay_FormattedOutput" Content="Display Formatted Output" />
+                    </dxlc:LayoutItem>-->
+
+                    <!--</dxlc:LayoutGroup>-->
+                </dxlc:LayoutGroup>
+            </dx:GroupFrame>
             <dxlc:LayoutItem>
                 <dxe:CheckEdit x:Name="ceReplaceCRLF" 
                                     Content="Replace CRLF in Key" 
