@@ -61,7 +61,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             configurationOptions.DisplayNodeKind = (bool)ceDisplay_NodeKind.IsChecked;
             configurationOptions.DisplayNodeValue = (bool)ceDisplay_NodeValue.IsChecked;
-            configurationOptions.DisplayFormattedOutput = (bool)ceDisplay_FormattedOutput.IsChecked;
+            //configurationOptions.DisplayFormattedOutput = (bool)ceDisplay_FormattedOutput.IsChecked;
+
+            configurationOptions.DisplayNodeParent = (bool)ceDisplay_NodeParent.IsChecked;
 
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
