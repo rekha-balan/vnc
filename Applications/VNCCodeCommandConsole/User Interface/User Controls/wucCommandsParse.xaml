@@ -41,38 +41,10 @@
         </dxlc:LayoutItem>
 
         <dxlc:LayoutGroup Orientation="Horizontal">
-        <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
-            <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
-                             ValueMember="Content" 
-                             SelectedIndex="0"                                                         
-                             ShowBorder="False" Background="{x:Null}">
-                <dxe:ListBoxEdit.StyleSettings>
-                    <dxe:RadioListBoxEditStyleSettings />
-                </dxe:ListBoxEdit.StyleSettings>
-                <dxe:ListBoxEdit.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" />
-                    </ItemsPanelTemplate>
-                </dxe:ListBoxEdit.ItemsPanel>
-                <dxe:ListBoxEdit.Items>
-                    <dxe:ListBoxEditItem Content="StructuredTrivia" />
-                    <dxe:ListBoxEditItem Content="Node" />
-                    <dxe:ListBoxEditItem Content="Token" />
-                    <dxe:ListBoxEditItem Content="Trivia" />
-                </dxe:ListBoxEdit.Items>
-            </dxe:ListBoxEdit>
-        </dx:GroupFrame>
-
-            <dx:GroupFrame Header="Node Retrieval" VerticalAlignment="Top">
-                <dxe:ComboBoxEdit Name="lbeNodes" 
-                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
-                                 SelectedIndex="0"                                                         
-                                 ShowBorder="False" Background="{x:Null}">
-                </dxe:ComboBoxEdit>
-            </dx:GroupFrame>
-            <!--<dx:GroupFrame Header="Node Retrieval" Height="120">
-                <dxe:ListBoxEdit Name="lbeNodes" 
-                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
+            
+            <dx:GroupFrame Header="SyntaxWalkerDepth" VerticalAlignment="Top">
+                <dxe:ListBoxEdit Name="lbeSyntaxWalkerDepth" 
+                                 ValueMember="Content" 
                                  SelectedIndex="0"                                                         
                                  ShowBorder="False" Background="{x:Null}">
                     <dxe:ListBoxEdit.StyleSettings>
@@ -83,14 +55,22 @@
                             <StackPanel Orientation="Vertical" />
                         </ItemsPanelTemplate>
                     </dxe:ListBoxEdit.ItemsPanel>
-                    --><!--<dxe:ListBoxEdit.Items>
-                        <dxe:ListBoxEditItem Content="Ancestors" />
-                        <dxe:ListBoxEditItem Content="Children" />
-                        <dxe:ListBoxEditItem Content="Descendants" />
+                    <dxe:ListBoxEdit.Items>
+                        <dxe:ListBoxEditItem Content="StructuredTrivia" />
+                        <dxe:ListBoxEditItem Content="Node" />
+                        <dxe:ListBoxEditItem Content="Token" />
                         <dxe:ListBoxEditItem Content="Trivia" />
-                    </dxe:ListBoxEdit.Items>--><!--
+                    </dxe:ListBoxEdit.Items>
                 </dxe:ListBoxEdit>
-            </dx:GroupFrame>-->
+            </dx:GroupFrame>
+
+            <dx:GroupFrame Header="Node Retrieval" VerticalAlignment="Top">
+                <dxe:ComboBoxEdit Name="lbeNodes" 
+                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
+                                 SelectedIndex="0"                                                         
+                                 ShowBorder="False" Background="{x:Null}">
+                </dxe:ComboBoxEdit>
+            </dx:GroupFrame>
 
         </dxlc:LayoutGroup>
 

@@ -51,8 +51,6 @@ namespace VNCCodeCommandConsole.Commands
             walker.Messages = sb;
             walker.Visit(tree.GetRoot());
 
-
-
             return sb;
         }
 
@@ -92,12 +90,14 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthNode(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
+        internal static StringBuilder ParseVBDepthNode(string sourceCode, User_Interface.User_Controls.wucConfigurationOptions configurationOptions)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node, displayNodeKind, displayNodeValue, displayFormattedOutput);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node);
+            walker._configurationOptions = configurationOptions.GetConfigurationInfo();
+            
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -122,12 +122,14 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBStructuredTrivia(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
+        internal static StringBuilder ParseVBStructuredTrivia(string sourceCode, User_Interface.User_Controls.wucConfigurationOptions configurationOptions)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
+            walker._configurationOptions = configurationOptions.GetConfigurationInfo();
+
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -152,12 +154,14 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthToken(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
+        internal static StringBuilder ParseVBDepthToken(string sourceCode, User_Interface.User_Controls.wucConfigurationOptions configurationOptions)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token, displayNodeKind, displayNodeValue, displayFormattedOutput);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token);
+            walker._configurationOptions = configurationOptions.GetConfigurationInfo();
+
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());
@@ -182,12 +186,14 @@ namespace VNCCodeCommandConsole.Commands
             return sb;
         }
 
-        internal static StringBuilder ParseVBDepthTrivia(string sourceCode, bool displayNodeKind, bool displayNodeValue, bool displayFormattedOutput)
+        internal static StringBuilder ParseVBDepthTrivia(string sourceCode, User_Interface.User_Controls.wucConfigurationOptions configurationOptions)
         {
             StringBuilder sb = new StringBuilder();
 
             SyntaxTree tree = VB.VisualBasicSyntaxTree.ParseText(sourceCode);
-            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
+            var walker = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia);
+            walker._configurationOptions = configurationOptions.GetConfigurationInfo();
+
             walker.Messages = sb;
 
             walker.Visit(tree.GetRoot());

@@ -18,9 +18,12 @@
     xmlns:uiuc="clr-namespace:VNCCodeCommandConsole.User_Interface.User_Controls"
     xmlns:uiw="clr-namespace:VNCCodeCommandConsole.User_Interface.Windows"
     
+    xmlns:vca="clr-namespace:VNC.CodeAnalysis.SyntaxNode;assembly=VNC.CodeAnalysis"
+    xmlns:vxe="clr-namespace:VNC.Xaml.Enums;assembly=VNC.XamlHelper"    
+    
     xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"     
     
-    d:DesignHeight="400" d:DesignWidth="200"
+    d:DesignHeight="600" d:DesignWidth="200"
     d:DesignStyle="{StaticResource myDesignStyle}">
     
     <dxlc:LayoutGroup MinWidth="200"  Orientation="Vertical">
@@ -58,6 +61,14 @@
                 </dxe:ListBoxEdit>
             </dx:GroupFrame>
 
+            <dx:GroupFrame Header="Additional Node Analysis" VerticalAlignment="Top">
+                <dxe:ComboBoxEdit Name="lbeNodes" 
+                                 ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
+                                 SelectedIndex="0"                                                         
+                                 ShowBorder="False" Background="{x:Null}">
+                </dxe:ComboBoxEdit>
+            </dx:GroupFrame>
+            
             <dxlc:LayoutItem>
                  <dxe:CheckEdit x:Name="ceDisplaySourceLocation" 
                                     Content="Display Source Location" 
