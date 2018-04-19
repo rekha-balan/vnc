@@ -62,7 +62,7 @@
             </dx:GroupFrame>
 
             <dx:GroupFrame Header="Additional Node Analysis" VerticalAlignment="Top">
-                <dxe:ComboBoxEdit Name="lbeNodes" 
+                <dxe:ComboBoxEdit Name="lbeAdditionalNodes" 
                                  ItemsSource="{Binding Source={vxe:EnumBindingSource {x:Type vca:AdditionalNodes}}}"
                                  SelectedIndex="0"                                                         
                                  ShowBorder="False" Background="{x:Null}">

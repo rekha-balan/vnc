@@ -531,8 +531,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             //if ((bool)ceShowMethodBlock2.IsChecked)
             //{
-            walker = new VNCSW.VB.MethodBlock(SyntaxWalkerDepth.Node, 
-                (bool)ceDisplay_NodeKind.IsChecked, (bool)ceDisplay_NodeValue.IsChecked, (bool)ceDisplay_FormattedOutput.IsChecked);
+            walker = new VNCSW.VB.MethodBlock();
             commandConfiguration.ConfigurationOptions.ShowBlockCRC = true;
             //}
             //else

@@ -36,7 +36,8 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             VNC.CodeAnalysis.ConfigurationOptions configurationOptions = new VNCCA.ConfigurationOptions();
 
             var foo = lbeSyntaxWalkerDepth.EditValue;
-
+            var bar = lbeAdditionalNodes.EditValue;
+            
             switch (lbeSyntaxWalkerDepth.EditValue)
             {
                 case "Node":
@@ -55,7 +56,63 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                     configurationOptions.SyntaxWalkerDepth = Microsoft.CodeAnalysis.SyntaxWalkerDepth.StructuredTrivia;
                     break;
             }
-     
+
+            configurationOptions.AdditionalNodeAnalysis = (VNCCA.SyntaxNode.AdditionalNodes)lbeAdditionalNodes.EditValue;
+
+            //switch (lbeAdditionalNodes.EditValue)
+            //{
+            //    case "None":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.None;
+            //        break;
+
+            //    case "Ancestors":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.Ancestors;
+            //        break;
+
+            //    case "AncestorsAndSelf":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.AncestorsAndSelf;
+            //        break;
+
+            //    case "ChildNodes":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildNodes;
+            //        break;
+
+            //    case "ChildNodesAndTokens":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildNodesAndTokens;
+            //        break;
+
+            //    case "ChildTokens":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.ChildTokens;
+            //        break;
+
+            //    case "DescendantNodes":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodes;
+            //        break;
+
+            //    case "DescendantNodesAndSelf":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndSelf;
+            //        break;
+
+            //    case "DescendantNodesAndTokens":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndTokens;
+            //        break;
+
+            //    case "DescendantNodesAndTokensAndSelf":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantNodesAndTokensAndSelf;
+            //        break;
+
+            //    case "DescendantTokens":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantTokens;
+            //        break;
+
+            //    case "DescendantTrivia":
+            //        configurationOptions.AdditionalNodeAnalysis = VNCCA.SyntaxNode.AdditionalNodes.DescendantTrivia;
+            //        break;
+
+            //    default:
+            //        break;
+            //}
+
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
             configurationOptions.ReplaceCRLF = (bool)ceReplaceCRLF.IsChecked;
