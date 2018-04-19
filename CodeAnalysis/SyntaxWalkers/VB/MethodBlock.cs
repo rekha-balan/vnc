@@ -13,32 +13,26 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
     public class MethodBlock : VNCVBTypedSyntaxWalkerBase
     {
-        bool displayNodeKind = false;
-        bool displayNodeValue = false;
-        bool displayFormattedOutput = false;
-
-        public MethodBlock(SyntaxWalkerDepth depth = SyntaxWalkerDepth.StructuredTrivia,
-            bool display_NodeKind = true, bool display_NodeValue = false, bool display_FormattedOutput = false) : base(depth)
-        {
-            displayNodeKind = display_NodeKind;
-            displayNodeValue = display_NodeValue;
-            displayFormattedOutput = display_FormattedOutput;
-        }
-
         public override void VisitMethodBlock(MethodBlockSyntax node)
         {
             if (_targetPatternRegEx.Match(node.SubOrFunctionStatement.Identifier.ToString()).Success)
             {
                 RecordMatchAndContext(node, BlockType.MethodBlock);
 
+                // Everything below here is an attempt to determine if a method 
+                // is Syntactically the same as another method.
+                //
+                // Some challenges.
+                // If only nodes kinds are evaluated things will show as the same even if different names or trivia
+                //
+                // If NodeValues are considered, at least two problems occur.
+                // 1. If we evaluate the body of the method, any trivia in the body is evaluated.
+                // 2. If we we don't evaluate the body, we have to iterate across the descendants
 
-                // Everything below here is an attempt to determine if a method is Syntactically the same
-                // as another method.
-
-                var walkerNode = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node, displayNodeKind, displayNodeValue, displayFormattedOutput);
-                var walkerToken = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token, displayNodeKind, displayNodeValue, displayFormattedOutput);
-                var walkerTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
-                var walkerStructuredTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia, displayNodeKind, displayNodeValue, displayFormattedOutput);
+                var walkerNode = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Node);
+                var walkerToken = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Token);
+                var walkerTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.Trivia);
+                var walkerStructuredTrivia = new VNC.CodeAnalysis.SyntaxWalkers.VB.VisitAll(SyntaxWalkerDepth.StructuredTrivia);
 
                 // Get the contained MethodStatement
 
@@ -46,9 +40,12 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                 var descendantNodes = node.DescendantNodes();
                 var descendantNodesAndSelf = node.DescendantNodesAndSelf();
+
                 var descendantNodesAndTokens = node.DescendantNodesAndTokens();
                 var descendantNodesAndTokensAndSelf = node.DescendantNodesAndTokensAndSelf();
+
                 var descendantTokens = node.DescendantTokens();
+                
                 var descendantTrivia = node.DescendantTrivia();
 
                 StringBuilder internalMessages = new StringBuilder();

@@ -10,27 +10,11 @@ using Crc32C;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class VisitAll : VisualBasicSyntaxWalker
+    public class VisitAll : VNCVBSyntaxWalkerBase
     {
-        public StringBuilder Messages;
-
-        public StringBuilder WalkerNode = new StringBuilder();
-        public StringBuilder WalkerToken = new StringBuilder();
-        public StringBuilder WalkerTrivia = new StringBuilder();
-        public StringBuilder WalkerStructureTrivia = new StringBuilder();
-
-        ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
-
-        bool displayNodeKind = false;
-        bool displayNodeValue = false;
-        bool displayFormattedOutput = false;
-
-        public VisitAll(SyntaxWalkerDepth depth = SyntaxWalkerDepth.StructuredTrivia,
-            bool display_NodeKind = true, bool display_NodeValue = false, bool display_FormattedOutput = false) : base(depth)
+        public VisitAll(SyntaxWalkerDepth depth = SyntaxWalkerDepth.StructuredTrivia) : base(depth)
         {
-            displayNodeKind = display_NodeKind;
-            displayNodeValue = display_NodeValue;
-            displayFormattedOutput = display_FormattedOutput;
+
         }
 
         public string GetCRC32()
@@ -51,17 +35,17 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             {
                 var indents = new String(' ', tabs * tabWidth);
 
-                if (displayFormattedOutput)
+                if (_configurationOptions.DisplayFormattedOutput)
                 {
                     Messages.AppendLine(string.Format("Node:{0}{1}:>{2}<", indents, 
-                        displayNodeKind ? node.Kind().ToString() : "",
-                        displayNodeValue ? node.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? node.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? node.ToString() : ""));
                 }
                 else
                 {
                     Messages.AppendLine(string.Format("Node:{0}:>{1}<",
-                        displayNodeKind ? node.Kind().ToString() : "",
-                        displayNodeValue ? node.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? node.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? node.ToString() : ""));
                 }
             }
 
@@ -75,17 +59,17 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             var indents = new String(' ', tabs * tabWidth);
 
-            if (displayFormattedOutput)
+            if (_configurationOptions.DisplayFormattedOutput)
             {
                 Messages.AppendLine(string.Format("Token:{0}{1}:>{2}<", indents,
-                        displayNodeKind ? token.Kind().ToString() : "",
-                        displayNodeValue ? token.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? token.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? token.ToString() : ""));
             }
             else
             {
                 Messages.AppendLine(string.Format("Token:{0}:>{1}<",
-                        displayNodeKind ? token.Kind().ToString() : "",
-                        displayNodeValue ? token.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? token.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? token.ToString() : ""));
             }
 
             // Call base to visit children
@@ -97,17 +81,17 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             var indents = new String(' ', tabs * tabWidth);
 
-            if (displayFormattedOutput)
+            if (_configurationOptions.DisplayFormattedOutput)
             {
                 Messages.AppendLine(string.Format("Trivia:{0}{1}:>{2}<", indents,
-                        displayNodeKind ? trivia.Kind().ToString() : "",
-                        displayNodeValue ? trivia.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? trivia.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? trivia.ToString() : ""));
             }
             else
             {
                 Messages.AppendLine(string.Format("Trivia:{0}:>{1}<",
-                        displayNodeKind ? trivia.Kind().ToString() : "",
-                        displayNodeValue ? trivia.ToString() : ""));
+                        _configurationOptions.DisplayNodeKind ? trivia.Kind().ToString() : "",
+                        _configurationOptions.DisplayNodeValue ? trivia.ToString() : ""));
             }
 
             // Call base to visit children

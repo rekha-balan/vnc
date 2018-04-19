@@ -37,7 +37,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         public string CRC32Trivia;
         public string CRC32StructuredTrivia;
 
-        ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
+        public ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
   
         public string TargetPattern
         {

@@ -16,9 +16,18 @@ namespace VNC.CodeAnalysis
 
     public class ConfigurationOptions
     {
-
         public SyntaxWalkerDepth SyntaxWalkerDepth { get; set; } = SyntaxWalkerDepth.StructuredTrivia;
         #region Output Options
+
+        public SyntaxNode.AdditionalNodes AdditionalNodeAnalysis { get; set; } = SyntaxNode.AdditionalNodes.None;
+
+        public bool DisplayNodeKind { get; set; } = false;
+
+        public bool DisplayNodeValue { get; set; } = false;
+
+        public bool DisplayFormattedOutput { get; set; } = false;
+
+
 
         public bool SourceLocation { get; set; } = false;
 
