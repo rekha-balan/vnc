@@ -49,8 +49,8 @@
                 <!--<dxe:TextEdit x:Name="teTargetInvocationExpression" >
                 </dxe:TextEdit>-->
                 <dxe:TextEdit x:Name="teTargetInvocationExpression" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceReplacementTargetUseRegEx, Path=IsChecked, Mode=OneWay}"
-                                      ToolTip="Supports Regular Expressions"/>
+                              IsEnabled="{cb:Binding ElementName=ceReplacementTargetUseRegEx, Path=IsChecked, Mode=OneWay}"
+                              ToolTip="Supports Regular Expressions"/>
 
             </dxlc:LayoutItem>
            
@@ -64,6 +64,26 @@
                         AcceptsReturn="True" AcceptsTab="True" />
             </dxlc:LayoutItem>
 
+            <dxlc:LayoutGroup Header="MethodBlock Remover"
+                View="GroupBox"	Orientation="Vertical">
+
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceCommentOut_MethodBlock" Content="Comment Out" 
+                                   EditValueChanged="ceCommentOut_MethodBlock_EditValueChanged"/>
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem>
+                    <Button x:Name="btnRemove_MethodBlock"
+                            Style="{StaticResource SyntaxRewriterButton}"
+                            Click="btnRemove_MethodBlock_Click">
+                        <TextBlock x:Name="teRemove_MethodBlock"
+                                   TextWrapping="Wrap" 
+                                   TextAlignment="Center">Remove MethodBlock</TextBlock>
+                    </Button>
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+            
             <dxlc:LayoutGroup Header="ExpressionStatement Removers"
                 View="GroupBox"	Orientation="Vertical">
 
@@ -74,7 +94,7 @@
                 
                 <dxlc:LayoutItem>
                     <Button x:Name="btnRemove_ExpressionStatement"
-                        Style="{StaticResource SyntaxRewriterButton}"
+                            Style="{StaticResource SyntaxRewriterButton}"
                             Click="btnRemove_ExpressionStatement_Click">
                         <TextBlock x:Name="teRemove_ExpressionStatement"
                                    TextWrapping="Wrap" TextAlignment="Center">Remove ExpressionStatement</TextBlock>
@@ -83,10 +103,11 @@
 
             </dxlc:LayoutGroup>
 
-            <dxlc:LayoutGroup Header="FieldDeclaration Removers"
+            <dxlc:LayoutGroup Header="FieldDeclaration Remover"
                 View="GroupBox"	Orientation="Vertical">
 
                 <dx:GroupFrame Header="FieldDeclaration Location" VerticalAlignment="Top">
+                    
                     <dxe:ListBoxEdit Name="lbeFieldDeclarationLocation" 
                              ValueMember="Content" 
                              SelectedIndex="0"                                                         
@@ -105,6 +126,7 @@
                             <dxe:ListBoxEditItem Content="Structure" />
                         </dxe:ListBoxEdit.Items>
                     </dxe:ListBoxEdit>
+                    
                 </dx:GroupFrame>
 
                 <dxlc:LayoutItem>
@@ -123,13 +145,12 @@
 
             </dxlc:LayoutGroup>
 
+
         </dxlc:LayoutGroup>
 
         <dxlc:LayoutGroup
         	Orientation="Vertical" VerticalAlignment="Top">
             
-
-
 
         </dxlc:LayoutGroup>
 

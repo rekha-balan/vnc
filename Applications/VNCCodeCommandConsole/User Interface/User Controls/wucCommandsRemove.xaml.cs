@@ -10,7 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using VNC.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -86,6 +86,35 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void ceCommentOut_MethodBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teRemove_MethodBlock.Text = isChecked ? "CommentOut MethodBlock" : "Remove MethodBlock";
+        }
+        private void btnRemove_MethodBlock_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(Remove_MethodBlockVB, CodeExplorer.configurationOptions);
+        }
+        private void ceCommentOut_ExpressionStatement_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teRemove_ExpressionStatement.Text = isChecked ? "CommentOut ExpressionStatement" : "Remove ExpressionStatement";
+        }
+        private void ceCommentOut_FieldDeclaration_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teRemove_FieldDeclaration.Text = isChecked ? "CommentOut FieldDeclaration" : "Remove FieldDeclaration";
+
+        }
         private void btnRemove_FieldDeclaration_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(Remove_FieldDeclarationVB, CodeExplorer.configurationOptions);
@@ -100,6 +129,162 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Main Function Routines
 
+        private StringBuilder CommentOut_InvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(commandConfiguration.TargetPattern, teComment.Text);
+
+            rewriter.Messages = commandConfiguration.Results;
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        private StringBuilder Remove_ExpressionStatementVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveExpressionStatement(
+                commandConfiguration.TargetPattern,
+                (Boolean)ceCommentOut_FieldDeclaration.IsChecked, teComment.Text);
+
+            rewriter.Messages = commandConfiguration.Results;
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        private StringBuilder Remove_FieldDeclarationVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+            VNCCA.SyntaxNode.FieldDeclarationLocation fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
+
+            // TODO(crhodes)
+            // Go look at EyeOnLife and see how to do this in a cleaner way.
+
+            switch (lbeFieldDeclarationLocation.EditValue.ToString())
+            {
+                case "Class":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
+                    break;
+
+                case "Module":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Module;
+                    break;
+
+                case "Structure":
+                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Structure;
+                    break;
+            }
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveFieldDeclaration(
+                commandConfiguration.TargetPattern, fieldDeclarationLocation,
+                (Boolean)ceCommentOut_FieldDeclaration.IsChecked, teComment.Text);
+
+            rewriter.Messages = commandConfiguration.Results;
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        private StringBuilder Remove_MethodBlockVB(RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveMethodBlock(
+                commandConfiguration.TargetPattern,
+                (Boolean)ceCommentOut_MethodBlock.IsChecked, teComment.Text);
+
+            rewriter.Messages = commandConfiguration.Results;
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+
+        }
+
+        //private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{
+        //    performedReplacement = false;
+
+        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
+        //        commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
+
+        //    rewriter.Messages = commandConfiguration.Results;
+
+        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+        //    string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+        //    return commandConfiguration.Results;
+        //}
+
+        //private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{
+        //    performedReplacement = false;
+
+        //    var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(
+        //        commandConfiguration.TargetPattern);
+
+        //    rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+        //    rewriter.Messages = commandConfiguration.Results;
+
+        //    SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+        //    string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+        //    performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+        //    return commandConfiguration.Results;
+        //}
+        //        StringBuilder WrapSQLFillCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        //{
+        //    {
+        //        performedReplacement = false;
+
+        //        var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(commandConfiguration.TargetPattern);
+
+        //        rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+        //        rewriter.Messages = commandConfiguration.Results;
+
+        //        SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+        //        string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+        //        performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+        //        return commandConfiguration.Results;
+        //    }
+        //}
+        #endregion
+
+        #region Utility Routines
         void ProcessOperation(VNCCA.Types.RewriteFileCommand command,
             wucConfigurationOptions configurationOptions)
         {
@@ -190,160 +375,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             CodeExplorer.teSourceCode.Text = sb.ToString();
         }
 
+
         #endregion
-
-        private StringBuilder CommentOut_InvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {          
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.CommentOutSingleLineInvocationExpression(commandConfiguration.TargetPattern, teComment.Text);
-
-            rewriter.Messages = commandConfiguration.Results;
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        private StringBuilder Remove_ExpressionStatementVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveExpressionStatement(
-                commandConfiguration.TargetPattern, 
-                (Boolean)ceCommentOut_FieldDeclaration.IsChecked, teComment.Text);
-
-            rewriter.Messages = commandConfiguration.Results;
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        StringBuilder Remove_FieldDeclarationVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-            VNCCA.SyntaxNode.FieldDeclarationLocation fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
-
-            // TODO(crhodes)
-            // Go look at EyeOnLife and see how to do this in a cleaner way.
-
-            switch (lbeFieldDeclarationLocation.EditValue.ToString())
-            {
-                case "Class":
-                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Class;
-                    break;
-
-                case "Module":
-                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Module;
-                    break;
-
-                case "Structure":
-                    fieldDeclarationLocation = VNCCA.SyntaxNode.FieldDeclarationLocation.Structure;
-                    break;
-            }
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveFieldDeclaration(
-                commandConfiguration.TargetPattern, fieldDeclarationLocation, 
-                (Boolean) ceCommentOut_FieldDeclaration.IsChecked, teComment.Text);
-
-            rewriter.Messages = commandConfiguration.Results;
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
-                commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
-
-            rewriter.Messages = commandConfiguration.Results;
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(
-                commandConfiguration.TargetPattern);
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            rewriter.Messages = commandConfiguration.Results;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        StringBuilder WrapSQLFillCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            {
-                performedReplacement = false;
-
-                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(commandConfiguration.TargetPattern);
-
-                rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-                rewriter.Messages = commandConfiguration.Results;
-
-                SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-                string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-                performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-                return commandConfiguration.Results;
-            }
-        }
-
-        private void ceCommentOut_ExpressionStatement_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
-            // TODO(crhodes)
-            // What would be cool is to look for the child that is a TextBlock.
-            // For now be boring and give it a name.
-            teRemove_ExpressionStatement.Text = isChecked ? "CommentOut ExpressionStatement" : "Remove ExpressionStatement";
-        }
-
-        private void ceCommentOut_FieldDeclaration_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
-            // TODO(crhodes)
-            // What would be cool is to look for the child that is a TextBlock.
-            // For now be boring and give it a name.
-            teRemove_FieldDeclaration.Text = isChecked ? "CommentOut FieldDeclaration" : "Remove FieldDeclaration";
-
-        }
     }
 }

@@ -94,6 +94,10 @@
                         <dxe:CheckEdit x:Name="ceDisplay_NodeValue" Content="Display Node Value" />
                     </dxlc:LayoutItem>
 
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceIncludeStatementBlockInCRC" Content="Inlcude StatementBlock in CRC" />
+                    </dxlc:LayoutItem>
+
                     <!--<dxlc:LayoutItem>
                         <dxe:CheckEdit x:Name="ceDisplay_FormattedOutput" Content="Display Formatted Output" />
                     </dxlc:LayoutItem>-->
@@ -109,6 +113,13 @@
                                     IsChecked="False" VerticalAlignment="Top" />
             </dxlc:LayoutItem>
 
+            <dxlc:LayoutItem>
+
+                <dxe:CheckEdit x:Name="ceDisplay_StatementBlock" 
+                                Content="Display Statement Block" 
+                                IsChecked="False" />
+            </dxlc:LayoutItem>
+            
             <dxlc:LayoutItem>
 
                 <dxe:CheckEdit x:Name="ceDisplay_NodeParent" 
