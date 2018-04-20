@@ -237,6 +237,7 @@
     <Compile Include="SyntaxNode\VB\Modules.cs" />
     <Compile Include="SyntaxNode\VB\Structures.cs" />
     <Compile Include="SyntaxRewriters\Helpers.cs" />
+    <Compile Include="SyntaxRewriters\VB\RemoveMethodBody.cs" />
     <Compile Include="SyntaxRewriters\VB\RewriteCellFormatFontColor.cs" />
     <Compile Include="SyntaxRewriters\VB\RemoveFieldDeclaration.cs" />
     <Compile Include="SyntaxRewriters\VB\RemoveExpressionStatement.cs" />

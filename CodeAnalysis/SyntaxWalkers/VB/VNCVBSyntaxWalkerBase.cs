@@ -207,7 +207,16 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                     break;
 
                 case BlockType.MethodBlock:
-                    nodeValue = ((MethodBlockSyntax)node).ToString();
+                    if (_configurationOptions.DisplayStatementBlock)
+                    {
+                        nodeValue = ((MethodBlockSyntax)node).ToString();
+                    }
+                    else
+                    {
+                        nodeValue = "<METHODBLOCK>";
+                    }
+
+                    //nodeValue = ((MethodBlockSyntax)node).ToString();
                     nodeKey = ((MethodBlockSyntax)node).SubOrFunctionStatement.ToString(); ;
                     break;
             }

@@ -457,7 +457,25 @@ namespace VNC.CodeAnalysis.Helpers
 
             foreach (string line in lines)
             {
-                result.AppendFormat(string.Format("'{0}\n{1}", line, leadingWhiteSpace));
+                var newLine = string.Format("'{0}", line);
+
+                result.AppendLine(string.Format("'{0}\n{1}", line, leadingWhiteSpace));
+            }
+
+            return result.ToString();
+        }
+
+        public static string BlockComment(string block)
+        {
+            StringBuilder result = new StringBuilder();
+
+            var lines = Regex.Split(block, "\r\n|\r|\n");
+
+            foreach (string line in lines)
+            {
+                var newLine = string.Format("'{0}", line);
+
+                result.AppendLine(newLine);
             }
 
             return result.ToString();
