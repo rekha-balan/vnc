@@ -2,28 +2,28 @@
 <Root Type="DevExpress.CodeRush.Foundation.Navigation.QuickFileNav.SolutionFileInfosContainer">
   <Options Language="Neutral">
     <Items>
-      <Item Id="{d771d0a1-0d16-4278-8c14-da18007e3db7}">
+      <Item Id="{9dca2e73-8210-4d3f-847a-ce61e84c35ed}">
         <Filename>MainWindowViewModel.cs</Filename>
         <FilePath>c:\github\vnc\explore\gui architectures\wpf mvvm explore\zzadesktop\mainwindowviewmodel.cs</FilePath>
         <Folders />
         <ProjectFileName>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\ZzaDesktop.csproj</ProjectFileName>
         <ProjectName>ZzaDesktop</ProjectName>
       </Item>
-      <Item Id="{5e294201-41b1-45ff-8ca5-c872027f664b}">
+      <Item Id="{8e4bdfd2-6726-48e1-bde8-580424c0f77f}">
         <Filename>MainWindow.xaml</Filename>
         <FilePath>c:\github\vnc\explore\gui architectures\wpf mvvm explore\zzadesktop\mainwindow.xaml</FilePath>
         <Folders />
         <ProjectFileName>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\ZzaDesktop.csproj</ProjectFileName>
         <ProjectName>ZzaDesktop</ProjectName>
       </Item>
-      <Item Id="{a0651b2a-6ede-4d9f-b031-c0e11c78462e}">
+      <Item Id="{72a53c59-4139-4de6-bd65-45577d239ce2}">
         <Filename>BindableBase.cs</Filename>
         <FilePath>c:\github\vnc\explore\gui architectures\wpf mvvm explore\zzadesktop\bindablebase.cs</FilePath>
         <Folders />
         <ProjectFileName>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\ZzaDesktop.csproj</ProjectFileName>
         <ProjectName>ZzaDesktop</ProjectName>
       </Item>
-      <Item Id="{1238966a-47ec-4389-8e97-5d6d779bd397}">
+      <Item Id="{f02e070a-c841-4ff8-87a1-29c04b28a506}">
         <Filename>OrderViewModel.cs</Filename>
         <FilePath>c:\github\vnc\explore\gui architectures\wpf mvvm explore\zzadesktop\orders\orderviewmodel.cs</FilePath>
         <Folders>
@@ -32,7 +32,7 @@
         <ProjectFileName>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\ZzaDesktop.csproj</ProjectFileName>
         <ProjectName>ZzaDesktop</ProjectName>
       </Item>
-      <Item Id="{8ed4bbff-1ea5-48b1-9efd-007da5e887b1}">
+      <Item Id="{79238c2f-2f5c-4bc5-849c-65deaf10d037}">
         <Filename>OrderPrepViewModel.cs</Filename>
         <FilePath>c:\github\vnc\explore\gui architectures\wpf mvvm explore\zzadesktop\orderprep\orderprepviewmodel.cs</FilePath>
         <Folders>
@@ -41,7 +41,7 @@
         <ProjectFileName>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\ZzaDesktop.csproj</ProjectFileName>
         <ProjectName>ZzaDesktop</ProjectName>
       </Item>
-      <Item Id="{9547bf86-06e6-4c99-84b3-202c4da493ef}">
+      <Item Id="{4697df64-da43-43a9-9e33-448459b14133}">
         <Filename>CustomerListViewModel.cs</Filename>
         <FilePath>C:\GitHub\vnc\Explore\GUI Architectures\WPF MVVM Explore\ZzaDesktop\Customers\CustomerListViewModel.cs</FilePath>
         <Folders />
