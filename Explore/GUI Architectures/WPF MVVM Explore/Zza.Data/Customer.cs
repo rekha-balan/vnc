@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Zza.Data
 {
-    public class Customer
+    //public class Customer
+    public class Customer : INotifyPropertyChanged
     {
         public Customer()
         {
@@ -16,6 +18,9 @@ namespace Zza.Data
         public Guid? StoreId { get; set; }
 
         string _firstName;
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
         public string FirstName
         {
             get
@@ -24,9 +29,19 @@ namespace Zza.Data
             }
             set
             {
+                // Added in later demo to raise IPC
+
+                if (_firstName != value)
+                {
                     _firstName = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("FirstName"));
+                }
+                //_firstName = value;
             }
         }
+
+        // TODO(crhodes)
+        // Should do IPC on all of these
 
         public string LastName { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
