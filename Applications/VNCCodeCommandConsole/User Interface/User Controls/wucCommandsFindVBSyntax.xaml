@@ -360,9 +360,9 @@
                     <dxe:CheckEdit x:Name="ceShowMethodParameters" Content="Show Method Parameters" IsChecked="False" />
                 </dxlc:LayoutItem>-->
 
-                <dxlc:LayoutItem>
+                <!--<dxlc:LayoutItem>
                     <dxe:CheckEdit x:Name="ceShowMethodBlock2" Content="Show Method Block" IsChecked="False" />
-                </dxlc:LayoutItem>
+                </dxlc:LayoutItem>-->
 
             </dxlc:LayoutGroup>
 
@@ -377,7 +377,7 @@
         <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True">
+            IsCollapsible="True" IsCollapsed="False">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">

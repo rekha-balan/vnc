@@ -74,13 +74,15 @@
                     <dxdo:TabbedGroup ItemWidth="300" Name="tg_Left">
 
                         <dxdo:LayoutPanel Name="lp_CommandsFindVBSyntax" Caption="Find VB Syntax"
-                                          AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False" >
+                                          AllowFloat="False" AllowClose="False" AllowDock="False" AllowHide="False"
+                                          Style="{StaticResource FixedLayoutPanelMedium}" >
 
                             <uiuc:wucCommandsFindVBSyntax x:Name="wucCommandsFindVBSyntax" />
 
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Find" Caption="Find Stuff" 
+                                          Style="{StaticResource FixedLayoutPanelMedium}">
 
                             <uiuc:wucCommandsFind x:Name="wucCommandsFind" />
 
@@ -256,10 +258,11 @@
 
                     </dxdo:LayoutPanel>
 
-                    <dxdo:TabbedGroup Name="tg_Right" ItemWidth="220">
+                    <dxdo:TabbedGroup Name="tg_Right" ItemWidth="250">
                         
                         <dxdo:LayoutPanel Name="lp_OutputOptions" Caption="Configuration Options"
-                                          AllowFloat="True" AllowClose="True" AllowDock="True" AllowHide="True" >
+                                          AllowFloat="True" AllowClose="True" AllowDock="True" AllowHide="True" 
+                                          Style="{StaticResource FixedLayoutPanelNarrow}">
                             
                             <uiuc:wucConfigurationOptions x:Name="configurationOptions" />
                             
@@ -279,13 +282,15 @@
 
                     <dxdo:AutoHideGroup DockType="Left" ItemWidth="250" >
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" ItemWidth="250">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Rewrite" Caption="Rewrite Stuff" 
+                                           Style="{StaticResource FixedLayoutPanelMedium}" >
 
                             <uiuc:wucCommandsRewrite x:Name="wucCommandsRewrite" />
 
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Remove" Caption="Remove Stuff" ItemWidth="250">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Remove" Caption="Remove Stuff"
+                                          Style="{StaticResource FixedLayoutPanelMedium}" >
 
                             <uiuc:wucCommandsRemove x:Name="wucCommandsRemove" />
 
@@ -321,7 +326,8 @@
 
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Parse" Caption="Parse" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Parse" Caption="Parse" 
+                                          ItemWidth="300" MinWidth="275" MaxWidth="325">
 
                             <uiuc:wucCommandsParse x:Name="wucCommandsParse" />
 
@@ -334,19 +340,22 @@
                             
                         </dxdo:LayoutPanel>-->
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Quality" Caption="Quality" 
+                                          ItemWidth="300" MinWidth="275" MaxWidth="325">
 
                             <uiuc:wucCommandsQuality x:Name="wucCommandsQuality" />
                             
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Design" Caption="Design" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Design" Caption="Design" 
+                                          ItemWidth="300" MinWidth="275" MaxWidth="325">
 
                             <uiuc:wucCommandsDesign x:Name="wucCommandsDesign" />
 
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel x:Name="lp_Commands_Performance" Caption="Performance" ItemWidth="300">
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Performance" Caption="Performance" 
+                                          ItemWidth="300" MinWidth="275" MaxWidth="325">
 
                             <uiuc:wucCommandsPerformance x:Name="wucCommandsPerformance" />
 

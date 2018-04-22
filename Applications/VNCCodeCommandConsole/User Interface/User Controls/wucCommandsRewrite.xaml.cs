@@ -112,6 +112,95 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Main Function Routines
 
+        private StringBuilder RewriteCellFormatFontColorVB(VNC.CodeAnalysis.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RewriteCellFormatFontColor(
+                commandConfiguration.TargetPattern);
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
+                commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
+
+            rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(
+                commandConfiguration.TargetPattern);
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
+
+        StringBuilder WrapSQLFillCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            {
+                performedReplacement = false;
+
+                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(commandConfiguration.TargetPattern);
+
+                rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+                rewriter.Messages = commandConfiguration.Results;
+                rewriter.Replacements = commandConfiguration.Replacements;
+
+                SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+                string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+                performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+                return commandConfiguration.Results;
+            }
+        }
+
+        #endregion
+
+        #region Utility Routines
+
         void ProcessOperation(VNCCA.Types.RewriteFileCommand command,
             wucConfigurationOptions configurationOptions)
         {
@@ -203,89 +292,5 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-        private StringBuilder RewriteCellFormatFontColorVB(VNC.CodeAnalysis.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RewriteCellFormatFontColor(
-                commandConfiguration.TargetPattern);
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            rewriter.Messages = commandConfiguration.Results;
-            rewriter.Replacements = commandConfiguration.Replacements;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        private StringBuilder RewriteInvocationExpressionVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.InvocationExpression(
-                commandConfiguration.TargetPattern, commandConfiguration.ReplacementPattern);
-
-            rewriter.Messages = commandConfiguration.Results;
-            rewriter.Replacements = commandConfiguration.Replacements;
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        private StringBuilder WrapSQLExecuteXCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            performedReplacement = false;
-
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLExecuteXCallsInDALHelper(
-                commandConfiguration.TargetPattern);
-
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-            rewriter.Messages = commandConfiguration.Results;
-            rewriter.Replacements = commandConfiguration.Replacements;
-
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-            return commandConfiguration.Results;
-        }
-
-        StringBuilder WrapSQLFillCallsInDALHelperVB(VNCCA.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
-        {
-            {
-                performedReplacement = false;
-
-                var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.WrapSQLFillCallsInDALHelper(commandConfiguration.TargetPattern);
-
-                rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
-
-                rewriter.Messages = commandConfiguration.Results;
-                rewriter.Replacements = commandConfiguration.Replacements;
-
-                SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
-
-                string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
-
-                performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
-
-                return commandConfiguration.Results;
-            }
-        }
     }
 }

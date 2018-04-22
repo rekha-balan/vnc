@@ -19,6 +19,24 @@
         <Setter Property="dxdo:LayoutPanel.AllowHide" Value="False" />
     </Style>
 
+    <Style x:Key="FixedLayoutPanelNarrow" >
+        <Setter Property="dxdo:LayoutGroup.MinWidth" Value="250" />
+        <Setter Property="dxdo:LayoutGroup.ItemWidth" Value="225" />   
+        <Setter Property="dxdo:LayoutGroup.MaxWidth" Value="275" />
+    </Style>
+    
+    <Style x:Key="FixedLayoutPanelMedium" >
+        <Setter Property="dxdo:LayoutGroup.MinWidth" Value="275" />
+        <Setter Property="dxdo:LayoutGroup.ItemWidth" Value="300" />
+        <Setter Property="dxdo:LayoutGroup.MaxWidth" Value="325" />
+    </Style>
+
+    <Style x:Key="FixedLayoutPanelWide" >
+        <Setter Property="dxdo:LayoutGroup.MinWidth" Value="300" />
+        <Setter Property="dxdo:LayoutGroup.ItemWidth" Value="325" />
+        <Setter Property="dxdo:LayoutGroup.MaxWidth" Value="350" />
+    </Style>
+
     <Style x:Key="LayoutControlStyle_Grid" >
         <Setter Property="dxlc:LayoutControl.Padding" Value="0" />
         <!--<Setter Property="dxlc:LayoutControl.VerticalAlignment" Value="Top" />-->

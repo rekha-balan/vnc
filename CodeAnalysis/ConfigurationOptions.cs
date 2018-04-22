@@ -29,6 +29,10 @@ namespace VNC.CodeAnalysis
 
         public bool DisplayNodeParent { get; set; } = false;
 
+        public bool DisplayStatementBlock { get; set; } = false;
+
+        public bool IncludeStatementBlockInCRC { get; set; } = false;
+
         public bool SourceLocation { get; set; } = false;
 
         public bool CRC32 { get; set; } = false;

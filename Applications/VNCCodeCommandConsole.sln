@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNCCodeCommandConsole", "VN
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VNC_DB", "..\Databases\VNC_DB\VNC_DB.sqlproj", "{0CF50996-B6C3-4C05-8D22-E7367625B1DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNC.CodeAnalysis", "..\VNC.CodeAnalysis\VNC.CodeAnalysis.csproj", "{9D21B031-3BFE-44B1-A622-D500230F90A7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7188171-B81B-40A1-8B55-0F7C77E774D3}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\temp\CodeCommandConsole_Config.xml = ..\..\..\temp\CodeCommandConsole_Config.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNC.XamlHelper", "..\VNC.XamlHelper\VNC.XamlHelper.csproj", "{D7A74541-04C0-4172-8F17-C30C06290274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalysis", "..\CodeAnalysis\CodeAnalysis.csproj", "{9D21B031-3BFE-44B1-A622-D500230F90A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlHelper", "..\XamlHelper\XamlHelper.csproj", "{D7A74541-04C0-4172-8F17-C30C06290274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

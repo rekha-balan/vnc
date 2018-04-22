@@ -65,6 +65,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             configurationOptions.DisplayNodeParent = (bool)ceDisplay_NodeParent.IsChecked;
 
+            configurationOptions.DisplayStatementBlock = (bool)ceDisplay_StatementBlock.IsChecked;
+            configurationOptions.IncludeStatementBlockInCRC = (bool)ceIncludeStatementBlockInCRC.IsChecked;
+
             configurationOptions.SourceLocation = (bool)ceDisplaySourceLocation.IsChecked;
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
             configurationOptions.ReplaceCRLF = (bool)ceReplaceCRLF.IsChecked;
