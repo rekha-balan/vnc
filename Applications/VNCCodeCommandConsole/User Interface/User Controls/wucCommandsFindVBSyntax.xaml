@@ -113,7 +113,7 @@
         <dxlc:LayoutGroup Header="Find ClassStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="True">
+            IsCollapsible="True" IsCollapsed="False">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -136,13 +136,18 @@
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-            	<dxe:CheckEdit x:Name="ceShowClassBlock" Content="Show Class Block" IsChecked="False" />
+            	<dxe:CheckEdit x:Name="ceShowClassBlock" 
+                               Content="Show Class Block" IsChecked="False"
+                               EditValueChanged="ceShowClassBlock_EditValueChanged"/>
             </dxlc:LayoutItem>
             
             <dxlc:LayoutItem>
-                <Button Content="ClassStatement Walker"
-                        Style="{StaticResource SyntaxQueryButton}"
-                        Click="btnClassStatementWalker_Click"/>
+                <Button  Style="{StaticResource SyntaxQueryButton}"
+                         Click="btnClassStatementWalker_Click">
+                    <TextBlock x:Name="teWalk_ClassStatement"
+                                   TextWrapping="Wrap" 
+                                   TextAlignment="Center">ClassStatement Walker</TextBlock>
+                </Button>                
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>
@@ -406,14 +411,19 @@
                 </dxlc:LayoutItem>-->
 
                 <dxlc:LayoutItem>
-                    <dxe:CheckEdit x:Name="ceShowMethodBlock" Content="Show Method Block" IsChecked="False" />
+                    <dxe:CheckEdit x:Name="ceShowMethodBlock"
+                                   Content="Show Method Block" IsChecked="False"
+                                   EditValueChanged="ceShowMethodBlock_EditValueChanged"/>
                 </dxlc:LayoutItem>
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>
-                <Button Content="MethodBlock Walker"
-                        Style="{StaticResource SyntaxQueryButton}"
-                        Click="btnMethodStatementWalker_Click"/>
+                <Button  Style="{StaticResource SyntaxQueryButton}"
+                         Click="btnMethodStatementWalker_Click">
+                    <TextBlock x:Name="teWalk_MethodStatement"
+                                   TextWrapping="Wrap" 
+                                   TextAlignment="Center">MethodStatement Walker</TextBlock>
+                </Button>
             </dxlc:LayoutItem>
 
         </dxlc:LayoutGroup>        

@@ -296,6 +296,9 @@
     <Compile Include="User Interface\User Controls\wucCommandsQuality.xaml.cs">
       <DependentUpon>wucCommandsQuality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Interface\User Controls\wucCommandsAdd.xaml.cs">
+      <DependentUpon>wucCommandsAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Interface\User Controls\wucCommandsRemove.xaml.cs">
       <DependentUpon>wucCommandsRemove.xaml</DependentUpon>
     </Compile>
@@ -435,6 +438,10 @@
     <Page Include="User Interface\User Controls\wucCommandsQuality.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Interface\User Controls\wucCommandsAdd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="User Interface\User Controls\wucCommandsRemove.xaml">
       <Generator>MSBuild:Compile</Generator>

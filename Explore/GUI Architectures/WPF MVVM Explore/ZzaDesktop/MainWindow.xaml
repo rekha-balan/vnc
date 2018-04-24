@@ -21,6 +21,10 @@
         <DataTemplate DataType="{x:Type prep:OrderPrepViewModel}" >
             <prep:OrderPrepView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type cust:AddEditCustomerViewModel}">
+            <cust:AddEditCustomerView />
+        </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

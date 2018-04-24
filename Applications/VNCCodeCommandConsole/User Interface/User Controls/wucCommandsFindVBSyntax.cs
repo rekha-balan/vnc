@@ -629,5 +629,24 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #region Utility Methods
 
         #endregion
+
+        private void ceShowMethodBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teWalk_MethodStatement.Text = isChecked ? "MethodBlock Walker" : "MethodStatement Walker";
+        }
+
+        private void ceShowClassBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teWalk_ClassStatement.Text = isChecked ? "ClassBlock Walker" : "ClassStatement Walker";
+
+        }
     }
 }

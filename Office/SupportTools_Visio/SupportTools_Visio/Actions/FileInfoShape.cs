@@ -7,12 +7,14 @@ using Visio = Microsoft.Office.Interop.Visio;
 using Microsoft.CodeAnalysis;
 using System.IO;
 using Microsoft.CodeAnalysis.VisualBasic;
+using VNC.CodeAnalysis;
 
 namespace SupportTools_Visio.Actions
 {
     public class FileInfoShape
     {
         delegate StringBuilder SearchTreeCommand(StringBuilder sb, SyntaxTree tree);
+
 
         #region Constructors and Load
 
@@ -58,11 +60,11 @@ namespace SupportTools_Visio.Actions
         {
             StringBuilder sb = new StringBuilder();
 
-            ProcessOperation(sb, DisplayImportsStatementWalkerVB);
-            ProcessOperation(sb, DisplayNamespaceStatementWalkerVB);
-            ProcessOperation(sb, DisplayClassStatementWalkerVB);
-            ProcessOperation(sb, DisplayModuleStatementWalkerVB);
-            ProcessOperation(sb, DisplayMethodStatementWalkerVB);
+            //ProcessOperation(sb, DisplayImportsStatementWalkerVB);
+            //ProcessOperation(sb, DisplayNamespaceStatementWalkerVB);
+            //ProcessOperation(sb, DisplayClassStatementWalkerVB);
+            //ProcessOperation(sb, DisplayModuleStatementWalkerVB);
+            //ProcessOperation(sb, DisplayMethodStatementWalkerVB);
 
             return sb.ToString();
         }
@@ -175,9 +177,9 @@ namespace SupportTools_Visio.Actions
                 tree, walker);
         }
 
-        private StringBuilder ProcessOperation(StringBuilder sb, SearchTreeCommand command)
+        private StringBuilder ProcessOperation()
         {
-            //StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             //CodeExplorer.teSourceCode.Clear();
 
             //string projectFullPath = CodeExplorerContext.teProjectFile.Text;
@@ -200,25 +202,25 @@ namespace SupportTools_Visio.Actions
             //        }
             //        else
             //        {
-                        StringBuilder sbFileResults = new StringBuilder();
+            //StringBuilder sbFileResults = new StringBuilder();
 
-                        var sourceCode = "";
+            //var sourceCode = "";
 
-                        using (var sr = new StreamReader(SourceFileFileName))
-                        {
-                            sourceCode = sr.ReadToEnd();
-                        }
+            //using (var sr = new StreamReader(SourceFileFileName))
+            //{
+            //    sourceCode = sr.ReadToEnd();
+            //}
 
-                        SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
+            //SyntaxTree tree = VisualBasicSyntaxTree.ParseText(sourceCode);
 
-                        sbFileResults = command(sbFileResults, tree);
+            //sbFileResults = command(sbFileResults, tree);
 
-                        //if ((bool)ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
-                        //{
-                        //    sb.AppendLine("Searching " + filePath);
-                        //}
+            ////if ((bool)ceAlwaysDisplayFileName.IsChecked || (sbFileResults.Length > 0))
+            ////{
+            ////    sb.AppendLine("Searching " + filePath);
+            ////}
 
-                        sb.Append(sbFileResults.ToString());
+            //sb.Append(sbFileResults.ToString());
             //        }
             //    }
             //}
@@ -241,22 +243,22 @@ namespace SupportTools_Visio.Actions
 
             //walker.DisplayClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
             //walker.DisplayMethodName = (bool)ceDisplayMethodName.IsChecked;
+            
+            //walker.DisplayClassOrModuleName = true;
+            //walker.DisplayMethodName = true;
 
-            walker.DisplayClassOrModuleName = true;
-            walker.DisplayMethodName = true;
+            //if (useRegEx)
+            //{
+            //    walker.IdentifierNames = regEx;
+            //}
+            //else
+            //{
+            //    walker.IdentifierNames = ".*";
+            //}
 
-            if (useRegEx)
-            {
-                walker.IdentifierNames = regEx;
-            }
-            else
-            {
-                walker.IdentifierNames = ".*";
-            }
+            //walker.InitializeRegEx();
 
-            walker.InitializeRegEx();
-
-            walker.Visit(syntaxTree.GetRoot());
+            //walker.Visit(syntaxTree.GetRoot());
 
             return sb;
         }
