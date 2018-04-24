@@ -296,6 +296,13 @@
 
                         </dxdo:LayoutPanel>
 
+                        <dxdo:LayoutPanel x:Name="lp_Commands_Add" Caption="Add Stuff"
+                                          Style="{StaticResource FixedLayoutPanelMedium}" >
+
+                            <uiuc:wucCommandsAdd x:Name="wucCommandsAdd" />
+
+                        </dxdo:LayoutPanel>
+                        
                     </dxdo:AutoHideGroup>
 
                     <!--<dxdo:AutoHideGroup DockType="Top">

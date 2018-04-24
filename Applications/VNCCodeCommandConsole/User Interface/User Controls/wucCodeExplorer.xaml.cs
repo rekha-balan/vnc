@@ -50,6 +50,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             wucCommands.CodeExplorer = this;
             wucCommands.CodeExplorerContext = wucCodeExplorerContext;
 
+            wucCommandsAdd.CodeExplorer = this;
+            wucCommandsAdd.CodeExplorerContext = wucCodeExplorerContext;
+
             wucCommandsDesign.CodeExplorer = this;
             wucCommandsDesign.CodeExplorerContext = wucCodeExplorerContext;
 

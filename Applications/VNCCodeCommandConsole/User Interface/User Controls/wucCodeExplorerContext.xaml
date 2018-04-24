@@ -180,14 +180,18 @@
                             </dxe:ComboBoxEdit.StyleSettings>
                         </dxe:ComboBoxEdit>
                     </dxlc:LayoutItem>
-                    
+
                     <dxlc:LayoutItem Label="Browse for Source File" 
-                                 LabelPosition="Top">
-                        
-                        <Button Content="Browse" Click="btnBrowseForFile_Click"/>
-                        
+                                     LabelPosition="Top">
+
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Browse" Click="btnBrowseForFile_Click"/> 
+                            
+                            <Button Content="Clear File" Click="btnClearFile_Click"/>
+                        </StackPanel>
+
                     </dxlc:LayoutItem>
-                        
+
                 </dxlc:LayoutGroup>
                 
                 <dxlc:LayoutGroup Orientation="Vertical">

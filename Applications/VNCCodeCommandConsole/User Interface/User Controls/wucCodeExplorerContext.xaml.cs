@@ -89,57 +89,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Event Handlers
 
-        private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
-        {
-            //CustomFormat.FormatStorageColumns(e);
-        }
-
-        #endregion
-
-        private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
-        {
-            //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
-        }
-
-        #region Main Function Routines
-
-
-
-        #endregion
-
-        //private void XXX_Picker_ControlChanged()
-        //{
-
-        //}
-
-        private void wucSourceBranch_Picker_ControlChanged()
-        {
-            try
-            {
-                teRepositoryName.Text = wucSourceBranch_Picker.Name;
-                teRepository.Text = wucSourceBranch_Picker.Repository;
-                teRepositoryPath.Text = wucSourceBranch_Picker.SourcePath;
-                teSourcePath.Text = teRepositoryPath.Text;
-
-                cbeSourceFile.Items.Clear();
-                cbeSourceFile.Clear();
-                cbeSourceFile.ItemsSource = null;
-
-                cbeProjectFile.Items.Clear();
-                cbeProjectFile.Clear();
-                cbeProjectFile.ItemsSource = null;
-
-                cbeSolutionFile.Items.Clear();
-                cbeSolutionFile.Clear();
-                cbeSolutionFile.ItemsSource = wucSourceBranch_Picker.xElement.Elements("Solution");
-                //UpdateSolutionPicker(wucSourceBranch_Picker.xElement);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         private void cbeSolutionFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
             try
@@ -198,7 +147,75 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 MessageBox.Show(ex.ToString());
             }
         }
+        //private void XXX_Picker_ControlChanged()
+        //{
 
+        //}
+
+        private void wucSourceBranch_Picker_ControlChanged()
+        {
+            try
+            {
+                teRepositoryName.Text = wucSourceBranch_Picker.Name;
+                teRepository.Text = wucSourceBranch_Picker.Repository;
+                teRepositoryPath.Text = wucSourceBranch_Picker.SourcePath;
+                teSourcePath.Text = teRepositoryPath.Text;
+
+                cbeSourceFile.Items.Clear();
+                cbeSourceFile.Clear();
+                cbeSourceFile.ItemsSource = null;
+
+                cbeProjectFile.Items.Clear();
+                cbeProjectFile.Clear();
+                cbeProjectFile.ItemsSource = null;
+
+                cbeSolutionFile.Items.Clear();
+                cbeSolutionFile.Clear();
+                cbeSolutionFile.ItemsSource = wucSourceBranch_Picker.xElement.Elements("Solution");
+                //UpdateSolutionPicker(wucSourceBranch_Picker.xElement);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "VB Source (*.vb)|*.vb|CS Source (*.cs)|*.cs|All files (*.*)|*.*";
+
+            openFileDialog1.FileName = "";
+
+            if (true == openFileDialog1.ShowDialog())
+            {
+                string fileName = openFileDialog1.FileName;
+
+                teSourceFile.Text = fileName;
+            }
+        }
+        private void btnClearFile_Click(object sender, RoutedEventArgs e)
+        {
+            teSourceFile.Text = "";
+        }
+
+        private void OnCustomColumnDisplayText(object sender, DevExpress.Xpf.Grid.CustomColumnDisplayTextEventArgs e)
+        {
+            //CustomFormat.FormatStorageColumns(e);
+        }
+
+        #endregion
+
+        private void CustomUnboundColumnData(object sender, DevExpress.Xpf.Grid.GridColumnDataEventArgs e)
+        {
+            //UnboundColumns.GetEnvironmentInstanceDatabaseColumns(e);
+        }
+
+        #region Main Function Routines
+
+
+
+        #endregion
         private void cbeProjectFile_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
         {
             try
@@ -371,22 +388,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
 
             return filesToProcess;
-        }
-
-        private void btnBrowseForFile_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.Filter = "VB Source (*.vb)|*.vb|CS Source (*.cs)|*.cs|All files (*.*)|*.*";
-
-            openFileDialog1.FileName = "";
-
-            if (true == openFileDialog1.ShowDialog())
-            {
-                string fileName = openFileDialog1.FileName;
-
-                teSourceFile.Text = fileName;
-            }
         }
     }
 }

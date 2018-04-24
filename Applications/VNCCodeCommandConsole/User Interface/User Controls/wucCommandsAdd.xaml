@@ -66,7 +66,13 @@
 
             <dxlc:LayoutGroup Header="Imports Adder"
                 View="GroupBox"	Orientation="Vertical">
+                <dxlc:LayoutItem Label="Imports Statement" LabelPosition="Top">
 
+                    <!--<dxe:TextEdit x:Name="teTargetInvocationExpression" >
+                </dxe:TextEdit>-->
+                    <dxe:TextEdit x:Name="teImportsName" Text="EASEControls" />
+
+                </dxlc:LayoutItem>
                 <dxlc:LayoutItem>
                     <Button x:Name="btnAdd_Imports"
                             Style="{StaticResource SyntaxRewriterButton}"

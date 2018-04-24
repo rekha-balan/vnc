@@ -17,6 +17,8 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
         {
             if (_targetPatternRegEx.Match(node.ImportsClauses.ToString()).Success)
             {
+                //var imports = node.Parent.DescendantNodes().OfType<ImportsStatementSyntax>();
+
                 RecordMatchAndContext(node, BlockType.None);
             }
 

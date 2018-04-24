@@ -98,25 +98,53 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private StringBuilder Add_ImportsVB(RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {
+
             performedReplacement = false;
+
+            var compilationUnit = commandConfiguration.SyntaxTree.GetCompilationUnitRoot();
+
+            var existingImports = compilationUnit.DescendantNodes().OfType<ImportsStatementSyntax>();
+
+            var newImportsStatement = SyntaxFactory.ImportsStatement();
+
+            // TODO(crhodes)
+            // Learn how to add leading trivia to name.  Without the space goes in as Imports<Name> not Imports <Name>
+
+            newImportsStatement = newImportsStatement.AddImportsClauses(
+                SyntaxFactory.SimpleImportsClause(SyntaxFactory.ParseName(string.Format(" {0}\n", teImportsName.Text)))
+                );
+
+            bool alreadyExists = false;
+
+            foreach (ImportsStatementSyntax item in existingImports)
+            {
+                if (item.ImportsClauses.ToString().Contains(teImportsName.Text))
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+
+            if ( ! alreadyExists)
+            {
+                var newCompilationUnit = compilationUnit.AddImports(newImportsStatement);
+                performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newCompilationUnit.SyntaxTree.GetRoot());
+            }
 
             // TODO(crhodes)
             // Add a new method to add imports
 
-            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RemoveMethodBlock(
-                commandConfiguration.TargetPattern,
-                (Boolean)ceCommentOut_MethodBlock.IsChecked, teComment.Text);
+            //var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.AddImportsStatement(teImportsName.Text);
 
-            rewriter.Messages = commandConfiguration.Results;
+            //rewriter.Messages = commandConfiguration.Results;
 
-            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+            //rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+            //SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
 
-            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+            //performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
 
             return commandConfiguration.Results;
-
         }
 
         #endregion

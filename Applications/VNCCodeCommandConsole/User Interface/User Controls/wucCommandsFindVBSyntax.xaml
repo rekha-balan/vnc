@@ -113,7 +113,7 @@
         <dxlc:LayoutGroup Header="Find ClassStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -337,7 +337,7 @@
         <dxlc:LayoutGroup Header="Find MethodBlock Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
@@ -382,7 +382,7 @@
         <dxlc:LayoutGroup Header="Find MethodStatement Syntax" 
         	View="GroupBox"
             Orientation="Vertical"
-            IsCollapsible="True" IsCollapsed="False">
+            IsCollapsible="True" IsCollapsed="True">
 
             <dxlc:LayoutGroup
             	Orientation="Horizontal">
