@@ -855,8 +855,20 @@
                         Click="btnSimpleAsClauseWalker_Click"/>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>        
+        </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find StopOrEndStatement Syntax" 
+        	View="GroupBox" Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutItem>
+                <Button Content="StopOrEndStatement Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnStopOrEndStatementWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find SyntaxNodes" 
         	View="GroupBox" Orientation="Vertical"
             IsCollapsible="True" IsCollapsed="True">
