@@ -47,11 +47,10 @@ namespace ZzaDesktop
 
         #endregion
 
-        CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
-        OrderViewModel  _orderViewModel = new OrderViewModel();
-        OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
+        private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
+        private OrderViewModel _orderViewModel = new OrderViewModel();
+        private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
         private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
-
 
         //public object CurrentViewModel { get; set; }
 
@@ -67,9 +66,11 @@ namespace ZzaDesktop
         public MainWindowViewModel()
         {
             NavigateCommand = new RelayCommand<string>(OnNavigate);
+
             _customerListViewModel.PlaceOrderRequested += NavToOrder;
             _customerListViewModel.AddCustomerRequested += NavToAddCustomer;
             _customerListViewModel.EditCustomerRequested += NavToEditCustomer;
+            _addEditViewModel.Done += NavToCustomerList;
         }
 
         void OnNavigate(string destination)
@@ -105,6 +106,11 @@ namespace ZzaDesktop
             _addEditViewModel.EditMode = true;
             _addEditViewModel.SetCustomer(cust);
             CurrentViewModel = _addEditViewModel;
+        }
+
+        private void NavToCustomerList()
+        {
+            CurrentViewModel = _customerListViewModel;
         }
     }
 }

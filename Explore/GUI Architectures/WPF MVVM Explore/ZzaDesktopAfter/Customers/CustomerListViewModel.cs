@@ -12,13 +12,19 @@ namespace ZzaDesktop.Customers
     class CustomerListViewModel : BindableBase
     {
         private ICustomersRepository _repo = new CustomersRepository();
+        public RelayCommand<Customer> PlaceOrderCommand { get; private set; }
+        public RelayCommand AddCustomerCommand { get; private set; }
+        public RelayCommand<Customer> EditCustomerCommand { get; private set; }
+
+        public event Action<Guid> PlaceOrderRequested = delegate { };
+        public event Action<Customer> AddCustomerRequested = delegate { };
+        public event Action<Customer> EditCustomerRequested = delegate { };
 
         public CustomerListViewModel()
         {
             PlaceOrderCommand = new RelayCommand<Customer>(OnPlaceOrder);
             AddCustomerCommand = new RelayCommand(OnAddCustomer);
             EditCustomerCommand = new RelayCommand<Customer>(OnEditCustomer);
-
         }
 
         private ObservableCollection<Customer> _customers;
@@ -34,27 +40,20 @@ namespace ZzaDesktop.Customers
                 await _repo.GetCustomersAsync());
         }
 
-        public RelayCommand<Customer> PlaceOrderCommand { get; private set; }
-        public RelayCommand AddCustomerCommand { get; private set; }
-        public RelayCommand<Customer> EditCustomerCommand { get; private set; }
-
-        public event Action<Guid> PlaceOrderRequested = delegate { };
-        public event Action<Customer> AddCustomerRequested = delegate { };
-        public event Action<Customer> EditCustomerRequested = delegate { };
-
         private void OnPlaceOrder(Customer customer)
         {
             PlaceOrderRequested(customer.Id);
         }
+
         private void OnAddCustomer()
         {
             AddCustomerRequested(new Customer { Id = Guid.NewGuid() });
         }
-        private void OnEditCustomer(Customer cust)
-        {
-            EditCustomerRequested(cust);
-        }
 
+        private void OnEditCustomer(Customer customer)
+        {
+            EditCustomerRequested(customer);
+        }
 
     }
 }
