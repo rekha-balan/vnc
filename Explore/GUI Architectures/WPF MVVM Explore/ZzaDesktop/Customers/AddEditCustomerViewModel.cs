@@ -63,10 +63,12 @@ namespace ZzaDesktop.Customers
         private async void OnSave()
         {
             UpdateCustomer(Customer, _editingCustomer);
+
             if (EditMode)
                 await _repo.UpdateCustomerAsync(_editingCustomer);
             else
                 await _repo.AddCustomerAsync(_editingCustomer);
+
             Done();
         }
 

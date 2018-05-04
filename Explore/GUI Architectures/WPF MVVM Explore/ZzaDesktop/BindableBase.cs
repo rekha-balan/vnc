@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ZzaDesktop
 {
-    class BindableBase : INotifyPropertyChanged
+    public class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 

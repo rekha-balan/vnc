@@ -13,7 +13,8 @@ namespace ZzaDesktop.Customers
     {
         #region "Enums, Fields, Properties, Structures"
 
-        private ICustomersRepository _repo = new CustomersRepository();
+        private ICustomersRepository _repo; // = new CustomersRepository();
+        private List<Customer> _allCustomers;
 
         private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers
@@ -22,9 +23,35 @@ namespace ZzaDesktop.Customers
             set { SetProperty(ref _customers, value); }
         }
 
+        private string _SearchInput;
+        public string SearchInput
+        {
+            get { return _SearchInput; }
+            set
+            {
+                SetProperty(ref _SearchInput, value);
+                FilterCustomers(_SearchInput);
+            }
+        }
+
+        private void FilterCustomers(string searchInput)
+        {
+            if (string.IsNullOrWhiteSpace(searchInput))
+            {
+                Customers = new ObservableCollection<Customer>(_allCustomers);
+                return;
+            }
+            else
+            {
+                Customers = new ObservableCollection<Customer>(_allCustomers
+                    .Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
+            }
+        }
+
         public RelayCommand<Customer> PlaceOrderCommand { get; private set; }
         public RelayCommand AddCustomerCommand { get; private set; }
         public RelayCommand<Customer> EditCustomerCommand { get; private set; }
+        public RelayCommand ClearSearchCommand { get; private set; }
 
         // Raise events that our parent can handle.
 
@@ -36,11 +63,14 @@ namespace ZzaDesktop.Customers
 
         #region "Constructors, Initialization, and Load"
 
-        public CustomerListViewModel()
+        public CustomerListViewModel(ICustomersRepository repo)
         {
+            _repo = repo;
+
             PlaceOrderCommand = new RelayCommand<Customer>(OnPlaceOrder);
             AddCustomerCommand = new RelayCommand(OnAddCustomer);
             EditCustomerCommand = new RelayCommand<Customer>(OnEditCustomer);
+            ClearSearchCommand = new RelayCommand(OnClearSearch);
         }
 
         #endregion
@@ -54,8 +84,10 @@ namespace ZzaDesktop.Customers
 
         public async void LoadCustomers()
         {
-            Customers = new ObservableCollection<Customer>(
-                await _repo.GetCustomersAsync());
+            //Customers = new ObservableCollection<Customer>(
+            //    await _repo.GetCustomersAsync());
+            _allCustomers = await _repo.GetCustomersAsync();
+            Customers = new ObservableCollection<Customer>(_allCustomers);
         }
 
         #endregion
@@ -76,13 +108,20 @@ namespace ZzaDesktop.Customers
         {
             PlaceOrderRequested(customer.Id);
         }
+
         private void OnAddCustomer()
         {
             AddCustomerRequested(new Customer { Id = Guid.NewGuid() });
         }
+
         private void OnEditCustomer(Customer cust)
         {
             EditCustomerRequested(cust);
+        }
+
+        private void OnClearSearch()
+        {
+            SearchInput = null;
         }
 
         #endregion

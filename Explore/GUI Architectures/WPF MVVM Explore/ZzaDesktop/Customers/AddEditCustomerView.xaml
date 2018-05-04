@@ -63,7 +63,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding FirstName, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
@@ -80,7 +80,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding LastName, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
@@ -97,7 +97,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />            
+                Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />            
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -114,7 +114,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
@@ -131,7 +131,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding Zip, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding Zip, ValidatesOnNotifyDataErrors=True}" />
         </Grid>
         
         <Grid Grid.Row="1">

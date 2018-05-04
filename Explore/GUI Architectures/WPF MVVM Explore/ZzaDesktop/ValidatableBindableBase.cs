@@ -18,9 +18,13 @@ namespace ZzaDesktop
         public System.Collections.IEnumerable GetErrors(string propertyName)
         {
             if (_errors.ContainsKey(propertyName))
+            {
                 return _errors[propertyName];
+            }
             else
-                return null;
+            {
+                return null;               
+            }
         }
 
         public bool HasErrors
@@ -50,6 +54,7 @@ namespace ZzaDesktop
             {
                 _errors.Remove(propertyName);
             }
+
             ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
