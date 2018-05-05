@@ -62,7 +62,7 @@ namespace ModuleM
             _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
             var vm2 = _container.Resolve<IContentAViewViewModel>();
-            vm2.Message = "Prism Rocks! Second View";
+            vm2.Message = "Prism Rocks! Second ViewModel";
 
             _regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
 
@@ -87,6 +87,8 @@ namespace ModuleM
             // TODO(crhodes)
             // Show deactivating or removing view
 
+            // TODO(crhodes)
+            // Play with switch views and the model associated with view
             try
             {
                 IRegion region = _regionManager.Regions[RegionNames.ContentRegion];

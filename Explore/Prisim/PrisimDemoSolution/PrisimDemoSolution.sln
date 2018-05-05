@@ -25,13 +25,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleD", "Src\Modules\Modu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrismDemoViews", "PrismDemoViews", "{09EC4981-42E4-4D44-88D7-081B0A9CA839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemoCreateView", "Src\PrismDemoViews\CreateView\PrismDemo\PrismDemoCreateView.csproj", "{2365054D-5A19-47B0-B682-14B3CEB4D849}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "Src\PrismDemoViews\CreateView\PrismDemo\PrismDemo.csproj", "{2365054D-5A19-47B0-B682-14B3CEB4D849}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleM", "Src\Modules\ModuleM\ModuleM.csproj", "{9BF41B1B-558B-496A-9CE2-6D34199F6297}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People", "People\People.csproj", "{3C63D2A4-6280-47C5-B9B5-D42F7F2A6CD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBar", "StatusBar\StatusBar.csproj", "{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrismDemoCommands", "PrismDemoCommands", "{B8604062-BE4D-43F0-B875-08BCCA7213D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "Src\PrismDemoCommands\PrismDemo\PrismDemo.csproj", "{7D5A3495-1172-4B86-83C7-A43687809B4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,10 @@ Global
 		{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5A3495-1172-4B86-83C7-A43687809B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5A3495-1172-4B86-83C7-A43687809B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5A3495-1172-4B86-83C7-A43687809B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5A3495-1172-4B86-83C7-A43687809B4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +108,7 @@ Global
 		{9BF41B1B-558B-496A-9CE2-6D34199F6297} = {E8CA3A9A-F6FA-45F2-B145-A3B901D7679C}
 		{3C63D2A4-6280-47C5-B9B5-D42F7F2A6CD9} = {E8CA3A9A-F6FA-45F2-B145-A3B901D7679C}
 		{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA} = {E8CA3A9A-F6FA-45F2-B145-A3B901D7679C}
+		{7D5A3495-1172-4B86-83C7-A43687809B4E} = {B8604062-BE4D-43F0-B875-08BCCA7213D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07AFC52B-BE13-4AF3-BDEE-FF9C77611397}
