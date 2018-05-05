@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleD", "Src\Modules\Modu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrismDemoViews", "PrismDemoViews", "{09EC4981-42E4-4D44-88D7-081B0A9CA839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "Src\PrismDemoViews\CreateView\PrismDemo\PrismDemo.csproj", "{2365054D-5A19-47B0-B682-14B3CEB4D849}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemoCreateView", "Src\PrismDemoViews\CreateView\PrismDemo\PrismDemoCreateView.csproj", "{2365054D-5A19-47B0-B682-14B3CEB4D849}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleM", "Src\Modules\ModuleM\ModuleM.csproj", "{9BF41B1B-558B-496A-9CE2-6D34199F6297}"
 EndProject

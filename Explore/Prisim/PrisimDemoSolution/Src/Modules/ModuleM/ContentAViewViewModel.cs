@@ -11,6 +11,12 @@ namespace ModuleM
     {
         public IView View { get; set; }
 
+        public string Message
+        {
+            get;
+            set; // Should have implement IPC and set value
+        }
+
         public ContentAViewViewModel(IContentAView view)
         {
             View = view;

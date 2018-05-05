@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ModuleM
 {
-    public interface IContentAViewViewModel : IViewModel
+    // This is for view first approaches
+    public interface IContentAViewViewModel2 : IViewModel2
     {
-        string Message { get; set; }
     }
 }

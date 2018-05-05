@@ -77,12 +77,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentA2.xaml.cs">
+      <DependentUpon>ContentA2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ContentA.xaml.cs">
       <DependentUpon>ContentA.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContentAViewViewModel.cs" />
+    <Compile Include="ContentAViewViewModel2.cs" />
     <Compile Include="IContentAView.cs" />
     <Compile Include="IContentAViewViewModel.cs" />
+    <Compile Include="IContentAViewViewModel2.cs" />
     <Compile Include="ModuleMModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -118,6 +123,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ContentA2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ContentA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

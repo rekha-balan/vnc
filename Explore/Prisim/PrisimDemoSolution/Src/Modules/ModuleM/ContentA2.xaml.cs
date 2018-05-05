@@ -17,31 +17,33 @@ using PrismDemo.Infrastructure;
 namespace ModuleM
 {
     /// <summary>
-    /// Interaction logic for ContentA.xaml
+    /// Interaction logic for ContentA2.xaml
+    /// This is for view first approaches
     /// </summary>
-    public partial class ContentA : UserControl, IContentAView
+    public partial class ContentA2 : UserControl, IView
     {
-        public ContentA()
+        public ContentA2(IContentAViewViewModel2 viewModel)
         {
             InitializeComponent();
+            ViewModel2 = viewModel;
         }
 
         public IViewModel ViewModel
         {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public IViewModel2 ViewModel2
+        {
             get
             {
-                return (IContentAViewViewModel)DataContext;
+                return (IContentAViewViewModel2)DataContext;
             }
             set
             {
                 DataContext = value;
             }
         }
-
-        public IViewModel2 ViewModel2
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-    }
+   }
 }

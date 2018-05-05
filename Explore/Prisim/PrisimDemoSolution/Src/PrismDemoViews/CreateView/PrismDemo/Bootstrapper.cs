@@ -3,7 +3,7 @@ using System.Windows;
 using Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using ModuleA;
+using ModuleM;
 using Prism.Regions;
 using System.Windows.Controls;
 using PrismDemo.Infrastructure;
@@ -27,7 +27,7 @@ namespace PrismDemo
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            moduleCatalog.AddModule(typeof(ModuleAModule));
+            moduleCatalog.AddModule(typeof(ModuleMModule));
         }
 
         protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
