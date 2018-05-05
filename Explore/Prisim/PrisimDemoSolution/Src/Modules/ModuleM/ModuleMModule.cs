@@ -62,7 +62,7 @@ namespace ModuleM
             _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
             var vm2 = _container.Resolve<IContentAViewViewModel>();
-            vm.Message = "Prism Rocks! Second View";
+            vm2.Message = "Prism Rocks! Second View";
 
             _regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
 
@@ -91,7 +91,7 @@ namespace ModuleM
             {
                 IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
                 // Can get list of Views, ActiveViews, Activate, Deactivate, Add, Remove, Activate, Deactivate, etc.
-                region.Deactivate(vm.View); // Doing this still through exception
+                //region.Deactivate(vm.View); // Doing this still through exception
                 //region.Deactivate(vm2.View);
                 region.Activate(vm2.View);
             }
