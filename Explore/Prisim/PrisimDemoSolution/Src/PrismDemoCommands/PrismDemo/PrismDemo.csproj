@@ -102,6 +102,18 @@
       <Project>{9bf41b1b-558b-496a-9ce2-6d34199f6297}</Project>
       <Name>ModuleM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Modules\People\People.csproj">
+      <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>
+      <Name>People</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\StatusBar\StatusBar.csproj">
+      <Project>{4634726f-ad0a-4bc2-90dc-d45cbaae7bca}</Project>
+      <Name>StatusBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\Toolbar\Toolbar.csproj">
+      <Project>{a8003c7c-bdb7-4ce8-a934-0755ea19e9e1}</Project>
+      <Name>Toolbar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\PrismDemo.Infrastructure\PrismDemo.Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>PrismDemo.Infrastructure</Name>

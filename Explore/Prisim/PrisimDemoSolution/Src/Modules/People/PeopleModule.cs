@@ -4,7 +4,6 @@ using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using PrismDemo.People;
 using PrismDemo.Infrastructure;
 
 namespace People
