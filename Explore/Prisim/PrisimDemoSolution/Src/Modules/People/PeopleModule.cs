@@ -1,9 +1,11 @@
-﻿using People.Views;
+﻿//using People.Views;
 using Prism.Modularity;
 using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
+using PrismDemo.People;
+using PrismDemo.Infrastructure;
 
 namespace People
 {
@@ -17,11 +19,6 @@ namespace People
             _container = container;
             _regionManager = regionManager;
         }
-
-        //public void Initialize()
-        //{
-        //    _container.RegisterTypeForNavigation<ViewA>();
-        //}
 
         public void Initialize()
         {

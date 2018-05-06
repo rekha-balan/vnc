@@ -1,7 +1,7 @@
 using System;
 using PrismDemo.Infrastructure;
 
-namespace PrismDemo.People
+namespace People
 {
     public interface IPersonViewModel : IViewModel
     {

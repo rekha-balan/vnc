@@ -4,20 +4,27 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:infra="clr-namespace:PrismDemo.Infrastructure;assembly=PrismDemo.Infrastructure"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="350" Width="525">
-    <!--
-        This came from the template
+        Title="{Binding Title}" Height="350" Width="550">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
-    </Grid>-->
-    <DockPanel LastChildFill="True">
-        <!--<ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="ToolbarRegion" />
-        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>-->
-
-        <!--<ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
-
-        <!--<ItemsControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
-        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
-    </DockPanel>
+        <DockPanel LastChildFill="True">
+            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" 
+                            DockPanel.Dock="Top" 
+                            Width="Auto" Height="Auto" 
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}" 
+                            DockPanel.Dock="Bottom" 
+                            Width="Auto" Height="Auto" 
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            <TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
+                        Width="Auto" Height="Auto" 
+                        HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" 
+                                Value="{Binding Content.DataContext.ViewName, RelativeSource={RelativeSource Self}}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+            </TabControl>            
+        </DockPanel>
+    </Grid>
 </Window>

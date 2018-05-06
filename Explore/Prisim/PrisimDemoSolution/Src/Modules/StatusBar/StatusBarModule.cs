@@ -1,12 +1,10 @@
 ﻿using System;
-//using Microsoft.Practices.Prism.Modularity;
-//using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using PrismDemo.Infrastructure;
-using Prism.Regions
+using Prism.Regions;
 using Prism.Modularity;
 
-namespace PrismDemo.StatusBar
+namespace StatusBar
 {
     public class StatusBarModule : IModule
     {

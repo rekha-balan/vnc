@@ -1,7 +1,7 @@
 using System;
 using PrismDemo.Infrastructure;
 
-namespace PrismDemo.StatusBar
+namespace StatusBar
 {
     public class StatusBarViewModel : ViewModelBase, IStatusBarViewModel
     {

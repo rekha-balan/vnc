@@ -4,7 +4,7 @@ using PrismDemo.Business;
 //using Microsoft.Practices.Prism.Commands;
 using Prism.Commands;
 
-namespace PrismDemo.People
+namespace People
 {
     public class PersonViewModel : ViewModelBase, IPersonViewModel
     {
@@ -22,6 +22,7 @@ namespace PrismDemo.People
         {
             Person.LastUpdated = DateTime.Now.AddYears(value.Age);
         }
+
         private bool CanSave(Person value)
         {
             return Person.Error == null;

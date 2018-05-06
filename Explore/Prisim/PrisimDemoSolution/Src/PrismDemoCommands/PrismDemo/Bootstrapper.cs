@@ -8,6 +8,8 @@ using Prism.Regions;
 using System.Windows.Controls;
 using PrismDemo.Infrastructure;
 using System;
+using People;
+using StatusBar;
 
 namespace PrismDemo
 {
@@ -24,17 +26,14 @@ namespace PrismDemo
         }
 
 
-        protected override void ConfigureModuleCatalog()
+        protected override IModuleCatalog CreateModuleCatalog()
         {
-            var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            moduleCatalog.AddModule(typeof(ModuleMModule));
-        }
+            ModuleCatalog catalog = new ModuleCatalog();
 
-        protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
-        {
-            RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
-            mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
-            return mappings;
+            catalog.AddModule(typeof(PeopleModule));
+            catalog.AddModule(typeof(StatusBarModule));
+
+            return catalog;
         }
     }
 }

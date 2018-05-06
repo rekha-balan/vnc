@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PrismDemo.Infrastructure;
 
-namespace PrismDemo.StatusBar
+namespace StatusBar
 {
     /// <summary>
     /// Interaction logic for StatusBarView.xaml

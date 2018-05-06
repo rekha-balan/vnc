@@ -12,6 +12,6 @@ namespace PrismDemo.Infrastructure
         IViewModel ViewModel { get; set; }
 
         // This is for view first approaches
-        IViewModel2 ViewModel2 { get; set; }
+        //IViewModel2 ViewModel2 { get; set; }
     }
 }

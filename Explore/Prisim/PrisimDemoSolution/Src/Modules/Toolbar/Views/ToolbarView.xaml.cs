@@ -11,16 +11,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PluralsightPrismDemo.Infrastructure;
+using PrismDemo.Infrastructure;
 
-namespace PluralsightPrismDemo.People
+namespace Toolbar
 {
     /// <summary>
-    /// Interaction logic for PeopleView.xaml
+    /// Interaction logic for ToolbarView.xaml
     /// </summary>
-    public partial class PersonView : UserControl, IPersonView
+    public partial class ToolbarView : UserControl, IToolbarView
     {
-        public PersonView()
+        public ToolbarView()
         {
             InitializeComponent();
         }

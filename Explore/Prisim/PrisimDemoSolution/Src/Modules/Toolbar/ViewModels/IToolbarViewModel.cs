@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using PrismDemo.Infrastructure;
 
-namespace PrismDemo.StatusBar
+namespace Toolbar
 {
-    public interface IStatusBarView : IView
+    public interface IToolbarViewModel : IViewModel
     {
     }
 }
