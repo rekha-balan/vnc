@@ -1,32 +1,20 @@
 using System;
-using PrismDemo.Infrastructure;
-using PrismDemo.Business;
+using Infrastructure;
+using Business;
 //using Microsoft.Practices.Prism.Commands;
 using Prism.Commands;
+using Prism.Events;
+using System.Windows;
 
 namespace People
 {
     public class PersonViewModel : ViewModelBase, IPersonViewModel
     {
-        public DelegateCommand<Person> SaveCommand { get; set; }
 
-        public PersonViewModel(IPersonView view)
-            : base(view)
-        {
-            CreatePerson();
+        #region Enums, Fields, Properties
 
-            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
-        }
-
-        private void Save(Person value)
-        {
-            Person.LastUpdated = DateTime.Now.AddYears(value.Age);
-        }
-
-        private bool CanSave(Person value)
-        {
-            return Person.Error == null;
-        }
+        IEventAggregator _eventAggregator;
+        IPersonRepository _personRepository;
 
         private Person _person;
         public Person Person
@@ -40,19 +28,65 @@ namespace People
             }
         }
 
-        void Person_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public DelegateCommand SaveCommand { get; set; }
+
+        public string ViewName
         {
-            SaveCommand.RaiseCanExecuteChanged();
+            get
+            {
+                return string.Format("{0}, {1}", Person.LastName, Person.FirstName);
+            }
         }
 
-        private void CreatePerson()
+        #endregion
+
+        #region "Constructors, Initialization, and Load"
+
+        public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
+            : base(view)
+        {
+            _eventAggregator = eventAggregator;
+            _personRepository = personRepository;
+
+            SaveCommand = new DelegateCommand(Save, CanSave);
+
+            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
+        }
+        #endregion
+
+        #region Public Methods
+
+        public void CreatePerson(string firstName, string lastName)
         {
             Person = new Person()
             {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Age = 46
+                FirstName = firstName,
+                LastName = lastName,
+                Age = 0
             };
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private bool CanSave()
+        {
+            return Person != null && Person.Error == null;
+        }
+        private void Person_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SaveCommand.RaiseCanExecuteChanged();
+        }
+        private void Save()
+        {
+            Person.LastUpdated = DateTime.Now;
+            _eventAggregator.GetEvent<PersonUpdatedEvent>().Publish(string.Format("{0}, {1}", Person.LastName, Person.FirstName));
+            int count = _personRepository.SavePerson(Person);
+            MessageBox.Show(count.ToString());
+        }
+
+        #endregion
+
     }
 }

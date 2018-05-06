@@ -1,5 +1,5 @@
 using System;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 
 namespace People
 {

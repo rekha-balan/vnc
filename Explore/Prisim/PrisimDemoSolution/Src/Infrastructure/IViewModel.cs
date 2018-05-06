@@ -1,14 +1,13 @@
-﻿using Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace ModuleM
+namespace Infrastructure
 {
-    public interface IContentAView : IView
+    public interface IViewModel
     {
+        IView View { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Practices.Unity;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using Prism.Regions;
 using Prism.Modularity;
 

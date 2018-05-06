@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace PrismDemo.Business
+namespace Business
 {
     public class Person : INotifyPropertyChanged, IDataErrorInfo
     {

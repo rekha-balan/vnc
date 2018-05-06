@@ -5,7 +5,7 @@ using System.Text;
 //using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 //using Microsoft.Practices.Prism.Regions;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using Prism.Modularity;
 using Prism.Regions;
 

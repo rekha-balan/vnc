@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Prism.Commands;
 
-namespace PrismDemo.Infrastructure
+namespace Infrastructure
 {
     public static class GlobalCommands
     {

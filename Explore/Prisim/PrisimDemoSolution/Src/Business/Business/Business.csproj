@@ -8,8 +8,8 @@
     <ProjectGuid>{AE529EDE-3D2F-4A49-B0A1-81BC838008CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrismDemo.Business</RootNamespace>
-    <AssemblyName>PrismDemo.Business</AssemblyName>
+    <RootNamespace>Business</RootNamespace>
+    <AssemblyName>Business</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

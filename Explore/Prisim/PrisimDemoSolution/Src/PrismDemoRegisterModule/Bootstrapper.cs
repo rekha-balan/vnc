@@ -6,7 +6,7 @@ using Prism.Unity;
 using ModuleA;
 using Prism.Regions;
 using System.Windows.Controls;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using System;
 
 namespace PrismDemo

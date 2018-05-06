@@ -114,9 +114,9 @@
       <Project>{a8003c7c-bdb7-4ce8-a934-0755ea19e9e1}</Project>
       <Name>Toolbar</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PrismDemo.Infrastructure\PrismDemo.Infrastructure.csproj">
+    <ProjectReference Include="..\..\PrismDemo.Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
-      <Name>PrismDemo.Infrastructure</Name>
+      <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

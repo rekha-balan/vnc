@@ -6,10 +6,11 @@ using Prism.Unity;
 using ModuleM;
 using Prism.Regions;
 using System.Windows.Controls;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using System;
 using People;
 using StatusBar;
+using Toolbar;
 
 namespace PrismDemo
 {
@@ -30,6 +31,7 @@ namespace PrismDemo
         {
             ModuleCatalog catalog = new ModuleCatalog();
 
+            catalog.AddModule(typeof(ToolbarModule));
             catalog.AddModule(typeof(PeopleModule));
             catalog.AddModule(typeof(StatusBarModule));
 

@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 
 namespace Toolbar
 {

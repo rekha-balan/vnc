@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace PrismDemo.Infrastructure
+namespace Infrastructure
 {
     public class ViewModelBase : IViewModel, INotifyPropertyChanged
     {

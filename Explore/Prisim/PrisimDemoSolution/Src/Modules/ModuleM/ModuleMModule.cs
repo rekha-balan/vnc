@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 //using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 //using Microsoft.Practices.Prism.Regions;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using Prism.Modularity;
 using Prism.Regions;
 using System.Windows;

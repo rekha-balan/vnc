@@ -9,7 +9,7 @@ using System.Windows;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace PrismDemo.Infrastructure
+namespace Infrastructure
 {
     public class StackPanelRegionAdapter : RegionAdapterBase<StackPanel>
     {

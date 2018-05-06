@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrismDemo.Infrastructure
+namespace Infrastructure
 {
-    public interface IViewModel
+    // This if for view first approaches
+    // No property back to view
+    public interface IViewModel2
     {
-        IView View { get; set; }
     }
 }
