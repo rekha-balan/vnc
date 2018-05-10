@@ -7,6 +7,8 @@ namespace Infrastructure
     {
         public IView View { get; set; }
 
+        public ViewModelBase() { }
+
         public ViewModelBase(IView view)
         {
             View = view;

@@ -40,6 +40,28 @@ namespace Business
             }
         }
 
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+
+        private string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged("ImagePath");
+            }
+        }       
+
         private DateTime? _lastUpdated;
         public DateTime? LastUpdated
         {
@@ -56,9 +78,10 @@ namespace Business
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyname)
+        protected virtual void OnPropertyChanged(string propertyname)
         {
-            if (PropertyChanged != null)
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
@@ -110,5 +133,10 @@ namespace Business
         }
 
         #endregion //IDataErrorInfo
+
+        public override string ToString()
+        {
+            return String.Format("{0}, {1}", FirstName, LastName);
+        }
     }
 }

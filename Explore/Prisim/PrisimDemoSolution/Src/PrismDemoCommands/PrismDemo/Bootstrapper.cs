@@ -11,6 +11,7 @@ using System;
 using People;
 using StatusBar;
 using Toolbar;
+using Unity.Container;
 
 namespace PrismDemo
 {
@@ -18,6 +19,7 @@ namespace PrismDemo
     {
         protected override DependencyObject CreateShell()
         {
+            
             return Container.Resolve<MainWindow>();
         }
 
