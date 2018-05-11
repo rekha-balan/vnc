@@ -3,7 +3,7 @@ using System.Windows;
 using Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using ModuleM;
+using ModuleAS;
 using Prism.Regions;
 using System.Windows.Controls;
 using Infrastructure;
@@ -26,14 +26,12 @@ namespace PrismDemo
             Application.Current.MainWindow.Show();
         }
 
-
         protected override IModuleCatalog CreateModuleCatalog()
         {
             ModuleCatalog catalog = new ModuleCatalog();
 
-            catalog.AddModule(typeof(ToolbarModule));
-            catalog.AddModule(typeof(PeopleModule));
-            catalog.AddModule(typeof(StatusBarModule));
+            catalog.AddModule(typeof(PersonServiceModule));
+            catalog.AddModule(typeof(ModuleASModule));
 
             return catalog;
         }

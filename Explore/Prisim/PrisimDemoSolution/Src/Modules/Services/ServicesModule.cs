@@ -1,7 +1,7 @@
 ﻿using System;
 //using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
-using PrismDemo.Infrastructure;
+using Infrastructure;
 using Prism.Modularity;
 using Services;
 

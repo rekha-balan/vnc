@@ -1,14 +1,14 @@
 ﻿using System.Windows.Controls;
 using Infrastructure;
 
-namespace ModuleA
+namespace ModuleAS
 {
     /// <summary>
     /// Interaction logic for ContentA.xaml
     /// </summary>
-    public partial class ContentAView : UserControl, IContentAView
+    public partial class ContentAView : UserControl, IContentASView
     {
-        public ContentAView(IContentAViewViewModel viewModel)
+        public ContentAView(IContentASViewViewModel viewModel)
         {
             InitializeComponent();
             ViewModel = viewModel;
@@ -16,7 +16,7 @@ namespace ModuleA
 
         public IViewModel ViewModel
         {
-            get { return (IContentAViewViewModel)DataContext; }
+            get { return (IContentASViewViewModel)DataContext; }
             set { DataContext = value; }
         }
     }

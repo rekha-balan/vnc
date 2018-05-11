@@ -7,7 +7,7 @@ using Infrastructure;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace ModuleA
+namespace ModuleAS
 {
     public class ModuleAModule : IModule
     {
@@ -22,8 +22,8 @@ namespace ModuleA
 
         public void Initialize()
         {
-            _container.RegisterType<IContentAView, ContentAView>();
-            _container.RegisterType<IContentAViewViewModel, ContentAViewViewModel>();
+            _container.RegisterType<IContentASView, ContentASView>();
+            _container.RegisterType<IContentASViewViewModel, ContentASViewViewModel>();
 
             _manager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentAView));
         }

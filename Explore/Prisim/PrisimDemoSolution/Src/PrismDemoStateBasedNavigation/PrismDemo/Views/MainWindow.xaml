@@ -3,18 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
-        prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="550">
     <Grid>
         <DockPanel LastChildFill="True">
-            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" 
+            <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" 
                             DockPanel.Dock="Top" 
                             Width="Auto" Height="Auto" 
                             HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
             <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}" 
                             DockPanel.Dock="Bottom" 
                             Width="Auto" Height="Auto" 
-                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
             <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
                             Width="Auto" Height="Auto" 
                             HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>

@@ -6,7 +6,7 @@ using Infrastructure;
 
 namespace ModuleAS
 {
-    public interface IContentASViewViewModel : IViewModel
+    public interface IContentASView : IView
     {
     }
 }

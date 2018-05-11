@@ -2,10 +2,11 @@
 using Business;
 using Infrastructure.Services;
 using System.Collections.ObjectModel;
+using Infrastructure;
 
-namespace ModuleA
+namespace ModuleAS
 {
-    public class ContentAViewViewModel : IContentAViewViewModel, INotifyPropertyChanged
+    public class ContentAViewViewModel : IContentASViewViewModel, INotifyPropertyChanged
     {
         private readonly IPersonService _personService;
 
@@ -32,6 +33,8 @@ namespace ModuleA
                 OnPropertyChanged("IsBusy");
             }
         }
+
+        public IView View { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         #endregion //Properties
 
