@@ -6,7 +6,7 @@ using Infrastructure;
 
 namespace ModuleAS
 {
-    public class ContentAViewViewModel : IContentASViewViewModel, INotifyPropertyChanged
+    public class ContentASViewViewModel : IContentASViewViewModel, INotifyPropertyChanged
     {
         private readonly IPersonService _personService;
 
@@ -40,7 +40,7 @@ namespace ModuleAS
 
         #region Constructors
 
-        public ContentAViewViewModel(IPersonService personService)
+        public ContentASViewViewModel(IPersonService personService)
         {
             _personService = personService;
             LoadPeople();

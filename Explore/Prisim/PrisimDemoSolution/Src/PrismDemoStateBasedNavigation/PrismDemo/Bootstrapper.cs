@@ -11,6 +11,7 @@ using System;
 using People;
 using StatusBar;
 using Toolbar;
+using Services.PersonService;
 
 namespace PrismDemo
 {

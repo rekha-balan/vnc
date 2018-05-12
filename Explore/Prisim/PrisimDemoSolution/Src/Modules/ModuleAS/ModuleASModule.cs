@@ -9,12 +9,12 @@ using Prism.Regions;
 
 namespace ModuleAS
 {
-    public class ModuleAModule : IModule
+    public class ModuleASModule : IModule
     {
         IUnityContainer _container;
         IRegionManager _manager;
 
-        public ModuleAModule(IUnityContainer container, IRegionManager manager)
+        public ModuleASModule(IUnityContainer container, IRegionManager manager)
         {
             _container = container;
             _manager = manager;
@@ -25,7 +25,7 @@ namespace ModuleAS
             _container.RegisterType<IContentASView, ContentASView>();
             _container.RegisterType<IContentASViewViewModel, ContentASViewViewModel>();
 
-            _manager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentAView));
+            _manager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentASView));
         }
     }
 }

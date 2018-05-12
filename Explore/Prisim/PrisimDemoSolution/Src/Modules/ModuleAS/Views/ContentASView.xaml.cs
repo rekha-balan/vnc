@@ -6,9 +6,9 @@ namespace ModuleAS
     /// <summary>
     /// Interaction logic for ContentA.xaml
     /// </summary>
-    public partial class ContentAView : UserControl, IContentASView
+    public partial class ContentASView : UserControl, IContentASView
     {
-        public ContentAView(IContentASViewViewModel viewModel)
+        public ContentASView(IContentASViewViewModel viewModel)
         {
             InitializeComponent();
             ViewModel = viewModel;
