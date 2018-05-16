@@ -10,7 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using VNC.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -86,12 +86,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void btnRewrite_StopOrEndStatement_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessOperation(RewriteStopOrEndStatementVB, CodeExplorer.configurationOptions);
+        }
+
         private void btnRewriteCellFormatFontColor_Click(object sender, RoutedEventArgs e)
         {
             ProcessOperation(RewriteCellFormatFontColorVB, CodeExplorer.configurationOptions);
         }
-
-
 
         private void btnWrapSQLFillCallsInDALHelpers_Click(object sender, RoutedEventArgs e)
         {
@@ -111,6 +114,25 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Main Function Routines
+        StringBuilder RewriteStopOrEndStatementVB(RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
+        {
+            performedReplacement = false;
+
+            var rewriter = new VNC.CodeAnalysis.SyntaxRewriters.VB.RewriteStopOrEndStatement();
+
+            rewriter._configurationOptions = commandConfiguration.ConfigurationOptions;
+
+            rewriter.Messages = commandConfiguration.Results;
+            rewriter.Replacements = commandConfiguration.Replacements;
+
+            SyntaxNode newNode = rewriter.Visit(commandConfiguration.SyntaxTree.GetRoot());
+
+            string fileSuffix = CodeExplorer.configurationOptions.ceAddFileSuffix.IsChecked.Value ? CodeExplorer.configurationOptions.teFileSuffix.Text : "";
+
+            performedReplacement = VNCSR.Helpers.SaveFileChanges(commandConfiguration, newNode);
+
+            return commandConfiguration.Results;
+        }
 
         private StringBuilder RewriteCellFormatFontColorVB(VNC.CodeAnalysis.RewriteFileCommandConfiguration commandConfiguration, out bool performedReplacement)
         {
@@ -291,6 +313,5 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         }
 
         #endregion
-
     }
 }

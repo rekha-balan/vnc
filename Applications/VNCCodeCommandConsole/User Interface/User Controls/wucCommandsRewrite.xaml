@@ -39,85 +39,55 @@
         <dxlc:LayoutGroup Header="Syntax Rewriters"
             View="GroupBox"	Orientation="Vertical" IsCollapsed="False" IsCollapsible="True">
 
-            <dxlc:LayoutItem>
-                <dxe:CheckEdit x:Name="ceReplacementTargetUseRegEx" Content="Use Regular Expressions"
-                                       IsChecked="False"/>
-            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup Header="Targeted Rewriters"
+            	View="GroupBox" Orientation="Vertical">
 
-            <dxlc:LayoutItem Label="Target Expression" LabelPosition="Top">
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="ceReplacementTargetUseRegEx" Content="Use Regular Expressions"
+                                           IsChecked="False"/>
+                </dxlc:LayoutItem>
 
-                <!--<dxe:TextEdit x:Name="teTargetInvocationExpression" >
-                </dxe:TextEdit>-->
-                <dxe:TextEdit x:Name="teTargetExpression" Text=".*"
-                                      IsEnabled="{cb:Binding ElementName=ceReplacementTargetUseRegEx, Path=IsChecked, Mode=OneWay}"
-                                      ToolTip="Supports Regular Expressions"/>
+                <dxlc:LayoutItem Label="Target Expression" LabelPosition="Top">
 
-            </dxlc:LayoutItem>
+                    <dxe:TextEdit x:Name="teTargetExpression" Text=".*"
+                                          IsEnabled="{cb:Binding ElementName=ceReplacementTargetUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                          ToolTip="Supports Regular Expressions"/>
+
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutGroup Header="Code Rewriters"
+                    View="GroupBox"	Orientation="Vertical">
+
+                    <dxlc:LayoutItem Label="Replacement Invocation Expression" LabelPosition="Top">
+                        <dxe:TextEdit x:Name="teReplacementInvocationExpression" >
+                        </dxe:TextEdit>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem>
+                        <Button Style="{StaticResource SyntaxRewriterButton}"
+                                Click="btnRewrite_InvocationExpression_Click">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center">Replace InvocationExpression</TextBlock>                        
+                        </Button>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+                
+            </dxlc:LayoutGroup>
 
             <dxlc:LayoutGroup Header="Code Rewriters"
-                View="GroupBox"	Orientation="Vertical">
-
-                <dxlc:LayoutItem Label="Replacement Invocation Expression" LabelPosition="Top">
-                    <dxe:TextEdit x:Name="teReplacementInvocationExpression" >
-                    </dxe:TextEdit>
-                </dxlc:LayoutItem>
+                    View="GroupBox"	Orientation="Vertical">
 
                 <dxlc:LayoutItem>
                     <Button Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnRewrite_InvocationExpression_Click">
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Replace InvocationExpression</TextBlock>                        
+                                Click="btnRewrite_StopOrEndStatement_Click">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Replace StopOrEndStatement</TextBlock>
                     </Button>
                 </dxlc:LayoutItem>
 
             </dxlc:LayoutGroup>
-
-            <!--<dxlc:LayoutGroup Header="Code Removers"
-                View="GroupBox"	Orientation="Vertical">
-
-                <dxlc:LayoutItem Label="Notification Comment" LabelPosition="Top">
-                    <dxe:TextEdit x:Name="teComment" 
-                        Text="Commented out by CodeCommandConsole"
-                        ToolTip="Accepts multiple lines"
-                        TextWrapping="Wrap"
-                        VerticalContentAlignment="Top"
-                        AcceptsReturn="True" AcceptsTab="True" />
-                </dxlc:LayoutItem>
-
-                <dxlc:LayoutItem>
-                    <Button Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnCommentOut_InvocationExpression_Click">
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">CommentOut SingleLine InvocationExpression</TextBlock>
-                    </Button>
-                </dxlc:LayoutItem>
-
-                <dxlc:LayoutItem>
-                    <Button Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnRemove_ExpressionStatement_Click">
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove ExpressionStatement</TextBlock>
-                    </Button>
-                </dxlc:LayoutItem>
-
-                <dxlc:LayoutItem>
-                    <Button Style="{StaticResource SyntaxRewriterButton}"
-                            Click="btnRemove_FieldDeclaration_Click">
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Remove FieldDeclaration</TextBlock>
-                    </Button>
-                </dxlc:LayoutItem>
-
-            </dxlc:LayoutGroup>-->
-
+            
             <dxlc:LayoutGroup Header="SQL Rewriters"
                 View="GroupBox"	Orientation="Vertical">
-
-                <!--<dxlc:LayoutItem Label="Target Invocation Expression" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teTargetInvocationExpression" >
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
-
-            <dxlc:LayoutItem Label="New Invocation Expression" LabelPosition="Top">
-                <dxe:TextEdit x:Name="teNewInvocationExpression" >
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>-->
 
                 <dxlc:LayoutItem>
                     <Button

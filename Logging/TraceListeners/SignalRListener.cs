@@ -208,6 +208,7 @@ namespace VNC.Logging.TraceListeners
 
             try
             {
+                //Connection.Start().RunSynchronously();
                 await Connection.Start();
             }
             catch (HttpRequestException ex)
