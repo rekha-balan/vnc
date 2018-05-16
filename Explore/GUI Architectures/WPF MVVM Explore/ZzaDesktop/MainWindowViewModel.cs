@@ -1,4 +1,4 @@
-﻿  using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +7,7 @@ using Zza.Data;
 using ZzaDesktop.Customers;
 using ZzaDesktop.OrderPrep;
 using ZzaDesktop.Orders;
+using Microsoft.Practices.Unity;
 
 namespace ZzaDesktop
 {
@@ -47,11 +48,11 @@ namespace ZzaDesktop
 
         #endregion
 
-        CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
-        OrderViewModel  _orderViewModel = new OrderViewModel();
-        OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
-        private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
-
+        private CustomerListViewModel _customerListViewModel; // = new CustomerListViewModel();
+        private OrderViewModel _orderViewModel = new OrderViewModel();
+        private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
+        private AddEditCustomerViewModel _addEditViewModel; // = new AddEditCustomerViewModel();
+        //private ICustomersRepository _repo = new ICustomersRepository();
 
         //public object CurrentViewModel { get; set; }
 
@@ -67,9 +68,17 @@ namespace ZzaDesktop
         public MainWindowViewModel()
         {
             NavigateCommand = new RelayCommand<string>(OnNavigate);
+
+            //_customerListViewModel = new CustomerListViewModel(_repo);
+            //_addEditViewModel = new AddEditCustomerViewModel(_repo);
+
+            _customerListViewModel = ContainerHelper.Container.Resolve<CustomerListViewModel>();
+            _addEditViewModel = ContainerHelper.Container.Resolve<AddEditCustomerViewModel>();
+
             _customerListViewModel.PlaceOrderRequested += NavToOrder;
             _customerListViewModel.AddCustomerRequested += NavToAddCustomer;
             _customerListViewModel.EditCustomerRequested += NavToEditCustomer;
+            _addEditViewModel.Done += NavToCustomerList;
         }
 
         void OnNavigate(string destination)
@@ -105,6 +114,11 @@ namespace ZzaDesktop
             _addEditViewModel.EditMode = true;
             _addEditViewModel.SetCustomer(cust);
             CurrentViewModel = _addEditViewModel;
+        }
+
+        private void NavToCustomerList()
+        {
+            CurrentViewModel = _customerListViewModel;
         }
     }
 }

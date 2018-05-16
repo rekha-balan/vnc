@@ -1,0 +1,11 @@
+﻿<Window x:Class="PrismDemo.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
+        Title="MainWindow">
+    <DockPanel LastChildFill="True">
+       <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
+        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
+    </DockPanel>
+</Window>

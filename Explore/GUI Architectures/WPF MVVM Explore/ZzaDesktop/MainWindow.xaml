@@ -24,7 +24,6 @@
         <DataTemplate DataType="{x:Type cust:AddEditCustomerViewModel}">
             <cust:AddEditCustomerView />
         </DataTemplate>
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
