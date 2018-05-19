@@ -3,6 +3,8 @@ using Business;
 using Infrastructure.Services;
 using System.Collections.ObjectModel;
 using Infrastructure;
+using Prism.Commands;
+using Microsoft.Windows.Controls;
 
 namespace ModuleAS
 {
@@ -11,6 +13,8 @@ namespace ModuleAS
         private readonly IPersonService _personService;
 
         #region Properties
+
+        public DelegateCommand EditPersonCommand { get; private set; }
 
         private ObservableCollection<Person> _People;
         public ObservableCollection<Person> People
@@ -34,6 +38,29 @@ namespace ModuleAS
             }
         }
 
+        private Person _selectedPerson;
+        public Person SelectedPerson
+        {
+            get { return _selectedPerson; }
+            set
+            {
+                _selectedPerson = value;
+                EditPersonCommand.RaiseCanExecuteChanged();
+                OnPropertyChanged("SelectedPerson");
+            }
+        }
+
+        private WindowState _windowState;
+        public WindowState WindowState
+        {
+            get { return _windowState; }
+            set
+            {
+                _windowState = value;
+                OnPropertyChanged("WindowState");
+            }
+        }
+
         public IView View { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         #endregion //Properties
@@ -44,13 +71,23 @@ namespace ModuleAS
         {
             _personService = personService;
             LoadPeople();
+            EditPersonCommand = new DelegateCommand(EditPerson, CanEditPerson);
         }
 
         #endregion //Constructors
 
         #region Commands
 
+        private void EditPerson()
+        {
+            WindowState = Microsoft.Windows.Controls.WindowState.Open;
+        }
 
+        private bool CanEditPerson()
+        {
+            //return true;
+            return SelectedPerson != null;
+        }
 
         #endregion //Commands
 
