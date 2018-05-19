@@ -69,9 +69,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationCommands.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="IPersonRepository.cs" />
+    <Compile Include="IView2..cs" />
+    <Compile Include="ModuleBase.cs" />
     <Compile Include="Services\IPersonService.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IViewModel.cs" />

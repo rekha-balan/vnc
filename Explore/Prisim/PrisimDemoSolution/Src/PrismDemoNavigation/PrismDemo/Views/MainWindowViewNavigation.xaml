@@ -1,0 +1,46 @@
+﻿<Window x:Class="PrismDemo.Views.MainWindowViewNavigation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
+        Title="{Binding Title}" Height="350" Width="550">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <!--This is for the X Demo--> 
+            
+            <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" 
+                            DockPanel.Dock="Top" 
+                            Width="Auto" Height="Auto" 
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}" 
+                            DockPanel.Dock="Bottom" 
+                            Width="Auto" Height="Auto" 
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
+            
+            <!--This is for the State-Based Navigation Demo--> 
+            
+            <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
+                            Width="Auto" Height="Auto" 
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
+
+            <!--This is for the Demo-->
+            
+            <!--<TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
+                        Width="Auto" Height="Auto" 
+                        HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" 
+                                Value="{Binding Content.DataContext.ViewName, RelativeSource={RelativeSource Self}}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+            </TabControl>-->
+            
+            <!--This is for the View-Based Navigation Demo--> 
+            
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" 
+		            prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" Margin="5" />
+            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" Margin="5"  />
+        </DockPanel>
+    </Grid>
+</Window>

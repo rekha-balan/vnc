@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Infrastructure
 {
-    public class ViewModelBase : IViewModel, INotifyPropertyChanged
+    public class ViewModelBase : IViewModel, IViewModel2, INotifyPropertyChanged
     {
         public IView View { get; set; }
 
