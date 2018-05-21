@@ -1,15 +1,10 @@
-﻿using PrismDemo.Views;
+﻿using PrismBlankApp1.Views;
 using System.Windows;
 using Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using ModuleA;
-using Prism.Regions;
-using System.Windows.Controls;
-using Infrastructure;
-using System;
 
-namespace PrismDemo
+namespace PrismBlankApp1
 {
     class Bootstrapper : UnityBootstrapper
     {
@@ -26,14 +21,7 @@ namespace PrismDemo
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            moduleCatalog.AddModule(typeof(ModuleAModule));
-        }
-
-        protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
-        {
-            RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
-            mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
-            return mappings;
+            //moduleCatalog.AddModule(typeof(YOUR_MODULE));
         }
     }
 }

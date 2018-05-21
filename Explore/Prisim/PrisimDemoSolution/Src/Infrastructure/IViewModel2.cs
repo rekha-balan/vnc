@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    // This if for view first approaches
+    // This is for view first approaches
     // No property back to view
     public interface IViewModel2
     {

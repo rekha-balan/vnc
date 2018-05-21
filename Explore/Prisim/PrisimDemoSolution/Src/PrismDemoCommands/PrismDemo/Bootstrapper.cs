@@ -18,8 +18,7 @@ namespace PrismDemo
     class Bootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
-        {
-            
+        {          
             return Container.Resolve<MainWindow>();
         }
 
@@ -27,7 +26,6 @@ namespace PrismDemo
         {
             Application.Current.MainWindow.Show();
         }
-
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
