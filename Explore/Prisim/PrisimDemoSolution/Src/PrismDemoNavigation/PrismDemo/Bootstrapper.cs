@@ -3,17 +3,12 @@ using System.Windows;
 using Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using ModuleAS;
 using ModuleA1;
 using ModuleB1;
 using Prism.Regions;
 using System.Windows.Controls;
 using Infrastructure;
 using System;
-using People;
-using StatusBar;
-using Toolbar;
-using Services.PersonService;
 using PrismDemo.ViewModels;
 
 namespace PrismDemo
@@ -23,22 +18,18 @@ namespace PrismDemo
         protected override DependencyObject CreateShell()
         {
             //this is for the State-Based Navigation Demo
-
             //return Container.Resolve<MainWindow>();
 
             // This is for the View-Based Navigation Demo
-
             return Container.Resolve<MainWindowViewNavigation>();
         }
 
         protected override void InitializeShell()
         {
             // This is for the State-Based Navigation Demo
-
             //Application.Current.MainWindow.Show();
 
             // This is for the View-Based Navigation Demo
-
             base.InitializeShell();
 
             App.Current.MainWindow = (Window)Shell;

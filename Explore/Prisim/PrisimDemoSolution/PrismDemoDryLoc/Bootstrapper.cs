@@ -23,7 +23,5 @@ namespace PrismDemoDryLoc
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             //moduleCatalog.AddModule(typeof(YOUR_MODULE));
         }
-
-
     }
 }

@@ -11,8 +11,6 @@ using Prism.Regions;
 
 namespace ModuleA
 {
-
-
     public class ModuleAModule : IModule
     {
         IUnityContainer _container;
@@ -26,8 +24,6 @@ namespace ModuleA
 
         public void Initialize()
         {
-            //experiement with regions here
-
             // Magic strings
 
             //_regionManager.RegisterViewWithRegion("ToolbarRegion", typeof(ToolbarView));
