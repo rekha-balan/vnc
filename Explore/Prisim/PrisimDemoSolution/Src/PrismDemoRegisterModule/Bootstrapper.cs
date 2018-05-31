@@ -23,29 +23,35 @@ namespace PrismDemo
             Application.Current.MainWindow.Show();
         }
 
-        //// To load modules from code
+        // To load modules from code
+        //
+        // NB. ModuleA needs to be referenced
 
-        //protected override void ConfigureModuleCatalog()
-        //{
-        //    Type moduleAType = typeof(ModuleAModule);
-        //    ModuleCatalog.AddModule(new ModuleInfo()
-        //    {
-        //        ModuleName = moduleAType.Name,
-        //        ModuleType = moduleAType.AssemblyQualifiedName,
-        //        InitializationMode = InitializationMode.WhenAvailable
-        //    });
-        //}
+        protected override void ConfigureModuleCatalog()
+        {
+            Type moduleAType = typeof(ModuleAModule);
+            ModuleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = moduleAType.Name,
+                ModuleType = moduleAType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.WhenAvailable
+            });
+        }
 
-        //// To load modules from directory
+        // To load modules from directory
+        //
+        // NB. ModuleB.dll and ModuleD.dll have not been referenced
+        // but appear in .\bin\Modules folder
 
         //protected override IModuleCatalog CreateModuleCatalog()
         //{
         //    return new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
         //}
 
-        //// To load modules from Xaml
-        //// TODO(crhodes)
-        //// This is not working
+        // To load modules from Xaml
+        //
+        // NB. ModuleC.dll has not been referenced
+        // but appear in .\bin folder
 
         //protected override IModuleCatalog CreateModuleCatalog()
         //{
@@ -54,6 +60,9 @@ namespace PrismDemo
         //}
 
         // To load from an App.Config file
+        //
+        // NB. ModuleD.dll has not been referenced
+        // but appears in .\bin\Modules folder
 
         protected override IModuleCatalog CreateModuleCatalog()
         {

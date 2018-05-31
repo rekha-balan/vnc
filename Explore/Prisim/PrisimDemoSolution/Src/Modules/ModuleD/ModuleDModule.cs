@@ -12,7 +12,6 @@ using Prism.Regions;
 namespace ModuleD
 {
 
-
     public class ModuleDModule : IModule
     {
         IUnityContainer _container;

@@ -5,7 +5,8 @@
         xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
         Title="MainWindow">
     <DockPanel LastChildFill="True">
-       <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
-        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" />
+        <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>-->
     </DockPanel>
 </Window>
