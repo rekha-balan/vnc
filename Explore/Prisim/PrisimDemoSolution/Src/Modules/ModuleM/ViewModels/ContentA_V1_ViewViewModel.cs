@@ -13,5 +13,13 @@ namespace ModuleM
         {
 
         }
+
+        private string _Message = "ContentA_V1";
+
+        public string Message
+        {
+            get { return _Message; }
+            set { _Message = value; } // Should implement INotifyPropertyChanged and set value
+        }
     }
 }

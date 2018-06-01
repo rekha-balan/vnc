@@ -67,7 +67,9 @@ namespace ModuleM
             // because ContentA_VM1 implements IContentA_VM1_View
             // Do same for IContentA_VM1_ViewViewModel, ContentA_VM1_ViewViewModel
 
+            //_container.RegisterType<ContentA_VM1>();
             _container.RegisterType<IContentA_VM1_View, ContentA_VM1>();
+
             _container.RegisterType<IContentA_VM1_ViewViewModel, ContentA_VM1_ViewViewModel>();
 
             // 2. Compose Application views using registered Views and View Models
@@ -81,26 +83,29 @@ namespace ModuleM
 
             //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA));
             //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA_V1));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA_VM1));
 
-            // Enable view Injection for 
+            // Problem here is we get the View but no ViewModel
 
-            //var vm = _container.Resolve<IContentAViewViewModel>();
+            //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA_VM1));
+
+            // Enable view Injection
+
+            var vm = _container.Resolve<IContentA_VM1_ViewViewModel>();
             //vm.Message = "Prism Rocks!";
 
-            // Now injection in region.  Add view that view model created. (5)
-            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
+            //Now inject in a region the view that viewmodel created. (16)
+            _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
-            //var vm2 = _container.Resolve<IContentAViewViewModel>();
-            //vm2.Message = "Prism Rocks! Second ViewModel";
+            // If don't deactivate view the second view is covered up.
 
-            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
+            _regionManager.Regions[RegionNames.ContentRegion].Deactivate(vm.View);
 
-            // Notice how the second view appears! on top of first.
-            // TODO(crhodes)
-            // Use region manager to verify there are two views.  Might only be one
+            var vm2 = _container.Resolve<IContentA_VM1_ViewViewModel>();
+            vm2.Message = "Prism Rocks! Second ViewModel";
 
-            // If you need more control of region
+            _regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
+
+            // If you need more control of region,
 
             //try
             //{
@@ -119,19 +124,19 @@ namespace ModuleM
 
             // TODO(crhodes)
             // Play with switch views and the model associated with view
-            try
-            {
-                //IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
-                //// Can get list of Views, ActiveViews, Activate, Deactivate, Add, Remove, Activate, Deactivate, etc.
-                ////region.Deactivate(vm.View); // Doing this still through exception
-                ////region.Deactivate(vm2.View);
-                //region.Activate(vm2.View);
-            }
-            catch (Exception ex)
-            {
-                // This gets thrown because we left the first view in place. (5)
-                MessageBox.Show(ex.ToString());
-            }
+            //try
+            //{
+            //    //IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
+            //    //// Can get list of Views, ActiveViews, Activate, Deactivate, Add, Remove, Activate, Deactivate, etc.
+            //    ////region.Deactivate(vm.View); // Doing this still through exception
+            //    ////region.Deactivate(vm2.View);
+            //    //region.Activate(vm2.View);
+            //}
+            //catch (Exception ex)
+            //{
+            //    // This gets thrown because we left the first view in place. (5)
+            //    MessageBox.Show(ex.ToString());
+            //}
         }
     }
 }

@@ -112,7 +112,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Business\Business\Business.csproj">
+    <ProjectReference Include="..\..\Business\Business.csproj">
       <Project>{ae529ede-3d2f-4a49-b0a1-81bc838008cb}</Project>
       <Name>Business</Name>
     </ProjectReference>

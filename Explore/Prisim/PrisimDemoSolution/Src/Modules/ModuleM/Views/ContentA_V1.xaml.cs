@@ -22,8 +22,7 @@ namespace ModuleM
     /// </summary>
     public partial class ContentA_V1 : UserControl, IContentA_V1_View
     {
-        // View first approach
-        // ViewModel is passed in constructor
+        // View first approach.  ViewModel is passed in constructor
         // Container must create ViewModel first so it can be passed in.
 
         public ContentA_V1(IContentA_V1_ViewViewModel viewModel)

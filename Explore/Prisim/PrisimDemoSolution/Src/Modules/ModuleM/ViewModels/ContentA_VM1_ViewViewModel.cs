@@ -9,6 +9,8 @@ namespace ModuleM
 {
     public class ContentA_VM1_ViewViewModel : IContentA_VM1_ViewViewModel
     {
+        private string _Message = "ContentA_VM1";
+
         // ViewModel first approach.  
         // View is passed in constructor
 
@@ -19,12 +21,16 @@ namespace ModuleM
             View.ViewModel = this;
         }
 
-        public IView View { get; set; }
-
-        public string Message
+        public IView View
         {
             get;
-            set; // Should implement INotifyPropertyChanged and set value
+            set;
+        }
+      
+        public string Message
+        {
+            get { return _Message; }
+            set { _Message = value; } // Should implement INotifyPropertyChanged and set value
         }
     }
 }

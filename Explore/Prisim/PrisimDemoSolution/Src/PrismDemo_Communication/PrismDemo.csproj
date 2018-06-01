@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70A2BD5D-B5E6-43DA-BBC1-32BDF2C33233}</ProjectGuid>
+    <ProjectGuid>{7D5A3495-1172-4B86-83C7-A43687809B4E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PrismDemo</RootNamespace>
-    <AssemblyName>PrismDemoRegisterModule</AssemblyName>
+    <AssemblyName>PrismDemo</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,14 +65,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Resource Include="XamlCatalog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -92,26 +89,46 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Extended.Wpf.Toolkit">
+      <Version>3.3.0</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Core">
       <Version>6.3.0</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="6.3.0" />
+    <PackageReference Include="Unity">
+      <Version>4.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modules\ModuleA\ModuleA.csproj">
-      <Project>{3d9a8549-a7a8-4df9-829e-aeae7ecacaca}</Project>
-      <Name>ModuleA</Name>
+    <ProjectReference Include="..\Modules\ModuleM\ModuleM.csproj">
+      <Project>{9bf41b1b-558b-496a-9ce2-6d34199f6297}</Project>
+      <Name>ModuleM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\People\People.csproj">
+      <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>
+      <Name>People</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
+      <Project>{4634726f-ad0a-4bc2-90dc-d45cbaae7bca}</Project>
+      <Name>StatusBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Toolbar\Toolbar.csproj">
+      <Project>{a8003c7c-bdb7-4ce8-a934-0755ea19e9e1}</Project>
+      <Name>Toolbar</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,5 +10,6 @@ namespace ModuleM
     // This is for view first approaches
     public interface IContentA_V1_ViewViewModel : IViewModel2
     {
+        string Message { get; set; }
     }
 }
