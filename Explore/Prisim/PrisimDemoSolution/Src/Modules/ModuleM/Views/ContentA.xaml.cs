@@ -38,10 +38,10 @@ namespace ModuleM
             }
         }
 
-        public IViewModel2 ViewModel2
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        //public IViewModel2 ViewModel2
+        //{
+        //    get => throw new NotImplementedException();
+        //    set => throw new NotImplementedException();
+        //}
     }
 }

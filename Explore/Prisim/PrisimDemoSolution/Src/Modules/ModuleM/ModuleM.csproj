@@ -74,17 +74,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentA2.xaml.cs">
+    <Compile Include="Views\ContentA2.xaml.cs">
       <DependentUpon>ContentA2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContentA.xaml.cs">
+    <Compile Include="Views\ContentA.xaml.cs">
       <DependentUpon>ContentA.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContentAViewViewModel.cs" />
-    <Compile Include="ContentAViewViewModel2.cs" />
-    <Compile Include="IContentAView.cs" />
-    <Compile Include="IContentAViewViewModel.cs" />
-    <Compile Include="IContentAViewViewModel2.cs" />
+    <Compile Include="ViewModels\ContentAViewViewModel.cs" />
+    <Compile Include="ViewModels\ContentAViewViewModel2.cs" />
+    <Compile Include="Views\IContentAView.cs" />
+    <Compile Include="ViewModels\IContentAViewViewModel.cs" />
+    <Compile Include="ViewModels\IContentAViewViewModel2.cs" />
     <Compile Include="ModuleMModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -99,7 +99,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ToolbarA.xaml.cs">
+    <Compile Include="Views\ToolbarA.xaml.cs">
       <DependentUpon>ToolbarA.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -121,15 +121,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ContentA2.xaml">
+    <Page Include="Views\ContentA2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ContentA.xaml">
+    <Page Include="Views\ContentA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ToolbarA.xaml">
+    <Page Include="Views\ToolbarA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

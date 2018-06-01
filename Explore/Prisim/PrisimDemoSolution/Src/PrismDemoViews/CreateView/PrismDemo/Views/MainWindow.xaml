@@ -12,6 +12,7 @@
         <!--<ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
 
         <!--<ItemsControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
+        
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
         <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
     </DockPanel>

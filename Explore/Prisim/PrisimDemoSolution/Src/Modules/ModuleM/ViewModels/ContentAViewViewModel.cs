@@ -17,6 +17,7 @@ namespace ModuleM
             set; // Should have implement IPC and set value
         }
 
+        // ViewModel first approach.  ViewModel is passed a view in constructor
         public ContentAViewViewModel(IContentAView view)
         {
             View = view;

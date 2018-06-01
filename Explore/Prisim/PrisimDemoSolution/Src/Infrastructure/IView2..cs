@@ -9,6 +9,7 @@ namespace Infrastructure
 {
     public interface IView2
     {
+        // This is view first approach.  View knows about ViewModel
         IViewModel2 ViewModel { get; set; }
     }
 }

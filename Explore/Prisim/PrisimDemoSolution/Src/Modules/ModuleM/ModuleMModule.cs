@@ -33,21 +33,28 @@ namespace ModuleM
 
         public void Initialize()
         {
-            // Not clear if need to call this if using region manager, infra
-            //_container.RegisterType<ToolbarA>();
+            // These are used when no MVVM pattern with Interfaces is used
 
-            // ViewModel first
+            //_container.RegisterType<ToolbarA>();
+            //_container.RegisterType<ContentA>();
+
+            // ViewModel first approach.  ViewModel is responsible for instantiating the view
+
+            // Pass in a View as type IContentAView.  Container will return ContentA
+            // because ContentA implements IContentAView
+            // Do same for IContentAViewViewModel, ContentAViewViewModel
+
             _container.RegisterType<IContentAView, ContentA>();
             _container.RegisterType<IContentAViewViewModel, ContentAViewViewModel>();
 
             // View first approach
-            _container.RegisterType<ContentA2>();
-            _container.RegisterType<IContentAViewViewModel2, ContentAViewViewModel2>();
+            //_container.RegisterType<ContentA2>();
+            //_container.RegisterType<IContentAViewViewModel2, ContentAViewViewModel2>();
 
             // Enable view discovery for toolbar
             // Not clear if need to RegisterType with container, supra, if using region manager
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(ToolbarA));
+            //_regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(ToolbarA));
 
             // Enable view discovery for content
 
@@ -55,16 +62,16 @@ namespace ModuleM
 
             // Enable view Injection for 
 
-            var vm = _container.Resolve<IContentAViewViewModel>();
-            vm.Message = "Prism Rocks!";
+            //var vm = _container.Resolve<IContentAViewViewModel>();
+            //vm.Message = "Prism Rocks!";
 
             // Now injection in region.  Add view that view model created. (5)
-            _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
+            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
-            var vm2 = _container.Resolve<IContentAViewViewModel>();
-            vm2.Message = "Prism Rocks! Second ViewModel";
+            //var vm2 = _container.Resolve<IContentAViewViewModel>();
+            //vm2.Message = "Prism Rocks! Second ViewModel";
 
-            _regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
+            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm2.View);
 
             // Notice how the second view appears! on top of first.
             // TODO(crhodes)
@@ -91,11 +98,11 @@ namespace ModuleM
             // Play with switch views and the model associated with view
             try
             {
-                IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
-                // Can get list of Views, ActiveViews, Activate, Deactivate, Add, Remove, Activate, Deactivate, etc.
-                //region.Deactivate(vm.View); // Doing this still through exception
-                //region.Deactivate(vm2.View);
-                region.Activate(vm2.View);
+                //IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
+                //// Can get list of Views, ActiveViews, Activate, Deactivate, Add, Remove, Activate, Deactivate, etc.
+                ////region.Deactivate(vm.View); // Doing this still through exception
+                ////region.Deactivate(vm2.View);
+                //region.Activate(vm2.View);
             }
             catch (Exception ex)
             {
