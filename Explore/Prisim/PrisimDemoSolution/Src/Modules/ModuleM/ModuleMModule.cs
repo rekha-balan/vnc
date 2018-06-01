@@ -18,47 +18,70 @@ namespace ModuleM
         IUnityContainer _container;
         IRegionManager _regionManager;
 
-        public ModuleMModule(IUnityContainer container, IRegionManager manager)
-        {
-            _container = container;
-            _regionManager = manager;
-        }
+        // Need a container so we can register our views
+        // and a RegionManager so we can compose views and perform View discovery.
+        // Prism will pass in when this module is created.
 
         //public ModuleMModule(IUnityContainer container)
         //{
         //    _container = container;
         //}
 
-        // Register our Views with our container
+        public ModuleMModule(IUnityContainer container, IRegionManager manager)
+        {
+            _container = container;
+            _regionManager = manager;
+        }
 
         public void Initialize()
         {
+            // 1. Register Views and ViewModels
+
             // These are used when no MVVM pattern with Interfaces is used
 
-            //_container.RegisterType<ToolbarA>();
+            //_container.RegisterType<ToolbarA>();  // If this is commented out, still works!
             //_container.RegisterType<ContentA>();
 
-            // ViewModel first approach.  ViewModel is responsible for instantiating the view
+            // These are MVVM approaches
 
-            // Pass in a View as type IContentAView.  Container will return ContentA
-            // because ContentA implements IContentAView
-            // Do same for IContentAViewViewModel, ContentAViewViewModel
+            // View first approach.  This is more common
 
-            _container.RegisterType<IContentAView, ContentA>();
-            _container.RegisterType<IContentAViewViewModel, ContentAViewViewModel>();
+            // View is responsible for instantiating the ViewModel
+            // When container creates View, it sees a ViewModel is required in constructor.
+            // Container resolves the ViewModel and passes it into the View's constructor.
 
-            // View first approach
-            //_container.RegisterType<ContentA2>();
-            //_container.RegisterType<IContentAViewViewModel2, ContentAViewViewModel2>();
+            // Register a View as type IContentA_V1_View.  Container will return ContentA_V1
+            // because ContentA_V1 implements IContentA_V1_View
+            // Do same for IContentA_V1_ViewViewModel, ContentA_V1_ViewViewModel
+
+            //_container.RegisterType<ContentA_V1>();   // Don't have to use interface but recommended.
+            //_container.RegisterType<IContentA_V1_ViewViewModel, ContentA_V1_ViewViewModel>();
+
+            // ViewModel first approach.
+
+            // ViewModel is responsible for instantiating the view
+            // When container creates ViewModel is sees a View is required in constructor.
+            // Container resolves the View and passes it into the ViewModel's constructor.
+
+            // Register a View as type IContentA_VM1_View.  Container will return ContentA_VM1
+            // because ContentA_VM1 implements IContentA_VM1_View
+            // Do same for IContentA_VM1_ViewViewModel, ContentA_VM1_ViewViewModel
+
+            _container.RegisterType<IContentA_VM1_View, ContentA_VM1>();
+            _container.RegisterType<IContentA_VM1_ViewViewModel, ContentA_VM1_ViewViewModel>();
+
+            // 2. Compose Application views using registered Views and View Models
 
             // Enable view discovery for toolbar
             // Not clear if need to RegisterType with container, supra, if using region manager
 
-            //_regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(ToolbarA));
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(ToolbarA));
 
             // Enable view discovery for content
 
             //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA));
+            //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA_V1));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentA_VM1));
 
             // Enable view Injection for 
 

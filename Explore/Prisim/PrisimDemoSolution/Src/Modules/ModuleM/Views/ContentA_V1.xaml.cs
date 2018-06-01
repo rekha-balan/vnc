@@ -18,32 +18,31 @@ namespace ModuleM
 {
     /// <summary>
     /// Interaction logic for ContentA2.xaml
-    /// This is for view first approaches
+    /// This is for View first approaches
     /// </summary>
-    public partial class ContentA2 : UserControl, IView
+    public partial class ContentA_V1 : UserControl, IContentA_V1_View
     {
-        public ContentA2(IContentAViewViewModel2 viewModel)
+        // View first approach
+        // ViewModel is passed in constructor
+        // Container must create ViewModel first so it can be passed in.
+
+        public ContentA_V1(IContentA_V1_ViewViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel2 = viewModel;
+            ViewModel = viewModel;
         }
 
-        public IViewModel ViewModel
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-
-        public IViewModel2 ViewModel2
+        public IViewModel2 ViewModel
         {
             get
             {
-                return (IContentAViewViewModel2)DataContext;
+                //return (IViewModel2)DataContext;
+                return (IContentA_V1_ViewViewModel)DataContext;
             }
             set
             {
                 DataContext = value;
             }
         }
-   }
+    }
 }

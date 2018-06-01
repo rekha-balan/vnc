@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModuleM
 {
-    public interface IContentAView : IView
+    public interface IContentA_V1_View : IView2
     {
     }
 }

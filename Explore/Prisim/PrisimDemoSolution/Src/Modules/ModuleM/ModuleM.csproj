@@ -74,17 +74,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\ContentA2.xaml.cs">
-      <DependentUpon>ContentA2.xaml</DependentUpon>
+    <Compile Include="Views\ContentA_VM1.xaml.cs">
+      <DependentUpon>ContentA_VM1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentA_V1.xaml.cs">
+      <DependentUpon>ContentA_V1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContentA.xaml.cs">
       <DependentUpon>ContentA.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ContentAViewViewModel.cs" />
-    <Compile Include="ViewModels\ContentAViewViewModel2.cs" />
-    <Compile Include="Views\IContentAView.cs" />
-    <Compile Include="ViewModels\IContentAViewViewModel.cs" />
-    <Compile Include="ViewModels\IContentAViewViewModel2.cs" />
+    <Compile Include="ViewModels\ContentA_VM1_ViewViewModel.cs" />
+    <Compile Include="ViewModels\ContentA_V1_ViewViewModel.cs" />
+    <Compile Include="Views\IContentA_VM1_View.cs" />
+    <Compile Include="Views\IContentA_V1_View.cs" />
+    <Compile Include="ViewModels\IContentA_VM1_ViewViewModel.cs" />
+    <Compile Include="ViewModels\IContentA_V1_ViewViewModel.cs" />
     <Compile Include="ModuleMModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -121,7 +125,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ContentA2.xaml">
+    <Page Include="Views\ContentA_VM1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ContentA_V1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

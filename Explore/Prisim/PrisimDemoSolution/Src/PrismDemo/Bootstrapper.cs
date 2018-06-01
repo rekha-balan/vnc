@@ -13,16 +13,6 @@ namespace PrismDemo
 {
     class Bootstrapper : UnityBootstrapper
     {
-        protected override DependencyObject CreateShell()
-        {
-            return Container.Resolve<MainWindow>();
-        }
-
-        protected override void InitializeShell()
-        {
-            Application.Current.MainWindow.Show();
-        }
-
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
@@ -34,6 +24,16 @@ namespace PrismDemo
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
             mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
             return mappings;
+        }
+
+        protected override DependencyObject CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
+
+        protected override void InitializeShell()
+        {
+            Application.Current.MainWindow.Show();
         }
     }
 }

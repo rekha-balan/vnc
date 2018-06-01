@@ -11,7 +11,7 @@ using System;
 using People;
 using StatusBar;
 using Toolbar;
-using Unity.Container;
+//using Unity.Container;
 
 namespace PrismDemo
 {

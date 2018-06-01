@@ -6,14 +6,8 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
     <DockPanel LastChildFill="True">
-        <!--<ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="ToolbarRegion" />
-        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>-->
-
-        <!--<ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
-
-        <!--<ItemsControl DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
-        
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" 
+                    prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
         <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
     </DockPanel>
 </Window>

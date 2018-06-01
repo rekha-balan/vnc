@@ -19,6 +19,11 @@ namespace Infrastructure
             
         }
 
+        protected override IRegion CreateRegion()
+        {
+            return new AllActiveRegion();
+        }
+
         protected override void Adapt(IRegion region, StackPanel regionTarget)
         {
             region.Views.CollectionChanged += (s, e) =>
@@ -33,11 +38,6 @@ namespace Infrastructure
 
                     //handle remove
                 };
-        }
-
-        protected override IRegion CreateRegion()
-        {
-            return new AllActiveRegion();
         }
     }
 }
