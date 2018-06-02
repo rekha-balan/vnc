@@ -13,12 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Infrastructure;
 
-
 namespace People
 {
-    /// <summary>
-    /// Interaction logic for PeopleView.xaml
-    /// </summary>
     public partial class PersonView : UserControl, IPersonView
     {
         public PersonView()

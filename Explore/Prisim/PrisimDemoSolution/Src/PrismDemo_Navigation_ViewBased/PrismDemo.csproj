@@ -122,7 +122,7 @@
       <Project>{a8003c7c-bdb7-4ce8-a934-0755ea19e9e1}</Project>
       <Name>Toolbar</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Services\PersonService\Services.PersonService.csproj">
+    <ProjectReference Include="..\Services\PersonService\Services.PersonService.csproj">
       <Project>{a4214904-9716-44ec-a0cc-33de4cef7fd8}</Project>
       <Name>Services.PersonService</Name>
     </ProjectReference>

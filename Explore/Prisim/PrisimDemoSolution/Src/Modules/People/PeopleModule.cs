@@ -23,11 +23,16 @@ namespace People
         {
             RegisterViewsAndServices();
 
+            var vm = _container.Resolve<IPersonViewModel>();
+            _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
+
             // This is for non Region Demo
 
             //IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
 
-            //var vm = _container.Resolve<IPersonViewModel>();
+
+
+
             //vm.CreatePerson("Bob", "Smith");
 
             //region.Add(vm.View);
@@ -41,21 +46,21 @@ namespace People
             //vm3.CreatePerson("Jeff", "Lock");
             //region.Add(vm3.View);
 
-            var vm = this._container.Resolve<IPeopleViewModel>();
-            _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
+            //var vm = this._container.Resolve<IPeopleViewModel>();
+            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
-            _regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
+            //_regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
         }
 
         protected void RegisterViewsAndServices()
         {
-            //_container.RegisterType<IPersonViewModel, PersonViewModel>();
-            //_container.RegisterType<IPersonView, PersonView>();
+            _container.RegisterType<IPersonViewModel, PersonViewModel>();
+            _container.RegisterType<IPersonView, PersonView>();
 
-            _container.RegisterType<IPeopleViewModel, PeopleViewModel>();
-            _container.RegisterType<IPeopleView, PeopleView>();
-            _container.RegisterType<IPersonDetailsView, PersonDetailsView>();
-            _container.RegisterType<IPersonDetailsViewModel, PersonDetailsViewModel>();
+            //_container.RegisterType<IPeopleViewModel, PeopleViewModel>();
+            //_container.RegisterType<IPeopleView, PeopleView>();
+            //_container.RegisterType<IPersonDetailsView, PersonDetailsView>();
+            //_container.RegisterType<IPersonDetailsViewModel, PersonDetailsViewModel>();
         }
     }
 }
