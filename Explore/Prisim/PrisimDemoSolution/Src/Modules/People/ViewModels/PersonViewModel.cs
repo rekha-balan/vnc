@@ -17,8 +17,11 @@ namespace People
         {
             CreatePerson();
 
-            SaveCommand = new DelegateCommand(Save, CanSave);
-            //SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+            // Use this form if do not need/want to pass parameters to methods
+            //SaveCommand = new DelegateCommand(Save, CanSave);
+
+            // Use this form to pass nullable command parameter.  Use object or other nullable type.
+            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
         }
 
         //public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
@@ -51,8 +54,8 @@ namespace People
             }
         }
 
-        public DelegateCommand SaveCommand { get; set; }
-        //public DelegateCommand<Person> SaveCommand { get; set; }
+        //public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand<Person> SaveCommand { get; set; }
 
         public string ViewName
         {
@@ -82,7 +85,7 @@ namespace People
             {
                 FirstName = firstName,
                 LastName = lastName,
-                Age = 0
+                Age = 0 // This is an invalid age.  Must correct before saving.
             };
         }
 
@@ -115,6 +118,7 @@ namespace People
 
         private bool CanSave(Person value)
         {
+
             return Person.Error == null;
         }
 
