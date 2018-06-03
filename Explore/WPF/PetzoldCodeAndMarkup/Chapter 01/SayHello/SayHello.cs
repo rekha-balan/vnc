@@ -23,6 +23,11 @@ namespace Petzold.SayHello
             // Alternatively can pass the window to Run() which will call Show()
 
             app.Run(win);
+
+            // Making a window Modal generates a MessageLoop for windows
+            // Independent of main program.
+
+            //win.ShowDialog();
         }
     }
 }
