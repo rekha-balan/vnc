@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VNCCodeCommandConsole", "VNCCodeCommandConsole.csproj", "{AEB76DE9-F7D5-4ECB-9719-D608D14E2845}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalysis", "..\..\CodeAnalysis\CodeAnalysis.csproj", "{9D21B031-3BFE-44B1-A622-D500230F90A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AEB76DE9-F7D5-4ECB-9719-D608D14E2845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB76DE9-F7D5-4ECB-9719-D608D14E2845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB76DE9-F7D5-4ECB-9719-D608D14E2845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D21B031-3BFE-44B1-A622-D500230F90A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D21B031-3BFE-44B1-A622-D500230F90A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D21B031-3BFE-44B1-A622-D500230F90A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D21B031-3BFE-44B1-A622-D500230F90A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

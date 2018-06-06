@@ -28,10 +28,20 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
     /// </summary>
     public partial class wucLiveLogViewer : wucDXBase
     {
+        #region Enums, Fields, Properties
+
         public String UserName { get; set; }
+
         public IHubProxy HubProxy { get; set; }
+
         //private string ServerURI = "http://localhost:8095/signalr";
+
         public HubConnection Connection { get; set; }
+
+        #endregion
+
+
+        #region Constructors
 
         public wucLiveLogViewer()
         {
@@ -51,7 +61,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //this.Height = (primaryScreenHeight * 9) / 10;
         }
 
+        #endregion
 
+        #region Initialization
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -65,51 +77,18 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             // Yup, still works.  Don't need this line as it is done in the XAML.
             //myCollectionViewSource.Source = EyeOnLife.Common.ApplicationDataSet.Servers;
 
-            //serversGridControl.GroupBy("Environment");
-            //serversGridControl.Set
-
-            // Update the views.  First ensure a row is selected.
-
-            //tableView1.FocusedRowHandle = 1;
-
-            //tableView1.BestFitColumns();
-            //tableView2.BestFitColumns();
-            //tableView3.BestFitColumns();
-            ////tableView4.BestFitColumns();
-            ////tableView5.BestFitColumns();
-            ////tableView6.BestFitColumns();
-            //tableView7.BestFitColumns();
-            //tableView8.BestFitColumns();
-
-            //serversGridControl.GroupBy("SecurityZone");
         }
 
+        #endregion
 
-
-        private void btnSend_Click(object sender, RoutedEventArgs e)
-        {
-            HubProxy.Invoke("Send", UserName, TextBoxMessage.Text);
-            TextBoxMessage.Text = String.Empty;
-            TextBoxMessage.Focus();
-        }
-
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
-        {
-            UserName = UserNameTextBox.Text;
-            //Connect to server (use async method to avoid blocking UI thread)
-            if (!String.IsNullOrEmpty(UserName))
-            {
-                StatusText.Visibility = Visibility.Visible;
-                StatusText.Content = "Connecting to server...";
-                ConnectAsync();
-            }
-        }
+        #region Private Methods
 
         private async void ConnectAsync()
         {
             Connection = new HubConnection(ServerURI.Text);
             Connection.Closed += Connection_Closed;
             HubProxy = Connection.CreateHubProxy("MyHub");
+
             //Handle incoming event from server: use Invoke to write to console from SignalR's thread
 
             HubProxy.On<string, string>("AddUserMessage", (name, message) =>
@@ -128,6 +107,186 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 })
             );
 
+            HubProxy.On<string, Int32>("AddPriorityMessage", (message, priority) =>
+                this.Dispatcher.Invoke(() =>
+                {
+                    Boolean displayMessage = false;
+
+                    // TODO(crhodes)
+                    // Make this more clever, perhaps a bit field
+                    // But this maybe plenty fast enough just long :(
+
+                    switch (priority)
+                    {
+                        #region Debug
+
+                        case 1000:
+                            if (ceDebug00.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 1001:
+                            if (ceDebug01.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 1002:
+                            if (ceDebug02.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 1003:
+                            if (ceDebug03.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 1004:
+                            if (ceDebug04.IsChecked == true) displayMessage = true;
+                            break;
+
+                        #endregion
+
+
+                        #region Trace00 - Trace09
+
+                        case 10000:
+                            if (ceTrace00.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10001:
+                            if (ceTrace01.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10002:
+                            if (ceTrace02.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10003:
+                            if (ceTrace03.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10004:
+                            if (ceTrace04.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10005:
+                            if (ceTrace05.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10006:
+                            if (ceTrace06.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10007:
+                            if (ceTrace07.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10008:
+                            if (ceTrace08.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10009:
+                            if (ceTrace09.IsChecked == true) displayMessage = true;
+                            break;
+
+                        #endregion
+                        
+                        #region Trace10 - Trace19
+
+                        case 10010:
+                            if (ceTrace10.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10011:
+                            if (ceTrace11.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10012:
+                            if (ceTrace12.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10013:
+                            if (ceTrace13.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10014:
+                            if (ceTrace14.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10015:
+                            if (ceTrace15.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10016:
+                            if (ceTrace16.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10017:
+                            if (ceTrace17.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10018:
+                            if (ceTrace18.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10019:
+                            if (ceTrace19.IsChecked == true) displayMessage = true;
+                            break;
+
+                        #endregion
+
+                        #region Trace20 - Trace29
+
+                        case 10020:
+                            if (ceTrace20.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10021:
+                            if (ceTrace21.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10022:
+                            if (ceTrace22.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10023:
+                            if (ceTrace23.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10024:
+                            if (ceTrace24.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10025:
+                            if (ceTrace25.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10026:
+                            if (ceTrace26.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10027:
+                            if (ceTrace27.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10028:
+                            if (ceTrace28.IsChecked == true) displayMessage = true;
+                            break;
+
+                        case 10029:
+                            if (ceTrace29.IsChecked == true) displayMessage = true;
+                            break;
+
+                        #endregion
+
+                        default:
+                            displayMessage = true;
+                            break;
+                    }
+
+                    if (displayMessage)
+                    {
+                        teLogStream.Text += String.Format("{0}\n", message);
+                    }
+                })
+            );
+
             try
             {
                 await Connection.Start();
@@ -142,12 +301,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //Show chat UI; hide login UI
             SignInPanel.Visibility = Visibility.Collapsed;
             ChatPanel.Visibility = Visibility.Visible;
-            ButtonSend.IsEnabled = true;
-            TextBoxMessage.Focus();
+            btnSend.IsEnabled = true;
+            btnSendPriority.IsEnabled = true;
+            tbMessage.Focus();
             teLogStream.Text += "Connected to server at " + ServerURI + "\r";
             //recLogStream.Text += "Connected to server at " + ServerURI + "\r";
             //rtbLogStream.AppendText("Connected to server at " + ServerURI + "\r");
         }
+
+        #endregion
 
         /// <summary>
         /// If the server is stopped, the connection will time out after 30 seconds (default), and the 
@@ -158,9 +320,36 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //Hide chat UI; show login UI
             var dispatcher = Application.Current.Dispatcher;
             dispatcher.Invoke(() => ChatPanel.Visibility = Visibility.Collapsed);
-            dispatcher.Invoke(() => ButtonSend.IsEnabled = false);
+            dispatcher.Invoke(() => btnSendPriority.IsEnabled = false);
+            dispatcher.Invoke(() => btnSend.IsEnabled = false);
             dispatcher.Invoke(() => StatusText.Content = "You have been disconnected.");
             dispatcher.Invoke(() => SignInPanel.Visibility = Visibility.Visible);
+        }
+
+        #region Event Handlers
+
+        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            UserName = UserNameTextBox.Text;
+            //Connect to server (use async method to avoid blocking UI thread)
+            if (!String.IsNullOrEmpty(UserName))
+            {
+                StatusText.Visibility = Visibility.Visible;
+                StatusText.Content = "Connecting to server...";
+                ConnectAsync();
+            }
+        }
+        private void btnSend_Click(object sender, RoutedEventArgs e)
+        {
+            HubProxy.Invoke("Send", UserName, tbMessage.Text);
+            tbMessage.Text = String.Empty;
+            tbMessage.Focus();
+        }
+        private void btnSendPriority_Click(object sender, RoutedEventArgs e)
+        {
+            HubProxy.Invoke("SendPriority", tbMessage.Text, Int32.Parse(tbMessagePriority.Text));
+            tbMessage.Text = String.Empty;
+            tbMessage.Focus();
         }
 
         private void WPFClient_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -184,27 +373,241 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             //recLogStream.Text = "";
         }
 
-        private void recLogStream_TextChanged(object sender, EventArgs e)
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
         {
-            // TODO(crhodes)
-            // Figure out how to scroll the RichEditControl
+            teLogStream.SelectAll();
+            teLogStream.Copy();
         }
 
+        private void btnDebugToggle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String)btnDebugToggle.Content == "All Off")
+            {
+                ceDebug00.IsChecked = false;
+                ceDebug01.IsChecked = false;
+                ceDebug02.IsChecked = false;
+                ceDebug03.IsChecked = false;
+                ceDebug04.IsChecked = false;
 
-        //private void saveButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Common.ApplicationDataSet.InstancesTA.Update(Common.ApplicationDataSet.Instances);
-        //}
+                btnDebugToggle.Content = "All On";
+            }
+            else
+            {
+                ceDebug00.IsChecked = true;
+                ceDebug01.IsChecked = true;
+                ceDebug02.IsChecked = true;
+                ceDebug03.IsChecked = true;
+                ceDebug04.IsChecked = true;
 
-        //private void undoButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Common.ApplicationDataSet.Instances.RejectChanges();
-        //}
+                btnDebugToggle.Content = "All Off";
+            }
+        }
 
-        //private void DXWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        //{
+        private void btnTrace00_09Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String)btnTrace00_09Toggle.Content == "All Off")
+            {
+                ceTrace00.IsChecked = false;
+                ceTrace01.IsChecked = false;
+                ceTrace02.IsChecked = false;
+                ceTrace03.IsChecked = false;
+                ceTrace04.IsChecked = false;
+                ceTrace05.IsChecked = false;
+                ceTrace06.IsChecked = false;
+                ceTrace07.IsChecked = false;
+                ceTrace08.IsChecked = false;
+                ceTrace09.IsChecked = false;
 
-        //}
+                btnTrace00_09Toggle.Content = "All On";
+            }
+            else
+            {
+                ceTrace00.IsChecked = true;
+                ceTrace01.IsChecked = true;
+                ceTrace02.IsChecked = true;
+                ceTrace03.IsChecked = true;
+                ceTrace04.IsChecked = true;
+                ceTrace05.IsChecked = true;
+                ceTrace06.IsChecked = true;
+                ceTrace07.IsChecked = true;
+                ceTrace08.IsChecked = true;
+                ceTrace09.IsChecked = true;
+
+                btnTrace00_09Toggle.Content = "All Off";
+            }
+        }
+
+        private void btnTrace10_19Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String)btnTrace10_19Toggle.Content == "All Off")
+            {
+                ceTrace10.IsChecked = false;
+                ceTrace11.IsChecked = false;
+                ceTrace12.IsChecked = false;
+                ceTrace13.IsChecked = false;
+                ceTrace14.IsChecked = false;
+                ceTrace15.IsChecked = false;
+                ceTrace16.IsChecked = false;
+                ceTrace17.IsChecked = false;
+                ceTrace18.IsChecked = false;
+                ceTrace19.IsChecked = false;
+
+                btnTrace10_19Toggle.Content = "All On";
+            }
+            else
+            {
+                ceTrace10.IsChecked = true;
+                ceTrace11.IsChecked = true;
+                ceTrace12.IsChecked = true;
+                ceTrace13.IsChecked = true;
+                ceTrace14.IsChecked = true;
+                ceTrace15.IsChecked = true;
+                ceTrace16.IsChecked = true;
+                ceTrace17.IsChecked = true;
+                ceTrace18.IsChecked = true;
+                ceTrace19.IsChecked = true;
+
+                btnTrace10_19Toggle.Content = "All Off";
+            }
+        }
+
+        private void btnTrace20_29Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String)btnTrace20_29Toggle.Content == "All Off")
+            {
+                ceTrace20.IsChecked = false;
+                ceTrace21.IsChecked = false;
+                ceTrace22.IsChecked = false;
+                ceTrace23.IsChecked = false;
+                ceTrace24.IsChecked = false;
+                ceTrace25.IsChecked = false;
+                ceTrace26.IsChecked = false;
+                ceTrace27.IsChecked = false;
+                ceTrace28.IsChecked = false;
+                ceTrace29.IsChecked = false;
+
+                btnTrace20_29Toggle.Content = "All On";
+            }
+            else
+            {
+                ceTrace20.IsChecked = true;
+                ceTrace21.IsChecked = true;
+                ceTrace22.IsChecked = true;
+                ceTrace23.IsChecked = true;
+                ceTrace24.IsChecked = true;
+                ceTrace25.IsChecked = true;
+                ceTrace26.IsChecked = true;
+                ceTrace27.IsChecked = true;
+                ceTrace28.IsChecked = true;
+                ceTrace29.IsChecked = true;
+
+                btnTrace20_29Toggle.Content = "All Off";
+            }
+        }
+
+        private void btnToggle_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO(crhodes)
+            // Figure out way to explore all child controls inside of capture filter and set IsChecked
+
+            if ((String)btnToggle.Content == "All Off")
+            {
+                ceDebug00.IsChecked = false;
+                ceDebug01.IsChecked = false;
+                ceDebug02.IsChecked = false;
+                ceDebug03.IsChecked = false;
+                ceDebug04.IsChecked = false;
+
+                ceTrace00.IsChecked = false;
+                ceTrace01.IsChecked = false;
+                ceTrace02.IsChecked = false;
+                ceTrace03.IsChecked = false;
+                ceTrace04.IsChecked = false;
+                ceTrace05.IsChecked = false;
+                ceTrace06.IsChecked = false;
+                ceTrace07.IsChecked = false;
+                ceTrace08.IsChecked = false;
+                ceTrace09.IsChecked = false;
+
+                ceTrace10.IsChecked = false;
+                ceTrace11.IsChecked = false;
+                ceTrace12.IsChecked = false;
+                ceTrace13.IsChecked = false;
+                ceTrace14.IsChecked = false;
+                ceTrace15.IsChecked = false;
+                ceTrace16.IsChecked = false;
+                ceTrace17.IsChecked = false;
+                ceTrace18.IsChecked = false;
+                ceTrace19.IsChecked = false;
+
+                ceTrace20.IsChecked = false;
+                ceTrace21.IsChecked = false;
+                ceTrace22.IsChecked = false;
+                ceTrace23.IsChecked = false;
+                ceTrace24.IsChecked = false;
+                ceTrace25.IsChecked = false;
+                ceTrace26.IsChecked = false;
+                ceTrace27.IsChecked = false;
+                ceTrace28.IsChecked = false;
+                ceTrace29.IsChecked = false;
+
+                btnDebugToggle.Content = "All On";
+                btnTrace00_09Toggle.Content = "All On";
+                btnTrace10_19Toggle.Content = "All On";
+                btnTrace20_29Toggle.Content = "All On";
+                btnToggle.Content = "All On";
+            }
+            else
+            {
+                ceDebug00.IsChecked = true;
+                ceDebug01.IsChecked = true;
+                ceDebug02.IsChecked = true;
+                ceDebug03.IsChecked = true;
+                ceDebug04.IsChecked = true;
+
+                ceTrace00.IsChecked = true;
+                ceTrace01.IsChecked = true;
+                ceTrace02.IsChecked = true;
+                ceTrace03.IsChecked = true;
+                ceTrace04.IsChecked = true;
+                ceTrace05.IsChecked = true;
+                ceTrace06.IsChecked = true;
+                ceTrace07.IsChecked = true;
+                ceTrace08.IsChecked = true;
+                ceTrace09.IsChecked = true;
+
+                ceTrace10.IsChecked = true;
+                ceTrace11.IsChecked = true;
+                ceTrace12.IsChecked = true;
+                ceTrace13.IsChecked = true;
+                ceTrace14.IsChecked = true;
+                ceTrace15.IsChecked = true;
+                ceTrace16.IsChecked = true;
+                ceTrace17.IsChecked = true;
+                ceTrace18.IsChecked = true;
+                ceTrace19.IsChecked = true;
+
+                ceTrace20.IsChecked = true;
+                ceTrace21.IsChecked = true;
+                ceTrace22.IsChecked = true;
+                ceTrace23.IsChecked = true;
+                ceTrace24.IsChecked = true;
+                ceTrace25.IsChecked = true;
+                ceTrace26.IsChecked = true;
+                ceTrace27.IsChecked = true;
+                ceTrace28.IsChecked = true;
+                ceTrace29.IsChecked = true;
+
+                btnDebugToggle.Content = "All Off";
+                btnTrace00_09Toggle.Content = "All Off";
+                btnTrace10_19Toggle.Content = "All Off";
+                btnTrace20_29Toggle.Content = "All Off";
+                btnToggle.Content = "All Off";
+            }
+
+        }
+
+        #endregion
 
     }
 

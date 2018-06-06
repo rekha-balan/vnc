@@ -25,8 +25,13 @@ namespace SignalRServerHub
         public MainWindow()
         {
             InitializeComponent();
+
+            VNC.AssemblyHelper.AssemblyInformation info = new VNC.AssemblyHelper.AssemblyInformation(System.Reflection.Assembly.GetExecutingAssembly());
+
+            Title = Title + " " +  info.InformationalVersionAttribute;
         }
 
+        
         /// <summary>
         /// Calls the StartServer method with Task.Run to not
         /// block the UI thread. 
@@ -112,23 +117,17 @@ namespace SignalRServerHub
     {
         public void Send(string name, string message)
         {
-            //switch (name)
-            //{
-                //case "SRL":
-                //    Clients.All.addUserMessage("", message);
-
-                //    //Clients.All.addMessage(message);
-                //    break;
-
-                //default:
-                    Clients.All.addUserMessage(name, message);
-                    //break;
-            //}
-
+            Clients.All.addUserMessage(name, message);
         }
+
         public void Send(string message)
         {
             Clients.All.addMessage(message);
+        }
+
+        public void SendPriority(string message, Int32 priority)
+        {
+            Clients.All.addPriorityMessage(message, priority);
         }
 
         public override Task OnConnected()
@@ -148,12 +147,5 @@ namespace SignalRServerHub
 
             return base.OnDisconnected(stopCalled);
         }
-        //public override Task OnDisconnected()
-        //{
-
-
-        //    return base.OnDisconnected();
-        //}
-
     }
 }
