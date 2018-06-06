@@ -28,6 +28,18 @@
         <TextBlock Grid.Row="2" Text="Age:" Margin="5"/>
         <TextBox Grid.Row="2" Grid.Column="1"  Margin="5" 
                  Text="{Binding Person.Age, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+        <!--<TextBox Grid.Row="2" Grid.Column="1"  Margin="5">
+            <TextBox.Text>
+                <Binding Path="Person.Age" Mode="TwoWay" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnNotifyDataErrors="True" 
+                         ValidatesOnExceptions="True">
+                    <Binding.ValidationRules>
+
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>-->
 
         <!-- Last Updated -->
         <TextBlock Grid.Row="3" Text="Last Updated:" Margin="5" />
@@ -35,9 +47,15 @@
                    Text="{Binding Person.LastUpdated}" />
 
         <!-- Save Button -->
+        <!--<Button Grid.Row="4" Grid.ColumnSpan="2" 
+                Content="Save" Margin="10" 
+                Command="{Binding SaveCommand}" 
+                CommandParameter="{Binding Person}"  />-->
+
+        <!-- Can pass a nullable CommandParameter -->  
         <Button Grid.Row="4" Grid.ColumnSpan="2" 
                 Content="Save" Margin="10" 
                 Command="{Binding SaveCommand}" 
-                CommandParameter="{Binding Person}"  />
+                CommandParameter="{Binding Person}" />
     </Grid>
 </UserControl>

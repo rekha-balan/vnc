@@ -8,7 +8,7 @@ using Prism.Regions;
 using System.Windows.Controls;
 using Infrastructure;
 using System;
-
+// PrismDemo_Views
 namespace PrismDemo
 {
     class Bootstrapper : UnityBootstrapper

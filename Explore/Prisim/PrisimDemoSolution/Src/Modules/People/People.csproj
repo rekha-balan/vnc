@@ -72,9 +72,18 @@
     <Compile Include="Views\IPersonDetailsView.cs" />
     <Compile Include="Views\IPeopleView.cs" />
     <Compile Include="Views\IPersonView.cs" />
-    <Compile Include="Views\PeopleView.xaml.cs" />
-    <Compile Include="Views\PersonDetailsView.xaml.cs" />
-    <Compile Include="Views\PersonView.xaml.cs" />
+    <Compile Include="Views\PeopleView.xaml.cs">
+	  <DependentUpon>PeopleView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+	</Compile>
+    <Compile Include="Views\PersonDetailsView.xaml.cs">
+	  <DependentUpon>PersonDetailsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+	</Compile>	
+    <Compile Include="Views\PersonView.xaml.cs">
+	  <DependentUpon>PersonView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+	</Compile>	
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

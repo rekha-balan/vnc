@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
-        prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="550">
     <Grid>
         <DockPanel LastChildFill="True">
@@ -15,11 +14,11 @@
                             DockPanel.Dock="Bottom" 
                             Width="Auto" Height="Auto" 
                             HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
-            <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
+            <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
                             Width="Auto" Height="Auto" 
-                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
 
-            <!--<TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
+            <TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
                         Width="Auto" Height="Auto" 
                         HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
                 <TabControl.ItemContainerStyle>
@@ -28,7 +27,7 @@
                                 Value="{Binding Content.DataContext.ViewName, RelativeSource={RelativeSource Self}}" />
                     </Style>
                 </TabControl.ItemContainerStyle>
-            </TabControl>-->            
+            </TabControl>            
         </DockPanel>
     </Grid>
 </Window>
