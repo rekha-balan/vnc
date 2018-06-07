@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[VWTriggers]
+    ADD CONSTRAINT [FK_VWTriggers_Tables] FOREIGN KEY ([DBView_ID]) REFERENCES [dbo].[DBViews] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

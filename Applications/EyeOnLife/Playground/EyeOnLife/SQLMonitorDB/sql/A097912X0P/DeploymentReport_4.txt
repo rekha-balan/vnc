@@ -1,0 +1,31 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[JSJobs]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       on [dbo].[JSJobs].[ID] (Default Constraint)
+       on [dbo].[JSJobs].[HasSchedule] (Default Constraint)
+       on [dbo].[JSJobs].[HasServer] (Default Constraint)
+       on [dbo].[JSJobs].[HasStep] (Default Constraint)
+       on [dbo].[JSJobs].[IsEnabled] (Default Constraint)
+     Table rebuild
+       [dbo].[JSJobs] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_JSJobs_Instances] (Foreign Key)
+       [dbo].[FK_JSJobs_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobSchedules_JSJobs] (Foreign Key)
+       [dbo].[FK_JSJobSteps_JSJobs] (Foreign Key)
+     Create
+       [dbo].[FK_JSJobs_Instances] (Foreign Key)
+       [dbo].[FK_JSJobs_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobSchedules_JSJobs] (Foreign Key)
+       [dbo].[FK_JSJobSteps_JSJobs] (Foreign Key)

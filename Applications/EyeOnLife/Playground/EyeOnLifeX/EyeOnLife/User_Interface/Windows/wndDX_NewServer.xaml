@@ -1,0 +1,70 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.wndDX_NewServer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    Title="wndDX_NewServer" Height="516" Width="377" xmlns:my="clr-namespace:SQLInformation.Data;assembly=SQLInformation" Loaded="DXWindow_Loaded">
+    <dx:DXWindow.Resources>
+        <my:ApplicationDataSet x:Key="applicationDataSet" />
+        <CollectionViewSource x:Key="serversViewSource" Source="{Binding Path=Servers, Source={StaticResource applicationDataSet}}" />
+    </dx:DXWindow.Resources>
+    <Grid>
+        <Grid DataContext="{StaticResource serversViewSource}" Margin="5" Name="grid1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />                
+            </Grid.RowDefinitions>
+                
+            <Label Content="Net Name:" Grid.Column="0" Grid.Row="3"  Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="3" Height="23" Margin="3" Name="netNameTextBox" Text="{Binding Path=NetName, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+                        
+            <Label Content="ID:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="0" Height="23" Margin="3" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+            
+            <Label Content="IPAddress:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="4" Height="23" Margin="3" Name="iPAddressTextBox" Text="{Binding Path=IPAddress, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+            
+             <Label Content="OSVersion:" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="6" Height="23" Margin="3" Name="oSVersionTextBox" Text="{Binding Path=OSVersion, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+            
+            <Label Content="Physical Memory:" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="7" Height="23" Margin="3" Name="physicalMemoryTextBox" Text="{Binding Path=PhysicalMemory, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+            
+            <Label Content="Processors:" Grid.Column="0" Grid.Row="8" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="8" Height="23" Margin="3" Name="processorsTextBox" Text="{Binding Path=Processors, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+            
+            <Label Content="Platform:" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="9" Height="23" Margin="3" Name="platformTextBox" Text="{Binding Path=Platform, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+            
+            <Label Content="ADDomain:" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="10" Height="23" Margin="3" Name="aDDomainTextBox" Text="{Binding Path=ADDomain, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+            
+            <Label Content="Environment:" Grid.Column="0" Grid.Row="11" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="11" Height="23" Margin="3" Name="environmentTextBox" Text="{Binding Path=Environment, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+            
+            <Label Content="Security Zone:" Grid.Column="0" Grid.Row="12" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="12" Height="23" Margin="3" Name="securityZoneTextBox" Text="{Binding Path=SecurityZone, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+            
+            <StackPanel Grid.Column="1" Grid.Row="13" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button IsDefault="True" Click="Button_Click" Width="55">OK</Button>
+                <Button IsCancel="True" Width="73">Cancel</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</dx:DXWindow>

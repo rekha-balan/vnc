@@ -1,0 +1,398 @@
+﻿<uiuc:wucDX_Base
+    x:Class="EyeOnLife.User_Interface.User_Controls.EyeOnLifeTables"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"   
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"        
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d"  
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"     
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"              
+    xmlns:my1="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"  
+    Title="EyeOnLifeTables"
+    d:DesignWidth="1000" d:DesignHeight="600" 
+    MinWidth="800" MinHeight="600">
+
+    <uiuc:wucDX_Base.Resources>
+
+        <Style x:Key="AdminButtonEvent" TargetType="{x:Type Button}" >
+            <EventSetter Event="Button.Click" Handler="DisplayUserControlFromTag" />
+           
+            <Setter Property="Template">
+                
+                <Setter.Value>
+                    
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <!-- This controls the look -->
+
+                        <Grid>
+                            <Rectangle x:Name="bgcolor" 
+                                       RadiusX="4" RadiusY="4">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#DCDCDC" Offset="0" />
+                                                <GradientStop Color="#C6C5C5" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            
+                            <Rectangle x:Name="outer" 
+                                       RadiusX="4" RadiusY="4"
+                                       StrokeThickness="1" >
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#DCDCDC" Offset="0" />
+                                                <GradientStop Color="#C6C5C5" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            
+                            <Rectangle x:Name="inner"  
+                               RadiusX="4" RadiusY="4" 
+                               StrokeThickness="1" StrokeMiterLimit="10" 
+                               StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter" 
+                               Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" 
+                               Margin="3,3,3,0" 
+                               HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                               Width="Auto" Height="Auto">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                                <GradientStop Color="#FFFFFF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            
+                            <Rectangle x:Name="BrightShine" 
+                               Visibility="Collapsed" 
+                               Margin="2" Height="Auto" 
+                               RadiusX="4px" RadiusY="4px" 
+                               VerticalAlignment="Top">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="transparent" Offset="0" />
+                                                <GradientStop Color="#909090" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            
+                            <ContentPresenter x:Name="ContentSite" 
+                              Margin="8,0,8,0" 
+                              TextElement.Foreground="#5F5F5F" 
+                              VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}" 
+                              HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}" />
+                        </Grid>
+
+                        <!-- This controls the behavior -->
+
+                        <ControlTemplate.Triggers>
+                            <!-- Focused -->
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <!-- MouseOver -->
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="bgcolor" Property="Stroke" Value="Green" />
+                                <Setter TargetName="bgcolor" Property="StrokeThickness" Value="2" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>            
+        </Style>
+
+        <Style x:Key="AdminButtonLeft" TargetType="{x:Type Button}"  BasedOn="{StaticResource AdminButtonEvent}">     
+            <!--<EventSetter Event="Button.Click" Handler="DisplayUserControlFromTag" />-->
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+
+        <Style x:Key="AdminButtonCenter" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminButtonEvent}" >
+            <Setter Property="Margin" Value="20,2,2,2" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <!--<Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="bgcolor" Property="Stroke" Value="Orange" />
+                                <Setter TargetName="bgcolor" Property="StrokeThickness" Value="2" />
+                                <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                            </Trigger>                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>-->
+        </Style>
+
+        <Style x:Key="AdminButtonRight" TargetType="{x:Type Button}" BasedOn="{StaticResource AdminButtonEvent}" >
+            <Setter Property="Margin" Value="50,2,5,2" />
+            <Setter Property="FontSize" Value="10" />            
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+    </uiuc:wucDX_Base.Resources>
+    
+    <DockPanel >
+        
+        <Border DockPanel.Dock="Left" Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2" Background="White">
+            <DockPanel>
+                
+                <TextBlock FontSize="16" HorizontalAlignment="Center" DockPanel.Dock="Top" FontWeight="Bold">SMO Tables</TextBlock>
+                
+                <my1:CylonEyeBall x:Name="cylonEyeBall1" DockPanel.Dock="Bottom"  Margin="5"/>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Left" >
+                    
+                    <VirtualizingStackPanel Width="175">
+
+                        <Button Content="Servers" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="Servers"  />
+
+                        <!--<Button Content="ServerInfo" 
+                                Style="{StaticResource AdminButtonCenter}" 
+                                Tag="wucDX_ServerInfo"  />-->
+
+                        <Button Content="Instances" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="Instances"  />
+
+                        <Button Content="InstanceInfo" 
+                                Style="{StaticResource AdminButtonCenter}" 
+                                Tag="InstanceInfo"  />
+
+                        <Button Content="Databases" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="Databases"  />
+
+                        <Button Content="Database Info" 
+                                Style="{StaticResource AdminButtonCenter}" 
+                                Tag="DatabaseInfo"  />
+
+                        <Button Content="DB DataFiles" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_DataFiles"  />
+
+                        <Button Content="DB DataFile Info" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_DataFileInfo"  />
+
+                        <Button Content="DBFileGroups" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_FileGroups"  />
+
+                        <Button Content="DBFileGroupInfo" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_FileGroupInfo"  />
+
+                        <Button Content="DB LogFiles" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_LogFiles"  />
+
+                        <Button Content="DB LogFile Info" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_LogFileInfo"  />
+
+                        <Button Content="DB Roles" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_Roles"  />
+
+                        <Button Content="DB StoredProcedures" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_StoredProcedures"  />
+
+                        <Button Content="DB Tables" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_Tables"  />
+
+                        <Button Content="DB Table Columns" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="TB_Columns"  />
+
+                        <Button Content="DB Table Triggers" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="TB_Triggers"  />
+
+                        <Button Content="DB DdlTriggers" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_DdlTriggers"  />
+
+                        <Button Content="DB UserDefinedFunctions" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_UserDefinedFunctions"  />
+
+                        <Button Content="DB Users" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_Users"  />
+
+                        <Button  Content="DB Views" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="DB_Views"  />
+
+                        <Button Content="DB View Columns" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="VW_Columns"  />
+
+                        <Button Content="DB View Triggers" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="VW_Triggers"  />
+                        
+                        <Button Content="JobServers" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="JobServers"  />
+
+                        <Button Content="JS Alert Categories" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_AlertCategories"  />
+
+                        <Button Content="JS Alerts" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_Alerts"  />
+
+                        <Button Content="JS Job Categories" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_JobCategories"  />
+
+                        <Button Content="JS Jobs" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_Jobs"  />
+
+                        <Button Content="JS JobSchedules" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_JobSchedules"  />
+
+                        <Button Content="JS JobSteps" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_JobSteps"  />
+
+                        <Button Content="JS OperatorCategories" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_OperatorCategories"  />
+
+                        <Button Content="JS Operators" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_Operators"  />
+
+                        <Button Content="JS ProxyAccounts" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_ProxyAccounts"  />
+
+                        <Button Content="JS SharedSchedules" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_SharedSchedules"  />
+
+                        <Button Content="JS TargetServerGroups" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_TargetServerGroups"  />
+
+                        <Button Content="JS TargetServers" 
+                                Style="{StaticResource AdminButtonRight}" 
+                                Tag="JS_TargetServers"  />
+
+                        <Button Content="LinkedServers" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="LinkedServers"  />
+
+                        <Button Content="Logins" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="Logins"  />
+
+                        <Button Content="ServerRoles" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="ServerRoles"  />
+
+                        <!--<Button Content="LKUP Tables" 
+                                Style="{StaticResource AdminButtonLeft}" 
+                                Tag="wucDX_Admin_LKUPTables"  />-->
+
+                        <!--<Button Content="Weekly Snapshot" Click="OnSnapShot_Weekly" />
+                        <Button Content="Daily Snapshot" Click="OnSnapShot_Daily" />
+                        <Button Content="IntraDay Snapshot" Click="OnSnapShot_IntraDay" />-->
+
+
+                    </VirtualizingStackPanel>
+                    
+                </ScrollViewer>
+                
+            </DockPanel>
+            
+        </Border>
+        
+        <Border DockPanel.Dock="Right" Margin="0,5,5,5"
+                BorderBrush="Black"
+                BorderThickness="2" Background="White">
+            
+            <DockPanel Name="dpUserControlContainer" >
+                <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Text="
+The SQL Management Objects (SMO) interface provides access to information about all the details
+in a SQL Server Instance.  EyeOnLife stores this information in tables that correspond to the
+SMO objects.  The navigation pane on the right provides access to the individual tables.  In
+most cases joins to related information is provided in the datagrid to allow some context to
+be maintained, e.g. the DB XXX tables display the INSTANCE containing the DATABASE and the
+ENVIRONMENT containing the INSTANCE.  The diagram below shows the relationship among some of the
+SMO objects." />
+                <Image DockPanel.Dock="Bottom" Source="/EyeOnLife;component/Resources/Images/Instance Hierarchy.png" 
+                           Stretch="Fill" />
+
+            </DockPanel>
+            
+        </Border>
+        
+    </DockPanel>
+
+</uiuc:wucDX_Base>

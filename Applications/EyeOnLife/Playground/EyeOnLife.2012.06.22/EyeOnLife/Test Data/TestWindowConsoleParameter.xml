@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- EAC iDev -->
+<SQLMonitorConfigData>
+  <Urls>
+    <Url EnvCode="PROD"    Description="Production Data">http://LPDCM01:8080/dms/tws</Url>
+    <Url EnvCode="STAG1"   Description="Staging Data">http://LSDCM02:8080/dms/tws</Url>
+    <Url EnvCode="STAG2"   Description="Staging Data2">http://LSDCM01V:8080/dms/tws</Url>
+    <Url EnvCode="STAG3"   Description="Staging Data3">http://LSDCM02V:8070/dms/tws</Url>
+    <Url EnvCode="TEST2"   Description="Static Data">http://LSDCM01V:8070/dms/tws</Url>
+    <Url EnvCode="TEST1"   Description="Current Build">http://LIFEDCM401:8030/dms/tws</Url>
+    <Url EnvCode="TEST4"   Description="QA Data Changes">http://LIFEDCM401:8010/dms/tws</Url>
+    <Url EnvCode="TEST5"   Description="QA Code Changes">http://LIFEDCM401:8020/dms/tws</Url>
+    <Url EnvCode="DEV1"    Description="DEV1">http://LIFEDCM601:8230/dms/tws</Url>
+    <Url EnvCode="DEV1-UI" Description="DEV 1 UI">http://LIFEDCM601:8230/dms/dms.jsp</Url>
+    <Url EnvCode="DEV2"    Description="DEV2">http://LIFEDCM601:8240/dms/tws</Url>
+  </Urls>
+
+  <SQLMonitorDBConnection>Data Source=a097912x0p\sql2008;Initial Catalog=SQLMonitorDB;Integrated Security=True</SQLMonitorDBConnection>
+  <!--<SQLMonitorDBConnection>server=172.20.136.138,1430;user id=mcreai;pwd=!Pacific!;database=MCRRequests</SQLMonitorDBConnection>-->
+  <!--<NorthWindDBConnection>Data Source=LDSQLI02v\sql2k5pdev01;Initial Catalog=Northwind;uid=eac_sqluser;pwd=!Pacific!;</NorthWindDBConnection>-->
+  
+  <!--<SQLMonitorDBConnection>Data Source=TRONW8;Initial Catalog=SQLMonitorDB;Integrated Security=True</SQLMonitorDBConnection>-->    
+  <!--<SQLMonitorDBConnection>Data Source=PARTHENON;Initial Catalog=SQLMonitorDB;Integrated Security=True</SQLMonitorDBConnection>-->  
+  <!--<SQLMonitorDBConnection>Data Source=MATRIX;Initial Catalog=SQLMonitorDB;Integrated Security=True</SQLMonitorDBConnection>-->    
+  <!--<NorthWindDBConnection>Data Source=PERSEPHONE\;Initial Catalog=Northwind;Integrated Security=True</NorthWindDBConnection>-->
+</SQLMonitorConfigData>
+<!-- EAC iTest -->
+
+<!-- EAC Staging -->
+
+<!-- EAC Production -->
+
+

@@ -22,6 +22,10 @@ namespace People
 
             // Use this form to pass nullable command parameter.  Use object or other nullable type.
             SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+
+            // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
+
+            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
         }
 
         //public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
@@ -93,11 +97,6 @@ namespace People
 
         #region Private Methods
 
-        private bool CanSave()
-        {
-            return Person != null && Person.Error == null;
-        }
-
         private void Person_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             SaveCommand.RaiseCanExecuteChanged();
@@ -111,14 +110,27 @@ namespace People
             //MessageBox.Show(count.ToString());
         }
 
+        
+
+        private bool CanSave()
+        {
+            return Person != null && Person.Error == null;
+        }
+
         private void Save(Person value)
         {
-            Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+            if (value is null)
+            {
+                Person.LastUpdated = DateTime.Now;
+            }
+            else
+            {
+                Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+            }
         }
 
         private bool CanSave(Person value)
         {
-
             return Person.Error == null;
         }
 

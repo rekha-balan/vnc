@@ -1,0 +1,1562 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal" xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:dxcore_unique_xmlns="http://schemas.devexpress.com/winfx/2008/xaml/core">
+  <dxcore_unique_xmlns:BooleanToVisibilityConverter x:Key="notInvertedBooleanToVisibilityConverter" Invert="False" />
+  <dxcore_unique_xmlns:BooleanToVisibilityConverter x:Key="invertedBooleanToVisibilityConverter" Invert="True" />
+  <sys:Double x:Key="{dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}">0.35</sys:Double>
+  <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}">0,3,0,3</Thickness>
+  <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}">6,0,14,0</Thickness>
+  <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}">6,0,14,0</Thickness>
+  <Thickness x:Key="{dxbt:BarCheckItemThemeKey ResourceKey=BorderMarginInMenu}">-2</Thickness>
+  <!--<DataTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=SnappedContentTemplate}">
+        <dxc:MeasurePixelSnapper SnapperType="Around">
+            <dx:DXContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{Binding Path=Link.ActualContentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type dxb:BarItemLinkControl}}}"/>
+        </dxc:MeasurePixelSnapper>
+    </DataTemplate>-->
+  <sys:Double x:Key="Double.NaN">NaN</sys:Double>
+  <ControlTemplate x:Key="{dxbt:BarButtonItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarButtonItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;22;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{TemplateBinding BorderStyle}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;23;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{TemplateBinding LayoutPanelStyle}" Alignment="{TemplateBinding ActualGlyphAlignment}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;24;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{TemplateBinding GlyphRenderTransform}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                       RenderTransform="{TemplateBinding GlyphRenderTransform}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{TemplateBinding NormalContentStyle}" Visibility="{TemplateBinding ActualContentVisibility}" VerticalAlignment="Center" Focusable="False" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+              <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+              <ControlTemplate TargetType="{x:Type ContentControl}">
+                <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;44;38" />
+              </ControlTemplate>
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+            <!--END WPF-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <dxb:BooleanToIntegerConverter x:Key="booleanToIntegerConverter" />
+  <ControlTemplate x:Key="{dxbt:BarButtonItemThemeKey ResourceKey=InRibbonPageGroupTemplate}" TargetType="{x:Type dxb:BarButtonItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;72;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{TemplateBinding BorderStyle}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;73;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{TemplateBinding LayoutPanelStyle}" Alignment="{TemplateBinding ActualGlyphAlignment}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;74;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{TemplateBinding GlyphRenderTransform}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                       RenderTransform="{TemplateBinding GlyphRenderTransform}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxb:ContentSelector SnapperType="Around" SelectedIndex="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource booleanToIntegerConverter}}">
+            <dxb:ContentSelector.Content1>
+              <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{TemplateBinding NormalContentStyle}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;89;30">
+                <!--BEGIN WPF-->
+                <ContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </ContentControl.ContentTemplateSelector>
+                <!--END WPF-->
+              </ContentControl>
+            </dxb:ContentSelector.Content1>
+            <dxb:ContentSelector.Content2>
+              <dxb:TextSplitterControl Content="{TemplateBinding ActualContent}" IsSelected="{TemplateBinding IsMouseOver}" Style="{DynamicResource {dxbt:BarButtonItemThemeKey ResourceKey=TextSplitterStyleInRibbonPageGroup}}" NormalTextStyle="{DynamicResource {dxbt:BarButtonItemThemeKey ResourceKey=NormalTextStyleInTextSplitter}}" SelectedTextStyle="{DynamicResource {dxbt:BarButtonItemThemeKey ResourceKey=SelectedTextStyleInTextSplitter}}" Visibility="{TemplateBinding ActualContentVisibility}" SplitMethod="BySpace" IsArrowVisible="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;98;30" />
+            </dxb:ContentSelector.Content2>
+          </dxb:ContentSelector>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarCheckItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarCheckItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;123;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;124;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;125;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                   RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+              <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+              <ControlTemplate TargetType="{x:Type ContentControl}">
+                <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;145;38" />
+              </ControlTemplate>
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+            <!--END WPF-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemCheckState">
+          <VisualState x:Name="ItemChecked" />
+          <VisualState x:Name="ItemUnchecked" />
+          <VisualState x:Name="ItemIndeterminate" />
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSplitButtonItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarSplitButtonItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;178;10">
+      <dxb:ItemBorderControl x:Name="PART_CustomizationBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;179;14" />
+      <dxcore_unique_xmlns:Items2Panel x:Name="itemPanel" Style="{Binding Path=ContentAndArrowLayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" StretchedContent="Content2" Alignment="{Binding Path=ActualArrowAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;180;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <Grid Name="PART_ArrowButton" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;182;22">
+            <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" ItemPosition="{TemplateBinding ArrowPartItemPosition}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;183;26" />
+            <Border Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;184;26">
+              <ContentControl x:Name="PART_ArrowContent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;185;30">
+                <ContentControl.Content>
+                  <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=ArrowStyle}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;187;38" />
+                </ContentControl.Content>
+              </ContentControl>
+            </Border>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;194;22">
+            <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" ItemPosition="{TemplateBinding ContentPartItemPosition}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;195;26" />
+            <dxcore_unique_xmlns:Items2Panel HorizontalAlignment="Center" Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;196;26">
+              <dxcore_unique_xmlns:Items2Panel.Content1>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <!--END WPF-->
+                  <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                               RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+              </dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:Items2Panel.Content2>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False">
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+                    <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                  </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+                  <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                      <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;216;50" />
+                    </ControlTemplate>
+                  </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                  <!--END WPF-->
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+              </dxcore_unique_xmlns:Items2Panel.Content2>
+            </dxcore_unique_xmlns:Items2Panel>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Bottom">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="ArrowHot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="ArrowPressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSubItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarSubItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;270;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;271;14" />
+      <dxcore_unique_xmlns:Items2Panel StretchedContent="Content1" Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualArrowAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;272;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:Items2Panel Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;274;22">
+            <dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                <!--BEGIN WPF-->
+                <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                <!--END WPF-->
+                <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                   RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+            </dxcore_unique_xmlns:Items2Panel.Content1>
+            <dxcore_unique_xmlns:Items2Panel.Content2>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Margin="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=ContentMargin}}" Focusable="False" IsTabStop="False">
+                <!--BEGIN WPF-->
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                  <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;294;42" />
+                  </ControlTemplate>
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                <!--END WPF-->
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+            </dxcore_unique_xmlns:Items2Panel.Content2>
+          </dxcore_unique_xmlns:Items2Panel>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <StackPanel Orientation="Horizontal" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;303;22">
+            <Border x:Name="PART_ContentToArrowIndent" Width="{Binding Path=ContentToArrowIndent, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;304;26" />
+            <ContentControl x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;305;26">
+              <ContentControl.Content>
+                <dxb:BarSubItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=ArrowStyle}}" LinkContainerType="{Binding Path=ContainerType, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;307;34" />
+              </ContentControl.Content>
+            </ContentControl>
+          </StackPanel>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <dxb:PopupMenuBase x:Name="PART_Popup" Focusable="false" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;313;14" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarEditItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarEditItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;335;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;336;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=EditAndContentLayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="Left" FillContent2="True" IgnoreContent2HorizontalAlignment="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;337;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="Left" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;339;22">
+            <dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                <!--BEGIN WPF-->
+                <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                <!--END WPF-->
+                <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                        RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+            </dxcore_unique_xmlns:Items2Panel.Content1>
+            <dxcore_unique_xmlns:Items2Panel.Content2>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False">
+                <!--BEGIN WPF-->
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                  <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;356;46" />
+                  </ControlTemplate>
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                <!--END WPF-->
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+            </dxcore_unique_xmlns:Items2Panel.Content2>
+          </dxcore_unique_xmlns:Items2Panel>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxcore_unique_xmlns:Items2Panel HorizontalIndent="4" HorizontalAlignment="{TemplateBinding ActualHorizontalEditAlignment}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;365;22">
+            <dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_EditContent" SnapperType="Around" Height="{TemplateBinding ActualEditHeight}" Width="{TemplateBinding ActualEditWidth}" Style="{Binding Path=NormalEditStyle, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualEditTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False" />
+            </dxcore_unique_xmlns:Items2Panel.Content1>
+            <dxcore_unique_xmlns:Items2Panel.Content2>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" Visibility="{TemplateBinding ActualContent2Visibility}" x:Name="PART_Content2" Content="{TemplateBinding ActualContent2}" ContentTemplate="{TemplateBinding ActualContent2Template}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" />
+            </dxcore_unique_xmlns:Items2Panel.Content2>
+          </dxcore_unique_xmlns:Items2Panel>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarStaticItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarStaticItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" MinWidth="{TemplateBinding ActualMinWidth}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;396;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;397;14" />
+      <Border Background="Transparent" Padding="1" MinHeight="22" IsHitTestVisible="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;398;14">
+        <ContentControl x:Name="PART_Border" Template="{DynamicResource {dxbt:BarStaticItemThemeKey ResourceKey=BorderTemplate}}" Focusable="False" DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;399;18" />
+      </Border>
+      <Border x:Name="ContentBorder" ClipToBounds="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;401;14">
+        <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding ActualContentAlignment}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;402;18">
+          <dxcore_unique_xmlns:Items2Panel.Content1>
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+              <!--BEGIN WPF-->
+              <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+              <!--END WPF-->
+              <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                   RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+          </dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:Items2Panel.Content2>
+            <dxcore_unique_xmlns:MeasurePixelSnapperContentControl SnapperType="Around" x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding ActualContentAlignment}" Visibility="{TemplateBinding ActualContentVisibility}" IsHitTestVisible="True" Focusable="False" IsTabStop="False">
+              <!--BEGIN WPF-->
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+                <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.ContentTemplateSelector>
+              <dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                  <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;422;42" />
+                </ControlTemplate>
+              </dxcore_unique_xmlns:MeasurePixelSnapperContentControl.Template>
+              <!--END WPF-->
+            </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+          </dxcore_unique_xmlns:Items2Panel.Content2>
+        </dxcore_unique_xmlns:Items2Panel>
+      </Border>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="WidthState">
+          <VisualState x:Name="HasWidth"></VisualState>
+          <VisualState x:Name="NoWidth"></VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarButtonItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarButtonItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="1" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;459;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;460;14" />
+      <Border Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;461;14">
+        <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;462;18">
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" x:Name="PART_GlyphBorder" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+          <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;471;22">
+            <ContentControl Name="PART_Content" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;472;26">
+              <!--BEGIN WPF-->
+              <ContentControl.ContentTemplateSelector>
+                <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+              </ContentControl.ContentTemplateSelector>
+              <ContentControl.Template>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                  <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;479;38" />
+                </ControlTemplate>
+              </ContentControl.Template>
+              <!--END WPF-->
+            </ContentControl>
+            <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;484;26" />
+          </StackPanel>
+          <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;486;26" />
+        </dxb:ItemContentPanel>
+      </Border>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarCheckItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarCheckItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="1" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;531;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;532;14" />
+      <Border Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;533;14">
+        <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;534;18">
+          <Border Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" MinWidth="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;535;22">
+            <Grid FlowDirection="LeftToRight" MinWidth="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" Margin="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=BorderMarginInMenu}}" HorizontalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;536;26">
+              <ContentControl x:Name="PART_TriStateGlyph" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=TriStateBorderInMenu}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;537;30" />
+              <ContentControl x:Name="PART_CheckGlyph" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=CheckInMenu}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;538;30" />
+              <ContentControl x:Name="PART_GlyphCheckBorder" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=GlyphCheckBorderInMenu}}" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;539;30">
+                <Border Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;540;34" />
+              </ContentControl>
+              <ContentControl x:Name="PART_GlyphTriStateBorder" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=GlyphTriStateBorderInMenu}}" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;542;30">
+                <Border Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;543;34" />
+              </ContentControl>
+              <!--BEGIN WPF-->
+              <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+              <!--END WPF-->
+              <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+            </Grid>
+          </Border>
+          <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;553;22">
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;554;26">
+              <ContentControl Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" HorizontalAlignment="Left" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;555;30">
+                <!--BEGIN WPF-->
+                <ContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </ContentControl.ContentTemplateSelector>
+                <ContentControl.Template>
+                  <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;562;42" />
+                  </ControlTemplate>
+                </ContentControl.Template>
+                <!--END WPF-->
+              </ContentControl>
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;568;26">
+              <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;569;30" />
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+          </StackPanel>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;572;22">
+            <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;573;26" />
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+        </dxb:ItemContentPanel>
+      </Border>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GlyphCheckBorder" Storyboard.TargetProperty="Background">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                  <DiscreteObjectKeyFrame.Value>
+                    <SolidColorBrush Color="#00FFFFFF" />
+                  </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GlyphTriStateBorder" Storyboard.TargetProperty="Background">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                  <DiscreteObjectKeyFrame.Value>
+                    <SolidColorBrush Color="#00FFFFFF" />
+                  </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GlyphCheckBorder" Storyboard.TargetProperty="Background">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                  <DiscreteObjectKeyFrame.Value>
+                    <SolidColorBrush Color="#00FFFFFF" />
+                  </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GlyphTriStateBorder" Storyboard.TargetProperty="Background">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                  <DiscreteObjectKeyFrame.Value>
+                    <SolidColorBrush Color="#00FFFFFF" />
+                  </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="TriStateBorderVisibility">
+          <VisualState x:Name="TriStateBorderVisible">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_TriStateGlyph" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="TriStateBorderHidden">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_TriStateGlyph" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="CheckVisibility">
+          <VisualState x:Name="CheckVisible">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_CheckGlyph" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="CheckHidden">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="TriStateGlyphBorderVisibility">
+          <VisualState x:Name="TriStateGlyphBorderVisible">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_GlyphTriStateBorder" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="TriStateGlyphBorderHidden">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_GlyphTriStateBorder" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="GlyphCheckVisibility">
+          <VisualState x:Name="GlyphCheckVisible">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_GlyphCheckBorder" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="GlyphCheckHidden">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_GlyphCheckBorder" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarStaticItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarStaticItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="1" Background="Transparent" MinWidth="{TemplateBinding ActualMinWidth}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;701;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;702;14" />
+      <Border Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;703;14">
+        <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;704;18">
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" x:Name="PART_GlyphBorder" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+          <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;713;22">
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;714;26">
+              <ContentControl Name="PART_Content" VerticalAlignment="Center" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding ActualContentAlignment}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;715;30">
+                <!--BEGIN WPF-->
+                <ContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </ContentControl.ContentTemplateSelector>
+                <ContentControl.Template>
+                  <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;722;42" />
+                  </ControlTemplate>
+                </ContentControl.Template>
+                <!--END WPF-->
+              </ContentControl>
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;728;26">
+              <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;729;30" />
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+          </StackPanel>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;732;22">
+            <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;733;26" />
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+        </dxb:ItemContentPanel>
+      </Border>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="WidthState">
+          <VisualState x:Name="HasWidth"></VisualState>
+          <VisualState x:Name="NoWidth"></VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSubItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarSubItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="1" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;785;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;786;14" />
+      <Border Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;787;14">
+        <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;788;18">
+          <Border Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;789;22">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+          </Border>
+          <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;797;22">
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;798;26">
+              <ContentControl Name="PART_Content" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;799;30">
+                <!--BEGIN WPF-->
+                <ContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </ContentControl.ContentTemplateSelector>
+                <ContentControl.Template>
+                  <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;806;42" />
+                  </ControlTemplate>
+                </ContentControl.Template>
+                <!--END WPF-->
+              </ContentControl>
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+            <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;812;26">
+              <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;813;30" />
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+          </StackPanel>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;816;22">
+            <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;817;26" />
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+          <ContentControl Name="PART_ArrowContent" dxb:ItemContentPanel.Alignment="Far" Margin="0,0,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;819;22">
+            <ContentControl.Content>
+              <dxb:BarSubItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=ArrowStyle}}" LinkContainerType="{Binding Path=ContainerType, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;821;30" />
+            </ContentControl.Content>
+          </ContentControl>
+        </dxb:ItemContentPanel>
+      </Border>
+      <!--ONLY SL<ContentControl Height="0" Width="0"> ONLY SL-->
+      <dxb:PopupMenuBase x:Name="PART_Popup" Focusable="false" DefaultVerticalOffset="-1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;827;16" />
+      <!--ONLY SL</ContentControl> ONLY SL-->
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSplitButtonItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarSplitButtonItemLinkControl}">
+    <Grid Margin="1" x:Name="PART_Item" Background="#00FFFFFF" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;871;10">
+      <dxb:ItemBorderControl x:Name="PART_ControlBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;872;14" />
+      <dxb:ItemBorderControl Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" x:Name="PART_CustomizationBorder" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;873;14" />
+      <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;874;14">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;879;18">
+          <dxb:ItemBorderControl x:Name="PART_ItemBorder" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;880;22" />
+          <Border Background="#00FFFFFF" Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;881;22">
+            <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;882;26">
+              <Border Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;883;30">
+                <!--BEGIN WPF-->
+                <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+                <!--END WPF-->
+                <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+              </Border>
+              <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;891;30">
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;892;34">
+                  <ContentControl Name="PART_Content" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;893;38">
+                    <!--BEGIN WPF-->
+                    <ContentControl.ContentTemplateSelector>
+                      <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </ContentControl.ContentTemplateSelector>
+                    <ContentControl.Template>
+                      <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;900;50" />
+                      </ControlTemplate>
+                    </ContentControl.Template>
+                    <!--END WPF-->
+                  </ContentControl>
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;906;34">
+                  <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;907;38" />
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </StackPanel>
+              <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;910;30">
+                <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;911;34" />
+              </dxcore_unique_xmlns:MeasurePixelSnapper>
+            </dxb:ItemContentPanel>
+          </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Right" x:Name="PART_ArrowButton" Grid.Column="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;916;18">
+          <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;917;22" />
+          <ContentControl x:Name="PART_ArrowContent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;918;22">
+            <ContentControl.Content>
+              <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;920;30" />
+            </ContentControl.Content>
+          </ContentControl>
+        </Grid>
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <Thickness x:Key="{dxbt:BarEditItemThemeKey ResourceKey=InMenuClientPadding}">0</Thickness>
+  <ControlTemplate x:Key="{dxbt:BarEditItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarEditItemLinkControl}">
+    <Grid x:Name="PART_Item" Margin="1" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;984;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;985;14" />
+      <Border Padding="{DynamicResource {dxbt:BarEditItemThemeKey ResourceKey=InMenuClientPadding}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;986;14">
+        <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;987;18">
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" x:Name="PART_GlyphBorder" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;996;22">
+            <ContentControl Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;997;26">
+              <!--BEGIN WPF-->
+              <ContentControl.Template>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                  <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1001;38" />
+                </ControlTemplate>
+              </ContentControl.Template>
+              <!--END WPF-->
+            </ContentControl>
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1007;22">
+            <dxcore_unique_xmlns:Items2Panel HorizontalIndent="4" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1008;26">
+              <dxcore_unique_xmlns:Items2Panel.Content1>
+                <ContentControl x:Name="PART_EditContent" Style="{Binding Path=NormalEditStyle, RelativeSource={RelativeSource TemplatedParent}}" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" Content="{Binding Path=Edit, RelativeSource={RelativeSource TemplatedParent}}" Width="{TemplateBinding ActualEditWidth}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1010;34" />
+              </dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:Items2Panel.Content2>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" Visibility="{TemplateBinding ActualContent2Visibility}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1013;34">
+                  <ContentControl Name="PART_Content2" Content="{TemplateBinding ActualContent2}" ContentTemplate="{TemplateBinding ActualContent2Template}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1014;38" />
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </dxcore_unique_xmlns:Items2Panel.Content2>
+            </dxcore_unique_xmlns:Items2Panel>
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+          <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1019;22">
+            <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1020;26" />
+          </dxcore_unique_xmlns:MeasurePixelSnapper>
+        </dxb:ItemContentPanel>
+      </Border>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSplitButtonItemThemeKey ResourceKey=InPageGroupTemplate}" TargetType="{x:Type dxb:BarSplitButtonItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1052;10">
+      <dxb:ItemBorderControl x:Name="PART_ControlBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1053;14" />
+      <dxb:ItemBorderControl x:Name="PART_CustomizationBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1054;14" />
+      <dxcore_unique_xmlns:Items2Panel x:Name="itemPanel" FillContent1="True" Style="{Binding Path=ContentAndArrowLayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualArrowAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1055;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <Grid Name="PART_ArrowButton" Grid.Row="1" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1057;22">
+            <Grid Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1058;26">
+              <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Style="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageGroup}}" HideBorderSide="None" IsHitTestVisible="False" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1059;30" />
+              <dxb:ItemBorderControl x:Name="PART_LargeArrowBorder" IsActive="{TemplateBinding IsArrowBorderActive}" State="{TemplateBinding ArrowBorderState}" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeArrowBorderStyleInRibbonPageGroup}}" HideBorderSide="None" IsHitTestVisible="False" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1060;30" />
+            </Grid>
+            <Border Background="Transparent" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1062;26">
+              <ContentControl x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1063;30">
+                <ContentControl.Content>
+                  <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=ArrowStyle}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1065;38" />
+                </ContentControl.Content>
+              </ContentControl>
+            </Border>
+            <dxcore_unique_xmlns:MeasurePixelSnapper x:Name="PART_ContentInArrow" HorizontalAlignment="Stretch" SnapperType="Around" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1069;26">
+              <dxb:TextSplitterControl Content="{TemplateBinding ActualContent}" IsSelected="{TemplateBinding IsMouseOver}" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=TextSplitterStyleInRibbonPageGroup}}" NormalArrowTemplate="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=NormalArrowTemplateInTextSplitter}}" SelectedArrowTemplate="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=SelectedArrowTemplateInTextSplitter}}" NormalTextStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=NormalTextStyleInTextSplitter}}" SelectedTextStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=SelectedTextStyleInTextSplitter}}" BottomSideArrowContainerStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=BottomSideArrowContainerStyleInTextSplitter}}" RightSideArrowContainerStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=RightSideArrowContainerStyleInTextSplitter}}" Visibility="{TemplateBinding ActualContentVisibility}" SplitMethod="BySpace" IsArrowVisible="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1070;30" />
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1075;22">
+            <Grid Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1076;26">
+              <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageGroup}}" HideBorderSide="None" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1077;30" />
+              <dxb:ItemBorderControl x:Name="PART_LargeItemBorder" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeContentBorderStyleInRibbonPageGroup}}" IsActive="{TemplateBinding IsContentBorderActive}" State="{TemplateBinding ContentBorderState}" HideBorderSide="None" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1078;30" />
+            </Grid>
+            <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1080;26">
+              <dxcore_unique_xmlns:Items2Panel.Content1>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <!--END WPF-->
+                  <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                                RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+              </dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:Items2Panel.Content2>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1093;34">
+                  <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1094;38">
+                    <!--BEGIN WPF-->
+                    <ContentControl.ContentTemplateSelector>
+                      <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </ContentControl.ContentTemplateSelector>
+                    <!--END WPF-->
+                  </ContentControl>
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </dxcore_unique_xmlns:Items2Panel.Content2>
+            </dxcore_unique_xmlns:Items2Panel>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Bottom">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LargeArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LargeItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="ArrowHot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="ArrowPressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSubItemThemeKey ResourceKey=InRibbonPageGroupTemplate}" TargetType="{x:Type dxb:BarSubItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1154;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1155;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1156;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" IsTabStop="False">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                                RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxb:ContentSelector SnapperType="Around" SelectedIndex="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource booleanToIntegerConverter}}">
+            <dxb:ContentSelector.Content1>
+              <Grid Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1171;30">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1177;34">
+                  <!--BEGIN WPF-->
+                  <ContentControl.ContentTemplateSelector>
+                    <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                  </ContentControl.ContentTemplateSelector>
+                  <!--END WPF-->
+                </ContentControl>
+                <Border Grid.Column="1" x:Name="PART_ContentToArrowIndent" Width="{Binding Path=ContentToArrowIndent, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1184;34" />
+                <ContentControl Grid.Column="2" x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1185;34">
+                  <ContentControl.Content>
+                    <dxb:BarSubItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=ArrowStyle}}" LinkContainerType="{Binding Path=ContainerType, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1187;42" />
+                  </ContentControl.Content>
+                </ContentControl>
+              </Grid>
+            </dxb:ContentSelector.Content1>
+            <dxb:ContentSelector.Content2>
+              <dxb:TextSplitterControl Content="{TemplateBinding ActualContent}" IsSelected="{TemplateBinding IsMouseOver}" Style="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=TextSplitterStyleInRibbonPageGroup}}" NormalArrowTemplate="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=NormalArrowTemplateInTextSplitter}}" SelectedArrowTemplate="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=SelectedArrowTemplateInTextSplitter}}" NormalTextStyle="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=NormalTextStyleInTextSplitter}}" SelectedTextStyle="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=SelectedTextStyleInTextSplitter}}" BottomSideArrowContainerStyle="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=BottomSideArrowContainerStyleInTextSplitter}}" RightSideArrowContainerStyle="{DynamicResource {dxbt:BarSubItemThemeKey ResourceKey=RightSideArrowContainerStyleInTextSplitter}}" Visibility="{TemplateBinding ActualContentVisibility}" SplitMethod="BySpace" IsArrowVisible="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1193;30" />
+            </dxb:ContentSelector.Content2>
+          </dxb:ContentSelector>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <dxb:PopupMenuBase x:Name="PART_Popup" Focusable="false" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1198;14" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarCheckItemThemeKey ResourceKey=InRibbonPageGroupTemplate}" TargetType="{x:Type dxb:BarCheckItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1219;10">
+      <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" ItemPosition="{Binding Path=(dxb:ItemPositionTypeProvider.HorizontalItemPosition), RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1220;14" />
+      <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1221;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+            <!--BEGIN WPF-->
+            <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+            <!--END WPF-->
+            <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                   RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+          </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <dxb:ContentSelector SnapperType="Around" SelectedIndex="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource booleanToIntegerConverter}}">
+            <dxb:ContentSelector.Content1>
+              <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1236;30">
+                <!--BEGIN WPF-->
+                <ContentControl.ContentTemplateSelector>
+                  <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </ContentControl.ContentTemplateSelector>
+                <!--END WPF-->
+              </ContentControl>
+            </dxb:ContentSelector.Content1>
+            <dxb:ContentSelector.Content2>
+              <dxb:TextSplitterControl Content="{TemplateBinding ActualContent}" IsSelected="{TemplateBinding IsMouseOver}" Style="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=TextSplitterStyleInRibbonPageGroup}}" NormalTextStyle="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=NormalTextStyleInTextSplitter}}" SelectedTextStyle="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=SelectedTextStyleInTextSplitter}}" Visibility="{TemplateBinding ActualContentVisibility}" SplitMethod="BySpace" IsArrowVisible="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1245;30" />
+            </dxb:ContentSelector.Content2>
+          </dxb:ContentSelector>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemCheckState">
+          <VisualState x:Name="ItemChecked" />
+          <VisualState x:Name="ItemUnchecked" />
+          <VisualState x:Name="ItemIndeterminate" />
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <dxcore_unique_xmlns:BoolToDoubleConverter TrueValue="1.0" x:Key="booleanToOpacityConverter" />
+  <ControlTemplate x:Key="{dxbt:BarSplitCheckItemThemeKey ResourceKey=InPageGroupTemplate}" TargetType="{x:Type dxb:BarSplitCheckItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1277;10">
+      <dxb:ItemBorderControl x:Name="PART_ControlBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1278;14" />
+      <dxb:ItemBorderControl x:Name="PART_CustomizationBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1279;14" />
+      <dxcore_unique_xmlns:Items2Panel x:Name="itemPanel" FillContent1="True" Style="{Binding Path=ContentAndArrowLayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualArrowAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1280;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <Grid Name="PART_ArrowButton" Grid.Row="1" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1282;22">
+            <Grid Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1283;26">
+              <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Style="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageGroup}}" HideBorderSide="None" IsHitTestVisible="False" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1284;30" />
+              <dxb:ItemBorderControl x:Name="PART_LargeArrowBorder" IsActive="{TemplateBinding IsArrowBorderActive}" State="{TemplateBinding ArrowBorderState}" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeArrowBorderStyleInRibbonPageGroup}}" HideBorderSide="None" IsHitTestVisible="False" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1285;30" />
+            </Grid>
+            <Border Background="Transparent" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1287;26">
+              <ContentControl x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Focusable="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1288;30">
+                <ContentControl.Content>
+                  <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=ArrowStyle}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1290;38" />
+                </ContentControl.Content>
+              </ContentControl>
+            </Border>
+            <dxcore_unique_xmlns:MeasurePixelSnapper x:Name="PART_ContentInArrow" HorizontalAlignment="Center" SnapperType="Around" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1294;26">
+              <dxb:TextSplitterControl Content="{TemplateBinding ActualContent}" IsSelected="{TemplateBinding IsMouseOver}" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=TextSplitterStyleInRibbonPageGroup}}" NormalArrowTemplate="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=NormalArrowTemplateInTextSplitter}}" SelectedArrowTemplate="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=SelectedArrowTemplateInTextSplitter}}" NormalTextStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=NormalTextStyleInTextSplitter}}" SelectedTextStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=SelectedTextStyleInTextSplitter}}" BottomSideArrowContainerStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=BottomSideArrowContainerStyleInTextSplitter}}" RightSideArrowContainerStyle="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=RightSideArrowContainerStyleInTextSplitter}}" Visibility="{TemplateBinding ActualContentVisibility}" SplitMethod="BySpace" IsArrowVisible="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1295;30" />
+            </dxcore_unique_xmlns:MeasurePixelSnapper>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1300;22">
+            <Grid Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1301;26">
+              <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageGroup}}" HideBorderSide="None" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1302;30" />
+              <dxb:ItemBorderControl x:Name="PART_LargeItemBorder" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeContentBorderStyleInRibbonPageGroup}}" IsActive="{TemplateBinding IsContentBorderActive}" State="{TemplateBinding ContentBorderState}" HideBorderSide="None" Visibility="{Binding Path=IsRibbonStyleLarge, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1303;30" />
+            </Grid>
+            <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1305;26">
+              <dxcore_unique_xmlns:Items2Panel.Content1>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <!--END WPF-->
+                  <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                                RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+              </dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:Items2Panel.Content2>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" Visibility="{Binding Path=ShowContentInArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1318;34">
+                  <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1319;38">
+                    <!--BEGIN WPF-->
+                    <ContentControl.ContentTemplateSelector>
+                      <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </ContentControl.ContentTemplateSelector>
+                    <!--END WPF-->
+                  </ContentControl>
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </dxcore_unique_xmlns:Items2Panel.Content2>
+            </dxcore_unique_xmlns:Items2Panel>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Bottom">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LargeArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LargeItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="ArrowHot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="ArrowPressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSplitCheckItemThemeKey ResourceKey=InMenuTemplate}" TargetType="{x:Type dxb:BarSplitCheckItemLinkControl}">
+    <Grid Margin="1" x:Name="PART_Item" Background="#00FFFFFF" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1378;10">
+      <dxb:ItemBorderControl x:Name="PART_ControlBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notInvertedBooleanToVisibilityConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1379;14" />
+      <dxb:ItemBorderControl Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" x:Name="PART_CustomizationBorder" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1380;14" />
+      <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1381;14">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1386;18">
+          <dxb:ItemBorderControl x:Name="PART_ItemBorder" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1387;22" />
+          <Border Background="#00FFFFFF" Padding="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1388;22">
+            <dxb:ItemContentPanel dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1389;26">
+              <Border Margin="{Binding Path=LinksControl.GlyphPadding, RelativeSource={RelativeSource TemplatedParent}}" MinWidth="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1390;30">
+                <Grid MinWidth="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" HorizontalAlignment="Center" Margin="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=BorderMarginInMenu}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1391;34">
+                  <ContentControl x:Name="PART_TriStateGlyph" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=TriStateBorderInMenu}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1392;38" />
+                  <ContentControl x:Name="PART_CheckGlyph" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=CheckInMenu}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1393;38" />
+                  <ContentControl x:Name="PART_GlyphCheckBorder" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=GlyphCheckBorderInMenu}}" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1394;38">
+                    <Border Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1395;42" />
+                  </ContentControl>
+                  <ContentControl x:Name="PART_GlyphTriStateBorder" Opacity="0" Template="{DynamicResource {dxbt:BarCheckItemThemeKey ResourceKey=GlyphTriStateBorderInMenu}}" VerticalAlignment="Center" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1397;38">
+                    <Border Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=IsLargeGlyph, RelativeSource={RelativeSource TemplatedParent}, Converter={dxb:IsLargeGlyphToDoubleConverter}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1398;42" />
+                  </ContentControl>
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:DXImage Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}" />
+                  <!--END WPF-->
+                  <!--ONLY SL
+                        <Image Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualGlyphVisibility}"/>
+                        ONLY SL-->
+                </Grid>
+              </Border>
+              <StackPanel x:Name="PART_ContentAndDescription" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1408;30">
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1409;34">
+                  <ContentControl Name="PART_Content" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1410;38">
+                    <!--BEGIN WPF-->
+                    <ContentControl.ContentTemplateSelector>
+                      <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </ContentControl.ContentTemplateSelector>
+                    <ContentControl.Template>
+                      <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1417;50" />
+                      </ControlTemplate>
+                    </ContentControl.Template>
+                    <!--END WPF-->
+                  </ContentControl>
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1423;34">
+                  <ContentControl Name="PART_Description" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Content="{TemplateBinding ActualDescription}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalDescriptionStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1424;38" />
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </StackPanel>
+              <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1427;30">
+                <ContentControl Name="PART_KeyGesture" dxb:ItemContentPanel.Alignment="Far" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}}" Content="{TemplateBinding ActualKeyGestureText}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" VerticalAlignment="Center" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1428;34" />
+              </dxcore_unique_xmlns:MeasurePixelSnapper>
+            </dxb:ItemContentPanel>
+          </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Right" x:Name="PART_ArrowButton" Grid.Column="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1433;18">
+          <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Visibility="{Binding ActualActAsDropDown, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}}" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1434;22" />
+          <ContentControl x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1435;22">
+            <ContentControl.Content>
+              <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=ArrowStyle}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1437;30" />
+            </ContentControl.Content>
+          </ContentControl>
+        </Grid>
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="KeyGestureVisibility">
+          <VisualState x:Name="KeyGestureVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_KeyGesture" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="DescriptionVisibility">
+          <VisualState x:Name="DescriptionVisible">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Visible" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Stretch" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="DescriptionHidden">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Description" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentAndDescription" Storyboard.TargetProperty="VerticalAlignment" dxcn:ValueSetter.VerticalAlignment="Center" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxbt:BarSplitCheckItemThemeKey ResourceKey=Template}" TargetType="{x:Type dxb:BarSplitCheckItemLinkControl}">
+    <Grid x:Name="PART_Item" Background="Transparent" Margin="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=Margin}}" SnapsToDevicePixels="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1498;10">
+      <dxb:ItemBorderControl x:Name="PART_CustomizationBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1499;14" />
+      <dxcore_unique_xmlns:Items2Panel x:Name="itemPanel" Style="{Binding Path=ContentAndArrowLayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualArrowAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1500;14">
+        <dxcore_unique_xmlns:Items2Panel.Content1>
+          <Grid Name="PART_ArrowButton" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1502;22">
+            <dxb:ItemBorderControl x:Name="PART_ArrowBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" ItemPosition="{TemplateBinding ArrowPartItemPosition}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1503;26" />
+            <Border Background="Transparent" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1504;26">
+              <ContentControl x:Name="PART_ArrowContent" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" VerticalContentAlignment="Stretch" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1505;30">
+                <ContentControl.Content>
+                  <dxb:BarSplitButtonItemArrowControl x:Name="PART_ArrowControl" Style="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=ArrowStyle}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1507;38" />
+                </ContentControl.Content>
+              </ContentControl>
+            </Border>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content1>
+        <dxcore_unique_xmlns:Items2Panel.Content2>
+          <Grid dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1514;22">
+            <dxb:ItemBorderControl x:Name="PART_ItemBorder" Style="{Binding Path=BorderStyle, RelativeSource={RelativeSource TemplatedParent}}" HideBorderSide="None" ItemPosition="{TemplateBinding ContentPartItemPosition}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1515;26" />
+            <dxcore_unique_xmlns:Items2Panel Style="{Binding Path=LayoutPanelStyle, RelativeSource={RelativeSource TemplatedParent}}" Alignment="{Binding Path=ActualGlyphAlignment, RelativeSource={RelativeSource TemplatedParent}}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1516;26">
+              <dxcore_unique_xmlns:Items2Panel.Content1>
+                <dxcore_unique_xmlns:MeasurePixelSnapperContentControl x:Name="PART_GlyphBorder" Visibility="{TemplateBinding ActualGlyphVisibility}" Width="{Binding Path=LinksControl.MaxGlyphSize.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=LinksControl.MaxGlyphSize.Height, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ActualGlyphTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsTabStop="False">
+                  <!--BEGIN WPF-->
+                  <dxcore_unique_xmlns:DXImage x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None" RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <!--END WPF-->
+                  <!--ONLY SL
+                        <Image x:Name="PART_Glyph" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="16" MinHeight="16" Source="{Binding Path=FrozenGlyph, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"
+                                                RenderTransform="{Binding Path=GlyphRenderTransform, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        ONLY SL-->
+                </dxcore_unique_xmlns:MeasurePixelSnapperContentControl>
+              </dxcore_unique_xmlns:Items2Panel.Content1>
+              <dxcore_unique_xmlns:Items2Panel.Content2>
+                <dxcore_unique_xmlns:MeasurePixelSnapper SnapperType="Around" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1529;34">
+                  <ContentControl x:Name="PART_Content" Content="{TemplateBinding ActualContent}" ContentTemplate="{TemplateBinding ActualContentTemplate}" Style="{Binding Path=NormalContentStyle, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ActualContentVisibility}" Focusable="False" IsTabStop="False" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1530;38">
+                    <!--BEGIN WPF-->
+                    <ContentControl.ContentTemplateSelector>
+                      <Binding Path="ActualContentTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </ContentControl.ContentTemplateSelector>
+                    <ContentControl.Template>
+                      <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <ContentPresenter RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Bars\Themes\Generic\BarItems.xaml;1537;50" />
+                      </ControlTemplate>
+                    </ContentControl.Template>
+                    <!--END WPF-->
+                  </ContentControl>
+                </dxcore_unique_xmlns:MeasurePixelSnapper>
+              </dxcore_unique_xmlns:Items2Panel.Content2>
+            </dxcore_unique_xmlns:Items2Panel>
+          </Grid>
+        </dxcore_unique_xmlns:Items2Panel.Content2>
+      </dxcore_unique_xmlns:Items2Panel>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="ArrowAlignment">
+          <VisualState x:Name="Bottom">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Bottom" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Top" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Right">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Right" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="Left" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="NoArrow">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ItemBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowBorder" Storyboard.TargetProperty="HideBorderSide" dxcn:ValueSetter.HideBorderSide="None" />
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ArrowButton" Storyboard.TargetProperty="Visibility" dxcn:ValueSetter.Visibility="Collapsed" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ItemState">
+          <VisualState x:Name="Normal">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Hot" />
+          <VisualState x:Name="ArrowHot" />
+          <VisualState x:Name="Pressed" />
+          <VisualState x:Name="ArrowPressed" />
+          <VisualState x:Name="Customization" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="PART_Item" Storyboard.TargetProperty="Opacity" To="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=DisableStateOpacityValue}}" Duration="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+</ResourceDictionary>

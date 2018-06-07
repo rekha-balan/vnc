@@ -1,0 +1,204 @@
+﻿<UserControl 
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucSplashScreenCHR"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"   
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"    
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"              
+    mc:Ignorable="d" 
+    d:DesignWidth="600" d:DesignHeight="400" >
+    <UserControl.Resources>
+        <Style x:Key="cyclonStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5D2727"/>
+                    <GradientStop Color="#FFF93030" Offset="1"/>
+                </LinearGradientBrush>                
+            </Style.Resources>
+            <!--<Setter Property="Background" Value="{StaticResource BackBrush}" />-->
+            <Setter Property="Background" Value="#CC0000" />
+            <Setter Property="Margin" Value="1" />            
+        </Style>
+        
+        <Style x:Key="adminWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#5D2727"/>
+                    <GradientStop Color="#CA4A4A" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />            
+        </Style>
+        
+        <Style x:Key="exploreWindowStyle" TargetType="Button">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF445D27"/>
+                    <GradientStop Color="#46D354" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+        </Style>
+        
+        <Style x:Key="startingPlaceStyle" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#FF27315D"/>
+                    <GradientStop Color="#FF7789FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Margin" Value="1" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#990099" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="20" />
+                </Trigger>
+            </Style.Triggers>            
+        </Style>    
+        
+        <Style x:Key="inactiveStyle" >
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <GradientStop Color="#404041"/>
+                    <GradientStop Color="Gainsboro" Offset="1"/>
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Button.Background" Value="{StaticResource BackBrush}" />
+            <Setter Property="Button.Margin" Value="1" />
+            
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value="DarkRed" />
+                    <Setter Property="Button.Foreground" Value="DarkRed" />
+                    <Setter Property="Button.BorderBrush" Value="Black" />
+                    <Setter Property="Button.BorderThickness" Value="10" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+            
+        <ControlTemplate x:Key="splashInactiveStyleTemplate" TargetType="{x:Type Button}">          
+            <Border x:Name="bdr_main" CornerRadius="5" Margin="1"
+                    BorderBrush="Black" BorderThickness="1"
+                    Background="White" >
+                <ContentPresenter Margin="1" ContentSource="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkRed" />
+                    <Setter Property="Foreground" Value="DarkRed" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />     
+            <!--<RowDefinition />-->            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="0" Click="OnCyclonEye_Click" Style="{StaticResource cyclonStyle}" >      
+            <uiuc:CylonEyeBall />                
+        </Button>
+        <Button Grid.Row="0" Grid.Column="2" Click="OnExploreSystems_Click" Style="{StaticResource inactiveStyle}"  >
+            <TextBlock Text="Explore Systems" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+
+        <Button Grid.Row="0" Grid.Column="3" Click="OnExploreApplications_Click" Style="{StaticResource inactiveStyle}" >
+            <TextBlock Text="Explore Applications" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+ 
+        <StackPanel Grid.Row="0" Grid.Column="3">
+
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="3">
+            <Button Content="Daily Snapshot" Click="OnDailySnapShot" />
+            <Button Content="Hourly Snapshot" Click="OnHourlySnapShot" />
+            <dxe:ComboBoxEdit 
+                Grid.Row="0" 
+                Name="comboBoxEdit1"
+                DisplayMember="Name" EditValueChanged="OnEditValueChanged_Theme"
+                ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}"  
+                VerticalAlignment="Top" />
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            
+            <Button  Click="OnWindow1_Click" Style="{StaticResource inactiveStyle}"  >
+                <TextBlock Text="Window1" TextWrapping="Wrap" TextAlignment="Center" />            
+            </Button>
+            
+            <Button Click="OnWindow2_Click" Style="{StaticResource inactiveStyle}"   >
+                <TextBlock Text="Window 2" TextWrapping="Wrap" TextAlignment="Center" />
+            </Button>     
+            
+            <Button Click="OnWindow3_Click" Style="{StaticResource inactiveStyle}" ToolTip="dxWindow3"  >
+                <TextBlock Text="Window 3" TextWrapping="Wrap" TextAlignment="Center" />
+            </Button>        
+        </StackPanel>
+
+        <Button Grid.Row="3" Grid.Column="0" Click="OnHelp_Click" Style="{StaticResource inactiveStyle}"  >
+            <TextBlock Text="Help" TextWrapping="Wrap" TextAlignment="Center" />                
+        </Button>
+        
+        <Button Grid.Row="0" Grid.Column="1" Click="OnExploreEnvironments_Click" Style="{StaticResource inactiveStyle}"  >
+            <TextBlock Text="Explore Environments" TextWrapping="Wrap" TextAlignment="Center" />            
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="1" Click="OnBigPictureDBContents_Click" Style="{StaticResource startingPlaceStyle}"  >
+            <TextBlock Text="Big Picture Instance and Database Contents" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="2" Click="OnBigPictureDBStorage_Click" Style="{StaticResource startingPlaceStyle}" >
+            <TextBlock Text="Big Picture Instance and Database Storage" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+
+        <Button Grid.Row="3" Grid.Column="1" Click="OnAdministration_Click" Style="{StaticResource startingPlaceStyle}"  >
+            <TextBlock Text="Table View and Administration" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="0" Click="OnExploreServers_Click" Style="{StaticResource exploreWindowStyle}">
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/EyeOnLife;component/Resources/Images/300px-IBM_Blue_Gene_P_supercomputer.jpg" />
+                </StackPanel>       
+        </Button>
+        
+        <Button Grid.Row="2" Grid.Column="1" Click="OnExploreInstances_Click" Style="{StaticResource exploreWindowStyle}" >
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/EyeOnLife;component/Resources/Images/DB_Instance-icon.png" Height="Auto"   />
+                </StackPanel>     
+        </Button>
+        
+        <Button Grid.Row="2" Grid.Column="2" Click="OnExploreDatabases_Click" Style="{StaticResource exploreWindowStyle}" >
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/EyeOnLife;component/Resources/Images/databasetop.png" Height="Auto"   />                   
+                </StackPanel>               
+        </Button>
+
+        <Button Grid.Row="3" Grid.Column="2" Click="OnToDo_Click" Style="{StaticResource inactiveStyle}"  >
+            <TextBlock Text="ToDo" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>     
+
+    </Grid>
+
+</UserControl>

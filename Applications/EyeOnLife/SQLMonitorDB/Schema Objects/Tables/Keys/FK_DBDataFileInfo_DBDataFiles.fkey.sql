@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[DBDataFileInfo]
+    ADD CONSTRAINT [FK_DBDataFileInfo_DBDataFiles] FOREIGN KEY ([DBDataFile_ID]) REFERENCES [dbo].[DBDataFiles] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

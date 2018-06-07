@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeOnLife", "EyeOnLife\EyeOnLife.csproj", "{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlExtentionMethods", "XamlExtentionMethods\XamlExtentionMethods.csproj", "{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlTransitions", "XamlTransitions\XamlTransitions.csproj", "{ACD5DC11-EC6C-4A13-819B-A481869BB320}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://lptfs.life.pacificlife.net:8080/tfs/defaultcollection
+		SccProjectUniqueName0 = EyeOnLife\\EyeOnLife.csproj
+		SccProjectName0 = EyeOnLife
+		SccAuxPath0 = http://lptfs.life.pacificlife.net:8080/tfs/defaultcollection
+		SccLocalPath0 = EyeOnLife
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = XamlExtentionMethods\\XamlExtentionMethods.csproj
+		SccProjectName1 = XamlExtentionMethods
+		SccAuxPath1 = http://lptfs.life.pacificlife.net:8080/tfs/defaultcollection
+		SccLocalPath1 = XamlExtentionMethods
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = XamlTransitions\\XamlTransitions.csproj
+		SccProjectName2 = XamlTransitions
+		SccAuxPath2 = http://lptfs.life.pacificlife.net:8080/tfs/defaultcollection
+		SccLocalPath2 = XamlTransitions
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		A097921NYP|Any CPU = A097921NYP|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		MATRIXW8|Any CPU = MATRIXW8|Any CPU
+		PARTHENON|Any CPU = PARTHENON|Any CPU
+		Release|Any CPU = Release|Any CPU
+		TRONW8|Any CPU = TRONW8|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.A097921NYP|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.A097921NYP|Any CPU.Build.0 = A097921NYP|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.MATRIXW8|Any CPU.ActiveCfg = MATRIXW8|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.MATRIXW8|Any CPU.Build.0 = MATRIXW8|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.PARTHENON|Any CPU.ActiveCfg = PARTHENON|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.PARTHENON|Any CPU.Build.0 = PARTHENON|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.TRONW8|Any CPU.ActiveCfg = TRONW8|Any CPU
+		{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}.TRONW8|Any CPU.Build.0 = TRONW8|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.A097921NYP|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.A097921NYP|Any CPU.Build.0 = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.MATRIXW8|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.MATRIXW8|Any CPU.Build.0 = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.PARTHENON|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.PARTHENON|Any CPU.Build.0 = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.TRONW8|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{244FF29C-2ABD-4B1F-974C-94A7037BA2A0}.TRONW8|Any CPU.Build.0 = A097921NYP|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.A097921NYP|Any CPU.ActiveCfg = A097921NYP|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.A097921NYP|Any CPU.Build.0 = A097921NYP|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.MATRIXW8|Any CPU.ActiveCfg = MATRIXW8|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.MATRIXW8|Any CPU.Build.0 = MATRIXW8|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.PARTHENON|Any CPU.ActiveCfg = PARTHENON|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.PARTHENON|Any CPU.Build.0 = PARTHENON|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.TRONW8|Any CPU.ActiveCfg = TRONW8|Any CPU
+		{ACD5DC11-EC6C-4A13-819B-A481869BB320}.TRONW8|Any CPU.Build.0 = TRONW8|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

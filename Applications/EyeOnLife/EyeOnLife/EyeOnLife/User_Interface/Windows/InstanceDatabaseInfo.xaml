@@ -1,0 +1,85 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.InstanceDatabaseInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"   
+    
+    mc:Ignorable="d"
+    Title="Instance and Database Info" FontSize="16"
+    d:DesignWidth="600" d:DesignHeight="400" 
+    Width="600" Height="600"
+    WindowStartupLocation="CenterScreen"
+    Loaded="DXWindow_OnLoaded"  >
+    
+    <dx:DXWindow.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+
+    </dx:DXWindow.Resources>
+
+    <dxlc:LayoutControl Name="layoutControlRoot" 
+                      Orientation="Vertical"
+                      Background="Transparent"
+                      VerticalAlignment="Stretch"
+                      DataContext="">
+        
+        <dxlc:LayoutControl.AvailableItems>
+            
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <!--<dxlc:LayoutGroup Name="layoutGroupHeader"
+                        VerticalAlignment="Top">
+           
+        </dxlc:LayoutGroup>-->
+        
+        <dxlc:LayoutGroup Name="lg_Body" Orientation="Vertical" >
+            <TextBlock Text="Logins and Users" VerticalAlignment="Top" />
+            <dxlc:LayoutControl Header="Instance:" VerticalAlignment="Top">
+                <TextBlock Name="tb_Instance" Text="Instance Name" VerticalAlignment="Top" />
+            </dxlc:LayoutControl>
+            <dxlc:LayoutControl Header="Database:" VerticalAlignment="Top">
+                <TextBlock Name="tb_Database" Text="Database Name" VerticalAlignment="Top" />
+            </dxlc:LayoutControl>
+            
+            <dxlc:LayoutGroup Orientation="Horizontal" >
+                
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <TextBlock Text="Instance Logins" VerticalAlignment="Top"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ListView Name="lv_Logins" DisplayMemberPath="Name_Login"/>                        
+                    </ScrollViewer>                 
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <TextBlock Text="DB Users" VerticalAlignment="Top"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ListView Name="lv_Users" DisplayMemberPath="Name_User" />
+                    </ScrollViewer>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
+        
+        <!--<dxlc:LayoutGroup Name="layoutGroupFooter"
+                        VerticalAlignment="Top">
+            <TextBlock Text="layoutGroupFooter Stuff Goes Here" />
+        </dxlc:LayoutGroup>-->
+        
+    </dxlc:LayoutControl>
+    
+</dx:DXWindow>

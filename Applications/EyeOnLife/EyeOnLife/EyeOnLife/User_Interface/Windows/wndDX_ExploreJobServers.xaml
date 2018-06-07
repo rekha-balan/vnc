@@ -1,0 +1,1270 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.wndDX_ExploreJobServers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"   
+    
+    mc:Ignorable="d"
+    Title="Instance-JobServer Explorer" FontSize="16"
+    d:DesignWidth="900" d:DesignHeight="600" 
+    WindowStartupLocation="CenterScreen"
+    MinWidth="900" MinHeight="600"
+    Loaded="DXWindow_OnLoaded" SizeChanged="DXWindow_OnSizeChanged" >
+
+    <dx:DXWindow.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+        
+        <CollectionViewSource x:Key="instancesViewSource" Source="{Binding Instances, Source={StaticResource applicationDataSet}}"/>
+        <CollectionViewSource x:Key="instancesJobServersViewSource" Source="{Binding FK_JobServers_Instances, Source={StaticResource instancesViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSAlertCategoriesViewSource" Source="{Binding FK_JSAlertCategories_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSAlertsViewSource" Source="{Binding FK_JSAlerts_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSJobCategoriesViewSource" Source="{Binding FK_JSJobCategories_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSOperatorCategoriesViewSource" Source="{Binding FK_JSOperatorCategories_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSOperatorsViewSource" Source="{Binding FK_JSOperators_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSProxyAccountsViewSource" Source="{Binding FK_JSProxyAccounts_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSTargetServerGroupsViewSource" Source="{Binding FK_JSTargetServerGroups_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSTargetServersViewSource" Source="{Binding FK_JSTargetServers_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSJobsViewSource" Source="{Binding FK_JSJobs_JobServers, Source={StaticResource instancesJobServersViewSource}}"/>
+        <CollectionViewSource x:Key="instancesJobServersJSJobsJSJobStepsViewSource" Source="{Binding FK_JSJobSteps_JSJobs, Source={StaticResource instancesJobServersJSJobsViewSource}}"/>
+
+        
+        <ControlTemplate x:Key="AdminWindowToolBoxControlsTemplate" >
+
+            <StackPanel>
+                <Button x:Name="saveButton" Margin="5" Content="Save" Click="saveButton_Click"  />
+                <Button x:Name="undoButton" Margin="5" Content="Undo" Click="undoButton_Click" />
+
+                <!--<CheckBox x:Name="readOnlyCheckBox" Margin="5"
+                            Content="Read only" IsChecked="False"
+                            Checked="readOnlyCheckBox_Checked"  Unchecked="readOnlyCheckBox_UnChecked" />
+
+                <CheckBox x:Name="canAddCheckBox" Margin="5"                            
+                            Content="Can add" IsChecked="True"
+                            Checked="canAddCheckBox_Checked" Unchecked="canAddCheckBox_UnChecked" />
+
+                <CheckBox x:Name="canDeleteCheckBox" Margin="5"
+                            Content="Can delete" IsChecked="True"
+                            Checked="canDeleteCheckBox_Checked" Unchecked="canDeleteCheckBox_UnChecked" />-->
+
+                <CheckBox Name="ckDisplayIDColumns" 
+                              Content="Display ID Columns" 
+                              Margin="5" 
+                              Checked="OnDisplayIDColumns_Checked" Unchecked="ckDisplayIDColumns_Unchecked"/>
+
+                <CheckBox Name="ckDisplaySnapShotColumns" 
+                              Content="Display SnapShot Columns" 
+                              Margin="5"                          
+                              Checked="OnDisplaySnapShotColumns_Checked" Unchecked="ckDisplaySnapShotColumns_Unchecked"/>
+            </StackPanel>
+
+        </ControlTemplate>
+
+        <Style x:Key="BoldFontLabelStyle" TargetType="dxlc:LayoutItemLabel">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+    </dx:DXWindow.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      Background="Transparent"
+                      VerticalAlignment="Stretch"
+                      DataContext="">
+        
+        <dxlc:LayoutControl.AvailableItems>
+            
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+
+            <dxlc:LayoutGroup 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                ItemSpace="30">
+
+                <!--<dxlc:LayoutItem Label="Server">
+                    <TextBlock Text="{Binding Path=NetName}" />
+                </dxlc:LayoutItem>-->
+
+                <dxlc:LayoutItem Label="Instance"
+                                 DataContext="{StaticResource instancesViewSource}">
+                    <TextBlock Text="{Binding Path=Name_Instance}" />
+                </dxlc:LayoutItem>
+
+                <!--<dxlc:LayoutItem Label="Database"
+                                 DataContext="{StaticResource serversInstancesDatabasesViewSource}">
+                    <TextBlock Text="{Binding Path=Name_Database}" />
+                </dxlc:LayoutItem>-->
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup 
+                Orientation="Vertical" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" >
+
+                <RadioButton Content="Show as Tabs" Name="checkShowAsTabs"
+                             IsChecked="True" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+                <RadioButton Content="Show as Group Boxes" Name="checkShowAsGroupBoxes" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Name="lg_Body"  >
+
+            <dxdo:DockLayoutManager 
+                Name="lg_Body_dlm" dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
+
+                <dxdo:LayoutGroup Name="lg_Body_dlm_layoutGroup">
+
+                    <dxdo:LayoutPanel Name="lg_Body_dlm_layoutGroup_layoutPanelRoot"  ItemHeight="400" MaxHeight="1200" FontSize="12">
+
+                        <dxlc:LayoutControl 
+                            Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical" StretchContentVertically="False" Background="Transparent">
+
+                            <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs">
+
+                                <dxlc:LayoutGroup.GroupBoxStyle>
+                                    <Style TargetType="dxlc:GroupBox">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="TitleVisibility" Value="Collapsed" />
+                                    </Style>
+                                </dxlc:LayoutGroup.GroupBoxStyle>
+
+                                <dxlc:LayoutGroup Header="Instances" Name="lg_Instances"
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_Instances" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl Name="fK_Instances_ServersGridControl"
+                                            ItemsSource="{Binding Source={StaticResource instancesViewSource}}" 
+                                            DesignTimeDataObjectType="{Binding Path=Instances, Source={StaticResource applicationDataSet}}"
+                                            DefaultSorting="Name_Instance" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID2" Fixed="Left" Visible="False" />
+                                                <dxg:GridColumn FieldName="Server_ID" Name="gc_ID2a"  Fixed="Left"  Visible="False" />
+
+                                                <dxg:GridColumn FieldName="Name_Instance" Fixed="Left" Name="gridColumn3a" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ADDomain"  Visible="True" Style="{StaticResource Header_ADDomain}"  />
+                                                <dxg:GridColumn FieldName="Environment"  Visible="True" Style="{StaticResource Header_Environment}" />
+                                                <dxg:GridColumn FieldName="SecurityZone"  Visible="True" Style="{StaticResource Header_SecurityZone}" />
+
+                                                <!--<dxg:GridColumn FieldName="IsClustered" Name="gridColumn10a" Visible="False"  />-->
+
+                                                <!--<dxg:GridColumn FieldName="BrowserStartMode" Name="gridColumn6a" Visible="False"  />-->
+                                                <dxg:GridColumn FieldName="Collation" Name="gridColumn7a" Visible="True" />
+                                                <!--<dxg:GridColumn FieldName="Edition" Name="gridColumn8a" Visible="True"  />-->
+                                                <!--<dxg:GridColumn FieldName="Version" Name="gridColumn23a" Visible="True" />-->
+                                                <!--<dxg:GridColumn FieldName="ProductLevel" Name="gridColumn18a" Visible="True" />-->
+                                                <!--<dxg:GridColumn FieldName="EngineEdition" Name="gridColumn9a"  Visible="False" />-->
+
+                                                <!--<dxg:GridColumn FieldName="NetName" Name="gridColumn11a"  Visible="False" />-->
+                                                <!--<dxg:GridColumn FieldName="OSVersion" Name="gridColumn12a" Visible="False" />-->
+                                                <!--<dxg:GridColumn FieldName="PerfMonMode" Name="gridColumn13a" />-->
+                                                <!--<dxg:GridColumn FieldName="PhysicalMemory" Name="gridColumn14a" Visible="False" Style="{StaticResource Header_PhysicalMemory}" />-->
+                                                <!--<dxg:GridColumn FieldName="Platform" Name="gridColumn15a" Visible="False" />-->
+                                                <!--<dxg:GridColumn FieldName="Processors" Name="gridColumn16a" Visible="False" />-->
+                                                <!--<dxg:GridColumn FieldName="Product" Name="gridColumn17a" Visible="False"/>-->
+
+                                                <dxg:GridColumn FieldName="ServiceName" Name="gridColumn20a" />
+                                                <!--<dxg:GridColumn FieldName="ServiceInstanceId" Name="gridColumn19a" />-->
+                                                <dxg:GridColumn FieldName="ServiceAccount" Name="gridColumn21a" />
+                                                <!--<dxg:GridColumn FieldName="Status" Name="gridColumn22a" Visible="False"/>-->
+
+                                                <!--<dxg:GridColumn FieldName="IsMonitored" Name="gridColumn20a1" Visible="False" />
+                                                <dxg:GridColumn FieldName="ExpandContent" Name="gridColumn20aa" Visible="False" />
+                                                <dxg:GridColumn FieldName="ExpandStorage" Name="gridColumn20aaa" Visible="False" />-->
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate1" 
+                                                    Visible="False" 
+                                                    Style="{StaticResource Header_SnapShotDate}"
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration1" 
+                                                    Style="{StaticResource Header_SnapShotDuration}"
+                                                    Visible="False"  UnboundType="Decimal" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError1" 
+                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                    Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView2" ShowFixedTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_InstanceDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="IsMonitored: ">
+                                                    <TextBlock Text="{Binding IsMonitored}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="Collation: ">
+                                                    <TextBlock Text="{Binding Collation}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="EngineEdition: ">
+                                                    <TextBlock Text="{Binding EngineEdition}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JobServer" Name="layoutGroupJobServer"
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JobServers" MaxHeight="1200" VerticalAlignment="Top">
+                                        
+                                        <dxg:GridControl x:Name="fK_JobServers_InstancesGridControl" 
+                                            DesignTimeDataObjectType="{Binding Path=JSJobServers, Source={StaticResource applicationDataSet}}"                                                  
+                                            ItemsSource="{Binding Source={StaticResource instancesJobServersViewSource}}"
+                                            DefaultSorting="Name_JobServer" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID2z" Visible="False" />
+                                                <dxg:GridColumn FieldName="Instance_ID" Name="gc_Instance_ID" Visible="False"  />
+                                                <dxg:GridColumn FieldName="Name_Instance" Name="gc_Name_Instance" Visible="True" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="Name_JobServer" Name="gc_Name_JobServer" Fixed="Left" />
+
+                                                <!--<dxg:GridColumn FieldName="CreateDate" Name="gc_CreateDate" Visible="True"
+                                                        EditSettings="{dxe:DateSettings DisplayFormat=G}" />
+                                            <dxg:GridColumn FieldName="DateLastModified" Name="gc_DateLastModified" Visible="True"
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>-->
+                                                <dxg:GridColumn FieldName="ErrorLogFile" Name="gc_ErrorLogFile" Visible="True" />
+                                                <dxg:GridColumn FieldName="HostLoginName" Name="gc_HostLoginName" Visible="True"/>
+                                                <dxg:GridColumn FieldName="MaximumHistoryRows" Name="gc_MaxiumHistoryRows" Visible="True"/>
+                                                <dxg:GridColumn FieldName="MaximumJobHistoryRows" Name="gc_MaximumJobHistoryRows" Visible="True" />
+                                                <dxg:GridColumn FieldName="MsxAccountCredentialName" Name="gc_MsxAccountCredentialName" Visible="True" />
+                                                <dxg:GridColumn FieldName="MsxAccountName" Name="gc_MsxAccountName" Visible="True" />
+                                                <dxg:GridColumn FieldName="MsxServerName" Name="gc_MsxServerName" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="IsMonitored" Name="gc_IsMonitored" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandAlertCategories" Name="gc_ExpandAlertCategories" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandAlerts" Name="gc_ExpandAlerts" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandJobCategories" Name="gc_ExpandJobCategories" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandJobs" Name="gc_ExpandJobs" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandOperatorCategories" Name="gc_ExpandOperatorCategories" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandOperators" Name="gc_ExpandOperators" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandProxyAccounts" Name="gc_ExpandProxyAccounts" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandSharedSchedules" Name="gc_ExpandSharedSchedules" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandTargetServerGroups" Name="gc_ExpandTargetServerGroups" Visible="True" />
+                                                <dxg:GridColumn FieldName="ExpandTargetServers" Name="gc_ExpandTargetServers" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate2" 
+                                                Visible="False" 
+                                                Style="{StaticResource Header_SnapShotDate}"
+                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration2" 
+                                                Style="{StaticResource Header_SnapShotDuration}"
+                                                Visible="False"  UnboundType="Decimal" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError2" 
+                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JobServerDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS AlertCategories" Name="layoutGroupJSAlertCategories"
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSAlertCategories" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSAlertCategories_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSAlertCategories, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSAlertCategoriesViewSource}}"
+                                        DefaultSorting="Name_JSAlertCategory" >
+                                            <dxg:GridControl.Columns>
+
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID3" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSAlertCategory"/>
+                                                <dxg:GridColumn FieldName="CategoryType"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate3" 
+                                                Visible="False" 
+                                                Style="{StaticResource Header_SnapShotDate}"
+                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration3" 
+                                                Style="{StaticResource Header_SnapShotDuration}"
+                                                Visible="False"  UnboundType="Decimal" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError3" 
+                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                Visible="False"  />
+                                            </dxg:GridControl.Columns>
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSAlertCategoryDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS Alerts" x:Name="layoutGroupJSAlerts" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSAlerts" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSAlerts_JobServersGridControl" 
+                                            DesignTimeDataObjectType="{Binding Path=JSAlerts, Source={StaticResource applicationDataSet}}"                                  
+                                            ItemsSource="{Binding Source={StaticResource instancesJobServersJSAlertsViewSource}}"
+                                            DefaultSorting="Name_JSAlert" >
+                                            <dxg:GridControl.Columns>
+
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID4" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSAlert"/>
+                                                <dxg:GridColumn FieldName="AlertType"/>
+                                                <dxg:GridColumn FieldName="CategoryName"/>
+                                                <dxg:GridColumn FieldName="CountResetDate"/>
+                                                <dxg:GridColumn FieldName="DatabaseName"/>
+                                                <dxg:GridColumn FieldName="IsEnabled"/>
+                                                <dxg:GridColumn FieldName="JobID"/>
+                                                <dxg:GridColumn FieldName="JobName"/>
+                                                <dxg:GridColumn FieldName="LastOccurrenceDate"/>
+                                                <dxg:GridColumn FieldName="LastResponseDate"/>
+                                                <dxg:GridColumn FieldName="NotificationMessage"/>
+                                                <dxg:GridColumn FieldName="OccurrenceCount"/>
+                                                <dxg:GridColumn FieldName="Severity"/>
+                                                <dxg:GridColumn FieldName="WmiEventNamespace"/>
+                                                <dxg:GridColumn FieldName="WmiEventQuery"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate4" 
+                                                Visible="False" 
+                                                Style="{StaticResource Header_SnapShotDate}"
+                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration4" 
+                                                Style="{StaticResource Header_SnapShotDuration}"
+                                                Visible="False"  UnboundType="Decimal" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError4" 
+                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                Visible="False"  />
+                                            </dxg:GridControl.Columns>
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+                                        
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSAlertDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>  
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS JobCategories" x:Name="layoutGroupJSJobCategories" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobCategories" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSJobCategories_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSJobCategories, Source={StaticResource applicationDataSet}}"                                  
+                                                     ItemsSource="{Binding Source={StaticResource instancesJobServersJSJobCategoriesViewSource}}"
+                                                     DefaultSorting="Name_JSJobCategory"  >
+                                            <dxg:GridControl.Columns>
+
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID5" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSJobCategory"/>
+                                                <dxg:GridColumn FieldName="CategoryType"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate5" 
+                                                Visible="False" 
+                                                Style="{StaticResource Header_SnapShotDate}"
+                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration5" 
+                                                Style="{StaticResource Header_SnapShotDuration}"
+                                                Visible="False"  UnboundType="Decimal" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError5" 
+                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                Visible="False"  />
+                                            </dxg:GridControl.Columns>
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobCategoryDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS OperatorCategories" x:Name="layoutGroupJSOperatorCategories" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSOperatorCategories" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSOperatorCategories_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSOperatorCategories, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSOperatorCategoriesViewSource}}" 
+                                        DefaultSorting="Name_JSOperatorCategory" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID6" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSOperatorCategory"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate6" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError6" Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSOperatorCategoryDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS Operators" x:Name="layoutGroupJSOperators" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSOperators" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSOperators_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSOperators, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSOperatorsViewSource}}"
+                                        DefaultSorting="Name_JSOperator" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID7" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSOperator"/>
+                                                <dxg:GridColumn FieldName="CategoryName"/>
+                                                <dxg:GridColumn FieldName="EmailAddress"/>
+                                                <dxg:GridColumn FieldName="Enabled"/>
+                                                <dxg:GridColumn FieldName="ID_Operator"/>
+                                                <dxg:GridColumn FieldName="LastEmailDate"/>
+                                                <dxg:GridColumn FieldName="LastNetSendDate"/>
+                                                <dxg:GridColumn FieldName="LastPagerDate"/>
+                                                <dxg:GridColumn FieldName="NetSendAddress"/>
+                                                <dxg:GridColumn FieldName="PagerAddress"/>
+                                                <dxg:GridColumn FieldName="PagerDays"/>
+                                                <dxg:GridColumn FieldName="SaturdayPagerEndTime"/>
+                                                <dxg:GridColumn FieldName="SaturdayPagerStartTime"/>
+                                                <dxg:GridColumn FieldName="SundayPagerEndTime"/>
+                                                <dxg:GridColumn FieldName="SundayPagerStartTime"/>
+                                                <dxg:GridColumn FieldName="WeekdayPagerEndTime"/>
+                                                <dxg:GridColumn FieldName="WeekdayPagerStartTime"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate7" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError7" Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSOperatorDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS ProxyAccounts" x:Name="layoutGroupJSProxyAccounts"
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSProxyAccounts" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSProxyAccounts_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSProxyAccounts, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSProxyAccountsViewSource}}" 
+                                        DefaultSorting="Name_JSProxyAccount" >
+
+                                            <dxg:GridControl.Columns>
+
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID8" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSProxyAccount"/>
+                                                <dxg:GridColumn FieldName="CredentialID"/>
+                                                <dxg:GridColumn FieldName="CredentialIdentity"/>
+                                                <dxg:GridColumn FieldName="CredentialName"/>
+                                                <dxg:GridColumn FieldName="Description"/>
+                                                <dxg:GridColumn FieldName="ID_ProxyAccount"/>
+                                                <dxg:GridColumn FieldName="IsEnabled"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate8" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError8" Visible="False"  />
+
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSProxyAccountDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS SharedSchedules" x:Name="layoutGroupJSSharedSchedules" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSSharedSchedules" MaxHeight="1200" VerticalAlignment="Top">
+
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSSharedScheduleDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS TargetServerGroups" x:Name="layoutGroupJSTargetServerGroups" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSTargetServerGroups" MaxHeight="1200" VerticalAlignment="Top" >
+
+                                        <dxg:GridControl x:Name="fK_JSTargetServerGroups_JobServersGridControl" 
+                                            DesignTimeDataObjectType="{Binding Path=JSTargetServerGroups, Source={StaticResource applicationDataSet}}"                                  
+                                            ItemsSource="{Binding Source={StaticResource instancesJobServersJSTargetServerGroupsViewSource}}" 
+                                            DefaultSorting="Name_JSTargetServerGroup" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID10" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSTargetServerGroups"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate10" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError10" Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+                                        
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSTargetServerGroupDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS TargetServers" x:Name="layoutGroupJSTargetServers" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSTargetServers" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSTargetServers_JobServersGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSTargetServers, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSTargetServersViewSource}}"
+                                        DefaultSorting="Name_JSTargetServer" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="JobServer_ID11"/>
+                                                <dxg:GridColumn FieldName="Name_JSTargetServer"/>
+                                                <dxg:GridColumn FieldName="EnlistDate"/>
+                                                <dxg:GridColumn FieldName="ID_TargetServer"/>
+                                                <dxg:GridColumn FieldName="LastPollDate"/>
+                                                <dxg:GridColumn FieldName="LocalTime"/>
+                                                <dxg:GridColumn FieldName="Location"/>
+                                                <dxg:GridColumn FieldName="PendingInstructions"/>
+                                                <dxg:GridColumn FieldName="PollingInterval"/>
+                                                <dxg:GridColumn FieldName="State"/>
+                                                <dxg:GridColumn FieldName="Status"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate11" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError11" Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSTargetServerDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS Jobs" x:Name="layoutGroupJSJobs" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobs" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fk_JSJobs_JobServersGridControl" 
+                                            DesignTimeDataObjectType="{Binding Path=JSJobs, Source={StaticResource applicationDataSet}}"                                  
+                                            ItemsSource="{Binding Source={StaticResource instancesJobServersJSJobsViewSource}}" 
+                                            DefaultSorting="Name_JSJob" >
+
+                                            <dxg:GridControl.Columns>
+
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID12" Visible="False" />
+                                                <dxg:GridColumn FieldName="JobServer_ID"/>
+                                                <dxg:GridColumn FieldName="Instance_ID" Name="gc_ID12a" />
+                                                <dxg:GridColumn FieldName="Name_Instance"/>
+                                                <dxg:GridColumn FieldName="Name_JSJob"/>
+                                                <dxg:GridColumn FieldName="Category"/>
+                                                <dxg:GridColumn FieldName="CurrentRunRetryAttempt"/>
+                                                <dxg:GridColumn FieldName="CurrentRunStatus"/>
+                                                <dxg:GridColumn FieldName="DateCreated"/>
+                                                <dxg:GridColumn FieldName="DateLastModified"/>
+                                                <dxg:GridColumn FieldName="Description"/>
+                                                <dxg:GridColumn FieldName="HasSchedule"/>
+                                                <dxg:GridColumn FieldName="HasServer"/>
+                                                <dxg:GridColumn FieldName="HasStep"/>
+                                                <dxg:GridColumn FieldName="IsEnabled"/>
+                                                <dxg:GridColumn FieldName="JobType"/>
+                                                <dxg:GridColumn FieldName="LastRunDate"/>
+                                                <dxg:GridColumn FieldName="LastRunOutcome"/>
+                                                <dxg:GridColumn FieldName="NextRunDate"/>
+                                                <dxg:GridColumn FieldName="NextScheduleRunId"/>
+                                                <dxg:GridColumn FieldName="OperatorsEmail"/>
+                                                <dxg:GridColumn FieldName="OriginatorsEmail"/>
+                                                <dxg:GridColumn FieldName="OwnerLoginName"/>
+                                                <dxg:GridColumn FieldName="StartStepID"/>
+                                                <dxg:GridColumn FieldName="VersionNumber"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate12" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError12" Visible="False"  />
+
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+                                        
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS Job Schedules" x:Name="layoutGroupJSJobSchedules" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobSchedules" MaxHeight="1200" VerticalAlignment="Top">
+
+
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobScheduleDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_Instances_ServersGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="JS JobSteps" x:Name="layoutGroupJSJobSteps" 
+                                    VerticalAlignment="Top"
+                                    MaxHeight="1200"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobSteps" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <dxg:GridControl x:Name="fK_JSJobSteps_JSJobsGridControl" 
+                                        DesignTimeDataObjectType="{Binding Path=JSJobSteps, Source={StaticResource applicationDataSet}}"                                  
+                                        ItemsSource="{Binding Source={StaticResource instancesJobServersJSJobsJSJobStepsViewSource}}"
+                                        DefaultSorting="Name_JSJobStep" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID14" Visible="False" />
+                                                <dxg:GridColumn FieldName="JSJob_ID"/>
+                                                <dxg:GridColumn FieldName="Name_JSJobStep"/>
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate14" Visible="False" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError14" Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView ShowFixedTotalSummary="True"/>
+                                            </dxg:GridControl.View>
+                                        </dxg:GridControl>
+                                        
+                                    </dxlc:LayoutItem>
+
+                                    <dxlc:LayoutItem Name="layoutItem_JSJobStepDetail" MaxHeight="1200" VerticalAlignment="Bottom" Height="130">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=fK_JSJobSteps_JSJobsGridControl}">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxlc:LayoutItem Label="SnapShotDate: ">
+                                                    <TextBlock Text="{Binding SnapShotDate}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="SnapShotError: ">
+                                                    <TextBlock Text="{Binding SnapShotError}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
+                                
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+
+                    </dxdo:LayoutPanel>
+
+                </dxdo:LayoutGroup>
+
+                <dxdo:DockLayoutManager.AutoHideGroups>
+
+                    <dxdo:AutoHideGroup Style="{StaticResource AdminAutoHideGroup}" >
+
+                        <dxdo:LayoutPanel x:Name="lp_DisplayOptions" Style="{StaticResource DisplayOptionsLayoutPanel}" 
+                                          LayoutUpdated="paneToolbox_LayoutUpdated"  >
+
+                            <ContentControl Template="{StaticResource DisplayOptionsControls}" />
+
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel x:Name="paneToolbox" Caption="Toolbox" ItemWidth="150" VerticalAlignment="Bottom" >
+
+                            <StackPanel>
+
+                                <ContentControl Template="{StaticResource AdminWindowToolBoxControlsTemplate}" />
+
+                                <TextBox Name="textBox_HeightHack" Text="130"/>
+                                
+                                <!--<Button x:Name="btnLoadFromXML" 
+                                Content="Load from XML File"
+                                Margin="2" Height="20" Width="Auto"
+                                Click="btnLoadFromXML_Click" />
+
+                                <Button x:Name="btnUpdateInfo" 
+                                Content="Fetch SMO Info"                     
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnUpdateInfo_Click" />
+
+                                <Button x:Name="btnUpdateServerInfo" Content="Sync Instance to Server"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnSyncInstanceToServer_Click" />
+
+                                <Button x:Name="btnSaveToXML" Content="Save To XML"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnSaveToXML_Click" />
+
+                                <Button x:Name="btnAddNewRow" Content="Add new row"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnAddNewRow_Click" />-->
+                            </StackPanel>
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                    <!--<dxdo:AutoHideGroup DockType="Right">
+
+                        <dxdo:LayoutPanel x:Name="paneExtendedProperties" Caption="Extended Properties" >
+                            <dxe:ComboBoxEdit HorizontalAlignment="Left" 
+                                              Name="comboBoxEdit1"
+                                              DisplayMember="Name" 
+                                              ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}"  
+                                              VerticalAlignment="Top" />
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>-->
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="layoutGroupFooter"
+                        VerticalAlignment="Top">
+            <Button Content="Provide Feedback" Click="OnSendFeedback_Click" />
+        </dxlc:LayoutGroup>
+
+    </dxlc:LayoutControl>
+    
+</dx:DXWindow>

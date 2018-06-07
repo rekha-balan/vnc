@@ -1,0 +1,19 @@
+﻿<dx:DXWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"       
+    xmlns:User_Controls="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    x:Class="EyeOnLife.User_Interface.Windows.SQLMonitorDBAdminMain"      
+    Title="SQLMonitorDBAdminMain" 
+    Height="768" Width="1024"   >
+    <Window.Resources>
+        <CollectionViewSource x:Key="serversViewSource" Source="{Binding}" />
+    </Window.Resources>
+
+    <Grid>
+
+        <User_Controls:wucEyeOnLifeAdminMain />
+
+    </Grid>
+</dx:DXWindow>

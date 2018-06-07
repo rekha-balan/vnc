@@ -1,0 +1,9 @@
+﻿<Window x:Class="SQLInformation.User_Interface.Windows.ExploreServers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uiuc="clr-namespace:SQLInformation.User_Interface.User_Controls"          
+        Title="ExploreServers"  Width="1000" Height="600">
+    <Grid>
+        <uiuc:wucServers />
+    </Grid>
+</Window>

@@ -110,6 +110,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\Prism\PrismLibrary\Source\Prism\Prism.csproj">
+      <Project>{362beb27-e66f-43f2-969d-33c9c5cffe33}</Project>
+      <Name>Prism</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>

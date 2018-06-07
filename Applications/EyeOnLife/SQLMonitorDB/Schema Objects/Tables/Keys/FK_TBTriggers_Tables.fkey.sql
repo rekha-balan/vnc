@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[TBTriggers]
+    ADD CONSTRAINT [FK_TBTriggers_Tables] FOREIGN KEY ([DBTable_ID]) REFERENCES [dbo].[DBTables] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

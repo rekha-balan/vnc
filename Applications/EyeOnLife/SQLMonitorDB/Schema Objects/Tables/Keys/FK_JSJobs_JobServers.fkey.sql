@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[JSJobs]
+    ADD CONSTRAINT [FK_JSJobs_JobServers] FOREIGN KEY ([JobServer_ID]) REFERENCES [dbo].[JobServers] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="SQLInformation.User_Interface.User_Controls.wucSQLMonitorAdminMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:my="clr-namespace:SQLInformation.Data"             
+             xmlns:my1="clr-namespace:SQLInformation.User_Interface.User_Controls"
+             d:DesignHeight="500" d:DesignWidth="1000" Loaded="UserControl_Loaded" >   
+    <DockPanel >
+        <Border DockPanel.Dock="Left" Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2" Background="White">
+            <StackPanel Width="150">
+                <my1:CylonEyeBall x:Name="cylonEyeBall1" HorizontalAlignment="Stretch" Margin="5"/>
+                <Button Name="btnInstances"
+                        Content="Instances" Height="30" Margin="5"
+                        Click="btnInstances_Click"/>
+                <Button Name="btnServers"
+                        Content="Servers" Height="30" Margin="5"
+                        Click="btnServers_Click"/>
+                <Button x:Name="btnDatabases"
+                	Content="Databases" Height="30" Margin="5"
+                	Click="btnDatabases_Click"/>
+            </StackPanel>
+        </Border>
+        <Border DockPanel.Dock="Right" Margin="0,5,5,5"
+                BorderBrush="Black"
+                BorderThickness="2" Background="White">
+            <DockPanel  Name="dpUserControlContainer" >
+                <!-- User Controls get loaded here -->
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</UserControl>

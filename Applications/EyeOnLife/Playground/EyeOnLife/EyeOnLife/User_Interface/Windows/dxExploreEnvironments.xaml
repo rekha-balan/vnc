@@ -1,0 +1,141 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.dxExploreEnvironments"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"  
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"   
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"   
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"     
+    Title="dxExploreEnvironments" Width="800" Height="600" Loaded="dxExploreEnvironments_Loaded_1"  >
+    <Window.Resources>
+        <localData:ApplicationDataSet x:Key="applicationDataSet"/>
+        <CollectionViewSource x:Key="serversViewSource" Source="Common.ApplicationDataSet.Servers">
+            <!--<CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="NetName" Direction="Ascending" />
+                <scm:SortDescription PropertyName="Environment" Direction="Ascending" />                
+            </CollectionViewSource.SortDescriptions>-->
+        </CollectionViewSource>        
+    </Window.Resources>
+    
+    <Grid dx:StyleManager.ApplyApplicationTheme="True"  DataContext="{StaticResource serversViewSource}" >
+        <dxdo:DockLayoutManager Margin="12" Name="dockManager1"  >
+            <dxdo:LayoutGroup Orientation="Horizontal" >
+                <dxdo:LayoutPanel x:Name="paneToolbox" Caption="Toolbox" ItemWidth="150"  >
+                    <!--Add custom controls to the pane here-->
+                </dxdo:LayoutPanel>
+                <dxdo:DocumentGroup>
+                    <dxdo:DocumentPanel x:Name="paneiDev" Caption="iDev" >
+                        <DataGrid x:Name="serversDataGrid1" 
+                            AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding}" 
+                            Margin="5" >
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="netNameColumn1" Binding="{Binding NetName}" Header="NetName" Width="SizeToCells" MinWidth="65"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="osVersionColumn" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="physicalMemoryColumn" Binding="{Binding PhysicalMemory}" Header="PhysicalMemory" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="processorsColumn" Binding="{Binding processors}" Header="Processors" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="platformColumn" Binding="{Binding platform}" Header="Platform" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="adDomainColumn1" Binding="{Binding ADDomain}" Header="AD Domain" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="environmentColumn1" Binding="{Binding Environment}" Header="Environment" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="securityZoneColumn1" Binding="{Binding SecurityZone}" Header="SecurityZone" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </dxdo:DocumentPanel>
+                    
+                    <dxdo:DocumentPanel x:Name="paneiTest" Caption="iTest">
+                        <DataGrid x:Name="serversDataGrid2" 
+                            AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding}" 
+                            Margin="5" >
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="netNameColumn2" Binding="{Binding NetName}" Header="NetName" Width="SizeToCells" MinWidth="65"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="osVersionColumn" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="physicalMemoryColumn" Binding="{Binding PhysicalMemory}" Header="PhysicalMemory" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="processorsColumn" Binding="{Binding processors}" Header="Processors" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="platformColumn" Binding="{Binding platform}" Header="Platform" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="adDomainColumn2" Binding="{Binding ADDomain}" Header="AD Domain" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="environmentColumn2" Binding="{Binding Environment}" Header="Environment" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="securityZoneColumn2" Binding="{Binding SecurityZone}" Header="SecurityZone" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </dxdo:DocumentPanel>
+                    
+                    <dxdo:DocumentPanel x:Name="paneStaging" Caption="Staging" >
+                        <DataGrid x:Name="serversDataGrid3" 
+                            AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding}" 
+                            Margin="5" >
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="netNameColumn3" Binding="{Binding NetName}" Header="NetName" Width="SizeToCells" MinWidth="65"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="osVersionColumn" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="physicalMemoryColumn" Binding="{Binding PhysicalMemory}" Header="PhysicalMemory" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="processorsColumn" Binding="{Binding processors}" Header="Processors" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="platformColumn" Binding="{Binding platform}" Header="Platform" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="adDomainColumn3" Binding="{Binding ADDomain}" Header="AD Domain" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="environmentColumn3" Binding="{Binding Environment}" Header="Environment" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="securityZoneColumn3" Binding="{Binding SecurityZone}" Header="SecurityZone" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </dxdo:DocumentPanel>
+                    
+                    <dxdo:DocumentPanel x:Name="paneProduction" Caption="Production">
+                        <DataGrid x:Name="serversDataGrid4" 
+                            AutoGenerateColumns="False" 
+                            EnableRowVirtualization="True" 
+                            ItemsSource="{Binding}" 
+                            Margin="5" >
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="netNameColumn4" Binding="{Binding NetName}" Header="NetName" Width="SizeToCells" MinWidth="65"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn" Binding="{Binding State}" Header="State" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="osVersionColumn" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="physicalMemoryColumn" Binding="{Binding PhysicalMemory}" Header="PhysicalMemory" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="processorsColumn" Binding="{Binding processors}" Header="Processors" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="platformColumn" Binding="{Binding platform}" Header="Platform" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="adDomainColumn4" Binding="{Binding ADDomain}" Header="AD Domain" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="environmentColumn4" Binding="{Binding Environment}" Header="Environment" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="securityZoneColumn4" Binding="{Binding SecurityZone}" Header="SecurityZone" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </dxdo:DocumentPanel>                 
+                </dxdo:DocumentGroup>
+            </dxdo:LayoutGroup>
+            <!--Create an auto-hidden pane-->
+            <dxdo:DockLayoutManager.AutoHideGroups>
+                <dxdo:AutoHideGroup DockType="Right">
+                    <dxdo:LayoutPanel x:Name="paneProperties" Caption="Properties" >
+                        <dxe:ComboBoxEdit HorizontalAlignment="Left" 
+                                          Name="comboBoxEdit1"
+                                          DisplayMember="Name" 
+                                          ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}"  
+                                          VerticalAlignment="Top" />
+                    </dxdo:LayoutPanel>
+                </dxdo:AutoHideGroup>
+            </dxdo:DockLayoutManager.AutoHideGroups>
+            <!--Create a floating pane-->
+            <dxdo:DockLayoutManager.FloatGroups>
+                <dxdo:FloatGroup FloatSize="200,200" FloatLocation="200,100">
+                    <dxdo:LayoutPanel x:Name="paneMessages" Caption="Messages">
+                        <RichTextBox />
+                    </dxdo:LayoutPanel>
+                </dxdo:FloatGroup>
+            </dxdo:DockLayoutManager.FloatGroups>
+
+        </dxdo:DockLayoutManager>
+
+    </Grid>
+    
+</dx:DXWindow>

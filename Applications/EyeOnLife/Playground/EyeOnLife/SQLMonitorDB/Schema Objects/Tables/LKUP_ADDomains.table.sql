@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[LKUP_ADDomains]
+(
+	[ID] INT NOT NULL PRIMARY KEY, 
+    [ADDomainName] VARCHAR(50) NOT NULL
+)

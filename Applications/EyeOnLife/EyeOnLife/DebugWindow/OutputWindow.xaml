@@ -1,0 +1,31 @@
+﻿<Window x:Class="DebugHelp.OutputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DebugWindow" Height="400" Width="600" Closing="Window_Closing_1" Closed="Window_Closed_1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Image Grid.Row="0" Grid.Column="0" Source="/Resources/Images/WatchWindow.bmp" />        
+        
+        <StackPanel
+            Grid.Column="0" Grid.Row="1">
+            <Button Content="Clear" Click="OnClear_Click"/>
+            <Button Content="Button2"/>
+        </StackPanel>
+        
+        <TextBox x:Name="tbOutput"
+            Grid.Column="1" Grid.Row="1"
+            TextWrapping="Wrap" FontFamily="Courier New" FontSize="12" ScrollViewer.CanContentScroll="True" 
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+
+
+    </Grid>
+</Window>

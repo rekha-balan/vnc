@@ -1,0 +1,20 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/WaitIndicators.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/ScrollBars.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/ExpandButtons.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/ColumnHeaderDragIndicator.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/GridControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/CardTemplates.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/CardView.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/GridItemsContainer.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/GridView.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/Rows.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/GridCard.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/ColumnHeader.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/TotalSummary.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/RowIndicator.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/TreeListIndentItems.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Grid/NewTheme/LookUpEdit.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

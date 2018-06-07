@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[JSJobSteps]
+(
+	[ID] UNIQUEIDENTIFIER NOT NULL DEFAULT (newid()), 
+    [JSJob_ID] UNIQUEIDENTIFIER NULL, 
+
+	[Name_JSJobStep] VARCHAR(256) NULL,
+
+	[DatabaseName] VARCHAR(256) NULL,
+	[DatabaseUserName] VARCHAR(256) NULL,
+	[LastRunDate] DATETIME2 NULL,
+	[LastRunDuration] INT NULL,
+	[LastRunOutcome] VARCHAR(256) NULL,
+	[LastRunRetries] INT NULL,
+	[ProxyName] VARCHAR(256) NULL,
+	[Server] VARCHAR(256) NULL,
+    [SnapShotDate] DATETIME NULL, 
+    [SnapShotError] VARCHAR(256) NULL,
+
+    CONSTRAINT [PK_JSJobSteps] PRIMARY KEY NONCLUSTERED ([ID]),
+	CONSTRAINT [FK_JSJobSteps_JSJobs] FOREIGN KEY ([JSJob_ID]) REFERENCES [dbo].[JSJobs] ([ID]) ON DELETE CASCADE
+)
+
+
+GO
+
+CREATE INDEX [IX_JSJobSteps_JSJob_ID] ON [dbo].[JSJobSteps] ([JSJob_ID])

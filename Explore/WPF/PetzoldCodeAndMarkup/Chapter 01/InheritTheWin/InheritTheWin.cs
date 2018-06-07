@@ -27,23 +27,39 @@ namespace Petzold.InheritTheWin
             // TODO(crhodes)
             // Redo this with reflection and dump all SystemParameters
 
-
+            double DPI = 1.0 / 96.0;
             sb.AppendFormat("SystemParameters\n");
-            sb.Append(GetSystemParameters());
-            //sb.AppendFormat("  FullPrimaryScreenHeight ({0})", SystemParameters.FullPrimaryScreenHeight);
-            //sb.AppendFormat("  FullPrimaryScreenWidth ({0})", SystemParameters.FullPrimaryScreenWidth);
-            //sb.AppendFormat("  MaximizedPrimaryScreenHeight ({0})", SystemParameters.MaximizedPrimaryScreenHeight);
-            //sb.AppendFormat("  MaximizedPrimaryScreenWidth ({0})", SystemParameters.MaximizedPrimaryScreenWidth);
-            //sb.AppendFormat("  MinimizedWindowHeight ({0})", SystemParameters.MinimizedWindowHeight);
-            //sb.AppendFormat("  MinimizedWindowWidth ({0})", SystemParameters.MinimizedWindowWidth);
-            //sb.AppendFormat("  MinimumWindowHeight ({0})", SystemParameters.MinimumWindowHeight);
-            //sb.AppendFormat("  MinimumWindowWidth ({0})", SystemParameters.MinimumWindowWidth);
+            //sb.Append(GetSystemParameters());
+            sb.AppendFormat("  FullPrimaryScreenHeight      ({0}) ({1})\n",
+                SystemParameters.FullPrimaryScreenHeight, SystemParameters.FullPrimaryScreenHeight * DPI);
+            sb.AppendFormat("  FullPrimaryScreenWidth       ({0}) ({1})\n", 
+                SystemParameters.FullPrimaryScreenWidth, SystemParameters.FullPrimaryScreenWidth * DPI);
+            sb.AppendFormat("  MaximizedPrimaryScreenHeight ({0}) ({1})\n",
+                SystemParameters.MaximizedPrimaryScreenHeight, SystemParameters.MaximizedPrimaryScreenHeight * DPI);
+            sb.AppendFormat("  MaximizedPrimaryScreenWidth  ({0}) ({1})\n", 
+                SystemParameters.MaximizedPrimaryScreenWidth, SystemParameters.MaximizedPrimaryScreenWidth * DPI);
+            sb.AppendFormat("  MinimizedWindowHeight        ({0}) ({1})\n", 
+                SystemParameters.MinimizedWindowHeight, SystemParameters.MinimizedWindowHeight * DPI);
+            sb.AppendFormat("  MinimizedWindowWidth         ({0}) ({1})\n", 
+                SystemParameters.MinimizedWindowWidth, SystemParameters.MinimizedWindowWidth * DPI);
+            sb.AppendFormat("  MinimumWindowHeight          ({0}) ({1})\n", 
+                SystemParameters.MinimumWindowHeight, SystemParameters.MinimumWindowHeight * DPI);
+            sb.AppendFormat("  MinimumWindowWidth           ({0}) ({1})\n", 
+                SystemParameters.MinimumWindowWidth, SystemParameters.MinimumWindowWidth * DPI);
+            sb.AppendLine();
+            sb.AppendFormat("  WorkArea.Top                 ({0})\n", SystemParameters.WorkArea.Top);
+            sb.AppendFormat("  WorkArea.Right               ({0})\n", SystemParameters.WorkArea.Right);
+            sb.AppendFormat("  WorkArea.Bottom              ({0})\n", SystemParameters.WorkArea.Bottom);
+            sb.AppendFormat("  WorkArea.Left                ({0})\n", SystemParameters.WorkArea.Left);
+            sb.AppendFormat("  WorkArea.Width               ({0})\n", SystemParameters.WorkArea.Width);
+            sb.AppendFormat("  WorkArea.Height              ({0})\n", SystemParameters.WorkArea.Height);
+            sb.AppendFormat("  WorkArea.TopLeft             ({0},{1})\n", SystemParameters.WorkArea.TopLeft.X, SystemParameters.WorkArea.TopLeft.Y);
+            sb.AppendFormat("  WorkArea.BottomRight         ({0},{1})\n", SystemParameters.WorkArea.BottomRight.X, SystemParameters.WorkArea.BottomRight.Y);
 
+            // This should be 6" * 4"
 
-            // This should be 3" * 2"
-
-            Width = 288;
-            Height = 192;
+            Width = 576;
+            Height = 384;
 
             // Default is 1/96" per pixel
 
@@ -51,6 +67,27 @@ namespace Petzold.InheritTheWin
             //Height = 100 * Math.E;
             //Left = 500;
             //Top = 100;
+
+            // Put in lower Right corner
+
+            Left = SystemParameters.PrimaryScreenWidth - Width;
+            Top = SystemParameters.PrimaryScreenHeight - Height;
+
+            // Put in lower Right corner of work area
+
+            Left = SystemParameters.WorkArea.Width - Width;
+            Top = SystemParameters.WorkArea.Height - Height;
+
+            // Put in Upper Right corner
+
+            Left = SystemParameters.WorkArea.Width - Width;
+            Top = 0;
+
+            // Put in Upper Right corner of work area
+
+            //Left = SystemParameters.WorkArea.Width - Width;
+            Top = SystemParameters.WorkArea.Top;
+
             Content = sb.ToString();
         }
 

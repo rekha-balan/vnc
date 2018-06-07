@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EyeOnLife xmlns="" >
+  <DBInstanceList>
+    <Environment Name="Production">
+      <Instance Server="LPSQLIA01CV1" IPV4Address="" Name="ODS01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLIB03CV1" IPV4Address="" Name="WFAPP01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI03V" IPV4Address="" Name="DSAPP01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+      <Instance Server="LPSQLI03V" IPV4Address="" Name="ODS02" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI04V" IPV4Address="" Name="RPTDM01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+      <Instance Server="LPSQLI04V" IPV4Address="" Name="RPTDM02" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI05V" IPV4Address="" Name="DS3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <!--<Instance Server="LPSQLI06V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI07V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI08V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI09V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />-->
+
+      <Instance Server="LPSQLI10V" IPV4Address="" Name="SSISLEGACY" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI11V" IPV4Address="" Name="DSAPP02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+      <Instance Server="LPSQLI11V" IPV4Address="" Name="SSRS01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <!--<Instance Server="LPSQLIRPT01V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLIRPT02V" IPV4Address="" Name="" Port="" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />-->
+
+      <Instance Server="LPSQLI15V" IPV4Address="" Name="ITO3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI17V" IPV4Address="" Name="DISTAPP01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI18V" IPV4Address="0" Name="SSIS06" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLI34V" IPV4Address="" Name="DRDB01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQL32V" IPV4Address="" Name="EXCPN2005" Port="1530" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQL34V" IPV4Address="" Name="EXCPN2000" Port="1433" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+    </Environment>
+    
+    <Environment Name="Production-DMZ">
+      <Instance Server="LPSQLZ22CV1" IPV4Address="" Name="DISTAPP02" Port="1630" ADDomain="LIFE.PLSERVICES.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLZ24V" IPV4Address="" Name="DS3P02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLZ27V" IPV4Address="" Name="TFS01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLZ01V" IPV4Address="" Name="EXCPN2000" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LPSQLZ02V" IPV4Address="" Name="EXCPN2005" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Production-Internal" SecurityZone="Internal" />
+    </Environment>
+    
+    <Environment Name="Staging">
+      <Instance Server="LSSQLIA03CV1" IPV4Address="" Name="ODS01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLIB01CV1" IPV4Address="" Name="WFAPP01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI03V" IPV4Address="" Name="ODS02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <Instance Server="LSSQLI03V" IPV4Address="" Name="DSAPP01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LSSQLI04V" IPV4Address="" Name="RPTDM01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <Instance Server="LSSQLI04V" IPV4Address="" Name="RPTDM02" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LSSQLI05V" IPV4Address="" Name="DS3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI06V" IPV4Address="" Name="SSIS01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI07V" IPV4Address="" Name="SSIS02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI08V" IPV4Address="" Name="SSIS03" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI09V" IPV4Address="" Name="SSIS04" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI10V" IPV4Address="" Name="SSISLEGACY" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI11V" IPV4Address="" Name="DSAPP02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <Instance Server="LSSQLI11V" IPV4Address="" Name="SSRS01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLIRPT01LV" IPV4Address="" Name="SSRS" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <Instance Server="LSSQLIRPT02LV" IPV4Address="" Name="SSRS" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI14V" IPV4Address="" Name="ITOAPP01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI15V" IPV4Address="" Name="ITO3P01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI16V" IPV4Address="" Name="ITO3P01NE" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI17V" IPV4Address="" Name="DISTAPP01" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI18V" IPV4Address="" Name="SSIS06" Port="1631" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLG13CV" IPV4Address="" Name="MISC3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <Instance Server="LSSQLG14CV" IPV4Address="" Name="MISC3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI18V" IPV4Address="" Name="ESSBASE01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLI19V" IPV4Address="" Name="ESSBASE02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />     
+
+      <Instance Server="LSSQLI17CV" IPV4Address="" Name="DIST3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <!--<Instance Server="LSSQLI18CV" IPV4Address="" Name="DIST3P01" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />-->
+
+      <Instance Server="LSSQLI32V" IPV4Address="" Name="EXCPN2005" Port="1530" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LSSQLI233V" IPV4Address="" Name="" Port="1433" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LSSQLJ19CV" IPV4Address="" Name="MISC3P02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />
+      <!--<Instance Server="LSSQLJ20CV" IPV4Address="" Name="MISC3P02" Port="1630" ADDomain="LIFE.PACIFICLIFE.NET" Environment="Staging-Internal" SecurityZone="Internal" />-->
+    </Environment>
+    
+    <Environment Name="Staging-DMZ">
+      <Instance Server="LSSQLZ01V" IPV4Address="" Name="EXCPN2000" Port="1630" ADDomain="LIFE.PLSERVICES.NET" Environment="Staging-DMZ" SecurityZone="DMZ2" />
+      <Instance Server="LSSQLZ02V" IPV4Address="" Name="EXCPN2005" Port="1630" ADDomain="LIFE.PLSERVICES.NET" Environment="Staging-DMZ" SecurityZone="DMZ2" />
+
+      <Instance Server="LSSQLZ22CV1" IPV4Address="" Name="DISTAPP02" Port="1630" ADDomain="LIFE.PLSERVICES.NET" Environment="Staging-DMZ" SecurityZone="DMZ2" />
+      
+      <Instance Server="LSSQLZ24V" IPV4Address="" Name="DS3P02" Port="1630" ADDomain="LIFE.PLSERVICES.NET" Environment="Staging-DMZ" SecurityZone="DMZ2" />
+      
+      <Instance Server="LSSQLZ25V" IPV4Address="" Name="SSIS" Port="" ADDomain="LIFE.PLSERVICES.NET" Environment="Staging-DMZ" SecurityZone="DMZ2" />
+      
+    </Environment>
+    
+    <Environment Name="iTest">
+      <Instance Server="LTSQLI01V" IPV4Address="" Name="SQL2KPROJ01" Port="1430" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI01V" IPV4Address="" Name="SQL2KPROJ02" Port="1431" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI02V" IPV4Address="" Name="SQL2K5PROJ01" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI02V" IPV4Address="" Name="SQL2K5PROJ02" Port="1531" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI03V" IPV4Address="" Name="SQL2KREL01" Port="1430" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI03V" IPV4Address="" Name="SQL2KREL02" Port="1431" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI07V" IPV4Address="" Name="SQL2K5SSRS01" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI08V" IPV4Address="" Name="SQL2K5SSIS01" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI08V" IPV4Address="" Name="SQL2K5ETL" Port="1531" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI11V" IPV4Address="" Name="SQL2K5SSISPROJ01" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI12V" IPV4Address="" Name="SQL2K5SSISPROJ02" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI13V" IPV4Address="" Name="SQL2K5SSISPROJ03" Port="1530" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI13V" IPV4Address="" Name="SQL2K5PROJ04" Port="1531" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI16V" IPV4Address="" Name="SQL2K8PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI17V" IPV4Address="" Name="SQL2K8REL01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI17V" IPV4Address="" Name="SQL2K8REL02" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI18V" IPV4Address="" Name="SQL2K8REL01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI18V" IPV4Address="" Name="SQL2K8REL02" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI19V" IPV4Address="" Name="SQL2K8SSIS01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI20V" IPV4Address="" Name="SQL2K8SSRS01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI21V" IPV4Address="" Name="SQL2K8PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI22V" IPV4Address="" Name="SQL2K8SSRS01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI23V" IPV4Address="" Name="SQL2K8PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI24V" IPV4Address="" Name="SQL2K8SSISPROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI25V" IPV4Address="" Name="SQL2K8PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI26V" IPV4Address="" Name="SQL2K8PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI27V" IPV4Address="" Name="PROJ01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI27V" IPV4Address="" Name="PROJ02" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI28V" IPV4Address="" Name="PROJ03" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI28V" IPV4Address="" Name="REG01" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI31V" IPV4Address="" Name="ODS01" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI32V" IPV4Address="" Name="DSAPP01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI32V" IPV4Address="" Name="ODS02" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI33V" IPV4Address="" Name="RPTDM01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI33V" IPV4Address="" Name="RPTDM02" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI34V" IPV4Address="" Name="SSIS01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI35V" IPV4Address="" Name="DS3P01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI36V" IPV4Address="" Name="SSIS03" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLIRPT01V" IPV4Address="" Name="" Port="" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI38V" IPV4Address="" Name="SSIS05" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI39V" IPV4Address="" Name="DSAPP02" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI39V" IPV4Address="" Name="SSRS01" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI40V" IPV4Address="" Name="ITOAP01" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI41V" IPV4Address="" Name="ITO3P01" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI42V" IPV4Address="" Name="ITO3P01NE" Port="" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI43V" IPV4Address="" Name="DISTAPP01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI44V" IPV4Address="" Name="SSIS06" Port="" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI45V" IPV4Address="" Name="SSIS07" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      
+      <Instance Server="LTSQLI46V" IPV4Address="" Name="WFAPP01" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI47V" IPV4Address="" Name="DCMREL07A" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI47V" IPV4Address="" Name="DCMREL07B" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI48V" IPV4Address="" Name="DCMREL08A" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+      <Instance Server="LTSQLI48V" IPV4Address="" Name="DCMREL08B" Port="1631" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI49V" IPV4Address="" Name="SSIS08" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+      <Instance Server="LTSQLI50V" IPV4Address="" Name="SSIS09" Port="1630" ADDomain="TSTLIFEINT.TSTPL01.NET" Environment="iTest-Internal" SecurityZone="Internal" />
+
+    </Environment>
+    
+    <Environment Name="iTest-DMZ">
+      <Instance Server="LTSQLZ02V" IPV4Address="" Name="SQL2K5PROJ01" Port="1540" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      <Instance Server="LTSQLZ02V" IPV4Address="" Name="SQL2K5PROJ02" Port="1541" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+
+      <Instance Server="LTSQLZ03V" IPV4Address="" Name="SQL2KREL01" Port="1440" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      <Instance Server="LTSQLZ03V" IPV4Address="" Name="SQL2KREL02" Port="1441" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+
+      <Instance Server="LTSQLZ27V" IPV4Address="" Name="PROJ01" Port="1630" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      <Instance Server="LTSQLZ27V" IPV4Address="" Name="PROJ02" Port="1631" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      
+      <Instance Server="LTSQLZ28V" IPV4Address="" Name="PROJ03" Port="1630" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      <Instance Server="LTSQLZ28V" IPV4Address="" Name="REG01" Port="1631" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      
+      <Instance Server="LTSQLZ47V" IPV4Address="" Name="DISTAPP02" Port="1630" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+      
+      <Instance Server="LTSQLZ48V" IPV4Address="" Name="DS3P02" Port="1630" ADDomain="TSTLIFEDMZ2.TSTPLSVRS01.NET" Environment="iTest-DMZ" SecurityZone="DMZ2" />
+
+    </Environment>
+    
+    <Environment Name="iDev">
+      <Instance Server="LDSQLI01V" IPV4Address="" Name="SQL2KPDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI01V" IPV4Address="" Name="SQL2KPDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI06V" IPV4Address="" Name="SQL2K5PROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI06V" IPV4Address="" Name="SQL2K5PROJ02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI07V" IPV4Address="" Name="SQL2KREL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI07V" IPV4Address="" Name="SQL2KREL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI08V" IPV4Address="" Name="SQL2K5REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI08V" IPV4Address="" Name="SQL2K5REL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI10V" IPV4Address="" Name="SQL2K5SSIS01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI10V" IPV4Address="" Name="SQL2K5ETL" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI12V" IPV4Address="" Name="SQL2K8PDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI12V" IPV4Address="" Name="SQL2K8PDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />      
+      
+      <Instance Server="LDSQLI14V" IPV4Address="" Name="SQL2K5SSISPROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI15V" IPV4Address="" Name="SQL2K5SSISPROJ02" Port="" ADDomain="" Environment="" SecurityZone="" />      
+            
+      <Instance Server="LDSQLI19V" IPV4Address="" Name="SQL2K8REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI19V" IPV4Address="" Name="SQL2K8REL02" Port="" ADDomain="" Environment="" SecurityZone="" />  
+      
+      <Instance Server="LDSQLI20V" IPV4Address="" Name="SQL2K8REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI20V" IPV4Address="" Name="SQL2K8REL02" Port="" ADDomain="" Environment="" SecurityZone="" />  
+            
+      <Instance Server="LDSQLI21V" IPV4Address="" Name="SQL2K8SSISPROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI22V" IPV4Address="" Name="SQL2K8SSISREL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI23V" IPV4Address="" Name="SQL2K8PROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI24V" IPV4Address="" Name="SQL2K8SSISPROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI25V" IPV4Address="" Name="SQL2K8SSRS01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI26V" IPV4Address="" Name="SQL2K8INST01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI27V" IPV4Address="" Name="SQL2K8PROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI30V" IPV4Address="" Name="PDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI30V" IPV4Address="" Name="PDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI31V" IPV4Address="" Name="DEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI31V" IPV4Address="" Name="PROJ03" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI32V" IPV4Address="" Name="PROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI32V" IPV4Address="" Name="PROJ02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI33V" IPV4Address="" Name="REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLI33V" IPV4Address="" Name="REL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+          
+      <Instance Server="LDSQLI34V" IPV4Address="" Name="SSIS01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI35V" IPV4Address="" Name="SSIS06" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI36V" IPV4Address="" Name="SSIS03" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLI38V" IPV4Address="" Name="SSIS05" Port="" ADDomain="" Environment="" SecurityZone="" />
+
+    </Environment>
+    
+    <Environment Name="iDev-DMZ">
+      <Instance Server="LDSQLZ02V" IPV4Address="" Name="SQL2K5PDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ02V" IPV4Address="" Name="SQL2K5PDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ07V" IPV4Address="" Name="SQL2KREL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ07V" IPV4Address="" Name="SQL2KREL02" Port="" ADDomain="" Environment="" SecurityZone="" />   
+      
+      <Instance Server="LDSQLZ08V" IPV4Address="" Name="SQL2K5REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ08V" IPV4Address="" Name="SQL2K5REL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ09V" IPV4Address="" Name="SQL2K8REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ09V" IPV4Address="" Name="SQL2K8REL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ10V" IPV4Address="" Name="SQL2K8REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ10V" IPV4Address="" Name="SQL2K8REL02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ11V" IPV4Address="" Name="SQL2K8SSIS01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ12V" IPV4Address="" Name="SQL2K8SSRS01" Port="" ADDomain="" Environment="" SecurityZone="" />      
+            
+      <Instance Server="LDSQLZ30V" IPV4Address="" Name="PDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ30V" IPV4Address="" Name="PDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />  
+      
+      <Instance Server="LDSQLZ30V" IPV4Address="" Name="PDEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ30V" IPV4Address="" Name="PDEV02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ31V" IPV4Address="" Name="DEV01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ31V" IPV4Address="" Name="DEV02" Port="" ADDomain="" Environment="" SecurityZone="" />
+      
+      <Instance Server="LDSQLZ32V" IPV4Address="" Name="PROJ01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ32V" IPV4Address="" Name="PROJ02" Port="" ADDomain="" Environment="" SecurityZone="" />
+    
+      <Instance Server="LDSQLZ33V" IPV4Address="" Name="REL01" Port="" ADDomain="" Environment="" SecurityZone="" />
+      <Instance Server="LDSQLZ33V" IPV4Address="" Name="REL02" Port="" ADDomain="" Environment="" SecurityZone="" />      
+      
+    </Environment>
+    
+    <Environment Name="VNC">
+      <!--<Instance Server="MATRIX" IPV4Address="" Name="" Port="" />
+      <Instance Server="PARTHENON" IPV4Address=""  Name="" Port="" />
+      <Instance Server="PARTHENON" IPV4Address=""  Name="SHAREPOINT" Port="" />
+      <Instance Server="TRON" IPV4Address=""  Name="" Port="" />-->
+      <!--<Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="" />
+      <Instance Server="" IPV4Address="10.0.0.5"  Name="NNN" Port="" />
+      <Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="PPP" />-->
+    </Environment>
+  
+  </DBInstanceList>
+
+</EyeOnLife>

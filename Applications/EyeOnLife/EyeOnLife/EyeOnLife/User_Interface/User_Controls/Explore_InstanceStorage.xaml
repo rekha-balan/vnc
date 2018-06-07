@@ -1,0 +1,857 @@
+﻿<uiuc:wucDX_Base
+    x:Class="EyeOnLife.User_Interface.User_Controls.Explore_InstanceStorage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+    mc:Ignorable="d"
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"    
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"      
+    
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:ui="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    xmlns:uiw="clr-namespace:EyeOnLife.User_Interface.Windows"
+    
+    Title="Instance-Database Storage Explorer" FontSize="16"
+    d:DesignWidth="800" d:DesignHeight="500"    
+    Loaded="OnLoaded" SizeChanged="OnSizeChanged" >
+
+    <uiuc:wucDX_Base.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+
+        <CollectionViewSource x:Key="adDomains" />
+        <CollectionViewSource x:Key="environments" Source="{Binding Path=LKUP_Environments, Source={StaticResource applicationDataSet}}" />
+        <CollectionViewSource x:Key="securityZones" />
+
+        <Style x:Key="BoldFontLabelStyle" TargetType="dxlc:LayoutItemLabel">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+    </uiuc:wucDX_Base.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+        Orientation="Vertical"
+        Background="Transparent"
+        VerticalAlignment="Stretch" >
+
+        <dxlc:LayoutControl.AvailableItems>
+
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+
+            <dxlc:LayoutGroup Name="lg_BreadCrumb"
+                DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Instances}"                 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                ItemSpace="30">
+
+                <dxlc:LayoutItem Label="Server:" Visibility="Visible">
+                    <TextBlock Text="{Binding Path=NetName}" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Visibility="Visible">
+                    <TextBlock Text="{Binding Path=ADDomain}" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Visibility="Visible">
+                    <TextBlock Text="{Binding Path=Environment}" />
+                </dxlc:LayoutItem>
+                
+                <dxlc:LayoutItem Label="Instance" >
+                    <TextBlock Text="{Binding Path=Name_Instance}" />
+                </dxlc:LayoutItem>
+
+                <!--
+                    This is for when pick a specific database on Database tab.
+                -->
+                <dxlc:LayoutItem Label="Database:"
+                                 DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" >
+                    <TextBlock Text="{Binding Path=Name_Database}" />
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup 
+                Orientation="Vertical" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" >
+
+                <RadioButton Content="Show as Tabs" Name="checkShowAsTabs"
+                             IsChecked="True" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+                <RadioButton Content="Show as Group Boxes" Name="checkShowAsGroupBoxes" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Body" >
+
+            <dxdo:DockLayoutManager Name="lg_Body_dlm" 
+                dx:StyleManager.ApplyApplicationTheme="True"             
+                FontSize="12" >
+
+                <dxdo:LayoutGroup Name="lg_Body_dlm_layoutGroup">
+
+                    <dxdo:LayoutPanel Style="{StaticResource FixedLayoutPanel}" >
+
+                        <dxlc:LayoutControl 
+                            Orientation="Vertical"
+                            StretchContentVertically="False" 
+                            Background="Transparent">
+
+                            <dxlc:LayoutGroup Name="groupContainer" 
+                                              Orientation="Vertical" 
+                                              View="Tabs" >
+
+                                <dxlc:LayoutGroup.GroupBoxStyle>
+                                    <Style TargetType="dxlc:GroupBox">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="TitleVisibility" Value="Collapsed" />
+                                    </Style>
+                                </dxlc:LayoutGroup.GroupBoxStyle>
+
+                                <dxlc:LayoutGroup Header="Instances" Name="lg_Instances"
+                                    VerticalAlignment="Top"
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="False"  >
+
+                                    <ContentControl Name="cc_DisplayOptions2"
+                                        Template="{StaticResource DisplayOptionsControls_Instance}" 
+                                        VerticalAlignment="Top" />
+
+                                    <dxlc:LayoutControl Name="lc_InstancesGrid" Style="{StaticResource LayoutControlStyle_Grid}" >
+
+                                        <dxg:GridControl Name="gc_Instances"
+                                            Height="500"
+                                            Style="{StaticResource GridControlStyle}"                                                          
+
+                                            DefaultSorting="Name_Instance" 
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText" 
+                                            CustomUnboundColumnData="CustomUnboundColumnData" >                                                         
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="SnapShotErrorIndicator" UnboundType="Object"
+                                                            CellTemplate="{StaticResource IconCellTemplate}" Visible="True" Fixed="Left" Width="8" />
+
+                                                <dxg:GridColumn FieldName="Name_Instance" Fixed="Left" Name="gridColumn3a" Visible="True" Style="{StaticResource Header_Name_Instance}"/>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID2" Fixed="Left" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="NetName" Name="gc_NetName2"  Style="{StaticResource Header_NetName}" Fixed="Left" Visible="True" />
+                                                <dxg:GridColumn FieldName="Server_ID" Name="gc_ID2a"  Fixed="Left"  Visible="False" />
+                                                
+                                                <dxg:GridColumn FieldName="Port" Name="gc_Port" Style="{StaticResource Header_Port}" Visible="True" Fixed="Left" />
+
+                                                <dxg:GridColumn FieldName="IsMonitored" Name="gc_IsMonitored2" Style="{StaticResource Header_IsMonitored}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ADDomain" Name="gc_ADDomain" Style="{StaticResource Header_ADDomain}" />
+
+                                                <dxg:GridColumn FieldName="Environment" Name="gc_Environment" Style="{StaticResource Header_Environment}" />
+
+                                                <dxg:GridColumn FieldName="SecurityZone" Name="gc_SecurityZone" Style="{StaticResource Header_SecurityZone}" />
+
+                                                <dxg:GridColumn FieldName="IsClustered" Name="gc_IsClustered" Style="{StaticResource Header_IsClustered}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="BrowserStartMode" Name="gc_BrowserStartMode" Style="{StaticResource Header_BrowserStartMode}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Collation" Name="gc_Collation" Style="{StaticResource Header_Collation}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Edition" Name="gc_Edition" Style="{StaticResource Header_Edition}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Version" Name="gc_Version" Style="{StaticResource Header_Version}" Visible="False" />
+                                                <dxg:GridColumn FieldName="ProductLevel" Name="gc_ProductLevel" Style="{StaticResource Header_ProductLevel}" Visible="False" />
+                                                <dxg:GridColumn FieldName="EngineEdition" Name="gc_EngineEdition" Style="{StaticResource Header_EngineEdition}" Visible="False" />
+                                               
+                                                <dxg:GridColumn FieldName="OSVersion" Name="gc_OSVersion2" Visible="False" Style="{StaticResource Header_OSVersion}" />
+                                                <dxg:GridColumn FieldName="PerfMonMode" Name="gc_PerfMonMode" Style="{StaticResource Header_PerfMonMode}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="PhysicalMemory" Name="gc_PhysicalMemory2" Visible="False" Style="{StaticResource Header_PhysicalMemory}" >
+                                                    <dxg:GridColumn.EditSettings>
+                                                        <dxe:TextEditSettings DisplayFormat="N" />
+                                                    </dxg:GridColumn.EditSettings>
+                                                </dxg:GridColumn>
+
+                                                <dxg:GridColumn FieldName="Platform" Name="gc_Platform2"  Style="{StaticResource Header_Platform}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="Processors" Name="gc_Processors2" Style="{StaticResource Header_Processors}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Product" Name="gc_Product" Style="{StaticResource Header_Product}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="ServiceName" Name="ServiceName" Style="{StaticResource Header_ServiceName}" Visible="False" />
+                                                <dxg:GridColumn FieldName="ServiceInstanceId" Name="ServiceInstanceId" Visible="False" />
+                                                <dxg:GridColumn FieldName="ServiceAccount" Name="ServiceAccount" Style="{StaticResource Header_ServiceAccount}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Status" Name="Status" Style="{StaticResource Header_Status}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="Notes" Name="gc_Notes" Style="{StaticResource Header_Notes}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate2" Visible="False"  
+                                                                Style="{StaticResource Header_SnapShotDate}"                                                                
+                                                            EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotDuration" Name="gc_SnapShotDuration2" Visible="False"  
+                                                                Style="{StaticResource Header_SnapShotDuration}" />
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError2" Visible="False"  
+                                                                Style="{StaticResource Header_SnapShotError}" />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView2"                                                     
+                                                               Style="{StaticResource TableViewStyle}"/>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutControl VerticalAlignment="Bottom" Name="lc_InstanceDetail">
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal"
+                                            DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Instances}">
+
+                                            <dxlc:LayoutControl Style="{StaticResource SnapShotDetails}" >
+
+                                                <ContentControl Template="{StaticResource SnapShotControlsTemplate}" />
+
+                                                <dxlc:LayoutItem Label="IsMonitored: ">
+                                                    <TextBlock Text="{Binding IsMonitored}"  />
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <!--<dxlc:LayoutItem Label="BrowserStartMode: ">
+                                                    <TextBlock Text="{Binding BrowserStartMode}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="Collation: ">
+                                                    <TextBlock Text="{Binding Collation}"  />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="EngineEdition: ">
+                                                    <TextBlock Text="{Binding EngineEdition}"  />
+                                                </dxlc:LayoutItem>-->
+
+                                            </dxlc:LayoutControl>
+
+                                        </dxlc:LayoutGroup>
+
+                                    </dxlc:LayoutControl>
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Databases" Name="lg_Databases"    
+                                    VerticalAlignment="Top"
+                                    View="Group"
+                                    Orientation="Vertical"
+                                    IsCollapsible="True"
+                                    IsCollapsed="False" 
+                                    DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Instances}" >
+
+                                    <ContentControl Name="cc_DisplayOptions3"
+                                        Template="{StaticResource DisplayOptionsControls_Database}" 
+                                        VerticalAlignment="Top" />
+
+                                    <dxlc:LayoutControl Name="lc_DatabasesGrid" Style="{StaticResource LayoutControlStyle_Grid}" >
+
+                                        <dxg:GridControl Name="gc_Databases"
+                                            Height="500" 
+                                            Style="{StaticResource GridControlStyle}"                                                          
+                                            ItemsSource="{Binding FK_Databases_Instances}"
+                                            DefaultSorting="Name_Database"
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="Name_Database" Name="gc_Name_Database" Style="{StaticResource Header_Name_Database}" Visible="True" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID3" Visible="False" Style="{StaticResource Header_ID}" Fixed="Left" />
+
+                                                <dxg:GridColumn FieldName="Name_Instance" Name="gc_Name_Instance3" Style="{StaticResource Header_Name_Instance}" Visible="True" Fixed="Left"  />
+                                                <dxg:GridColumn FieldName="Instance_ID" Name="gc_Instance_ID" Style="{StaticResource Header_Instance_ID}" Visible="False" Fixed="Left" />
+
+                                                <dxg:GridColumn FieldName="CreateDate" Name="gc_CreateDate" Style="{StaticResource Header_CreateDate}" 
+                                                            EditSettings="{dxe:DateSettings DisplayFormat=G}" />
+                                                <dxg:GridColumn FieldName="DataBaseGuid" Name="gc_DataBaseGuid" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="DefaultFileGroup" Name="gc_DefaultFileGroup" Style="{StaticResource Header_DefaultFileGroup}" Visible="True" />
+                                                <dxg:GridColumn FieldName="DataSpaceUsage" Name="gc_DataSpaceUsage" Style="{StaticResource Header_DataSpaceUsage}" Visible="True" />
+                                                <dxg:GridColumn FieldName="IndexSpaceUsage" Name="gc_IndexSpaceUsage"  Style="{StaticResource Header_IndexSpaceUsage}" Visible="True"/>
+                                                <dxg:GridColumn FieldName="Size" Name="gc_Size" Style="{StaticResource Header_Size}" Visible="True" Tag="MB" />
+                                                <dxg:GridColumn FieldName="SpaceAvailable" Name="gc_SpaceAvailable" Style="{StaticResource Header_SpaceAvailable}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ID_DB" Name="gc_ID_DB" Visible="False" />
+                                                <dxg:GridColumn FieldName="Owner" Name="gc_Owner" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="LastBackupDate" Name="gc_LastBackupDate" Style="{StaticResource Header_LastBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="LastDifferentialBackupDate" Name="gc_LastDifferentialBackupDate" Style="{StaticResource Header_LastDifferentialBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="LastLogBackupDate" Name="gc_LastLogBackupDate" Style="{StaticResource Header_LastLogBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="RecoveryModel" Name="gc_RecoveryModel" Style="{StaticResource Header_RecoveryModel}" Visible="False"/>
+
+                                                <dxg:GridColumn FieldName="EP_Area" Name="gc_EP_Area" Visible="False"/>
+                                                <dxg:GridColumn FieldName="EP_Team" Name="gc_EP_Team" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_PrimaryDBContact" Name="gc_EP_PrimaryDBContact" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_DBApprover" Name="gc_EP_DBApprover" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_DRTier" Name="gc_EP_DRTier" Visible="False"/>
+
+                                                <dxg:GridColumn FieldName="IsMonitored" Name="gc_IsMonitored3" Visible="True" Style="{StaticResource Header_IsMonitored}" />
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate3" Visible="False" 
+                                                                Style="{StaticResource Header_SnapShotDate}"
+                                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError3" Visible="False"  
+                                                                Style="{StaticResource Header_SnapShotError}" />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView3"                                                     
+                                                               Style="{StaticResource TableViewStyle}"/>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutControl Name="lc_DatabaseDetail" VerticalAlignment="Top">
+
+                                        <Border BorderBrush="Blue" BorderThickness="2">
+                                            <dxc:ChartControl Name="chart1" 
+                                                                  BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D BarDistance="0.05">
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                <dxc:Pane MirrorHeight="100.0" />
+                                                            </dxc:XYDiagram2D.DefaultPane>-->
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <dxc:XYDiagram2D.Series>
+                                                            <dxc:LineSeries2D DisplayName="IndexSpace" Name="series1"
+                                                                                           ArgumentDataMember="SnapShotDate"
+                                                                                           ValueDataMember="IndexSpaceUsage"
+                                                                                            />
+
+                                                            <dxc:LineSeries2D DisplayName="DataSpace" Name="series1a"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                        ValueDataMember="DataSpaceUsage"
+                                                                                         />
+
+                                                            <dxc:LineSeries2D DisplayName="SpaceAvailable" Name="series1b"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                        ValueDataMember="SpaceAvailable"
+                                                                                         />
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                        <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                        <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>
+                                        </Border>
+
+                                    </dxlc:LayoutControl>
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Storage" Name="lg_Storage"                                          
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="True" 
+                                    DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" >
+
+                                    <ContentControl 
+                                        Name="cc_DisplayOptions4"
+                                        Template="{StaticResource DisplayOptionsControls_Storage}" 
+                                        VerticalAlignment="Top" />
+
+                                    <dxlc:LayoutControl Name="lc_DBFileGroups" 
+                                        Style="{StaticResource LayoutControlStyle_Grid}" 
+                                                        VerticalAlignment="Top" >
+
+                                        <dxg:GridControl Name="gc_DBFileGroups" 
+                                            MaxHeight="300"
+                                            Style="{StaticResource GridControlStyle}"                                                          
+                                            ItemsSource="{Binding FK_DBFileGroups_Databases}"
+                                            DefaultSorting="Name_FileGroup" 
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText" ShowBorder="False" >
+
+                                            <dxg:GridControl.Columns >
+                                                <dxg:GridColumn FieldName="Name_FileGroup" Name="gc_Name_FileGroup" Fixed="Left" Style="{StaticResource Header_Name_FileGroup}" />
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID4" Visible="False" Fixed="Left" Style="{StaticResource Header_ID}" />
+                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_ID4a" Visible="False" Fixed="Left" Style="{StaticResource Header_Database_ID}" />
+
+                                                <dxg:GridColumn FieldName="Size" Name="gc_Size4" Style="{StaticResource Header_Size}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate4" 
+                                                    Visible="False" 
+                                                    Style="{StaticResource Header_SnapShotDate}"
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError4" 
+                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                    Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View >
+                                                <dxg:TableView Name="tableView4"                                                     
+                                                               Style="{StaticResource TableViewStyle}" 
+                                                               ShowGroupPanel="False" 
+                                                               ShowAutoFilterRow="False" 
+                                                               ShowFilterPanelMode="Default" />
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutControl Name="lc_DBDataFiles" VerticalAlignment="Top"
+                                        Style="{StaticResource LayoutControlStyle_Grid}"                                                         
+                                        DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_DBFileGroups}" >
+
+                                        <dxg:GridControl Name="gc_DBDataFiles"
+                                            Style="{StaticResource GridControlStyle}"   
+                                            MaxHeight="300"
+                                            ItemsSource="{Binding FK_DBDataFiles_FileGroups}"
+                                            DefaultSorting="Name_DataFile" 
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID5" Style="{StaticResource Header_ID}" Visible="False" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="FileGroup_ID" Name="gc_FileGroup_ID" Style="{StaticResource Header_FileGroup_ID}" Visible="False" Fixed="Left"  />
+                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_Database_ID5" Style="{StaticResource Header_Database_ID}" Visible="False" Fixed="Left"  />
+
+                                                <dxg:GridColumn FieldName="Name_DataFile" Name="gc_Name_DataFile" Style="{StaticResource Header_Name_DataFile}" Visible="True"  Fixed="Left" />
+                                                <dxg:GridColumn FieldName="FileName" Name="gc_FileName5" Style="{StaticResource Header_FileName}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ID_DataFile" Name="gc_ID_DataFile5" Style="{StaticResource Header_ID_DataFile}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="UsedSpace" Name="gc_UsedSpace5" Style="{StaticResource Header_UsedSpace}" Visible="False" />
+                                                <dxg:GridColumn FieldName="AvailableSpace" Name="gc_AvailableSpace5" Style="{StaticResource Header_AvailableSpace}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Size" Name="gc_Size5" Style="{StaticResource Header_Size}" Visible="False"  />
+                                                <dxg:GridColumn FieldName="MaxSize" Name="gc_MaxSize5" Style="{StaticResource Header_MaxSize}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="VolumeFreeSpace" Name="gc_VolumeFreeSpace5" Style="{StaticResource Header_VolumeFreeSpace}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="IsPrimaryFile" Name="gc_IsPrimaryFile" Style="{StaticResource Header_IsPrimaryFile}" Visible="True" />
+                                                <dxg:GridColumn FieldName="Growth" Name="gc_Growth5" Style="{StaticResource Header_Growth}" Visible="True" />
+                                                <dxg:GridColumn FieldName="GrowthType" Name="gc_GrowthType5" Style="{StaticResource Header_GrowthType}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="NumberOfDiskReads" Name="gc_NumberOfDiskReads" Style="{StaticResource Header_NumberOfDiskReads}" Visible="False" />
+                                                <dxg:GridColumn FieldName="BytesReadFromDisk" Name="gc_BytesReadFromDisk" Style="{StaticResource Header_BytesReadFromDisk}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="NumberOfDiskWrites" Name="gc_NumberOfDiskWrites" Style="{StaticResource Header_NumberOfDiskWrites}" Visible="False" />
+                                                <dxg:GridColumn FieldName="BytesWrittenToDisk" Name="gc_BytesWrittenToDisk" Style="{StaticResource Header_BytesWrittenToDisk}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate5" Visible="False" 
+                                                    Style="{StaticResource Header_SnapShotDate}"                                                 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError5" 
+                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                    Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView5"                                                     
+                                                               Style="{StaticResource TableViewStyle}"
+                                                               ShowGroupPanel="False" 
+                                                               ShowAutoFilterRow="False" 
+                                                               ShowFilterPanelMode="Default" />
+
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Top" >
+
+                                        <dxlc:LayoutControl VerticalAlignment="Top" >
+
+                                            <dxc:ChartControl Name="chartDataFileSpace" VerticalAlignment="Top"
+                                                                      BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D BarDistance="0.05">
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                    <dxc:Pane MirrorHeight="100.0" />
+                                                                </dxc:XYDiagram2D.DefaultPane>-->
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <dxc:XYDiagram2D.Series>
+                                                            <dxc:LineSeries2D DisplayName="Size" Name="seriesDFS"
+                                                                                               ArgumentDataMember="SnapShotDate"
+                                                                                               ValueDataMember="Size"
+                                                                                                />
+
+                                                            <dxc:LineSeries2D DisplayName="DataSpace" Name="seriesDFS1"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="UsedSpace"
+                                                                                             />
+
+                                                            <dxc:LineSeries2D DisplayName="AvailableSpace" Name="seriesDFS2"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="AvailableSpace"
+                                                                                             />
+
+                                                            <!--<dxc:LineSeries2D DisplayName="VolumeFreeSpace" Name="seriesDFS3"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="VolumeFreeSpace"
+                                                                                             />-->
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                            <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                            <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>
+
+                                        </dxlc:LayoutControl>
+
+                                        <dxlc:LayoutControl VerticalAlignment="Top">
+
+                                            <dxc:ChartControl Name="chartDataFileActivity" VerticalAlignment="Top"
+                                                                      BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D BarDistance="0.05">
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                    <dxc:Pane MirrorHeight="100.0" />
+                                                                </dxc:XYDiagram2D.DefaultPane>-->
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <dxc:XYDiagram2D.Series>
+                                                            <dxc:LineSeries2D DisplayName="Bytes Read" Name="seriesDFA"
+                                                                                               ArgumentDataMember="SnapShotDate"
+                                                                                               ValueDataMember="BytesReadFromDisk"
+                                                                                                />
+
+                                                            <dxc:LineSeries2D DisplayName="Bytes Written" Name="seriesDFA1"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="BytesWrittenToDisk"
+                                                                                             />
+
+                                                            <dxc:LineSeries2D DisplayName="Number Reads" Name="seriesDFA2"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="NumberOfDiskReads"
+                                                                                             />
+
+                                                            <dxc:LineSeries2D DisplayName="Number Writes" Name="seriesDFA3"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="NumberOfDiskWrites"
+                                                                                             />
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="DataFile Activity"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                            <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                            <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>
+
+                                        </dxlc:LayoutControl>
+
+                                    </dxlc:LayoutGroup>
+
+                                    <dxlc:LayoutControl Name="lc_DBLogFiles" Header="XXX"
+                                        Style="{StaticResource LayoutControlStyle_Grid}"                                                         
+                                        DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" >
+
+                                        <dxg:GridControl Name="gc_DBLogFiles" 
+                                            MaxHeight="300"    
+                                            Style="{StaticResource GridControlStyle}"                                                          
+                                            ItemsSource="{Binding FK_DBLogFiles_Databases}"
+                                            DefaultSorting="Name_LogFile" 
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText" >
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID" Style="{StaticResource Header_ID}" Visible="False" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_Database_ID" Style="{StaticResource Header_Database_ID}" Visible="False" Fixed="Left"  />
+                                                <dxg:GridColumn FieldName="Name_LogFile" Name="gc_Name_LogFile" Style="{StaticResource Header_Name_LogFile}" Visible="True"  Fixed="Left" />
+                                                <dxg:GridColumn FieldName="FileName" Name="gc_FileName" Style="{StaticResource Header_FileName}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ID_DataFile" Name="gc_ID_DataFile" Style="{StaticResource Header_ID_DataFile}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="UsedSpace" Name="gc_UsedSpace" Style="{StaticResource Header_UsedSpace}" Visible="False" />
+                                                <dxg:GridColumn FieldName="AvailableSpace" Name="gc_AvailableSpace" Style="{StaticResource Header_AvailableSpace}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Size" Name="gc_Size2" Style="{StaticResource Header_Size}" Visible="False" />
+                                                <dxg:GridColumn FieldName="MaxSize" Name="gc_MaxSize" Style="{StaticResource Header_MaxSize}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="VolumeFreeSpace" Name="gc_VolumeFreeSpace" Style="{StaticResource Header_VolumeFreeSpace}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="Growth" Name="gc_Growth" Style="{StaticResource Header_Growth}" Visible="True" />
+                                                <dxg:GridColumn FieldName="GrowthType" Name="gc_GrowthType" Style="{StaticResource Header_GrowthType}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="NumberOfDiskReads" Name="gc_NumberOfDiskReads2" Style="{StaticResource Header_NumberOfDiskReads}" Visible="False" />
+                                                <dxg:GridColumn FieldName="BytesReadFromDisk" Name="gc_BytesReadFromDisk2" Style="{StaticResource Header_BytesReadFromDisk}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="NumberOfDiskWrites" Name="gc_NumberOfDiskWrites2" Style="{StaticResource Header_NumberOfDiskWrites}" Visible="False" />
+                                                <dxg:GridColumn FieldName="BytesWrittenToDisk" Name="gc_BytesWrittenToDisk2" Style="{StaticResource Header_BytesWrittenToDisk}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate" 
+                                                    Visible="False" 
+                                                    Style="{StaticResource Header_SnapShotDate}"
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError" 
+                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                    Visible="False"  />
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView6"  
+                                                               Style="{StaticResource TableViewStyle}"
+                                                               ShowGroupPanel="False" 
+                                                               ShowAutoFilterRow="False" 
+                                                               ShowFilterPanelMode="Default" />
+
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutGroup Orientation="Horizontal">
+
+                                        <dxlc:LayoutControl>
+
+                                            <dxc:ChartControl Name="chartLogFileSpace" VerticalAlignment="Top"
+                                                                      BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D BarDistance="0.05">
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                    <dxc:Pane MirrorHeight="100.0" />
+                                                                </dxc:XYDiagram2D.DefaultPane>-->
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <dxc:XYDiagram2D.Series>
+                                                            <dxc:LineSeries2D DisplayName="Size" Name="seriesLFS"
+                                                                                               ArgumentDataMember="SnapShotDate"
+                                                                                               ValueDataMember="Size"
+                                                                                                />
+
+                                                            <dxc:LineSeries2D DisplayName="DataSpace" Name="seriesLFS1"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="UsedSpace"
+                                                                                             />
+
+                                                            <!--<dxc:LineSeries2D DisplayName="VolumeFreeSpace" Name="seriesDFS3"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="VolumeFreeSpace"
+                                                                                             />-->
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                            <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                            <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>
+
+                                        </dxlc:LayoutControl>
+
+                                        <dxlc:LayoutControl>
+
+                                            <dxc:ChartControl Name="chartLogFileActivity" Height="200"
+                                                                      BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D BarDistance="0.05">
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                    <dxc:Pane MirrorHeight="100.0" />
+                                                                </dxc:XYDiagram2D.DefaultPane>-->
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <dxc:XYDiagram2D.Series>
+                                                            <dxc:LineSeries2D DisplayName="Bytes Read" Name="seriesLFA"
+                                                                                               ArgumentDataMember="SnapShotDate"
+                                                                                               ValueDataMember="BytesReadFromDisk"
+                                                                                                />
+
+                                                            <dxc:LineSeries2D DisplayName="Bytes Written" Name="seriesLFA1"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="BytesWrittenToDisk"
+                                                                                             />
+
+                                                            <dxc:LineSeries2D DisplayName="Number Reads" Name="seriesLFA2"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="NumberOfDiskReads"
+                                                                                             />
+
+                                                            <dxc:LineSeries2D DisplayName="Number Writes" Name="seriesLFA3"                                                                                                                                                                         ArgumentDataMember="SnapShotDate"
+                                                                                            ValueDataMember="NumberOfDiskWrites"
+                                                                                             />
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="LogFile Activity"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                            <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                            <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>
+
+                                        </dxlc:LayoutControl>
+
+                                    </dxlc:LayoutGroup>
+
+                                </dxlc:LayoutGroup>
+
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+
+                    </dxdo:LayoutPanel>
+
+                </dxdo:LayoutGroup>
+
+                <dxdo:DockLayoutManager.AutoHideGroups>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Left" Style="{StaticResource AutoHideGroup_Left}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Top" Style="{StaticResource AutoHideGroup_Top}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Right" Style="{StaticResource AutoHideGroup_Right}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup Name="ahg_Bottom" Style="{StaticResource AutoHideGroup_Bottom}" >
+
+                        <dxdo:LayoutPanel x:Name="paneToolbox" >
+
+                            <StackPanel>
+
+                                <TextBox Name="textBox_HeightHack" Text="170" VerticalAlignment="Bottom"/>
+
+                            </StackPanel>
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Footer" >
+
+        </dxlc:LayoutGroup>
+
+    </dxlc:LayoutControl>
+
+</uiuc:wucDX_Base>

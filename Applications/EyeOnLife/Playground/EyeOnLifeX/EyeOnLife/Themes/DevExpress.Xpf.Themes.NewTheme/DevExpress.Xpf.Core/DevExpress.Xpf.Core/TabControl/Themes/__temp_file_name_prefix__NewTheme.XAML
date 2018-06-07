@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs" xmlns:dxcore_unique_xmlns="http://schemas.devexpress.com/winfx/2008/xaml/core">
+  <!--BEGIN WPF-->
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/NewTheme/Components.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/NewTheme/TabControl.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/NewTheme/TabItem.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/Generic/Components.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/Generic/TabControl.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/Generic/TabItem.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <!--END WPF-->
+  <SolidColorBrush x:Key="ThemeColorsThemeKey_WhiteForegroundColor" Color="#FF373A3D" cs:Name="SolidColorBrush_0001" />
+  <SolidColorBrush x:Key="ThemeColorsThemeKey_BlackForegroundColor" Color="#FF373A3D" cs:Name="SolidColorBrush_0002" />
+  <!--#include \NewTheme\Components.xaml-->
+  <!--#include \Generic\Components.xaml-->
+  <!--#include \NewTheme\TabItem.xaml-->
+  <!--#include \Generic\TabItem.xaml-->
+  <!--#include \NewTheme\TabControl.xaml-->
+  <!--#include \Generic\TabControl.xaml-->
+  <Style x:Key="{dxdst:DefaultStyleThemeKey FullName=DevExpress.Xpf.Core.TabControlHeaderMenuItem}" TargetType="{x:Type dx:TabControlHeaderMenuItem}" BasedOn="{StaticResource TabControlHeaderMenuItemDefaultStyle}" />
+  <Style x:Key="{dxdst:DefaultStyleThemeKey FullName=DevExpress.Xpf.Core.TabControlHeaderMenuSeparator}" TargetType="{x:Type dx:TabControlHeaderMenuSeparator}" BasedOn="{StaticResource TabControlHeaderMenuSeparatorDefaultStyle}" />
+  <Style x:Key="{dxdst:DefaultStyleThemeKey FullName=DevExpress.Xpf.Core.TabControlHeaderMenu}" TargetType="{x:Type dx:TabControlHeaderMenu}" BasedOn="{StaticResource TabControlHeaderMenuDefaultStyle}" />
+  <Style x:Key="{dxdst:DefaultStyleThemeKey FullName=DevExpress.Xpf.Core.DXTabControl}" TargetType="{x:Type dx:DXTabControl}" BasedOn="{StaticResource TabControlDefaultStyle}" />
+  <Style x:Key="{dxdst:DefaultStyleThemeKey FullName=DevExpress.Xpf.Core.DXTabItem}" TargetType="{x:Type dx:DXTabItem}" BasedOn="{StaticResource TabItemDefaultStyle}" />
+</ResourceDictionary>

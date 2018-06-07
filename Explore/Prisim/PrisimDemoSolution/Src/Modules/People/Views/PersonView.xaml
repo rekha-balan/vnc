@@ -46,12 +46,6 @@
         <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" 
                    Text="{Binding Person.LastUpdated}" />
 
-        <!-- Save Button -->
-        <!--<Button Grid.Row="4" Grid.ColumnSpan="2" 
-                Content="Save" Margin="10" 
-                Command="{Binding SaveCommand}" 
-                CommandParameter="{Binding Person}"  />-->
-
         <!-- Can pass a nullable CommandParameter -->  
         <Button Grid.Row="4" Grid.ColumnSpan="2" 
                 Content="Save" Margin="10" 

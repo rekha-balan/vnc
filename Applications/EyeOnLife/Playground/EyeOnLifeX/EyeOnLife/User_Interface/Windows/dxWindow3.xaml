@@ -1,0 +1,110 @@
+﻿<dx:DXWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    x:Class="EyeOnLife.User_Interface.Windows.dxWindow3"
+    Title="dxWindow3" Height="541" Width="696"  Loaded="OnLoaded" xmlns:my="clr-namespace:SQLInformation.Data;assembly=SQLInformation">
+    <dx:DXWindow.Resources>
+        <my:ApplicationDataSet x:Key="applicationDataSet" />
+        
+        <CollectionViewSource x:Key="serversViewSource" 
+                              Source="{Binding Path=Servers, Source={StaticResource applicationDataSet}}" />
+        <CollectionViewSource x:Key="serversInstancesViewSource" 
+                              Source="{Binding Path=FK_Instances_Servers, Source={StaticResource serversViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesViewSource" 
+                              Source="{Binding Path=FK_Databases_Instances, Source={StaticResource serversInstancesViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBFileGroupsViewSource" 
+                              Source="{Binding Path=FK_DBFileGroups_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBFileGroupsDBDataFilesViewSource" 
+                              Source="{Binding Path=FK_DBDataFiles_FileGroups, Source={StaticResource serversInstancesDatabasesDBFileGroupsViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBLogFilesViewSource" 
+                              Source="{Binding Path=FK_DBLogFiles_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBTablesViewSource" 
+                              Source="{Binding Path=FK_DBTables_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBStoredProceduresViewSource" 
+                              Source="{Binding Path=FK_DBStoredProcedures_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+    </dx:DXWindow.Resources>
+    <Grid dx:StyleManager.ApplyApplicationTheme="True" DataContext="{StaticResource serversViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <dxg:GridControl 
+            Name="serversGridControl"             
+            AutoPopulateColumns="True" 
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding}" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView1" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart"  />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl 
+            Name="fK_Instances_ServersGridControl"
+            AutoPopulateColumns="True" 
+            Grid.ColumnSpan="2" 
+            Grid.Row="1"  
+            ItemsSource="{Binding Source={StaticResource serversInstancesViewSource}}"  >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView2" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl 
+            Name="fK_Databases_InstancesGridControl"
+            AutoPopulateColumns="True" 
+            Grid.ColumnSpan="2" Grid.Row="2" 
+            HorizontalAlignment="Left" 
+            ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesViewSource}}"  >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView3" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart"  />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl 
+            Name="fK_DBFileGroups_DatabasesGridControl"            
+            AutoPopulateColumns="True" 
+            Grid.Row="3" 
+            ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBFileGroupsViewSource}}" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView4" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl 
+            Name="fK_DBDataFiles_FileGroupsGridControl" 
+            AutoPopulateColumns="True" Grid.Row="4" 
+            ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBFileGroupsDBDataFilesViewSource}}" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView5" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl
+            Name="fK_DBLogFiles_DatabasesGridControl" 
+            AutoPopulateColumns="True" 
+            Grid.Column="1" Grid.Row="4" 
+            ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBLogFilesViewSource}}" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView6" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl AutoPopulateColumns="True" Grid.Column="1" Grid.Row="2" 
+                         ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBTablesViewSource}}" 
+                         Name="fK_DBTables_DatabasesGridControl" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView7" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxg:GridControl AutoPopulateColumns="True" Grid.Column="1" Grid.Row="3" 
+                         ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBStoredProceduresViewSource}}"
+                         Name="fK_DBStoredProcedures_DatabasesGridControl" >
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView8" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</dx:DXWindow>

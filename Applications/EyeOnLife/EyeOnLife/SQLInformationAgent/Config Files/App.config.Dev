@@ -1,0 +1,296 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <configSections>
+    <section name="loggingConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.LoggingSettings, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+    <section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+  </configSections>
+  <loggingConfiguration name="Logging Application Block" tracingEnabled="true" defaultCategory="General" logWarningsWhenNoCategoriesMatch="true">
+    <listeners>
+      <add 
+        name="FlatFile TraceListener" 
+        fileName="C:\Temp\LogFiles\SQLInformation_DataLoadService.log" 
+        header="" 
+        footer="" 
+        formatter="FlatFile Formatter" 
+        listenerDataType="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.FlatFileTraceListenerData, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" 
+        traceOutputOptions="None" 
+        type="Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.FlatFileTraceListener, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+      
+      <add 
+        name="Formatted EventLog TraceListener" 
+        source="Enterprise Library Logging" 
+        formatter="Text Formatter" 
+        log="Application" 
+        machineName="" 
+        listenerDataType="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.FormattedEventLogTraceListenerData, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" 
+        traceOutputOptions="None" 
+        type="Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.FormattedEventLogTraceListener, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+      
+      <add 
+        name="Formatted EventLog TraceListener_SQLInfo" 
+        source="SQLINFOAGENT" 
+        formatter="Text Formatter" 
+        log="Application" 
+        machineName="" 
+        listenerDataType="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.FormattedEventLogTraceListenerData, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" 
+        traceOutputOptions="None" 
+        type="Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.FormattedEventLogTraceListener, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+
+      <add 
+        name="RFF_Listener_EyeOnLife" 
+        fileName="C:\Temp\LogFiles\SQLInformation_DataLoadService.log" 
+        rollSizeKB="0" 
+        timeStampPattern="yyyy-MM-dd" 
+        rollFileExistsBehavior="Increment" 
+        rollInterval="Hour" 
+        formatter="FlatFile Formatter" 
+        header="" 
+        footer="" 
+        listenerDataType="Microsoft.Practices.EnterpriseLibrary.Logging.Configuration.RollingFlatFileTraceListenerData, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" 
+        traceOutputOptions="None" 
+        type="Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.RollingFlatFileTraceListener, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+      
+    </listeners>
+    <formatters>
+      <add template="Timestamp: {timestamp(local)}
+Message:{keyvalue(Class Name)}.{keyvalue(Method Name)} &gt;  {message}
+Category: {category}
+Priority: {priority} Severity: {severity}
+Process: {processName} - {processId}
+Thread: {threadName} - {win32ThreadId}
+User:{keyvalue(User Name)}
+Title:{title}
+EventId: {eventid}
+Machine: {machine}
+Application Domain: {appDomain}
+Extended Properties: {dictionary({key} - {value}
+)}" type="Microsoft.Practices.EnterpriseLibrary.Logging.Formatters.TextFormatter, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" name="ErrorLog Formatter"/>
+      <add template="{timestamp(local)}|{category}|{priority}|{severity}|{eventid}|{processName}|{processId}|{threadName}|{win32ThreadId}|{keyvalue(User Name)}|{keyvalue(Class Name)}.{keyvalue(Method Name)}|{keyvalue(Duration)}|{message}" type="Microsoft.Practices.EnterpriseLibrary.Logging.Formatters.TextFormatter, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" name="FlatFile Formatter"/>
+      <add template="TimeStamp {timestamp(local)}
+Message: {message}
+Category: {category}
+Priority: {priority}
+EventId: {eventid}
+Severity: {severity}
+Title:{title}
+Machine: {machine}
+Application Domain: {appDomain}
+Process Id: {processId}
+Process Name: {processName}
+Win32 Thread Id: {win32ThreadId}
+Thread Name: {threadName}
+Extended Properties: {dictionary({key} - {value}
+)}" type="Microsoft.Practices.EnterpriseLibrary.Logging.Formatters.TextFormatter, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" name="Text Formatter"/>
+    </formatters>
+    <logFilters>
+      <add 
+        name="Priority Filter" 
+        minimumPriority="0" 
+        maximumPriority="10010" 
+        type="Microsoft.Practices.EnterpriseLibrary.Logging.Filters.PriorityFilter, Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+    </logFilters>
+    <categorySources>
+      <add switchValue="All" name="General">
+        <listeners>
+          <add name="Formatted EventLog TraceListener"/>
+        </listeners>
+      </add>
+      <add switchValue="All" name="EyeOnLife">
+        <listeners>
+          <add name="RFF_Listener_EyeOnLife"/>
+        </listeners>
+      </add>
+      <add switchValue="All" name="SQLInformation">
+        <listeners>
+          <add name="RFF_Listener_EyeOnLife"/>
+        </listeners>
+      </add>
+      <add switchValue="All" name="SQLINFOAGENT">
+        <listeners>
+          <add name="RFF_Listener_EyeOnLife"/>
+        </listeners>
+      </add>
+    </categorySources>
+    <specialSources>
+      <allEvents switchValue="All" name="All Events"/>
+      <notProcessed switchValue="All" name="Unprocessed Category"/>
+      <errors switchValue="All" name="Logging Errors &amp; Warnings">
+        <listeners>
+          <add name="Formatted EventLog TraceListener"/>
+        </listeners>
+      </errors>
+    </specialSources>
+  </loggingConfiguration>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0,Profile=Client"/>
+  </startup>
+  
+  <appSettings>
+    
+    <!-- Current Date - Testing Only.  Use this with caution and not in Production ! -->
+    <!-- <add key="CurrentDate" value="7/1/2011" /> -->
+    
+    <!-- Database Connection Strings -->
+    
+    <add key="SQLMonitorDBConnection" value="Data Source=LPSQLMGMT01v,1630;Initial Catalog=SQLMonitorDB;Integrated Security=True"/>
+
+    <!--<add key="SQLMonitorDBConnection" value="Data Source=LDSQLI33V,1631;Initial Catalog=SQLMonitorDB;Integrated Security=True"/>-->
+    <!--<add key="SQLMonitorDBConnection" value="Data Source=LDSQLI33V,1631;Initial Catalog=SQLMonitorDB;User ID=SMonitor;Password=Pa$$word1;Pooling=False"/>-->
+    <!--<add key="SQLMonitorDBConnection" value="Data Source=A097921NYP;Initial Catalog=SQLMonitorDB;Integrated Security=True"/>-->
+    <!--<add key="SQLMonitorDBConnection" value="Data Source=a097912x0p\sql2008;Initial Catalog=SQLMonitorDB;Integrated Security=True" />-->
+    <!--<add key="SQLMonitorDBConnection" value="Data Source=PARTHENON;Initial Catalog=SQLMonitorDB;Integrated Security=True" />-->
+
+    <!--
+      SQLInformationAgent keys control the database and account
+      used to crawl (SQLSMO) the instances.
+      
+      SQLInformationAgent_LoginSecure = true uses Windows Credentials
+      which come from the account used to run the hosting windows service.
+      
+      SQLInformationAgent_LoginSecure = false uses SQL Authentication
+      
+      If use SQL Authentication set the 
+        SQLInformationAgent_LoginName and 
+        SQLInformationAgent_Password keys
+    -->
+
+    <add key="SQLInformationAgent_DatabaseName" value="SQLMonitorDB"/>
+    <add key="SQLInformationAgent ConnectionTimeout" value="30"/>
+    
+    <!--<add key="SQLInformationAgent LoginSecure" value="true"/>-->
+    <add key="SQLInformationAgent LoginSecure" value="false"/>
+     
+    <add key="SQLInformationAgent_LoginName" value="SMonitor"/>
+    <add key="SQLInformationAgent_Password" value="Pa$$word1"/>
+    
+    <add key="SQLInformationAgent_ServerRole" value="sysadmin"/>
+
+    <!-- 
+      LoadCycle keys control how often the scheduler runs.
+      
+      There are separate settings for three periods
+      
+        LoadCycle_Weekly
+        LoadCycle_Daily
+        LoadCycle_IntraDay
+        
+      Currently only Daily is supported.
+      
+      There are three keys for each cycle
+      
+        _Run          - does the cycle run true/false
+        _StartTime    - When the cycle starts
+        _ReStartTime  - When the cycle repeats
+               
+    -->
+    
+    <!-- LoadCycle Weekly NOT SUPPORTED -->
+    
+    <add key="LoadCycle_Weekly_Run" value="false"/>
+    <add key="LoadCycle_Weekly_StartTime" value="07:34 PM"/>
+    <add key="LoadCycle_Weekly_ReStartTime" value="7 day" />
+    <!--<add key="LoadCycle_Weekly_ReStartTime" value="1 minute"/>--> 
+    
+    <!-- LoadCycle Daily -->
+    
+    <add key="LoadCycle_Daily_Run" value="true"/>
+    <add key="LoadCycle_Daily_StartTime" value="12:10 PM"/>
+    <add key="LoadCycle_Daily_ReStartTime" value="1 day" />
+    <!--<add key="LoadCycle_Daily_ReStartTime" value="240 minute"/>-->
+    
+    <!-- LoadCycle IntraDay NOT SUPPORTED -->
+    
+    <add key="LoadCycle_IntraDay_Run" value="false"/>
+    <add key="LoadCycle_IntraDay_StartTime" value="07:34 PM"/>
+    <add key="LoadCycle_IntraDay_ReStartTime" value="240 minute"/>
+
+    <!-- 
+      ExpandSetting keys control what data is captured during a LoadCycle.  
+      There are three settings for each LoadCycle.
+      
+        _Instance
+        _JobServer
+        _Database
+        
+      The values are passed in as arguments to the Load_Instances_FromSMO() method
+      and are AND'd with the setting for the corresponding object.
+      This allows different levels of detail to be captured
+      Weekly, Daily, and IntraDay, e.g. IntraDay may only update storage usage.
+      
+      See 
+        SQLInformation.Helper.TakeSnapShot_{Daily,IntraDay,Weekly}(...)
+        SQLInformation.SMO.Helper.Load_Instances_FromSMO(...)
+        
+    -->
+
+    <add key="ExpandSetting_Database_Default" value="2047"/>
+    <add key="ExpandSetting_JobServer_Default" value="65535"/>
+
+    <add key="ExpandSetting_IntraDay_Database" value="15"/>
+    <add key="ExpandSetting_IntraDay_JobServer" value="65535"/>
+    <add key="ExpandSetting_IntraDay_Instance" value="5"/>
+
+    <add key="ExpandSetting_Daily_Database" value="2047"/>
+    <add key="ExpandSetting_Daily_JobServer" value="65535"/>
+    <add key="ExpandSetting_Daily_Instance" value="127"/>
+
+    <add key="ExpandSetting_Weekly_Database" value="2047"/>
+    <add key="ExpandSetting_Weekly_JobServer" value="65535"/>
+    <add key="ExpandSetting_Weekly_Instance" value="127"/>
+    
+    
+    <!-- Email Settings -->
+
+    <add key="SMTP Server" value="LifeMail700.devlifeint.devpl01.net"/>
+    <add key="Email To" value="crhodes@pacificlife.com"/>
+    <add key="Email CC" value="crhodes@pacificlife.com"/>
+    <add key="Email From" value="MCR-iDev@pacificlife.com"/>
+
+    <add key="LKUP_FileName" value="Test Data\EyeOnLifeLKUPData.xml"/>
+
+    <!-- ApplicationDataSet Table Load Settings -->
+
+    <add key="ADSLoad_DatabaseInfo" value="true"/>
+    <add key="ADSLoad_Databases" value="true"/>
+    <add key="ADSLoad_DBDataFileInfo" value="true"/>
+    <add key="ADSLoad_DBDataFiles" value="true"/>
+    <add key="ADSLoad_DBDdlTriggers" value="true"/>
+    <add key="ADSLoad_DBFileGroups" value="true"/>
+    <add key="ADSLoad_DBLogFileInfo" value="true"/>
+    <add key="ADSLoad_DBLogFiles" value="true"/>
+    <add key="ADSLoad_DBRoles" value="true"/>
+    <add key="ADSLoad_DBStoredProcedures" value="true"/>
+    <add key="ADSLoad_DBStoredProcedureContent" value="false"/>
+    <add key="ADSLoad_DBTables" value="true"/>
+    <add key="ADSLoad_DBUserDefinedFunctions" value="true"/>
+    <add key="ADSLoad_DBUsers" value="true"/>
+    <add key="ADSLoad_DBViews" value="true"/>
+    <add key="ADSLoad_InstanceInfo" value="true"/>
+    <add key="ADSLoad_Instances" value="true"/>
+    <add key="ADSLoad_JobServers" value="true"/>
+    <add key="ADSLoad_JSAlertCategories" value="true"/>
+    <add key="ADSLoad_JSAlerts" value="true"/>
+    <add key="ADSLoad_JSJobCategories" value="true"/>
+    <add key="ADSLoad_JSJobs" value="true"/>
+    <add key="ADSLoad_JSJobSchedules" value="true"/>
+    <add key="ADSLoad_JSJobSteps" value="true"/>
+    <add key="ADSLoad_JSOperatorCategories" value="true"/>
+    <add key="ADSLoad_JSOperators" value="true"/>
+    <add key="ADSLoad_JSProxyAccounts" value="true"/>
+    <add key="ADSLoad_JSSharedSchedules" value="true"/>
+    <add key="ADSLoad_JSTargetServerGroups" value="true"/>
+    <add key="ADSLoad_JSTargetServers" value="true"/>
+    <add key="ADSLoad_LinkedServers" value="true"/>    
+    <add key="ADSLoad_LKUP_ADDomains" value="true"/>
+    <add key="ADSLoad_LKUP_Environments" value="true"/>
+    <add key="ADSLoad_Logins" value="true"/>
+    <add key="ADSLoad_ServerInfo" value="true"/>
+    <add key="ADSLoad_ServerRoles" value="true"/>
+    <add key="ADSLoad_Servers" value="true"/>
+    <add key="ADSLoad_TBTriggers" value="true"/>
+    <add key="ADSLoad_VWTriggers" value="true"/>
+
+  </appSettings>
+  
+</configuration>

@@ -28,6 +28,8 @@ namespace People
             //var vm = _container.Resolve<IPersonViewModel>();
             //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
+            // This is for TabControl multiple view 
+
             IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
 
             var vm = _container.Resolve<IPersonViewModel>();
@@ -43,9 +45,6 @@ namespace People
             var vm3 = _container.Resolve<IPersonViewModel>();
             vm3.CreatePerson("Jeff", "Lock");
             region.Add(vm3.View);
-
-            //var vm = this._container.Resolve<IPeopleViewModel>();
-            //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
             //_regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
         }

@@ -1,0 +1,628 @@
+﻿<uiuc:wucDX_Base x:Name="wucDX_Base"
+    x:Class="EyeOnLife.User_Interface.User_Controls.Admin_CrawlerExpandSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+    mc:Ignorable="d"
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+    
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:ui="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    xmlns:uiw="clr-namespace:EyeOnLife.User_Interface.Windows"
+
+    d:DesignWidth="900" d:DesignHeight="600"
+    Title="Crawler ExpandSettings" 
+    Loaded="OnLoaded"  >
+    
+    <uiuc:wucDX_Base.Resources>
+        
+
+    </uiuc:wucDX_Base.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      Background="Transparent" >
+
+        <dxlc:LayoutControl.AvailableItems>
+
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Body" >
+
+            <dxdo:DockLayoutManager Name="lg_Body_dlm" 
+                                    Style="{StaticResource DocLayoutManagerStyle}"
+                                    dx:StyleManager.ApplyApplicationTheme="True" >
+
+                <dxdo:LayoutGroup >
+
+                    <dxdo:LayoutPanel AllowClose="False" AllowHide="False" >
+
+                        <dxlc:LayoutControl 
+                            Orientation="Horizontal" 
+                            StretchContentVertically="True" 
+                            Background="Transparent">
+
+                            <dxlc:LayoutGroup Orientation="Vertical" Style="{StaticResource FixedLayoutPanel}" >
+
+                                <dxlc:LayoutControl Name="lc_ItemsGrid" Style="{StaticResource LayoutControlStyle_Grid}" >
+
+                                    <dxg:GridControl  Name="dataGrid"
+                                        Style="{StaticResource GridControlStyle}"                                                        
+                                        DefaultSorting="TimePeriod" 
+                                        CustomColumnDisplayText="OnCustomColumnDisplayText" 
+                                        CustomUnboundColumnData="CustomUnboundColumnData" >
+
+                                        <dxg:GridControl.Columns>
+                                            <dxg:GridColumn FieldName="TimePeriod" Name="gc_TimePeriod"  />
+                                            <dxg:GridColumn FieldName="TargetObject" Name="gc_TargetObject"  />
+                                            <!--<dxg:GridColumn FieldName="ExpandSetting" Name="gc_ExpandSetting" EditTemplate="{Binding ElementName=wucDX_Base, Mode=OneWay}">
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:ComboBoxEditSettings />
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>-->
+
+                                            <dxg:GridColumn FieldName="ExpandSetting" Name="gc_ExpandSetting">
+                                                <!--<dxg:GridColumn.EditSettings>
+                                                    <dxe:ComboBoxEditSettings Name="cbe_ExpandSetting" />
+                                                </dxg:GridColumn.EditSettings>-->
+                                            </dxg:GridColumn>
+                                            
+                                            <dxg:GridColumn FieldName="Notes" Name="gc_Notes" Style="{StaticResource Header_Notes}" Visible="True" />
+                                        </dxg:GridControl.Columns>
+
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView 
+                                                Name="tableView" 
+                                                NewItemRowPosition="Bottom"
+                                                Style="{StaticResource TableViewStyle}"
+                                                CellValueChanged="OnCellValueChanged" 
+                                                CellValueChanging="OnCellValueChanged" 
+                                                FocusedRowChanged="tableView_FocusedRowChanged" />
+                                        </dxg:GridControl.View>
+
+                                    </dxg:GridControl>
+
+                                </dxlc:LayoutControl>
+                        
+                                <dxlc:LayoutControl VerticalAlignment="Bottom" Name="lc_ItemDetail" >
+
+                                    <dxlc:LayoutGroup Header="Expand Mask Calculators"
+                                                      View="GroupBox"
+                                                      Orientation="Horizontal" HorizontalAlignment="Center"  >
+
+                                        <dxlc:LayoutGroup Orientation="Horizontal">
+                                            
+                                            <dxlc:LayoutGroup Orientation="Horizontal" Header="Instance" View="GroupBox">
+
+                                                <Border BorderBrush="Black" BorderThickness="1">
+
+                                                    <dxlc:LayoutControl Orientation="Horizontal" >
+
+                                                        <dxlc:LayoutControl Name="lc_ExpandInstanceCurrent" Style="{StaticResource SnapShotDetails}" >
+
+                                                            <Border Style="{StaticResource ExpandWhatStyle}" >
+
+                                                                <StackPanel>
+
+                                                                    <DockPanel>
+
+                                                                        <Label Content="Current" DockPanel.Dock="Top" />
+                                                                        <CheckBox IsChecked="{Binding IsMonitored, Mode=OneWay}" 
+                                                                                Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                                DockPanel.Dock="Left" />
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}" >
+
+                                                                        <StackPanel>
+
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+
+                                                                            <CheckBox IsChecked="{Binding ExpandContent, Mode=OneWay}" 
+                                                                                        Content="Content" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Tables, Views, SPs, etc." Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandStorage, Mode=OneWay}" 
+                                                                                        Content="Storage" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture FileGroups, DataFiles, LogFiles" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobServer, Mode=OneWay}" 
+                                                                                        Content="JobServers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture "  Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandLinkedServers, Mode=OneWay}" 
+                                                                                        Content="LinkedServers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture LinkedServers" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandLogins, Mode=OneWay}" 
+                                                                                        Content="Logins" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Instance Logins" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandServerRoles, Mode=OneWay}" 
+                                                                                        Content="ServerRoles" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture ServerRoles" Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandTriggers, Mode=OneWay}" 
+                                                                                        Content="Triggers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture ServerDdlTriggers" Margin="5,0,0,0"  />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_InstanceExpandMaskCurrent" Text="0" />
+
+                                                                </StackPanel>
+
+                                                            </Border>
+
+                                                        </dxlc:LayoutControl>
+
+                                                        <dxlc:LayoutControl Name="lc_ExpandInstance" Style="{StaticResource SnapShotDetails}" >
+
+                                                            <dxlc:LayoutGroup Header="Calculate" View="GroupBox">
+                                                                
+                                                                <!--<Border Style="{StaticResource ExpandWhatStyle}" >-->
+
+                                                                <StackPanel>
+
+                                                                    <DockPanel>
+
+                                                                        <CheckBox IsChecked="{Binding IsMonitored, Mode=OneWay}" 
+                                                                                Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                                DockPanel.Dock="Left"
+                                                                                Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}" >
+
+                                                                        <StackPanel>
+
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+
+                                                                            <CheckBox IsChecked="{Binding ExpandContent, Mode=OneWay}" 
+                                                                                        Content="Content" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Tables, Views, SPs, etc." Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandStorage, Mode=OneWay}" 
+                                                                                        Content="Storage" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture FileGroups, DataFiles, LogFiles" Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobServer, Mode=OneWay}" 
+                                                                                        Content="JobServers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture "  Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandLinkedServers, Mode=OneWay}" 
+                                                                                        Content="LinkedServers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture LinkedServers" Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandLogins, Mode=OneWay}" 
+                                                                                        Content="Logins" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Instance Logins" Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandServerRoles, Mode=OneWay}" 
+                                                                                        Content="ServerRoles" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture ServerRoles" Margin="5,0,0,0"
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandTriggers, Mode=OneWay}" 
+                                                                                        Content="Triggers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture ServerDdlTriggers" Margin="5,0,0,0" 
+                                                                                        Checked="InstanceCalculator" Unchecked="InstanceCalculator" />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_InstanceExpandMask" Text="0" />
+
+                                                                </StackPanel>
+
+                                                            <!--</Border>-->
+                                                                
+                                                            </dxlc:LayoutGroup>
+                                                            
+                                                        </dxlc:LayoutControl>
+
+                                                    </dxlc:LayoutControl>
+
+                                                </Border>
+                                                
+                                            </dxlc:LayoutGroup>
+                                            
+                                            <dxlc:LayoutGroup Orientation="Horizontal" Header="JobServer" View="GroupBox">
+                                                
+                                                <Border BorderBrush="Black" BorderThickness="1">
+                                                    
+                                                    <dxlc:LayoutControl Orientation="Horizontal" >
+                                                        
+                                                        <dxlc:LayoutControl Name="lc_ExpandJobServerCurrent" Style="{StaticResource SnapShotDetails}" >
+
+                                                    <!--<Border Style="{StaticResource ExpandWhatStyle}" >-->
+
+                                                            <dxlc:LayoutGroup Header="Current" View="GroupBox">
+                                                                <StackPanel>
+                                                    
+                                                                    <DockPanel>
+
+                                                                        <CheckBox IsChecked="{Binding IsMonitored}" 
+                                                                            Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                            DockPanel.Dock="Left" />                                                        
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}">
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+                                                            
+                                                                            <CheckBox IsChecked="{Binding ExpandAlertCategories}" 
+                                                                                        Content="AlertCategories" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture AlertCategories" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandAlerts}" 
+                                                                                        Content="Alerts" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Alerts" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobCategories}" 
+                                                                                        Content="JobCategories" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture JobCategories" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobs}" 
+                                                                                        Content="Jobs" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Jobs" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobSchedules}" 
+                                                                                        Content="JobSchedules" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture JobSchedules" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobSteps}" 
+                                                                                        Content="JobSteps" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture JobSteps" Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandOperatorCategories}" 
+                                                                                        Content="OperatorCategories" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture OperatorCategories" Margin="5,0,0,0"   />
+                                                                            <CheckBox IsChecked="{Binding ExpandOperators}" 
+                                                                                        Content="Operators" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture Operators" Margin="5,0,0,0"   />
+                                                                            <CheckBox IsChecked="{Binding ExpandProxyAccounts}" 
+                                                                                        Content="ProxyAccounts" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture ProxyAccounts" Margin="5,0,0,0"   />
+                                                                            <CheckBox IsChecked="{Binding ExpandSharedSchedules}" 
+                                                                                        Content="SharedSchedules" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture SharedSchedules" Margin="5,0,0,0"   />
+                                                                            <CheckBox IsChecked="{Binding ExpandTargetServerGroups}" 
+                                                                                        Content="TargetServerGroups" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture TargetServerGroups" Margin="5,0,0,0"   />
+                                                                            <CheckBox IsChecked="{Binding ExpandTargetServers}" 
+                                                                                        Content="TargetServers" VerticalContentAlignment="Center" 
+                                                                                        ToolTip="Capture TargetServers" Margin="5,0,0,0"   />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_JobServerExpandMaskCurrent" Text="0" />
+                                                    
+                                                                </StackPanel>
+                                                            </dxlc:LayoutGroup>
+                                                <!--</Border>-->
+
+                                                </dxlc:LayoutControl>
+
+                                                <dxlc:LayoutControl Name="lc_ExpandJobServer" Style="{StaticResource SnapShotDetails}" >
+
+                                                    <!--<Border Style="{StaticResource ExpandWhatStyle}" >-->
+                                                            <dxlc:LayoutGroup Header="Calculate" View="GroupBox">
+                                                                <StackPanel>
+
+                                                                    <DockPanel>
+
+                                                                        <CheckBox IsChecked="{Binding IsMonitored}" 
+                                                                            Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                            DockPanel.Dock="Left"
+                                                                            Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}">
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+
+                                                                            <CheckBox IsChecked="{Binding ExpandAlertCategories}" 
+                                                                              Content="AlertCategories" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture AlertCategories" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandAlerts}" 
+                                                                              Content="Alerts" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture Alerts" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobCategories}" 
+                                                                              Content="JobCategories" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture JobCategories" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobs}" 
+                                                                              Content="Jobs" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture Jobs" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobSchedules}" 
+                                                                              Content="JobSchedules" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture JobSchedules" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandJobSteps}" 
+                                                                              Content="JobSteps" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture JobSteps" Margin="5,0,0,0" 
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandOperatorCategories}" 
+                                                                              Content="OperatorCategories" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture OperatorCategories" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandOperators}" 
+                                                                              Content="Operators" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture Operators" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandProxyAccounts}" 
+                                                                              Content="ProxyAccounts" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture ProxyAccounts" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandSharedSchedules}" 
+                                                                              Content="SharedSchedules" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture SharedSchedules" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandTargetServerGroups}" 
+                                                                              Content="TargetServerGroups" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture TargetServerGroups" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandTargetServers}" 
+                                                                              Content="TargetServers" VerticalContentAlignment="Center" 
+                                                                              ToolTip="Capture TargetServers" Margin="5,0,0,0"  
+                                                                              Checked="JobServerCalculator" Unchecked="JobServerCalculator" />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_JobServerExpandMask" Text="0" />
+
+                                                                </StackPanel>
+
+                                                            </dxlc:LayoutGroup>
+                                                            <!--</Border>-->
+
+                                                        </dxlc:LayoutControl>
+                                                                                               
+                                                    </dxlc:LayoutControl>
+                                                    
+                                                </Border>
+                                                
+                                            </dxlc:LayoutGroup>
+                                            
+                                            <dxlc:LayoutGroup Orientation="Horizontal" Header="Database" View="GroupBox">
+                                                
+                                                <Border BorderBrush="Black" BorderThickness="1">
+                                                    
+                                                    <dxlc:LayoutControl Orientation="Horizontal" Header="xxx" >
+                                                        
+                                                        <dxlc:LayoutControl Name="lc_ExpandDatabaseCurrent" Style="{StaticResource SnapShotDetails}" >
+
+                                                            <Border Style="{StaticResource ExpandWhatStyle}" >
+
+                                                                <StackPanel>
+                                                                    <Label Content="Current" />
+                                                    
+                                                                    <DockPanel>
+                                                                        <CheckBox IsChecked="{Binding IsMonitored}" 
+                                                                            Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                            DockPanel.Dock="Left" />
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}">
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+                                                            
+                                                                            <CheckBox IsChecked="{Binding ExpandTables}" 
+                                                                                      Content="Tables" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Tables" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandViews}" 
+                                                                                      Content="Views" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Views" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandStoredProcedures}" 
+                                                                                      Content="Stored Procedures" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB StoredProcedures" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandRoles}" 
+                                                                                      Content="Roles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Roles" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandUsers}" 
+                                                                                      Content="Users" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Users" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandTriggers}" 
+                                                                                      Content="Triggers" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB DdlTriggers" Margin="5,0,0,0"  />
+                                                                            <CheckBox IsChecked="{Binding ExpandUserDefinedFunctions}" 
+                                                                                      Content="UserDefined Functions" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB UserDefinedFunctions" Margin="5,0,0,0"  />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}" >
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+                                                                            <CheckBox IsChecked="{Binding ExpandFileGroups}" 
+                                                                                      Content="FileGroups" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandDataFiles}" 
+                                                                                      Content="DataFiles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0" />
+                                                                            <CheckBox IsChecked="{Binding ExpandLogFiles}" 
+                                                                                      Content="LogFiles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0" />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_DatabaseExpandMaskCurrent" Text="0" VerticalAlignment="Bottom" />
+                                                    
+                                                                </StackPanel>
+
+                                                            </Border>
+
+                                                        </dxlc:LayoutControl>
+
+                                                        <dxlc:LayoutControl Name="lc_ExpandDatabase" Style="{StaticResource SnapShotDetails}" >
+
+                                                            <Border Style="{StaticResource ExpandWhatStyle}" >
+
+                                                                <StackPanel>
+                                                                    <Label Content="Calculator" />
+
+                                                                    <DockPanel>
+                                                                        <CheckBox IsChecked="{Binding IsMonitored}" 
+                                                                            Content="Is Crawled" VerticalContentAlignment="Center" 
+                                                                            DockPanel.Dock="Left"
+                                                                            Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                    </DockPanel>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}">
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+
+                                                                            <CheckBox IsChecked="{Binding ExpandTables}" 
+                                                                                      Content="Tables" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Tables" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandViews}" 
+                                                                                      Content="Views" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Views" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandStoredProcedures}" 
+                                                                                      Content="Stored Procedures" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB StoredProcedures" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandRoles}" 
+                                                                                      Content="Roles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Roles" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandUsers}" 
+                                                                                      Content="Users" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB Users" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandTriggers}" 
+                                                                                      Content="Triggers" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB DdlTriggers" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandUserDefinedFunctions}" 
+                                                                                      Content="UserDefined Functions" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="Capture DB UserDefinedFunctions" Margin="5,0,0,0"  
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <Border Style="{StaticResource BorderStyle2}" >
+
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Capture" Margin="0,0,0,2" />
+                                                                            <CheckBox IsChecked="{Binding ExpandFileGroups}" 
+                                                                                      Content="FileGroups" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0" 
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandDataFiles}" 
+                                                                                      Content="DataFiles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0"                                                                       
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+                                                                            <CheckBox IsChecked="{Binding ExpandLogFiles}" 
+                                                                                      Content="LogFiles" VerticalContentAlignment="Center" 
+                                                                                      ToolTip="" Margin="5,0,0,0"                                                                       
+                                                                                      Checked="DatabaseCalculator" Unchecked="DatabaseCalculator" />
+
+                                                                        </StackPanel>
+
+                                                                    </Border>
+
+                                                                    <TextBlock Name="tb_DatabaseExpandMask" Text="0" VerticalAlignment="Bottom" />
+
+                                                                </StackPanel>
+
+                                                            </Border>
+
+                                                        </dxlc:LayoutControl>
+
+                                                    </dxlc:LayoutControl>
+                                                    
+                                                </Border>
+
+                                            </dxlc:LayoutGroup>
+                                            
+                                        </dxlc:LayoutGroup>
+                                        
+                                    </dxlc:LayoutGroup>
+                                    
+                                </dxlc:LayoutControl>
+
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+                        
+                    </dxdo:LayoutPanel>   
+                    
+                </dxdo:LayoutGroup>            
+            
+                <dxdo:DockLayoutManager.AutoHideGroups >
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Left" Style="{StaticResource AutoHideGroup_Left}" Visibility="Hidden" >
+
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Top" Style="{StaticResource AutoHideGroup_Top}" Visibility="Hidden" >
+
+                            <dxdo:LayoutPanel Caption="Save Changes">
+                                
+                                <WrapPanel>
+
+                                    <Button     Content="Save Changes" 
+                                                Click="saveButton_Click" />
+                                    <Button     Content="Cancel Changes" 
+                                                Click="undoButton_Click" />
+                                </WrapPanel>
+                                
+                            </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Right" Style="{StaticResource AutoHideGroup_Right}" >
+                        
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Bottom"  Style="{StaticResource AutoHideGroup_Bottom}" >
+
+
+                    </dxdo:AutoHideGroup>
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+        
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Name="lg_Footer" >
+
+            
+        </dxlc:LayoutGroup>
+        
+    </dxlc:LayoutControl>
+    
+</uiuc:wucDX_Base>

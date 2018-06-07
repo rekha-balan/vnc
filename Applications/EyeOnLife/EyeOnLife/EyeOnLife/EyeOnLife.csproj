@@ -1,0 +1,1309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>50054A4D79A6BC22DB2BEAE40E7D57C240BEDF41</ManifestCertificateThumbprint>
+    <PublishUrl>F:\Publish\EyeOnLife\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>49</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>EyeOnLife_3_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LPSQLMGMT01Lv|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\LPSQLMGMT01Lv\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icons\EyeOnLife.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33F0F530-DDBF-41ED-9DD6-84CAEBF89999}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyeOnLife</RootNamespace>
+    <AssemblyName>EyeOnLife</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MATRIXW8|AnyCPU'">
+    <OutputPath>bin\MATRIXW8\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PARTHENON|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\PARTHENON\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TRONW8|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TRONW8\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A097921NYP|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\A097921NYP\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Extensions, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.DXStyle.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.LightGray.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Black.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Blue.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Silver.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Black.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Blue.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Silver.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Seven.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.VS2010.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dmf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Dmf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Smo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="VNC.AssemblyHelper">
+      <HintPath>..\..\..\..\Common\VNC.AssemblyHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.Logging">
+      <HintPath>..\..\..\..\Common\VNC.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="VNC.XamlHelper">
+      <HintPath>..\..\..\..\Common\VNC.XamlHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ExternalProgram.cs" />
+    <Compile Include="Helpers\Command.cs" />
+    <Compile Include="Helpers\SMOInfo.cs" />
+    <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\Server.cs" />
+    <Compile Include="Helpers\SnapShots.cs" />
+    <Compile Include="Helpers\TelnetInterface.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Security.cs" />
+    <Compile Include="SnapShot.cs" />
+    <Compile Include="Test Data\LKUPData.cs" />
+    <Compile Include="Test Data\InstanceData.cs" />
+    <Compile Include="User_Interface\Content_Controls\cc1.xaml.cs">
+      <DependentUpon>cc1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Content_Controls\cc2.xaml.cs">
+      <DependentUpon>cc2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\CustomFormat.cs" />
+    <Compile Include="User_Interface\Help.cs" />
+    <Compile Include="User_Interface\User_Controls\Admin_CrawlerExpandSettings.xaml.cs">
+      <DependentUpon>Admin_CrawlerExpandSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\ApplicationUsage.xaml.cs">
+      <DependentUpon>ApplicationUsage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Add_Server.xaml.cs">
+      <DependentUpon>Add_Server.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_FileGroupInfo.xaml.cs">
+      <DependentUpon>DB_FileGroupInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucMasterDetailBase1.xaml.cs">
+      <DependentUpon>wucMasterDetailBase1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\ViewModes.cs" />
+    <Compile Include="User_Interface\SplashScreens\DXSplashScreen\LoadingSplashScreen.xaml.cs">
+      <DependentUpon>LoadingSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\UnboundColumns.cs" />
+    <Compile Include="User_Interface\PreserveColumnOrderBehavior.cs" />
+    <Compile Include="User_Interface\SplashScreens\SplashScreenItems.cs" />
+    <Compile Include="User_Interface\SplashScreens\wucInitialSplash.xaml.cs">
+      <DependentUpon>wucInitialSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\DisplayOptions.cs" />
+    <Compile Include="User_Interface\ViewMode.cs" />
+    <Compile Include="User_Interface\User_Controls\HelpAndTraining.xaml.cs">
+      <DependentUpon>HelpAndTraining.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Explore_Hierarchy.xaml.cs">
+      <DependentUpon>Explore_Hierarchy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Explore_Databases.xaml.cs">
+      <DependentUpon>Explore_Databases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Explore_DatabaseStorage.xaml.cs">
+      <DependentUpon>Explore_DatabaseStorage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Explore_JobServers.xaml.cs">
+      <DependentUpon>Explore_JobServers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Explore_InstanceStorage.xaml.cs">
+      <DependentUpon>Explore_InstanceStorage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\ToolBoxResources.cs" />
+    <Compile Include="User_Interface\User_Controls\Explore_Instances.xaml.cs">
+      <DependentUpon>Explore_Instances.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Add_Instance.xaml.cs">
+      <DependentUpon>Add_Instance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DatabaseInfo.xaml.cs">
+      <DependentUpon>DatabaseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Databases.xaml.cs">
+      <DependentUpon>Databases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_DataFileInfo.xaml.cs">
+      <DependentUpon>DB_DataFileInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_DataFiles.xaml.cs">
+      <DependentUpon>DB_DataFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_DdlTriggers.xaml.cs">
+      <DependentUpon>DB_DdlTriggers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_FileGroups.xaml.cs">
+      <DependentUpon>DB_FileGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_LogFileInfo.xaml.cs">
+      <DependentUpon>DB_LogFileInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_LogFiles.xaml.cs">
+      <DependentUpon>DB_LogFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_Roles.xaml.cs">
+      <DependentUpon>DB_Roles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_StoredProcedures.xaml.cs">
+      <DependentUpon>DB_StoredProcedures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_Tables.xaml.cs">
+      <DependentUpon>DB_Tables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_UserDefinedFunctions.xaml.cs">
+      <DependentUpon>DB_UserDefinedFunctions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_Users.xaml.cs">
+      <DependentUpon>DB_Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\DB_Views.xaml.cs">
+      <DependentUpon>DB_Views.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\InstanceInfo.xaml.cs">
+      <DependentUpon>InstanceInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JobServers.xaml.cs">
+      <DependentUpon>JobServers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_AlertCategories.xaml.cs">
+      <DependentUpon>JS_AlertCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_Alerts.xaml.cs">
+      <DependentUpon>JS_Alerts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_Jobs.xaml.cs">
+      <DependentUpon>JS_Jobs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_JobCategories.xaml.cs">
+      <DependentUpon>JS_JobCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_JobSchedules.xaml.cs">
+      <DependentUpon>JS_JobSchedules.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_JobSteps.xaml.cs">
+      <DependentUpon>JS_JobSteps.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_OperatorCategories.xaml.cs">
+      <DependentUpon>JS_OperatorCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_Operators.xaml.cs">
+      <DependentUpon>JS_Operators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_ProxyAccounts.xaml.cs">
+      <DependentUpon>JS_ProxyAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_SharedSchedules.xaml.cs">
+      <DependentUpon>JS_SharedSchedules.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_TargetServerGroups.xaml.cs">
+      <DependentUpon>JS_TargetServerGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\JS_TargetServers.xaml.cs">
+      <DependentUpon>JS_TargetServers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\LinkedServers.xaml.cs">
+      <DependentUpon>LinkedServers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucDX_LoadFromXMLFile.xaml.cs">
+      <DependentUpon>wucDX_LoadFromXMLFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Admin_EyeOnLife.xaml.cs">
+      <DependentUpon>Admin_EyeOnLife.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Logins.xaml.cs">
+      <DependentUpon>Logins.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\ServerInfo.xaml.cs">
+      <DependentUpon>ServerInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\ServerRoles.xaml.cs">
+      <DependentUpon>ServerRoles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\TB_Columns.xaml.cs">
+      <DependentUpon>TB_Columns.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\TB_Triggers.xaml.cs">
+      <DependentUpon>TB_Triggers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\VW_Columns.xaml.cs">
+      <DependentUpon>VW_Columns.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucDX_LayoutControlBase.xaml.cs">
+      <DependentUpon>wucDX_LayoutControlBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\SplashScreens\wucSplashScreenExplorerLayout.xaml.cs">
+      <DependentUpon>wucSplashScreenExplorerLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Admin_LKUPTables.xaml.cs">
+      <DependentUpon>Admin_LKUPTables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Servers.xaml.cs">
+      <DependentUpon>Servers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\VW_Triggers.xaml.cs">
+      <DependentUpon>VW_Triggers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucServers_Main.xaml.cs">
+      <DependentUpon>wucServers_Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucServers_DetailContent.xaml.cs">
+      <DependentUpon>wucServers_DetailContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucServers_MasterContent.xaml.cs">
+      <DependentUpon>wucServers_MasterContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\wucServers_OverviewContent.xaml.cs">
+      <DependentUpon>wucServers_OverviewContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\SplashScreens\wucSplashScreenTileLayout.xaml.cs">
+      <DependentUpon>wucSplashScreenTileLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\SplashScreens\SplashItem.cs" />
+    <Compile Include="User_Interface\Windows\DXRibbonWindowMain.xaml.cs">
+      <DependentUpon>DXRibbonWindowMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\GlobalSettings.xaml.cs">
+      <DependentUpon>GlobalSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\InstanceDatabaseInfo.xaml.cs">
+      <DependentUpon>InstanceDatabaseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_CommandOne.xaml.cs" />
+    <Compile Include="User_Interface\Windows\wndDX_CommandTelnet.xaml.cs">
+      <DependentUpon>wndDX_CommandTelnet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Helper.cs" />
+    <Compile Include="User_Interface\Windows\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\UserControlHost.xaml.cs">
+      <DependentUpon>UserControlHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_EditExtendedProperties_Instance.xaml.cs">
+      <DependentUpon>wndDX_EditExtendedProperties_Instance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_ExploreJobServers.xaml.cs">
+      <DependentUpon>wndDX_ExploreJobServers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_Explore_LKUPTables.xaml.cs">
+      <DependentUpon>wndDX_Explore_LKUPTables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_Explore_LookupTables.xaml.cs">
+      <DependentUpon>wndDX_Explore_LookupTables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_Explore_XBase.xaml.cs">
+      <DependentUpon>wndDX_Explore_XBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_LayoutControlBase.xaml.cs">
+      <DependentUpon>wndDX_LayoutControlBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\dxExploreEnvironments.xaml.cs">
+      <DependentUpon>dxExploreEnvironments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\wndDX_NewServer.xaml.cs">
+      <DependentUpon>wndDX_NewServer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\Windows\ProvideFeedback.xaml.cs">
+      <DependentUpon>ProvideFeedback.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\Instances.xaml.cs">
+      <DependentUpon>Instances.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\BrandingVisuals.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ColumnHeader_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\AutoHideGroup_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Display_StylesAndTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DatabaseListStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\InstanceListStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MasterListStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ServerListStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\StoryboardAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ToolBoxResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Content_Controls\cc1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Content_Controls\cc2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\SplashScreens\DXSplashScreen\LoadingSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\SplashScreens\wucInitialSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Admin_CrawlerExpandSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\ApplicationUsage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Add_Server.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_FileGroupInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\HelpAndTraining.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_Hierarchy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_Databases.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_DatabaseStorage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_JobServers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_InstanceStorage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Explore_Instances.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Add_Instance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DatabaseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Databases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_DataFileInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_DataFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_DdlTriggers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_FileGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_LogFileInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_LogFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_Roles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_StoredProcedures.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_Tables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_UserDefinedFunctions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\DB_Views.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\InstanceInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JobServers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_AlertCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_Alerts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_Jobs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_JobCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_JobSchedules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_JobSteps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_OperatorCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_Operators.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_ProxyAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_SharedSchedules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_TargetServerGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\JS_TargetServers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\LinkedServers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucDX_LoadFromXMLFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Admin_EyeOnLife.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Logins.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\ServerInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\ServerRoles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\TB_Columns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\TB_Triggers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\VW_Columns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucDX_LayoutControlBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\SplashScreens\wucSplashScreenExplorerLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\CylonEyeBall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Admin_LKUPTables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Servers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\VW_Triggers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucMasterDetailBase1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucServers_Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucServers_DetailContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucServers_MasterContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\wucServers_OverviewContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\SplashScreens\wucSplashScreenTileLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\EyeOnLifeTables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\DXRibbonWindowMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\GlobalSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\InstanceDatabaseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_CommandOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_CommandTelnet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\UserControlHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_EditExtendedProperties_Instance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_ExploreJobServers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_Explore_LKUPTables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_Explore_LookupTables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_Explore_XBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_LayoutControlBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User_Interface\Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\dxExploreEnvironments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="Data\ConfigData.cs" />
+    <Compile Include="ErrorNumbers.cs" />
+    <Compile Include="Exceptions\CustomExceptions.cs" />
+    <Compile Include="Detail3DManager.cs" />
+    <Compile Include="MasterListManager.cs" />
+    <Compile Include="User_Interface\User_Controls\CylonEyeBall.xaml.cs">
+      <DependentUpon>CylonEyeBall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Interface\User_Controls\IRefresh.cs" />
+    <Compile Include="User_Interface\User_Controls\wucDX_Base.cs" />
+    <Compile Include="User_Interface\User_Controls\EyeOnLifeTables.xaml.cs">
+      <DependentUpon>EyeOnLifeTables.xaml</DependentUpon>
+    </Compile>
+    <Page Include="User_Interface\Windows\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\wndDX_NewServer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\Windows\ProvideFeedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User_Interface\User_Controls\Instances.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="EyeOnLife_2_TemporaryKey.pfx" />
+    <None Include="EyeOnLife_3_TemporaryKey.pfx" />
+    <None Include="EyeOnLife_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\SQLInformation.Data.ApplicationDataSet.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Test Data\EyeOnLifeLKUPData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Documents\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\Media\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Media_PatientProtal.png" />
+    <Resource Include="Resources\Images\Media_UltrasoundPortal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Test Data\ServerData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="User_Interface\SplashScreens\DXSplashScreen\Image.png" />
+    <Resource Include="User_Interface\SplashScreens\DXSplashScreen\Logo.png" />
+    <Resource Include="VNCDeveloperMotivation.ico" />
+    <Resource Include="Resources\Images\Server Hierarchy.png" />
+    <Resource Include="Resources\Images\Instance Hierarchy.png" />
+    <Resource Include="Resources\Images\SnapShotCamera.png" />
+    <Resource Include="Resources\Images\RedBall.png" />
+    <Resource Include="Resources\Images\GreenBall.png" />
+    <Resource Include="Resources\Images\OrangeBall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\ToolBox.png" />
+    <Resource Include="Resources\Images\EyeOnLife.png" />
+    <Resource Include="Resources\Icons\EyeOnLife.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Resources\Icons\VNCDeveloperMotivation.ico" />
+    <Resource Include="Resources\Images\FilterEditor.png" />
+    <None Include="Resources\Images\Images_QuestionMark.png" />
+    <Resource Include="Resources\Images\QuestionMark.png" />
+    <Resource Include="Resources\Images\GroupByPanel.png" />
+    <Resource Include="Resources\Images\RowDetails.png" />
+    <Resource Include="Resources\Icons\cut-16x16.png" />
+    <Resource Include="Resources\Icons\cut-32x32.png" />
+    <Resource Include="Resources\Icons\save-16x16.png" />
+    <Resource Include="Resources\Icons\save-32x32.png" />
+    <Resource Include="Resources\Icons\save-as-16x16.png" />
+    <Resource Include="Resources\Icons\save-as-32x32.png" />
+    <Content Include="TODO.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\300px-IBM_Blue_Gene_P_supercomputer.jpg" />
+    <Resource Include="Resources\Images\iStock_000006362032XSmall1-300x225.jpg" />
+    <Resource Include="Resources\Images\server-room.jpg" />
+    <Resource Include="Resources\Images\databasetop.png" />
+    <Resource Include="Resources\Images\WatchWindow.bmp" />
+    <Content Include="Test Data\EyeOnLifeLKUPData.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Test Data\InstanceData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\VNCDeveloper.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\VNCDeveloperMotivation.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Data-Transfer-Rate.jpg" />
+    <Resource Include="Resources\Images\DB_Instance.png" />
+    <Resource Include="Resources\Images\edata_128.png" />
+    <Resource Include="Resources\Images\multi-server-icon.png" />
+    <Resource Include="Resources\Images\DB_Instance-icon.png" />
+    <Resource Include="Resources\Images\server-icon.png" />
+    <Resource Include="Resources\Images\VNCDeveloperMotivation.png" />
+    <Content Include="Test Data\TestWindowConsoleParameter.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADHelper\ADHelper.csproj">
+      <Project>{23820666-c581-49d0-9445-24451e26a4e5}</Project>
+      <Name>ADHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLInformation\SQLInformation.csproj">
+      <Project>{bf4598b1-6450-4042-97a3-ab3acafe8d84}</Project>
+      <Name>SQLInformation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="DevExpress.Utils.v16.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.Xpf.Printing.v16.2.Core">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Practices.EnterpriseLibrary.Logging">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Practices.ObjectBuilder">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.ConnectionInfo">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Diagnostics.STrace">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Dmf">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Management.Sdk.Sfc">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Management.SmoMetadataProvider">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Management.SqlParser">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.ServiceBrokerEnum">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Smo">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.SqlClrProvider">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.SqlEnum">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
