@@ -1,0 +1,150 @@
+﻿<r:RibbonWindow x:Class="SQLInformation.User_Interface.Windows.MainRibbonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"            
+        mc:Ignorable="d"         
+        xmlns:User_Controls="clr-namespace:SQLInformation.User_Interface.User_Controls" 
+        xmlns:xamlTransitions="clr-namespace:XamlTransitions;assembly=XamlTransitions"                  
+        xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"                
+        Title="MainRibbonSkeleton" Width="1024" Height="768" 
+        Loaded="OnWindowLoaded"
+        Initialized="OnWindowIntialized"                >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/BrandingVisuals.xaml"/>
+                <ResourceDictionary Source="/Resources/StoryboardAnimation.xaml"/>
+                <ResourceDictionary Source="/Resources/ControlStylesandTemplates.xaml"/>
+                <ResourceDictionary Source="/Resources/Logos.xaml"/>
+                <ResourceDictionary Source="/Resources/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="FontFamilyBrand1">#Helvetica Neue LT Std 67</FontFamily>
+
+        </ResourceDictionary>
+    </Window.Resources>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>   
+        
+        <!-- Ribbon -->
+        
+        <r:Ribbon x:Name="MainRibbon" 
+            Title="Ribbon Test" 
+            Grid.Row="0">
+            <r:Ribbon.ApplicationMenu>
+                <r:RibbonApplicationMenu>
+                    <!--<r:RibbonApplicationMenuItem Command="{Binding Path=ShowServers}" SmallImageSource="Resources/Images/Media_PatientProtal.png" />-->
+                    <!--<r:RibbonApplicationMenuItem Command="Instances" />
+                    <r:RibbonApplicationMenuItem Command="{Binding Path=ShowServers}" SmallImageSource="Resources/Images/Media_PatientProtal.png" />-->
+                    
+                    <r:RibbonApplicationMenuItem Click="ShowServers">
+                        <r:RibbonApplicationMenuItem.Template>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal" Height="50">
+                                    <TextBlock>Servers</TextBlock>                                    
+                                    <Image Source="/Resources/Images/server-icon.png"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </r:RibbonApplicationMenuItem.Template>
+                    </r:RibbonApplicationMenuItem>
+                    
+                    <r:RibbonApplicationMenuItem Click="ShowInstances">
+                        <r:RibbonApplicationMenuItem.Template>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal" Height="50">
+                                    <TextBlock>Instances</TextBlock>                                    
+                                    <Image Source="/Resources/Images/DB_Instance-icon.png"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </r:RibbonApplicationMenuItem.Template>
+                    </r:RibbonApplicationMenuItem>                    
+                    <!--<r:RibbonApplicationMenuItem Click="ShowServers" ImageSource="/Resources/Images/server-icon.png"  />-->
+                    <!--<r:RibbonApplicationMenuItem Command="Databases" />-->                    
+                    
+                    <r:RibbonSeparator />
+                    
+                    <!--<r:RibbonApplicationMenuItem Command="Exit" />-->
+                    <r:RibbonApplicationMenuItem Click="ShowAbout">
+                        <r:RibbonApplicationMenuItem.Template>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal" Height="50">
+                                    <TextBlock>About</TextBlock>                                    
+                                    <Image Source="/Resources/Images/VNCDeveloperMotivation.png"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </r:RibbonApplicationMenuItem.Template>
+                    </r:RibbonApplicationMenuItem>
+                        
+                </r:RibbonApplicationMenu>
+            </r:Ribbon.ApplicationMenu>
+            <r:Ribbon.QuickAccessToolBar>
+                <r:RibbonQuickAccessToolBar>
+                    <!--<r:RibbonButton Command="{StaticResource ShowServers}" />
+                    <r:RibbonButton Command="{StaticResource ShowInstances}" />-->
+                    <r:RibbonButton Click="ShowServers" LargeImageSource="/Resources/Images/server-icon.png" />
+                    <r:RibbonButton Command="{Binding Path=ShowInstances}" SmallImageSource="/Resources/Images/DB_Instance-icon.png"  />                    
+                </r:RibbonQuickAccessToolBar>
+            </r:Ribbon.QuickAccessToolBar>
+            <r:RibbonTab x:Name="AdministrationTab" Header="Administration">
+                <r:RibbonGroup x:Name="AdministrationGroup" Header="Administration">
+                    <r:RibbonButton x:Name="ButtonG2B1" Label="Admin Servers" Click="AdminServers"/>
+                    <r:RibbonButton x:Name="ButtonG2B2" Label="Admin Instances" Click="AdminInstances"/>
+                    <r:RibbonButton x:Name="btnAdministration" Label="Administer Tables" Click="OnAdministration_Click"/>                    
+                </r:RibbonGroup>
+            </r:RibbonTab>
+            <r:RibbonTab x:Name="DisplayTab" Header="Display">
+                <r:RibbonGroup x:Name="DisplayGroup" Header="Display">
+                    <r:RibbonButton x:Name="btnDisplayServers" Label="Display Servers" Click="OnDisplayServers_Click"/>
+                    <r:RibbonButton x:Name="btnDisplayInstances" Label="Display Instances" Click="OnDisplayInstances_Click"/>
+                    <r:RibbonButton x:Name="btnRoot3" Label="Display Root3" Click="OnDisplayRoot3_Click"/>                    
+                </r:RibbonGroup>
+            </r:RibbonTab>
+            <r:RibbonTab x:Name="ServersTab" Header="Servers" Visibility="Visible">
+                <r:RibbonGroup x:Name="ServersGroup" Header="Severs">
+                    <r:RibbonButton x:Name="btnServersGroup1" Label="Server Command 1" Click="btnServersGroup1_Click"/>
+                    <r:RibbonButton x:Name="btnServersGroup2" Label="Server Command 2" Click="btnServersGroup2_Click"/>
+                    <r:RibbonButton x:Name="btnServersGroup3" Label="Server Command 3" Click="btnServersGroup3_Click"/>
+                </r:RibbonGroup>
+            </r:RibbonTab>
+            <r:RibbonTab x:Name="InstancesTab" Header="Instances" Visibility="Visible">
+                <r:RibbonGroup x:Name="InstancesGroup" Header="Instances">
+                    <r:RibbonButton x:Name="btnInstancesGroup1" Label="Instance Command 1" Click="btnInstancesGroup1_Click"/>
+                    <r:RibbonButton x:Name="btnInstancesGroup2" Label="Instance Command 2" Click="btnInstancesGroup2_Click"/>
+                    <r:RibbonButton x:Name="btnInstancesGroup3" Label="Instance Command 3" Click="btnInstancesGroup3_Click"/>
+                </r:RibbonGroup>
+            </r:RibbonTab>           
+            <r:RibbonContextualTabGroup x:Name="RibbonContextTab1">
+                <r:RibbonContextualTabGroupItemsControl>
+                    <r:RibbonCheckBox>x</r:RibbonCheckBox>
+                </r:RibbonContextualTabGroupItemsControl>
+            </r:RibbonContextualTabGroup>
+            <r:RibbonMenuButton></r:RibbonMenuButton>
+            <r:RibbonButton></r:RibbonButton>
+        </r:Ribbon>        
+
+        <ContentControl x:Name="x1" Grid.Row="1">
+            <Grid x:Name="GlobalRoot">
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <User_Controls:wucServers x:Name="wucServers" Visibility="Collapsed" />
+                
+                <User_Controls:wucInstances x:Name="wucInstances" Visibility="Collapsed" />
+                
+                <!--<User_Controls:wucRoot1 x:Name="Root3" Visibility="Visible" />-->  
+                
+                <!--<Grid x:Name="Root3"
+                  Grid.Row="0"
+                  Visibility="Collapsed">
+                    <TextBlock>Root3</TextBlock>
+                </Grid>-->
+
+            </Grid>
+        </ContentControl>
+    </Grid>
+</r:RibbonWindow>

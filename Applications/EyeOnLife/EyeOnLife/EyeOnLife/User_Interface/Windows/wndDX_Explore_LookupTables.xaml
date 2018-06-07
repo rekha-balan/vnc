@@ -1,0 +1,234 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.wndDX_Explore_LookupTables"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"   
+    
+    mc:Ignorable="d"
+    Title="Lookup Tables" FontSize="16"
+    d:DesignWidth="1000" d:DesignHeight="800" 
+    WindowStartupLocation="CenterScreen"
+    Loaded="DXWindow_OnLoaded" SizeChanged="DXWindow_OnSizeChanged" >
+    
+    <dx:DXWindow.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+
+        <CollectionViewSource x:Key="lKUP_ADDomainsViewSource" Source="{Binding Path=LKUP_ADDomains, Source={StaticResource applicationDataSet}}" />
+        <CollectionViewSource x:Key="lKUP_EnvironmentsViewSource" Source="{Binding Path=LKUP_Environments, Source={StaticResource applicationDataSet}}" />
+        <CollectionViewSource x:Key="lKUP_SQLServerVersionsViewSource" Source="{Binding Path=LKUP_SQLServerVersions, Source={StaticResource applicationDataSet}}" />
+
+    </dx:DXWindow.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      Background="Transparent"
+                      VerticalAlignment="Stretch"
+                      DataContext="">
+        
+        <dxlc:LayoutControl.AvailableItems>
+            
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+           
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Name="lg_Body" >
+
+            <dxdo:DockLayoutManager 
+                Name="lg_Body_dlm" dx:StyleManager.ApplyApplicationTheme="True" FontSize="12" >
+
+                <dxdo:LayoutGroup Name="lg_Body_dlm_layoutGroup">
+
+                    <dxdo:LayoutPanel Name="lg_Body_dlm_layoutGroup_layoutPanelRoot"  ItemHeight="400" MaxHeight="1200" FontSize="12">
+
+                        <dxlc:LayoutControl 
+                            Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical" StretchContentVertically="False" Background="Transparent">
+
+                            <dxlc:LayoutGroup Name="groupContainer" Orientation="Vertical" View="Tabs">
+
+                                <dxlc:LayoutGroup.GroupBoxStyle>
+                                    <Style TargetType="dxlc:GroupBox">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="TitleVisibility" Value="Collapsed" />
+                                    </Style>
+                                </dxlc:LayoutGroup.GroupBoxStyle>
+
+                                <dxlc:LayoutGroup Header="AD Domains" Name="layoutGroup_ADDomains">
+                                    
+                                    <dxlc:LayoutItem Name="layoutItems_ADDomains" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <Grid>
+                                            <dxg:GridControl 
+                                                AutoPopulateColumns="True" 
+                                                ItemsSource="{Binding Source={StaticResource lKUP_ADDomainsViewSource}}" 
+                                                Name="lKUP_ADDomainsGridControl" >
+                                                <dxg:GridControl.Columns>
+                                                    <dxg:GridColumn FieldName="ID" Name="gc_ID1" Visible="False" />
+                                                    <dxg:GridColumn FieldName="ADDomainName" Name="gridColumn2" Fixed="Left" />
+                                                </dxg:GridControl.Columns>
+                                                <dxg:GridControl.View>
+                                                    <dxg:TableView Name="tableView" ShowFixedTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                                                </dxg:GridControl.View>
+                                            </dxg:GridControl>
+                                        </Grid>
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Environments" Name="layoutGroup_Environments">
+
+                                    <dxlc:LayoutItem Name="layoutItems_Environments" MaxHeight="1200" VerticalAlignment="Top">
+                                        
+                                        <Grid DataContext="{StaticResource lKUP_EnvironmentsViewSource}">
+                                            <dxg:GridControl AutoPopulateColumns="True" 
+                                                     ItemsSource="{Binding}" 
+                                                     Name="lKUP_EnvironmentsGridControl" >
+                                                <dxg:GridControl.Columns>
+                                                    <dxg:GridColumn FieldName="ID" Name="gc_ID2" Visible="False" />
+                                                    <dxg:GridColumn FieldName="EnvironmentName" Name="gridColumn4" Fixed="Left" />
+                                                    <dxg:GridColumn FieldName="ADDomain_ID" Name="gridColumn5" />
+                                                    <dxg:GridColumn FieldName="IPBase" Name="gridColumn6" />
+                                                    <dxg:GridColumn FieldName="IPMask" Name="gridColumn7" />
+                                                    <dxg:GridColumn FieldName="SecurityZone" Name="gridColumn8" />
+                                                </dxg:GridControl.Columns>
+                                                <dxg:GridControl.View>
+                                                    <dxg:TableView Name="tableView2" ShowFixedTotalSummary="True" />
+                                                </dxg:GridControl.View>
+                                            </dxg:GridControl>
+                                        </Grid>
+                                        
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Areas and Teams" Name="layoutGroup_AreasAndTeams">
+
+                                    <dxlc:LayoutItem Name="layoutItems_AreasAndTeams" MaxHeight="1200" VerticalAlignment="Top">
+
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="SQLServer Versions" Name="layoutGroup_SQLServerVersions">
+
+                                    <dxlc:LayoutItem Name="layoutItems_SQLServerVersions" MaxHeight="1200" VerticalAlignment="Top">
+
+                                        <Grid DataContext="{StaticResource lKUP_SQLServerVersionsViewSource}">
+                                            <dxg:GridControl 
+                                                AutoPopulateColumns="True" 
+                                                ItemsSource="{Binding}" 
+                                                Name="lKUP_SQLServerVersionsGridControl" >
+                                                <dxg:GridControl.Columns>
+                                                    <dxg:GridColumn FieldName="ID" Name="gc_ID3" />
+                                                    <dxg:GridColumn FieldName="Name" Name="gridColumn3" Fixed="Left" />
+                                                    <dxg:GridColumn FieldName="CodeName" Name="gridColumn9" />
+                                                    <dxg:GridColumn FieldName="RTM" Name="gridColumn10" />
+                                                    <dxg:GridColumn FieldName="SP1" Name="gridColumn11" />
+                                                    <dxg:GridColumn FieldName="SP2" Name="gridColumn12" />
+                                                    <dxg:GridColumn FieldName="SP3" Name="gridColumn13" />
+                                                    <dxg:GridColumn FieldName="SP4" Name="gridColumn14" />
+                                                </dxg:GridControl.Columns>
+                                                <dxg:GridControl.View>
+                                                    <dxg:TableView Name="tableView3" ShowFixedTotalSummary="True" BestFitArea="All" BestFitMode="Smart"  />
+                                                </dxg:GridControl.View>
+                                            </dxg:GridControl>
+                                        </Grid>
+                                        
+                                    </dxlc:LayoutItem>
+                                    
+                                </dxlc:LayoutGroup>
+                                
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+
+                    </dxdo:LayoutPanel>
+
+                </dxdo:LayoutGroup>
+
+                <dxdo:DockLayoutManager.AutoHideGroups>
+
+                    <dxdo:AutoHideGroup DockType="Left">
+
+                        <dxdo:LayoutPanel x:Name="paneToolbox" Caption="Toolbox" ItemWidth="150" >
+
+                            <StackPanel>
+
+                                <ContentControl Template="{StaticResource AdminWindowToolBoxControlsTemplate}" />
+
+                                <!--<Button x:Name="btnLoadFromXML" 
+                                Content="Load from XML File"
+                                Margin="2" Height="20" Width="Auto"
+                                Click="btnLoadFromXML_Click" />
+
+                                <Button x:Name="btnUpdateInfo" 
+                                Content="Fetch SMO Info"                     
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnUpdateInfo_Click" />
+
+                                <Button x:Name="btnUpdateServerInfo" Content="Sync Instance to Server"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnSyncInstanceToServer_Click" />
+
+                                <Button x:Name="btnSaveToXML" Content="Save To XML"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnSaveToXML_Click" />
+
+                                <Button x:Name="btnAddNewRow" Content="Add new row"
+                                Margin="2" Height="20" Width="Auto"  
+                                Click="btnAddNewRow_Click" />-->
+                            </StackPanel>
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                    <!--<dxdo:AutoHideGroup DockType="Right">
+
+                        <dxdo:LayoutPanel x:Name="paneExtendedProperties" Caption="Extended Properties" >
+                            <dxe:ComboBoxEdit HorizontalAlignment="Left" 
+                                              Name="comboBoxEdit1"
+                                              DisplayMember="Name" 
+                                              ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}"  
+                                              VerticalAlignment="Top" />
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>-->
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Name="layoutGroupFooter"
+                        VerticalAlignment="Top">
+            <TextBlock Text="layoutGroupFooter Stuff Goes Here" />
+        </dxlc:LayoutGroup>
+        
+    </dxlc:LayoutControl>
+    
+</dx:DXWindow>

@@ -1,0 +1,3 @@
+﻿ALTER DATABASE [$(DatabaseName)]
+    ADD FILE (NAME = [SQLMonitorDB], FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL10.SQL2008\MSSQL\DATA\SQLMonitorDB.mdf', SIZE = 2304 KB, FILEGROWTH = 1024 KB) TO FILEGROUP [PRIMARY];
+

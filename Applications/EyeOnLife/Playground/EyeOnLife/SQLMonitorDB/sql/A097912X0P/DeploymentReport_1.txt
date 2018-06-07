@@ -1,0 +1,55 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[JSAlerts]
+       [dbo].[JSJobs]
+       [dbo].[JSJobSchedules]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column JobID in table [dbo].[JSAlerts] is currently  INT NULL but is being changed to  UNIQUEIDENTIFIER
+         NULL. There is no implicit or explicit conversion.
+       The type for column Severity in table [dbo].[JSAlerts] is currently  VARCHAR (256) NULL but is being changed to  INT
+         NULL. Data loss could occur.
+       The column [dbo].[JSJobSchedules].[JobServer_ID] is being dropped, data loss could occur.
+
+** User actions
+     Drop
+       on [dbo].[JSAlerts].[ID] (Default Constraint)
+       on [dbo].[JSAlerts].[IsEnabled] (Default Constraint)
+       on [dbo].[JSJobs].[ID] (Default Constraint)
+       on [dbo].[JSJobs].[HasSchedule] (Default Constraint)
+       on [dbo].[JSJobs].[HasServer] (Default Constraint)
+       on [dbo].[JSJobs].[HasStep] (Default Constraint)
+       on [dbo].[JSJobs].[IsEnabled] (Default Constraint)
+       on [dbo].[JSJobSchedules].[ID] (Default Constraint)
+       on [dbo].[Servers].[DefaultInstanceExpandMask] (Default Constraint)
+       [dbo].[FK_JSJobSchedules_JobServers] (Foreign Key)
+     Table rebuild
+       [dbo].[JSAlerts] (Table)
+       [dbo].[JSJobs] (Table)
+       [dbo].[JSJobSchedules] (Table)
+     Alter
+       [dbo].[Servers] (Table)
+     Create
+       [dbo].[FK_JSJobSchedules_JSJobs] (Foreign Key)
+       [dbo].[FK_JSJobSchedules_JSSharedSchedules] (Foreign Key)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_JSAlerts_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobs_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobs_Instances] (Foreign Key)
+       [dbo].[FK_JSJobSteps_JSJobs] (Foreign Key)
+     Create
+       Default Constraint on [dbo].[Servers].[DefaultInstanceExpandMask] (Default Constraint)
+       [dbo].[FK_JSAlerts_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobs_JobServers] (Foreign Key)
+       [dbo].[FK_JSJobs_Instances] (Foreign Key)
+       [dbo].[FK_JSJobSteps_JSJobs] (Foreign Key)
+
+The type for column JobID in table [dbo].[JSAlerts] is currently  INT NULL but is being changed to  UNIQUEIDENTIFIER NULL. There is no implicit or explicit conversion.
+The type for column Severity in table [dbo].[JSAlerts] is currently  VARCHAR (256) NULL but is being changed to  INT NULL. Data loss could occur.
+The column [dbo].[JSJobSchedules].[JobServer_ID] is being dropped, data loss could occur.
+

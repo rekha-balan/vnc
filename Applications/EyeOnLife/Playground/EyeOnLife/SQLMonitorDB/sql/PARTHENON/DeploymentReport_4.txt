@@ -1,0 +1,54 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Databases]
+       [dbo].[DBUsers]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       on [dbo].[Databases].[ID] (Default Constraint)
+       on [dbo].[Databases].[IsMonitored] (Default Constraint)
+       on [dbo].[Databases].[ExpandDataFiles] (Default Constraint)
+       on [dbo].[Databases].[ExpandFileGroups] (Default Constraint)
+       on [dbo].[Databases].[ExpandLogFiles] (Default Constraint)
+       on [dbo].[Databases].[ExpandRoles] (Default Constraint)
+       on [dbo].[Databases].[ExpandStoredProcedures] (Default Constraint)
+       on [dbo].[Databases].[ExpandTables] (Default Constraint)
+       on [dbo].[Databases].[ExpandTriggers] (Default Constraint)
+       on [dbo].[Databases].[ExpandUserDefinedFunctions] (Default Constraint)
+       on [dbo].[Databases].[ExpandUsers] (Default Constraint)
+       on [dbo].[Databases].[ExpandViews] (Default Constraint)
+     Table rebuild
+       [dbo].[Databases] (Table)
+       [dbo].[DBUsers] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_DBDdlTriggers_Databases] (Foreign Key)
+       [dbo].[FK_DBFileGroups_Databases] (Foreign Key)
+       [dbo].[FK_DBRoles_Databases] (Foreign Key)
+       [dbo].[FK_DBStoredProcedures_Databases] (Foreign Key)
+       [dbo].[FK_DBTables_Databases] (Foreign Key)
+       [dbo].[FK_DBUserDefinedFunctions_Databases] (Foreign Key)
+       [dbo].[FK_DBUsers_Databases] (Foreign Key)
+       [dbo].[FK_DBViews_Databases] (Foreign Key)
+       [dbo].[FK_DBLogFiles_Databases] (Foreign Key)
+       [dbo].[FK_Databases_Instances] (Foreign Key)
+       [dbo].[FK_DatbaseInfo_Databases] (Foreign Key)
+     Create
+       [dbo].[FK_DBDdlTriggers_Databases] (Foreign Key)
+       [dbo].[FK_DBFileGroups_Databases] (Foreign Key)
+       [dbo].[FK_DBRoles_Databases] (Foreign Key)
+       [dbo].[FK_DBStoredProcedures_Databases] (Foreign Key)
+       [dbo].[FK_DBTables_Databases] (Foreign Key)
+       [dbo].[FK_DBUserDefinedFunctions_Databases] (Foreign Key)
+       [dbo].[FK_DBUsers_Databases] (Foreign Key)
+       [dbo].[FK_DBViews_Databases] (Foreign Key)
+       [dbo].[FK_DBLogFiles_Databases] (Foreign Key)
+       [dbo].[FK_Databases_Instances] (Foreign Key)
+       [dbo].[FK_DatbaseInfo_Databases] (Foreign Key)

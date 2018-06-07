@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[LKUP_Teams]
+(
+	[ID] INT NOT NULL PRIMARY KEY, 
+    [TeamName] VARCHAR(50) NOT NULL
+)

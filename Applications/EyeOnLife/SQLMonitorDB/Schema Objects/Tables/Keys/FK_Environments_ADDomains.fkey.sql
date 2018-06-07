@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[LKUP_Environments]
+    ADD CONSTRAINT [FK_Environments_ADDomains] FOREIGN KEY ([ADDomain_ID]) REFERENCES [dbo].[LKUP_ADDomains] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

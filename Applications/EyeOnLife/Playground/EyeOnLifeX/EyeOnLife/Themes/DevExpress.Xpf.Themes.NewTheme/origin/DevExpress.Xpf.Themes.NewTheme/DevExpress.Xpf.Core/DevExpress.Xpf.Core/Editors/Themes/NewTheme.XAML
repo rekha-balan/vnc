@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/StandardControlStyles.xaml" />
+        <!--
+          skipped
+          Source ={dx:UtilsResource Themes/NewTheme/Popup.xaml}
+          ignoreSource = Popup.xaml-->
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ButtonEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/SpinEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/CheckEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ComboBoxEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/MemoEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/Generic/ColorChooser.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ColorChooser.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ErrorPresenter.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/PopupBaseEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/PopupListBox.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/TextEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/DateEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ListBoxEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/FilterControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/FilterPanelControlBase.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ExpressionEditorControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/TrackBarEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ProgressBarEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/PasswordBoxEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ColorEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/CalcEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/ImageEdit.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/DateNavigator.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme/DataPager.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/Generic/FontEdit.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

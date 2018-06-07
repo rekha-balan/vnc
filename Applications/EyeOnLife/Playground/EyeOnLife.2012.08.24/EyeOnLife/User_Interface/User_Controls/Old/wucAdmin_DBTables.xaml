@@ -1,0 +1,290 @@
+﻿<ui:ucBase 
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucAdmin_DBTables"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:ui="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"    
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"      
+    mc:Ignorable="d" 
+    d:DesignWidth="800" d:DesignHeight="400" Loaded="ucBase_Loaded"  >
+    <ui:ucBase.Resources>
+        <localData:ApplicationDataSet x:Key="applicationDataSet"/>
+
+        <CollectionViewSource x:Key="tablesViewSource" 
+                              Source="Common.ApplicationDataSet.Tables"/>
+        <CollectionViewSource x:Key="databasesViewSource" 
+                              Source="Common.ApplicationDataSet.Databases"/>
+        <CollectionViewSource x:Key="instancesViewSource" 
+                              Source="Common.ApplicationDataSet.Instances"/>
+        <CollectionViewSource x:Key="instancesDatabasesViewSource" 
+                              Source="{Binding FK_Databases_Instances, Source={StaticResource instancesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversViewSource" 
+                              Source="{Binding Servers, Source={StaticResource applicationDataSet}}"/>
+        <CollectionViewSource x:Key="serversInstancesViewSource" 
+                              Source="{Binding FK_Instances_Servers, Source={StaticResource serversViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesViewSource" 
+                              Source="{Binding FK_Databases_Instances, Source={StaticResource serversInstancesViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBTablesViewSource" 
+                              Source="{Binding FK_DBTables_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBStoredProceduresViewSource" 
+                              Source="{Binding FK_DBStoredProcedures_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+        
+        <Style x:Key="detailInfoStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="BlanchedAlmond" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <CollectionViewSource x:Key="dBTablesViewSource" Source="{Binding DBTables, Source={StaticResource applicationDataSet}}"/>
+        <!--<CollectionViewSource x:Key="databasesViewSource" Source="{Binding Databases, Source={StaticResource applicationDataSet}}"/>-->
+    </ui:ucBase.Resources>
+    
+    <Grid DataContext="{StaticResource tablesViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="150" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel 
+            Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel 
+                Orientation="Horizontal" 
+                Margin="5" 
+                DockPanel.Dock="Left" 
+                VerticalAlignment="Center">
+                <CheckBox x:Name="readOnlyCheckBox" Margin="5"
+                    Content="Read only" IsChecked="False"
+                    Checked="readOnlyCheckBox_Checked"
+                    Unchecked="readOnlyCheckBox_UnChecked" />
+                <CheckBox x:Name="canAddCheckBox" Margin="5"
+                    Content="Can add" IsChecked="True"
+                    Checked="canAddCheckBox_Checked"
+                    Unchecked="canAddCheckBox_UnChecked" />
+                <CheckBox x:Name="canDeleteCheckBox" Margin="5"
+                    Content="Can delete" IsChecked="True"
+                    Checked="canDeleteCheckBox_Checked"
+                    Unchecked="canDeleteCheckBox_UnChecked" />
+            </StackPanel>
+
+            <StackPanel 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center" 
+                Orientation="Horizontal"
+                Width="Auto">
+                <Button Content="Load from XML File" Width="Auto" x:Name="btnLoadFromXML" Click="btnLoadFromXML_Click" />
+                <Button Content="Update Info" Width="Auto" x:Name="btnUpdateInfo" Click="btnUpdateInfo_Click" />
+                <!--<Button Content="Load Databases" Width="Auto" x:Name="btnLoadDatabases" Click="btnLoadDatabases_Click" />-->
+                <Button x:Name="saveButton" Content="Save"
+                    Margin="10" HorizontalAlignment="Right"
+                    Width="75"
+                    Click="saveButton_Click"/>
+                <Button x:Name="undoButton" Content="Undo"
+                    Margin="10" HorizontalAlignment="Right"
+                    Width="75" 
+                    Click="undoButton_Click"/>
+            </StackPanel>
+
+        </DockPanel>
+
+        <!--To add, just click in empty row and start typing 
+           To delete, just click in a row and press Delete key-->
+
+        <DataGrid x:Name="dataGrid" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="1" Grid.ColumnSpan="2" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding Source={StaticResource tablesViewSource}}" 
+                  RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>-->
+                <DataGridTextColumn x:Name="tableNameColumn" Binding="{Binding TableName}" Header="Table Name" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="table_IDColumn" Binding="{Binding Table_ID}" Header="Table ID" Width="SizeToCells"/>
+                <DataGridComboBoxColumn x:Name="databaseNameColumn"
+                    DisplayMemberPath="DatabaseName"
+                    Header="Database Name" MinWidth="40"                                        
+                    ItemsSource="{Binding Source={StaticResource databasesViewSource}}"
+                    SelectedValuePath="ID"
+                    SelectedValueBinding="{Binding Path=Database_ID}" />                
+                <!--<DataGridTextColumn x:Name="database_IDColumn" Binding="{Binding Database_ID}" Header="Database ID" Width="SizeToCells"/>-->
+                <DataGridTextColumn x:Name="ownerColumn" Binding="{Binding Owner}" Header="Owner" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="eP_PurposeColumn" Binding="{Binding EP_Purpose}" Header="EP Purpose" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="createDateColumn" Header="Create Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding CreateDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="dataSpaceUsedColumn" Binding="{Binding DataSpaceUsed}" Header="Data Space Used" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="dateLastModifiedColumn" Header="Date Last Modified" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateLastModified, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="rowCountColumn" Binding="{Binding RowCount}" Header="Row Count" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- This is the detail below the grid -->
+
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="5" >
+            <Grid 
+                DataContext="{Binding ElementName=dataGrid, Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ID:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ID}" 
+                           Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <TextBlock Text="DB Name:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox x:Name="databaseNameColumn2"
+                        Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                        DisplayMemberPath="Name"                          
+                        ItemsSource="{Binding Source={StaticResource databasesViewSource}}"
+                        SelectedValuePath="ID"
+                        SelectedValue="{Binding Path=Database_ID}" />    
+                
+                <!--<TextBlock Text="DB Name:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />                
+                <ListView x:Name="databaseNameColumn3"
+                          Grid.Row="2" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                          DisplayMemberPath="Name"
+                          MaxHeight="20"
+                          ItemsSource="{Binding Source={StaticResource databasesViewSource}}"
+                          SelectedValuePath="ID"
+                          SelectedValue="{Binding Path=Database_ID}" />-->
+
+                
+                <TextBlock Text="Instance ID:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox x:Name="instanceIDcolumn"
+                          Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                          DisplayMemberPath="Owner"
+                          ItemsSource="{Binding Source={StaticResource databasesViewSource}}"
+                          SelectedValuePath="ID"
+                          SelectedValue="{Binding Path=Database_ID}" />  
+                
+                <!--<TextBlock Text="Instance ID:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox x:Name="instanceIDcolumn2"
+                          Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                          DisplayMemberPath="Instance_ID"
+                          ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBTablesViewSource}}"
+                          SelectedValuePath="ID"
+                          SelectedValue="{Binding Path=Database_ID}" />-->
+
+                <!--<TextBlock Text="Instance ID:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox x:Name="instanceIDcolumn3"
+                          Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                          DisplayMemberPath="InstanceName"
+                          ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBTablesViewSource}}"
+                          SelectedValuePath="ID"
+                          SelectedValue="{Binding Path=Database_ID}" />-->                                
+                
+                <!--<DataGridComboBoxColumn x:Name="databaseNameColumn"
+                    DisplayMemberPath="Name"
+                    Header="Database Name" MinWidth="40"                                        
+                    ItemsSource="{Binding Source={StaticResource databasesViewSource}}"
+                    SelectedValuePath="ID"
+                    SelectedValueBinding="{Binding Path=Database_ID}" />-->
+                
+                
+                <!--<TextBlock Text="Collation:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Collation}" 
+                           Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center"  />-->
+
+                <!--<TextBlock Text="Is Clustered:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding IsClustered}" 
+                           Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Edition:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Edition}" 
+                           Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="EngineEdition:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding EngineEdition}" 
+                           Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ServiceName:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ServiceName}" 
+                           Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ServiceInstanceId:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ServiceInstanceId}" 
+                           Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <TextBlock Text="DB ID:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Database_ID}"  
+                           Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <!--<TextBlock Text="Platform:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Platform}"  
+                           Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Processors:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Processors}" 
+                           Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Product:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Product}" 
+                           Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ProductLevel:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ProductLevel}" 
+                           Grid.Row="4" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Version:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Version}" 
+                           Grid.Row="5" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Server_ID:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Server_ID}" 
+                           Grid.Row="6" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="20" />-->
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+    
+</ui:ucBase>

@@ -1,0 +1,499 @@
+﻿<dxr:DXRibbonWindow
+    x:Class="EyeOnLife.User_Interface.Windows.DXRibbonWindowMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"  
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxch="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"         
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+
+    xmlns:my="clr-namespace:EyeOnLife.User_Interface.Windows"
+    xmlns:local="clr-namespace:EyeOnLife"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"     
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"    
+    xmlns:uiss="clr-namespace:EyeOnLife.User_Interface.SplashScreens"
+    xmlns:uiw="clr-namespace:EyeOnLife.User_Interface.Windows"    
+    Title="EyeOnLife" 
+    Name="DXRibbonWindowMain1"
+    Width="900" Height="700"
+    MinWidth="900" MinHeight="700"
+    WindowStartupLocation="CenterScreen"
+    Loaded="OnWindowLoaded" 
+    dx:DXSplashScreen.SplashScreenType = "{x:Type uiss:LoadingSplashScreen}"
+    Icon="/EyeOnLife;component/Resources/Icons/EyeOnLife.ico" >
+
+    <dxr:DXRibbonWindow.Resources>
+
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+
+        <Style x:Key="AboutLayout" >
+            <Setter Property="dxlc:LayoutItem.LabelPosition" Value="Top" />
+            <Setter Property="dxlc:LayoutItem.LabelHorizontalAlignment" Value="Left" />
+            <Setter Property="dxlc:LayoutItem.VerticalAlignment" Value="Stretch" />
+        </Style>
+
+    </dxr:DXRibbonWindow.Resources>
+
+    <Grid>
+
+        <dxb:BarManager CreateStandardLayout="True">
+            <!--<dxb:BarManager.Resources>
+            <dxr:ApplicationMenu x:Key="appMenu">
+                <dxr:ApplicationMenu.ItemLinks>
+                    <dxb:BarItemLink BarItemName="sbFile" />
+                    <dxb:BarItemLink BarItemName="bTools" />
+                    <dxb:BarItemLink BarItemName="bAbout" />
+                    <dxb:BarItemLink BarItemName="bExit" />
+                </dxr:ApplicationMenu.ItemLinks>
+            </dxr:ApplicationMenu>
+        </dxb:BarManager.Resources>-->
+
+            <dxb:BarManager.Items>
+
+                <dxb:BarEditItem Name="bei_DetailViewMode" Content="DetailViewMode" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                                 EditValueChanged="bei_DetailViewMode_EditValueChanged" >
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings IsTextEditable="False">
+                            <dxe:ComboBoxEditSettings.Items>
+                                <dxe:ComboBoxEditItem Content="Tooltip" Tag="tooltip" />
+                                <dxe:ComboBoxEditItem Content="SelectedRow" Tag="selected" />
+                                <dxe:ComboBoxEditItem Content="DetailedRows" Tag="details" />
+                                <dxe:ComboBoxEditItem Content="None" Tag="none" />
+                            </dxe:ComboBoxEditSettings.Items>
+                        </dxe:ComboBoxEditSettings>
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+
+                <dxb:BarEditItem Name="bei_VisualTheme" Content="Visual Theme" EditWidth="100" ClosePopupOnChangingEditValue="True" 
+                                 EditValueChanged="bei_VisualTheme_EditValueChanged" >
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings IsTextEditable="False" Name="cbes_Themes" ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_AdvancedMode" 
+                    Content="Enable Advanced Views" 
+                    Hint="Enable Additional Views and Command Panels"
+                    ItemClick="OnAdvancedMode_Click" 
+                    ToolTip="bci advanced mode"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_AdministratorMode" 
+                    Content="Enable Updates" 
+                    Hint="Enable grids for updating"
+                    ItemClick="OnAdministratorMode_Click"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_DeveloperMode" 
+                    Content="Enable Developer" 
+                    ItemClick="OnDeveloperMode_Click"/>
+                
+                <dxb:BarCheckItem 
+                    Name="bci_BetaMode" 
+                    Content="Enable Beta Options" 
+                    Hint="Enable half baked ideas"
+                    ItemClick="OnBetaMode_Clicked"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveCSV" 
+                    Content="Save as .CSV" 
+                    Hint="Save all information in the displayed grid as a .CSV file"                       
+                    Glyph="/EyeOnLife;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/EyeOnLife;component/Resources/Icons/save-as-32x32.png"
+                    ItemClick="OnFileSave_Click" 
+                    Tag="csv"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveXLS" 
+                    Content="Save as .XLS" 
+                    Hint="Save all information in the displayed grid as an .XLS file"                      
+                    Glyph="/EyeOnLife;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/EyeOnLife;component/Resources/Icons/save-as-32x32.png"                    
+                    ItemClick="OnFileSave_Click" 
+                    Tag="xls"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_SaveXLSX" 
+                    Content="Save as .XLSX" 
+                    Hint="Save all information in the displayed grid as an .XLSX file"                      
+                    Glyph="/EyeOnLife;component/Resources/Icons/save-as-16x16.png"
+                    LargeGlyph="/EyeOnLife;component/Resources/Icons/save-as-32x32.png"                    
+                    ItemClick="OnFileSave_Click" 
+                    Tag="xlsx"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Settings" 
+                    Content="Settings" 
+                    ItemClick="OnSettings_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_About" 
+                    Content="About" 
+                    ItemClick="OnAboutClick"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Feedback" 
+                    Content="Provide Feedback" 
+                    ItemClick="OnSendFeedback_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Help" 
+                    Content="Help" 
+                    ItemClick="OnHelp_Click"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Exit" 
+                    Content="Exit" 
+                    ItemClick="OnExit_Click"/>
+
+                <!-- Standard Stuff -->
+
+                <dxb:BarButtonItem 
+                    Name="bbi_Servers" 
+                    Content="Servers"
+                    Hint="Information about the Servers hosting SQL Instances."                      
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Servers" />
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Instances" 
+                    Content="Instances" 
+                    Hint="Information about SQL Instances."                      
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Instances"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Databases" 
+                    Content="Databases" 
+                    Hint="Information about SQL Databases."                       
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Databases"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Info" 
+                    Content="Environment Info" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Admin_LKUPTables"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Training" 
+                    Content="Help and Training" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.HelpAndTraining"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_DatabaseExplorer" 
+                    Content="Database Explorer" 
+                    Hint="Hierarchical display of information about SQL Databases and content."                       
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Explore_Databases"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_DatabaseStorageExplorer" 
+                    Content="Database Storage Explorer" 
+                    Hint="Hierarchical display of information about SQL Database storage."                     
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Explore_DatabaseStorage"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_Logins" 
+                    Content="Instance Logins" 
+                    Hint="Logins by Instance"                             
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Logins"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_DB_StoredProcedures" 
+                    Content="Database Stored Procedures" 
+                    Hint="Stored Procedures by Database"
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.DB_StoredProcedures"/>
+
+                <dxb:BarButtonItem 
+                    Name="bbi_DB_Tables" 
+                    Content="Database Tables" 
+                    Hint="Tables by Database"
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.DB_Tables"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_EyeOnLifeTables" 
+                    Content="Individual Tables" 
+                    Hint="Access to all the individual tables in SQLMonitorDB"                    
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.EyeOnLifeTables"/>
+
+                <!-- Beta Stuff -->
+
+                <dxb:BarButtonItem 
+                    Name="bbi_ExploreHierarchy" 
+                    Content="Explore Hierarchy" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Explore_Hierarchy"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_InstanceStorageExplorer" 
+                    Content="Instance Storage Explorer" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Explore_InstanceStorage"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_ExporeJobServers" 
+                    Content="Explore JobServers" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Explore_JobServers"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Tiles" 
+                    Content="Tiles" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="SplashScreens.wucSplashScreenTileLayout"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_ExploratoryPOC" 
+                    Content="Exploratory POC" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.wucServers_Main"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_Charts" 
+                    Content="Explore Charts" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.wucMasterDetailBase1"/>
+
+                <!-- Admin Stuff -->
+
+                <dxb:BarButtonItem 
+                    Name="bbi_AddNewInstance" 
+                    Content="Add New Instance" 
+                    ItemClick="OnShowInNewWindow_Click" 
+                    Tag="User_Controls.Add_Instance"/>
+                <dxb:BarButtonItem 
+                    Name="bbi_DeleteItems" 
+                    Content="Delete Selected Item(s)" 
+                    ItemClick="OnDeleteItems_Click" 
+                    Tag=""/>
+                <dxb:BarButtonItem 
+                    Name="bbi_UpdateIPAddresses" 
+                    Content="Update Server IP Addresses" 
+                    ItemClick="OnUpdateIPAddresses_Click" 
+                    Tag=""/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_ApplicationUsage" 
+                    Content="View Application Usage" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.ApplicationUsage"/>
+                <dxb:BarButtonItem 
+                    Name="bbi_LoadInstances" 
+                    Content="Load Instances from XML" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag=""/>
+                <dxb:BarButtonItem 
+                    Name="bbi_ConfigureCrawler" 
+                    Content="Configure Crawler" 
+                    ItemClick="OnShowInCurrentWindow_Click" 
+                    Tag="User_Controls.Admin_CrawlerExpandSettings"/>
+                <dxb:BarButtonItem 
+                    Name="bbi_TakeWeeklySnapshot" 
+                    Content="Take Weekly Snapshot" 
+                    Hint="Collects data using the current Weekly Settings."                    
+                    Glyph="/EyeOnLife;component/Resources/Images/SnapShotCamera.png"                    
+                    ItemClick="OnTakeSnapshot_Click" 
+                    Tag="Weekly" />
+
+                <dxb:BarButtonItem 
+                    Name="bbi_TakeDailySnapshot" 
+                    Content="Take Daily Snapshot" 
+                    Hint="Collects data using the current Daily Settings."
+                    Glyph="/EyeOnLife;component/Resources/Images/SnapShotCamera.png"                      
+                    ItemClick="OnTakeSnapshot_Click" 
+                    Tag="Daily"/>
+                
+                <dxb:BarButtonItem 
+                    Name="bbi_TakeIntraDaySnapshot" 
+                    Content="Take IntraDay Snapshot" 
+                    Hint="Collects data using the current IntraDay Settings."                    
+                    Glyph="/EyeOnLife;component/Resources/Images/SnapShotCamera.png"                      
+                    ItemClick="OnTakeSnapshot_Click" 
+                    Tag="IntraDay"/>
+
+                <!-- Menus start here -->
+                
+                <dxb:BarSubItem Name="bsi_File" Content="File">
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveCSV" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveXLS" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_SaveXLSX" />
+                    <dxb:BarItemLinkSeparator />                    
+                    <dxb:BarButtonItemLink BarItemName="bbi_Exit" />
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_View" Content="View"  >
+                    <!-- These items are always visible -->
+                    <dxb:BarButtonItemLink BarItemName="bbi_Servers" IsVisible="True" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Instances" IsVisible="True"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Databases" IsVisible="True"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_DatabaseExplorer" IsVisible="True" />
+                    
+                    <dxb:BarItemLinkSeparator />    
+                    
+                    <dxb:BarButtonItemLink BarItemName="bbi_Info" IsVisible="True"  />
+
+                    <dxb:BarItemLinkSeparator />
+                    
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_InstanceExplorer" Name="bbil_InstanceExplorer" IsVisible="False"  />-->
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_DatabaseExplorer" Name="bbil_DatabaseExplorer" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />-->
+                    <!--<dxb:BarItemLinkSeparator />-->                    
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_InstanceStorageExplorer" Name="bbil_InstanceStorageExplorer" IsVisible="False"  />-->
+                    <dxb:BarButtonItemLink BarItemName="bbi_DatabaseStorageExplorer" Name="bbil_DatabaseStorageExplorer" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
+                    
+                    <dxb:BarItemLinkSeparator />
+
+                    <dxb:BarButtonItemLink BarItemName="bbi_Logins" Name="bbil_Logins" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_DB_Tables" Name="bbil_DB_Tables" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_DB_StoredProcedures" Name="bbil_DB_StoredProcedures" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
+                    
+                    <dxb:BarItemLinkSeparator />
+                    
+                    <dxb:BarButtonItemLink BarItemName="bbi_EyeOnLifeTables" Name="bbil_EyeOnLifeTables" 
+                                           IsVisible="{Binding IsAdvancedMode, ElementName=DXRibbonWindowMain1}"  />
+                    
+                    <dxb:BarItemLinkSeparator />  
+                    
+                    <dxb:BarCheckItemLink BarItemName="bci_AdvancedMode" />  
+                    
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Tools" Content="Settings" ToolTip="bsi tools" >
+                    <dxb:BarEditItemLink BarItemName="bei_DetailViewMode" />                    
+                    <dxb:BarEditItemLink BarItemName="bei_VisualTheme" />
+                    <!--<dxb:BarCheckItemLink BarItemName="bci_BetaMode" Name="bcil_BetaMode" IsEnabled="False" IsVisible="False" />-->
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_Settings" />-->
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Admin" Content="Administration" 
+                                IsVisible="{Binding Path=(local:Common.IsAdministrator)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsAdministrator)}"  >
+                    <dxb:BarCheckItemLink BarItemName="bci_AdministratorMode" ToolTip="Enable Administrative Options" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItemLink BarItemName="bbi_AddNewInstance"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_DeleteItems"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_UpdateIPAddresses"  />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItemLink BarItemName="bbi_ConfigureCrawler"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_ApplicationUsage" />                    
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Developer" Content="Developer" Alignment="Far"
+                                IsVisible="{Binding Path=(local:Common.IsDeveloper)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsDeveloper)}"  >
+                    <dxb:BarCheckItemLink BarItemName="bci_DeveloperMode" ToolTip="Enable Developer Options" />                    
+                    <dxb:BarButtonItemLink BarItemName="bbi_LoadInstances"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_TakeWeeklySnapshot" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_TakeDailySnapshot"  />
+                    <dxb:BarButtonItemLink BarItemName="bbi_TakeIntraDaySnapshot" />              
+                    <!--<dxb:BarButtonItemLink BarItemName="bbi_ApplicationUsage" />-->
+                </dxb:BarSubItem>
+                
+                <dxb:BarSubItem Name="bsi_Beta" Content="BETA Ideas" Alignment="Far"
+                                IsVisible="{Binding Path=(local:Common.IsBetaUser)}" 
+                                IsEnabled="{Binding Path=(local:Common.IsBetaUser)}" >
+                    <dxb:BarButtonItemLink BarItemName="bbi_ExploreHierarchy" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_ExporeJobServers" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Tiles" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_ExploratoryPOC" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_Charts" />
+                </dxb:BarSubItem>
+
+                <dxb:BarSubItem Name="bsi_Help" Content="Help" Alignment="Far" >
+                    <dxb:BarButtonItemLink BarItemName="bbi_Feedback" />
+                    <dxb:BarButtonItemLink BarItemName="bbi_About" />
+                </dxb:BarSubItem>
+
+            </dxb:BarManager.Items>
+
+            <dxb:BarManager.Bars>
+                <dxb:Bar Caption="Main" IsMainMenu="True" UseWholeRow="True">
+                    <dxb:Bar.DockInfo>
+                        <!--<dxb:BarDockInfo ContainerType="Floating" />-->
+                        <dxb:BarDockInfo ContainerType="Top" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:Bar.ItemLinks>
+                        <dxb:BarSubItemLink BarItemName="bsi_File" />
+                        <dxb:BarSubItemLink BarItemName="bsi_View" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Tools" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Admin" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Developer" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Beta" />
+                        <dxb:BarSubItemLink BarItemName="bsi_Help" />
+                    </dxb:Bar.ItemLinks>
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+
+            <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch">
+                <!--<dxlc:LayoutControl.Background>
+    		<LinearGradientBrush EndPoint="0.704,-0.086" StartPoint="0.702,1.026">
+    			<GradientStop Color="#818181" Offset="1"/>
+    			<GradientStop Color="White" Offset="0.5"/>
+    		</LinearGradientBrush>
+    	</dxlc:LayoutControl.Background>-->
+
+                <dxlc:LayoutControl.AvailableItems>
+
+                    <!-- Add things that are optionally displayable-->
+
+                </dxlc:LayoutControl.AvailableItems>
+
+                <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top" 
+                        Orientation="Horizontal" >
+
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Name="lg_Body" 
+                          HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch" >
+
+                    <Grid x:Name="splashScreenGrid" >
+
+                        <uiss:wucInitialSplash />
+
+                    </Grid>
+
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Name="lg_Footer"
+                          VerticalAlignment="Top" 
+                          HorizontalAlignment="Right"
+                          Orientation="Horizontal" >
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutControl>
+
+        </dxb:BarManager>
+
+    </Grid>
+
+</dxr:DXRibbonWindow>

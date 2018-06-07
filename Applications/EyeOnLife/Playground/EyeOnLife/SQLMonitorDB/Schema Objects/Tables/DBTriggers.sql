@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[DBTriggers]
+(
+	[ID] UNIQUEIDENTIFIER NOT NULL, 
+    [SnapShotDate] DATETIME NULL, 
+    [Database_ID] UNIQUEIDENTIFIER NULL, 
+    CONSTRAINT [PK_DBTriggers] PRIMARY KEY ([ID]) 
+)

@@ -1,0 +1,698 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys" xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs">
+    <!--BEGIN WPF-->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarButtonItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarCheckItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarEditItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarItemSeparator.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarSplitButtonItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarSplitCheckItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarStaticItem.xaml" />
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme/BarSubItem.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <!--END WPF-->
+    <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=Margin}">1</Thickness>
+    <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuClientPadding}">0</Thickness>
+    <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuContentMargin}">5,3,15,3</Thickness>
+    <Thickness x:Key="{dxbt:BarItemThemeKey ResourceKey=InMenuKeyGestureMargin}">5,3,15,3</Thickness>
+    <ControlTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderTemplate}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid SnapsToDevicePixels="True">
+            <Grid x:Name="States">
+                <Border x:Name="HoverState" Opacity="0">
+                    <Border x:Name="hover" Background="#FFE3E3E3" BorderThickness="0,1,0,1" cs:Name="Border_0005" />
+                </Border>
+                <Border x:Name="PressedState" Background="#FFF78A09" BorderThickness="0,1,0,1" Opacity="0" cs:Name="Border_0006" />
+                <Border x:Name="CustomizationState" Background="#7FFFFFFF" BorderBrush="#FFF78A09" BorderThickness="1" Opacity="0" cs:Name="Border_0008" />
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HideBorderSide">
+                    <VisualState x:Name="None" />
+                    <VisualState x:Name="Left">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="1,0,0,0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Right" />
+                    <VisualState x:Name="Top" />
+                    <VisualState x:Name="Bottom" />
+                    <VisualState x:Name="All" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ArrowHideBorderSide">
+                    <VisualState x:Name="ArrowNone" />
+                    <VisualState x:Name="ArrowLeft" />
+                    <VisualState x:Name="ArrowTop" />
+                    <VisualState x:Name="ArrowRight" />
+                    <VisualState x:Name="ArrowBottom" />
+                    <VisualState x:Name="ArrowAll" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ActiveState">
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="State">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="PressedState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked" />
+                    <VisualState x:Name="HoverChecked" />
+                    <VisualState x:Name="Focused" />
+                    <VisualState x:Name="Customization">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="CustomizationState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid SnapsToDevicePixels="True">
+            <Grid x:Name="States">
+                <Border x:Name="HoverState" Opacity="0">
+                    <Border x:Name="hover" Background="#FFE3E3E3" cs:Name="Border_0009" />
+                </Border>
+                <Border x:Name="PressedState" Background="#FFF78A09" Opacity="0" cs:Name="Border_0010" />
+                <Border x:Name="CustomizationState" Background="#7FFFFFFF" BorderBrush="#FFF78A09" BorderThickness="1" Opacity="0" cs:Name="Border_0012" />
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HideBorderSide">
+                    <VisualState x:Name="None" />
+                    <VisualState x:Name="Left">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="1,0,0,0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Right" />
+                    <VisualState x:Name="Top" />
+                    <VisualState x:Name="Bottom">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="0,0,0,1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="All" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ArrowHideBorderSide">
+                    <VisualState x:Name="ArrowNone" />
+                    <VisualState x:Name="ArrowLeft" />
+                    <VisualState x:Name="ArrowTop" />
+                    <VisualState x:Name="ArrowRight" />
+                    <VisualState x:Name="ArrowBottom" />
+                    <VisualState x:Name="ArrowAll" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ActiveState">
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="State">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="PressedState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="HoverChecked" />
+                    <VisualState x:Name="Focused" />
+                    <VisualState x:Name="Customization">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="CustomizationState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderTemplateInButtonGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid Margin="-1" SnapsToDevicePixels="True">
+            <Grid x:Name="States">
+                <Border x:Name="HoverState" Opacity="0">
+                    <Border x:Name="hover" Background="#FFE3E3E3" cs:Name="Border_0013" />
+                </Border>
+                <Border x:Name="PressedState" Background="#FFF78A09" Opacity="0" cs:Name="Border_0014" />
+                <Border x:Name="CustomizationState" Background="#FFFFFFFF" BorderBrush="#FFF78A09" BorderThickness="1" Opacity="0" cs:Name="Border_0004" />
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HideBorderSide">
+                    <VisualState x:Name="None" />
+                    <VisualState x:Name="Left">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="1,0,0,0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Right" />
+                    <VisualState x:Name="Top" />
+                    <VisualState x:Name="Bottom" />
+                    <VisualState x:Name="All" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ArrowHideBorderSide">
+                    <VisualState x:Name="ArrowNone" />
+                    <VisualState x:Name="ArrowLeft" />
+                    <VisualState x:Name="ArrowTop" />
+                    <VisualState x:Name="ArrowRight" />
+                    <VisualState x:Name="ArrowBottom" />
+                    <VisualState x:Name="ArrowAll" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ActiveState">
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="State">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="PressedState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="HoverChecked" />
+                    <VisualState x:Name="Focused" />
+                    <VisualState x:Name="Customization">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="CustomizationState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderTemplateInMainMenu}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid SnapsToDevicePixels="True">
+            <Grid x:Name="States">
+                <Border x:Name="HoverState" Opacity="0">
+                    <Border x:Name="hover" Background="#FFF78A09" cs:Name="Border_0015" />
+                </Border>
+                <Border x:Name="PressedState" Background="#FFF78A09" Opacity="0" cs:Name="Border_0016" />
+                <Border x:Name="CustomizationState" Background="#7F000000" BorderBrush="#FFF78A09" BorderThickness="1" Opacity="0" cs:Name="Border_0004" />
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HideBorderSide">
+                    <VisualState x:Name="None" />
+                    <VisualState x:Name="Left">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="1,0,0,0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Right" />
+                    <VisualState x:Name="Top" />
+                    <VisualState x:Name="Bottom" />
+                    <VisualState x:Name="All" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ArrowHideBorderSide">
+                    <VisualState x:Name="ArrowNone" />
+                    <VisualState x:Name="ArrowLeft" />
+                    <VisualState x:Name="ArrowTop" />
+                    <VisualState x:Name="ArrowRight" />
+                    <VisualState x:Name="ArrowBottom" />
+                    <VisualState x:Name="ArrowAll" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ActiveState">
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="0.9" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="State">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="PressedState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="HoverChecked" />
+                    <VisualState x:Name="Focused" />
+                    <VisualState x:Name="Customization">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="CustomizationState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderTemplateInMenu}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid SnapsToDevicePixels="True">
+            <Grid x:Name="States">
+                <Border x:Name="HoverState" Opacity="0">
+                    <Border x:Name="hover" Background="#FFF78A09" cs:Name="Border_0017" />
+                </Border>
+                <Border x:Name="PressedState" Background="#FFF78A09" Opacity="0" cs:Name="Border_0018" />
+                <Border x:Name="CustomizationState" Background="#7F000000" BorderBrush="#FFF78A09" BorderThickness="1" Opacity="0" cs:Name="Border_0004" />
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HideBorderSide">
+                    <VisualState x:Name="None" />
+                    <VisualState x:Name="Left">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="States" Storyboard.TargetProperty="(Border.Margin)" dxcn:ValueSetter.Thickness="1,0,0,0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Right" />
+                    <VisualState x:Name="Top" />
+                    <VisualState x:Name="Bottom" />
+                    <VisualState x:Name="All" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ArrowHideBorderSide">
+                    <VisualState x:Name="ArrowNone" />
+                    <VisualState x:Name="ArrowLeft" />
+                    <VisualState x:Name="ArrowTop" />
+                    <VisualState x:Name="ArrowRight" />
+                    <VisualState x:Name="ArrowBottom" />
+                    <VisualState x:Name="ArrowAll" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ActiveState">
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="hover" Storyboard.TargetProperty="Opacity" Duration="0" To="0.9" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="State">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="PressedState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="HoverState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="HoverChecked" />
+                    <VisualState x:Name="Focused" />
+                    <VisualState x:Name="Customization">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="CustomizationState" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyle}" TargetType="{x:Type ContentControl}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0001" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInMainMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0002" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0003" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0004" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInStatusBar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0005" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyle}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0006" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInMainMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0007" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0008" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0009" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInStatusBar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0010" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyle}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0011" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInMainMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0012" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0013" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0014" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInStatusBar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0015" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyle}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0016" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInMainMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0017" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0018" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0019" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInStatusBar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0020" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonStatusBarLeft}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0021" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonStatusBarRight}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0022" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonStatusBarLeft}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0023" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonStatusBarRight}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0024" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonStatusBarLeft}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0025" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonStatusBarRight}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0026" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonStatusBarLeft}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0027" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonStatusBarRight}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0028" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonPageGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0029" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInButtonGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0030" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonPageGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0031" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonToolbar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0032" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonToolbarFooter}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0033" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInRibbonPageHeader}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0034" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotContentStyleInButtonGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0035" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonPageGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0036" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonToolbar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0037" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonToolbarFooter}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0038" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInRibbonPageHeader}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0039" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedContentStyleInButtonGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0040" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonPageGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0041" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonToolbar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0042" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonToolbarFooter}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0043" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInRibbonPageHeader}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0044" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalContentStyleInButtonGroup}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0045" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonToolbar}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0046" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonToolbarFooter}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0047" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledContentStyleInRibbonPageHeader}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0048" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=DisabledDescriptionStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#7F373A3D" cs:Name="Setter_0049" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=HotDescriptionStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0050" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=NormalDescriptionStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FF373A3D" cs:Name="Setter_0051" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=PressedDescriptionStyleInApplicationMenu}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" cs:Name="Setter_0052" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyle}" TargetType="{x:Type dxc:Items2Panel}">
+        <Setter Property="HorizontalIndent" Value="2" />
+        <Setter Property="VerticalIndent" Value="2" />
+        <Setter Property="Content1Padding" Value="3" />
+        <Setter Property="Content2Padding" Value="3" />
+        <Setter Property="VerticalPadding" Value="3" />
+        <Setter Property="HorizontalPadding" Value="3" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInMainMenu}" TargetType="{x:Type dxc:Items2Panel}">
+        <Setter Property="HorizontalIndent" Value="2" />
+        <Setter Property="VerticalIndent" Value="2" />
+        <Setter Property="Content1Padding" Value="3" />
+        <Setter Property="Content2Padding" Value="3" />
+        <Setter Property="VerticalPadding" Value="3" />
+        <Setter Property="HorizontalPadding" Value="3" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInStatusBar}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyle}}" />
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}" TargetType="{x:Type dxc:Items2Panel}">
+        <Setter Property="HorizontalIndent" Value="3" />
+        <Setter Property="VerticalIndent" Value="3" />
+        <Setter Property="Content1Padding" Value="3" />
+        <Setter Property="Content2Padding" Value="3" />
+        <Setter Property="VerticalPadding" Value="3" />
+        <Setter Property="HorizontalPadding" Value="3" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInButtonGroup}" TargetType="{x:Type dxc:Items2Panel}">
+        <Setter Property="HorizontalIndent" Value="1" />
+        <Setter Property="VerticalIndent" Value="1" />
+        <Setter Property="Content1Padding" Value="2" />
+        <Setter Property="Content2Padding" Value="2" />
+        <Setter Property="VerticalPadding" Value="2" />
+        <Setter Property="HorizontalPadding" Value="2" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageHeader}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbar}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbarFooter}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarLeft}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarRight}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyle}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyle}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInMainMenu}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInMainMenu}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageGroup}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInButtonGroup}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInButtonGroup}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarLeft}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarLeft}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarRight}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonStatusBarRight}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbar}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbar}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbarFooter}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonToolbar}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageHeader}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInRibbonPageHeader}}" />
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=LayoutPanelStyleInStatusBar}" TargetType="{x:Type dxc:Items2Panel}" BasedOn="{StaticResource {dxbt:BarItemThemeKey ResourceKey=LayoutPanelStyleInStatusBar}}" />
+    <Style x:Key="{dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeArrowBorderStyleInRibbonPageGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeArrowBorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeContentBorderStyleInRibbonPageGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarSplitButtonItemThemeKey ResourceKey=LargeContentBorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyle}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplate}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInMainMenu}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInMainMenu}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInApplicationMenu}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInMenu}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInStatusBar}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplate}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInMenu}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInMenu}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInButtonGroup}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInButtonGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonToolbar}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonToolbarFooter}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonPageHeader}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonStatusBarLeft}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Style x:Key="{dxbt:BarItemThemeKey ResourceKey=BorderStyleInRibbonStatusBarRight}" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Setter Property="Template" Value="{DynamicResource {dxbt:BarItemThemeKey ResourceKey=BorderTemplateInRibbonPageGroup}}" />
+    </Style>
+    <Thickness x:Key="{dxbt:BarEditItemThemeKey ResourceKey=EditContentMargin}">3,1,0,1</Thickness>
+    <Thickness x:Key="{dxbt:BarEditItemThemeKey ResourceKey=InRibbonEditContentMargin}">0,2,0,0</Thickness>
+    <Thickness x:Key="{dxbt:BarStaticItemThemeKey ResourceKey=BorderPadding}">3,0,3,0</Thickness>
+    <Thickness x:Key="{dxbt:BarSubItemThemeKey ResourceKey=ContentMargin}">2,0,1,0</Thickness>
+    <Style x:Key="{dxbt:BarSubItemThemeKey ResourceKey=GlyphBorderStyle}" TargetType="{x:Type dxc:MeasurePixelSnapperContentControl}"></Style>
+</ResourceDictionary>

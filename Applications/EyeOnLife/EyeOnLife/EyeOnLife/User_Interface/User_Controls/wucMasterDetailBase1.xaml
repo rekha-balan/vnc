@@ -1,0 +1,511 @@
+﻿<uiuc:wucDX_Base
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucMasterDetailBase1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+    mc:Ignorable="d"
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+    
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:ui="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    xmlns:uiw="clr-namespace:EyeOnLife.User_Interface.Windows"
+
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    
+    d:DesignWidth="800" d:DesignHeight="600"
+    Title="wucDX_Admin_Servers" 
+    Loaded="OnLoaded"  >
+    
+    <uiuc:wucDX_Base.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet"/>
+
+        <CollectionViewSource x:Key="databaseInfoViewSource" 
+                              Source="{Binding Path=DatabaseInfo, Source={StaticResource applicationDataSet}}" />
+
+        <!-- Use this if need more than what is defined in default on located in ToolBoxResources.xaml -->
+        <!--<DataTemplate x:Key="DetailCoreTemplate">
+            <dx:MeasurePixelSnapper>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Platform:" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="OSVersion:" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Memory:" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Processors:" />
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="SnapShotDate:" />
+
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Row.Platform}" />
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Row.OSVersion}" />
+                        <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding Row.PhysicalMemory}" />
+                        <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding Row.Processors}" />
+                        <TextBlock Grid.Column="2" Grid.Row="4" Text="{Binding Row.SnapShotDate}" />
+                    </Grid>
+                </Grid>
+            </dx:MeasurePixelSnapper>
+        </DataTemplate>-->
+
+    </uiuc:wucDX_Base.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+                      Orientation="Vertical"
+                      Background="Transparent" >
+
+        <dxlc:LayoutControl.AvailableItems>
+
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Body" >
+
+            <dxdo:DockLayoutManager Name="lg_Body_dlm" 
+                                    dx:StyleManager.ApplyApplicationTheme="True" 
+                                    FontSize="12" >
+
+                <dxdo:LayoutGroup >
+
+                    <dxdo:LayoutPanel AllowClose="False" AllowHide="False" >
+
+                        <dxlc:LayoutControl 
+                            Orientation="Horizontal" 
+                            VerticalAlignment="Top"
+                            Background="Transparent">
+
+                            <dxlc:LayoutGroup Orientation="Vertical" Style="{StaticResource FixedLayoutPanel}" >
+
+                                <ContentControl Name="cc_DisplayOptions" DockPanel.Dock="Left"
+                                    Template="{StaticResource DisplayOptionsControls_Server}" 
+                                    VerticalAlignment="Top" />
+
+                                <dxlc:LayoutControl Name="lc_ItemsGrid" Style="{StaticResource LayoutControlStyle_Grid}" >
+
+                                    <dxg:GridControl Name="dataGrid" 
+                                        Style="{StaticResource GridControlStyle}"
+                                        DefaultSorting="SnapShotDate"
+                                        CustomUnboundColumnData="CustomUnboundColumnData"
+                                        CustomColumnDisplayText="OnCustomColumnDisplayText" Tag="Database" >
+
+                                        <dxg:GridControl.TotalSummary>
+                                            <dxg:GridSummaryItem  SummaryType="Count" Alignment="Left"/>
+                                        </dxg:GridControl.TotalSummary>
+
+                                        <dxg:GridControl.Columns>
+                                            <dxg:GridColumn FieldName="ID" Name="gc_ID" Visible="False" Fixed="Left" Style="{StaticResource Header_ID}"/>
+
+                                            <dxg:GridColumn FieldName="Name_Database" Name="gridColumn5" Style="{StaticResource Header_Name_Database}" Visible="True" Fixed="Left" />
+                                            <dxg:GridColumn FieldName="Database_ID" Name="gc_ID1" Visible="False" Style="{StaticResource Header_Database_ID}" Fixed="Left" />
+                                            <dxg:GridColumn FieldName="Name_Instance" Name="gc_Name_Instance" Style="{StaticResource Header_Name_Instance}" Visible="True" Fixed="Left"  />
+                                            <dxg:GridColumn FieldName="Instance_ID" Name="gc_Instance_ID" Style="{StaticResource Header_Instance_ID}" Visible="False" Fixed="Left" />
+
+                                            <dxg:GridColumn FieldName="Environment" UnboundType="String" Style="{StaticResource Header_Environment}" Visible="True" />
+
+                                            <dxg:GridColumn FieldName="Size" Name="gc_Size" Style="{StaticResource Header_Size}" Visible="True" />
+
+                                            <dxg:GridColumn FieldName="DataSpaceUsage" Name="gc_DataSpaceUsage" Style="{StaticResource Header_DataSpaceUsage}" Visible="True"  />
+                                            <dxg:GridColumn FieldName="IndexSpaceUsage" Name="gc_IndexSpaceUsage" Style="{StaticResource Header_IndexSpaceUsage}" Visible="True" />
+
+                                            <dxg:GridColumn FieldName="SpaceAvailable" Name="gc_SpaceAvailable" Style="{StaticResource Header_SpaceAvailable}" Visible="True" />
+
+                                            <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate" 
+                                                Visible="False" Fixed="Right"
+                                                Style="{StaticResource Header_SnapShotDate}"
+                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                            <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError" 
+                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                Visible="False" Fixed="Right" />
+                                        </dxg:GridControl.Columns>
+
+                                        <!--<dxg:GridControl.View>
+                                            <dxg:TableView Name="tableView" 
+                                               AllowCascadeUpdate="True" 
+                                               NavigationStyle="Row"
+                                               ShowFixedTotalSummary="True"/>
+                                        </dxg:GridControl.View>-->
+
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView 
+                                                Name="tableView"                                               
+                                                Style="{StaticResource TableViewStyle}"                                                
+                                                CellValueChanged="OnCellValueChanged" 
+                                                CellValueChanging="OnCellValueChanged"
+                                                FocusedRowChanged="OnFocusedRowChanged" 
+                                                ShowGridMenu="OnShowGridMenu" >
+                                                <dxg:TableView.ColumnMenuCustomizations>
+                                                    <dxb:BarButtonItem Name="bi_CheckAll" Content="Check All" 
+                                                                       ToolTip="This will check all rows, not just visible ones." ItemClick="OnCheckAllRows" dxb:BarItemLinkActionBase.ItemLinkIndex="0" IsVisible="False" />
+                                                    <dxb:BarButtonItem Name="bi_UnCheckAll" Content="UnCheck All" 
+                                                                       ToolTip="This will uncheck all rows, not just visible ones." 
+                                                                       ItemClick="OnCheckAllRows" dxb:BarItemLinkActionBase.ItemLinkIndex="0" IsVisible="False" />
+                                                    <!--<dxb:BarCheckItem Name="checkItem2" Content="All Checked" IsChecked="False" CheckedChanged="OnColumnHeaderRightClick" dxb:BarItemLinkActionBase.ItemLinkIndex="0"/>-->
+                                                    <!--<dxb:BarCheckItem Name="checkItem2a" Content="Checked" IsChecked="True" CheckedChanged="OnColumnHeaderRightClick" dxb:BarItemLinkActionBase.ItemLinkIndex="1"/>-->
+                                                    <dxb:BarItemLinkSeparator dxb:BarItemLinkActionBase.ItemLinkIndex="1" />
+                                                </dxg:TableView.ColumnMenuCustomizations>
+                                            </dxg:TableView>
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+
+                                </dxlc:LayoutControl>
+
+                                <dxlc:LayoutControl VerticalAlignment="Bottom" Name="lc_ItemDetailX" Visibility="Visible" >
+
+                                    <Border Style="{StaticResource DetailPaneBorderStyle}" >
+
+                                        <dxlc:LayoutGroup 
+                                            Orientation="Horizontal" 
+                                            DataContext="{Binding ElementName=dataGrid, Path=View.FocusedRowData.Row }">
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxc:ChartControl Name="chart1" 
+                                                                  BorderThickness="0" >
+
+                                                    <dxc:ChartControl.Titles>
+                                                        <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                        <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                        <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                        <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                    </dxc:ChartControl.Titles>
+                                                    
+                                                    <dxc:ChartControl.Diagram>
+
+                                                        <dxc:XYDiagram2D BarDistance="0.05">
+
+                                                            <dxc:XYDiagram2D.PanesPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <Grid>
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition />
+                                                                            <RowDefinition />
+                                                                            <RowDefinition />
+                                                                        </Grid.RowDefinitions>
+                                                                    </Grid>
+                                                                </ItemsPanelTemplate>
+                                                            </dxc:XYDiagram2D.PanesPanel>
+                                                            
+                                                            <dxc:XYDiagram2D.DefaultPane>
+                                                                
+                                                                <dxc:Pane x:Name="availableSpace" Grid.Row="0" />
+                                                                    
+                                                            </dxc:XYDiagram2D.DefaultPane>
+                                                            
+                                                            <dxc:XYDiagram2D.Panes>
+                                                                
+                                                                <dxc:Pane x:Name="indexSpace" Grid.Row="1" />
+                                                                <dxc:Pane x:Name="dataSpace" Grid.Row="2" />
+                                                                
+                                                            </dxc:XYDiagram2D.Panes>
+                                                            
+                                                            <dxc:XYDiagram2D.AxisX>
+                                                                <dxc:AxisX2D>
+
+                                                                </dxc:AxisX2D>
+                                                            </dxc:XYDiagram2D.AxisX>
+
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Size (MB)" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+
+                                                            <dxc:XYDiagram2D.SecondaryAxesY>
+                                                                <dxc:SecondaryAxisY2D>
+                                                                    <dxc:SecondaryAxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Size (MB)" />
+                                                                    </dxc:SecondaryAxisY2D.Title>
+                                                                </dxc:SecondaryAxisY2D>
+                                                            </dxc:XYDiagram2D.SecondaryAxesY>
+                                                            
+                                                            <dxc:XYDiagram2D.Series>
+                                                                <dxc:LineSeries2D DisplayName="IndexSpace" Name="series1"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="IndexSpaceUsage" 
+                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[0]}" />
+                                                                
+                                                                <dxc:LineSeries2D DisplayName="DataSpace" Name="series1a"                                                                                                                                                                        
+                                                                                  ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="DataSpaceUsage" 
+                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[0]}" />
+
+                                                                <dxc:LineSeries2D DisplayName="SpaceAvailable" Name="series1b"                                                                                                                                                                       
+                                                                                  ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="SpaceAvailable"
+                                                                                  />
+                                                                
+                                                            </dxc:XYDiagram2D.Series>
+                                                            
+                                                        </dxc:XYDiagram2D>
+                                                        
+                                                    </dxc:ChartControl.Diagram>
+
+                                                    <dxc:ChartControl.Legend>
+                                                        <dxc:Legend />
+                                                    </dxc:ChartControl.Legend>
+
+                                                </dxc:ChartControl>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxc:ChartControl Name="chart2" 
+                                                                  BorderThickness="0" >
+
+                                                    <dxc:ChartControl.Titles>
+                                                        <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                        <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                        <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                        <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                    </dxc:ChartControl.Titles>
+
+                                                    <dxc:ChartControl.Diagram>
+                                                        <dxc:XYDiagram2D BarDistance="0.05">
+                                                            <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                <dxc:Pane MirrorHeight="100.0" />
+                                                            </dxc:XYDiagram2D.DefaultPane>-->
+                                                            <dxc:XYDiagram2D.AxisX>
+                                                                <dxc:AxisX2D>
+
+                                                                </dxc:AxisX2D>
+                                                            </dxc:XYDiagram2D.AxisX>
+                                                            
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Size (MB)" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                            
+                                                            <dxc:XYDiagram2D.Series>
+                                                                <dxc:AreaStackedSeries2D  Name="series2"
+                                                                    DisplayName="IndexSpace"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="IndexSpaceUsage" />
+
+                                                                <dxc:AreaStackedSeries2D Name="series2a"                                                                                                                                                                        
+                                                                    DisplayName="DataSpace" 
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="DataSpaceUsage" />
+
+                                                                <dxc:LineSeries2D Name="series2b"                                                                                                                                                                     
+                                                                    DisplayName="Size"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="Size" />
+
+                                                                <dxc:LineSeries2D Name="series2c"                                                                                                                                                                         
+                                                                    DisplayName="SpaceAvailable"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="SpaceAvailable" />
+                                                            </dxc:XYDiagram2D.Series>
+                                                            
+                                                        </dxc:XYDiagram2D>
+                                                        
+                                                    </dxc:ChartControl.Diagram>
+
+                                                    <dxc:ChartControl.Legend>
+                                                        <dxc:Legend  />
+                                                    </dxc:ChartControl.Legend>
+
+                                                </dxc:ChartControl>
+
+                                            </dxlc:LayoutControl>
+
+                                            <dxlc:LayoutControl Orientation="Vertical">
+
+                                                <dxc:ChartControl Name="chart3" 
+                                                                  BorderThickness="0" >
+
+                                                    <dxc:ChartControl.Titles>
+                                                        <dxc:Title Dock="Top" Content="Space Utilization"/>
+                                                        <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                        <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                        <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                    </dxc:ChartControl.Titles>
+
+                                                    <dxc:ChartControl.Diagram>
+                                                        <dxc:XYDiagram2D BarDistance="0.05">
+                                                            <!--<dxc:XYDiagram2D.DefaultPane>
+                                                                <dxc:Pane MirrorHeight="100.0" />
+                                                            </dxc:XYDiagram2D.DefaultPane>-->
+                                                            <dxc:XYDiagram2D.AxisX>
+                                                                <dxc:AxisX2D>
+
+                                                                </dxc:AxisX2D>
+                                                            </dxc:XYDiagram2D.AxisX>
+                                                            
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Size (MB)" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                            
+                                                            <dxc:XYDiagram2D.Series>
+                                                                <dxc:LineStackedSeries2D  Name="series3"
+                                                                    DisplayName="IndexSpace"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="IndexSpaceUsage" />
+
+                                                                <dxc:LineStackedSeries2D Name="series3a"                                                                                                                                                                        
+                                                                    DisplayName="DataSpace" 
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="DataSpaceUsage" />
+
+                                                                <dxc:LineSeries2D Name="series3b"                                                                                                                                                                     
+                                                                    DisplayName="Size"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="Size" />
+
+                                                                <dxc:LineSeries2D Name="series3c"                                                                                                                                                                         
+                                                                    DisplayName="SpaceAvailable"
+                                                                    ArgumentDataMember="SnapShotDate"
+                                                                    ValueDataMember="SpaceAvailable" />
+                                                                
+                                                            </dxc:XYDiagram2D.Series>
+                                                            
+                                                        </dxc:XYDiagram2D>
+                                                        
+                                                    </dxc:ChartControl.Diagram>
+
+                                                    <dxc:ChartControl.Legend>
+                                                        <dxc:Legend  />
+                                                    </dxc:ChartControl.Legend>
+
+                                                </dxc:ChartControl>
+
+                                            </dxlc:LayoutControl>
+                                            
+                                        </dxlc:LayoutGroup>
+
+                                    </Border>
+                                    
+                                </dxlc:LayoutControl>
+
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+                        
+                    </dxdo:LayoutPanel>   
+                    
+                </dxdo:LayoutGroup>            
+            
+                <dxdo:DockLayoutManager.AutoHideGroups >
+
+                    <dxdo:AutoHideGroup Style="{StaticResource AutoHideGroup_Left}" Visibility="Hidden" >
+
+                        <dxdo:LayoutPanel x:Name="lp_ToolBox"  
+                                          ToolTip="Commands and Tools" 
+                                          CaptionImage="{StaticResource ToolBox3}" >
+
+                            <DockPanel>
+
+                                <Border Style="{StaticResource AdvancedWindowToolBoxStyle}">
+                                    
+                                    <WrapPanel Orientation="Horizontal">
+
+                                        <ContentControl Template="{StaticResource AdvancedWindowToolBoxControlsTemplate}" />
+
+                                    </WrapPanel>
+                                    
+                                </Border>
+
+                                <Border Style="{StaticResource AdminWindowToolBoxStyle}" >
+
+                                    <WrapPanel Orientation="Horizontal" Name="wp_AdminTools" >
+
+                                        <Button Content="Delete Selected" Click="OnDeleteRow" />
+
+                                        <Button Content="Delete All" Click="OnDeleteAllRows" />
+
+                                        <ContentControl Template="{StaticResource AdminWindowToolBoxControlsTemplate}" />
+
+                                    </WrapPanel>
+
+                                </Border>
+
+                            </DockPanel>
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+                        
+                    <dxdo:AutoHideGroup x:Name="ahg_Save" Style="{StaticResource AutoHideGroup_Top}" Visibility="Hidden" >
+
+                            <dxdo:LayoutPanel Caption="Updates Detected" >
+                                
+                                <WrapPanel>
+
+                                    <Button     Content="Save Changes" 
+                                                Click="saveButton_Click" />
+                                    <Button     Content="Cancel Changes" 
+                                                Click="undoButton_Click" />
+                                </WrapPanel>
+                                
+                            </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup Style="{StaticResource AutoHideGroup_Right}" >
+
+                        <!-- Add Stuff -->
+                        
+                    </dxdo:AutoHideGroup>
+                    
+                    <dxdo:AutoHideGroup Style="{StaticResource AutoHideGroup_Bottom}" >
+
+                        <!-- Add Stuff -->
+                        
+                    </dxdo:AutoHideGroup>
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+        
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Name="lg_Footer" >
+
+        </dxlc:LayoutGroup>
+        
+    </dxlc:LayoutControl>
+    
+</uiuc:wucDX_Base>

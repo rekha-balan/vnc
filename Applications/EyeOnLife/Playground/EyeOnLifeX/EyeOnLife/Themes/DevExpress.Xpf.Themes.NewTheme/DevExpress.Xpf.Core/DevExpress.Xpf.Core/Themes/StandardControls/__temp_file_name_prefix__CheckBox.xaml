@@ -1,0 +1,80 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs" xmlns:dxcore_unique_xmlns="http://schemas.devexpress.com/winfx/2008/xaml/core">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/StandardControls/Brushes.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/StandardControls/SharedResources.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="{dxdst:DefaultStyleThemeKey ThemeName=NewTheme, FullName=System.Windows.Controls.CheckBox}" TargetType="{x:Type CheckBox}">
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="Foreground" Value="{StaticResource Text.Foreground}" />
+    <Setter Property="Background" Value="{StaticResource CheckBox.DefaultState.Border2}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CheckBox.DefaultState.Border1}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="4,0,0,0" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type CheckBox}">
+          <Grid x:Name="Root" Background="#00000000" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" cs:Name="Grid_0001" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;17;22">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Width="14" Height="14" Grid.Column="0" Grid.ColumnSpan="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;22;26">
+              <Grid x:Name="DefaultState" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;23;30">
+                <Border Background="{StaticResource CheckBox.DefaultState.Border1}" Padding="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;24;34">
+                  <Border Background="{StaticResource CheckBox.DefaultState.Border2}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;25;38" />
+                </Border>
+              </Grid>
+              <Grid x:Name="HoverState" Opacity="0" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;28;30">
+                <Border Background="{StaticResource CheckBox.HoverState.Border1}" Padding="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;29;34">
+                  <Border Background="{StaticResource CheckBox.HoverState.Border2}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;30;38" />
+                </Border>
+              </Grid>
+              <Grid x:Name="FocusState" Opacity="0" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;33;30">
+                <Border Style="{StaticResource FocusTemplate}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;34;34" />
+              </Grid>
+              <Grid x:Name="PressedState" Opacity="0" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;36;30">
+                <Border Background="{StaticResource CheckBox.PressedState.Border1}" Padding="1" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;37;34">
+                  <Border Background="{StaticResource CheckBox.PressedState.Border2}" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;38;38" />
+                </Border>
+              </Grid>
+              <Border x:Name="IndeterminateState" Background="{StaticResource CheckBox.IndeterminateState.Border}" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Opacity="0" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;41;30" />
+              <Path x:Name="CheckIcon" Fill="#FF373A3D" Style="{StaticResource CheckBoxIconTemplate}" Opacity="0" cs:Name="Path_0001" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;42;30" />
+            </Grid>
+            <ContentPresenter x:Name="contentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" Grid.ColumnSpan="1" RecognizesAccessKey="True" dxcore_unique_xmlns:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;44;26" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="IsThreeState" Value="True" />
+                <Condition Property="IsChecked" Value="False" />
+              </MultiTrigger.Conditions>
+              <Setter Property="Visibility" TargetName="IndeterminateState" Value="Visible" />
+              <Setter Property="Opacity" TargetName="CheckIcon" Value="0" />
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+              <Setter TargetName="CheckIcon" Property="Opacity" Value="1" />
+              <Setter TargetName="IndeterminateState" Property="Opacity" Value="0" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="DefaultState" Property="Opacity" Value="0" />
+              <Setter TargetName="HoverState" Property="Opacity" Value="1" />
+              <Setter TargetName="PressedState" Property="Opacity" Value="0" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="DefaultState" Property="Opacity" Value="0" />
+              <Setter TargetName="HoverState" Property="Opacity" Value="0" />
+              <Setter TargetName="PressedState" Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+              <Setter TargetName="FocusState" Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Root" Property="Opacity" Value="0.5" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

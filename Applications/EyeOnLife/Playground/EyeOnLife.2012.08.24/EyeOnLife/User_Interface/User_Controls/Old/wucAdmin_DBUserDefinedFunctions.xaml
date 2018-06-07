@@ -1,0 +1,201 @@
+﻿<local:ucBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation" 
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucAdmin_DBUserDefinedFunctions"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"    
+    mc:Ignorable="d" 
+    d:DesignWidth="800" d:DesignHeight="400" Loaded="ucBase_Loaded"  >
+    <local:ucBase.Resources>
+        <localData:ApplicationDataSet x:Key="applicationDataSet"/>
+        <CollectionViewSource x:Key="instancesViewSource" 
+                              Source="Common.ApplicationDataSet.Instances">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name_Instance" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <!--<CollectionViewSource x:Key="instancesViewSource1" Source="{Binding Instances, Source={StaticResource applicationDataSet}}"/>-->
+        <Style x:Key="detailInfoStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="BlanchedAlmond" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <CollectionViewSource x:Key="dBUserDefinedFunctionsViewSource" Source="{Binding DBUserDefinedFunctions, Source={StaticResource applicationDataSet}}"/>
+    </local:ucBase.Resources>
+    
+    <Grid DataContext="{StaticResource instancesViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="150" />            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <DockPanel 
+            Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel 
+                Orientation="Horizontal" 
+                Margin="5" 
+                DockPanel.Dock="Left" 
+                VerticalAlignment="Center">
+                <CheckBox x:Name="readOnlyCheckBox" Margin="5"
+                    Content="Read only" IsChecked="False"
+                    Checked="readOnlyCheckBox_Checked"
+                    Unchecked="readOnlyCheckBox_UnChecked" />
+                <CheckBox x:Name="canAddCheckBox" Margin="5"
+                    Content="Can add" IsChecked="True"
+                    Checked="canAddCheckBox_Checked"
+                    Unchecked="canAddCheckBox_UnChecked" />
+                <CheckBox x:Name="canDeleteCheckBox" Margin="5"
+                    Content="Can delete" IsChecked="True"
+                    Checked="canDeleteCheckBox_Checked"
+                    Unchecked="canDeleteCheckBox_UnChecked" />
+                <Button x:Name="saveButton" Content="Save"
+                    Margin="2" Height="40" Width="Auto" 
+                    Click="saveButton_Click"/> 
+                <Button x:Name="undoButton" Content="Undo"
+                    Margin="2" Height="40" Width="Auto" 
+                    Click="undoButton_Click"/>                
+            </StackPanel>
+            
+            <WrapPanel 
+                
+                Orientation="Horizontal"
+                Margin="5"
+                Width="Auto">
+               
+                <Button Content="Do X" Width="Auto" x:Name="btnDoX" Click="btnDoX_Click" />                
+                
+            </WrapPanel>
+
+        </DockPanel>
+        
+        <!--To add, just click in empty row and start typing 
+           To delete, just click in a row and press Delete key-->    
+        
+        <DataGrid x:Name="dataGrid" 
+                  AutoGenerateColumns="False" 
+                  Grid.ColumnSpan="2" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding Source={StaticResource dBUserDefinedFunctionsViewSource}}" 
+                  Grid.Row="1" 
+                  RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="snapShotDateColumn" Header="Snap Shot Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding SnapShotDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="database_IDColumn" Binding="{Binding Database_ID}" Header="Database ID" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>    
+        
+        <!-- This is the detail below the grid -->
+        
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="5" >
+            
+        <Grid DataContext="{Binding ElementName=dataGrid, Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ID:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ID}" 
+                           Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <!--<TextBlock Text="Collation:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Collation}" 
+                           Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center"  />-->
+
+                <!--<TextBlock Text="Is Clustered:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding IsClustered}" 
+                           Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Edition:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Edition}" 
+                           Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="EngineEdition:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding EngineEdition}" 
+                           Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ServiceName:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding ServiceName}" 
+                           Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ServiceInstanceId:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding ServiceInstanceId}" 
+                           Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="OS Version:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding OSVersion}"  
+                           Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Platform:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Platform}"  
+                           Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Processors:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Processors}" 
+                           Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Product:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Product}" 
+                           Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="ProductLevel:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding ProductLevel}" 
+                           Grid.Row="4" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Version:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBlock Text="{Binding Version}" 
+                           Grid.Row="5" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+
+                <!--<TextBlock Text="Server_ID:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                <!--<TextBox Text="{Binding Server_ID}" 
+                           Grid.Row="6" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="20" />-->
+
+            </Grid>
+            
+        </Border>
+
+    </Grid>
+    
+</local:ucBase>

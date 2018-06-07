@@ -1,0 +1,50 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Instances]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Instances].[ExpandDatabases] is being dropped, data loss could occur.
+       The column [dbo].[Instances].[ExpandInstance] is being dropped, data loss could occur.
+
+** User actions
+     Drop
+       on [dbo].[Instances].[DefaultDatabaseExpandMask] (Default Constraint)
+       on [dbo].[Instances].[ID] (Default Constraint)
+       on [dbo].[Instances].[IsMonitored] (Default Constraint)
+       on [dbo].[Instances].[ExpandInstance] (Default Constraint)
+       on [dbo].[Instances].[ExpandDatabases] (Default Constraint)
+       on [dbo].[Instances].[ExpandLogins] (Default Constraint)
+       on [dbo].[Instances].[ExpandServerRoles] (Default Constraint)
+       on [dbo].[Instances].[ExpandTriggers] (Default Constraint)
+     Alter
+       [dbo].[DBDataFiles] (Table)
+       [dbo].[DBLogFiles] (Table)
+       [dbo].[DBStoredProcedures] (Table)
+       [dbo].[Servers] (Table)
+     Table rebuild
+       [dbo].[Instances] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_InstanceInfo_Instances] (Foreign Key)
+       [dbo].[FK_Jobs_Instances] (Foreign Key)
+       [dbo].[FK_Logins_Instances] (Foreign Key)
+       [dbo].[FK_Roles_Instances] (Foreign Key)
+       [dbo].[FK_Databases_Instances] (Foreign Key)
+       [dbo].[FK_Instances_Servers] (Foreign Key)
+       [dbo].[FK_DatabaseInfo_Instances] (Foreign Key)
+     Create
+       [dbo].[FK_InstanceInfo_Instances] (Foreign Key)
+       [dbo].[FK_Jobs_Instances] (Foreign Key)
+       [dbo].[FK_Logins_Instances] (Foreign Key)
+       [dbo].[FK_Roles_Instances] (Foreign Key)
+       [dbo].[FK_Databases_Instances] (Foreign Key)
+       [dbo].[FK_Instances_Servers] (Foreign Key)
+       [dbo].[FK_DatabaseInfo_Instances] (Foreign Key)
+
+The column [dbo].[Instances].[ExpandDatabases] is being dropped, data loss could occur.
+The column [dbo].[Instances].[ExpandInstance] is being dropped, data loss could occur.
+

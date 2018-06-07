@@ -1,0 +1,8 @@
+﻿EyeOnLife - Things to TODO
+
+- Add Async/Await to fix Debug message delay.
+- Add TreeView sample to AdminX_Main
+- Figure out how to keep the benefits of the hierarchical server-instance-database... 
+	without having to show all levels.  E.g. on non top level screen
+- Add commands from Admin_X to AdminX_Main controls.  Pull out into common routines.
+- Explore TableAdapterManager and use or create GetXTableAdapter methods.  Clean up all the places that need tableadapters.

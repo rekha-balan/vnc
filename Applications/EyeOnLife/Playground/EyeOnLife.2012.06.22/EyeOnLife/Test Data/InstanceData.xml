@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlInformation xmlns="" >
+  <DBInstanceList>
+    <Environment Name="Production">
+
+    </Environment>
+    
+    <Environment Name="Production-DMZ">
+
+    </Environment>
+    
+    <Environment Name="Staging">
+
+    </Environment>
+    
+    <Environment Name="Staging-DMZ">
+      
+    </Environment>
+    
+    <Environment Name="iTest">
+      <Instance Server="LTSQLI01V" IPV4Address="" Name="SQL2KPROJ01" Port="" />
+      <Instance Server="LTSQLI01V" IPV4Address="" Name="SQL2KPROJ02" Port="" />    
+      <Instance Server="LTSQLI02V" IPV4Address="" Name="SQL2K5PROJ01" Port="" />
+      <Instance Server="LTSQLI02V" IPV4Address="" Name="SQL2K5PROJ02" Port="" />   
+    </Environment>
+    
+    <Environment Name="iTest-DMZ">
+      <Instance Server="LTSQLZ01V" IPV4Address="" Name="SQL2KPROJ01" Port="" />
+      <Instance Server="LTSQLZ01V" IPV4Address="" Name="SQL2KPROJ02" Port="" />
+      <Instance Server="LTSQLZ02V" IPV4Address="" Name="SQL2K5PROJ02" Port="" /> 
+    </Environment>
+    
+    <Environment Name="iDev">
+      <Instance Server="LDSQLI01V" IPV4Address="" Name="SQL2KPDEV01" Port="" />
+      <Instance Server="LDSQLI01V" IPV4Address="" Name="SQL2KPDEV02" Port="" />    
+      <Instance Server="LDSQLI02V" IPV4Address="" Name="SQL2K5PDEV01" Port="" />
+      <Instance Server="LDSQLI02V" IPV4Address="" Name="SQL2K5PDEV02" Port="" />      
+    </Environment>
+    
+    <Environment Name="iDev-DMZ">
+      <Instance Server="LDSQLZ01V" IPV4Address="" Name="SQL2KPDEV01" Port="" />
+      <Instance Server="LDSQLZ02V" IPV4Address="" Name="SQL2K5PDEV01" Port="" />
+      <Instance Server="LDSQLZ02V" IPV4Address="" Name="SQL2K5PDEV02" Port="" />    
+    </Environment>
+    
+    <Environment Name="VNC">
+      <Instance Server="Matrix" IPV4Address="" Name="" Port="" />
+      <Instance Server="Parthenon" IPV4Address=""  Name="" Port="" />
+      <Instance Server="Tron" IPV4Address=""  Name="" Port="" />
+      <Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="" />
+      <Instance Server="" IPV4Address="10.0.0.5"  Name="NNN" Port="" />
+      <Instance Server="" IPV4Address="10.0.0.5"  Name="" Port="PPP" />
+    </Environment>
+  
+  </DBInstanceList>
+
+</SqlInformation>

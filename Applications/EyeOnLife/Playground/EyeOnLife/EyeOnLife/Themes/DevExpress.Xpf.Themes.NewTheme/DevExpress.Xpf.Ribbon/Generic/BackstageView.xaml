@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" xmlns:dxrt="http://schemas.devexpress.com/winfx/2008/xaml/ribbon/themekeys" xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys">
+    <dxc:BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" Invert="False" />
+    <dxc:BooleanToVisibilityConverter x:Key="invertBoolToVisibilityConverter" Invert="True" />
+    <ControlTemplate x:Key="{dxrt:BackstageThemeKey ResourceKey=ControlTemplate}" TargetType="{x:Type dxr:BackstageViewControl}">
+        <Grid Focusable="False">
+            <ContentControl Style="{TemplateBinding BackgroundStyle}" Focusable="False" />
+            <Image Source="{TemplateBinding ActualBackgroundGlyph}" Style="{TemplateBinding BackgroundGlyphStyle}" Focusable="False" Visibility="{Binding IsBackgroundGlyphVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisibilityConverter}}" />
+            <Grid Focusable="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <dxr:BackstageViewLeftPartContentControl Style="{TemplateBinding TabPaneStyle}" MinWidth="{TemplateBinding TabPaneMinWidth}" Focusable="False">
+                    <ItemsPresenter Style="{TemplateBinding ItemsPresenterStyle}" Focusable="False" />
+                </dxr:BackstageViewLeftPartContentControl>
+                <ContentControl Style="{TemplateBinding ControlPaneStyle}" Grid.Column="1" Focusable="False">
+                    <dxc:DXContentPresenter Content="{TemplateBinding ActualControlPane}" Focusable="False" />
+                </ContentControl>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs" xmlns:dxcore_unique_xmlns="http://schemas.devexpress.com/winfx/2008/xaml/core">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/Axis.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/AxisScrollBar.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/Legend.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/Diagram2D.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/Diagram3D.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/SeriesLabel.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/ChartControl.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/Titles.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Charts/NewTheme/ToolTip.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

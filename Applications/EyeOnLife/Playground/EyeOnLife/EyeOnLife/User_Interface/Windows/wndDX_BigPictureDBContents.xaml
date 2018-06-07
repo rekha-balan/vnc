@@ -1,0 +1,625 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.wndDX_BigPictureDBContents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:lc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"      
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"      
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"      
+    mc:Ignorable="d"
+    d:DesignHeight="800" d:DesignWidth="1000"
+    Loaded="OnLoaded" >
+    <dx:DXWindow.Resources>
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+        <CollectionViewSource x:Key="serversViewSource" 
+                              Source="{Binding Path=Servers, Source={StaticResource applicationDataSet}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesViewSource" 
+                              Source="{Binding Path=FK_Instances_Servers, Source={StaticResource serversViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesViewSource" 
+                              Source="{Binding Path=FK_Databases_Instances, Source={StaticResource serversInstancesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBFileGroupsViewSource" 
+                              Source="{Binding Path=FK_DBFileGroups_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBFileGroupsDBDataFilesViewSource" 
+                              Source="{Binding Path=FK_DBDataFiles_FileGroups, Source={StaticResource serversInstancesDatabasesDBFileGroupsViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBLogFilesViewSource" 
+                              Source="{Binding Path=FK_DBLogFiles_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBTablesViewSource" 
+                              Source="{Binding Path=FK_DBTables_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBViewsViewSource" 
+                              Source="{Binding Path=FK_DBViews_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBStoredProceduresViewSource" 
+                              Source="{Binding Path=FK_DBStoredProcedures_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBDdlTriggersViewSource" 
+                              Source="{Binding Path=FK_DBDdlTriggers_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBUserDefinedFunctionsViewSource" 
+                              Source="{Binding Path=FK_DBUserDefinedFunctions_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBRolesViewSource" 
+                              Source="{Binding Path=FK_DBRoles_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBUsersViewSource" 
+                              Source="{Binding Path=FK_DBUsers_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}" />
+
+        <ControlTemplate x:Key="AdminWindowToolBoxControlsTemplate" >
+
+            <StackPanel>
+                <Button x:Name="saveButton" Margin="5" Content="Save" Click="saveButton_Click"  />
+                <Button x:Name="undoButton" Margin="5" Content="Undo" Click="undoButton_Click" />
+
+                <!--<CheckBox x:Name="readOnlyCheckBox" Margin="5"
+                            Content="Read only" IsChecked="False"
+                            Checked="readOnlyCheckBox_Checked"  Unchecked="readOnlyCheckBox_UnChecked" />
+
+                <CheckBox x:Name="canAddCheckBox" Margin="5"                            
+                            Content="Can add" IsChecked="True"
+                            Checked="canAddCheckBox_Checked" Unchecked="canAddCheckBox_UnChecked" />
+
+                <CheckBox x:Name="canDeleteCheckBox" Margin="5"
+                            Content="Can delete" IsChecked="True"
+                            Checked="canDeleteCheckBox_Checked" Unchecked="canDeleteCheckBox_UnChecked" />-->
+
+                <CheckBox Name="ckDisplayIDColumns" 
+                              Content="Display ID Columns" 
+                              Margin="5" 
+                              Checked="OnDisplayIDColumns_Checked" Unchecked="ckDisplayIDColumns_Unchecked"/>
+
+                <CheckBox Name="ckDisplaySnapShotColumns" 
+                              Content="Display SnapShot Columns" 
+                              Margin="5"                          
+                              Checked="OnDisplaySnapShotColumns_Checked" Unchecked="ckDisplaySnapShotColumns_Unchecked"/>
+            </StackPanel>
+
+        </ControlTemplate>
+        
+        <Style x:Key="BoldFontLabelStyle" TargetType="lc:LayoutItemLabel">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </dx:DXWindow.Resources>
+    
+    <Grid DataContext="{StaticResource serversViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Name="textBlock1" Text="Database Content Explorer" DockPanel.Dock="Top"
+                           HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" />
+
+            <lc:LayoutGroup 
+                DockPanel.Dock="Right"
+                Orientation="Vertical" 
+                ItemSpace="2">
+
+                <RadioButton Content="Show as Tabs" Name="checkShowAsTabs"
+                             IsChecked="True" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+                <RadioButton Content="Show as Group Boxes" Name="checkShowAsGroupBoxes" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+
+            </lc:LayoutGroup>
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
+
+                <Grid Name="grid1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Server:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="3" Name="netNameTextBox" Text="{Binding Path=NetName, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid DataContext="{StaticResource serversInstancesViewSource}" Name="grid2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Instance:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="3" Name="name_InstanceTextBox" Text="{Binding Path=Name_Instance, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid DataContext="{StaticResource serversInstancesDatabasesViewSource}" Name="grid3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Database:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="3" Name="name_DatabaseTextBox" Text="{Binding Path=Name_Database, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
+                </Grid>
+            </StackPanel>
+            
+        </DockPanel>
+
+        <dxdo:DockLayoutManager Margin="5" Name="dockManager1" dx:StyleManager.ApplyApplicationTheme="True"   Grid.Row="1" Grid.Column="0">
+            
+            <dxdo:LayoutGroup>
+                
+                <dxdo:LayoutPanel>
+                
+                    <lc:LayoutControl 
+           
+                        Orientation="Vertical" 
+                        StretchContentVertically="False" 
+                        Background="Transparent">
+            
+                    <lc:LayoutGroup Name="groupContainer" 
+                            Orientation="Vertical" 
+                            View="Tabs">
+                
+                    <lc:LayoutGroup.GroupBoxStyle>
+                        
+                        <Style TargetType="lc:GroupBox">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="TitleVisibility" Value="Collapsed" />
+                        </Style>
+                        
+                    </lc:LayoutGroup.GroupBoxStyle>
+
+                    <lc:LayoutGroup Header="Servers" Name="layoutGroupServers"
+                            MaxHeight="800"
+                            View="Group"                                
+                            Orientation="Vertical"                                
+                            IsCollapsible="True"
+                            IsCollapsed="False" >
+                    
+                        <dxg:GridControl Name="serversGridControl"             
+                            ItemsSource="{Binding}"
+                            DefaultSorting="NetName" >
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="ID" Name="gridColumn_ID1" Fixed="Left" Visible="False" />
+                                <dxg:GridColumn FieldName="NetName" Name="gridColumn2" />
+                                <dxg:GridColumn FieldName="IPAddress" Name="gridColumn3"  />
+                                <dxg:GridColumn FieldName="Environment" Name="gridColumn12"  />
+                                <dxg:GridColumn FieldName="SecurityZone" Name="gridColumn13"  />
+                                <!--<dxg:GridColumn FieldName="State" Name="gridColumn6"  />-->
+                                <dxg:GridColumn FieldName="OSVersion" Name="gridColumn7"  />
+                                <dxg:GridColumn FieldName="PhysicalMemory" Name="gridColumn8"  />
+                                <dxg:GridColumn FieldName="Processors" Name="gridColumn9"  />
+                                <dxg:GridColumn FieldName="Platform" Name="gridColumn10"  />
+                                <dxg:GridColumn FieldName="ADDomain" Name="gridColumn11"  />
+                                        <dxg:GridColumn FieldName="DefaultInstanceExpandMask" Name="gridColumn11s" />
+                                
+                                        <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate1" Visible="False" Fixed="Right" />
+                                <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError1" Visible="False" Fixed="Right" />
+                                    </dxg:GridControl.Columns>
+                            <dxg:GridControl.View>
+                                <dxg:TableView Name="tableView1" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart"  />
+                            </dxg:GridControl.View>
+                        </dxg:GridControl>
+
+                    </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Instances" Name="layoutGroupInstances"
+                    MaxHeight="250" 
+                    View="Group" 
+                    Orientation="Vertical" 
+                    IsCollapsible="True"
+                    IsCollapsed="False"  >
+                    
+                    <dxg:GridControl Name="fK_Instances_ServersGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=Instances, Source={StaticResource applicationDataSet}}"
+                        DefaultSorting="Name_Instance" >
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID2" Fixed="Left" Visible="False" />
+                            <dxg:GridColumn FieldName="Server_ID" Name="gridColumn_ID2a"  Fixed="Left"  Visible="True" />
+                            
+                            <dxg:GridColumn FieldName="Name_Instance" Name="gridColumn3a" />
+
+                            <dxg:GridColumn FieldName="BrowserStartMode" Name="gridColumn6a" />
+                            <dxg:GridColumn FieldName="Collation" Name="gridColumn7a" />
+                            <dxg:GridColumn FieldName="Edition" Name="gridColumn8a" />
+                            <dxg:GridColumn FieldName="EngineEdition" Name="gridColumn9a" />
+                            <dxg:GridColumn FieldName="IsClustered" Name="gridColumn10a" />
+                            <dxg:GridColumn FieldName="NetName" Name="gridColumn11a" />
+                            <dxg:GridColumn FieldName="OSVersion" Name="gridColumn12a" />
+                            <dxg:GridColumn FieldName="PerfMonMode" Name="gridColumn13a" />
+                            <dxg:GridColumn FieldName="PhysicalMemory" Name="gridColumn14a" />
+                            <dxg:GridColumn FieldName="Platform" Name="gridColumn15a" />
+                            <dxg:GridColumn FieldName="Processors" Name="gridColumn16a" />
+                            <dxg:GridColumn FieldName="Product" Name="gridColumn17a" />
+                            <dxg:GridColumn FieldName="ProductLevel" Name="gridColumn18a" />
+                            <dxg:GridColumn FieldName="ServiceInstanceId" Name="gridColumn19a" />
+                            <dxg:GridColumn FieldName="ServiceName" Name="gridColumn20a" />
+                            <dxg:GridColumn FieldName="ServiceAccount" Name="gridColumn21a" />
+                            <dxg:GridColumn FieldName="Status" Name="gridColumn22a" />
+                            <dxg:GridColumn FieldName="Version" Name="gridColumn23a" />
+                            
+                                        <dxg:GridColumn FieldName="IsMonitored" Name="gridColumn20a1" />
+                                        <dxg:GridColumn FieldName="ExpandContent" Name="gridColumn20aa" />
+                                        <dxg:GridColumn FieldName="ExpandStorage" Name="gridColumn20aaa" />
+                            
+                                        <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate2" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError2" Visible="False" Fixed="Right" />
+                                    </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView2" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Databases" Name="layoutGroupDatabases"                                 
+                    MaxHeight="800"
+                    View="Group"
+                    Orientation="Vertical"
+                    IsCollapsible="True"
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_Databases_InstancesGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=Databases, Source={StaticResource applicationDataSet}}" 
+                        DefaultSorting="Name_Database" >
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID3" Fixed="Left" Visible="False" />
+                            <dxg:GridColumn FieldName="Instance_ID" Name="gridColumn_ID3a" Fixed="Left"  Visible="True" />
+                            <dxg:GridColumn FieldName="Name_Database" Name="gridColumn5c" Fixed="Left" />      
+                            
+                            <dxg:GridColumn FieldName="Name_Instance" Name="gridColumnInstancenameLookup" DataContext="{Binding Path=FK_Instances_Servers/Name_Instance}" />
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn6d" />
+                        <!--<dxg:GridColumn FieldName="DataBaseGuid" Name="gridColumn7c" />
+                        <dxg:GridColumn FieldName="DataSpaceUsage" Name="gridColumn8c" />
+                        <dxg:GridColumn FieldName="DefaultFileGroup" Name="gridColumn9c" />
+                        <dxg:GridColumn FieldName="ID_DB" Name="gridColumn10c" />
+                        <dxg:GridColumn FieldName="IndexSpaceUsage" Name="gridColumn11c" />
+                        <dxg:GridColumn FieldName="Owner" Name="gridColumn12c" />
+                        <dxg:GridColumn FieldName="Size" Name="gridColumn13c" />
+                        <dxg:GridColumn FieldName="SpaceAvailable" Name="gridColumn14" />-->
+                        <dxg:GridColumn FieldName="EP_Area" Name="gridColumn15" />
+                        <dxg:GridColumn FieldName="EP_Team" Name="gridColumn16" />
+                        <dxg:GridColumn FieldName="EP_PrimaryDBContact" Name="gridColumn17" />
+                        <dxg:GridColumn FieldName="EP_DBApprover" Name="gridColumn18" />
+                        <dxg:GridColumn FieldName="EP_DRTier" Name="gridColumn19" />
+                        <!--<dxg:GridColumn FieldName="IsMonitored" Name="gridColumn20" />-->
+                        <!--<dxg:GridColumn FieldName="ExpandDataFiles" Name="gridColumn21" />
+                        <dxg:GridColumn FieldName="ExpandFileGroups" Name="gridColumn22" />
+                        <dxg:GridColumn FieldName="ExpandLogFiles" Name="gridColumn23" />
+                        <dxg:GridColumn FieldName="ExpandRoles" Name="gridColumn24" />
+                        <dxg:GridColumn FieldName="ExpandStoredProcedures" Name="gridColumn25" />
+                        <dxg:GridColumn FieldName="ExpandTables" Name="gridColumn26" />
+                        <dxg:GridColumn FieldName="ExpandTriggers" Name="gridColumn27" />
+                        <dxg:GridColumn FieldName="ExpandUserDefinedFunctions" Name="gridColumn28" />
+                        <dxg:GridColumn FieldName="ExpandUsers" Name="gridColumn29" />
+                        <dxg:GridColumn FieldName="ExpandViews" Name="gridColumn30" />-->
+
+                        <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate3" Visible="False" Fixed="Right" />
+                        <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError3" Visible="False" Fixed="Right" />
+                    </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView3" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Tables" Name="layoutGroupTables" 
+                    MaxHeight="800"
+                    View="Group" 
+                    Orientation="Vertical" 
+                    IsCollapsible="True"
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_DBTables_DatabasesGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBTablesViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBTables, Source={StaticResource applicationDataSet}}"                                     
+                        DefaultSorting="Name_Table" >
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID4" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID4a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_Table" Name="gridColumn5t" Fixed="Left" />
+
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn6t" />
+                            <dxg:GridColumn FieldName="DataSpaceUsed" Name="gridColumn7t" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn8t" />
+                            <dxg:GridColumn FieldName="FileGroup" Name="gridColumn9t" />
+                            <dxg:GridColumn FieldName="HasIndex" Name="gridColumn10t" />
+                            <dxg:GridColumn FieldName="IsSystemObject" Name="gridColumn11t" />
+                            <dxg:GridColumn FieldName="Owner" Name="gridColumn12t" />
+                            <dxg:GridColumn FieldName="RowCount" Name="gridColumn13t" />
+                            <dxg:GridColumn FieldName="Table_ID" Name="gridColumn14t" />
+                            <dxg:GridColumn FieldName="EP_Purpose" Name="gridColumn15t" />
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate4" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError4" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>                        
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView4" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Views" Name="layoutGroupViews" 
+                    MaxHeight="800"
+                    View="Group" 
+                    Orientation="Vertical" 
+                    ItemLabelsAlignment="Local" 
+                    IsCollapsible="True"
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_DBViews_DatabasesGridControl" 
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBViewsViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBViews, Source={StaticResource applicationDataSet}}"                           
+                        DefaultSorting="Name_View" >
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID5" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID5a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_View" Name="gridColumn10v" Fixed="Left" />
+                            
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn5v" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn6v" />
+                            <!--<dxg:GridColumn FieldName="IsSystemObject" Name="gridColumn7" />
+                            <dxg:GridColumn FieldName="Owner" Name="gridColumn8" />
+                            <dxg:GridColumn FieldName="View_ID" Name="gridColumn9" />
+
+                            <dxg:GridColumn FieldName="EP_Purpose" Name="gridColumn11" />-->
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate5" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError5" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>                        
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView5" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Stored Procedures" Name="layoutGroupStoredProcedures" 
+                    MaxHeight="800" 
+                    View="Group" 
+                    Orientation="Vertical" 
+                    IsCollapsible="True"
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_DBStoredProcedures_DatabasesGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBStoredProceduresViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBStoredProcedures, Source={StaticResource applicationDataSet}}"                         
+                        DefaultSorting="Name_StoredProcedure" >
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID6" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID6a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_StoredProcedure" Name="gridColumn5s" Fixed="Left" />
+                            
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn12s" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn13s" />
+
+                            <!--<dxg:GridColumn FieldName="StoredProcedure_ID" Name="gridColumn6" />-->
+                            <dxg:GridColumn FieldName="Owner" Name="gridColumns7" />
+                            <!--<dxg:GridColumn FieldName="MethodName" Name="gridColumn8" />
+                                <dxg:GridColumn FieldName="TextHeader" Name="gridColumn9" />
+                                <dxg:GridColumn FieldName="TextBody" Name="gridColumn10" />-->
+                            <!--<dxg:GridColumn FieldName="IsSystemObject" Name="gridColumn11s" />-->
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate6" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError6" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView6" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="DDL Triggers" Name="layoutGroupDDLTriggers" 
+                    MaxHeight="800"
+                    View="Group"
+                    IsCollapsible="True"
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_DBDdlTriggers_DatabasesGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBDdlTriggersViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBDdlTriggers, Source={StaticResource applicationDataSet}}"  
+                        DefaultSorting="Name_Trigger" >
+                        <dxg:GridControl.Columns>
+
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID7" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID7a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_Trigger" Name="gridColumn5tr" Fixed="Left" />  
+                            
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn6tr" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn7tr" />
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate7" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError7" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView7" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Users" Name="layoutGroupUsers" 
+                    MaxHeight="800"          
+                    View="Group" 
+                    IsCollapsible="True" 
+                    IsCollapsed="True"  >
+                    
+                    <dxg:GridControl Name="fK_DBUsers_DatabasesGridControl"
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBUsersViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBUsers, Source={StaticResource applicationDataSet}}"                                      
+                        DefaultSorting="Name_User" >
+                        <dxg:GridControl.Columns>
+
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID8" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID8a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_User" Name="gridColumn11u" Fixed="Left" />
+                            
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn5u" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn6u" />
+                            <dxg:GridColumn FieldName="HasDBAccess" Name="gridColumn7u" />
+                            <dxg:GridColumn FieldName="IsSystemObject" Name="gridColumn8u" />
+                            <dxg:GridColumn FieldName="LoginType" Name="gridColumn9u" />
+                            <dxg:GridColumn FieldName="Login" Name="gridColumn10u" />
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate8" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError8" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView10" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="Roles" Name="layoutGroupRoles" 
+                    MaxHeight="800"
+                    View="Group" 
+                    IsCollapsible="True" 
+                    IsCollapsed="True">
+                    
+                    <dxg:GridControl Name="fK_DBRoles_DatabasesGridControl" 
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBRolesViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBRoles, Source={StaticResource applicationDataSet}}"                                      
+                        DefaultSorting="Name_Role" >
+                        <dxg:GridControl.Columns>
+
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID9" Visible="False" Fixed="Left"/>
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID9a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_Role" Name="gridColumn8r" Fixed="Left" />
+                            
+                            <dxg:GridColumn FieldName="CreateDate" />
+                            <dxg:GridColumn FieldName="DateLastModified" />
+                            <!--<dxg:GridColumn FieldName="IsFixedRole" Name="gridColumn7" />-->
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate9" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError9" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView9" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+
+                    <lc:LayoutGroup Header="User Defined Functions" Name="layoutGroupUserDefinedFunctions"
+                    MaxHeight="800"
+                    View="Group" 
+                    ItemSpace="15" 
+                    IsCollapsible="True" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Top" 
+                    IsCollapsed="True" >
+                    
+                    <dxg:GridControl Name="fK_DBUserDefinedFunctions_DatabasesGridControl" 
+                        ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesDBUserDefinedFunctionsViewSource}}" 
+                        DesignTimeDataObjectType="{Binding Path=DBUserDefinedFunctions, Source={StaticResource applicationDataSet}}"                                         
+                        DefaultSorting="Name_UserDefinedFunction" >
+                        <dxg:GridControl.Columns>
+
+                            <dxg:GridColumn FieldName="ID" Name="gridColumn_ID10" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Database_ID" Name="gridColumn_ID10a" Visible="False" Fixed="Left" />
+                            <dxg:GridColumn FieldName="Name_UserDefinedFunction" Name="gridColumn5ud" Fixed="Left" />
+                            
+                            <dxg:GridColumn FieldName="CreateDate" Name="gridColumn6uud" />
+                            <dxg:GridColumn FieldName="DateLastModified" Name="gridColumn7ud" />
+                            <!--<dxg:GridColumn FieldName="IsSystemObject" Name="gridColumn8ud" />-->
+
+                            <dxg:GridColumn FieldName="SnapShotDate" Name="gridColumn_SnapShotDate10" Visible="False" Fixed="Right" />
+                            <dxg:GridColumn FieldName="SnapShotError" Name="gridColumn_SnapShotError10" Visible="False" Fixed="Right" />
+                        </dxg:GridControl.Columns>                        
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="tableView8" ShowTotalSummary="True" BestFitArea="All" BestFitMode="Smart" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    
+                </lc:LayoutGroup>
+                
+                    </lc:LayoutGroup>
+            
+                    </lc:LayoutControl>
+                    
+                </dxdo:LayoutPanel>
+                
+            </dxdo:LayoutGroup>
+
+            <dxdo:DockLayoutManager.AutoHideGroups>
+
+                <dxdo:AutoHideGroup DockType="Left">
+
+                    <dxdo:LayoutPanel x:Name="paneToolbox" Caption="Toolbox" ItemWidth="150" >
+
+                        <StackPanel>
+
+                            <ContentControl Template="{StaticResource AdminWindowToolBoxControlsTemplate}" />
+
+                            <!--<Button x:Name="btnLoadFromXML" 
+                            Content="Load from XML File"
+                            Margin="2" Height="20" Width="Auto"
+                            Click="btnLoadFromXML_Click" />
+
+                            <Button x:Name="btnUpdateInfo" 
+                            Content="Fetch SMO Info"                     
+                            Margin="2" Height="20" Width="Auto"  
+                            Click="btnUpdateInfo_Click" />
+
+                            <Button x:Name="btnUpdateServerInfo" Content="Sync Instance to Server"
+                            Margin="2" Height="20" Width="Auto"  
+                            Click="btnSyncInstanceToServer_Click" />
+
+                            <Button x:Name="btnSaveToXML" Content="Save To XML"
+                            Margin="2" Height="20" Width="Auto"  
+                            Click="btnSaveToXML_Click" />
+
+                            <Button x:Name="btnAddNewRow" Content="Add new row"
+                            Margin="2" Height="20" Width="Auto"  
+                            Click="btnAddNewRow_Click" />-->
+                        </StackPanel>
+
+                    </dxdo:LayoutPanel>
+
+                </dxdo:AutoHideGroup>
+
+                <!--<dxdo:AutoHideGroup DockType="Right">
+
+                    <dxdo:LayoutPanel x:Name="paneExtendedProperties" Caption="Extended Properties" >
+                        <dxe:ComboBoxEdit HorizontalAlignment="Left" 
+                                          Name="comboBoxEdit1"
+                                          DisplayMember="Name" 
+                                          ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}"  
+                                          VerticalAlignment="Top" />
+                    </dxdo:LayoutPanel>
+
+                </dxdo:AutoHideGroup>-->
+
+            </dxdo:DockLayoutManager.AutoHideGroups>
+            
+        </dxdo:DockLayoutManager>        
+    </Grid>
+    
+</dx:DXWindow>

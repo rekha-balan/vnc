@@ -1,0 +1,143 @@
+﻿<UserControl 
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucEyeOnLifeAdminMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d"  
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"              
+    xmlns:my1="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    d:DesignHeight="600" d:DesignWidth="1000"  > 
+    <UserControl.Resources>
+        <Style x:Key="AdminButton">
+            <Setter Property="Button.Height" Value="20" />
+            <Setter Property="Button.Margin" Value="5,2,5,2" />
+        </Style>
+    </UserControl.Resources>
+    <DockPanel >
+        <Border DockPanel.Dock="Left" Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2" Background="White">
+            <StackPanel Width="150">
+                <!--<my1:CylonEyeBall x:Name="cylonEyeBall1" HorizontalAlignment="Stretch" Margin="5"/>-->
+                <TextBlock FontSize="16" HorizontalAlignment="Center" FontWeight="Bold">Eye On Life</TextBlock>
+                
+                <Button Name="btnServers" Content="Servers" 
+                        Style="{StaticResource AdminButton}" Click="btnServers_Click"/>
+                
+                <Button Name="btnServerInfo" Content="ServerInfo" 
+                        Style="{StaticResource AdminButton}"  Click="btnServerInfo_Click"/>                
+                
+                <Button Name="btnInstances" Content="Instances" 
+                        Style="{StaticResource AdminButton}" Click="btnInstances_Click"/>
+
+                <Button Name="btnInstanceInfo" Content="InstanceInfo" 
+                        Style="{StaticResource AdminButton}" Click="btnInstanceInfo_Click"/>
+
+                <Button x:Name="btnJobServers" Content="JobServers" 
+                        Style="{StaticResource AdminButton}" Click="btnJobServers_Click"/>
+
+                <Button x:Name="btnJSAlertCategories" Content="JS Alert Categories" 
+                        Style="{StaticResource AdminButton}" Click="btnJSAlertCategories_Click"/>
+
+                <Button x:Name="btnJSAlerts" Content="JS Alerts" 
+                        Style="{StaticResource AdminButton}" Click="btnJSAlerts_Click"/>
+
+                <Button x:Name="btnJSJobCategories" Content="JS Job Categories" 
+                        Style="{StaticResource AdminButton}" Click="btnJSJobCategories_Click"/>
+
+                <Button x:Name="btnJSJobs" Content="JS Jobs" 
+                        Style="{StaticResource AdminButton}" Click="btnJSJobs_Click"/>
+
+                <Button x:Name="btnJSJobSchedules" Content="JS JobSchedules" 
+                        Style="{StaticResource AdminButton}" Click="btnJSJobSchedules_Click"/>
+                
+                <Button x:Name="btnJSJobSteps" Content="JS JobSteps" 
+                        Style="{StaticResource AdminButton}" Click="btnJSJobSteps_Click"/>
+
+                <Button x:Name="btnJSOperatorCategories" Content="JS OperatorCategories" 
+                        Style="{StaticResource AdminButton}" Click="btnJSOperatorCategories_Click"/>
+
+                <Button x:Name="btnJSOperators" Content="JS Operators" 
+                        Style="{StaticResource AdminButton}" Click="btnJSOperators_Click"/>
+
+                <Button x:Name="btnJSProxyAccounts" Content="JS ProxyAccounts" 
+                        Style="{StaticResource AdminButton}" Click="btnJSProxyAccounts_Click"/>
+
+                <Button x:Name="btnJSSharedSchedules" Content="JS SharedSchedules" 
+                        Style="{StaticResource AdminButton}" Click="btnJSSharedSchedules_Click"/>
+
+                <Button x:Name="btnJSTargetServerGroups" Content="JS TargetServerGroups" 
+                        Style="{StaticResource AdminButton}" Click="btnJSTargetServerGroups_Click"/>
+
+                <Button x:Name="btnJSTargetServers" Content="JS TargetServers" 
+                        Style="{StaticResource AdminButton}" Click="btnJSTargetServers_Click"/>
+
+                <Button x:Name="btnLinkedServers" Content="LinkedServers" 
+                        Style="{StaticResource AdminButton}" Click="btnLinkedServers_Click"/>
+                
+                <Button x:Name="btnLogins" Content="Logins" 
+                        Style="{StaticResource AdminButton}" Click="btnLogins_Click"/>
+
+                <Button x:Name="btnServerRoles" Content="ServerRoles" 
+                        Style="{StaticResource AdminButton}" Click="btnServerRoles_Click"/>
+                                
+                <Button x:Name="btnDatabases" Content="Databases" 
+                        Style="{StaticResource AdminButton}" Click="btnDatabases_Click"/>
+
+                <Button x:Name="btnDatabaseInfo" Content="Database Info" 
+                        Style="{StaticResource AdminButton}" Click="btnDatabaseInfo_Click"/>
+
+                <Button x:Name="btnDBDataFiles" Content="DB DataFiles" 
+                        Style="{StaticResource AdminButton}" Click="btnDBDataFiles_Click"/>
+
+                <Button x:Name="btnDBDataFileInfo" Content="DB DataFile Info" 
+                        Style="{StaticResource AdminButton}" Click="btnDBDataFileInfo_Click"/>                
+                
+                <Button x:Name="btnDBFileGroups" Content="DBFileGroups" 
+                        Style="{StaticResource AdminButton}" Click="btnDBFileGroups_Click"/>
+                
+                <Button x:Name="btnDBLogFiles" Content="DB LogFiles" 
+                        Style="{StaticResource AdminButton}" Click="btnDBLogFiles_Click"/>
+                
+                <Button x:Name="btnDBLogFileInfo" Content="DB LogFile Info" 
+                        Style="{StaticResource AdminButton}" Click="btnDBLogFileInfo_Click"/>
+                
+                <Button x:Name="btnDBRoles" Content="DB Roles" 
+                        Style="{StaticResource AdminButton}" Click="btnDBRoles_Click"/> 
+                
+                <Button x:Name="btnDBStoredProcedures" Content="DB StoredProcedures" 
+                        Style="{StaticResource AdminButton}" Click="btnDBStoredProcedures_Click"/>
+
+                <Button x:Name="btnDBTables" Content="DB Tables" 
+                        Style="{StaticResource AdminButton}" Click="btnDBTables_Click"/>
+                
+                <Button x:Name="btnDBDdlTriggers" Content="DB DdlTriggers" 
+                        Style="{StaticResource AdminButton}" Click="btnDBDdlTriggers_Click"/>
+
+                <Button x:Name="btnDBUserDefinedFunctions" Content="DB UserDefinedFunctions" 
+                        Style="{StaticResource AdminButton}" Click="btnDBUserDefinedFunctions_Click"/>
+                
+                <Button x:Name="btnDBUsers" Content="DB Users" 
+                        Style="{StaticResource AdminButton}" Click="btnDBUsers_Click"/>
+                
+                <Button x:Name="btnDBViews" Content="DB Views" 
+                        Style="{StaticResource AdminButton}" Click="btnDBViews_Click"/> 
+                
+                <Button x:Name="btnLKUPTables" Content="LKUP Tables" 
+                        Style="{StaticResource AdminButton}" Click="btnLKUPTables_Click"/>   
+                
+            </StackPanel>
+            
+        </Border>
+        
+        <Border DockPanel.Dock="Right" Margin="0,5,5,5"
+                BorderBrush="Black"
+                BorderThickness="2" Background="White">
+            <DockPanel  Name="dpUserControlContainer" >
+                <!-- User Controls get loaded here -->
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</UserControl>

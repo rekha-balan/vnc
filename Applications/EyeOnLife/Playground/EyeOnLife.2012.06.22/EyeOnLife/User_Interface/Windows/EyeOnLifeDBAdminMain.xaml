@@ -1,0 +1,20 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             xmlns:my="clr-namespace:SQLInformation.Data"      
+    xmlns:User_Controls="clr-namespace:SQLInformation.User_Interface.User_Controls"
+
+    x:Class="SQLInformation.User_Interface.Windows.SQLMonitorDBAdminMain"      
+    Title="SQLMonitorDBAdminMain" 
+    Height="768" Width="1024" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="serversViewSource" Source="{Binding}" />
+    </Window.Resources>
+
+    <Grid>
+
+        <User_Controls:wucSQLMonitorAdminMain />
+
+    </Grid>
+</Window>

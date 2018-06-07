@@ -1,0 +1,270 @@
+﻿<local:ucBase
+    x:Class="EyeOnLife.User_Interface.User_Controls.wucAdmin_Instances"      
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface"
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation" 
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"    
+    mc:Ignorable="d" 
+    d:DesignWidth="800" d:DesignHeight="400" Loaded="ucBase_Loaded" >
+    <local:ucBase.Resources>
+        <localData:ApplicationDataSet x:Key="applicationDataSet"/>
+        <CollectionViewSource x:Key="instancesViewSource" 
+                              Source="Common.ApplicationDataSet.Instances">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name_Instance" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <!--<CollectionViewSource x:Key="instancesViewSource1" Source="{Binding Instances, Source={StaticResource applicationDataSet}}"/>-->
+        <Style x:Key="detailInfoStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="BlanchedAlmond" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </local:ucBase.Resources>
+    
+    <Grid DataContext="{StaticResource instancesViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="150" />            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <DockPanel 
+            Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel 
+                Orientation="Horizontal" 
+                Margin="5" 
+                DockPanel.Dock="Left" 
+                VerticalAlignment="Center">
+                <CheckBox x:Name="readOnlyCheckBox" Margin="5"
+                    Content="Read only" IsChecked="False"
+                    Checked="readOnlyCheckBox_Checked"
+                    Unchecked="readOnlyCheckBox_UnChecked" />
+                <CheckBox x:Name="canAddCheckBox" Margin="5"
+                    Content="Can add" IsChecked="True"
+                    Checked="canAddCheckBox_Checked"
+                    Unchecked="canAddCheckBox_UnChecked" />
+                <CheckBox x:Name="canDeleteCheckBox" Margin="5"
+                    Content="Can delete" IsChecked="True"
+                    Checked="canDeleteCheckBox_Checked"
+                    Unchecked="canDeleteCheckBox_UnChecked" />
+                <Button x:Name="saveButton" Content="Save"
+                    Margin="2" Height="40" Width="Auto" 
+                    Click="saveButton_Click"/> 
+                <Button x:Name="undoButton" Content="Undo"
+                    Margin="2" Height="40" Width="Auto" 
+                    Click="undoButton_Click"/>                
+            </StackPanel>
+            
+            <WrapPanel 
+
+                Orientation="Horizontal"
+                Margin="5"
+                Width="Auto">
+                <Button x:Name="btnLoadFromXML" 
+                        Content="Load from XML File"
+                        Margin="2" Height="20" Width="Auto"
+                        Click="btnLoadFromXML_Click" />                
+                <Button x:Name="btnUpdateInfo" 
+                        Content="Fetch SMO Info"                     
+                        Margin="2" Height="20" Width="Auto"  
+                        Click="btnUpdateInfo_Click" />
+                <Button x:Name="btnUpdateServerInfo" Content="Sync Instance to Server"
+                        Margin="2" Height="20" Width="Auto"  
+                        Click="btnSyncInstanceToServer_Click" />                
+                <!--<Button x:Name="btnLoadDatabases" Content="Load Databases"
+                        Margin="2" Height="20" Width="Auto"
+                        Click="btnLoadDatabases_Click" />-->      
+                <Button Content="Take Snapshot" Width="Auto" x:Name="btnTakeSnapshot" Click="btnTakeSnapshot_Click" />                
+                
+                <!--<Button x:Name="saveButton" Content="Save"
+                    Margin="2" Height="20" Width="Auto" 
+                    Click="saveButton_Click"/> 
+                <Button x:Name="undoButton" Content="Undo"
+                    Margin="2" Height="20" Width="Auto" 
+                    Click="undoButton_Click"/>-->
+            </WrapPanel>
+
+        </DockPanel>
+        
+        <!--To add, just click in empty row and start typing 
+           To delete, just click in a row and press Delete key-->    
+        
+        <DataGrid x:Name="instancesDataGrid" 
+                  AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding Source={StaticResource instancesViewSource}}" 
+                  Grid.Row="1" Grid.ColumnSpan="2"
+                  RowDetailsVisibilityMode="Collapsed" 
+                  Margin="5" 
+                  InitializingNewItem="instancesDataGrid_InitializingNewItem" >
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="id:" />
+                            <TextBlock Text="{Binding ID}" Style="{StaticResource detailInfoStyle}" />                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Processors:" />
+                            <TextBlock Text="{Binding Processors}" Foreground="Black" Background="Beige" />                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Physical Memory:" />                            
+                            <TextBlock Text="{Binding PhysicalMemory}" Style="{StaticResource detailInfoStyle}"  />                
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToCells"/>-->
+                <DataGridTextColumn x:Name="instanceNameColumn" Binding="{Binding Name_Instance}" Header="Instance Name" MinWidth="100" Width="SizeToCells"/>
+                <!--<DataGridTextColumn x:Name="collationColumn" Binding="{Binding Collation}" Header="Collation" Width="SizeToCells"/>-->
+                <DataGridTextColumn x:Name="netNameColumn" Binding="{Binding NetName}" Header="Net Name" MinWidth="100" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="serverIDColumn" Binding="{Binding Server_ID}" Header="Server ID" MinWidth="100" Width="SizeToCells"/>                
+                <!--<DataGridTextColumn x:Name="serviceInstanceIdColumn" Binding="{Binding ServiceInstanceId}" Header="Service Instance Id" Width="SizeToCells"/>-->
+                <!--<DataGridTextColumn x:Name="serviceNameColumn" Binding="{Binding ServiceName}" Header="Service Name" Width="SizeToCells"/>-->
+                <DataGridTextColumn x:Name="serviceAccountColumn" Binding="{Binding ServiceAccount}" Header="Service Account" MinWidth="100" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="snapShotDateColumn" Binding="{Binding SnapShotDate}" Header="SnapShotDate" MinWidth="90" Width="SizeToCells"/>
+                <DataGridTextColumn Binding="{Binding IsMonitored}" Header="Is Monitored" MinWidth="100" Width="SizeToCells"/>                
+                <DataGridTextColumn Binding="{Binding ExpandInstance}" Header="Expand Instance" MinWidth="100" Width="SizeToCells"/>
+                <DataGridTextColumn Binding="{Binding DefaultDatabaseExpandMask}" Header="Default DB ExpandMask" MinWidth="100" Width="SizeToCells"/>
+                <DataGridTextColumn Binding="{Binding ExpandDatabases}" Header="Expand Databases" MinWidth="110" Width="SizeToCells"/>  
+                <DataGridTextColumn Binding="{Binding ExpandLogins}" Header="Expand Logins" MinWidth="110" Width="SizeToCells"/>
+                <DataGridTextColumn Binding="{Binding ExpandServerRoles}" Header="Expand Roles" MinWidth="110" Width="SizeToCells"/>
+                <DataGridTextColumn Binding="{Binding ExpandTriggers}" Header="Expand Triggers" MinWidth="110" Width="SizeToCells"/>                
+                                                
+                <!--<DataGridTextColumn x:Name="editionColumn" Binding="{Binding Edition}" Header="Edition" Width="SizeToCells"/>-->
+                <!--<DataGridTextColumn x:Name="isClusteredColumn" Binding="{Binding IsClustered}" Header="Is Clustered" Width="SizeToCells"/>-->
+                <!--<DataGridTextColumn x:Name="oSVersionColumn" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToCells"/>-->
+                <!--<DataGridTextColumn x:Name="physicalMemoryColumn" Binding="{Binding PhysicalMemory}" Header="Physical Memory" Width="SizeToHeader"/>-->
+                <!--<DataGridTextColumn x:Name="platformColumn" Binding="{Binding Platform}" Header="Platform" Width="SizeToCells"/>-->
+                <!--<DataGridTextColumn x:Name="processorsColumn" Binding="{Binding Processors}" Header="Processors" Width="SizeToHeader"/>-->
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!-- This is the detail below the grid -->
+        
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="5" >
+            <Grid DataContext="{Binding ElementName=instancesDataGrid, Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />   
+                    <RowDefinition Height="Auto" /> 
+                    <RowDefinition Height="Auto" />     
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />                
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="ID:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ID}" 
+                           Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />  
+                
+                <TextBlock Text="Collation:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Collation}" 
+                           Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                
+                <TextBlock Text="Is Clustered:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding IsClustered}" 
+                           Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+                
+                <TextBlock Text="Edition:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Edition}" 
+                           Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+                
+                <TextBlock Text="EngineEdition:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding EngineEdition}" 
+                           Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />                
+
+                <TextBlock Text="ServiceName:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ServiceName}" 
+                           Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                
+                <TextBlock Text="ServiceInstanceId:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ServiceInstanceId}" 
+                           Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                
+                <TextBlock Text="OS Version:" Margin="0,0,5,0"
+                           Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding OSVersion}"  
+                           Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />   
+                
+                <TextBlock Text="Platform:" Margin="0,0,5,0"
+                           Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                 <TextBlock Text="{Binding Platform}"  
+                           Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" />    
+                
+                <TextBlock Text="Processors:" Margin="0,0,5,0"
+                           Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Processors}" 
+                           Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <TextBlock Text="Product:" Margin="0,0,5,0"
+                           Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Product}" 
+                           Grid.Row="3" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <TextBlock Text="ProductLevel:" Margin="0,0,5,0"
+                           Grid.Row="4" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ProductLevel}" 
+                           Grid.Row="4" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            
+                <TextBlock Text="Version:" Margin="0,0,5,0"
+                           Grid.Row="5" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Version}" 
+                           Grid.Row="5" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" /> 
+                
+                <TextBlock Text="Server_ID:" Margin="0,0,5,0"
+                           Grid.Row="6" Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Server_ID}" 
+                           Grid.Row="6" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="20" />               
+                
+                <!--<StackPanel Orientation="Vertical" Grid.Column="0" >
+                    <TextBlock Text="Id:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30"/>
+                    <TextBlock Text="Collation:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30"/>
+                    <TextBlock Text="Is Clustered:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical"  Grid.Column="1" >
+                    <TextBlock Text="{Binding ID}"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" />
+                    <TextBlock Text="{Binding Collation}"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" />
+                    <TextBlock Text="{Binding IsClustered}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" />                            
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="2" >
+                    <TextBlock Text="OS Version:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30"/>
+                    <TextBlock Text="Platform:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" />
+                    <TextBlock Text="Processors:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30"  />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="3" >
+                    <TextBlock Text="{Binding OSVersion}"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30"/>
+                    <TextBlock Text="{Binding Platform}"  HorizontalAlignment="Left"  VerticalAlignment="Center" Height="30"/>
+                    <TextBlock Text="{Binding Processors}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" />
+                </StackPanel>-->             
+            </Grid>
+        </Border> 
+        
+    </Grid>
+    
+</local:ucBase>

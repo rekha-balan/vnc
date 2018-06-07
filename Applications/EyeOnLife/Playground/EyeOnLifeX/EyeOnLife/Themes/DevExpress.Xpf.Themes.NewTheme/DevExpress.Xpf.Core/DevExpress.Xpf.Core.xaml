@@ -1,0 +1,20 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cs="colorscheme_ignorable_uri" mc:Ignorable="cs">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/DXPanel.xaml" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/Generic.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Bars/Themes/NewTheme.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/TabControl/Themes/NewTheme.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/GroupBoxAndGroupFrame.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/Generic/Generic.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Editors/Themes/NewTheme.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/StandardControlStyles.XAML}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/Window.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/SuperTip.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/UserControl.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/PopUp.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/PseudoWindow.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/CustomTemplates.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/SearchPanel.xaml}" />
+        <ResourceDictionary Source="{dxc:ThemePartLoader Path=/DevExpress.Xpf.Core/DevExpress.Xpf.Core/Themes/NewTheme/WaitIndicators.xaml}" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -1,0 +1,413 @@
+﻿<dx:DXWindow
+    x:Class="EyeOnLife.User_Interface.Windows.BigPictureDBStorage"    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"     
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"      
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    Title="BigPicture" Width="800" Height="600" Loaded="Window_Loaded"  >
+        
+    <Window.Resources>
+        <!--<Data:ApplicationDataSet x:Key="applicationDataSet" />-->
+        <!--<CollectionViewSource x:Key="serversViewSource" 
+                              Source="{Binding Servers, Source={StaticResource applicationDataSet}}"/>-->
+        <!--<CollectionViewSource x:Key="serversViewSource" 
+                              Source="Common.ApplicationDataSet.Servers"/>-->
+        <!-- Must be some way of doing the link to Common.ApplicationDataSet.Servers in XAML.  For now, just do in code. -->
+        <CollectionViewSource x:Key="serversViewSource" 
+                              Source=""/>
+        <CollectionViewSource x:Key="serversInstancesViewSource" 
+                              Source="{Binding FK_Instances_Servers, Source={StaticResource serversViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesViewSource" 
+                              Source="{Binding FK_Databases_Instances, Source={StaticResource serversInstancesViewSource}}"/>
+        
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBStoredProceduresViewSource" 
+                              Source="{Binding FK_DBStoredProcedures_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBViewsViewSource" 
+                              Source="{Binding FK_DBViews_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+        <CollectionViewSource x:Key="serversInstancesDatabasesDBTablesViewSource" 
+                              Source="{Binding FK_DBTables_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+
+        <!--<localData:ApplicationDataSet x:Key="applicationDataSet"/>
+        <CollectionViewSource x:Key="instancesViewSource" Source="{Binding Instances, Source={StaticResource applicationDataSet}}"/>-->
+        <!--<CollectionViewSource x:Key="instancesViewSource" Source="{Binding FK_Instances_Servers, Source={StaticResource serversViewSource}}"/>     
+        <CollectionViewSource x:Key="instancesDatabasesViewSource" Source="{Binding FK_Databases_Instances, Source={StaticResource instancesViewSource}}"/>-->
+        
+        <!--<CollectionViewSource x:Key="instancesDatabasesDBFileGroupsViewSource" Source="{Binding FK_DBFileGroups_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>-->
+        <!--<CollectionViewSource x:Key="instancesDatabasesDBFileGroupsDBDataFilesViewSource" Source="{Binding FK_DBDataFiles_FileGroups, Source={StaticResource instancesDatabasesDBFileGroupsViewSource}}"/>
+        <CollectionViewSource x:Key="instancesDatabasesDBLogFilesViewSource" Source="{Binding FK_DBLogFiles_Databases, Source={StaticResource instancesDatabasesViewSource}}"/>-->
+        
+        <CollectionViewSource x:Key="instancesDatabasesDBFileGroupsViewSource" 
+                              Source="{Binding FK_DBFileGroups_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>
+        
+        <CollectionViewSource x:Key="instancesDatabasesDBFileGroupsDBDataFilesViewSource" 
+                              Source="{Binding FK_DBDataFiles_FileGroups, Source={StaticResource instancesDatabasesDBFileGroupsViewSource}}"/>
+        
+        <CollectionViewSource x:Key="instancesDatabasesDBLogFilesViewSource" 
+                              Source="{Binding FK_DBLogFiles_Databases, Source={StaticResource serversInstancesDatabasesViewSource}}"/>        
+
+        <Style x:Name="ExpanderBorder" TargetType="Expander">
+            <!--<Setter Property="BorderBrush" Value="DarkBlue" />-->
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+            <!--<Setter Property="Background" Value="AliceBlue" />-->
+
+        </Style>
+
+        <Style x:Name="DataGridBorder" TargetType="DataGrid">
+            <!--<Setter Property="BorderBrush" Value="Blue" />-->
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>        
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource serversViewSource}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <CheckBox Content="Show IDs" 
+                  Grid.Column="0" Grid.Row="0" 
+                  Margin="2"
+                  HorizontalAlignment="Right"
+                  Checked="OnShowIDs_Checked" 
+                  IsChecked="False"
+                  Unchecked="OnShowIDs_Uncheked" Click="OnShowIDs_Click" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" >
+            <RadioButton x:Name="XLargeScreen" Content="1400x1000"  Click="OnScreenSize_Click" Margin="10,0,0,0"/>
+            <RadioButton x:Name="LargeScreen" Content="1200x800"  Click="OnScreenSize_Click" Margin="10,0,0,0"/>
+            <RadioButton x:Name="MediumScreen" Content="1000x600" Click="OnScreenSize_Click" Margin="10,0,0,0" />
+            <RadioButton x:Name="SmallScreen" Content="800x600" Click="OnScreenSize_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" >
+
+            <Expander Header="Servers"  
+                      Visibility="Visible" 
+                      IsExpanded="True" >
+
+                <DataGrid x:Name="serversDataGrid" 
+                      AutoGenerateColumns="False" 
+                      EnableRowVirtualization="True" 
+                      ItemsSource="{Binding}" 
+                      MaxHeight="150"
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="netNameColumn" Header="Net Name"
+                                            Binding="{Binding NetName}"
+                                            Width="150"/>
+
+                        <DataGridTextColumn x:Name="iDColumn_Servers" Header="ID" 
+                                            Binding="{Binding ID}" 
+                                            Width="SizeToCells" Visibility="Hidden"/>
+
+                        <DataGridTextColumn x:Name="ipAddressColumn" Header="IP Address" 
+                                            Binding="{Binding IPAddress}" 
+                                            Width="SizeToHeader"/>
+ 
+                        <DataGridTextColumn x:Name="oSVersionColumn" Header="OS Version"
+                                            Binding="{Binding OSVersion}"  
+                                            Width="50"/>
+
+                        <DataGridTextColumn x:Name="physicalMemoryColumn" Header="Physical Memory" 
+                                            Binding="{Binding PhysicalMemory}" 
+                                            Width="60">
+                            <!--<DataGridTextColumn.CellStyle>
+                                <Style>
+                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>-->
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn x:Name="processorsColumn"  Header="Processors"
+                                            Binding="{Binding Processors}" 
+                                            Width="SizeToHeader"/>
+
+                        <DataGridTextColumn x:Name="platformColumn" Header="Platform" 
+                                            Binding="{Binding Platform}" 
+                                            Width="SizeToHeader"/>
+
+                        <DataGridTextColumn x:Name="aDDomainColumn" Header="ADDomain"
+                                            Binding="{Binding ADDomain}"  
+                                            Width="SizeToHeader"/>
+
+                        <DataGridTextColumn x:Name="environmentColumn"  Header="Environment"
+                                            Binding="{Binding Environment}" 
+                                            Width="SizeToHeader"/>
+
+                        <DataGridTextColumn x:Name="securityZoneColumn" Header="Security Zone" 
+                                            Binding="{Binding SecurityZone}"
+                                            Width="60"/>
+
+                        <DataGridTextColumn x:Name="stateColumn" Header="State" 
+                                            Binding="{Binding State}" 
+                                            Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Expander>
+
+            <Expander Header="Instances" 
+                      Visibility="Visible" 
+                      IsExpanded="True" >
+
+                <DataGrid x:Name="instancesDataGrid" 
+                          AutoGenerateColumns="False" 
+                          EnableRowVirtualization="True" 
+                          MaxHeight="150"                          
+                          ItemsSource="{Binding Source={StaticResource serversInstancesViewSource}}" 
+                          RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="instanceNameColumn" 
+                                            Binding="{Binding Name_Instance}" Header="Instance Name" Width="150" />
+                        <DataGridTextColumn x:Name="iDColumn_Instances" 
+                                            Binding="{Binding ID}" Header="ID" Width="SizeToCells" Visibility="Hidden" />
+                        <DataGridTextColumn x:Name="snapShotDateColumn" 
+                                            Binding="{Binding SnapShotDate}" Header="SnapShotDate" MinWidth="90" Width="SizeToCells"/>
+                        <DataGridTextColumn Binding="{Binding ExpandInstance}" Header="Expand Instance" Width="65"/>
+                        <DataGridTextColumn Binding="{Binding ExpandDatabases}" Header="Expand Databases"  Width="65"/>
+                        <DataGridTextColumn x:Name="server_IDColumn" 
+                                            Binding="{Binding Server_ID}" Header="Server ID" Width="SizeToCells" Visibility="Hidden" />
+
+                        <!--<DataGridTextColumn x:Name="collationColumn" Binding="{Binding Collation}" Header="Collation" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="netNameColumn1" Binding="{Binding NetName}" Header="Net Name" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="serviceInstanceIdColumn" Binding="{Binding ServiceInstanceId}" Header="Service Instance Id" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="serviceNameColumn" Binding="{Binding ServiceName}" Header="Service Name" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="serviceAccountColumn" Binding="{Binding ServiceAccount}" Header="Service Account" Width="SizeToCells"/>-->
+
+                        <DataGridTextColumn x:Name="editionColumn" 
+                                            Binding="{Binding Edition}" Header="Edition" MinWidth="55" Width="SizeToCells"/>
+
+                        <DataGridCheckBoxColumn x:Name="isClusteredColumn" 
+                                            Binding="{Binding IsClustered}" Header="Is Clustered" Width="65"/>
+
+                        <!--<DataGridTextColumn x:Name="oSVersionColumn1" Binding="{Binding OSVersion}" Header="OSVersion" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="physicalMemoryColumn1" Binding="{Binding PhysicalMemory}" Header="Physical Memory" Width="SizeToCells"/>-->
+
+                        <DataGridTextColumn x:Name="platformColumn1" 
+                                        Binding="{Binding Platform}" Header="Platform" Width="SizeToHeader"/>
+
+                        <!--<DataGridTextColumn x:Name="processorsColumn1" Binding="{Binding Processors}" Header="Processors" Width="SizeToCells"/>-->
+
+                        <DataGridTextColumn x:Name="engineEditionColumn" 
+                                            Binding="{Binding EngineEdition}" Header="Engine Edition" Width="60"/>
+                        <DataGridTextColumn x:Name="productColumn" 
+                                            Binding="{Binding Product}" Header="Product" MinWidth="55" Width="SizeToCells"/>
+                        <DataGridTextColumn x:Name="productLevelColumn" 
+                                            Binding="{Binding ProductLevel}" Header="Product Level" Width="60"/>
+                        <DataGridTextColumn x:Name="versionColumn" 
+                                            Binding="{Binding Version}" Header="Version" MinWidth="55" Width="SizeToCells"/>
+                        <!--<DataGridTextColumn x:Name="serviceInstanceIdentifierColumn" Binding="{Binding ServiceInstanceIdentifier}" Header="Service Instance Identifier" Width="SizeToCells"/>-->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Expander>
+
+            <Expander Header="Databases" 
+                      Visibility="Visible" 
+                      IsExpanded="True" >
+
+                <DataGrid x:Name="databasesDataGrid" 
+                    AutoGenerateColumns="False" 
+                    EnableRowVirtualization="True" 
+                    MaxHeight="200"                       
+                    ItemsSource="{Binding Source={StaticResource serversInstancesDatabasesViewSource}}" 
+                    RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn x:Name="databaseNameColumn" Header="Database Name"
+                                            Binding="{Binding Name_Database}"  
+                                            Width="150"/>
+                        <DataGridTextColumn x:Name="iDColumn_Databases" Header="ID"
+                                            Binding="{Binding ID}" 
+                                            Width="SizeToCells" Visibility="Hidden" />
+                        <DataGridTextColumn x:Name="snapShotDateColumn2" 
+                                            Binding="{Binding SnapShotDate}" Header="SnapShotDate" MinWidth="90" Width="SizeToCells"/>
+                        <DataGridTextColumn Binding="{Binding ExpandStoredProcedures}" Header="Expand Stored Procedures" MinWidth="100" Width="SizeToCells"/>
+                        <DataGridTextColumn Binding="{Binding ExpandTables}" Header="Expand Tables"  Width="65"/>
+                        <DataGridTextColumn Binding="{Binding ExpandViews}" Header="Expand Views"  Width="65"/>
+                        <!--<DataGridTextColumn x:Name="iD_DBColumn" Binding="{Binding ID_DB}" Header="ID DB" Width="SizeToCells"/>-->
+                        <!--<DataGridTextColumn x:Name="dataBaseGuidColumn" Binding="{Binding DataBaseGuid}" Header="Data Base Guid" Width="SizeToCells"/>-->
+                        <DataGridTextColumn x:Name="createDateColumn" Header="Create Date" 
+                                                Binding="{Binding CreateDate}"                                                 
+                                                Width="65">
+                        </DataGridTextColumn>
+                        <!--<DataGridTemplateColumn x:Name="createDateColumn" Header="Create Date" Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding CreateDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                        <DataGridTextColumn x:Name="instance_IDColumn" Header="Instance ID" 
+                                            Binding="{Binding Instance_ID}" 
+                                            Width="SizeToCells" 
+                                            Visibility="Hidden" />
+                        <DataGridTextColumn x:Name="eP_AreaColumn"  Header="EP Area" 
+                                            Binding="{Binding EP_Area}" 
+                                            MinWidth="60" Width="SizeToCells" />
+                        <DataGridTextColumn x:Name="eP_TeamColumn" Header="EP Team"
+                                            Binding="{Binding EP_Team}"  
+                                            MinWidth="60" Width="SizeToCells"/>
+                        <DataGridTextColumn x:Name="eP_PrimaryDBContactColumn" Header="EP Primary DBContact"
+                                            Binding="{Binding EP_PrimaryDBContact}"  
+                                            Width="70"/>
+                        <DataGridTextColumn x:Name="eP_DBApproverColumn" Header="EP DBApprover"
+                                            Binding="{Binding EP_DBApprover}"  
+                                            Width="75"/>
+                        <DataGridTextColumn x:Name="eP_DRTierColumn" Header="EP DRTier"
+                                            Binding="{Binding EP_DRTier}"  
+                                            Width="60"/>
+                        <!--<DataGridTextColumn x:Name="indexSpaceUsageColumn" Binding="{Binding IndexSpaceUsage}" Header="Index Space Usage" Width="SizeToCells"/>-->
+                        <DataGridTextColumn x:Name="dataSpaceUsageColumn" Header="Space Used"
+                                            Binding="{Binding DataSpaceUsage}" 
+                                            Width="60"/>
+                        <!--<DataGridTextColumn x:Name="ownerColumn" Binding="{Binding Owner}" Header="Owner" Width="SizeToCells"/>-->
+                        <DataGridTextColumn x:Name="sizeColumn" Header="Size"
+                                            Binding="{Binding Size}"  
+                                            MinWidth="30" Width="SizeToCells"/>
+                        <DataGridTextColumn x:Name="spaceAvailableColumn" Header="Space Available"
+                                            Binding="{Binding SpaceAvailable}"  
+                                            Width="65"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Expander>
+
+            <Expander Header="Storage" 
+                  Visibility="Visible" 
+                  IsExpanded="True" >
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto" >
+
+                    <StackPanel Orientation="Vertical" >
+
+                        <Expander Visibility="Visible" 
+                            IsExpanded="True"
+                            ExpandDirection="Down" >
+
+                            <DataGrid x:Name="fK_DBFileGroups_DatabasesDataGrid" 
+                                  AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                                  ItemsSource="{Binding Source={StaticResource instancesDatabasesDBFileGroupsViewSource}}" 
+                                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
+                                    <DataGridTextColumn x:Name="database_IDColumn" Binding="{Binding Database_ID}" Header="Database ID" Width="SizeToCells"/>
+                                    <DataGridTemplateColumn x:Name="snapShotDateColumn1" Header="Snap Shot Date" Width="SizeToHeader">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding SnapShotDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn x:Name="name_FileGroupColumn" Binding="{Binding Name_FileGroup}" Header="File Group Name" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="sizeColumn1" Binding="{Binding Size}" Header="Size" Width="SizeToHeader"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </Expander>
+
+                        <Expander Visibility="Visible" 
+                              ExpandDirection="Down" 
+                              IsExpanded="True" >
+                            
+                            <DataGrid x:Name="fK_DBDataFiles_FileGroupsDataGrid" 
+                                  AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                                  ItemsSource="{Binding Source={StaticResource instancesDatabasesDBFileGroupsDBDataFilesViewSource}}" 
+                                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="iDColumn1" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
+                                    <DataGridTextColumn x:Name="fileGroup_IDColumn" Binding="{Binding FileGroup_ID}" Header="File Group ID" Width="SizeToCells"/>
+                                    <DataGridTemplateColumn x:Name="snapShotDateColumn3" Header="Snap Shot Date" Width="SizeToHeader">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding SnapShotDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn x:Name="name_DataFileColumn" Binding="{Binding Name_DataFile}" Header="Name Data File" Width="60"/>
+                                    <DataGridTextColumn x:Name="availableSpaceColumn" Binding="{Binding AvailableSpace}" Header="Available Space" Width="60"/>
+                                    <DataGridTextColumn x:Name="bytesReadFromDiskColumn" Binding="{Binding BytesReadFromDisk}" Header="Bytes Read From Disk" Width="60"/>
+                                    <DataGridTextColumn x:Name="bytesWrittenToDiskColumn" Binding="{Binding BytesWrittenToDisk}" Header="Bytes Written To Disk" Width="60"/>
+                                    <DataGridTextColumn x:Name="fileNameColumn" Binding="{Binding FileName}" Header="File Name" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="growthColumn" Binding="{Binding Growth}" Header="Growth" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="growthTypeColumn" Binding="{Binding GrowthType}" Header="Growth Type" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="iD_DataFileColumn" Binding="{Binding ID_DataFile}" Header="ID Data File" Width="SizeToHeader"/>
+                                    <DataGridCheckBoxColumn x:Name="isPrimaryFileColumn" Binding="{Binding IsPrimaryFile}" Header="Is Primary File" Width="60"/>
+                                    <DataGridTextColumn x:Name="maxSizeColumn" Binding="{Binding MaxSize}" Header="Max Size" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskReadsColumn" Binding="{Binding NumberOfDiskReads}" Header="Number Of Disk Reads" Width="60"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskWritesColumn" Binding="{Binding NumberOfDiskWrites}" Header="Number Of Disk Writes" Width="60"/>
+                                    <DataGridTextColumn x:Name="sizeColumn2" Binding="{Binding Size}" Header="Size" Width="60"/>
+                                    <DataGridTextColumn x:Name="usedSpaceColumn" Binding="{Binding UsedSpace}" Header="Used Space" Width="60"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </Expander>
+
+                        <Expander Visibility="Visible"
+                            ExpandDirection="Down"
+                              IsExpanded="True" >
+                            
+                            <DataGrid x:Name="fK_DBLogFiles_DatabasesDataGrid" 
+                                      AutoGenerateColumns="False" 
+                                      EnableRowVirtualization="True" 
+                                      ItemsSource="{Binding Source={StaticResource instancesDatabasesDBLogFilesViewSource}}" 
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="iDColumn2" Binding="{Binding ID}" Header="ID" Width="SizeToCells"/>
+                                    <DataGridTemplateColumn x:Name="snapShotDateColumn4" Header="Snap Shot Date" Width="SizeToHeader">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding SnapShotDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn x:Name="database_IDColumn1" Binding="{Binding Database_ID}" Header="Database ID" Width="60"/>
+                                    <DataGridTextColumn x:Name="name_LogFileColumn" Binding="{Binding Name_LogFile}" Header="Name Log File" Width="60"/>
+                                    <DataGridTextColumn x:Name="availableSpaceColumn1" Binding="{Binding AvailableSpace}" Header="Available Space" Width="60"/>
+                                    <DataGridTextColumn x:Name="growthColumn1" Binding="{Binding Growth}" Header="Growth" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="growthTypeColumn1" Binding="{Binding GrowthType}" Header="Growth Type" Width="60"/>
+                                    <DataGridTextColumn x:Name="iD_FileGroupColumn" Binding="{Binding ID_FileGroup}" Header="ID File Group" Width="60"/>
+                                    <DataGridCheckBoxColumn x:Name="isPrimaryFileColumn1" Binding="{Binding IsPrimaryFile}" Header="Is Primary File" Width="60"/>
+                                    <DataGridTextColumn x:Name="maxSizeColumn1" Binding="{Binding MaxSize}" Header="Max Size" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskReadBytesColumn" Binding="{Binding NumberOfDiskReadBytes}" Header="Number Of Disk Read Bytes" Width="60"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskReadsColumn1" Binding="{Binding NumberOfDiskReads}" Header="Number Of Disk Reads" Width="60"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskWriteBytesColumn" Binding="{Binding NumberOfDiskWriteBytes}" Header="Number Of Disk Write Bytes" Width="60"/>
+                                    <DataGridTextColumn x:Name="numberOfDiskWritesColumn1" Binding="{Binding NumberOfDiskWrites}" Header="Number Of Disk Writes" Width="60" />
+                                    <DataGridTextColumn x:Name="sizeColumn3" Binding="{Binding Size}" Header="Size" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="usedSpaceColumn1" Binding="{Binding UsedSpace}" Header="Used Space" Width="60"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </Expander>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+            </Expander>
+
+        </StackPanel>
+
+    </Grid>
+
+</dx:DXWindow>

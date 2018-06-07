@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PostConversionRemoveFromScc>
+    </PostConversionRemoveFromScc>
+    <PostConversionAddToScc>
+    </PostConversionAddToScc>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>SQLMonitorDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.0</ProjectVersion>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ShowWizard>True</ShowWizard>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <LoadSqlClrTypes>True</LoadSqlClrTypes>
+    <RootNamespace>SQLMonitorDB</RootNamespace>
+    <DefaultSchema>dbo</DefaultSchema>
+    <PreviousProjectVersion>4.0</PreviousProjectVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <ValidateCasingOnIdentifiers>False</ValidateCasingOnIdentifiers>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{433fbace-46a8-470e-a61a-df33d65b59e3}</ProjectGuid>
+    <GenerateDatabaseFile>False</GenerateDatabaseFile>
+    <GenerateCreateScript>True</GenerateCreateScript>
+    <SqlServerVerification>False</SqlServerVerification>
+    <TargetLanguage>CS</TargetLanguage>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <AnsiNullDefault>True</AnsiNullDefault>
+    <AnsiNulls>True</AnsiNulls>
+    <AnsiPadding>True</AnsiPadding>
+    <AnsiWarnings>True</AnsiWarnings>
+    <ArithAbort>True</ArithAbort>
+    <ConcatNullYieldsNull>True</ConcatNullYieldsNull>
+    <QuotedIdentifier>True</QuotedIdentifier>
+    <NumericRoundAbort>False</NumericRoundAbort>
+    <RecursiveTriggersEnabled>False</RecursiveTriggersEnabled>
+    <DatabaseState>ONLINE</DatabaseState>
+    <UpdateOptions>READ_WRITE</UpdateOptions>
+    <CloseCursorOnCommitEnabled>False</CloseCursorOnCommitEnabled>
+    <DefaultCursor>LOCAL</DefaultCursor>
+    <AutoClose>False</AutoClose>
+    <AutoCreateStatistics>True</AutoCreateStatistics>
+    <AutoShrink>False</AutoShrink>
+    <AutoUpdateStatistics>True</AutoUpdateStatistics>
+    <TornPageDetection>False</TornPageDetection>
+    <DatabaseAccess>MULTI_USER</DatabaseAccess>
+    <Recovery>FULL</Recovery>
+    <EnableFullTextSearch>True</EnableFullTextSearch>
+    <DatabaseChaining>False</DatabaseChaining>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <Trustworthy>False</Trustworthy>
+    <AutoUpdateStatisticsAsynchronously>False</AutoUpdateStatisticsAsynchronously>
+    <PageVerify>NONE</PageVerify>
+    <ServiceBrokerOption>DisableBroker</ServiceBrokerOption>
+    <DateCorrelationOptimizationOn>False</DateCorrelationOptimizationOn>
+    <Parameterization>SIMPLE</Parameterization>
+    <AllowSnapshotIsolation>False</AllowSnapshotIsolation>
+    <ReadCommittedSnapshot>False</ReadCommittedSnapshot>
+    <VardecimalStorageFormatOn>True</VardecimalStorageFormatOn>
+    <SupplementalLoggingOn>False</SupplementalLoggingOn>
+    <DefaultFileStreamFilegroup />
+    <IsChangeTrackingOn>False</IsChangeTrackingOn>
+    <IsChangeTrackingAutoCleanupOn>True</IsChangeTrackingAutoCleanupOn>
+    <ChangeTrackingRetentionPeriod>2</ChangeTrackingRetentionPeriod>
+    <ChangeTrackingRetentionUnit>Days</ChangeTrackingRetentionUnit>
+    <IsEncryptionOn>False</IsEncryptionOn>
+    <IsBrokerPriorityHonored>False</IsBrokerPriorityHonored>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>.\sql\release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>.\sql\debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TRON|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+    <OutputPath>.\sql\TRON\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'A097912X0P|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MATRIX|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MATRIXW8|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PARTHENON|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+    <OutputPath>.\sql\PARTHENON\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TRONW8|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+    <OutputPath>.\sql\TRONW8\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'A097921NYP|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'iDev|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetDatabase />
+    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <SuppressTSqlWarnings />
+    <OutputPath>.\sql\A097912X0P\</OutputPath>
+  </PropertyGroup>
+  <!--Import the settings-->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Pre-Deployment" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Data Generation Plans" />
+    <Folder Include="Schema Comparisons" />
+    <Folder Include="Properties\" />
+    <Folder Include="Schema Objects\" />
+    <Folder Include="Schema Objects\Programmability\" />
+    <Folder Include="Schema Objects\Programmability\Database Triggers\" />
+    <Folder Include="Schema Objects\Programmability\Defaults\" />
+    <Folder Include="Schema Objects\Programmability\Functions\" />
+    <Folder Include="Schema Objects\Programmability\Rules\" />
+    <Folder Include="Schema Objects\Programmability\Stored Procedures\" />
+    <Folder Include="Schema Objects\Programmability\Types\" />
+    <Folder Include="Schema Objects\Programmability\Types\User Defined Data Types\" />
+    <Folder Include="Schema Objects\Programmability\Types\User Defined Types CLR\" />
+    <Folder Include="Schema Objects\Programmability\Types\User Defined Table Types\" />
+    <Folder Include="Schema Objects\Programmability\Types\XML Schema Collections\" />
+    <Folder Include="Schema Objects\Assemblies\" />
+    <Folder Include="Schema Objects\Security\" />
+    <Folder Include="Schema Objects\Security\Schemas\" />
+    <Folder Include="Schema Objects\Security\Users\" />
+    <Folder Include="Schema Objects\Security\Certificates\" />
+    <Folder Include="Schema Objects\Security\Asymmetric Keys\" />
+    <Folder Include="Schema Objects\Security\Master Keys\" />
+    <Folder Include="Schema Objects\Security\Signatures\" />
+    <Folder Include="Schema Objects\Security\Symmetric Keys\" />
+    <Folder Include="Schema Objects\Security\Database Encryption Keys\" />
+    <Folder Include="Schema Objects\Security\Database Audit Specification\" />
+    <Folder Include="Schema Objects\Security\Roles\" />
+    <Folder Include="Schema Objects\Security\Roles\Application Roles\" />
+    <Folder Include="Schema Objects\Security\Roles\Database Roles\" />
+    <Folder Include="Schema Objects\Service Broker\" />
+    <Folder Include="Schema Objects\Service Broker\Broker Priorities\" />
+    <Folder Include="Schema Objects\Service Broker\Contracts\" />
+    <Folder Include="Schema Objects\Service Broker\Event Notifications\" />
+    <Folder Include="Schema Objects\Service Broker\Message Types\" />
+    <Folder Include="Schema Objects\Service Broker\Queues\" />
+    <Folder Include="Schema Objects\Service Broker\Remote Service Binding\" />
+    <Folder Include="Schema Objects\Service Broker\Routes\" />
+    <Folder Include="Schema Objects\Service Broker\Services\" />
+    <Folder Include="Schema Objects\Storage\" />
+    <Folder Include="Schema Objects\Storage\Full Text Stoplists\" />
+    <Folder Include="Schema Objects\Storage\Filegroups\" />
+    <Folder Include="Schema Objects\Storage\Files\" />
+    <Folder Include="Schema Objects\Storage\Full Text Catalogs\" />
+    <Folder Include="Schema Objects\Storage\Partition Functions\" />
+    <Folder Include="Schema Objects\Storage\Partition Schemes\" />
+    <Folder Include="Schema Objects\Synonyms\" />
+    <Folder Include="Schema Objects\Tables\" />
+    <Folder Include="Schema Objects\Tables\Constraints\" />
+    <Folder Include="Schema Objects\Tables\Indexes\" />
+    <Folder Include="Schema Objects\Tables\Keys\" />
+    <Folder Include="Schema Objects\Tables\Triggers\" />
+    <Folder Include="Schema Objects\Tables\Statistics\" />
+    <Folder Include="Schema Objects\Views\" />
+    <Folder Include="Schema Objects\Views\Indexes\" />
+    <Folder Include="Schema Objects\Views\Triggers\" />
+    <Folder Include="Schema Objects\Views\Statistics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BuildContributorArgument Include="OutDir=$(OutDir)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Permissions_1.sql" />
+    <Build Include="Schema Objects\Tables\Servers.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Schema Objects\Tables\Instances.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\InstanceInfo.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\Databases.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\DatabaseInfo.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\ServerInfo.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\Constraints\DF_Servers_id.defconst.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Service Broker\Routes\AutoCreatedLocal.route.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\Keys\PK_Servers.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Tables\DBTables.table.sql" />
+    <Build Include="Schema Objects\Tables\DBViews.table.sql" />
+    <Build Include="Schema Objects\Tables\DBStoredProcedures.table.sql" />
+    <Build Include="Schema Objects\Tables\LKUP_Environments.table.sql" />
+    <Build Include="Schema Objects\Tables\LKUP_ADDomains.table.sql" />
+    <Build Include="Schema Objects\Tables\Logins.table.sql" />
+    <Build Include="Schema Objects\Tables\ServerRoles.table.sql" />
+    <Build Include="Schema Objects\Tables\DBFileGroups.table.sql" />
+    <Build Include="Schema Objects\Tables\DBDataFiles.table.sql" />
+    <Build Include="Schema Objects\Tables\DBLogFiles.table.sql" />
+    <Build Include="Schema Objects\Tables\DBRoles.table.sql" />
+    <Build Include="Schema Objects\Tables\DBUsers.table.sql" />
+    <Build Include="Schema Objects\Tables\DBDdlTriggers.table.sql" />
+    <Build Include="Schema Objects\Tables\DBUserDefinedFunctions.table.sql" />
+    <Build Include="Schema Objects\Tables\Jobs.table.sql" />
+    <Build Include="Schema Objects\Tables\TBTriggers.table.sql" />
+    <Build Include="Schema Objects\Tables\VWTriggers.table.sql" />
+    <Build Include="Schema Objects\Tables\DBDataFileInfo.table.sql" />
+    <Build Include="Schema Objects\Tables\DBLogFileInfo.table.sql" />
+    <Build Include="Schema Objects\Tables\LKUP_SQLServerVersions.table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="A097912X0P.publish.xml" />
+    <None Include="SQLMonitorDB.publish.xml" />
+    <None Include="PARTHENON.publish.xml" />
+    <None Include="MATRIXW8.publish.xml" />
+    <None Include="SQLMonitorDB_1.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SQLMonitorDB.refactorlog" />
+  </ItemGroup>
+</Project>

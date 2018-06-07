@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxcore_unique_xmlns="http://schemas.devexpress.com/winfx/2008/xaml/core">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.NavBar/NewTheme/CommonElements.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.NavBar/NewTheme/NavigationPane.xaml" />
+    <ResourceDictionary Source="/DevExpress.Xpf.Themes.NewTheme.v12.1;component/DevExpress.Xpf.NavBar/NewTheme/ExplorerBar.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

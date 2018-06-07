@@ -1,0 +1,994 @@
+﻿<uiuc:wucDX_Base
+    x:Class="EyeOnLife.User_Interface.User_Controls.Explore_DatabaseStorage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+    mc:Ignorable="d"
+    
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"    
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"  
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"     
+    
+    xmlns:local="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:localData="clr-namespace:SQLInformation.Data;assembly=SQLInformation"
+    xmlns:ui="clr-namespace:EyeOnLife.User_Interface" 
+    xmlns:uiuc="clr-namespace:EyeOnLife.User_Interface.User_Controls"
+    xmlns:uiw="clr-namespace:EyeOnLife.User_Interface.Windows"
+    
+    Title="Database Storage Explorer" FontSize="16"
+    d:DesignWidth="800" d:DesignHeight="500"    
+    Loaded="OnLoaded" SizeChanged="OnSizeChanged" >
+
+    <uiuc:wucDX_Base.Resources>
+        
+        <localData:ApplicationDataSet x:Key="applicationDataSet" />
+
+        <CollectionViewSource x:Key="adDomains" />
+        <CollectionViewSource x:Key="environments" Source="{Binding Path=LKUP_Environments, Source={StaticResource applicationDataSet}}" />
+        <CollectionViewSource x:Key="securityZones" />
+
+        <Style x:Key="BoldFontLabelStyle" TargetType="dxlc:LayoutItemLabel">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+    </uiuc:wucDX_Base.Resources>
+
+    <dxlc:LayoutControl Name="lc_Root" 
+        Orientation="Vertical"
+        Background="Transparent"
+        VerticalAlignment="Stretch" >
+
+        <dxlc:LayoutControl.AvailableItems>
+
+            <!-- Add things that are optionally displayable-->
+
+        </dxlc:LayoutControl.AvailableItems>
+
+        <dxlc:LayoutGroup Name="lg_Header"
+                        VerticalAlignment="Top">
+
+            <dxlc:LayoutGroup Name="lg_BreadCrumb"
+                Orientation="Horizontal" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                ItemSpace="30">
+
+                <dxlc:LayoutItem Label="Server:" Visibility="Visible">
+                    <TextBlock Text="{Binding Path=NetName}" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Visibility="Visible">
+                    <TextBlock Text="{Binding Path=ADDomain}" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Visibility="Visible">
+                    <TextBlock Text="{Binding Path=Environment}" />
+                </dxlc:LayoutItem>
+
+                <dxlc:LayoutItem Label="Database:"
+                                 DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" >
+                    <TextBlock Text="{Binding Path=Name_Database}" />
+                </dxlc:LayoutItem>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup 
+                Orientation="Vertical" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" >
+
+                <RadioButton Content="Show as Tabs" Name="checkShowAsTabs"
+                             IsChecked="True" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+                <RadioButton Content="Show as Group Boxes" Name="checkShowAsGroupBoxes" 
+                             Checked="ShowAs_Checked" 
+                             FontSize="10" />
+
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Body" >
+
+            <dxdo:DockLayoutManager Name="lg_Body_dlm" 
+                dx:StyleManager.ApplyApplicationTheme="True"             
+                FontSize="12" >
+
+                <dxdo:LayoutGroup Name="lg_Body_dlm_layoutGroup">
+
+                    <dxdo:LayoutPanel Style="{StaticResource FixedLayoutPanel}" >
+
+                        <dxlc:LayoutControl 
+                            Orientation="Vertical" 
+                            StretchContentVertically="False" 
+                            Background="Transparent">
+
+                            <dxlc:LayoutGroup Name="groupContainer" 
+                                              Orientation="Vertical" 
+                                              View="Tabs" >
+
+                                <dxlc:LayoutGroup.GroupBoxStyle>
+                                    <Style TargetType="dxlc:GroupBox">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="TitleVisibility" Value="Collapsed" />
+                                    </Style>
+                                </dxlc:LayoutGroup.GroupBoxStyle>
+
+                                <dxlc:LayoutGroup Header="Databases" Name="lg_Databases"   
+                                    VerticalAlignment="Top"                              
+                                    View="Group"
+                                    Orientation="Vertical"
+                                    IsCollapsible="True"
+                                    IsCollapsed="False" >
+
+                                    <ContentControl Name="cc_DisplayOptions3"
+                                        Template="{StaticResource DisplayOptionsControls_Database}" 
+                                        VerticalAlignment="Top" />
+
+                                    <dxlc:LayoutControl Name="lc_DatabasesGrid" Style="{StaticResource LayoutControlStyle_Grid}" VerticalAlignment="Top" >
+
+                                        <dxg:GridControl Name="gc_Databases"
+                                            Height="200" VerticalAlignment="Top"
+                                            Style="{StaticResource GridControlStyle}"                                                          
+                                            DefaultSorting="Name_Database"
+                                            CustomColumnDisplayText="OnCustomColumnDisplayText"
+                                            CustomUnboundColumnData="CustomUnboundColumnData"                                                           
+                                            Tag="Database" > <!--  Tag controls how OnCustomColumnDisplayText handles some columns. -->
+
+                                            <dxg:GridControl.Columns>
+                                                <dxg:GridColumn FieldName="Name_Database" Name="gc_Name_Database" Style="{StaticResource Header_Name_Database}" Visible="True" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="ID" Name="gc_ID3" Visible="False" Style="{StaticResource Header_ID}" Fixed="Left" />
+                                                
+                                                <dxg:GridColumn FieldName="SnapShotErrorIndicator" UnboundType="Object"
+                                                            CellTemplate="{StaticResource IconCellTemplate}" Visible="True" Fixed="Left" Width="8" />
+                                                <dxg:GridColumn FieldName="Name_Instance" Name="gc_Name_Instance3" Style="{StaticResource Header_Name_Instance}" Visible="True" Fixed="Left"  />
+                                                <dxg:GridColumn FieldName="Instance_ID" Name="gc_Instance_ID" Style="{StaticResource Header_Instance_ID}" Visible="False" Fixed="Left" />
+                                                <dxg:GridColumn FieldName="Notes_Instance" Name="gc_Notes_Instance" UnboundType="String" Style="{StaticResource Header_Notes}" Visible="False" Fixed="Left" />
+
+                                                <dxg:GridColumn FieldName="IsMonitored_Instance" Name="gc_IsMonitored_Instance" Visible="False" UnboundType="Boolean" Style="{StaticResource Header_IsMonitored}" />
+                                                
+                                                <dxg:GridColumn FieldName="ADDomain" Name="gc_ADDomain" UnboundType="String" Style="{StaticResource Header_ADDomain}" Visible="False" />
+                                                <dxg:GridColumn FieldName="Environment" Name="gc_Environment" UnboundType="String" Style="{StaticResource Header_Environment}" Visible="False" />
+                                                <dxg:GridColumn FieldName="SecurityZone" Name="gc_SecurityZone" UnboundType="String" Style="{StaticResource Header_SecurityZone}" Visible="False" />
+
+                                                <dxg:GridColumn FieldName="CreateDate" Name="gc_CreateDate" Style="{StaticResource Header_CreateDate}" 
+                                                            EditSettings="{dxe:DateSettings DisplayFormat=G}" />
+                                                <dxg:GridColumn FieldName="DataBaseGuid" Name="gc_DataBaseGuid" Visible="False" />
+                                                
+                                                <dxg:GridColumn FieldName="DefaultFileGroup" Name="gc_DefaultFileGroup" Style="{StaticResource Header_DefaultFileGroup}" Visible="True" />
+                                                <dxg:GridColumn FieldName="DataSpaceUsage" Name="gc_DataSpaceUsage" Style="{StaticResource Header_DataSpaceUsage}" Visible="True" />
+                                                <dxg:GridColumn FieldName="IndexSpaceUsage" Name="gc_IndexSpaceUsage"  Style="{StaticResource Header_IndexSpaceUsage}" Visible="True"/>
+                                                <dxg:GridColumn FieldName="Size" Name="gc_Size" Style="{StaticResource Header_Size}" Visible="True" Tag="MB" />
+                                                <dxg:GridColumn FieldName="SpaceAvailable" Name="gc_SpaceAvailable" Style="{StaticResource Header_SpaceAvailable}" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="ID_DB" Name="gc_ID_DB" Visible="False" />
+                                                <dxg:GridColumn FieldName="Owner" Name="gc_Owner" Visible="True" />
+
+                                                <dxg:GridColumn FieldName="LastBackupDate" Name="gc_LastBackupDate" Style="{StaticResource Header_LastBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="LastDifferentialBackupDate" Name="gc_LastDifferentialBackupDate" Style="{StaticResource Header_LastDifferentialBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="LastLogBackupDate" Name="gc_LastLogBackupDate" Style="{StaticResource Header_LastLogBackupDate}" 
+                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}" Visible="False"/>
+                                                <dxg:GridColumn FieldName="RecoveryModel" Name="gc_RecoveryModel" Style="{StaticResource Header_RecoveryModel}" Visible="False"/>
+
+                                                <dxg:GridColumn FieldName="EP_Area" Name="gc_EP_Area" Visible="False"/>
+                                                <dxg:GridColumn FieldName="EP_Team" Name="gc_EP_Team" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_PrimaryDBContact" Name="gc_EP_PrimaryDBContact" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_DBApprover" Name="gc_EP_DBApprover" Visible="False" />
+                                                <dxg:GridColumn FieldName="EP_DRTier" Name="gc_EP_DRTier" Visible="False"/>
+
+                                                <dxg:GridColumn FieldName="IsMonitored" Name="gc_IsMonitored3" Visible="False" Style="{StaticResource Header_IsMonitored}" />
+                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate3" Visible="False" 
+                                                                Style="{StaticResource Header_SnapShotDate}"
+                                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+
+                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError3" Visible="False"  
+                                                                Style="{StaticResource Header_SnapShotError}" />
+
+                                                <dxg:GridColumn FieldName="NotFound" Name="gc_NotFound" Visible="False" Style="{StaticResource Header_NotFound}" />
+                                                
+                                            </dxg:GridControl.Columns>
+
+                                            <dxg:GridControl.View>
+                                                <dxg:TableView Name="tableView3"                                                     
+                                                    Style="{StaticResource TableViewStyle}"
+                                                    CellValueChanged="OnCellValueChanged" 
+                                                    CellValueChanging="OnCellValueChanged"                                                                
+                                                    FocusedRowChanged="OnFocusedRowChanged_Database" >
+                                                    <dxg:TableView.RowCellMenuCustomizations>
+                                                        <dxb:BarButtonItem Name="gridCmd1" Content="Cmd1" ItemClick="OnItemClick_Cmd1" />
+                                                        <dxb:BarButtonItem Name="gridCmd2" Content="List Logins" ItemClick="OnDisplayDBLogins" />
+                                                    </dxg:TableView.RowCellMenuCustomizations>
+                                                </dxg:TableView>
+                                            </dxg:GridControl.View>
+
+                                        </dxg:GridControl>
+
+                                    </dxlc:LayoutControl>
+
+                                    <dxlc:LayoutControl Name="lc_DatabaseDetail" VerticalAlignment="Top">
+
+                                        <Border BorderBrush="Transparent" BorderThickness="2">
+
+                                            <dxc:ChartControl Name="cht_Database" 
+                                                                BorderThickness="0" >
+                                                <dxc:ChartControl.Diagram>
+                                                    <dxc:XYDiagram2D>
+                                                            
+                                                        <!--<dxc:XYDiagram2D.PanesPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition />
+                                                                        <RowDefinition />
+                                                                        <RowDefinition />
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition />
+                                                                    </Grid.ColumnDefinitions>
+                                                                </Grid>
+                                                            </ItemsPanelTemplate>
+                                                        </dxc:XYDiagram2D.PanesPanel>-->
+
+                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+
+
+
+                                                        </dxc:XYDiagram2D.DefaultPane>-->
+
+                                                        <!--<dxc:XYDiagram2D.Panes>
+
+                                                            <dxc:Pane x:Name="spaceAvailable_Database" Grid.Row="0" Grid.Column="0" />
+                                                            <dxc:Pane x:Name="size_Database" Grid.Row="0" Grid.Column="1" />
+                                                            <dxc:Pane x:Name="indexSpace_Database" Grid.Row="1" Grid.Column="0" />
+                                                            <dxc:Pane x:Name="dataSpace_Database" Grid.Row="1" Grid.Column="1" />
+
+                                                        </dxc:XYDiagram2D.Panes>-->
+                                                            
+                                                        <dxc:XYDiagram2D.AxisX>
+                                                            <dxc:AxisX2D>
+
+                                                            </dxc:AxisX2D>
+                                                        </dxc:XYDiagram2D.AxisX>
+                                                            
+                                                        <dxc:XYDiagram2D.AxisY>
+                                                            <dxc:AxisY2D>
+                                                                <dxc:AxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Size (MB)" FontSize="10" />
+                                                                </dxc:AxisY2D.Title>
+                                                            </dxc:AxisY2D>
+                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                        <!--<dxc:XYDiagram2D.SecondaryAxesY>
+                                                            <dxc:SecondaryAxisY2D>
+                                                                <dxc:SecondaryAxisY2D.Title>
+                                                                    <dxc:AxisTitle Content="Available Size (MB)" />
+                                                                </dxc:SecondaryAxisY2D.Title>
+                                                            </dxc:SecondaryAxisY2D>
+                                                        </dxc:XYDiagram2D.SecondaryAxesY>-->
+
+                                                        <dxc:XYDiagram2D.Series>
+
+                                                            <dxc:AreaStackedSeries2D Name="seriesDB_DataSpace"                                                                                                                                                                        
+                                                                        DisplayName="DataSpace" 
+                                                                        ArgumentDataMember="SnapShotDate"
+                                                                        ValueDataMember="DataSpaceUsage"  />
+                                                                
+                                                            <dxc:AreaStackedSeries2D  Name="seriesDB_IndexSpace"
+                                                                        DisplayName="IndexSpace"
+                                                                        ArgumentDataMember="SnapShotDate"
+                                                                        ValueDataMember="IndexSpaceUsage"  />
+
+                                                            <dxc:LineSeries2D Name="seriesDB_Size"                                                                                                                                                                     
+                                                                        DisplayName="Size"
+                                                                        ArgumentDataMember="SnapShotDate"
+                                                                        ValueDataMember="Size" />
+
+                                                            <dxc:LineSeries2D Name="seriesDB_SpaceAvailable"                                                                                                                                                                         
+                                                                        DisplayName="SpaceAvailable"
+                                                                        ArgumentDataMember="SnapShotDate"
+                                                                        ValueDataMember="SpaceAvailable"  />                                                                              
+
+                                                        </dxc:XYDiagram2D.Series>
+
+                                                    </dxc:XYDiagram2D>
+
+                                                </dxc:ChartControl.Diagram>
+
+                                                <dxc:ChartControl.Legend>
+                                                    <dxc:Legend />
+                                                </dxc:ChartControl.Legend>
+
+                                                <dxc:ChartControl.Titles>
+                                                    <dxc:Title Dock="Top" Content="Space Utilization" FontSize="10"/>
+                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                    <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                    <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                </dxc:ChartControl.Titles>
+
+                                            </dxc:ChartControl>   
+                                            
+                                        </Border>
+
+                                    </dxlc:LayoutControl>
+
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Storage" Name="lg_Storage"                                       
+                                    View="Group" 
+                                    Orientation="Vertical" 
+                                    IsCollapsible="True"
+                                    IsCollapsed="True" 
+                                    DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" >
+
+                                    <ContentControl 
+                                        Name="cc_DisplayOptions4"
+                                        Template="{StaticResource DisplayOptionsControls_Storage}" 
+                                        VerticalAlignment="Top" />
+
+                                    <Border BorderBrush="Orange" BorderThickness="2" CornerRadius="3" >
+                                        
+                                        <StackPanel Orientation="Vertical" >
+                                            
+                                            <Border BorderBrush="Transparent" BorderThickness="2" >
+
+                                                    <Border BorderBrush="Transparent" BorderThickness="2" >
+
+                                                        <dxg:GridControl Name="gc_DBFileGroups" 
+                                                            MaxHeight="300"
+                                                            Style="{StaticResource GridControlStyle}"                                                          
+                                                            ItemsSource="{Binding FK_DBFileGroups_Databases}"
+                                                            DefaultSorting="Name_FileGroup" 
+                                                                 
+                                                            CustomColumnDisplayText="OnCustomColumnDisplayText" VerticalAlignment="Top" ShowBorder="False"  >
+
+                                                            <dxg:GridControl.Columns >
+                                                                <dxg:GridColumn FieldName="Name_FileGroup" Name="gc_Name_FileGroup" Fixed="Left" Style="{StaticResource Header_Name_FileGroup}" />
+                                                                <dxg:GridColumn FieldName="ID" Name="gc_ID4" Visible="False" Fixed="Left" Style="{StaticResource Header_ID}" />
+                                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_ID4a" Visible="False" Fixed="Left" Style="{StaticResource Header_Database_ID}" />
+
+                                                                <dxg:GridColumn FieldName="Size" Name="gc_Size4" Style="{StaticResource Header_Size}" Visible="True" />
+
+                                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate4" 
+                                                                Visible="False" 
+                                                                Style="{StaticResource Header_SnapShotDate}"
+                                                                EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+
+                                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError4" 
+                                                                Style="{StaticResource Header_SnapShotError}"                                                
+                                                                Visible="False"  />
+                                                            </dxg:GridControl.Columns>
+
+                                                            <dxg:GridControl.View >
+                                                                <dxg:TableView Name="tableView4"                                                     
+                                                                        Style="{StaticResource TableViewStyle}" 
+                                                                        FocusedRowChanged="OnFocusedRowChanged_FileGroup"                                                                                
+                                                                        ShowGroupPanel="False" 
+                                                                        ShowAutoFilterRow="False" 
+                                                                        ShowFixedTotalSummary="False" ShowTotalSummary="False"
+                                                                        ShowFilterPanelMode="Default" VerticalAlignment="Top" >
+                                                                    <dxg:TableView.RowCellMenuCustomizations>
+                                                                        <dxb:BarButtonItem Name="gridCmd1a" Content="Cmd1" ItemClick="OnItemClick_Cmd1" />
+                                                                    </dxg:TableView.RowCellMenuCustomizations>
+                                                                </dxg:TableView>
+                                                            </dxg:GridControl.View>
+
+                                                        </dxg:GridControl>
+
+                                                    </Border>
+                                        
+                                            </Border>
+
+                                            <Border BorderBrush="Transparent" BorderThickness="2" DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_DBFileGroups}" >
+                                                                            
+                                                    <Border BorderBrush="Transparent" BorderThickness="2" >
+                                                
+                                                        <dxg:GridControl Name="gc_DBDataFiles"
+                                                            Style="{StaticResource GridControlStyle}"   
+                                                            MaxHeight="300"
+                                                            ItemsSource="{Binding FK_DBDataFiles_FileGroups}"
+                                                            DefaultSorting="Name_DataFile" 
+                                                            CustomColumnDisplayText="OnCustomColumnDisplayText" 
+                                                            VerticalAlignment="Top" 
+                                                            VerticalContentAlignment="Top" >
+
+                                                            <dxg:GridControl.Columns>
+                                                                <dxg:GridColumn FieldName="ID" Name="gc_ID5" Style="{StaticResource Header_ID}" Visible="False" Fixed="Left" />
+                                                                <dxg:GridColumn FieldName="FileGroup_ID" Name="gc_FileGroup_ID" Style="{StaticResource Header_FileGroup_ID}" Visible="False" Fixed="Left"  />
+                                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_Database_ID5" Style="{StaticResource Header_Database_ID}" Visible="False" Fixed="Left"  />
+
+                                                                <dxg:GridColumn FieldName="Name_DataFile" Name="gc_Name_DataFile" Style="{StaticResource Header_Name_DataFile}" Visible="True"  Fixed="Left" />
+                                                                <dxg:GridColumn FieldName="FileName" Name="gc_FileName5" Style="{StaticResource Header_FileName}" Visible="True" />
+
+                                                                <dxg:GridColumn FieldName="ID_DataFile" Name="gc_ID_DataFile5" Style="{StaticResource Header_ID_DataFile}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="UsedSpace" Name="gc_UsedSpace5" Style="{StaticResource Header_UsedSpace}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="AvailableSpace" Name="gc_AvailableSpace5" Style="{StaticResource Header_AvailableSpace}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="Size" Name="gc_Size5" Style="{StaticResource Header_Size}" Visible="False"  />
+                                                                <dxg:GridColumn FieldName="MaxSize" Name="gc_MaxSize5" Style="{StaticResource Header_MaxSize}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="VolumeFreeSpace" Name="gc_VolumeFreeSpace5" Style="{StaticResource Header_VolumeFreeSpace}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="IsPrimaryFile" Name="gc_IsPrimaryFile" Style="{StaticResource Header_IsPrimaryFile}" Visible="True" />
+                                                                <dxg:GridColumn FieldName="Growth" Name="gc_Growth5" Style="{StaticResource Header_Growth}" Visible="True" />
+                                                                <dxg:GridColumn FieldName="GrowthType" Name="gc_GrowthType5" Style="{StaticResource Header_GrowthType}" Visible="True" />
+
+                                                                <!--<dxg:GridColumn FieldName="NumberOfDiskReads" Name="gc_NumberOfDiskReads" Style="{StaticResource Header_NumberOfDiskReads}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="BytesReadFromDisk" Name="gc_BytesReadFromDisk" Style="{StaticResource Header_BytesReadFromDisk}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="NumberOfDiskWrites" Name="gc_NumberOfDiskWrites" Style="{StaticResource Header_NumberOfDiskWrites}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="BytesWrittenToDisk" Name="gc_BytesWrittenToDisk" Style="{StaticResource Header_BytesWrittenToDisk}" Visible="False" />-->
+
+                                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate5" Visible="False" 
+                                                                    Style="{StaticResource Header_SnapShotDate}"                                                 
+                                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError5" 
+                                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                                    Visible="False"  />
+                                                            </dxg:GridControl.Columns>
+
+                                                            <dxg:GridControl.View>
+                                                                <dxg:TableView Name="tableView5"                                                     
+                                                                                   Style="{StaticResource TableViewStyle}"
+                                                                                   FocusedRowChanged="OnFocusedRowChanged_DataFile"
+                                                                                   ShowGroupPanel="False" 
+                                                                                   ShowAutoFilterRow="False" 
+                                                                                   ShowFixedTotalSummary="False"
+                                                                                   ShowFilterPanelMode="Default" >
+                                                                    <dxg:TableView.RowCellMenuCustomizations>
+                                                                        <dxb:BarButtonItem Name="gridCmd1b" Content="Display DataFileInfo" ItemClick="OnDisplayDataFileInfo_Click" />
+                                                                    </dxg:TableView.RowCellMenuCustomizations>
+                                                                </dxg:TableView>
+
+                                                            </dxg:GridControl.View>
+
+                                                        </dxg:GridControl>
+                                                
+                                                    </Border>
+                                       
+                                            </Border>
+
+                                            <Border BorderBrush="Transparent" BorderThickness="2" VerticalAlignment="Top" >
+                                        
+                                                <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Top" >
+                                            
+                                                    <!--<Border BorderBrush="Fuchsia" BorderThickness="2" VerticalAlignment="Top" >-->
+                                            
+                                                            <dxc:ChartControl Name="cht_DataFileSpace" 
+                                                                                  BorderThickness="0" VerticalAlignment="Top" >
+
+                                                                <dxc:ChartControl.Titles>
+                                                                    <dxc:Title Dock="Top" Content="Space Utilization" FontSize="12" />
+                                                                    <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                                                <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                                                <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                                </dxc:ChartControl.Titles>
+                                                                
+                                                                <dxc:ChartControl.Diagram>
+
+                                                                    <dxc:XYDiagram2D BarDistance="0.05">
+
+                                                                        <!--<dxc:XYDiagram2D.PanesPanel>
+                                                                            <ItemsPanelTemplate>
+                                                                                <Grid>
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition />
+                                                                                        <RowDefinition />
+                                                                                    </Grid.RowDefinitions>
+                                                                                    <Grid.ColumnDefinitions>
+                                                                                        <ColumnDefinition />
+                                                                                        <ColumnDefinition />
+                                                                                    </Grid.ColumnDefinitions>
+                                                                                </Grid>
+                                                                            </ItemsPanelTemplate>
+                                                                        </dxc:XYDiagram2D.PanesPanel>-->
+
+                                                                        <!--<dxc:XYDiagram2D.DefaultPane>
+
+
+
+                                                                        </dxc:XYDiagram2D.DefaultPane>-->
+
+                                                                        <!--<dxc:XYDiagram2D.Panes>
+                                                                            
+                                                                            <dxc:Pane Grid.Row="0" Grid.Column="0" />
+                                                                            <dxc:Pane Grid.Row="0" Grid.Column="1" />
+                                                                            <dxc:Pane Grid.Row="1" Grid.Column="0" />
+                                                                            <dxc:Pane Grid.Row="1" Grid.Column="1" />
+
+                                                                        </dxc:XYDiagram2D.Panes>-->
+                                                                        
+                                                                        <dxc:XYDiagram2D.AxisX>
+                                                                            <dxc:AxisX2D>
+
+                                                                            </dxc:AxisX2D>
+                                                                        </dxc:XYDiagram2D.AxisX>
+                                                                        
+                                                                        <dxc:XYDiagram2D.AxisY>
+                                                                            <dxc:AxisY2D>
+                                                                                <dxc:AxisY2D.Title>
+                                                                                    <dxc:AxisTitle Content="Size (MB)" />
+                                                                                </dxc:AxisY2D.Title>
+                                                                            </dxc:AxisY2D>
+                                                                        </dxc:XYDiagram2D.AxisY>
+
+                                                                        <!--<dxc:XYDiagram2D.SecondaryAxesY>
+                                                                            <dxc:SecondaryAxisY2D>
+                                                                                <dxc:SecondaryAxisY2D.Title>
+                                                                                    <dxc:AxisTitle Content="Available Size (MB)" />
+                                                                                </dxc:SecondaryAxisY2D.Title>
+                                                                            </dxc:SecondaryAxisY2D>
+                                                                        </dxc:XYDiagram2D.SecondaryAxesY>-->
+
+                                                                        <dxc:XYDiagram2D.Series>
+                                                                            <dxc:AreaStackedSeries2D Name="seriesDFS_UsedSpace"
+                                                                                DisplayName="Used" 
+                                                                                ArgumentDataMember="SnapShotDate"                                                                                              
+                                                                                ValueDataMember="UsedSpace" />
+                                                                            
+                                                                            <dxc:AreaStackedSeries2D Name="seriesDFS_AvailableSpace"   
+                                                                                DisplayName="Available" 
+                                                                                ArgumentDataMember="SnapShotDate"                                                                                              
+                                                                                ValueDataMember="AvailableSpace" />
+
+                                                                            <dxc:LineSeries2D Name="seriesDFS_Size"                                                                                                                                                                      
+                                                                                DisplayName="Size"   
+                                                                                ArgumentDataMember="SnapShotDate"                                                                                
+                                                                                ValueDataMember="Size" />
+
+                                                                        </dxc:XYDiagram2D.Series>
+
+                                                                    </dxc:XYDiagram2D>
+
+                                                                </dxc:ChartControl.Diagram>
+
+                                                                <dxc:ChartControl.Legend>
+                                                                    <dxc:Legend />
+                                                                </dxc:ChartControl.Legend>
+
+                                                            </dxc:ChartControl>
+
+                                                        <!--</dxlc:LayoutControl>-->
+                                            
+                                                    <!--</Border>-->
+                                        
+                                                    <!--<Border BorderBrush="Red" BorderThickness="2" VerticalAlignment="Top">-->
+                                            
+                                                        <!--<dxc:ChartControl Name="cht_DataFileActivity" 
+                                                                                    BorderThickness="0" >
+                                                            <dxc:ChartControl.Titles>
+                                                                <dxc:Title Dock="Top" Content="DataFile Activity" FontSize="12" />
+                                                            </dxc:ChartControl.Titles>
+                                                            
+                                                            <dxc:ChartControl.Diagram>
+                                                                        <dxc:XYDiagram2D BarDistance="0.05">
+                                                                            <dxc:XYDiagram2D.PanesPanel>
+                                                                                <ItemsPanelTemplate>
+                                                                                    <Grid>
+                                                                                        <Grid.RowDefinitions>
+                                                                                            <RowDefinition />
+                                                                                            <RowDefinition />
+                                                                                        </Grid.RowDefinitions>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition />
+                                                                                            <ColumnDefinition />
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                    </Grid>
+                                                                                </ItemsPanelTemplate>
+                                                                            </dxc:XYDiagram2D.PanesPanel>
+
+                                                                            <dxc:XYDiagram2D.Panes>
+
+                                                                                <dxc:Pane Grid.Row="0" Grid.Column="0" />
+                                                                                <dxc:Pane Grid.Row="0" Grid.Column="1" />
+                                                                                <dxc:Pane Grid.Row="1" Grid.Column="0" />
+                                                                                <dxc:Pane Grid.Row="1" Grid.Column="1" />
+
+                                                                            </dxc:XYDiagram2D.Panes>
+                                                                            
+                                                                            <dxc:XYDiagram2D.AxisX>
+                                                                                <dxc:AxisX2D>
+
+                                                                                </dxc:AxisX2D>
+                                                                            </dxc:XYDiagram2D.AxisX>
+
+                                                                            <dxc:XYDiagram2D.AxisY>
+                                                                                <dxc:AxisY2D>
+                                                                                    <dxc:AxisY2D.Title>
+                                                                                        <dxc:AxisTitle Content="Bytes" />
+                                                                                    </dxc:AxisY2D.Title>
+                                                                                </dxc:AxisY2D>
+                                                                            </dxc:XYDiagram2D.AxisY>
+
+                                                                            <dxc:XYDiagram2D.SecondaryAxesY>
+                                                                                <dxc:SecondaryAxisY2D>
+                                                                                    <dxc:SecondaryAxisY2D.Title>
+                                                                                        <dxc:AxisTitle Content="Number" />
+                                                                                    </dxc:SecondaryAxisY2D.Title>
+                                                                                </dxc:SecondaryAxisY2D>
+                                                                            </dxc:XYDiagram2D.SecondaryAxesY>
+
+                                                                            <dxc:XYDiagram2D.Series>
+
+                                                                                <dxc:LineSeries2D Name="seriesDFA_BytesRead"
+                                                                                                    DisplayName="Bytes Read" 
+                                                                                                    ArgumentDataMember="SnapShotDate"
+                                                                                                    ValueDataMember="BytesReadFromDisk"
+                                                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[0]}" />
+
+                                                                                <dxc:LineSeries2D Name="seriesDFA_BytesWritten"      
+                                                                                                    DisplayName="Bytes Written"                                                                                                       
+                                                                                                    ValueDataMember="BytesWrittenToDisk"
+                                                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[1]}" />
+
+                                                                                <dxc:LineSeries2D Name="seriesDFA_NumberReads" 
+                                                                                                    DisplayName="Number Reads"                                                                                                                                                                         
+                                                                                                  ArgumentDataMember="SnapShotDate"
+                                                                                                    ValueDataMember="NumberOfDiskReads"
+                                                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[2]}" />
+
+                                                                                <dxc:LineSeries2D Name="seriesDFA_NumberWrites"       
+                                                                                                    DisplayName="Number Writes" 
+                                                                                                    ValueDataMember="NumberOfDiskWrites"
+                                                                                                    dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[3]}" />
+
+                                                                            </dxc:XYDiagram2D.Series>
+
+                                                                        </dxc:XYDiagram2D>
+
+                                                                </dxc:ChartControl.Diagram>
+
+                                                                <dxc:ChartControl.Legend>
+                                                                    <dxc:Legend />
+                                                                </dxc:ChartControl.Legend>
+
+                                                            </dxc:ChartControl>-->
+                                            
+                                                    <!--</Border>-->
+                                        
+                                                </dxlc:LayoutGroup>
+                                        
+                                            </Border>
+                                            
+                                        </StackPanel>
+                                        
+                                    </Border>
+
+                                    <Border BorderBrush="Chocolate" BorderThickness="2" CornerRadius="3">
+                                        
+                                        <StackPanel Orientation="Vertical">
+                                            
+                                            <Border BorderBrush="Transparent" BorderThickness="2" DataContext="{Binding Path=View.FocusedRowData.Row, ElementName=gc_Databases}" VerticalAlignment="Top" >
+                                        
+                                                    <!--<Border BorderBrush="Fuchsia" BorderThickness="2" VerticalAlignment="Top" >-->
+                                                
+                                                        <dxg:GridControl Name="gc_DBLogFiles" VerticalAlignment="Top"
+                                                            MaxHeight="300"    
+                                                            Style="{StaticResource GridControlStyle}"                                                          
+                                                            ItemsSource="{Binding FK_DBLogFiles_Databases}"
+                                                            DefaultSorting="Name_LogFile" 
+                                                            CustomColumnDisplayText="OnCustomColumnDisplayText" >
+
+                                                            <dxg:GridControl.Columns>
+                                                                <dxg:GridColumn FieldName="ID" Name="gc_ID" Style="{StaticResource Header_ID}" Visible="False" Fixed="Left" />
+                                                                <dxg:GridColumn FieldName="Database_ID" Name="gc_Database_ID" Style="{StaticResource Header_Database_ID}" Visible="False" Fixed="Left"  />
+                                                                <dxg:GridColumn FieldName="Name_LogFile" Name="gc_Name_LogFile" Style="{StaticResource Header_Name_LogFile}" Visible="True"  Fixed="Left" />
+                                                                <dxg:GridColumn FieldName="FileName" Name="gc_FileName" Style="{StaticResource Header_FileName}" Visible="True" />
+
+                                                                <dxg:GridColumn FieldName="ID_DataFile" Name="gc_ID_DataFile" Style="{StaticResource Header_ID_DataFile}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="UsedSpace" Name="gc_UsedSpace" Style="{StaticResource Header_UsedSpace}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="Size" Name="gc_Size2" Style="{StaticResource Header_Size}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="MaxSize" Name="gc_MaxSize" Style="{StaticResource Header_MaxSize}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="VolumeFreeSpace" Name="gc_VolumeFreeSpace" Style="{StaticResource Header_VolumeFreeSpace}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="Growth" Name="gc_Growth" Style="{StaticResource Header_Growth}" Visible="True" />
+                                                                <dxg:GridColumn FieldName="GrowthType" Name="gc_GrowthType" Style="{StaticResource Header_GrowthType}" Visible="True" />
+
+                                                                <!--<dxg:GridColumn FieldName="NumberOfDiskReads" Name="gc_NumberOfDiskReads2" Style="{StaticResource Header_NumberOfDiskReads}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="BytesReadFromDisk" Name="gc_BytesReadFromDisk2" Style="{StaticResource Header_BytesReadFromDisk}" Visible="False" />
+
+                                                                <dxg:GridColumn FieldName="NumberOfDiskWrites" Name="gc_NumberOfDiskWrites2" Style="{StaticResource Header_NumberOfDiskWrites}" Visible="False" />
+                                                                <dxg:GridColumn FieldName="BytesWrittenToDisk" Name="gc_BytesWrittenToDisk2" Style="{StaticResource Header_BytesWrittenToDisk}" Visible="False" />-->
+
+                                                                <dxg:GridColumn FieldName="SnapShotDate" Name="gc_SnapShotDate" 
+                                                                    Visible="False" 
+                                                                    Style="{StaticResource Header_SnapShotDate}"
+                                                                    EditSettings="{dxe:DateSettings DisplayFormat=G}"/>
+                                                                <dxg:GridColumn FieldName="SnapShotError" Name="gc_SnapShotError" 
+                                                                    Style="{StaticResource Header_SnapShotError}"                                                
+                                                                    Visible="False"  />
+                                                            </dxg:GridControl.Columns>
+
+                                                            <dxg:GridControl.View>
+                                                                <dxg:TableView Name="tableView6"  VerticalAlignment="Top"
+                                                                                       Style="{StaticResource TableViewStyle}"
+                                                                                       FocusedRowChanged="OnFocusedRowChanged_LogFile"                                                               
+                                                                                       ShowGroupPanel="False" 
+                                                                                       ShowAutoFilterRow="False" 
+                                                                                       ShowFixedTotalSummary="False" 
+                                                                                       ShowFilterPanelMode="Default" >
+                                                                    <dxg:TableView.RowCellMenuCustomizations>
+                                                                        <dxb:BarButtonItem Name="gridCmd1c" Content="Display LogFileInfo" ItemClick="OnDisplayLogFileInfo_Click" />
+                                                                    </dxg:TableView.RowCellMenuCustomizations>
+                                                                </dxg:TableView>
+
+                                                            </dxg:GridControl.View>
+
+                                                        </dxg:GridControl>
+
+                                                    <!--</Border>-->
+                                                                            
+                                            </Border>
+
+                                            <Border BorderBrush="Transparent" BorderThickness="2" VerticalAlignment="Top" >
+                                        
+                                                <dxlc:LayoutGroup Orientation="Horizontal" VerticalAlignment="Top" >
+
+                                                    <!--<Border BorderBrush="Blue" BorderThickness="2" VerticalAlignment="Top" >-->
+
+                                                            <!--<Border BorderBrush="Fuchsia" BorderThickness="2" VerticalAlignment="Top" >-->
+                                                        
+                                                                <dxc:ChartControl Name="cht_LogFileSpace" VerticalAlignment="Top"
+                                                                              BorderThickness="0" >
+                                                                    <dxc:ChartControl.Titles>
+                                                                        <dxc:Title Dock="Top" Content="Space Utilization" FontSize="12" />
+                                                                        <!--<dxc:Title Dock="Bottom"  Content="BottomTitle"/>
+                                                                            <dxc:Title Dock="Left"  Content="LeftTitle"/>
+                                                                            <dxc:Title Dock="Right"  Content="RightTitle" VerticalAlignment="Bottom"/>-->
+                                                                    </dxc:ChartControl.Titles>
+                                                                
+                                                                    <dxc:ChartControl.Diagram>
+                                                                        
+                                                                        <dxc:XYDiagram2D>
+                                                                            <!--<dxc:XYDiagram2D.PanesPanel>
+                                                                                <ItemsPanelTemplate>
+                                                                                    <Grid>
+                                                                                        <Grid.RowDefinitions>
+                                                                                            <RowDefinition />
+                                                                                            <RowDefinition />
+                                                                                            <RowDefinition />
+                                                                                        </Grid.RowDefinitions>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition />
+                                                                                            <ColumnDefinition />
+                                                                                        </Grid.ColumnDefinitions>
+                                                                                    </Grid>
+                                                                                </ItemsPanelTemplate>
+                                                                            </dxc:XYDiagram2D.PanesPanel>
+
+                                                                            <dxc:XYDiagram2D.DefaultPane>
+                                                                                <dxc:Pane Grid.Row="0" Grid.Column="0" />
+                                                                            </dxc:XYDiagram2D.DefaultPane>
+
+                                                                            <dxc:XYDiagram2D.Panes>
+
+                                                                                <dxc:Pane Grid.Row="0" Grid.Column="1" />
+                                                                                <dxc:Pane Grid.Row="1" Grid.Column="0" />
+                                                                                <dxc:Pane Grid.Row="1" Grid.Column="1" />
+
+                                                                            </dxc:XYDiagram2D.Panes>-->
+                                                                            
+                                                                            <dxc:XYDiagram2D.AxisX>
+                                                                                <dxc:AxisX2D>
+
+                                                                                </dxc:AxisX2D>
+                                                                            </dxc:XYDiagram2D.AxisX>
+                                                                            
+                                                                            <dxc:XYDiagram2D.AxisY>
+                                                                                <dxc:AxisY2D>
+                                                                                    <dxc:AxisY2D.Title>
+                                                                                        <dxc:AxisTitle Content="Size (MB)" />
+                                                                                    </dxc:AxisY2D.Title>
+                                                                                </dxc:AxisY2D>
+                                                                            </dxc:XYDiagram2D.AxisY>
+
+                                                                            <!--<dxc:XYDiagram2D.SecondaryAxesY>
+                                                                                <dxc:SecondaryAxisY2D>
+                                                                                    <dxc:SecondaryAxisY2D.Title>
+                                                                                        <dxc:AxisTitle Content="Available Size (MB)" />
+                                                                                    </dxc:SecondaryAxisY2D.Title>
+                                                                                </dxc:SecondaryAxisY2D>
+                                                                            </dxc:XYDiagram2D.SecondaryAxesY>-->
+                                                                            
+                                                                            <dxc:XYDiagram2D.Series>
+                                                                                
+                                                                                <dxc:LineSeries2D Name="seriesLFS_Size"                                                                                                                                                                      
+                                                                                            DisplayName="Size"   
+                                                                                            ArgumentDataMember="SnapShotDate"                                                                                
+                                                                                            ValueDataMember="Size" />
+
+                                                                                <dxc:AreaSeries2D Name="seriesLFS_UsedSpace"
+                                                                                            DisplayName="Used" 
+                                                                                            ArgumentDataMember="SnapShotDate"                                                                                              
+                                                                                            ValueDataMember="UsedSpace" />
+
+                                                                            </dxc:XYDiagram2D.Series>
+
+                                                                        </dxc:XYDiagram2D>
+
+                                                                    </dxc:ChartControl.Diagram>
+
+                                                                    <dxc:ChartControl.Legend>
+                                                                        <dxc:Legend />
+                                                                    </dxc:ChartControl.Legend>
+
+                                                                </dxc:ChartControl>
+
+                                                            <!--</Border>-->               
+                                                
+                                                    <!--</Border>-->
+
+                                                    <!--<Border BorderBrush="Blue" BorderThickness="2" VerticalAlignment="Top" >-->
+
+                                                            <!--<Border BorderBrush="Fuchsia" BorderThickness="2" VerticalAlignment="Top" >-->
+
+                                                                <!--<dxc:ChartControl Name="cht_LogFileActivity" VerticalAlignment="Top" 
+                                                                                  BorderThickness="0" >
+
+                                                                    <dxc:ChartControl.Titles>
+                                                                        <dxc:Title Dock="Top" Content="LogFile Activity" FontSize="8" />
+                                                                    </dxc:ChartControl.Titles>
+                                                                
+                                                                    <dxc:ChartControl.Diagram>
+                                                                            <dxc:XYDiagram2D BarDistance="0.05">
+                                                                                <dxc:XYDiagram2D.PanesPanel>
+                                                                                    <ItemsPanelTemplate>
+                                                                                        <Grid>
+                                                                                            <Grid.RowDefinitions>
+                                                                                                <RowDefinition />
+                                                                                                <RowDefinition />
+                                                                                            </Grid.RowDefinitions>
+                                                                                            <Grid.ColumnDefinitions>
+                                                                                                <ColumnDefinition />
+                                                                                                <ColumnDefinition />
+                                                                                            </Grid.ColumnDefinitions>
+                                                                                        </Grid>
+                                                                                    </ItemsPanelTemplate>
+                                                                                </dxc:XYDiagram2D.PanesPanel>
+
+                                                                                <dxc:XYDiagram2D.Panes>
+
+                                                                                    <dxc:Pane Grid.Row="0" Grid.Column="0" />
+                                                                                    <dxc:Pane Grid.Row="0" Grid.Column="1" />
+                                                                                    <dxc:Pane Grid.Row="1" Grid.Column="0" />
+                                                                                    <dxc:Pane Grid.Row="1" Grid.Column="1" />
+
+                                                                                </dxc:XYDiagram2D.Panes>
+                                                                                
+                                                                                <dxc:XYDiagram2D.AxisX>
+                                                                                    <dxc:AxisX2D>
+
+                                                                                    </dxc:AxisX2D>
+                                                                                </dxc:XYDiagram2D.AxisX>
+                                                                                
+                                                                                <dxc:XYDiagram2D.AxisY>
+                                                                                    <dxc:AxisY2D>
+                                                                                        <dxc:AxisY2D.Title>
+                                                                                            <dxc:AxisTitle Content="Bytes" />
+                                                                                        </dxc:AxisY2D.Title>
+                                                                                    </dxc:AxisY2D>
+                                                                                </dxc:XYDiagram2D.AxisY>
+
+                                                                                <dxc:XYDiagram2D.SecondaryAxesY>
+                                                                                    <dxc:SecondaryAxisY2D>
+                                                                                        <dxc:SecondaryAxisY2D.Title>
+                                                                                            <dxc:AxisTitle Content="Number" />
+                                                                                        </dxc:SecondaryAxisY2D.Title>
+                                                                                    </dxc:SecondaryAxisY2D>
+                                                                                </dxc:XYDiagram2D.SecondaryAxesY>
+                                                                                
+                                                                                <dxc:XYDiagram2D.Series>
+
+                                                                                    <dxc:LineSeries2D Name="seriesLFA_BytesRead"
+                                                                                        DisplayName="Bytes Read" 
+                                                                                        ArgumentDataMember="SnapShotDate"
+                                                                                        ValueDataMember="BytesReadFromDisk"
+                                                                                        dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[0]}" />
+
+                                                                                    <dxc:LineSeries2D Name="seriesLFA_BytesWritten"      
+                                                                                        DisplayName="Bytes Written"                                                                                                       
+                                                                                        ValueDataMember="BytesWrittenToDisk"
+                                                                                        dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[1]}" />
+
+                                                                                    <dxc:LineSeries2D Name="seriesLFA_NumberReads" 
+                                                                                        DisplayName="Number Reads"                                                                                                                                                                         
+                                                                                                      ArgumentDataMember="SnapShotDate"
+                                                                                        ValueDataMember="NumberOfDiskReads"
+                                                                                        dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[2]}" />
+
+                                                                                    <dxc:LineSeries2D Name="seriesLFA_NumberWrites"       
+                                                                                        DisplayName="Number Writes" 
+                                                                                        ValueDataMember="NumberOfDiskWrites"
+                                                                                        dxc:XYDiagram2D.SeriesPane="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxc:XYDiagram2D}, Path=Panes[3]}" />
+                                                                                    
+                                                                                </dxc:XYDiagram2D.Series>
+
+                                                                            </dxc:XYDiagram2D>
+
+                                                                        </dxc:ChartControl.Diagram>
+
+                                                                    <dxc:ChartControl.Legend>
+                                                                        <dxc:Legend />
+                                                                    </dxc:ChartControl.Legend>
+
+                                                                </dxc:ChartControl>-->
+
+                                                            <!--</Border>-->
+                                                
+                                                        <!--</Border>-->
+                                            
+                                                </dxlc:LayoutGroup>
+                                        
+                                            </Border>
+                                            
+                                        </StackPanel>
+                                        
+                                    </Border>
+                                    
+                                </dxlc:LayoutGroup>
+
+                            </dxlc:LayoutGroup>
+
+                        </dxlc:LayoutControl>
+
+                    </dxdo:LayoutPanel>
+
+                </dxdo:LayoutGroup>
+
+                <dxdo:DockLayoutManager.AutoHideGroups>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Left" Style="{StaticResource AutoHideGroup_Left}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Top" Style="{StaticResource AutoHideGroup_Top}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup x:Name="ahg_Right" Style="{StaticResource AutoHideGroup_Right}" >
+
+                    </dxdo:AutoHideGroup>
+
+                    <dxdo:AutoHideGroup Name="ahg_Bottom" Style="{StaticResource AutoHideGroup_Bottom}" >
+
+                        <dxdo:LayoutPanel x:Name="paneToolbox" >
+
+                            <StackPanel>
+
+                                <TextBox Name="textBox_HeightHack" Text="170" VerticalAlignment="Bottom"/>
+
+                            </StackPanel>
+
+                        </dxdo:LayoutPanel>
+
+                    </dxdo:AutoHideGroup>
+
+                </dxdo:DockLayoutManager.AutoHideGroups>
+
+            </dxdo:DockLayoutManager>
+
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Name="lg_Footer" >
+
+        </dxlc:LayoutGroup>
+
+    </dxlc:LayoutControl>
+
+</uiuc:wucDX_Base>

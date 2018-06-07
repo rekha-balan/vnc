@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[LKUP_Areas]
+(
+	[ID] INT NOT NULL PRIMARY KEY, 
+    [AreaName] VARCHAR(50) NOT NULL
+)

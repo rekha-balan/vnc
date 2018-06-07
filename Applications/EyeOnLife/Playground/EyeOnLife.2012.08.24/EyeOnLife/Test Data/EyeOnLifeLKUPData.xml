@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EyeOnLife xmlns="" >
+  <ADDomains>
+    
+    <ADDomain ID="0" Name="VNC.LOCAL" />
+    
+    <!-- Production -->
+    
+    <ADDomain ID="1" Name="PACIFICLIFE.NET" />
+    <ADDomain ID="2" Name="LIFE.PACIFICLIFE.NET" />
+    
+    <ADDomain ID="3" Name="PLSERVICES.NET" />
+    <ADDomain ID="4" Name="LIFE.PLSERVICES.NET" />
+    
+    <!-- Staging -->  
+    
+    <ADDomain ID="5" Name="STGPLSERVICES.NET" />
+    <ADDomain ID="6" Name="LIFE.STGPLSERVICES.NET" />
+    
+    <!-- iTest -->
+    
+    <ADDomain ID="7" Name="TSTPL01.NET" />
+    <ADDomain ID="8" Name="TSTLIFEINT.TSTPL01.NET" />
+
+    <ADDomain ID="9" Name="TSTPLSVRS01.NET" />
+    <ADDomain ID="10" Name="TSTLIFEDMZ2.TSTPLSVRS01.NET" />
+    
+    <!-- iDev -->
+    
+    <ADDomain ID="11" Name="DEVPL01.NET" />
+    <ADDomain ID="12" Name="DEVLIFEINT.DEVPL01.NET" />
+
+    <ADDomain ID="13" Name="DEVPLSVRS01.NET" />
+    <ADDomain ID="14" Name="DEVLIFEDMZ2.DEVPLSVRS01.NET" />
+
+  </ADDomains>
+  
+  <Environments>
+    
+    <!-- Production -->
+    
+    <Environment ID="1" Name="Production-Internal" />
+    <Environment ID="2" Name="Production-DMZ" />
+    
+    <!-- Staging -->
+    
+    <Environment ID="3" Name="Staging-Internal" />
+    <Environment ID="4" Name="Staging-DMZ" />
+    
+    <!-- iTest -->
+    
+    <Environment ID="5" Name="iTest-Internal" />
+    <Environment ID="6" Name="iTest-DMZ" />
+    
+    <!-- iDev -->
+    
+    <Environment ID="7" Name="iDev-Internal" />
+    <Environment ID="8" Name="iDev-DMZ" />
+    
+  </Environments>
+
+  <SQLServerVersions>
+    <SQLServerVersion ID="0" Name="SQL Server 2012"    CodeName="Denali"
+                      RTM="11.00.2100.60" 
+                      SP1=""           
+                      SP2=""           
+                      SP3=""           
+                      SP4=""/>
+    <SQLServerVersion ID="1" Name="SQL Server 2008 R2" CodeName="Kilimanjaro" 
+                      RTM="10.50.1600.1"  
+                      SP1="10.50.2500" 
+                      SP2=""           
+                      SP3=""           
+                      SP4=""/>
+    <SQLServerVersion ID="2" Name="SQL Server 2008"    CodeName="Katmai"      
+                      RTM="10.00.1600.22" 
+                      SP1="10.00.2531" 
+                      SP2="10.00.4000" 
+                      SP3="10.00.5500" 
+                      SP4=""/>
+    <SQLServerVersion ID="3" Name="SQL Server 2005"    CodeName="Yukon"       
+                      RTM="9.00.1399.06"  
+                      SP1="9.00.2047"  
+                      SP2="9.00.3042"  
+                      SP3="9.00.4035"  
+                      SP4="9.00.5000"/>
+    <SQLServerVersion ID="4" Name="SQL Server 2000"    CodeName="Shiloh"      
+                      RTM="8.00.194"      
+                      SP1="8.00.384"   
+                      SP2="8.00.532"   
+                      SP3="8.00.760"   
+                      SP4="8.00.2039"/>
+    <SQLServerVersion ID="5" Name="SQL Server 7.0"     CodeName="Sphinx"      
+                      RTM="7.00.623"      
+                      SP1="7.00.699"   
+                      SP2="7.00.842"   
+                      SP3="7.00.961"   
+                      SP4="7.00.1063"/>
+  </SQLServerVersions>
+</EyeOnLife>
+
