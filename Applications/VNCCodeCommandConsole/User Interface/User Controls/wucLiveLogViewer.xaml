@@ -180,10 +180,22 @@
                                                 
                                             <dxlc:LayoutGroup
                                             	Orientation="Vertical">
-                                            
 
-                                            <dxlc:LayoutGroup
-                                                Orientation="Horizontal">
+                                                <dxlc:LayoutGroup
+                                                    Orientation="Horizontal" HorizontalAlignment="Left">
+
+                                                    <Button x:Name="btnInfoToggle" Content="All Off" Click="btnInfoToggle_Click"   HorizontalAlignment="Left"/>
+
+                                                    <dxe:CheckEdit x:Name="ceInfo00" Content="Info 00" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo01" Content="Info 01" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo02" Content="Info 02" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo03" Content="Info 03" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo04" Content="Info 04" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo05" Content="Info 05" IsChecked="True"/>
+                                                </dxlc:LayoutGroup>
+
+                                                <dxlc:LayoutGroup
+                                                Orientation="Horizontal" HorizontalAlignment="Left">
                                                 
                                                 <Button x:Name="btnDebugToggle" Content="All Off" Click="btnDebugToggle_Click"   HorizontalAlignment="Left"/>
                                                 
@@ -192,6 +204,7 @@
                                                 <dxe:CheckEdit x:Name="ceDebug02" Content="Debug 02" IsChecked="True"/>
                                                 <dxe:CheckEdit x:Name="ceDebug03" Content="Debug 03" IsChecked="True"/>
                                                 <dxe:CheckEdit x:Name="ceDebug04" Content="Debug 04" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug05" Content="Debug 05" IsChecked="True"/>
                                             </dxlc:LayoutGroup>
                                           
                                             <dxlc:LayoutGroup
@@ -258,14 +271,32 @@
                                             <dxlc:LayoutGroup
                                              	Orientation="Horizontal">
 
+                                                <dxlc:LayoutItem HorizontalAlignment="Left">
+                                                	<dxe:CheckEdit x:Name="ceAutoUpdate" Content="Auto Update" IsChecked="False"/>
+                                                </dxlc:LayoutItem>
+                                                
                                                 <dxlc:LayoutItem>
-                                                    <Button x:Name="btnClear" Content="Clear" 
+                                                    <Button x:Name="btnUpdateScreen" 
+                                                            ToolTip="Update Screen"
+                                                            HorizontalAlignment="Left"
+                                                            IsEnabled="{cb:Binding ElementName=ceAutoUpdate, Path=!IsChecked, Mode=OneWay}"
+                                                            Click="btnUpdateScreen_Click">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label x:Name="lbLastEntry" Content="HH:MM:SS.xxx" Width="80" />
+                                                            <Label Content="Update Screen" HorizontalAlignment="Right" Foreground="Red" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </dxlc:LayoutItem>
+                                                
+                                                <dxlc:LayoutItem HorizontalAlignment="Right">
+                                                    <Button x:Name="btnClear" Content="Clear Screen" 
+                                                            Foreground="Red"
                                                             ToolTip="Clear Screen"
                                                             Click="btnClear_Click" />
                                                 </dxlc:LayoutItem>
 
-                                                <dxlc:LayoutItem>
-                                                    <Button x:Name="btnCopy" Content="Copy" 
+                                                <dxlc:LayoutItem HorizontalAlignment="Right">
+                                                    <Button x:Name="btnCopy" Content="Copy Contents" 
                                                             ToolTip="Copy contents to clipboard"
                                                             Click="btnCopy_Click" />
                                                 </dxlc:LayoutItem>

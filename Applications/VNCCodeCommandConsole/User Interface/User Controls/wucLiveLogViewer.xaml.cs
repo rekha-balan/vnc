@@ -114,7 +114,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
                     // TODO(crhodes)
                     // Make this more clever, perhaps a bit field
-                    // But this maybe plenty fast enough just long :(
+                    // But this may be plenty fast enough just long :(
 
                     switch (priority)
                     {
@@ -141,7 +141,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                             break;
 
                         #endregion
-
 
                         #region Trace00 - Trace09
 
@@ -328,6 +327,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #region Event Handlers
 
+
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             UserName = UserNameTextBox.Text;
@@ -339,12 +339,15 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 ConnectAsync();
             }
         }
+
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             HubProxy.Invoke("Send", UserName, tbMessage.Text);
             tbMessage.Text = String.Empty;
+
             tbMessage.Focus();
         }
+
         private void btnSendPriority_Click(object sender, RoutedEventArgs e)
         {
             HubProxy.Invoke("SendPriority", tbMessage.Text, Int32.Parse(tbMessagePriority.Text));
@@ -363,6 +366,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         private void teLogStream_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
+            lbLastEntry.Content = DateTime.Now.ToString("HH:mm:ss.fff");
+
+            if (ceAutoUpdate.IsChecked == true)
+            {
+                teLogStream.Focus();
+                teLogStream.SelectionStart = teLogStream.Text.Length;
+            }
+        }
+
+        private void btnUpdateScreen_Click(object sender, RoutedEventArgs e)
+        {
             teLogStream.Focus();
             teLogStream.SelectionStart = teLogStream.Text.Length;
         }
@@ -377,6 +391,30 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             teLogStream.SelectAll();
             teLogStream.Copy();
+        }
+
+        private void btnInfoToggle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((String)btnInfoToggle.Content == "All Off")
+            {
+                ceInfo00.IsChecked = false;
+                ceInfo01.IsChecked = false;
+                ceInfo02.IsChecked = false;
+                ceInfo03.IsChecked = false;
+                ceInfo04.IsChecked = false;
+
+                btnInfoToggle.Content = "All On";
+            }
+            else
+            {
+                ceInfo00.IsChecked = true;
+                ceInfo01.IsChecked = true;
+                ceInfo02.IsChecked = true;
+                ceInfo03.IsChecked = true;
+                ceInfo04.IsChecked = true;
+
+                btnInfoToggle.Content = "All Off";
+            }
         }
 
         private void btnDebugToggle_Click(object sender, RoutedEventArgs e)
@@ -512,6 +550,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             if ((String)btnToggle.Content == "All Off")
             {
+                ceInfo00.IsChecked = false;
+                ceInfo01.IsChecked = false;
+                ceInfo02.IsChecked = false;
+                ceInfo03.IsChecked = false;
+                ceInfo04.IsChecked = false;
+
                 ceDebug00.IsChecked = false;
                 ceDebug01.IsChecked = false;
                 ceDebug02.IsChecked = false;
@@ -551,6 +595,7 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 ceTrace28.IsChecked = false;
                 ceTrace29.IsChecked = false;
 
+                btnInfoToggle.Content = "All On";
                 btnDebugToggle.Content = "All On";
                 btnTrace00_09Toggle.Content = "All On";
                 btnTrace10_19Toggle.Content = "All On";
@@ -559,6 +604,12 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             }
             else
             {
+                ceInfo00.IsChecked = true;
+                ceInfo01.IsChecked = true;
+                ceInfo02.IsChecked = true;
+                ceInfo03.IsChecked = true;
+                ceInfo04.IsChecked = true;
+
                 ceDebug00.IsChecked = true;
                 ceDebug01.IsChecked = true;
                 ceDebug02.IsChecked = true;
@@ -598,17 +649,16 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
                 ceTrace28.IsChecked = true;
                 ceTrace29.IsChecked = true;
 
+                btnInfoToggle.Content = "All Off";
                 btnDebugToggle.Content = "All Off";
                 btnTrace00_09Toggle.Content = "All Off";
                 btnTrace10_19Toggle.Content = "All Off";
                 btnTrace20_29Toggle.Content = "All Off";
                 btnToggle.Content = "All Off";
             }
-
         }
 
         #endregion
-
     }
 
 }
