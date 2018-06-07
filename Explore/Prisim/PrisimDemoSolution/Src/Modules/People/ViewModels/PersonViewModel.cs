@@ -110,6 +110,8 @@ namespace People
             //MessageBox.Show(count.ToString());
         }
 
+        
+
         private bool CanSave()
         {
             return Person != null && Person.Error == null;
@@ -117,7 +119,14 @@ namespace People
 
         private void Save(Person value)
         {
-            Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+            if (value is null)
+            {
+                Person.LastUpdated = DateTime.Now;
+            }
+            else
+            {
+                Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+            }
         }
 
         private bool CanSave(Person value)
