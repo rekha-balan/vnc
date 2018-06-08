@@ -126,6 +126,10 @@
       <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>
       <Name>People</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Services\Services.csproj">
+      <Project>{e06e56bc-45a7-4f1e-8e85-65f523e410d6}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
       <Project>{4634726f-ad0a-4bc2-90dc-d45cbaae7bca}</Project>
       <Name>StatusBar</Name>
