@@ -27,7 +27,7 @@ namespace ModuleA1
     //    }
     //}
 
-    public partial class ViewA1 : UserControl, IView2, INavigationAware
+    public partial class ViewA1 : UserControl, IView, INavigationAware
     {
         public ViewA1(IViewA1ViewModel viewModel)
         {

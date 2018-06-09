@@ -76,6 +76,10 @@
     <Resource Include="Images\MC900433938.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\Business.csproj">
+      <Project>{ae529ede-3d2f-4a49-b0a1-81bc838008cb}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>

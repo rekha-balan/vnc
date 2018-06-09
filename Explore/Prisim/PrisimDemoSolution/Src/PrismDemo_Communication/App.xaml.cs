@@ -14,7 +14,8 @@ namespace PrismDemo
         {
             base.OnStartup(e);
 
-            var bootstrapper = new Bootstrapper();
+            //var bootstrapper = new Bootstrapper();
+            var bootstrapper = new BootstrapperRegionContext();
             bootstrapper.Run();
         }
     }

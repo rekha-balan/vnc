@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -128,7 +129,7 @@
       <Project>{b9b7c304-b100-4cb1-a489-e87e8b3d34d1}</Project>
       <Name>ModuleAS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\ModuleB1\ModuleB1.csproj">
+    <ProjectReference Include="..\Modules\ModuleB1\ModuleB1.csproj">
       <Project>{5072f261-1419-4936-b62f-bf75316db84b}</Project>
       <Name>ModuleB1</Name>
     </ProjectReference>

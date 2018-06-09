@@ -27,7 +27,7 @@ namespace People
         private void CreatePeople()
         {
             var people = new ObservableCollection<Person>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 people.Add(new Person()
                 {
