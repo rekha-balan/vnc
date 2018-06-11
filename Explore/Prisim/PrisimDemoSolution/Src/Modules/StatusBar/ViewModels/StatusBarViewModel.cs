@@ -25,6 +25,7 @@ namespace StatusBar
                 OnPropertyChanged("Message");
             }
         }
+
         void PersonUpdated(string obj)
         {
             Message = string.Format("{0} was updated", obj);

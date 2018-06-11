@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\MainWindowRegionContext.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,8 +68,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BootstrapperRegionContext.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainWindowRegionContext.xaml.cs">
+      <DependentUpon>MainWindowRegionContext.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -110,10 +118,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Prism\PrismLibrary\Source\Prism\Prism.csproj">
-      <Project>{362beb27-e66f-43f2-969d-33c9c5cffe33}</Project>
-      <Name>Prism</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
@@ -125,6 +129,10 @@
     <ProjectReference Include="..\Modules\People\People.csproj">
       <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>
       <Name>People</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Services\Services.csproj">
+      <Project>{e06e56bc-45a7-4f1e-8e85-65f523e410d6}</Project>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
       <Project>{4634726f-ad0a-4bc2-90dc-d45cbaae7bca}</Project>

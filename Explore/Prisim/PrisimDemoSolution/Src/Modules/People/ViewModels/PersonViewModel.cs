@@ -10,6 +10,9 @@ namespace People
 {
     public class PersonViewModel : ViewModelBase, IPersonViewModel
     {
+        IEventAggregator _eventAggregator;
+        IPersonRepository _personRepository;
+
         #region "Constructors, Initialization, and Load"
 
         public PersonViewModel(IPersonView view)
@@ -28,23 +31,48 @@ namespace People
             GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
         }
 
-        //public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
-        //    : base(view)
-        //{
-        //    _eventAggregator = eventAggregator;
-        //    _personRepository = personRepository;
+        // Need to pass in EventAggregator
 
-        //    SaveCommand = new DelegateCommand(Save, CanSave);
+        public PersonViewModel(IPersonView view, IEventAggregator eventAggregator)
+            : base(view)
+        {
+            _eventAggregator = eventAggregator;
 
-        //    GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
-        //}
+            CreatePerson();
+
+            // Use this form if do not need/want to pass parameters to methods
+            //SaveCommand = new DelegateCommand(Save, CanSave);
+
+            // Use this form to pass nullable command parameter.  Use object or other nullable type.
+            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+
+            // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
+
+            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
+        }
+
+        public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
+            : base(view)
+        {
+            _eventAggregator = eventAggregator;
+            _personRepository = personRepository;
+
+            // Use this form if do not need/want to pass parameters to methods
+            //SaveCommand = new DelegateCommand(Save, CanSave);
+
+            // Use this form to pass nullable command parameter.  Use object or other nullable type.
+            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+
+            // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
+
+            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
+        }
 
         #endregion
 
         #region Enums, Fields, Properties
 
-        IEventAggregator _eventAggregator;
-        IPersonRepository _personRepository;
+
 
         private Person _person;
         public Person Person
@@ -104,13 +132,19 @@ namespace People
 
         private void Save()
         {
-            Person.LastUpdated = DateTime.Now;
-            //_eventAggregator.GetEvent<PersonUpdatedEvent>().Publish(string.Format("{0}, {1}", Person.LastName, Person.FirstName));
-            //int count = _personRepository.SavePerson(Person);
-            //MessageBox.Show(count.ToString());
-        }
+            // This is doing a local save.
 
-        
+            //Person.LastUpdated = DateTime.Now;
+
+            // This uses the repository
+
+            int count = _personRepository.SavePerson(Person);
+            //MessageBox.Show(count.ToString());
+
+            // Publish when person saved.
+            _eventAggregator.GetEvent<PersonUpdatedEvent>().Publish(string.Format("{0}, {1}  Count:{2}", 
+                Person.LastName, Person.FirstName, count));
+        }
 
         private bool CanSave()
         {
@@ -121,17 +155,41 @@ namespace People
         {
             if (value is null)
             {
-                Person.LastUpdated = DateTime.Now;
+                // This is doing a local save.
+                //Person.LastUpdated = DateTime.Now;
+                // This uses the repository
+
+                int count = _personRepository.SavePerson(Person);
+                //MessageBox.Show(count.ToString());
+
+                // Publish when person saved.
+                _eventAggregator.GetEvent<PersonUpdatedEvent>().Publish(string.Format("{0}, {1}  Count:{2}",
+                    Person.LastName, Person.FirstName, count));
             }
             else
             {
-                Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+                // This is doing a local save.
+                //Person.LastUpdated = DateTime.Now.AddYears(value.Age);
+
+                // This uses the repository
+
+                int count = _personRepository.SavePerson(Person);
+                //MessageBox.Show(count.ToString());
+
+                // Publish when person saved.
+                _eventAggregator.GetEvent<PersonUpdatedEvent>().Publish(string.Format("{0}, {1}  Count:{2}",
+                    Person.LastName, Person.FirstName, count));
             }
         }
 
         private bool CanSave(Person value)
         {
-            return Person.Error == null;
+            if (Person != null)
+            {
+                return Person.Error == null;
+            }
+
+            return false;
         }
 
         #endregion

@@ -23,41 +23,50 @@ namespace People
         {
             RegisterViewsAndServices();
 
-            // This is for single content not tab view
+            //// This is for single content not tab view
 
             //var vm = _container.Resolve<IPersonViewModel>();
             //_regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
-            // This is for TabControl multiple view 
+            //// This is for TabControl multiple view 
 
-            IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
+            //IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
 
-            var vm = _container.Resolve<IPersonViewModel>();
-            vm.CreatePerson("Bob", "Smith");
+            //var vm = _container.Resolve<IPersonViewModel>();
+            //vm.CreatePerson("Bob", "Smith");
 
-            region.Add(vm.View);
-            region.Activate(vm.View);
+            //region.Add(vm.View);
+            //region.Activate(vm.View);
 
-            var vm2 = _container.Resolve<IPersonViewModel>();
-            vm2.CreatePerson("Karl", "Sums");
-            region.Add(vm2.View);
+            //var vm2 = _container.Resolve<IPersonViewModel>();
+            //vm2.CreatePerson("Karl", "Sums");
+            //region.Add(vm2.View);
 
-            var vm3 = _container.Resolve<IPersonViewModel>();
-            vm3.CreatePerson("Jeff", "Lock");
-            region.Add(vm3.View);
+            //var vm3 = _container.Resolve<IPersonViewModel>();
+            //vm3.CreatePerson("Jeff", "Lock");
+            //region.Add(vm3.View);
 
-            //_regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
+            // This is for RegionContext People and Person Detail view
+
+            var vm = _container.Resolve<IPeopleViewModel>();
+            _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
+
+            _regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
         }
 
         protected void RegisterViewsAndServices()
         {
-            _container.RegisterType<IPersonViewModel, PersonViewModel>();
-            _container.RegisterType<IPersonView, PersonView>();
+            //// This is for Persons
 
-            //_container.RegisterType<IPeopleViewModel, PeopleViewModel>();
-            //_container.RegisterType<IPeopleView, PeopleView>();
-            //_container.RegisterType<IPersonDetailsView, PersonDetailsView>();
-            //_container.RegisterType<IPersonDetailsViewModel, PersonDetailsViewModel>();
+            //_container.RegisterType<IPersonViewModel, PersonViewModel>();
+            //_container.RegisterType<IPersonView, PersonView>();
+
+            // This is for People
+
+            _container.RegisterType<IPeopleViewModel, PeopleViewModel>();
+            _container.RegisterType<IPeopleView, PeopleView>();
+            _container.RegisterType<IPersonDetailsView, PersonDetailsView>();
+            _container.RegisterType<IPersonDetailsViewModel, PersonDetailsViewModel>();
         }
     }
 }
