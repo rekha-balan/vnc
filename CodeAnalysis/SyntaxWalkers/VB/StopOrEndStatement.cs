@@ -11,17 +11,16 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 {
-    public class ExpressionStatement : VNCVBSyntaxWalkerBase
+    public class StopOrEndStatement : VNCVBSyntaxWalkerBase
     {
-        public override void VisitExpressionStatement(ExpressionStatementSyntax node)
+        public override void VisitStopOrEndStatement(StopOrEndStatementSyntax node)
         {
-            if (_targetPatternRegEx.Match(node.Expression.ToString()).Success)
-            {
+            //if (_targetPatternRegEx.Match(node.Identifier.ToString()).Success)
+            //{
                 RecordMatchAndContext(node, BlockType.None);
-            }
+            //}
 
-            // Call base to visit children
-            base.VisitExpressionStatement(node);
+            base.VisitStopOrEndStatement(node);
         }
     }
 }

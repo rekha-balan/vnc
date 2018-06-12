@@ -93,6 +93,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+
+        private void btnMultiLineLambdaExpressionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayMultiLineLambdaExpressionVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+
+        private void btnSingleLineLambdaExpressionWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplaySingleLineLambdaExpressionVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
+
         private void btnStopOrEndStatementWalker_Click(object sender, RoutedEventArgs e)
         {
             Helper.ProcessOperation(DisplayStopOrEndStatementVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
@@ -246,6 +257,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             commandConfiguration.UseRegEx = (bool)ceExpressionStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teExpressionStatementRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
+
+        StringBuilder DisplayMultiLineLambdaExpressionVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            var walker = new VNCSW.VB.MultiLineLambdaExpression();
+
+            commandConfiguration.UseRegEx = (bool)ceMultiLineLambdaExpressionUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teMultiLineLambdaExpressionRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
+
+        StringBuilder DisplaySingleLineLambdaExpressionVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            var walker = new VNCSW.VB.SingleLineLambdaExpression();
+
+            commandConfiguration.UseRegEx = (bool)ceSingleLineLambdaExpressionUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teSingleLineLambdaExpressionRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
