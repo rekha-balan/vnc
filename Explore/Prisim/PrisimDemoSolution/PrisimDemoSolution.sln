@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prism", "..\..\..\..\Prism\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Src\Business\Business.csproj", "{AE529EDE-3D2F-4A49-B0A1-81BC838008CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemoStateBased", "Src\PrismDemo_Navigation_StateBased\PrismDemoStateBased.csproj", "{22F5E157-9686-4B32-AA5E-7F8769C5D9B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "Src\PrismDemo_Navigation_StateBased\PrismDemo.csproj", "{22F5E157-9686-4B32-AA5E-7F8769C5D9B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemoViewBased", "Src\PrismDemo_Navigation_ViewBased\PrismDemoViewBased.csproj", "{68B2237F-250E-4703-A201-49054E33FF8E}"
 EndProject

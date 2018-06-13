@@ -40,7 +40,6 @@ namespace ModuleM
             // These are used when no MVVM pattern with Interfaces is used
 
             //_container.RegisterType<ToolbarA>();  // If this is commented out, still works!
-            //_container.RegisterType<ContentA>();
 
             // These are MVVM approaches
 

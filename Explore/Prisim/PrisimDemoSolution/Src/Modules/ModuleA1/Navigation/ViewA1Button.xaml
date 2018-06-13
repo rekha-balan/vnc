@@ -4,6 +4,7 @@
              xmlns:views="clr-namespace:ModuleA1"
              xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure">
     <Grid Margin="5">
-        <Button Command="{x:Static infra:ApplicationCommands.NavigateCommand}" CommandParameter="{x:Type views:ViewA1}">Navigate to View A1</Button>
+        <Button Command="{x:Static infra:ApplicationCommands.NavigateCommand}" 
+                CommandParameter="{x:Type views:ViewA1}">Navigate to View A1</Button>
     </Grid>
 </UserControl>

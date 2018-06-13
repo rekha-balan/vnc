@@ -78,7 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\ContentASView.xaml.cs">
+    <Compile Include="ViewModels\ContentASView.xaml.cs">
       <DependentUpon>ContentASView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ContentASViewViewModel.cs" />
@@ -121,7 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ContentASView.xaml">
+    <Page Include="ViewModels\ContentASView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

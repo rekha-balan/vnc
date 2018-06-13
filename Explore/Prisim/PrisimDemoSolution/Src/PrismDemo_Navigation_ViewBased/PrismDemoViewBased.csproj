@@ -65,6 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -102,9 +103,21 @@
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modules\ModuleAS\ModuleAS.csproj">
-      <Project>{b9b7c304-b100-4cb1-a489-e87e8b3d34d1}</Project>
-      <Name>ModuleAS</Name>
+    <ProjectReference Include="..\Modules\ModuleA1\ModuleA1.csproj">
+      <Project>{0b79451f-23fc-4143-885e-e264539626c8}</Project>
+      <Name>ModuleA1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ModuleA\ModuleA.csproj">
+      <Project>{3d9a8549-a7a8-4df9-829e-aeae7ecacaca}</Project>
+      <Name>ModuleA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ModuleB1\ModuleB1.csproj">
+      <Project>{5072f261-1419-4936-b62f-bf75316db84b}</Project>
+      <Name>ModuleB1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ModuleB\ModuleB.csproj">
+      <Project>{d0984924-8f65-476e-a466-5e7972916d13}</Project>
+      <Name>ModuleB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modules\People\People.csproj">
       <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>

@@ -9,11 +9,15 @@
             <!--<ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" 
                             DockPanel.Dock="Top" 
                             Width="Auto" Height="Auto" 
-                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
+            <StackPanel prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}"
+                        DockPanel.Dock="Top" Orientation="Horizontal" />
+            
             <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}" 
                             DockPanel.Dock="Bottom" 
                             Width="Auto" Height="Auto" 
-                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>-->
+                            HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            
             <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}" 
                             Width="Auto" Height="Auto" 
                             HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>

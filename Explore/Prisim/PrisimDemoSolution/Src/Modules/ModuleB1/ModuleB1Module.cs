@@ -19,10 +19,10 @@ namespace ModuleB1
         protected override void RegisterTypes()
         {
             // This is supposed to work but doesn't.
-            //Container.RegisterTypeForNavigation<ViewB1>();
+            Container.RegisterTypeForNavigation<ViewB1>();
 
             // This longer form does work.
-            Container.RegisterType<object, ViewB1>(typeof(ViewB1).FullName);
+            //Container.RegisterType<object, ViewB1>(typeof(ViewB1).FullName);
         }
     }
 }

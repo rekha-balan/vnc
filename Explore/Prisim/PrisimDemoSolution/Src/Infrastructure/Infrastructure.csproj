@@ -95,6 +95,7 @@
     <Compile Include="RegionNames.cs" />
     <Compile Include="Services\ServiceResult.cs" />
     <Compile Include="StackPanelRegionAdapter.cs" />
+    <Compile Include="UnityExtensions.cs" />
     <Compile Include="ViewModelBase.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
