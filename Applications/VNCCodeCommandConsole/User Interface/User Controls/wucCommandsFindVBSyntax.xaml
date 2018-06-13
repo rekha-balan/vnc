@@ -492,6 +492,72 @@
 
         </dxlc:LayoutGroup>
 
+        <dxlc:LayoutGroup Header="Find MultiLineLambdaExpression Syntax" 
+            View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceMultiLineLambdaExpressionUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teMultiLineLambdaExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceMultiLineLambdaExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="MultiLineLambdaExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnMultiLineLambdaExpressionWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
+        <dxlc:LayoutGroup Header="Find SingleLineLambdaExpression Syntax" 
+            View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceSingleLineLambdaExpressionUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teSingleLineLambdaExpressionRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceSingleLineLambdaExpressionUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+                
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="SingleLineLambdaExpression Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnSingleLineLambdaExpressionWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+
         <dxlc:LayoutGroup Header="Find ExpressionStatement Syntax" 
             View="GroupBox"
             Orientation="Vertical"
@@ -514,7 +580,7 @@
                     </dxlc:LayoutItem>
 
                 </dxlc:LayoutGroup>
-                
+
             </dxlc:LayoutGroup>
 
             <dxlc:LayoutItem>

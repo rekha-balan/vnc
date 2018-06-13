@@ -105,9 +105,9 @@
                                                      Text="http://localhost:8095/signalr"
                                                      Height="20" TextWrapping="Wrap" Margin="0,0,80,0"/>
                                         </dxlc:LayoutItem>
-                                        
+
                                         <dxlc:LayoutGroup VerticalAlignment="Top">
-                                             <StackPanel x:Name="SignInPanel" Margin="10,0" >
+                                            <StackPanel x:Name="SignInPanel" Margin="10,0" >
                                                 <Label Content="Enter user name:"/>
                                                 <Grid>
                                                     <TextBox x:Name="UserNameTextBox" Height="20" Margin="0,0,80,0"/>
@@ -116,27 +116,46 @@
 
                                                 <Label x:Name="StatusText" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,10"/>
                                             </StackPanel>
-                                        
-                                            <StackPanel x:Name="ChatPanel" Margin="10" Visibility="Collapsed" >
-                                                <Grid>
-                                                    <TextBox x:Name="TextBoxMessage" Height="20" TextWrapping="Wrap" Margin="0,0,80,0"/>
-                                                    <Button x:Name="ButtonSend" Content="Send" Width="75" Height="20" Click="btnSend_Click" IsDefault="True" IsEnabled="False" HorizontalAlignment="Right"/>
-                                                </Grid>
-                                            </StackPanel>                                       	
-                                        </dxlc:LayoutGroup>
 
-                                        <!--<RichTextBox x:Name="rtbLogStream" 
-                                                         FontSize="18"
-                                                         HorizontalAlignment="Left" 
-                                                         ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                                                         Height="600"
-                                                         Margin="0,10" IsReadOnly="True" TextChanged="rtbLogStream_TextChanged"/>-->
-                                            <!--<dxe:ListBoxEdit x:Name="lbeLogStream"
-                                                             FontFamily="Consolas"
-                                                             FontSize="8"
-                                                             VerticalAlignment="Stretch"
-                                                             VerticalContentAlignment="Stretch" >                                              
-                                            </dxe:ListBoxEdit>-->
+                                            <dxlc:LayoutGroup x:Name="ChatPanel"
+                                            	Orientation="Vertical"
+                                                Visibility="Hidden">
+
+                                                <dxlc:LayoutGroup
+                                                	Orientation="Horizontal">
+
+                                                    <dxlc:LayoutItem
+                                                	    Label="Message"
+                                                	    LabelPosition="Top"
+                                                        HorizontalAlignment="Left">
+                                                        <TextBox x:Name="tbMessage"
+                                                                 Width="300"
+                                                                 TextWrapping="Wrap" />
+                                                    </dxlc:LayoutItem>
+
+                                                    <dxlc:LayoutItem
+                                                	    Label="Priority"
+                                                	    LabelPosition="Top"
+                                                        HorizontalAlignment="Left">
+                                                        <TextBox x:Name="tbMessagePriority" Width="100" />
+                                                    </dxlc:LayoutItem>
+
+                                                </dxlc:LayoutGroup>
+
+                                                <dxlc:LayoutGroup
+                                                	Orientation="Horizontal">
+
+                                                    <Button x:Name="btnSend" Content="Send" Width="75" Height="20" 
+                                                            Click="btnSend_Click" 
+                                                            IsDefault="True" IsEnabled="False" />
+                                                    <Button x:Name="btnSendPriority" Content="Send Priority" HorizontalAlignment="Left" Height="20" 
+                                                            Click="btnSendPriority_Click" IsEnabled="False" />
+
+                                                </dxlc:LayoutGroup>
+
+                                            </dxlc:LayoutGroup>
+
+                                        </dxlc:LayoutGroup>
 
                                         <dxe:TextEdit x:Name="teLogStream" 
                                                   FontFamily="Consolas" 
@@ -147,35 +166,154 @@
                                                   TextWrapping="Wrap"
                                                   HorizontalScrollBarVisibility="Auto"
                                                   EditValueChanged="teLogStream_EditValueChanged"/>
-
-                                        <!--<dxre:RichEditControl x:Name="recLogStream"
-                                                FontSize="{Binding ElementName=sbFontSize, Path=Value}"
-                                                VerticalAlignment="Stretch"
-                                                VerticalContentAlignment="Stretch"
-                                                
-                                                TextChanged="recLogStream_TextChanged">
+                                     
+                                        <dxlc:LayoutGroup Header="Capture Filter" 
+                                            View="GroupBox" Orientation="Horizontal"
+                                                            VerticalAlignment="Bottom"
+                                            Visibility="Visible" IsCollapsible="True">
                                             
-                                        </dxre:RichEditControl>-->
+                                            <dxlc:LayoutGroup
+                                            	Orientation="Vertical">
+                                                <Button x:Name="btnToggle" Content="All Off" Click="btnToggle_Click"   HorizontalAlignment="Left"/>
+
+                                            </dxlc:LayoutGroup>
+                                                
+                                            <dxlc:LayoutGroup
+                                            	Orientation="Vertical">
+
+                                                <dxlc:LayoutGroup
+                                                    Orientation="Horizontal" HorizontalAlignment="Left">
+
+                                                    <Button x:Name="btnInfoToggle" Content="All Off" Click="btnInfoToggle_Click"   HorizontalAlignment="Left"/>
+
+                                                    <dxe:CheckEdit x:Name="ceInfo00" Content="Info 00" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo01" Content="Info 01" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo02" Content="Info 02" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo03" Content="Info 03" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo04" Content="Info 04" IsChecked="True"/>
+                                                    <dxe:CheckEdit x:Name="ceInfo05" Content="Info 05" IsChecked="True"/>
+                                                </dxlc:LayoutGroup>
+
+                                                <dxlc:LayoutGroup
+                                                Orientation="Horizontal" HorizontalAlignment="Left">
+                                                
+                                                <Button x:Name="btnDebugToggle" Content="All Off" Click="btnDebugToggle_Click"   HorizontalAlignment="Left"/>
+                                                
+                                                <dxe:CheckEdit x:Name="ceDebug00" Content="Debug 00" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug01" Content="Debug 01" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug02" Content="Debug 02" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug03" Content="Debug 03" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug04" Content="Debug 04" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceDebug05" Content="Debug 05" IsChecked="True"/>
+                                            </dxlc:LayoutGroup>
+                                          
+                                            <dxlc:LayoutGroup
+                                                Orientation="Horizontal">
+                                                
+                                                <Button x:Name="btnTrace00_09Toggle" Content="All Off" Click="btnTrace00_09Toggle_Click"   HorizontalAlignment="Left"/>
+                                                
+                                                <dxe:CheckEdit x:Name="ceTrace00" Content="Trace 00" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace01" Content="Trace 01" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace02" Content="Trace 02" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace03" Content="Trace 03" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace04" Content="Trace 04" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace05" Content="Trace 05" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace06" Content="Trace 06" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace07" Content="Trace 07" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace08" Content="Trace 08" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace09" Content="Trace 09" IsChecked="True"/>
+                                                    
+                                            </dxlc:LayoutGroup>
+
+                                            <dxlc:LayoutGroup
+                                                Orientation="Horizontal">
+                                                
+                                                <Button x:Name="btnTrace10_19Toggle" Content="All Off" Click="btnTrace10_19Toggle_Click"   HorizontalAlignment="Left"/>
+                                                
+                                                <dxe:CheckEdit x:Name="ceTrace10" Content="Trace 10" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace11" Content="Trace 11" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace12" Content="Trace 12" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace13" Content="Trace 13" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace14" Content="Trace 14" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace15" Content="Trace 15" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace16" Content="Trace 16" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace17" Content="Trace 17" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace18" Content="Trace 18" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace19" Content="Trace 19" IsChecked="True"/>
+
+                                            </dxlc:LayoutGroup>
+
+                                            <dxlc:LayoutGroup
+                                                Orientation="Horizontal">
+                                                
+                                                <Button x:Name="btnTrace20_29Toggle" Content="All Off" Click="btnTrace20_29Toggle_Click" HorizontalAlignment="Left"/>
+                                                
+                                                <dxe:CheckEdit x:Name="ceTrace20" Content="Trace 20" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace21" Content="Trace 21" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace22" Content="Trace 22" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace23" Content="Trace 23" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace24" Content="Trace 24" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace25" Content="Trace 25" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace26" Content="Trace 26" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace27" Content="Trace 27" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace28" Content="Trace 28" IsChecked="True"/>
+                                                <dxe:CheckEdit x:Name="ceTrace29" Content="Trace 29" IsChecked="True"/>
+
+                                            </dxlc:LayoutGroup>
+
+                                            </dxlc:LayoutGroup>
+                                        </dxlc:LayoutGroup>
 
                                         <dxlc:LayoutGroup
-                                        	Orientation="Horizontal"
+                                        	Orientation="Vertical"
                                             VerticalAlignment="Bottom">
 
-                                            <dxlc:LayoutItem>
-                                                <Button x:Name="btnClear" Content="Clear" 
-                                                        ToolTip="Clear Screen"
-                                                        Click="btnClear_Click" />
-                                            </dxlc:LayoutItem>
+                                            <dxlc:LayoutGroup
+                                             	Orientation="Horizontal">
 
-                                            <dxlc:LayoutItem Label="FontSize" 
-                                                 LabelPosition="Left"
-                                                 HorizontalAlignment="Right">
-                                                 
-                                                <dxe:SpinEdit x:Name="sbFontSize" 
-                                                    MinValue="8" Value="10" HorizontalAlignment="Right" /> 
+                                                <dxlc:LayoutItem HorizontalAlignment="Left">
+                                                	<dxe:CheckEdit x:Name="ceAutoUpdate" Content="Auto Update" IsChecked="False"/>
+                                                </dxlc:LayoutItem>
                                                 
-                                            </dxlc:LayoutItem>
+                                                <dxlc:LayoutItem>
+                                                    <Button x:Name="btnUpdateScreen" 
+                                                            ToolTip="Update Screen"
+                                                            HorizontalAlignment="Left"
+                                                            IsEnabled="{cb:Binding ElementName=ceAutoUpdate, Path=!IsChecked, Mode=OneWay}"
+                                                            Click="btnUpdateScreen_Click">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label x:Name="lbLastEntry" Content="HH:MM:SS.xxx" Width="80" />
+                                                            <Label Content="Update Screen" HorizontalAlignment="Right" Foreground="Red" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </dxlc:LayoutItem>
+                                                
+                                                <dxlc:LayoutItem HorizontalAlignment="Right">
+                                                    <Button x:Name="btnClear" Content="Clear Screen" 
+                                                            Foreground="Red"
+                                                            ToolTip="Clear Screen"
+                                                            Click="btnClear_Click" />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem HorizontalAlignment="Right">
+                                                    <Button x:Name="btnCopy" Content="Copy Contents" 
+                                                            ToolTip="Copy contents to clipboard"
+                                                            Click="btnCopy_Click" />
+                                                </dxlc:LayoutItem>
+
+                                                <dxlc:LayoutItem Label="FontSize" 
+                                                     LabelPosition="Left"
+                                                     HorizontalAlignment="Right">
+
+                                                    <dxe:SpinEdit x:Name="sbFontSize" 
+                                                        MinValue="8" Value="10" HorizontalAlignment="Right" />
+
+                                                </dxlc:LayoutItem>
+
+                                            </dxlc:LayoutGroup>
+
                                         </dxlc:LayoutGroup>
+                                        
                                     </dxlc:LayoutGroup>
 
                                 </dxlc:LayoutGroup>

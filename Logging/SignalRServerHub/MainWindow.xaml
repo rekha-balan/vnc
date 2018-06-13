@@ -10,7 +10,7 @@
                 <Button x:Name="ButtonStop" Content="Stop" HorizontalAlignment="Right" Width="100" Click="ButtonStop_Click" IsEnabled="False"/>
 
             </StackPanel>
-            <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Margin="10,35,10,10" VerticalAlignment="Stretch" Width="315">
+            <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Margin="10,35,10,10" VerticalAlignment="Stretch">
                 <FlowDocument>
                     <Paragraph>
                     </Paragraph>

@@ -37,6 +37,7 @@ namespace VNC.Logging.TraceListeners
 
         private string sLoggingDbConString = string.Empty;
         private int iSQLCommandTimeoutInSecs = 300;
+        private Int32 iPriority = 0;
         private string sEntryID = string.Empty;
         private string sMachineName = string.Empty;
         private string sUserName = string.Empty;
@@ -131,8 +132,6 @@ namespace VNC.Logging.TraceListeners
 
                 return (bool)suppressEnter;
             }
-
-
         }
         /// <summary>
         /// This name is simply added to sent messages to identify the user; this 
@@ -161,7 +160,7 @@ namespace VNC.Logging.TraceListeners
                 //message = message + "*W*";
                 //client.DisplayLogEntry(message);  // Named pipes
                 //HubProxy.Invoke("Send", SignalRListenerUser, message);
-                HubProxy.Invoke("Send",  message);
+                HubProxy.Invoke("SendPriority", message, iPriority);
             }
             catch (Exception ex)
             {
@@ -177,7 +176,7 @@ namespace VNC.Logging.TraceListeners
                 //message = message + "*WL*";
                 //client.DisplayLogEntry(message); named pipes
                 //HubProxy.Invoke("Send", SignalRListenerUser, message);
-                HubProxy.Invoke("Send", message);
+                HubProxy.Invoke("SendPriority", message, iPriority);
             }
             catch (Exception ex)
             {
@@ -256,7 +255,7 @@ namespace VNC.Logging.TraceListeners
                 try
                 {
                     LogEntry e = (LogEntry)data;
-
+                    this.iPriority = e.Priority;
                     this.sEntryID = System.Guid.NewGuid().ToString();
                     this.sMachineName = e.MachineName;
                     this.sApplicationName = e.CategoriesStrings[0];
@@ -494,6 +493,10 @@ namespace VNC.Logging.TraceListeners
         public void Send(string message)
         {
             Clients.All.addMessage(message);
+        }
+        public void SendPriority(string message, Int32 priority)
+        {
+            Clients.All.addPriorityMessage(message, priority);
         }
 
         //public override Task OnConnected()

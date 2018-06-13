@@ -254,8 +254,10 @@
     <Compile Include="SyntaxWalkers\CS\VisitAll.cs" />
     <Compile Include="SyntaxWalkers\CS\VNCCSSyntaxWalkerBase.cs" />
     <Compile Include="SyntaxWalkers\VB\AsNewClause.cs" />
-    <Compile Include="SyntaxWalkers\VB\StopOrEndStatement.cs" />
     <Compile Include="SyntaxWalkers\VB\ExpressionStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\MultiLineLambdaExpression.cs" />
+    <Compile Include="SyntaxWalkers\VB\StopOrEndStatement.cs" />
+    <Compile Include="SyntaxWalkers\VB\SingleLineLambdaExpression.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxNode.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxToken.cs" />
     <Compile Include="SyntaxWalkers\VB\SyntaxTrivia.cs" />
