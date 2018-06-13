@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="PluralsightPrismDemo.Toolbar.ToolbarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:inf="clr-namespace:PluralsightPrismDemo.Infrastructure;assembly=PluralsightPrismDemo.Infrastructure"
+             Height="Auto" Width="Auto">
+    <ToolBar>
+        <Button Command="{x:Static inf:GlobalCommands.SaveAllCommand}" >Save All</Button>
+    </ToolBar>
+</UserControl>
