@@ -26,7 +26,7 @@
 
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="6,0">Send</Button>
-            <Button Width="60">Cancel</Button>
+            <Button Command="{Binding CancelCommand}" Width="60">Cancel</Button>
         </StackPanel>
 
     </Grid>

@@ -9,10 +9,11 @@ using Infrastructure.Services;
 using Prism;
 using Prism.Commands;
 using Prism.Regions;
+using System.Windows;
 
 namespace ModuleA1
 {
-    public class ViewA1ViewModel : ViewModelBase, IViewA1ViewModel, INavigationAware, IRegionMemberLifetime
+    public class ViewA1ViewModel : ViewModelBase, IViewA1ViewModel, INavigationAware, IRegionMemberLifetime, IConfirmNavigationRequest
     {
         private readonly IRegionManager _regionManager;
         private readonly IPersonService _personService;
@@ -78,6 +79,20 @@ namespace ModuleA1
         }
 
         #endregion //Commands
+
+        #region IConfirmNavigationRequest
+
+        public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
+        {
+            bool result = true;
+
+            if (MessageBox.Show("Do you want to navigate?", "Navigate?", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                result = false;
+
+            continuationCallback(result);
+        }
+
+        #endregion
 
         #region INavigationAware
 
