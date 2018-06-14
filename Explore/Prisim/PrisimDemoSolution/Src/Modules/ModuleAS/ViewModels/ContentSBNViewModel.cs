@@ -71,10 +71,14 @@ namespace ModuleSBN
 
         #region Constructors
 
+        // Pass in an IPersonService to avoid having a direct dependency
+        // on Services.PersonService
         public ContentSBNViewModel(IPersonService personService)
         {
             _personService = personService;
+
             LoadPeople();
+
             EditPersonCommand = new DelegateCommand(EditPerson, CanEditPerson);
         }
 
@@ -99,6 +103,7 @@ namespace ModuleSBN
         private void LoadPeople()
         {
             IsBusy = true;
+
             _personService.GetPeopleAsync((sender, result) =>
             {
                 People = new ObservableCollection<Person>(result.Object);
