@@ -83,7 +83,7 @@
     </Compile>
     <Compile Include="ViewModels\ContentSBNViewModel.cs" />
     <Compile Include="ViewModels\IContentSBNViewModel.cs" />
-    <Compile Include="ModuleASModule.cs" />
+    <Compile Include="ModuleSBNModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
