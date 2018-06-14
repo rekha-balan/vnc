@@ -27,33 +27,34 @@ namespace ModuleA1
         }
     }
 
-    //public partial class ViewA1 : UserControl, IView, INavigationAware
-    //{
-    //public ViewA1(IViewA1ViewModel viewModel)
-    //{
-    //    InitializeComponent();
-    //    ViewModel = viewModel;
-    //}
+    public partial class ViewA1 : UserControl, IView, INavigationAware
+    {
+        public ViewA1(IViewA1ViewModel viewModel)
+        {
+            InitializeComponent();
+            ViewModel = viewModel;
+        }
 
-    //public IViewModel ViewModel
-    //{
-    //    get { return (IViewModel)DataContext; }
-    //    set { DataContext = value; }
-    //}
+        public IViewModel ViewModel
+        {
+            get { return (IViewModel)DataContext; }
+            set { DataContext = value; }
+        }
 
-    //public bool IsNavigationTarget(NavigationContext navigationContext)
-    //{
-    //    return true;
-    //}
 
-    //public void OnNavigatedFrom(NavigationContext navigationContext)
-    //{
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
 
-    //}
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
 
-    //public void OnNavigatedTo(NavigationContext navigationContext)
-    //{
+        }
 
-    //}
-    //}
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+        }
+    }
 }

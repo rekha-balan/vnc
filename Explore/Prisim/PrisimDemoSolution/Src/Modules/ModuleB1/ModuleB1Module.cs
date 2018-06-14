@@ -18,11 +18,16 @@ namespace ModuleB1
 
         protected override void RegisterTypes()
         {
-            // This is supposed to work but doesn't.
+            // Cannot do this - Shows up as System.Object
+            //Container.RegisterType<ViewB1>();
+
+            // When using Navigation have to register as Object.
+            //Container.RegisterType<object, ViewA1>(typeof(ViewB1).FullName);
+
+            // This hides the complexity.
             Container.RegisterTypeForNavigation<ViewB1>();
 
-            // This longer form does work.
-            //Container.RegisterType<object, ViewB1>(typeof(ViewB1).FullName);
+            Container.RegisterType<IViewB1ViewModel, ViewB1ViewModel>();
         }
     }
 }

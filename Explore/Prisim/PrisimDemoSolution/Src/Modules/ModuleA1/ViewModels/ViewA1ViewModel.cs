@@ -7,7 +7,7 @@ using Prism.Regions;
 
 namespace ModuleA1
 {
-    public class ViewA1ViewModel : ViewModelBase, IViewA1ViewModel, INavigationAware
+    public class ViewA1ViewModel : ViewModelBase, IViewA1ViewModel, INavigationAware, IRegionMemberLifetime
     {
         private int _pageViews;
         public int PageViews
@@ -25,6 +25,8 @@ namespace ModuleA1
 
         }
 
+        #region INavigationAware
+
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -32,12 +34,23 @@ namespace ModuleA1
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             PageViews++;
         }
+
+        #endregion
+
+        #region IRegionMemberLifetime
+
+        public bool KeepAlive
+        {
+            get { return false; }   // Always get new instance
+        }
+
+        #endregion
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using Business;
 using Infrastructure.Services;
 using System.Collections.ObjectModel;
 using Infrastructure;
 using Prism.Commands;
-using Microsoft.Windows.Controls;
+//using Microsoft.Windows.Controls;
 
 namespace ModuleSBN
 {
@@ -88,7 +89,7 @@ namespace ModuleSBN
 
         private void EditPerson()
         {
-            WindowState = Microsoft.Windows.Controls.WindowState.Open;
+            WindowState = System.Windows.WindowState.Normal;
         }
 
         private bool CanEditPerson()

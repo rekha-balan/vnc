@@ -25,6 +25,8 @@ namespace ModuleB1
 
         }
 
+        #region INavigationAware
+
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -40,9 +42,15 @@ namespace ModuleB1
             PageViews++;
         }
 
+        #endregion
+
+        #region IRegionMemberLifetime
+
         public bool KeepAlive
         {
-            get { return true; }
+            get { return true; }    // Always get same instance
         }
+
+        #endregion
     }
 }
