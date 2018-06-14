@@ -1,6 +1,6 @@
 using System;
 using Infrastructure;
-using Business;
+//using Business;
 //using Microsoft.Practices.Prism.Commands;
 using Prism.Commands;
 using Prism.Events;
@@ -15,7 +15,7 @@ namespace People
 
         #region "Constructors, Initialization, and Load"
 
-        public PersonViewModel(IPersonView view)
+        public PersonViewModel(IPerson view)
             : base(view)
         {
             CreatePerson();
@@ -24,7 +24,7 @@ namespace People
             //SaveCommand = new DelegateCommand(Save, CanSave);
 
             // Use this form to pass nullable command parameter.  Use object or other nullable type.
-            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+            SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
 
             // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
 
@@ -33,7 +33,7 @@ namespace People
 
         // Need to pass in EventAggregator
 
-        public PersonViewModel(IPersonView view, IEventAggregator eventAggregator)
+        public PersonViewModel(IPerson view, IEventAggregator eventAggregator)
             : base(view)
         {
             _eventAggregator = eventAggregator;
@@ -44,14 +44,14 @@ namespace People
             //SaveCommand = new DelegateCommand(Save, CanSave);
 
             // Use this form to pass nullable command parameter.  Use object or other nullable type.
-            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+            SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
 
             // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
 
             GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
         }
 
-        public PersonViewModel(IPersonView view, IEventAggregator eventAggregator, IPersonRepository personRepository)
+        public PersonViewModel(IPerson view, IEventAggregator eventAggregator, IPersonRepository personRepository)
             : base(view)
         {
             _eventAggregator = eventAggregator;
@@ -61,7 +61,7 @@ namespace People
             //SaveCommand = new DelegateCommand(Save, CanSave);
 
             // Use this form to pass nullable command parameter.  Use object or other nullable type.
-            SaveCommand = new DelegateCommand<Person>(Save, CanSave);
+            SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
 
             // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
 
@@ -72,10 +72,8 @@ namespace People
 
         #region Enums, Fields, Properties
 
-
-
-        private Person _person;
-        public Person Person
+        private Business.Person _person;
+        public Business.Person Person
         {
             get { return _person; }
             set
@@ -87,7 +85,7 @@ namespace People
         }
 
         //public DelegateCommand SaveCommand { get; set; }
-        public DelegateCommand<Person> SaveCommand { get; set; }
+        public DelegateCommand<Business.Person> SaveCommand { get; set; }
 
         public string ViewName
         {
@@ -103,7 +101,7 @@ namespace People
 
         private void CreatePerson()
         {
-            Person = new Person()
+            Person = new Business.Person()
             {
                 FirstName = "Bob",
                 LastName = "Smith",
@@ -113,7 +111,7 @@ namespace People
 
         public void CreatePerson(string firstName, string lastName)
         {
-            Person = new Person()
+            Person = new Business.Person()
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -151,7 +149,7 @@ namespace People
             return Person != null && Person.Error == null;
         }
 
-        private void Save(Person value)
+        private void Save(Business.Person value)
         {
             if (value is null)
             {
@@ -182,7 +180,7 @@ namespace People
             }
         }
 
-        private bool CanSave(Person value)
+        private bool CanSave(Business.Person value)
         {
             if (Person != null)
             {
@@ -193,6 +191,5 @@ namespace People
         }
 
         #endregion
-
     }
 }

@@ -11,7 +11,7 @@ using Infrastructure;
 using System;
 using PrismDemo.ViewModels;
 using Services.PersonService;
-using ModuleAS;
+using ModuleSBN;
 
 namespace PrismDemo
 {
@@ -22,7 +22,7 @@ namespace PrismDemo
             ModuleCatalog catalog = new ModuleCatalog();
 
             catalog.AddModule(typeof(PersonServiceModule));
-            catalog.AddModule(typeof(ModuleASModule));
+            catalog.AddModule(typeof(ModuleSBNModule));
 
             return catalog;
         }

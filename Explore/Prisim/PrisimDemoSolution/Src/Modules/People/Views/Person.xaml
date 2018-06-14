@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="People.PersonView"
+﻿<UserControl x:Class="People.Person"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid x:Name="LayoutRoot" Background="White">
@@ -28,18 +28,6 @@
         <TextBlock Grid.Row="2" Text="Age:" Margin="5"/>
         <TextBox Grid.Row="2" Grid.Column="1"  Margin="5" 
                  Text="{Binding Person.Age, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-        <!--<TextBox Grid.Row="2" Grid.Column="1"  Margin="5">
-            <TextBox.Text>
-                <Binding Path="Person.Age" Mode="TwoWay" 
-                         ValidatesOnDataErrors="True" 
-                         ValidatesOnNotifyDataErrors="True" 
-                         ValidatesOnExceptions="True">
-                    <Binding.ValidationRules>
-
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>-->
 
         <!-- Last Updated -->
         <TextBlock Grid.Row="3" Text="Last Updated:" Margin="5" />

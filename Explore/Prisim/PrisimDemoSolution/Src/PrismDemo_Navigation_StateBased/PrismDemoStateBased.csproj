@@ -125,9 +125,9 @@
       <Project>{0b79451f-23fc-4143-885e-e264539626c8}</Project>
       <Name>ModuleA1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modules\ModuleAS\ModuleAS.csproj">
+    <ProjectReference Include="..\Modules\ModuleAS\ModuleSBN.csproj">
       <Project>{b9b7c304-b100-4cb1-a489-e87e8b3d34d1}</Project>
-      <Name>ModuleAS</Name>
+      <Name>ModuleSBN</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modules\ModuleB1\ModuleB1.csproj">
       <Project>{5072f261-1419-4936-b62f-bf75316db84b}</Project>

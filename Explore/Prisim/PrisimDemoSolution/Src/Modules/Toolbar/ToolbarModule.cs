@@ -31,7 +31,7 @@ namespace Toolbar
         protected void RegisterViewsAndServices()
         {
             _container.RegisterType<IToolbarViewModel, ToolbarViewModel>();
-            _container.RegisterType<IToolbarView, ToolbarView>();
+            _container.RegisterType<IToolbar, Toolbar>();
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Toolbar
     /// <summary>
     /// Interaction logic for ToolbarView.xaml
     /// </summary>
-    public partial class ToolbarView : UserControl, IToolbarView
+    public partial class Toolbar : UserControl, IToolbar
     {
-        public ToolbarView()
+        public Toolbar()
         {
             InitializeComponent();
         }

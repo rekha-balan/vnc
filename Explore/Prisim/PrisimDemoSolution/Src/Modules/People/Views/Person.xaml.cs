@@ -15,9 +15,9 @@ using Infrastructure;
 
 namespace People
 {
-    public partial class PersonView : UserControl, IPersonView
+    public partial class Person : UserControl, IPerson
     {
-        public PersonView()
+        public Person()
         {
             InitializeComponent();
         }

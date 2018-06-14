@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Infrastructure;
 
-namespace StatusBar
+namespace ModuleSBN
 {
-    public interface IStatusBarView : IView
+    public interface IContentSBNViewModel : IViewModel
     {
     }
 }

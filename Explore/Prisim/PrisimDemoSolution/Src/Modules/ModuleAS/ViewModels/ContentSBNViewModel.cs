@@ -6,9 +6,9 @@ using Infrastructure;
 using Prism.Commands;
 using Microsoft.Windows.Controls;
 
-namespace ModuleAS
+namespace ModuleSBN
 {
-    public class ContentASViewViewModel : IContentASViewViewModel, INotifyPropertyChanged
+    public class ContentSBNViewModel : IContentSBNViewModel, INotifyPropertyChanged
     {
         private readonly IPersonService _personService;
 
@@ -61,13 +61,17 @@ namespace ModuleAS
             }
         }
 
-        public IView View { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public IView View
+        {
+            get => throw new System.NotImplementedException();
+            set => throw new System.NotImplementedException();
+        }
 
         #endregion //Properties
 
         #region Constructors
 
-        public ContentASViewViewModel(IPersonService personService)
+        public ContentSBNViewModel(IPersonService personService)
         {
             _personService = personService;
             LoadPeople();
@@ -85,7 +89,6 @@ namespace ModuleAS
 
         private bool CanEditPerson()
         {
-            //return true;
             return SelectedPerson != null;
         }
 

@@ -1,8 +1,6 @@
-﻿//using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Infrastructure.Services;
 using Prism.Modularity;
-
 
 namespace Services.PersonService
 {

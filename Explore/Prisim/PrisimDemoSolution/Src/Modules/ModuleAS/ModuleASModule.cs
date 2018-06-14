@@ -7,14 +7,14 @@ using Infrastructure;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace ModuleAS
+namespace ModuleSBN
 {
-    public class ModuleASModule : IModule
+    public class ModuleSBNModule : IModule
     {
         IUnityContainer _container;
         IRegionManager _manager;
 
-        public ModuleASModule(IUnityContainer container, IRegionManager manager)
+        public ModuleSBNModule(IUnityContainer container, IRegionManager manager)
         {
             _container = container;
             _manager = manager;
@@ -22,10 +22,10 @@ namespace ModuleAS
 
         public void Initialize()
         {
-            _container.RegisterType<IContentASView, ContentASView>();
-            _container.RegisterType<IContentASViewViewModel, ContentASViewViewModel>();
+            _container.RegisterType<IContentSBN, ContentSBN>();
+            _container.RegisterType<IContentSBNViewModel, ContentSBNViewModel>();
 
-            _manager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentASView));
+            _manager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentSBN));
         }
     }
 }

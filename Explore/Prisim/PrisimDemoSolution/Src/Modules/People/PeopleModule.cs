@@ -51,7 +51,7 @@ namespace People
             var vm = _container.Resolve<IPeopleViewModel>();
             _regionManager.Regions[RegionNames.ContentRegion].Add(vm.View);
 
-            _regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetailsView));
+            _regionManager.RegisterViewWithRegion("PersonDetailsRegion", typeof(PersonDetails));
         }
 
         protected void RegisterViewsAndServices()
@@ -64,8 +64,8 @@ namespace People
             // This is for People
 
             _container.RegisterType<IPeopleViewModel, PeopleViewModel>();
-            _container.RegisterType<IPeopleView, PeopleView>();
-            _container.RegisterType<IPersonDetailsView, PersonDetailsView>();
+            _container.RegisterType<IPeople, People>();
+            _container.RegisterType<IPersonDetails, PersonDetails>();
             _container.RegisterType<IPersonDetailsViewModel, PersonDetailsViewModel>();
         }
     }

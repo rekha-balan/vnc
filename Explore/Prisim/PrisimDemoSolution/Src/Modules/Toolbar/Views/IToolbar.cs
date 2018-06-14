@@ -3,7 +3,7 @@ using Infrastructure;
 
 namespace Toolbar
 {
-    public interface IToolbarView : IView
+    public interface IToolbar : IView
     {
 
     }

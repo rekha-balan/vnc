@@ -3,8 +3,7 @@ using Infrastructure;
 
 namespace People
 {
-    public interface IPersonView : IView
+    public interface IPerson : IView
     {
-
     }
 }

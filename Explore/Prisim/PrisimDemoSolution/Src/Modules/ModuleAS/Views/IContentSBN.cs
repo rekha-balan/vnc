@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Infrastructure;
 
-namespace ModuleAS
+namespace ModuleSBN
 {
-    public interface IContentASView : IView
+    public interface IContentSBN : IView
     {
     }
 }

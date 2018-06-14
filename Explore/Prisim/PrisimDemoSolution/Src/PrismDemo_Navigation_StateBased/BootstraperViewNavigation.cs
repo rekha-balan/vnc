@@ -11,7 +11,7 @@ using Infrastructure;
 using System;
 using PrismDemo.ViewModels;
 using Services.PersonService;
-using ModuleAS;
+using ModuleSBN;
 
 namespace PrismDemo
 {
@@ -58,7 +58,7 @@ namespace PrismDemo
             // This is for State-Based Navigation
 
             catalog.AddModule(typeof(PersonServiceModule));
-            catalog.AddModule(typeof(ModuleASModule));
+            catalog.AddModule(typeof(ModuleSBNModule));
 
             // This is for View-Based Navigation
 

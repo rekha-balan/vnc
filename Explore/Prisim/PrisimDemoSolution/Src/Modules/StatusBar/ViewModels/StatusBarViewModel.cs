@@ -8,7 +8,7 @@ namespace StatusBar
     {
         IEventAggregator _eventAggregator;
 
-        public StatusBarViewModel(IStatusBarView view, IEventAggregator eventAggregator)
+        public StatusBarViewModel(IStatusBar view, IEventAggregator eventAggregator)
             : base(view)
         {
             _eventAggregator = eventAggregator;

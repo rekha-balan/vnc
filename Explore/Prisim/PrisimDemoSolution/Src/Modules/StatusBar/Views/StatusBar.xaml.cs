@@ -18,9 +18,9 @@ namespace StatusBar
     /// <summary>
     /// Interaction logic for StatusBarView.xaml
     /// </summary>
-    public partial class StatusBarView : UserControl, IStatusBarView
+    public partial class StatusBar : UserControl, IStatusBar
     {
-        public StatusBarView()
+        public StatusBar()
         {
             InitializeComponent();
         }

@@ -28,7 +28,7 @@ namespace StatusBar
         protected void RegisterViewsAndServices()
         {
             _container.RegisterType<IStatusBarViewModel, StatusBarViewModel>();
-            _container.RegisterType<IStatusBarView, StatusBarView>();
+            _container.RegisterType<IStatusBar, StatusBar>();
         }
     }
 }

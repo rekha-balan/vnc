@@ -5,6 +5,5 @@ namespace People
 {
     public interface IPeopleViewModel : IViewModel
     {
-
     }
 }

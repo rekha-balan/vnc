@@ -8,7 +8,7 @@ namespace Toolbar
 {
     public class ToolbarViewModel : ViewModelBase, IToolbarViewModel
     {
-        public ToolbarViewModel(IToolbarView view)
+        public ToolbarViewModel(IToolbar view)
             : base(view)
         {
 

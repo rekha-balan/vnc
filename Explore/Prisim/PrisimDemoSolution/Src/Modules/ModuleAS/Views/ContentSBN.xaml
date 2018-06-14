@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ModuleAS.ContentASView"
+﻿<UserControl x:Class="ModuleSBN.ContentSBN"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended">
@@ -35,7 +35,8 @@
                     </TextBlock.Text>
                 </TextBlock>
             </StackPanel>
-        </DataTemplate>        
+        </DataTemplate>  
+        
     </UserControl.Resources>
 
     <Grid Margin="25" >

@@ -24,9 +24,6 @@ namespace PrismDemo
         {
             ModuleCatalog catalog = new ModuleCatalog();
 
-            //catalog.AddModule(typeof(ModuleAModule));
-            //catalog.AddModule(typeof(ModuleBModule));
-
             catalog.AddModule(typeof(ModuleA1Module));
             catalog.AddModule(typeof(ModuleB1Module));
 

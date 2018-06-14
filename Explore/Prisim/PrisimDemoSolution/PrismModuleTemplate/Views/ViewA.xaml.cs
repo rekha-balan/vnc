@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,24 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Infrastructure;
 
-namespace People
+namespace PrismModuleTemplate.Views
 {
     /// <summary>
-    /// Interaction logic for PeopleView.xaml
+    /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class PeopleView : UserControl, IPeopleView
+    public partial class ViewA : UserControl
     {
-        public PeopleView()
+        public ViewA()
         {
             InitializeComponent();
-        }
-
-        public IViewModel ViewModel
-        {
-            get { return (IViewModel)DataContext; }
-            set { DataContext = value; }
         }
     }
 }

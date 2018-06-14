@@ -1,20 +1,19 @@
 using System;
 using Infrastructure;
-using Business;
 using System.Collections.ObjectModel;
 
 namespace People
 {
     public class PeopleViewModel : ViewModelBase, IPeopleViewModel
     {
-        public PeopleViewModel(IPeopleView view)
+        public PeopleViewModel(IPeople view)
             : base(view)
         {
             CreatePeople();
         }
 
-        private ObservableCollection<Person> _people;
-        public ObservableCollection<Person> People
+        private ObservableCollection<Business.Person> _people;
+        public ObservableCollection<Business.Person> People
         {
             get { return _people; }
             set
@@ -26,10 +25,10 @@ namespace People
 
         private void CreatePeople()
         {
-            var people = new ObservableCollection<Person>();
+            var people = new ObservableCollection<Business.Person>();
             for (int i = 0; i < 5; i++)
             {
-                people.Add(new Person()
+                people.Add(new Business.Person()
                 {
                     FirstName = String.Format("First {0}", i),
                     LastName = String.Format("Last {0}", i)
