@@ -13,6 +13,9 @@ namespace ModuleA1
         protected override void InitializeModule()
         {
             RegionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(ViewA1Button));
+
+            // This is for the navigation demo
+            ApplicationCommands.NavigateCommand.Execute(typeof(ViewA1));
         }
 
         protected override void RegisterTypes()
@@ -27,6 +30,11 @@ namespace ModuleA1
             Container.RegisterTypeForNavigation<ViewA1>();
 
             Container.RegisterType<IViewA1ViewModel, ViewA1ViewModel > ();
+
+            // This is for the parameters demo
+
+            Container.RegisterType<IEmailViewModel, EmailViewModel>();
+            Container.RegisterTypeForNavigation<Email>();
         }
     }
 }

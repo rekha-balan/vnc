@@ -1,14 +1,43 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using Infrastructure;
 //using Microsoft.Practices.Prism.Regions;
+using Business;
+using Infrastructure;
+using Infrastructure.Services;
+using Prism;
+using Prism.Commands;
 using Prism.Regions;
 
 namespace ModuleB1
 {
     public class ViewB1ViewModel : ViewModelBase, IViewB1ViewModel, INavigationAware, IRegionMemberLifetime
     {
+        private readonly IRegionManager _regionManager;
+        private readonly IPersonService _personService;
+
+        #region Constructors
+
+        public ViewB1ViewModel()
+        {
+
+        }
+
+        public ViewB1ViewModel(IRegionManager regionManager, IPersonService personService)
+        {
+            _regionManager = regionManager;
+            _personService = personService;
+            EmailCommand = new DelegateCommand<Person>(Email);
+            LoadPeople();
+        }
+
+        #endregion //Constructors
+
+        #region Properties
+
+        public DelegateCommand<Person> EmailCommand { get; private set; }
+
         private int _pageViews;
         public int PageViews
         {
@@ -18,12 +47,37 @@ namespace ModuleB1
                 _pageViews = value;
                 OnPropertyChanged("PageViews");
             }
-        }       
-
-        public ViewB1ViewModel()
-        {
-
         }
+
+        private ObservableCollection<Person> _People;
+        public ObservableCollection<Person> People
+        {
+            get { return _People; }
+            set
+            {
+                _People = value;
+                OnPropertyChanged("People");
+            }
+        }
+
+        #endregion // Properties
+
+        #region Commands
+
+        private void Email(Person person)
+        {
+            if (person != null)
+            {
+                //var uriQuery = new UriQuery();
+                var uriQuery = new NavigationParameters();
+                uriQuery.Add("To", person.Email);
+
+                var uri = new Uri(typeof(Email).FullName + uriQuery, UriKind.Relative);
+                _regionManager.RequestNavigate(RegionNames.ContentRegion, uri);
+            }
+        }
+
+        #endregion //Commands
 
         #region INavigationAware
 
@@ -34,7 +88,7 @@ namespace ModuleB1
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -48,9 +102,23 @@ namespace ModuleB1
 
         public bool KeepAlive
         {
-            get { return true; }    // Always get same instance
+            get { return false; }   // Always get new instance
         }
 
         #endregion
+
+        #region Methods
+
+        private void LoadPeople()
+        {
+            IsBusy = true;
+            _personService.GetPeopleAsync((sender, result) =>
+            {
+                People = new ObservableCollection<Person>(result.Object);
+                IsBusy = false;
+            });
+        }
+
+        #endregion //Methods
     }
 }

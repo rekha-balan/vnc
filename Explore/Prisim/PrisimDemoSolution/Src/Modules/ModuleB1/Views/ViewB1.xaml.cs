@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 
 namespace ModuleB1
 {
-    //public partial class ViewB1 : UserControl
-    //{
-    //    public ViewB1()
-    //    {
-    //        InitializeComponent();
-    //    }
-    //}
+    public partial class ViewB1 : UserControl
+    {
+        public ViewB1()
+        {
+            InitializeComponent();
+        }
+    }
 
     public partial class ViewB1 : UserControl, IView, INavigationAware
     {
