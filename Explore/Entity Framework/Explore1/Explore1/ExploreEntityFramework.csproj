@@ -223,6 +223,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="MTMLIN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -856,6 +861,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
