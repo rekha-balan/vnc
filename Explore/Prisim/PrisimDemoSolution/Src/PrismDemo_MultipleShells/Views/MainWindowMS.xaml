@@ -1,0 +1,26 @@
+﻿<Window x:Class="PrismDemo.Views.MainWindowMS"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:infra="clr-namespace:Infrastructure;assembly=Infrastructure"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="350" Width="525">
+    <!--prism:ViewModelLocator.AutoWireViewModel="True"-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Open Shell" Command="{Binding OpenShellCommand}" CommandParameter="ViewB" />
+            <MenuItem Header="Navigate To ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
+            <MenuItem Header="Navigate To ViewB" Command="{Binding NavigateCommand}" CommandParameter="ViewB" />
+            <MenuItem Header="Navigate To ViewC" Command="{Binding NavigateCommand}" CommandParameter="ViewC" />
+            <MenuItem Header="Navigate To ViewD" Command="{Binding NavigateCommand}" CommandParameter="ViewD" />
+        </Menu>
+
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static infra:KnownRegionNames.ContentRegion}" />
+
+    </Grid>
+</Window>
