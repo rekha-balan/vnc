@@ -56,12 +56,23 @@
     <Compile Include="Migrations\201806150324169_AddDataOfDeathToNinja.Designer.cs">
       <DependentUpon>201806150324169_AddDataOfDeathToNinja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806160452053_MakeDateOfDeathNullable.cs" />
+    <Compile Include="Migrations\201806160452053_MakeDateOfDeathNullable.Designer.cs">
+      <DependentUpon>201806160452053_MakeDateOfDeathNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806160457440_MakeDateOfDeathNullable2.cs" />
+    <Compile Include="Migrations\201806160457440_MakeDateOfDeathNullable2.Designer.cs">
+      <DependentUpon>201806160457440_MakeDateOfDeathNullable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806160511381_MakeDateOfDeathNullable3.cs" />
+    <Compile Include="Migrations\201806160511381_MakeDateOfDeathNullable3.Designer.cs">
+      <DependentUpon>201806160511381_MakeDateOfDeathNullable3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NinjaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +87,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806150324169_AddDataOfDeathToNinja.resx">
       <DependentUpon>201806150324169_AddDataOfDeathToNinja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806160452053_MakeDateOfDeathNullable.resx">
+      <DependentUpon>201806160452053_MakeDateOfDeathNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806160457440_MakeDateOfDeathNullable2.resx">
+      <DependentUpon>201806160457440_MakeDateOfDeathNullable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806160511381_MakeDateOfDeathNullable3.resx">
+      <DependentUpon>201806160511381_MakeDateOfDeathNullable3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

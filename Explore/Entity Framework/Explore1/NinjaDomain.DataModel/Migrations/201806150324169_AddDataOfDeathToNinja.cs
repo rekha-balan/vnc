@@ -7,7 +7,7 @@ namespace NinjaDomain.DataModel.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Ninjas", "DateOfDeath", c => c.DateTime(nullable: false));
+            AddColumn("dbo.Ninjas", "DateOfDeath", c => c.DateTime(nullable: true));
         }
         
         public override void Down()

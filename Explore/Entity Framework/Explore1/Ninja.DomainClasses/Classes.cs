@@ -15,7 +15,7 @@ namespace NinjaDomain.Classes
 
         public System.DateTime DateOfBirth { get; set; }
 
-        public System.DateTime DateOfDeath { get; set; }
+        public System.DateTime? DateOfDeath { get; set; }
 
         public List<NinjaEquipment> EquipmentOwned { get; set; }
 
