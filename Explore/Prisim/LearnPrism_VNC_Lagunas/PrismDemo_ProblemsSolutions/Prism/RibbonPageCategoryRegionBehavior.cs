@@ -39,7 +39,7 @@ namespace PrismDemo.Prism
 
                 foreach (var newView in e.NewItems)
                 {
-                    foreach (var attr in GetCustomAttributes<RibbonPageAttribute>(newView.GetType()))
+                    foreach (var attr in GetCustomAttributes<DependentViewAttribute>(newView.GetType()))
                     {
                         var ribbonPageItem = Activator.CreateInstance(attr.Type) as RibbonPage;
 

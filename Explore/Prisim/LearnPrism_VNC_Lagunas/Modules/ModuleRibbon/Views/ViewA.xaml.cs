@@ -8,8 +8,8 @@ namespace ModuleRibbon.Views
     /// Interaction logic for ViewA
     /// </summary>
     [RibbonPage(typeof(ViewATab))]
-    [RibbonPage(typeof(ViewATab))]
-    [RibbonPage(typeof(ViewATab2))]
+    [DependentView(typeof(ViewATab), "RibbonPageCategoryRegion")]
+    [DependentView(typeof(ViewATab2), "RibbonPageCategoryRegion")]
     public partial class ViewA : UserControl, ISupportDataContext
     {
 

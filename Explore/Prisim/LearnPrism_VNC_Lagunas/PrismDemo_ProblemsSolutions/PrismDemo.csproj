@@ -69,6 +69,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Prism\DependentViewRegionBehavior.cs" />
     <Compile Include="Prism\RibbonPageCategoryRegionBehavior.cs" />
     <Compile Include="Prism\RibbonStatusBarControlRegionAdapter.cs" />
     <Compile Include="Prism\RibbonPageCategoryRegionAdapter.cs" />

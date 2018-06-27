@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using PrismDemo.Core;
 using ModuleRibbon.RibbonTabs;
+using Prism.Regions;
 
 namespace ModuleRibbon.Views
 {
@@ -8,16 +9,31 @@ namespace ModuleRibbon.Views
     /// Interaction logic for ViewB
     /// </summary>
     [RibbonPage(typeof(ViewBTab))]
-    [RibbonPage(typeof(ViewBTab2))]
-    [RibbonPage(typeof(ViewBTab3))]
-    public partial class ViewB : UserControl, ISupportDataContext
+    [DependentView(typeof(ViewBTab2), "RibbonPageCategoryRegion2")]
+    [DependentView(typeof(ViewBTab3), "RibbonPageCategoryRegion")]
+    [DependentView(typeof(ViewC), "SubRegion")]
+    public partial class ViewB : UserControl, ISupportDataContext, IRegionMemberLifetime
+
     {     
         public ViewB()
         {
             InitializeComponent();
         }
 
+        #region IRegionMemberLifetime
+
+        public bool KeepAlive
+        {
+            get { return false; }
+        }
+
+        #endregion
+
+        #region ISupportDataContext
+
         // Because ViewB is a UserControl, it already has a DataContext
         // Don't need to implement ISupportDataContext!
+
+        #endregion
     }
 }

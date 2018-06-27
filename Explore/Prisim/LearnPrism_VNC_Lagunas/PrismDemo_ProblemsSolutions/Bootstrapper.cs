@@ -39,7 +39,8 @@ namespace PrismDemo
         {
             var behaviors =  base.ConfigureDefaultRegionBehaviors();
 
-            behaviors.AddIfMissing(RibbonPageCategoryRegionBehavior.BehaviorKey, typeof(RibbonPageCategoryRegionBehavior));
+            //behaviors.AddIfMissing(RibbonPageCategoryRegionBehavior.BehaviorKey, typeof(RibbonPageCategoryRegionBehavior));
+            behaviors.AddIfMissing(DependentViewRegionBehavior.BehaviorKey, typeof(DependentViewRegionBehavior));
 
             return behaviors;
         }
