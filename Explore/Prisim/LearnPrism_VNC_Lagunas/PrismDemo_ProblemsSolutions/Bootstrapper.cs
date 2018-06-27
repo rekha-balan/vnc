@@ -26,19 +26,31 @@ namespace PrismDemo
         protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
         {
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
+
             mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
-            mappings.RegisterMapping(typeof(RibbonControl), Container.Resolve<RibbonControlRegionAdapter>());
+            mappings.RegisterMapping(typeof(RibbonPageCategory), Container.Resolve<RibbonPageCategoryRegionAdapter>());
             mappings.RegisterMapping(typeof(RibbonStatusBarControl), Container.Resolve<RibbonStatusBarControlRegionAdapter>());
+
             return mappings;
         }
 
         // Step 3
+        protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        {
+            var behaviors =  base.ConfigureDefaultRegionBehaviors();
+
+            behaviors.AddIfMissing(RibbonPageCategoryRegionBehavior.BehaviorKey, typeof(RibbonPageCategoryRegionBehavior));
+
+            return behaviors;
+        }
+
+        // Step 4
         protected override DependencyObject CreateShell()
         {
             return Container.Resolve<MainWindow>();
         }
 
-        // Step 4
+        // Step 5
         protected override void InitializeShell()
         {
             Application.Current.MainWindow.Show();

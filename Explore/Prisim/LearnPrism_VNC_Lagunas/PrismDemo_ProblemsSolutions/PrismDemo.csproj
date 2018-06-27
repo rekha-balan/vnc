@@ -69,8 +69,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Prism\RibbonPageCategoryRegionBehavior.cs" />
     <Compile Include="Prism\RibbonStatusBarControlRegionAdapter.cs" />
-    <Compile Include="Prism\RibbonControlRegionAdapter.cs" />
+    <Compile Include="Prism\RibbonPageCategoryRegionAdapter.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -115,6 +116,10 @@
     <ProjectReference Include="..\Modules\ModuleRibbon\ModuleRibbon.csproj">
       <Project>{ca1a50e4-3b3e-4e2a-b326-bc353590b1d9}</Project>
       <Name>ModuleRibbon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrismDemo.Core\PrismDemo.Core.csproj">
+      <Project>{c4c64bdc-4aca-499b-a05b-449293b40485}</Project>
+      <Name>PrismDemo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

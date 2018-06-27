@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "PrismDemo_View
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleRibbon", "Modules\ModuleRibbon\ModuleRibbon.csproj", "{CA1A50E4-3B3E-4E2A-B326-BC353590B1D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Core", "PrismDemo.Core\PrismDemo.Core.csproj", "{C4C64BDC-4ACA-499B-A05B-449293B40485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +205,10 @@ Global
 		{CA1A50E4-3B3E-4E2A-B326-BC353590B1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA1A50E4-3B3E-4E2A-B326-BC353590B1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA1A50E4-3B3E-4E2A-B326-BC353590B1D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C64BDC-4ACA-499B-A05B-449293B40485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C64BDC-4ACA-499B-A05B-449293B40485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C64BDC-4ACA-499B-A05B-449293B40485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C64BDC-4ACA-499B-A05B-449293B40485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -232,6 +238,7 @@ Global
 		{BED61C24-17BF-4EF7-B296-A75357B6CEE5} = {608C002E-74DD-4EB3-807F-DB900BAA1C80}
 		{2365054D-5A19-47B0-B682-14B3CEB4D849} = {09EC4981-42E4-4D44-88D7-081B0A9CA839}
 		{CA1A50E4-3B3E-4E2A-B326-BC353590B1D9} = {E8CA3A9A-F6FA-45F2-B145-A3B901D7679C}
+		{C4C64BDC-4ACA-499B-A05B-449293B40485} = {608C002E-74DD-4EB3-807F-DB900BAA1C80}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07AFC52B-BE13-4AF3-BDEE-FF9C77611397}

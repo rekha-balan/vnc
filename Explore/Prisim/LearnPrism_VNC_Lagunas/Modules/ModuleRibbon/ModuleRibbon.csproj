@@ -97,6 +97,21 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RibbonTabs\ViewATab2.xaml.cs">
+      <DependentUpon>ViewATab2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\ViewATab.xaml.cs">
+      <DependentUpon>ViewATab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\ViewBTab3.xaml.cs">
+      <DependentUpon>ViewBTab3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\ViewBTab2.xaml.cs">
+      <DependentUpon>ViewBTab2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\ViewBTab.xaml.cs">
+      <DependentUpon>ViewBTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatusBar\ViewAStatusItem.xaml.cs">
       <DependentUpon>ViewAStatusItem.xaml</DependentUpon>
     </Compile>
@@ -123,6 +138,26 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="RibbonTabs\ViewATab2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTabs\ViewATab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTabs\ViewBTab3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTabs\ViewBTab2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTabs\ViewBTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="StatusBar\ViewAStatusItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,7 +176,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RibbonTabs\" />
+    <ProjectReference Include="..\..\PrismDemo.Core\PrismDemo.Core.csproj">
+      <Project>{c4c64bdc-4aca-499b-a05b-449293b40485}</Project>
+      <Name>PrismDemo.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

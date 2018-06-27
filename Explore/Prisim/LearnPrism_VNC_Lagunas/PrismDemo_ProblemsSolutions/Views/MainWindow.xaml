@@ -25,13 +25,40 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <dxr:RibbonControl Grid.Row="0" prism:RegionManager.RegionName="RibbonControl">
+        <dxr:RibbonControl Grid.Row="0" 
+                           RibbonStyle="Office2007">
             <dxr:RibbonControl.ToolbarItems>
                 <dxb:BarButtonItem Content="Tab1"  BarItemDisplayMode="ContentAndGlyph" />
                 <dxb:BarButtonItem Content="Tab2"  BarItemDisplayMode="ContentAndGlyph" />
                 <!--<dxb:BarButtonItem Glyph="{dx:DXImage Image=Undo_16x16.png}" Command="{Binding UndoCommand, ElementName=paintControl}" Content="Undo" />
                 <dxb:BarButtonItem Glyph="{dx:DXImage Image=Redo_16x16.png}" Command="{Binding RedoCommand, ElementName=paintControl}" Content="Redo" />-->
             </dxr:RibbonControl.ToolbarItems>
+            <dxr:RibbonDefaultPageCategory>
+                <dxr:RibbonPage Caption="HomeHome">
+                    <dxr:RibbonPageGroup Name="pgGroup1" Caption="Glyphs" ShowCaptionButton="True" >
+                        <dxb:BarButtonItem Name="bbi1" Content="Default" RibbonStyle="Default" Glyph="{dx:DXImage Image=Undo_16x16.png}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" />
+                        <dxb:BarButtonItem Name="bbi2" Content="Large" RibbonStyle="Large" Glyph="{dx:DXImage Image=Undo_16x16.png}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}"/>
+                        <dxb:BarButtonItem Name="bbi3" Content="SmallWithoutText" RibbonStyle="SmallWithoutText" Glyph="{dx:DXImage Image=Undo_16x16.png}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" />
+                        <dxb:BarButtonItem Name="bbi4" Content="SmallWithText" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=Undo_16x16.png}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Name="pgGroup2" Caption="NoGlyphs" ShowCaptionButton="False" >
+                        <dxb:BarButtonItem Name="bbi10" Content="Default" RibbonStyle="Default"  />
+                        <dxb:BarButtonItem Name="bbi20" Content="Large" RibbonStyle="Large" />
+                        <dxb:BarButtonItem Name="bbi30" Content="SmallWithoutText" RibbonStyle="SmallWithoutText" />
+                        <dxb:BarButtonItem Name="bbi40" Content="SmallWithText" RibbonStyle="SmallWithText" />
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+            <dxr:RibbonPageCategory prism:RegionManager.RegionName="RibbonPageCategoryRegion">
+                <dxr:RibbonPage Caption="Garage">
+                    <dxr:RibbonPageGroup Caption="Group1">
+                        
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Group2">
+
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonPageCategory>
         </dxr:RibbonControl>
         
         <!--<dxb:BarManager CreateStandardLayout="True">
@@ -56,7 +83,8 @@
                 <Button Content="Navigate ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
                 <Button Content="Navigate ViewB" Command="{Binding NavigateCommand}" CommandParameter="ViewB" />
             </StackPanel>
-            <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="1,3,3,3" />
+            <!--<ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="1,3,3,3" />-->
+            <TabControl prism:RegionManager.RegionName="ContentRegion" Margin="1,3,3,3" />
         </DockPanel>
 
         <dxr:RibbonStatusBarControl Grid.Row="2" prism:RegionManager.RegionName="StatusBar">
