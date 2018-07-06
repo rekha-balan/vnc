@@ -10,7 +10,6 @@ namespace FriendOrganizer.UI.ViewModel
     {
         public IFriendDataService _friendDataService { get; set; }
 
-
         Friend _selectedFriend;
 
         public Friend SelectedFriend

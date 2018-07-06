@@ -15,23 +15,18 @@ namespace FriendOrganizer.UI.Startup
 {
     class Bootstrapper : UnityBootstrapper
     {
-        //protected override void ConfigureModuleCatalog()
-        //{
-        //    var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-        //    moduleCatalog.AddModule(typeof(ModuleAModule));
-        //}
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
             Container.RegisterType<IFriendDataService, FriendDataService>();
-        }
 
-        //protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
-        //{
-        //    RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
-        //    mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
-        //    return mappings;
-        //}
+            // TODO(crhodes)
+            // Need to figure out how to get Unity to do this which AutoFac supports.
+            // builder.RegisterType<FriendOrganizerDbContext>().AsSelf()
+
+            Container.RegisterType<FriendOrganizerDbContext>();
+
+        }
 
         protected override DependencyObject CreateShell()
         {

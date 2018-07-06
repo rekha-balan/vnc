@@ -1,13 +1,28 @@
-﻿namespace FriendOrganizer.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FriendOrganizer.Model
 {
-  public class Friend
-  {
-    public int Id { get; set; }
+    public class Friend
+    {
 
-    public string FirstName { get; set; }
+        #region Enums, Fields, Properties
 
-    public string LastName { get; set; }
+        public int Id { get; set; }
 
-    public string Email { get; set; }
-  }
+        // Using Data Annotations to enforce constraints
+        // Need to add reference to System.ComponentModel.DataAnnotations
+
+        [Required]
+        [MaxLength(50)] // Used for Strings or Byte Arrays
+        public string FirstName { get; set; }
+
+        [StringLength(50)]
+        public string LastName { get; set; }
+
+        [StringLength(50)]
+        public string Email { get; set; }
+
+        #endregion
+
+    }
 }
