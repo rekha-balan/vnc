@@ -162,6 +162,17 @@ namespace VNC.Logging.TraceListeners
                 //HubProxy.Invoke("Send", SignalRListenerUser, message);
                 HubProxy.Invoke("SendPriority", message, iPriority);
             }
+            catch (System.InvalidOperationException)
+            {
+                // Logging framework likely spins up worker threads that are killed
+                // if not active.  When that happens we need to start again.
+
+                ConnectAsync();
+
+                // Send the message so it doesn't get lost
+
+                HubProxy.Invoke("SendPriority", message, iPriority);
+            }
             catch (Exception ex)
             {
                 //Log.Error(ex, LOG_APPNAME);
@@ -178,10 +189,23 @@ namespace VNC.Logging.TraceListeners
                 //HubProxy.Invoke("Send", SignalRListenerUser, message);
                 HubProxy.Invoke("SendPriority", message, iPriority);
             }
+            catch (System.InvalidOperationException)
+            {
+                // Logging framework likely spins up worker threads that are killed
+                // if not active.  When that happens we need to start again.
+
+                ConnectAsync();
+                
+                // Send the message so it doesn't get lost
+
+                HubProxy.Invoke("SendPriority", message, iPriority);
+            }
             catch (Exception ex)
             {
                 //Log.Error(ex, LOG_APPNAME);
+                var errorMessage = ex.ToString();
                 //client.DisplayLogEntry(string.Format("SRLWLex: {0}", ex.ToString()));
+                //ConnectAsync();
             }
         }
 
