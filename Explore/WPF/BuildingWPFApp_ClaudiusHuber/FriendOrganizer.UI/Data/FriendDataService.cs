@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using FriendOrganizer.DataAccess;
 using FriendOrganizer.Model;
 
@@ -44,10 +46,50 @@ namespace FriendOrganizer.UI.Data
             //    return ctx.Friends.AsNoTracking().ToList();
             //}
 
-
             using (var ctx = _contextCreator())
             {
                 return ctx.Friends.AsNoTracking().ToList();
+            }
+        }
+
+        //If use await then must mark method with async
+       public async Task<List<Friend>> GetAllAsync()
+        {
+            using (var ctx = _contextCreator())
+            {
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+
+                return await ctx.Friends.AsNoTracking().ToListAsync();
+
+                //// Demonstrate UI remains responsive
+
+                //var friends = await ctx.Friends.AsNoTracking().ToListAsync();
+
+                //// See that can move window around
+                //await Task.Delay(5000);
+
+                //// And then friends show up.
+                //return friends;
+            }
+        }
+
+        public async Task<Friend> GetByIdAsync(int friendId)
+        {
+            using (var ctx = _contextCreator())
+            {
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+
+                return await ctx.Friends.AsNoTracking().SingleAsync(f => f.Id == friendId);
+
+                //// Demonstrate UI remains responsive
+
+                //var friends = await ctx.Friends.AsNoTracking().ToListAsync();
+
+                //// See that can move window around
+                //await Task.Delay(5000);
+
+                //// And then friends show up.
+                //return friends;
             }
         }
     }
