@@ -3,6 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WPF SignalR Client" Height="552" Width="517" MinWidth="517" MinHeight="552" ResizeMode="CanResizeWithGrip" Closing="WPFClient_Closing">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="LogButton">
+                <Setter Property="Button.Margin" Value="2" />
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="314*"/>
@@ -28,24 +33,26 @@
             </Grid>
             <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Height="461" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,10" IsReadOnly="True"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" >
             <Label Content="DelayMS" VerticalContentAlignment="Center" />
-            <TextBox x:Name="tbDelayMS" VerticalContentAlignment="Center">100</TextBox>
-            <Button x:Name="btnLog" Content="Log Delay" Click="btnLog_Click" />
+            <TextBox x:Name="tbDelayMS" VerticalContentAlignment="Center" >100</TextBox>
+            <Button x:Name="btnLog" Content="Log Delay" Click="btnLog_Click" Style="{StaticResource LogButton}" />
             
-            <StackPanel>
-                <Button Content="Debug" Click="Debug_Click" />
-                <Button Content="Debug1" Click="Debug1_Click"/>
-                <Button Content="Debug2" Click="Debug2_Click" />
-                <Button Content="Debug3" Click="Debug3_Click" />
-                <Button Content="Debug4" Click="Debug4_Click" />
+            <StackPanel Margin="5">
+                <Button Content="Debug" Click="Debug_Click" Style="{StaticResource LogButton}" />
+                <Button Content="Debug1" Click="Debug1_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Debug2" Click="Debug2_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Debug3" Click="Debug3_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Debug4" Click="Debug4_Click" Style="{StaticResource LogButton}"/>
             </StackPanel>
-            <StackPanel>
-                <Button Content="Trace" Click="Trace_Click" />
-                <Button Content="Trace1" Click="Trace1_Click"/>
-                <Button Content="Trace2" Click="Trace2_Click" />
-                <Button Content="Trace3" Click="Trace3_Click" />
-                <Button Content="Trace4" Click="Trace4_Click" />
+            
+            <StackPanel Margin="5">
+                <Button Content="Trace" Click="Trace_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Trace1" Click="Trace1_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Trace2" Click="Trace2_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Trace3" Click="Trace3_Click" Style="{StaticResource LogButton}"/>
+                <Button Content="Trace4" Click="Trace4_Click" Style="{StaticResource LogButton}"/>
             </StackPanel>
          
         </StackPanel>

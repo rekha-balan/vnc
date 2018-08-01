@@ -119,7 +119,6 @@ namespace SignalRClient
             }
         }
 
-
         private void btnLog_Click(object sender, RoutedEventArgs e)
         {
             long startTicks = VNC.AppLog.Info("Enter","SignalRClient");
