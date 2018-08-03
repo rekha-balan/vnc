@@ -91,7 +91,7 @@ namespace SignalRClient
         void Connection_Closed()
         {
             //Hide chat UI; show login UI
-            var dispatcher = Application.Current.Dispatcher;
+                var dispatcher = Application.Current.Dispatcher;
             dispatcher.Invoke(() => ChatPanel.Visibility = Visibility.Collapsed);
             dispatcher.Invoke(() => ButtonSend.IsEnabled = false);
             dispatcher.Invoke(() => StatusText.Content = "You have been disconnected.");
