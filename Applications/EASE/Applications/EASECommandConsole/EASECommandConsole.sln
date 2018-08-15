@@ -31,6 +31,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewerTightCoupling",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewerLooseCoupling", "..\..\Modules\PeopleViewerLooseCoupling\PeopleViewerLooseCoupling.csproj", "{7759CD68-76B5-48FB-8427-086C54968A29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{2BE083F5-43EB-482D-9241-A7B2C0E65E14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{21C780FB-49A1-4711-A81D-430E04A7186C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewer.Presentation", "..\..\Presentations\PeopleViewer.Presentation\PeopleViewer.Presentation.csproj", "{25A262B7-9146-4EE3-8D2F-321172A03BD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewerDI", "..\..\Modules\PeopleViewer\PeopleViewerDI.csproj", "{3104F414-EC1F-415B-BC49-C72ABDC0E529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewer", "..\..\Views\PeopleViewer\PeopleViewer.csproj", "{08719960-A23E-4481-A512-F2097957F096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +87,18 @@ Global
 		{7759CD68-76B5-48FB-8427-086C54968A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7759CD68-76B5-48FB-8427-086C54968A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7759CD68-76B5-48FB-8427-086C54968A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25A262B7-9146-4EE3-8D2F-321172A03BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25A262B7-9146-4EE3-8D2F-321172A03BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25A262B7-9146-4EE3-8D2F-321172A03BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25A262B7-9146-4EE3-8D2F-321172A03BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3104F414-EC1F-415B-BC49-C72ABDC0E529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3104F414-EC1F-415B-BC49-C72ABDC0E529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3104F414-EC1F-415B-BC49-C72ABDC0E529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3104F414-EC1F-415B-BC49-C72ABDC0E529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08719960-A23E-4481-A512-F2097957F096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08719960-A23E-4481-A512-F2097957F096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08719960-A23E-4481-A512-F2097957F096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08719960-A23E-4481-A512-F2097957F096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +112,9 @@ Global
 		{7740BF98-CCC7-4A90-8147-C982AEF8C47A} = {D073F81D-5348-4D38-A0BF-5D1424B8F5AE}
 		{BD4A192E-C418-4FB6-8499-1FBD5BD7C4BA} = {D90036B6-C61A-4510-A187-15F608189C0B}
 		{7759CD68-76B5-48FB-8427-086C54968A29} = {D90036B6-C61A-4510-A187-15F608189C0B}
+		{25A262B7-9146-4EE3-8D2F-321172A03BD2} = {21C780FB-49A1-4711-A81D-430E04A7186C}
+		{3104F414-EC1F-415B-BC49-C72ABDC0E529} = {D90036B6-C61A-4510-A187-15F608189C0B}
+		{08719960-A23E-4481-A512-F2097957F096} = {2BE083F5-43EB-482D-9241-A7B2C0E65E14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D0977A9-5A9B-46C2-9C21-5C36A12E2C91}

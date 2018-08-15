@@ -45,7 +45,7 @@ namespace ModuleA
             region.Add(_container.Resolve<ToolbarView>());
             region.Add(_container.Resolve<ToolbarView>());
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionX, typeof(ContentView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionP, typeof(ContentView));
         }
     }
 }

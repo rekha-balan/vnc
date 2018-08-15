@@ -80,7 +80,7 @@
                                     </Style>
                                 </dxlc:LayoutGroup.GroupBoxStyle>
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
-                                <dxlc:LayoutGroup Header="X Stuff" Name="lg_X">
+                                <dxlc:LayoutGroup Header="Prism Stuff" Name="lg_W">
                                     <DockPanel LastChildFill="True">
                                         <!-- Name regions directly -->
                                         <!--
@@ -98,9 +98,12 @@
                                                 prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
 
                                         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionP}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
+                                <dxlc:LayoutGroup Header="DI(X)" Name="lg_X">
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
+                                </dxlc:LayoutGroup>                                
                                 <dxlc:LayoutGroup Header="Tight Coupling(Y)" Name="lg_Y">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionY}"/>
                                 </dxlc:LayoutGroup>

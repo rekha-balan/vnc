@@ -6,8 +6,11 @@ using System.Linq;
 
 namespace PersonRepository.Service
 {
-    public class ServiceRepository // : IPersonRepository
+    public class ServiceRepository : IPersonRepository
     {
+        // Problem.  ServiceRepository references a concrete type of Service
+        // and is responsible for creating and managing the lifetime of the ServiceProxy.
+
         PersonServiceClient ServiceProxy = new PersonServiceClient();
 
         public IEnumerable<Person> GetPeople()

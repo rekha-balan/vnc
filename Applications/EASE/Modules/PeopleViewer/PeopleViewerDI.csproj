@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7759CD68-76B5-48FB-8427-086C54968A29}</ProjectGuid>
+    <ProjectGuid>{3104F414-EC1F-415B-BC49-C72ABDC0E529}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PeopleViewer</RootNamespace>
-    <AssemblyName>PeopleViewerLooseCoupling</AssemblyName>
+    <AssemblyName>PeopleViewerDI</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,8 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Converters.cs" />
-    <Compile Include="PeopleViewerLooseCouplingModule.cs" />
+    <Compile Include="PeopleViewerDIModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -63,10 +62,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="ViewModels\PeopleViewerViewModel.cs" />
-    <Compile Include="Views\PeopleViewer.xaml.cs">
-      <DependentUpon>PeopleViewer.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,16 +82,14 @@
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Repositories\PersonRepository.Interface\PersonRepository.Interface.csproj">
-      <Project>{7740bf98-ccc7-4a90-8147-c982aef8c47a}</Project>
-      <Name>PersonRepository.Interface</Name>
+    <ProjectReference Include="..\..\Repositories\PersonRepository.Service\PersonRepository.Service.csproj">
+      <Project>{8eba64e3-198d-4456-b9bf-d7ef9bd2cbce}</Project>
+      <Name>PersonRepository.Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\PeopleViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <ProjectReference Include="..\..\Views\PeopleViewer\PeopleViewer.csproj">
+      <Project>{08719960-a23e-4481-a512-f2097957f096}</Project>
+      <Name>PeopleViewer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Core">

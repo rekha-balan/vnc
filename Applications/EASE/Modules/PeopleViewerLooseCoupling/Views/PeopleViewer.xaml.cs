@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using PeopleViewer.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PeopleViewer.Views
 {
@@ -20,14 +8,38 @@ namespace PeopleViewer.Views
     /// </summary>
     public partial class PeopleViewer : UserControl
     {
-        public PeopleViewer()
+        // Problem.  PeopleViewer is tightly coupled to PeopleViewerViewModel
+        // It has a direct reference to the PeopleViewerViewModel class.
+        // Which must exist and be compiled for PeopleViewer to work.
+        // PeopleViewer must also manage lifetime of PeopleViewerViewModel
+        // NB. This comment is a bit odd given that PeopleViewer is a module
+        // that contains a View and ViewModel.
+
+        //public PeopleViewer()
+        //{
+        //    InitializeComponent();
+
+        //    // Can either use AutoWireUp by using this line in the Xaml
+        //    //prism: ViewModelLocator.AutoWireViewModel = "True"
+        //    // or explicitly create and bind the ViewModel
+
+        //    DataContext = new ViewModels.PeopleViewerViewModel();
+        //}
+
+        // Pass in the viewModel so we are no longer coupled
+        // Could get fancy and do an interface, but since View and ViewModel are 
+        // in same class here, let's keep it simple.
+
+        public PeopleViewer(PeopleViewerViewModel viewModel)
         {
             InitializeComponent();
 
             // Can either use AutoWireUp by using this line in the Xaml
             //prism: ViewModelLocator.AutoWireViewModel = "True"
             // or explicitly create and bind the ViewModel
-            DataContext = new ViewModels.PeopleViewerViewModel();
+
+            //DataContext = new ViewModels.PeopleViewerViewModel();
+            DataContext = viewModel;
         }
     }
 }

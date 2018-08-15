@@ -16,7 +16,7 @@
             <local:DecadeBrushConverter x:Key="myDecadeBrushConverter"/>
 
             <!-- Application Brushes -->
-            <SolidColorBrush x:Key="ApplicationBackground" Color="LightGray"/>
+            <SolidColorBrush x:Key="ApplicationBackground" Color="LightCoral"/>
             <SolidColorBrush x:Key="ApplicationForeground" Color="DarkGray"/>
             <SolidColorBrush x:Key="ApplicationTextForeground" Color="DarkSlateGray"/>
             <SolidColorBrush x:Key="ApplicationHighlight" Color="White"/>

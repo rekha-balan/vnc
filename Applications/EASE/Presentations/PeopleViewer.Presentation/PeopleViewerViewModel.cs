@@ -1,20 +1,15 @@
 ﻿using PeopleViewer.SharedObjects;
-using PersonRepository.Interface;
+using PersonRepository.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace PeopleViewer.ViewModels
+namespace PeopleViewer.Presentation
 {
     public class PeopleViewerViewModel : INotifyPropertyChanged
     {
-        // Problem.  Repository is of concrete type, ServiceRepository.
-        // Must have a direct reference to a ServiceRepository.
-
-        //protected ServiceRepository Repository;
-
-        protected IPersonRepository Repository;
+        protected ServiceRepository Repository;
 
         private IEnumerable<Person> _people;
         public IEnumerable<Person> People
@@ -29,21 +24,9 @@ namespace PeopleViewer.ViewModels
             }
         }
 
-        // Problem.  PeopleViewerViewModel is tightly coupled to ServiceRepository
-        // It has a direct reference to the PersonRepository.Service class,
-        // which must exist and be compiled for PeopleViewerViewModel to work.
-        // PeopleViewerViewModel must also manage the lifetime of PersonRepository.Service
-
-        //public PeopleViewerViewModel()
-        //{
-        //    Repository = new ServiceRepository();
-        //}
-
-        // Use Constructor Injection to pass in repository
-
-        public PeopleViewerViewModel(IPersonRepository repository)
+        public PeopleViewerViewModel()
         {
-            Repository = repository;
+            Repository = new ServiceRepository();
         }
 
         #region Commands
@@ -69,8 +52,7 @@ namespace PeopleViewer.ViewModels
             {
                 return true;
             }
-
-            #endregion RefreshCommand Standard Stuff
+        #endregion RefreshCommand Standard Stuff
 
             public void Execute(object parameter)
             {
@@ -100,7 +82,7 @@ namespace PeopleViewer.ViewModels
                 return true;
             }
 
-            #endregion
+        #endregion
 
             public void Execute(object parameter)
             {
@@ -122,4 +104,3 @@ namespace PeopleViewer.ViewModels
         #endregion
     }
 }
-
