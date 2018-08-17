@@ -48,32 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201806150234244_InitialDB.cs" />
-    <Compile Include="Migrations\201806150234244_InitialDB.Designer.cs">
-      <DependentUpon>201806150234244_InitialDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806150324169_AddDataOfDeathToNinja.cs" />
-    <Compile Include="Migrations\201806150324169_AddDataOfDeathToNinja.Designer.cs">
-      <DependentUpon>201806150324169_AddDataOfDeathToNinja.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806160452053_MakeDateOfDeathNullable.cs" />
-    <Compile Include="Migrations\201806160452053_MakeDateOfDeathNullable.Designer.cs">
-      <DependentUpon>201806160452053_MakeDateOfDeathNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806160457440_MakeDateOfDeathNullable2.cs" />
-    <Compile Include="Migrations\201806160457440_MakeDateOfDeathNullable2.Designer.cs">
-      <DependentUpon>201806160457440_MakeDateOfDeathNullable2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806160511381_MakeDateOfDeathNullable3.cs" />
-    <Compile Include="Migrations\201806160511381_MakeDateOfDeathNullable3.Designer.cs">
-      <DependentUpon>201806160511381_MakeDateOfDeathNullable3.cs</DependentUpon>
+    <Compile Include="Migrations\201808162150233_InitialDatabase.cs" />
+    <Compile Include="Migrations\201808162150233_InitialDatabase.Designer.cs">
+      <DependentUpon>201808162150233_InitialDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NinjaContext.cs" />
+    <Compile Include="NinjaContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NinjaContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NinjaContext.Views.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ninja.DomainClasses\NinjaDomain.Classes.csproj">
@@ -82,21 +69,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806150234244_InitialDB.resx">
-      <DependentUpon>201806150234244_InitialDB.cs</DependentUpon>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="NinjaContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NinjaContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808162150233_InitialDatabase.resx">
+      <DependentUpon>201808162150233_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806150324169_AddDataOfDeathToNinja.resx">
-      <DependentUpon>201806150324169_AddDataOfDeathToNinja.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806160452053_MakeDateOfDeathNullable.resx">
-      <DependentUpon>201806160452053_MakeDateOfDeathNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806160457440_MakeDateOfDeathNullable2.resx">
-      <DependentUpon>201806160457440_MakeDateOfDeathNullable2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806160511381_MakeDateOfDeathNullable3.resx">
-      <DependentUpon>201806160511381_MakeDateOfDeathNullable3.cs</DependentUpon>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InitialDatabase_0.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

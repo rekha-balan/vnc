@@ -102,7 +102,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,6 +137,10 @@
       <Project>{3104f414-ec1f-415b-bc49-c72abdc0e529}</Project>
       <Name>PeopleViewerDI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj">
+      <Project>{22d242eb-8113-49e3-8cc9-03a41e3b185e}</Project>
+      <Name>PersonRepository.CSV</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Repositories\PersonRepository.Interface\PersonRepository.Interface.csproj">
       <Project>{7740bf98-ccc7-4a90-8147-c982aef8c47a}</Project>
       <Name>PersonRepository.Interface</Name>
@@ -142,6 +148,10 @@
     <ProjectReference Include="..\..\..\Repositories\PersonRepository.Service\PersonRepository.Service.csproj">
       <Project>{8eba64e3-198d-4456-b9bf-d7ef9bd2cbce}</Project>
       <Name>PersonRepository.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Repositories\PersonRepository.SQL\PersonRepository.SQL.csproj">
+      <Project>{003702d8-e922-4539-80d4-15aab22ff29d}</Project>
+      <Name>PersonRepository.SQL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

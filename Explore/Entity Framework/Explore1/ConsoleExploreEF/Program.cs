@@ -13,7 +13,9 @@ namespace ConsoleExploreEF
     {
         static void Main(string[] args)
         {
+            // Have EF skip DB 
             Database.SetInitializer(new NullDatabaseInitializer<NinjaContext>());
+            Console.WriteLine("InsertNinja");
             InsertNinja();
             // InsertMultipleNinjas();
             //SimpleNinjaQueries();
@@ -37,15 +39,20 @@ namespace ConsoleExploreEF
 
         private static void InsertNinja()
         {
+            // Create a Ninja
+
             var ninja = new Ninja
             {
-                Name = "SampsonSan",
+                Name = "SampsonSan3",
                 ServedInOniwaban = false,
                 DateOfBirth = new DateTime(2008, 1, 28),
                 DateOfDeath = null,
                 ClanId = 1
 
             };
+
+            // And use EF to insert it.
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;

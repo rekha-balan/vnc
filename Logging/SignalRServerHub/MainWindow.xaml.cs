@@ -71,6 +71,11 @@ namespace SignalRServerHub
                 this.Dispatcher.Invoke(() => ButtonStart.IsEnabled = true);
                 return;
             }
+            catch (Exception ex)
+            {
+                WriteToConsole(ex.ToString());
+            }
+
             this.Dispatcher.Invoke(() => ButtonStop.IsEnabled = true);
             WriteToConsole("Server started at " + ServerURI);
         }
@@ -117,17 +122,42 @@ namespace SignalRServerHub
     {
         public void Send(string name, string message)
         {
-            Clients.All.addUserMessage(name, message);
+            try
+            {
+                Clients.All.addUserMessage(name, message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
+            
         }
 
         public void Send(string message)
         {
-            Clients.All.addMessage(message);
+            try
+            {
+                Clients.All.addMessage(message);
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }          
         }
 
         public void SendPriority(string message, Int32 priority)
         {
-            Clients.All.addPriorityMessage(message, priority);
+            try
+            {
+                Clients.All.addPriorityMessage(message, priority);               
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    ((MainWindow)Application.Current.MainWindow).WriteToConsole(ex.ToString()));
+            }
         }
 
         public override Task OnConnected()
@@ -139,11 +169,21 @@ namespace SignalRServerHub
             return base.OnConnected();
         }
 
+        public override Task OnReconnected()
+        {
+            //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class
+            Application.Current.Dispatcher.Invoke(() =>
+                ((MainWindow)Application.Current.MainWindow).WriteToConsole("Client Reconnected: " + Context.ConnectionId));
+
+            return base.OnReconnected();
+        }
+
         public override Task OnDisconnected(bool stopCalled)
         {
             //Use Application.Current.Dispatcher to access UI thread from outside the MainWindow class
             Application.Current.Dispatcher.Invoke(() =>
                 ((MainWindow)Application.Current.MainWindow).WriteToConsole("Client disconnected: " + Context.ConnectionId));
+
 
             return base.OnDisconnected(stopCalled);
         }

@@ -27,6 +27,10 @@ namespace SignalRClient
         public MainWindow()
         {
             InitializeComponent();
+
+            VNC.AssemblyHelper.AssemblyInformation info = new VNC.AssemblyHelper.AssemblyInformation(System.Reflection.Assembly.GetExecutingAssembly());
+
+            Title = Title + " " + info.InformationalVersionAttribute;
         }
 
         private void ButtonSend_Click(object sender, RoutedEventArgs e)
@@ -51,27 +55,39 @@ namespace SignalRClient
         {
             Connection = new HubConnection(ServerURI);
             Connection.Closed += Connection_Closed;
+            Connection.Error += Connection_Error;
+            //Connection.Received += Connection_Received;
+            Connection.Reconnected += Connection_Reconnected;
+            Connection.Reconnecting += Connection_Reconnecting;
+            Connection.StateChanged += Connection_StateChanged;
+
             HubProxy = Connection.CreateHubProxy("MyHub");
             //Handle incoming event from server: use Invoke to write to console from SignalR's thread
             HubProxy.On<string, string>("AddUserMessage", (name, message) =>
                 this.Dispatcher.Invoke(() =>
-                    RichTextBoxConsole.AppendText(String.Format("{0}: {1}\r", name, message))
+                    ListBoxConsole.Items.Add(String.Format("{0}: {1}", name, message))
                 )
             );
 
             HubProxy.On<string>("AddMessage", (message) =>
                 this.Dispatcher.Invoke(() =>
-                    RichTextBoxConsole.AppendText(String.Format("{0}\r", message))
+                    ListBoxConsole.Items.Add(String.Format("{0}", message))
                 )
             );
+
             try
             {
                 await Connection.Start();
             }
             catch (HttpRequestException)
             {
-                StatusText.Content = "Unable to connect to server: Start server before connecting clients.";
+                StatusText.Items.Add("Unable to connect to server: Start server before connecting clients.");
                 //No connection: Don't enable Send button or show chat UI
+                return;
+            }
+            catch (Exception ex)
+            {
+                StatusText.Items.Add(ex.ToString());
                 return;
             }
 
@@ -81,7 +97,50 @@ namespace SignalRClient
             ButtonSend.IsEnabled = true;
             ButtonSendAnoymous.IsEnabled = true;
             TextBoxMessage.Focus();
-            RichTextBoxConsole.AppendText("Connected to server at " + ServerURI + "\r");
+            ListBoxEvents.Items.Add("Connected to server at " + ServerURI);
+        }
+
+        #region Connection Events
+
+        void Connection_Reconnected()
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            var message = string.Format("Connection_Reconnected");
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(message));
+        }
+
+        void Connection_Reconnecting()
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            var message = string.Format("Connection_Reconnecting");
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(message));
+        }
+
+        void Connection_StateChanged(StateChange obj)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+            
+            var message = string.Format("Connection_StateChanged {0,15} -> {1,-15}", obj.OldState, obj.NewState);
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(message));
+        }
+
+        private void Connection_Received(string obj)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            var message = string.Format("Connection_Received");
+
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(message));
+        }
+
+        private void Connection_Error(Exception obj)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            var message = string.Format("Connection_Error >{0}<", obj.GetBaseException().ToString());
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(message));
         }
 
         /// <summary>
@@ -91,12 +150,15 @@ namespace SignalRClient
         void Connection_Closed()
         {
             //Hide chat UI; show login UI
-                var dispatcher = Application.Current.Dispatcher;
+            var dispatcher = Application.Current.Dispatcher;
+
             dispatcher.Invoke(() => ChatPanel.Visibility = Visibility.Collapsed);
             dispatcher.Invoke(() => ButtonSend.IsEnabled = false);
-            dispatcher.Invoke(() => StatusText.Content = "You have been disconnected.");
+            Dispatcher.Invoke(() => ListBoxEvents.Items.Add(String.Format("{0}", "Connection_Closed")));
             dispatcher.Invoke(() => SignInPanel.Visibility = Visibility.Visible);
         }
+
+        #endregion
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +167,7 @@ namespace SignalRClient
             if (!String.IsNullOrEmpty(UserName))
             {     
                 StatusText.Visibility = Visibility.Visible;
-                StatusText.Content = "Connecting to server...";
+                StatusText.Items.Add("Connecting to server...");
                 ConnectAsync();
             }
         }

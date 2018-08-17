@@ -10,6 +10,8 @@ using ModuleA;
 using PeopleViewer;
 using PersonRepository.Interface;
 using PersonRepository.Service;
+using PersonRepository.CSV;
+using PersonRepository.SQL;
 
 namespace EASECommandConsole
 {
@@ -32,7 +34,12 @@ namespace EASECommandConsole
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-            Container.RegisterType<PersonRepository.Interface.IPersonRepository, PersonRepository.Service.ServiceRepository>();
+            // Use the ServiceRepository
+            //Container.RegisterType<PersonRepository.Interface.IPersonRepository, ServiceRepository>();
+            // Use the CSVRepository
+            //Container.RegisterType<PersonRepository.Interface.IPersonRepository, CSVRepository>();
+            // Use the SQLRepository
+            Container.RegisterType<PersonRepository.Interface.IPersonRepository, SQLRepository>();
         }
 
         // Step 3 - Configure the RegionAdapters

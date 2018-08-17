@@ -87,6 +87,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         {
             Connection = new HubConnection(ServerURI.Text);
             Connection.Closed += Connection_Closed;
+            Connection.Error += Connection_Error;
+            Connection.Received += Connection_Received;
+            Connection.Reconnected += Connection_Reconnected;
+            Connection.Reconnecting += Connection_Reconnecting;
+            Connection.StateChanged += Connection_StateChanged;
             HubProxy = Connection.CreateHubProxy("MyHub");
 
             //Handle incoming event from server: use Invoke to write to console from SignalR's thread
@@ -303,12 +308,51 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             btnSend.IsEnabled = true;
             btnSendPriority.IsEnabled = true;
             tbMessage.Focus();
-            teLogStream.Text += "Connected to server at " + ServerURI + "\r";
+            teLogStream.Text += "Connected to server at " + ServerURI + "\n";
             //recLogStream.Text += "Connected to server at " + ServerURI + "\r";
             //rtbLogStream.AppendText("Connected to server at " + ServerURI + "\r");
         }
 
         #endregion
+
+        #region Connection Events
+
+        void Connection_Reconnected()
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            dispatcher.Invoke(() => teLogStream.Text += "Connection_Reconnected\n");
+        }
+
+        void Connection_Reconnecting()
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            dispatcher.Invoke(() => teLogStream.Text += "Connection_Reconnecting\n");
+        }
+
+        void Connection_StateChanged(StateChange obj)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+            var message = string.Format("Connection_StateChanged {0,15} -> {1,-15}\n", obj.OldState, obj.NewState);
+
+            dispatcher.Invoke(() => teLogStream.Text += message);
+        }
+
+        private void Connection_Received(string obj)
+        {
+            //var dispatcher = Application.Current.Dispatcher;
+
+            //dispatcher.Invoke(() => teLogStream.Text += "Connection_Received");
+        }
+
+        private void Connection_Error(Exception obj)
+        {
+            var dispatcher = Application.Current.Dispatcher;
+
+            var message = string.Format("Connection_Error >{0}<\n", obj.GetBaseException().ToString());
+            dispatcher.Invoke(() => teLogStream.Text += message);
+        }
 
         /// <summary>
         /// If the server is stopped, the connection will time out after 30 seconds (default), and the 
@@ -321,9 +365,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             dispatcher.Invoke(() => ChatPanel.Visibility = Visibility.Collapsed);
             dispatcher.Invoke(() => btnSendPriority.IsEnabled = false);
             dispatcher.Invoke(() => btnSend.IsEnabled = false);
-            dispatcher.Invoke(() => StatusText.Content = "You have been disconnected.");
+            dispatcher.Invoke(() => teLogStream.Text += "You have been disconnected.\n");
             dispatcher.Invoke(() => SignInPanel.Visibility = Visibility.Visible);
         }
+
+        #endregion
 
         #region Event Handlers
 

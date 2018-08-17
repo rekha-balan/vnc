@@ -41,6 +41,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewerDI", "..\..\Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleViewer", "..\..\Views\PeopleViewer\PeopleViewer.csproj", "{08719960-A23E-4481-A512-F2097957F096}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonRepository.CSV", "..\..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj", "{22D242EB-8113-49E3-8CC9-03A41E3B185E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonRepository.SQL", "..\..\Repositories\PersonRepository.SQL\PersonRepository.SQL.csproj", "{003702D8-E922-4539-80D4-15AAB22FF29D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,14 @@ Global
 		{08719960-A23E-4481-A512-F2097957F096}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08719960-A23E-4481-A512-F2097957F096}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08719960-A23E-4481-A512-F2097957F096}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D242EB-8113-49E3-8CC9-03A41E3B185E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D242EB-8113-49E3-8CC9-03A41E3B185E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D242EB-8113-49E3-8CC9-03A41E3B185E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D242EB-8113-49E3-8CC9-03A41E3B185E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{003702D8-E922-4539-80D4-15AAB22FF29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{003702D8-E922-4539-80D4-15AAB22FF29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{003702D8-E922-4539-80D4-15AAB22FF29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{003702D8-E922-4539-80D4-15AAB22FF29D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +127,8 @@ Global
 		{25A262B7-9146-4EE3-8D2F-321172A03BD2} = {21C780FB-49A1-4711-A81D-430E04A7186C}
 		{3104F414-EC1F-415B-BC49-C72ABDC0E529} = {D90036B6-C61A-4510-A187-15F608189C0B}
 		{08719960-A23E-4481-A512-F2097957F096} = {2BE083F5-43EB-482D-9241-A7B2C0E65E14}
+		{22D242EB-8113-49E3-8CC9-03A41E3B185E} = {D073F81D-5348-4D38-A0BF-5D1424B8F5AE}
+		{003702D8-E922-4539-80D4-15AAB22FF29D} = {D073F81D-5348-4D38-A0BF-5D1424B8F5AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D0977A9-5A9B-46C2-9C21-5C36A12E2C91}
