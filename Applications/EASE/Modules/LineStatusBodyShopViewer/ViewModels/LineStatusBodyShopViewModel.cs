@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LineStatusBodyShopViewer.ViewModels
 {
-    public class LineStatusBodyShopView : BindableBase
+    public class LineStatusBodyShopViewModel : BindableBase
     {
         private string _message;
         public string Message
@@ -17,7 +17,7 @@ namespace LineStatusBodyShopViewer.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public LineStatusBodyShopView()
+        public LineStatusBodyShopViewModel()
         {
             Message = "LineStatus BodyShop from your Prism Module";
         }
