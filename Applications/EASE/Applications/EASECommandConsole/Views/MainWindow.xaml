@@ -79,6 +79,7 @@
                                         <Setter Property="TitleVisibility" Value="Collapsed" />
                                     </Style>
                                 </dxlc:LayoutGroup.GroupBoxStyle>
+                                
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
                                 <dxlc:LayoutGroup Header="Prism Stuff" Name="lg_W">
                                     <DockPanel LastChildFill="True">
@@ -101,18 +102,33 @@
                                         <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionP}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
+                                
                                 <dxlc:LayoutGroup Header="DI(X)" Name="lg_X">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
-                                </dxlc:LayoutGroup>                                
+                                </dxlc:LayoutGroup> 
+                                
                                 <dxlc:LayoutGroup Header="Tight Coupling(Y)" Name="lg_Y">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionY}"/>
                                 </dxlc:LayoutGroup>
+
                                 <dxlc:LayoutGroup Header="Loose Coupling(Z)" Name="lg_Z">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionZ}"/>
-                                </dxlc:LayoutGroup>                                
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="LineStatus" Name="lg_LS">
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatus}"/>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="LineStatus BodyShop" Name="lg_LSBS">
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusBodyShop}"/>
+                                </dxlc:LayoutGroup>
+                            
                             </dxlc:LayoutGroup>
+                            
                         </dxlc:LayoutControl>
+                        
                     </dxdo:LayoutPanel>
+                    
                 </dxdo:LayoutGroup>
                 
                 <dxdo:DockLayoutManager.AutoHideGroups>

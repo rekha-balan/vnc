@@ -111,48 +111,55 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Core">
-      <Version>6.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Unity" Version="6.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure.csproj">
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Modules\ModuleA\ModuleA.csproj">
+    <ProjectReference Include="..\..\Modules\LineStatusBodyShopViewer\LineStatusBodyShopViewer.csproj">
+      <Project>{0ABAE659-AC80-4511-BD4C-275A13164304}</Project>
+      <Name>LineStatusBodyShopViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\LineStatusViewer\LineStatusViewer.csproj">
+      <Project>{F7F0C0D1-5E67-4DDF-B716-080D8ABF930B}</Project>
+      <Name>LineStatusViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\ModuleA\ModuleA.csproj">
       <Project>{3d9a8549-a7a8-4df9-829e-aeae7ecacaca}</Project>
       <Name>ModuleA</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Modules\PeopleViewerLooseCoupling\PeopleViewerLooseCoupling.csproj">
-      <Project>{7759cd68-76b5-48fb-8427-086c54968a29}</Project>
-      <Name>PeopleViewerLooseCoupling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Modules\PeopleViewerTightCoupling\PeopleViewerTightCoupling.csproj">
-      <Project>{bd4a192e-c418-4fb6-8499-1fbd5bd7c4ba}</Project>
-      <Name>PeopleViewerTightCoupling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Modules\PeopleViewer\PeopleViewerDI.csproj">
+    <ProjectReference Include="..\..\Modules\PeopleViewerDI\PeopleViewerDI.csproj">
       <Project>{3104f414-ec1f-415b-bc49-c72abdc0e529}</Project>
       <Name>PeopleViewerDI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj">
+    <ProjectReference Include="..\..\Modules\PeopleViewerLooseCoupling\PeopleViewerLooseCoupling.csproj">
+      <Project>{7759cd68-76b5-48fb-8427-086c54968a29}</Project>
+      <Name>PeopleViewerLooseCoupling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\PeopleViewerTightCoupling\PeopleViewerTightCoupling.csproj">
+      <Project>{bd4a192e-c418-4fb6-8499-1fbd5bd7c4ba}</Project>
+      <Name>PeopleViewerTightCoupling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj">
       <Project>{22d242eb-8113-49e3-8cc9-03a41e3b185e}</Project>
       <Name>PersonRepository.CSV</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Repositories\PersonRepository.Interface\PersonRepository.Interface.csproj">
+    <ProjectReference Include="..\..\Repositories\PersonRepository.Interface\PersonRepository.Interface.csproj">
       <Project>{7740bf98-ccc7-4a90-8147-c982aef8c47a}</Project>
       <Name>PersonRepository.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Repositories\PersonRepository.Service\PersonRepository.Service.csproj">
+    <ProjectReference Include="..\..\Repositories\PersonRepository.Service\PersonRepository.Service.csproj">
       <Project>{8eba64e3-198d-4456-b9bf-d7ef9bd2cbce}</Project>
       <Name>PersonRepository.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Repositories\PersonRepository.SQL\PersonRepository.SQL.csproj">
+    <ProjectReference Include="..\..\Repositories\PersonRepository.SQL\PersonRepository.SQL.csproj">
       <Project>{003702d8-e922-4539-80d4-15aab22ff29d}</Project>
       <Name>PersonRepository.SQL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity">
+      <Version>6.3.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

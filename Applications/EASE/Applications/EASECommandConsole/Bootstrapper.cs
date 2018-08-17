@@ -12,6 +12,8 @@ using PersonRepository.Interface;
 using PersonRepository.Service;
 using PersonRepository.CSV;
 using PersonRepository.SQL;
+using LineStatusViewer;
+using LineStatusBodyShopViewer;
 
 namespace EASECommandConsole
 {
@@ -27,6 +29,8 @@ namespace EASECommandConsole
             moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
             moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
             moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
+            moduleCatalog.AddModule(typeof(LineStatusViewerModule));
+            moduleCatalog.AddModule(typeof(LineStatusBodyShopViewerModule));
         }
 
         // Step 2 - Configure the container
