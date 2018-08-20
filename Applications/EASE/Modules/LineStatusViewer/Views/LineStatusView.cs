@@ -23,6 +23,7 @@ namespace LineStatusViewer.Views
         public LineStatusView()
         {
             InitializeComponent();
+            DataContext = LineStatusViewModel.LineInfo;
         }
     }
 }

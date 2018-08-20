@@ -9,8 +9,15 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <TextBlock Text="{Binding Message}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+                   HorizontalAlignment="Center"
+                   Grid.Row="0"
+                   VerticalAlignment="Center" />
+        <ListBox x:Name="lbLineStatus"
+                 Grid.Row="1"/>
     </Grid>
 </UserControl>

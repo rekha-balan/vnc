@@ -19,9 +19,17 @@ namespace ModuleA
     /// </summary>
     public partial class ContentView : UserControl
     {
+        //private readonly ConnectedRepository _repo = new ConnectedRepository();
+
         public ContentView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            //ninjaListBox.ItemsSource = _repo.NinjasInMemory();
+            base.OnInitialized(e);
         }
     }
 }
