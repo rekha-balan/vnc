@@ -20,7 +20,6 @@ namespace LineStatusViewer.ViewModels
         public LineStatusViewModel()
         {
             Message = "LineStatus from your Prism Module";
-
         }
     }
 }
