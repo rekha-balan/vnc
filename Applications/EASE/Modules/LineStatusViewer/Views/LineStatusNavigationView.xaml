@@ -1,9 +1,12 @@
 ﻿<UserControl x:Class="LineStatusViewer.Views.LineStatusNavigationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:prism="http://prismlibrary.com/"    
+             xmlns:local="clr-namespace:LineStatusViewer.Views"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-            
+        <ListView ItemsSource="{Binding Friends}"
+                  SelectedItem="{Binding SelectedFriend, Mode=TwoWay}"
+                  DisplayMemberPath="DisplayMember"/>            
     </Grid>
 </UserControl>

@@ -14,7 +14,9 @@ namespace Infrastructure
         public static string ContentRegionX = "ContentRegionX";
         public static string ContentRegionY = "ContentRegionY";
         public static string ContentRegionZ = "ContentRegionZ";
-        public static string ContentRegionLineStatus = "ContentRegionLineStatus";
+        public static string ContentRegionLineStatusA = "ContentRegionLineStatusA";
+        public static string ContentRegionLineStatusB = "ContentRegionLineStatusB";
+        public static string ContentRegionLineStatusC = "ContentRegionLineStatusC";
         public static string ContentRegionLineStatusBodyShop = "ContentRegionLineStatusBodyShop";
     }
 }

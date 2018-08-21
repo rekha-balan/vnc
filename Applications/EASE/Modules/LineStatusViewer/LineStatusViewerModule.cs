@@ -5,6 +5,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using Infrastructure;
+using LineStatusViewer.Data;
 
 namespace LineStatusViewer
 {
@@ -21,7 +22,16 @@ namespace LineStatusViewer
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatus, typeof(LineStatusView));
+            RegisterViewsAndServices();
+
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusA, typeof(LineStatusView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusB, typeof(LineStatusNavigationView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusC, typeof(LineStatusDetailView));
+        }
+
+        void RegisterViewsAndServices()
+        {
+            _container.RegisterType<ILineStatusDataService, LineStatusDataService>();
         }
     }
 }

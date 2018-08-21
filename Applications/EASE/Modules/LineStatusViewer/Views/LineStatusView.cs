@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LineStatusViewer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,19 @@ namespace LineStatusViewer.Views
     /// </summary>
     public partial class LineStatusView : UserControl
     {
-        public LineStatusView()
+        private LineStatusViewModel _viewModel;
+
+        public LineStatusView(LineStatusViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = LineStatusViewModel.LineInfo;
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+
+            Loaded += LineStatusView_Loaded;
+        }
+        void LineStatusView_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Load();
         }
     }
 }
