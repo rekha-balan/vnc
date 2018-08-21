@@ -25,6 +25,7 @@ namespace EASECommandConsole
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+
             moduleCatalog.AddModule(typeof(ModuleAModule));
             moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
             moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
@@ -48,7 +49,7 @@ namespace EASECommandConsole
 
         // Step 3 - Configure the RegionAdapters
 
-        protected override Prism.Regions.RegionAdapterMappings ConfigureRegionAdapterMappings()
+        protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
         {
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
             mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());

@@ -1,17 +1,17 @@
-﻿using LineStatusViewer.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using LineStatusViewer.ViewModels;
 
 namespace LineStatusViewer.Views
 {
     /// <summary>
-    /// Interaction logic for ViewA.xaml
+    /// Interaction logic for LineStatusGridView
     /// </summary>
-    public partial class LineStatusView : UserControl
+    public partial class LineStatusGridView : UserControl
     {
         private LineStatusViewModel _viewModel;
 
-        public LineStatusView(LineStatusViewModel viewModel)
+        public LineStatusGridView(LineStatusViewModel viewModel)
         {
             InitializeComponent();
 
@@ -20,6 +20,7 @@ namespace LineStatusViewer.Views
 
             Loaded += LineStatusView_Loaded;
         }
+
         void LineStatusView_Loaded(object sender, RoutedEventArgs e)
         {
             _viewModel.Load();

@@ -71,7 +71,7 @@
             <TextBox
                 Grid.Row="5"
                 Margin="10 0 10 10"
-                Text="{Binding SelectedLineStatus.StationNo,
+                Text="{Binding SelectedLineStatus.BuildNo,
                                     Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <!--<view:LineStatusNavigationView DataContext="{Binding LineStatusNavigationViewModel}"/>-->

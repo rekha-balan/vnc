@@ -115,15 +115,19 @@
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionZ}"/>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="LineStatus" Name="lg_LSA">
+                                <dxlc:LayoutGroup Header="LineStatusA" Name="lg_LSA">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusA}"/>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="LineStatus" Name="lg_LSB">
+                                <dxlc:LayoutGroup Header="LineStatusG" Name="lg_LSG">
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusG}"/>
+                                </dxlc:LayoutGroup>
+                                
+                                <dxlc:LayoutGroup Header="LineStatusB" Name="lg_LSB">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusB}"/>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="LineStatus" Name="lg_LSC">
+                                <dxlc:LayoutGroup Header="LineStatusC" Name="lg_LSC">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusC}"/>
                                 </dxlc:LayoutGroup>
 

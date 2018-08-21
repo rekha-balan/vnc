@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Grid.v18.1, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v18.1.Core, Version=18.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -66,10 +70,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\LineStatusDetailViewModel.cs" />
+    <Compile Include="ViewModels\LineStatusGridViewModel.cs" />
     <Compile Include="ViewModels\LineStatusNavigationViewModel.cs" />
     <Compile Include="ViewModels\LineStatusViewModel.cs" />
     <Compile Include="Views\LineStatusDetailView.xaml.cs">
       <DependentUpon>LineStatusDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LineStatusGridView.xaml.cs">
+      <DependentUpon>LineStatusGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LineStatusNavigationView.xaml.cs">
       <DependentUpon>LineStatusNavigationView.xaml</DependentUpon>
@@ -89,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\LineStatusDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LineStatusGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
