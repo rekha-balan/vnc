@@ -64,6 +64,21 @@ namespace LineStatusViewer.ViewModels
         public void Load()
         {
             var lineStatus = _lineStatusDataService.GetAll();
+
+            LineStatus.Clear();
+
+            foreach (var line in lineStatus)
+            {
+                LineStatus.Add(line);
+            }
+        }
+
+        public async Task LoadAsync()
+        {
+            var lineStatus = await _lineStatusDataService.GetAllAsync();
+
+            await Task.Delay(10000);
+
             LineStatus.Clear();
 
             foreach (var line in lineStatus)

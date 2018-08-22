@@ -20,9 +20,15 @@ namespace LineStatusViewer.Views
 
             Loaded += LineStatusView_Loaded;
         }
-        void LineStatusView_Loaded(object sender, RoutedEventArgs e)
+
+        //void LineStatusView_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    _viewModel.Load();
+        //}
+
+        async void LineStatusView_Loaded(object sender, RoutedEventArgs e)
         {
-            _viewModel.Load();
+            await _viewModel.LoadAsync();
         }
     }
 }
