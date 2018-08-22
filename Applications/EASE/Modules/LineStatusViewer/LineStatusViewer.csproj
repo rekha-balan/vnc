@@ -83,6 +83,9 @@
     <Compile Include="Views\LineStatusNavigationView.xaml.cs">
       <DependentUpon>LineStatusNavigationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LineStatusViewX.cs">
+      <DependentUpon>LineStatusViewX.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LineStatusView.cs">
       <DependentUpon>LineStatusView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
     <Page Include="Views\LineStatusNavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LineStatusViewX.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LineStatusView.xaml">
       <SubType>Designer</SubType>

@@ -77,7 +77,8 @@ namespace LineStatusViewer.ViewModels
         {
             var lineStatus = await _lineStatusDataService.GetAllAsync();
 
-            await Task.Delay(10000);
+            // Demo async loading.  UI should be responsive 
+            //await Task.Delay(10000);
 
             LineStatus.Clear();
 

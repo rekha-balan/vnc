@@ -28,6 +28,7 @@ namespace LineStatusViewer
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusG, typeof(LineStatusGridView));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusB, typeof(LineStatusNavigationView));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusC, typeof(LineStatusDetailView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusA, typeof(LineStatusViewX));
         }
 
         void RegisterViewsAndServices()
