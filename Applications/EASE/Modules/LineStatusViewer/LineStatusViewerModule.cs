@@ -24,11 +24,12 @@ namespace LineStatusViewer
         {
             RegisterViewsAndServices();
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusA, typeof(LineStatusView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusV, typeof(LineStatusView));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusG, typeof(LineStatusGridView));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusB, typeof(LineStatusNavigationView));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusC, typeof(LineStatusDetailView));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusA, typeof(LineStatusViewX));
+
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNVDV, typeof(LineStatusViewNVDV));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNV, typeof(LineStatusNavigationView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusDV, typeof(LineStatusDetailView));
         }
 
         void RegisterViewsAndServices()

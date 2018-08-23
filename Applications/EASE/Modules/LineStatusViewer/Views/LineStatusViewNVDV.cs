@@ -4,12 +4,14 @@ using System.Windows.Controls;
 
 namespace LineStatusViewer.Views
 {
-
-    public partial class LineStatusNavigationView : UserControl
+    /// <summary>
+    /// Interaction logic for ViewA.xaml
+    /// </summary>
+    public partial class LineStatusViewNVDV : UserControl
     {
         private LineStatusViewModel _viewModel;
 
-        public LineStatusNavigationView(LineStatusViewModel viewModel)
+        public LineStatusViewNVDV(LineStatusViewModel viewModel)
         {
             InitializeComponent();
 

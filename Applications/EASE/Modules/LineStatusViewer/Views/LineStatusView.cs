@@ -4,9 +4,7 @@ using System.Windows.Controls;
 
 namespace LineStatusViewer.Views
 {
-    /// <summary>
-    /// Interaction logic for ViewA.xaml
-    /// </summary>
+
     public partial class LineStatusView : UserControl
     {
         private LineStatusViewModel _viewModel;
