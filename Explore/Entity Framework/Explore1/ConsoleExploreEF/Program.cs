@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace ConsoleExploreEF
             // Have EF skip DB 
             Database.SetInitializer(new NullDatabaseInitializer<NinjaContext>());
             Console.WriteLine("InsertNinja");
-            InsertNinja();
-            // InsertMultipleNinjas();
+            //InsertNinja();
+            //InsertMultipleNinjas();
             //SimpleNinjaQueries();
             //QueryAndUpdateNinja();
             //DeleteNinja();
@@ -33,6 +34,9 @@ namespace ConsoleExploreEF
             //QueryAndUpdateNinjaDisconnected();
 
             //ReseedDatabase();
+
+            DataHelpers.NewDbWithSeed();
+
             Console.ReadKey();
         }
 
@@ -43,9 +47,9 @@ namespace ConsoleExploreEF
 
             var ninja = new Ninja
             {
-                Name = "SampsonSan3",
+                Name = "SampsonNew",
                 ServedInOniwaban = false,
-                DateOfBirth = new DateTime(2008, 1, 28),
+                DateOfBirth = new DateTime(2000, 11, 28),
                 DateOfDeath = null,
                 ClanId = 1
 
@@ -57,6 +61,11 @@ namespace ConsoleExploreEF
             {
                 context.Database.Log = Console.WriteLine;
                 context.Ninjas.Add(ninja);
+
+                //context.Database.Log = s =>
+                //{
+                //    Debug.Print(s);
+                //};
                 context.SaveChanges();
             }
         }
@@ -87,25 +96,47 @@ namespace ConsoleExploreEF
 
         private static void SimpleNinjaQueries()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;
+
                 var ninjas = context.Ninjas
                     .Where(n => n.DateOfBirth >= new DateTime(1984, 1, 1))
                     .OrderBy(n => n.Name)
                     .Skip(1).Take(1);
 
-                //var query = context.Ninjas;
-                // var someninjas = query.ToList();
                 foreach (var ninja in ninjas)
                 {
                     Console.WriteLine(ninja.Name);
                 }
+
+                //var query = context.Ninjas;
+
+                //foreach (var ninja in query)
+                //{
+                //    Console.WriteLine(ninja.Name);
+                //}
+
+                //var ninjas = query.ToList();
+
+                //foreach (var ninja in ninjas)
+                //{
+                //    Console.WriteLine(ninja.Name);
+                //}
+
+                //foreach (var ninja in context.Ninjas)
+                //{
+                //    Console.WriteLine(ninja.Name);
+                //}
             }
         }
 
         private static void QueryAndUpdateNinja()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;
@@ -117,6 +148,8 @@ namespace ConsoleExploreEF
 
         private static void QueryAndUpdateNinjaDisconnected()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             Ninja ninja;
             using (var context = new NinjaContext())
             {
@@ -137,6 +170,8 @@ namespace ConsoleExploreEF
 
         private static void RetrieveDataWithFind()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             var keyval = 4;
             using (var context = new NinjaContext())
             {
@@ -152,6 +187,7 @@ namespace ConsoleExploreEF
 
         private static void RetrieveDataWithStoredProc()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             using (var context = new NinjaContext())
             {
@@ -166,6 +202,8 @@ namespace ConsoleExploreEF
 
         private static void DeleteNinja()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             Ninja ninja;
             using (var context = new NinjaContext())
             {
@@ -186,6 +224,8 @@ namespace ConsoleExploreEF
 
         private static void DeleteNinjaWithKeyValue()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             var keyval = 1;
             using (var context = new NinjaContext())
             {
@@ -198,6 +238,8 @@ namespace ConsoleExploreEF
 
         private static void DeleteNinjaViaStoredProcedure()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             var keyval = 3;
             using (var context = new NinjaContext())
             {
@@ -209,6 +251,8 @@ namespace ConsoleExploreEF
 
         private static void InsertNinjaWithEquipment()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;
@@ -242,6 +286,8 @@ namespace ConsoleExploreEF
 
         private static void SimpleNinjaGraphQuery()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;
@@ -254,11 +300,12 @@ namespace ConsoleExploreEF
                 Console.WriteLine("Ninja Retrieved:" + ninja.Name);
                 context.Entry(ninja).Collection(n => n.EquipmentOwned).Load();
             }
-
         }
 
         private static void ProjectionQuery()
         {
+            Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             using (var context = new NinjaContext())
             {
                 context.Database.Log = Console.WriteLine;
@@ -268,10 +315,6 @@ namespace ConsoleExploreEF
 
             }
         }
-
-
-
-
 
         private static void ReseedDatabase()
         {

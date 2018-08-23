@@ -48,9 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectedRepository.cs" />
+    <Compile Include="DataHelpers.cs" />
+    <Compile Include="DisconnectedRepository.cs" />
     <Compile Include="Migrations\201808162150233_InitialDatabase.cs" />
     <Compile Include="Migrations\201808162150233_InitialDatabase.Designer.cs">
       <DependentUpon>201808162150233_InitialDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808171806564_AddedModificationHistory.cs" />
+    <Compile Include="Migrations\201808171806564_AddedModificationHistory.Designer.cs">
+      <DependentUpon>201808171806564_AddedModificationHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808172008526_ChangeDateColumns.cs" />
+    <Compile Include="Migrations\201808172008526_ChangeDateColumns.Designer.cs">
+      <DependentUpon>201808172008526_ChangeDateColumns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NinjaContext.cs" />
@@ -59,7 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NinjaContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NinjaContext.Views.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,8 +92,15 @@
     <EmbeddedResource Include="Migrations\201808162150233_InitialDatabase.resx">
       <DependentUpon>201808162150233_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808171806564_AddedModificationHistory.resx">
+      <DependentUpon>201808171806564_AddedModificationHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808172008526_ChangeDateColumns.resx">
+      <DependentUpon>201808172008526_ChangeDateColumns.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddedModificationHistory_1.sql" />
     <Content Include="InitialDatabase_0.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
