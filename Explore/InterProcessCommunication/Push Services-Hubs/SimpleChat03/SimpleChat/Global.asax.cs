@@ -12,9 +12,9 @@ namespace SimpleChat
         {
             AreaRegistration.RegisterAllAreas();
 
-            // Need to enable SignalR
+            // Need to enable SignalR.  This is obsolete.  Use a separate Startup.cs
 
-            RouteTable.Routes.MapHubs();
+            //RouteTable.Routes.MapHubs();
 
             // These are pure MVC things
 
