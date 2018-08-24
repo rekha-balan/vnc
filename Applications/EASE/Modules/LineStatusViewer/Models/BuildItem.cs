@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 
 namespace LineStatusViewer.Models
 {
-    class BuildItem
+    public class BuildItem
     {
-        string _id;
-        public string Id
+        string _buildNo;
+        public string BuildNo
         {
-            get { return _id; }
+            get { return _buildNo; }
             set
             {
-                _id = value;
+                _buildNo = value;
             }
         }
         
-
-
-
     }
 }

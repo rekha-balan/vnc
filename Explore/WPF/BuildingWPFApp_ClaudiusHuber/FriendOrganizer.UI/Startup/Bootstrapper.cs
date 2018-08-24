@@ -34,13 +34,13 @@ namespace FriendOrganizer.UI.Startup
 
             Container.RegisterType<IFriendLookupDataService, LookupDataService>();
 
-
-
             // TODO(crhodes)
             // Need to figure out how to get Unity to do this which AutoFac supports.
             // builder.RegisterType<FriendOrganizerDbContext>().AsSelf()
 
             Container.RegisterType<FriendOrganizerDbContext>();
+
+            // Now that MainWindow loads NavigationView and FriendDetailView
 
             Container.RegisterType<INavigationViewModel, NavigationViewModel>();
             Container.RegisterType<IFriendDetailViewModel, FriendDetailViewModel>();
@@ -48,7 +48,11 @@ namespace FriendOrganizer.UI.Startup
 
         protected override DependencyObject CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            // Initial UI.  Everything is in side MainWindow.Xaml
+            //return Container.Resolve<MainWindow>();
+
+            // Decouple UI Parts
+            return Container.Resolve<MainWindowNVDV>();
         }
 
         protected override void InitializeShell()

@@ -25,11 +25,11 @@ namespace FriendOrganizer.UI.Data
             {
                 return await ctx.Friends.AsNoTracking()
                     .Select(f =>
-                    new LookupItem
-                    {
-                        Id = f.Id,
-                        DisplayMember = f.FirstName + " " + f.LastName
-                    })
+                        new LookupItem
+                        {
+                            Id = f.Id,
+                            DisplayMember = f.FirstName + " " + f.LastName
+                        })
                     .ToListAsync();
             }
         }

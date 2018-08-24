@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="LineStatusViewer.Views.LineStatusNavigationView"
+    x:Class="LineStatusViewer.Views.LineStatusNVDVView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,36 +9,32 @@
     xmlns:view="clr-namespace:LineStatusViewer.Views"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="200"
+    d:DesignWidth="300"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
-        </Grid.ColumnDefinitions>        
+        </Grid.ColumnDefinitions>
+
         <TextBlock
-            Grid.Row="0" Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Text="{Binding Message}" />
-        <TextBlock
-            Grid.Row="1" Grid.Column="0"
-            VerticalAlignment="Center"
-            Text="LineStatusNavigationView" />        
-        <!--<ListView
-            Grid.Row="1"
-            DisplayMemberPath="BuildNo"
-            ItemsSource="{Binding Builds}"
-            SelectedItem="{Binding SelectedLineStatus, Mode=TwoWay}" />-->
-        <!--<ListView
-            Grid.Row="1"
-            DisplayMemberPath="BuildNo"
-            ItemsSource="{Binding Builds}" />-->        
+        
+        <view:LineStatusNavigationView Grid.Row="1"  Grid.Column="0"
+                                       DataContext="{Binding LineStatusNavigationViewModel}" />
+
+        <!--<view:LineStatusDetailView Grid.Row="2" Grid.Column="1" 
+                                   DataContext="{Binding LineStatusDetailViewModel}" />-->
     </Grid>
 
 </UserControl>

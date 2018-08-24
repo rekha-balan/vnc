@@ -49,6 +49,26 @@ namespace LineStatusViewer.Data
             }
         }
 
+        public async Task<AML_LineStatus> GetByBuildNoAsync(string buildNo)
+        {
+            using (var ctx = _contextCreator())
+            {
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+
+                return await ctx.AML_LineStatus.AsNoTracking().SingleAsync(f => f.BuildNo == buildNo);
+
+                //// Demonstrate UI remains responsive
+
+                //var friends = await ctx.Friends.AsNoTracking().ToListAsync();
+
+                //// See that can move window around
+                //await Task.Delay(5000);
+
+                //// And then friends show up.
+                //return friends;
+            }
+        }
+
         //public IEnumerable<AML_LineStatus> GetAll()
         //{
         //    //// TODO(crhodes)

@@ -10,8 +10,7 @@ namespace FriendOrganizer.UI.Data
 {
     public class FriendDataService : IFriendDataService
     {
-        private FriendOrganizerDbContext _dbContext;
-        Func<FriendOrganizerDbContext> _contextCreator;
+        //private FriendOrganizerDbContext _dbContext;
 
         //public FriendDataService(FriendOrganizerDbContext dbContext)
         //{
@@ -23,6 +22,8 @@ namespace FriendOrganizer.UI.Data
         // Looks like the same syntax as AutoFac works.  Create a Func<> that
         // knows how to return a FriendOrganizerDbContext
         // See the Bootstraper class for how it is registered.
+        // Humm, don't seem to need to register it!
+        Func<FriendOrganizerDbContext> _contextCreator;
 
         public FriendDataService(Func<FriendOrganizerDbContext> contextCreator)
         {
@@ -77,19 +78,7 @@ namespace FriendOrganizer.UI.Data
         {
             using (var ctx = _contextCreator())
             {
-                // Await result so ctx doesn't get disposed before ToListAsync returns
-
                 return await ctx.Friends.AsNoTracking().SingleAsync(f => f.Id == friendId);
-
-                //// Demonstrate UI remains responsive
-
-                //var friends = await ctx.Friends.AsNoTracking().ToListAsync();
-
-                //// See that can move window around
-                //await Task.Delay(5000);
-
-                //// And then friends show up.
-                //return friends;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace LineStatusViewer.Views
 {
@@ -9,7 +10,14 @@ namespace LineStatusViewer.Views
     {
         public LineStatusDetailView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                var foo = ex;
+            }
         }
     }
 }

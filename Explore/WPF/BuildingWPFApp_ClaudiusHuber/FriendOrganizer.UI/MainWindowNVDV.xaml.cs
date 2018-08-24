@@ -4,11 +4,11 @@ using System.Windows;
 
 namespace FriendOrganizer.UI
 {
-    public partial class MainWindow : Window
+    public partial class MainWindowNVDV : Window
     {
-        public MainWindowViewModel _viewModel;
+        public MainWindowNVDVViewModel _viewModel;
 
-        public MainWindow(MainWindowViewModel viewModel)
+        public MainWindowNVDV(MainWindowNVDVViewModel viewModel)
         {
             InitializeComponent();
 

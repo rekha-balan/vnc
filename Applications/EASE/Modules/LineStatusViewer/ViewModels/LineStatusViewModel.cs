@@ -56,9 +56,16 @@ namespace LineStatusViewer.ViewModels
 
         public LineStatusViewModel(ILineStatusDataService lineStatusDataService)
         {
-            Message = "LineStatus from your Prism Module";
-            _lineStatusDataService = lineStatusDataService;
-            LineStatus = new ObservableCollection<AML_LineStatus>();
+            try
+            {
+                Message = "LineStatusViewModel from your Prism Module";
+                _lineStatusDataService = lineStatusDataService;
+                LineStatus = new ObservableCollection<AML_LineStatus>();
+            }
+            catch (Exception ex)
+            {
+                var foo = ex;
+            }
         }
 
         public void Load()

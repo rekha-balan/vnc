@@ -9,5 +9,7 @@ namespace LineStatusViewer.Data
         IEnumerable<AML_LineStatus> GetAll();
 
         Task<IEnumerable<AML_LineStatus>> GetAllAsync();
+
+        Task<AML_LineStatus> GetByBuildNoAsync(string buildNo);
     }
 }
