@@ -8,17 +8,18 @@ namespace LineStatusViewer.Models
 {
     class BuildItem
     {
-        string propertyName;
+        string _id;
         public string Id
         {
-            get { return propertyName; }
+            get { return _id; }
             set
             {
-                propertyName = value;
+                _id = value;
             }
         }
+        
 
 
-       
+
     }
 }
