@@ -30,6 +30,9 @@ namespace LineStatusViewer
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNVDV, typeof(LineStatusViewNVDV));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNV, typeof(LineStatusNavigationView));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusDV, typeof(LineStatusDetailView));
+
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNV2, typeof(LineStatusNavigationView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusDV2, typeof(LineStatusDetailView));
         }
 
         void RegisterViewsAndServices()

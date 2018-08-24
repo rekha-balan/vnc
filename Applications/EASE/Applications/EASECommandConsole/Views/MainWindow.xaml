@@ -124,16 +124,16 @@
                                 </dxlc:LayoutGroup>
                                 
                                 <dxlc:LayoutGroup Header="LineStatusNV" Name="lg_LSNV">
-                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusB}"/>
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusNV}"/>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="LineStatusDV" Name="lg_LSDV">
-                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusC}"/>
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusDV}"/>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="LineStatusNVDV" Name="lg_LSNV_DV">
-                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusNV}"/>
-                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusDV}"/>
+                                <dxlc:LayoutGroup Header="LineStatusNV2_DV2" Name="lg_LSNV_DV">
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusNV2}"/>
+                                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionLineStatusDV2}"/>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="LineStatusNVDV" Name="lg_LSNVDV">

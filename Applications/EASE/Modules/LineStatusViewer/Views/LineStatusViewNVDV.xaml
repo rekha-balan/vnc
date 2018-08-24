@@ -30,13 +30,14 @@
         <ListView
             Grid.Row="1"
             Grid.Column="0"
+            Background="LightGreen"
             DisplayMemberPath="BuildNo"
             ItemsSource="{Binding LineStatus}"
             SelectedItem="{Binding SelectedLineStatus, Mode=TwoWay}" />
         <Grid
             Grid.Row="1"
             Grid.Column="1"
-            Background="LightSlateGray">
+            Background="LightBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

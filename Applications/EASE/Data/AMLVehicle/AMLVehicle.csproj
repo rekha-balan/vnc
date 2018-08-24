@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AMLVehicleEDMX.cs" />
+    <Compile Include="AML_VehicleOptions.cs" />
+    <Compile Include="AML_VehicleOrders.cs" />
+    <Compile Include="AML_VehicleTrim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
