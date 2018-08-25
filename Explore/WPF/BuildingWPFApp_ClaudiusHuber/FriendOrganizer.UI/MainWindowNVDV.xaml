@@ -9,7 +9,7 @@
         xmlns:view="clr-namespace:FriendOrganizer.UI.View"
         
         mc:Ignorable="d"
-        Title="FriendOrganizer" Height="350" Width="525" FontSize="20">
+        Title="FriendOrganizerNVDV" Height="350" Width="525" FontSize="20">
 
     <Grid>
         <Grid.ColumnDefinitions>

@@ -8,37 +8,23 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:view="clr-namespace:LineStatusViewer.Views"
     mc:Ignorable="d"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     d:DesignHeight="300"
-    d:DesignWidth="200"
-    prism:ViewModelLocator.AutoWireViewModel="True">
+    d:DesignWidth="200">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>        
-        <TextBlock
-            Grid.Row="0" Grid.Column="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="{Binding Message}" />
-        <TextBlock
-            Grid.Row="1" Grid.Column="0"
-            VerticalAlignment="Center"
-            Text="LineStatusNavigationView" />        
-        <!--<ListView
+        <TextBlock Text="{Binding Message}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+        <ListView
             Grid.Row="1"
-            DisplayMemberPath="BuildNo"
             ItemsSource="{Binding Builds}"
-            SelectedItem="{Binding SelectedLineStatus, Mode=TwoWay}" />-->
-        <!--<ListView
-            Grid.Row="1"
-            DisplayMemberPath="BuildNo"
-            ItemsSource="{Binding Builds}" />-->        
+            SelectedItem="{Binding SelectedBuild, Mode=TwoWay}"
+            DisplayMemberPath="BuildNo"/>
     </Grid>
 
 </UserControl>

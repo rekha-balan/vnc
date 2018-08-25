@@ -9,13 +9,11 @@
     xmlns:view="clr-namespace:LineStatusViewer.Views"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="300"
-    prism:ViewModelLocator.AutoWireViewModel="True">
+    d:DesignWidth="300" >
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,10 +29,10 @@
             Text="{Binding Message}" />
         
         <view:LineStatusNavigationView Grid.Row="1"  Grid.Column="0"
-                                       DataContext="{Binding LineStatusNavigationViewModel}" />
+                                       DataContext="{Binding NavigationViewModel}" />
 
-        <!--<view:LineStatusDetailView Grid.Row="2" Grid.Column="1" 
-                                   DataContext="{Binding LineStatusDetailViewModel}" />-->
+        <view:LineStatusDetailView Grid.Row="1" Grid.Column="1" 
+                                   DataContext="{Binding DetailViewModel}" />
     </Grid>
 
 </UserControl>

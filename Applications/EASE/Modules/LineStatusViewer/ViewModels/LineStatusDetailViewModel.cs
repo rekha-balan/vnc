@@ -48,17 +48,17 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync(string buildNo)
         {
-            LineInfo = await _lineStatusDataService.GetByBuildNoAsync(buildNo);
+            LineStatus = await _lineStatusDataService.GetByBuildNoAsync(buildNo);
         }
 
-        private AML_LineStatus _lineInfo;
+        private AML_LineStatus _lineStatus;
 
-        public AML_LineStatus LineInfo
+        public AML_LineStatus LineStatus
         {
-            get { return _lineInfo; }
+            get { return _lineStatus; }
             private set
             {
-                _lineInfo = value;
+                _lineStatus = value;
                 OnPropertyChanged();
             }
         }

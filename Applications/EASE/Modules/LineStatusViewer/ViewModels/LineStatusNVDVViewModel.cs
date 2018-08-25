@@ -16,9 +16,8 @@ namespace LineStatusViewer.ViewModels
 
     public class LineStatusNVDVViewModel : BindableBase
     {
-        public ILineStatusDataService _lineStatusDataService { get; set; }
-
         public ILineStatusNavigationViewModel NavigationViewModel { get; }
+
         public ILineStatusDetailViewModel DetailViewModel { get; }
 
         private string _message;

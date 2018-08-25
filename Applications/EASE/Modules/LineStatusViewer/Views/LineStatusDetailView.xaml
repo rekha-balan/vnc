@@ -35,7 +35,7 @@
         
         <Label Grid.Row="4" Content="BuildNO" Margin="10 0"/>
         <TextBox Grid.Row="5" 
-                     Text="{Binding LineStatus.StationNo,
+                     Text="{Binding LineStatus.BuildNo,
                                     Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                      Margin="10 0 10 10"/>
 
