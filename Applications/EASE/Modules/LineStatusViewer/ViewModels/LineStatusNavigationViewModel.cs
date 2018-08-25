@@ -25,7 +25,7 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
-                Message = "LineStatusNavigationViewModel from your Prism Module";
+                Message = "LineStatusNavigationViewModel";
 
                 _lookupBuildsService = lookupBuildsService;
                 _eventAggregator = eventAggregator;

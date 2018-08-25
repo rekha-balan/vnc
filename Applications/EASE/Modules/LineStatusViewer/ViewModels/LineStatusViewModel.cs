@@ -58,7 +58,7 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
-                Message = "LineStatusViewModel from your Prism Module";
+                Message = "LineStatusViewModel";
                 _lineStatusDataService = lineStatusDataService;
                 LineStatus = new ObservableCollection<AML_LineStatus>();
             }

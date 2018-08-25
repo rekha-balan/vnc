@@ -32,7 +32,7 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
-                Message = "LineStatusNVDVViewModel from your Prism Module";
+                Message = "LineStatusNVDVViewModel";
 
                 NavigationViewModel = lineStatusNaviagationViewModel;
                 DetailViewModel = lineStatusDetailViewModel;

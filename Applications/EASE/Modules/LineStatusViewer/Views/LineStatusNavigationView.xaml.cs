@@ -13,9 +13,9 @@ namespace LineStatusViewer.Views
             InitializeComponent();
         }
 
-        private LineStatusNVDVViewModel _viewModel;
+        private LineStatusNavigationViewModel _viewModel;
 
-        public LineStatusNavigationView(LineStatusNVDVViewModel viewModel)
+        public LineStatusNavigationView(LineStatusNavigationViewModel viewModel)
         {
             try
             {

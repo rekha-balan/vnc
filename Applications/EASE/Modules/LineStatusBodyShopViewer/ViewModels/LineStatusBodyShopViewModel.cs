@@ -19,7 +19,7 @@ namespace LineStatusBodyShopViewer.ViewModels
 
         public LineStatusBodyShopViewModel()
         {
-            Message = "LineStatus BodyShop from your Prism Module";
+            Message = "LineStatusBodyShopViewModel";
         }
     }
 }
