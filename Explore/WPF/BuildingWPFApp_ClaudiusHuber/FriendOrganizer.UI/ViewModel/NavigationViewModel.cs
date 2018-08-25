@@ -10,6 +10,7 @@ namespace FriendOrganizer.UI.ViewModel
     public class NavigationViewModel : ViewModelBase, INavigationViewModel
     {
         private IFriendLookupDataService _friendLookupService;
+
         public IEventAggregator _eventAggregator { get; set; }
 
         public NavigationViewModel(IFriendLookupDataService friendLookupService,
@@ -34,6 +35,7 @@ namespace FriendOrganizer.UI.ViewModel
         public ObservableCollection<LookupItem> Friends { get; }
 
         LookupItem _selectedFriend;
+
         public LookupItem SelectedFriend
         {
             get { return _selectedFriend; }
