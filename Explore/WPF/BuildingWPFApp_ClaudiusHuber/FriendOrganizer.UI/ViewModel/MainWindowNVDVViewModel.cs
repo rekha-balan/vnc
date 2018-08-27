@@ -9,6 +9,9 @@ namespace FriendOrganizer.UI.ViewModel
 {
     public class MainWindowNVDVViewModel : ViewModelBase
     {
+        public INavigationViewModel NavigationViewModel { get; }
+
+        public IFriendDetailViewModel FriendDetailViewModel { get; }
 
         public MainWindowNVDVViewModel(INavigationViewModel navigationViewModel,
                                         IFriendDetailViewModel friendDetailViewModel)
@@ -21,9 +24,5 @@ namespace FriendOrganizer.UI.ViewModel
         {
             await NavigationViewModel.LoadAsync();
         }
-
-        public INavigationViewModel NavigationViewModel { get; }
-
-        public IFriendDetailViewModel FriendDetailViewModel { get; }
     }
 }
