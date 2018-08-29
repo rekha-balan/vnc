@@ -8,35 +8,11 @@ namespace LineStatusViewer.Models
 {
     public class BuildItem
     {
-        decimal _lineId;
-        public decimal LineId
-        {
-            get { return _lineId; }
-            set
-            {
-                _lineId = value;
-            }
-        }
+        public decimal LineId { get; set; }
 
-        string _stationNO;
-        public string StationNO
-        {
-            get { return _stationNO; }
-            set
-            {
-                _stationNO = value;
-            }
-        }
-        
-        string _buildNo;
-        public string BuildNo
-        {
-            get { return _buildNo; }
-            set
-            {
-                _buildNo = value;
-            }
-        }
-        
+        public string StationNO { get; set; }
+
+        public string BuildNo { get; set; }
+
     }
 }

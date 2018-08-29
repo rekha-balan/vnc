@@ -25,7 +25,8 @@ namespace LineStatusViewer.Data
 
                 // Await result so ctx doesn't get disposed before ToListAsync returns
 
-                return await ctx.AML_LineStatus.AsNoTracking()
+                //return await ctx.AML_LineStatus.AsNoTracking()
+                return await ctx.AML_LineStatus
                     .Select(f =>
                     new BuildItem
                     {

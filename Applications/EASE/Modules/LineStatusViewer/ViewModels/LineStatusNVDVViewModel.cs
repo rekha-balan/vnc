@@ -27,8 +27,9 @@ namespace LineStatusViewer.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public LineStatusNVDVViewModel(ILineStatusNavigationViewModel lineStatusNaviagationViewModel,
-                                        ILineStatusDetailViewModel lineStatusDetailViewModel)
+        public LineStatusNVDVViewModel(
+            ILineStatusNavigationViewModel lineStatusNaviagationViewModel,
+            ILineStatusDetailViewModel lineStatusDetailViewModel)
         {
             try
             {

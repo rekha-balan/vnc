@@ -57,7 +57,10 @@ namespace LineStatusViewer.Data
                 // Await result so ctx doesn't get disposed before ToListAsync returns
 
                 return await ctx.AML_LineStatus.AsNoTracking()
-                    .SingleAsync(n => n.LineID == buildItem.LineId && n.StationNO == buildItem.StationNO);
+                    .SingleAsync(n => 
+                        n.LineID == buildItem.LineId 
+                        && n.StationNO == buildItem.StationNO
+                        && n.BuildNo == buildItem.BuildNo);
 
                 //// Demonstrate UI remains responsive
 
@@ -98,19 +101,24 @@ namespace LineStatusViewer.Data
                 ctx.Database.Log = Console.WriteLine;
 
                 var oldLineStatus = ctx.AML_LineStatus
-                    .Where(n => n.LineID == buildItem.LineId && n.StationNO == buildItem.StationNO);
+                    .Where(n => 
+                        n.LineID == buildItem.LineId 
+                        && n.StationNO == buildItem.StationNO
+                        && n.BuildNo == buildItem.BuildNo)
+                    .Single();
 
-                foreach (AML_LineStatus item in oldLineStatus)
-                {
-                    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
-                }
+                //foreach (AML_LineStatus item in oldLineStatus)
+                //{
+                //    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
+                //}
 
-                foreach (AML_LineStatus item in oldLineStatus.Where(n => n.BuildNo == buildItem.BuildNo))
-                {
-                    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
-                }
+                //foreach (AML_LineStatus item in oldLineStatus.Where(n => n.BuildNo == buildItem.BuildNo))
+                //{
+                //    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
+                //}
 
-                //ctx.AML_LineStatus.Remove(oldLineStatus);
+                ctx.AML_LineStatus.Remove(oldLineStatus);
+                ctx.Entry(oldLineStatus).State = EntityState.Deleted;
                 // TODO(crhodes)
                 // Need to delete existing row based on buildItem, then attach new
 

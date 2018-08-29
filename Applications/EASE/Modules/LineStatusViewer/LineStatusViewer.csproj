@@ -62,7 +62,6 @@
     <Compile Include="Events\OpenLineStatusDetailViewEvent.cs" />
     <Compile Include="LineStatusViewerModule.cs" />
     <Compile Include="Models\BuildItem.cs" />
-    <Compile Include="Models\LineStatusItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

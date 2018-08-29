@@ -20,7 +20,8 @@ namespace LineStatusViewer.ViewModels
 
         public ObservableCollection<BuildItem> Builds { get; }
 
-        public LineStatusNavigationViewModel(ILookupBuildsService lookupBuildsService,
+        public LineStatusNavigationViewModel(
+            ILookupBuildsService lookupBuildsService,
             IEventAggregator eventAggregator)
         {
             try
