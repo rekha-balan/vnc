@@ -37,20 +37,25 @@ namespace LineStatusViewer.ViewModels
             }
         }
 
-        BuildItem _selectedBuild;
+        BuildItem _selectedBuildItem;
 
-        public BuildItem SelectedBuild
+        public BuildItem SelectedBuildItem
         {
-            get { return _selectedBuild; }
+            get
+            {
+                return _selectedBuildItem;
+            }
             set
             {
-                _selectedBuild = value;
+                _selectedBuildItem = value;
                 OnPropertyChanged();
 
-                if (_selectedBuild != null)
+                if (_selectedBuildItem != null)
                 {
+                    //_eventAggregator.GetEvent<OpenLineStatusDetailViewEvent>()
+                    //    .Publish(_selectedBuild.BuildNo);
                     _eventAggregator.GetEvent<OpenLineStatusDetailViewEvent>()
-                        .Publish(_selectedBuild.BuildNo);
+                        .Publish(_selectedBuildItem);
                 }
             }
         }

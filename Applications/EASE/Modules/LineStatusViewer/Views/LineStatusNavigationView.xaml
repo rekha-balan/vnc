@@ -17,14 +17,32 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        
         <TextBlock Text="{Binding Message}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
         <ListView
             Grid.Row="1"
             ItemsSource="{Binding Builds}"
+            SelectedItem="{Binding SelectedBuildItem, Mode=TwoWay}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LineId}" />
+                        <TextBlock Text=" : " />
+                        <TextBlock Text="{Binding StationNO}" />
+                        <TextBlock Text=" : " />                        
+                        <TextBlock Text="{Binding BuildNo}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <!--<ListView
+            Grid.Row="1"
+            ItemsSource="{Binding Builds}"
             SelectedItem="{Binding SelectedBuild, Mode=TwoWay}"
-            DisplayMemberPath="BuildNo"/>
+            DisplayMemberPath="BuildNo"/>-->
     </Grid>
 
 </UserControl>

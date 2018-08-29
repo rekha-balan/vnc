@@ -57,6 +57,8 @@
     <Compile Include="Data\ILookupBuildsService.cs" />
     <Compile Include="Data\LineStatusDataService.cs" />
     <Compile Include="Data\LookupDataService.cs" />
+    <Compile Include="Events\AfterLineStatusSavedEvent.cs" />
+    <Compile Include="Events\AfterLineStatusSavedEventArgs.cs" />
     <Compile Include="Events\OpenLineStatusDetailViewEvent.cs" />
     <Compile Include="LineStatusViewerModule.cs" />
     <Compile Include="Models\BuildItem.cs" />

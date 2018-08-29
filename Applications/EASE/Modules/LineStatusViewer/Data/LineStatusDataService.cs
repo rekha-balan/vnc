@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AMLLinesEDMXCodeFirst;
+using LineStatusViewer.Models;
 
 namespace LineStatusViewer.Data
 {
@@ -49,13 +50,14 @@ namespace LineStatusViewer.Data
             }
         }
 
-        public async Task<AML_LineStatus> GetByBuildNoAsync(string buildNo)
+        public async Task<AML_LineStatus> GetByBuildItemAsync(BuildItem buildItem)
         {
             using (var ctx = _contextCreator())
             {
                 // Await result so ctx doesn't get disposed before ToListAsync returns
 
-                return await ctx.AML_LineStatus.AsNoTracking().SingleAsync(f => f.BuildNo == buildNo);
+                return await ctx.AML_LineStatus.AsNoTracking()
+                    .SingleAsync(n => n.LineID == buildItem.LineId && n.StationNO == buildItem.StationNO);
 
                 //// Demonstrate UI remains responsive
 
@@ -66,6 +68,56 @@ namespace LineStatusViewer.Data
 
                 //// And then friends show up.
                 //return friends;
+            }
+        }
+
+        //public async Task<AML_LineStatus> GetByBuildItemAsync(string buildNo)
+        //{
+        //    using (var ctx = _contextCreator())
+        //    {
+        //        // Await result so ctx doesn't get disposed before ToListAsync returns
+
+        //        return await ctx.AML_LineStatus.AsNoTracking().SingleAsync(f => f.BuildNo == buildNo);
+
+        //        //// Demonstrate UI remains responsive
+
+        //        //var friends = await ctx.Friends.AsNoTracking().ToListAsync();
+
+        //        //// See that can move window around
+        //        //await Task.Delay(5000);
+
+        //        //// And then friends show up.
+        //        //return friends;
+        //    }
+        //}
+
+        public async Task SaveAsync(BuildItem buildItem, AML_LineStatus newLineStatus)
+        {
+            using (var ctx = _contextCreator())
+            {
+                ctx.Database.Log = Console.WriteLine;
+
+                var oldLineStatus = ctx.AML_LineStatus
+                    .Where(n => n.LineID == buildItem.LineId && n.StationNO == buildItem.StationNO);
+
+                foreach (AML_LineStatus item in oldLineStatus)
+                {
+                    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
+                }
+
+                foreach (AML_LineStatus item in oldLineStatus.Where(n => n.BuildNo == buildItem.BuildNo))
+                {
+                    Console.WriteLine($"LineID:{item.LineID} StationNO:{item.StationNO}");
+                }
+
+                //ctx.AML_LineStatus.Remove(oldLineStatus);
+                // TODO(crhodes)
+                // Need to delete existing row based on buildItem, then attach new
+
+                ctx.AML_LineStatus.Attach(newLineStatus);
+                ctx.Entry(newLineStatus).State = EntityState.Added;
+
+                await ctx.SaveChangesAsync();
             }
         }
 

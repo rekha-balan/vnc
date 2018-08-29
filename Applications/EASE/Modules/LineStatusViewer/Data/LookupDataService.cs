@@ -23,15 +23,19 @@ namespace LineStatusViewer.Data
             using (var ctx = _contextCreator())
             {
 
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+
                 return await ctx.AML_LineStatus.AsNoTracking()
                     .Select(f =>
                     new BuildItem
                     {
-                        BuildNo = f.BuildNo   
+                        LineId = f.LineID,
+                        StationNO = f.StationNO,
+                        BuildNo = f.BuildNo
+
                     })
                     .ToListAsync();
 
-                // Await result so ctx doesn't get disposed before ToListAsync returns
 
                 //return await ctx.AML_LineStatus.AsNoTracking().ToListAsync();
 
