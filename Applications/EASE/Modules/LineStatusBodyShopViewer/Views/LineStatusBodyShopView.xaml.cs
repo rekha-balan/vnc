@@ -22,6 +22,7 @@ namespace LineStatusBodyShopViewer.Views
     {
         public LineStatusBodyShopView()
         {
+            // 31
             InitializeComponent();
         }
     }

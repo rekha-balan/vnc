@@ -13,6 +13,7 @@ namespace LineStatusViewer.Views
 
         public LineStatusGridView(LineStatusViewModel viewModel)
         {
+            // 15
             InitializeComponent();
 
             _viewModel = viewModel;
@@ -28,6 +29,7 @@ namespace LineStatusViewer.Views
 
         async void LineStatusView_Loaded(object sender, RoutedEventArgs e)
         {
+            // 37
             await _viewModel.LoadAsync();
         }
     }

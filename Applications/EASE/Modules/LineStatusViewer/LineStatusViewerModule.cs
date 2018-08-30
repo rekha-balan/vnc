@@ -19,6 +19,7 @@ namespace LineStatusViewer
         {
             try
             {
+                // 09
                 _container = container;
                 _regionManager = regionManager;
             }
@@ -30,12 +31,13 @@ namespace LineStatusViewer
 
         public void Initialize()
         {
+            // 10
             RegisterViewsAndServices();
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusV, typeof(LineStatusView));
-
+            //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusV, typeof(LineStatusView));
+            // 12
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusG, typeof(LineStatusGridView));
-
+            // 17
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNVDV, typeof(LineStatusNVDVView));
 
             //_regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusNV, typeof(LineStatusNavigationView));
@@ -47,6 +49,7 @@ namespace LineStatusViewer
 
         void RegisterViewsAndServices()
         {
+            // 11
             _container.RegisterType<ILineStatusDataService, LineStatusDataService>();
 
             // TODO(crhodes)

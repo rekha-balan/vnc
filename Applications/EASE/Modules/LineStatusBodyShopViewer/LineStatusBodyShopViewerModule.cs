@@ -15,12 +15,14 @@ namespace LineStatusBodyShopViewer
 
         public LineStatusBodyShopViewerModule(IUnityContainer container, IRegionManager regionManager)
         {
+            // 29
             _container = container;
             _regionManager = regionManager;
         }
 
         public void Initialize()
         {
+            // 30
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionLineStatusBodyShop, typeof(LineStatusBodyShopView));
         }
     }

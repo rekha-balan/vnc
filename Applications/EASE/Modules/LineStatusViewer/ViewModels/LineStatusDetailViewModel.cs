@@ -25,10 +25,13 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
+                // 21
+                // 28
                 Message = "LineStatusDetailViewModel";
                 
                 _lineStatusDataService = lineStatusDataService;
                 _eventAggregator = eventAggregator;
+
                 _eventAggregator.GetEvent<OpenLineStatusDetailViewEvent>()
                     .Subscribe(OnOpenLineStatusDetailView);
 
@@ -48,8 +51,10 @@ namespace LineStatusViewer.ViewModels
 
         private async void OnSaveExecute()
         {
+            // S1
             await _lineStatusDataService.SaveAsync(OldLineStatus, LineStatus);
 
+            // S3
             _eventAggregator.GetEvent<AfterLineStatusSavedEvent>().Publish(
                 new AfterLineStatusSavedEventArgs
                 {
@@ -72,6 +77,7 @@ namespace LineStatusViewer.ViewModels
 
         async void OnOpenLineStatusDetailView(BuildItem buildItem)
         {
+            // B2
             await LoadAsync(buildItem);
         }
 
@@ -82,6 +88,7 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync(BuildItem buildItem)
         {
+            // B3
             LineStatus = await _lineStatusDataService.GetByBuildItemAsync(buildItem);
             // Save the item in case we need to update it.
             //OldLineStatus = LineStatus;
@@ -113,6 +120,7 @@ namespace LineStatusViewer.ViewModels
             get { return _lineStatus; }
             private set
             {
+                // B6
                 _lineStatus = value;
                 OnPropertyChanged();
             }
@@ -129,6 +137,8 @@ namespace LineStatusViewer.ViewModels
             {
                 if (_oldLineStatus == value)
                     return;
+
+                // B7
                 _oldLineStatus = value;
             }
         }

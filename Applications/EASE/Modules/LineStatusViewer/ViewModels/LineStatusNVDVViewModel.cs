@@ -33,6 +33,7 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
+                // 22
                 Message = "LineStatusNVDVViewModel";
 
                 NavigationViewModel = lineStatusNaviagationViewModel;
@@ -46,6 +47,7 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync()
         {
+            // 34
             await NavigationViewModel.LoadAsync();
         }
     }

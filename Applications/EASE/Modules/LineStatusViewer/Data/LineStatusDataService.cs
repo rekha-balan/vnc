@@ -19,6 +19,9 @@ namespace LineStatusViewer.Data
 
         public LineStatusDataService(Func<AMLLinesCF> contextCreator)
         {
+            // 13
+            // 20
+            // 27
             _contextCreator = contextCreator;
         }
 
@@ -26,6 +29,8 @@ namespace LineStatusViewer.Data
         {
             using (var ctx = _contextCreator())
             {
+                ctx.Database.Log = Console.WriteLine;
+
                 return ctx.AML_LineStatus.AsNoTracking().ToList();
             }
         }
@@ -34,8 +39,10 @@ namespace LineStatusViewer.Data
         {
             using (var ctx = _contextCreator())
             {
-                // Await result so ctx doesn't get disposed before ToListAsync returns
+                ctx.Database.Log = Console.WriteLine;
 
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+                // 39
                 return await ctx.AML_LineStatus.AsNoTracking().ToListAsync();
 
                 //// Demonstrate UI remains responsive
@@ -54,8 +61,10 @@ namespace LineStatusViewer.Data
         {
             using (var ctx = _contextCreator())
             {
-                // Await result so ctx doesn't get disposed before ToListAsync returns
+                ctx.Database.Log = Console.WriteLine;
 
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+                // B4
                 return await ctx.AML_LineStatus.AsNoTracking()
                     .SingleAsync(n => 
                         n.LineID == buildItem.LineId 
@@ -98,6 +107,7 @@ namespace LineStatusViewer.Data
         {
             using (var ctx = _contextCreator())
             {
+                // S2
                 ctx.Database.Log = Console.WriteLine;
 
                 var oldLineStatus = ctx.AML_LineStatus
@@ -119,6 +129,11 @@ namespace LineStatusViewer.Data
 
                 ctx.AML_LineStatus.Remove(oldLineStatus);
                 ctx.Entry(oldLineStatus).State = EntityState.Deleted;
+                // Need to Save the Delete before Attaching new below
+                // Ok unless the Key items do not change, e.g. updating IPCStatus, AndonCall, or ReadStatus
+                // for an existing BuildItem
+
+                await ctx.SaveChangesAsync();
                 // TODO(crhodes)
                 // Need to delete existing row based on buildItem, then attach new
 

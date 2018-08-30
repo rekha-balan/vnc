@@ -7,7 +7,10 @@ namespace LineStatusViewer.Events
         //public string BuildNo { get; set; }
         public BuildItem BuildItem
         {
+            // S6
             get;
+
+            // S4
             set;
         }
     }

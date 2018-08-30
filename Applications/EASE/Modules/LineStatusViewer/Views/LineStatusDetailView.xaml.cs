@@ -12,6 +12,7 @@ namespace LineStatusViewer.Views
         {
             try
             {
+                // 26
                 InitializeComponent();
             }
             catch (Exception ex)
