@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{4B4CCAB0-0E6D-4A15-80B9-9C093983A193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFConsole", "WPFConsole Solution1\WPFConsole\WPFConsole.csproj", "{C409222A-03E8-4A12-A5FA-93795040C0C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{6A7D36C8-489F-401C-98DC-5D9F64B2CC7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{8A678FE0-263C-458A-A2FE-A9C48088D17F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{45EBA20E-2FDA-4EC3-B639-FC0FC7799CB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{54E7BA2B-D830-49AD-B2E2-DF140686517A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{1C9416D3-5B4B-415A-904B-9A01440F6D02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{1308B705-52A1-4643-87C0-64981A6B285F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D5044485-F576-423E-9637-D383493B13AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C409222A-03E8-4A12-A5FA-93795040C0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C409222A-03E8-4A12-A5FA-93795040C0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C409222A-03E8-4A12-A5FA-93795040C0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C409222A-03E8-4A12-A5FA-93795040C0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C409222A-03E8-4A12-A5FA-93795040C0C3} = {4B4CCAB0-0E6D-4A15-80B9-9C093983A193}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2799DAA1-FC5F-4086-B0A5-5C75CADE8C51}
+	EndGlobalSection
+EndGlobal

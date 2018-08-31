@@ -2,14 +2,14 @@
 <Root Type="DevExpress.CodeRush.Foundation.Navigation.QuickFileNav.SolutionFileInfosContainer">
   <Options Language="Neutral">
     <Items>
-      <Item Id="{3f991cc2-fe98-4363-b836-194c23326db9}">
+      <Item Id="{3517394c-5415-4e37-a247-fd6fee9d196b}">
         <Filename>Events.cs</Filename>
         <FilePath>c:\github\vnc\explore\prisim\prisimdemosolution\src\infrastructure\events.cs</FilePath>
         <Folders />
         <ProjectFileName>C:\GitHub\vnc\Explore\Prisim\PrisimDemoSolution\Src\Infrastructure\Infrastructure.csproj</ProjectFileName>
         <ProjectName>Infrastructure</ProjectName>
       </Item>
-      <Item Id="{7b578067-c5f7-4d94-a34e-97a9b400061e}">
+      <Item Id="{3075419d-67c2-427f-bd11-aad2b29375d4}">
         <Filename>StatusBarViewModel.cs</Filename>
         <FilePath>c:\github\vnc\explore\prisim\prisimdemosolution\src\modules\statusbar\viewmodels\statusbarviewmodel.cs</FilePath>
         <Folders>
@@ -18,14 +18,14 @@
         <ProjectFileName>C:\GitHub\vnc\Explore\Prisim\PrisimDemoSolution\Src\Modules\StatusBar\StatusBar.csproj</ProjectFileName>
         <ProjectName>StatusBar</ProjectName>
       </Item>
-      <Item Id="{370629a1-5bc9-411a-8338-e01c96d6531d}">
+      <Item Id="{2246bfcd-184c-4d59-8593-d8c5cb9bff5e}">
         <Filename>StatusBarModule.cs</Filename>
         <FilePath>c:\github\vnc\explore\prisim\prisimdemosolution\src\modules\statusbar\statusbarmodule.cs</FilePath>
         <Folders />
         <ProjectFileName>C:\GitHub\vnc\Explore\Prisim\PrisimDemoSolution\Src\Modules\StatusBar\StatusBar.csproj</ProjectFileName>
         <ProjectName>StatusBar</ProjectName>
       </Item>
-      <Item Id="{00ce9a5b-401d-4e22-a6a7-f7523665984d}">
+      <Item Id="{b87d90a4-05a9-4a15-be10-52ab5722352b}">
         <Filename>PersonViewModel.cs</Filename>
         <FilePath>c:\github\vnc\explore\prisim\prisimdemosolution\src\modules\people\viewmodels\personviewmodel.cs</FilePath>
         <Folders>

@@ -1,0 +1,41 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
+  <TemplateData>
+    <Name>WPFConsole Solution</Name>
+    <Description>WPFConsole Solution Base</Description>
+    <ProjectType>CSharp</ProjectType>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+	<ProjectCollection>
+    <Project TargetFileName="defaultfolders.csproj" File="defaultfolders.csproj" ReplaceParameters="true">
+      <Folder Name="Applications" TargetFolderName="Applications" />
+      <Folder Name="Data" TargetFolderName="Data" />
+      <Folder Name="Domain" TargetFolderName="Domain" />
+      <Folder Name="Infrastructure" TargetFolderName="Infrastructure" />
+      <Folder Name="Modules" TargetFolderName="Modules" />
+      <Folder Name="packages" TargetFolderName="packages" />
+      <Folder Name="Repositories" TargetFolderName="Repositories" />
+      <Folder Name="Services" TargetFolderName="Services" />
+    </Project>	
+	  <SolutionFolder Name="Applications">
+		<ProjectTemplateLink ProjectName="WPFConsole">
+		  Applications\WPFConsole.vstemplate
+		</ProjectTemplateLink>
+	  </SolutionFolder>
+	  <SolutionFolder Name="Data">
+	  </SolutionFolder>
+	  <SolutionFolder Name="Domain">
+	  </SolutionFolder>
+	  <SolutionFolder Name="Infrastructure">
+	  </SolutionFolder>
+	  <SolutionFolder Name="Modules">
+	  </SolutionFolder>
+	  <SolutionFolder Name="packages">
+	  </SolutionFolder>
+	  <SolutionFolder Name="Repositories">
+	  </SolutionFolder>
+  	  <SolutionFolder Name="Services">
+	  </SolutionFolder>
+	</ProjectCollection>
+  </TemplateContent>
+</VSTemplate>
