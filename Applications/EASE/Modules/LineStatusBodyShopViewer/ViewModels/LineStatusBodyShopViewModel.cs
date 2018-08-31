@@ -19,6 +19,7 @@ namespace LineStatusBodyShopViewer.ViewModels
 
         public LineStatusBodyShopViewModel()
         {
+            // 32
             Message = "LineStatusBodyShopViewModel";
         }
     }

@@ -20,16 +20,21 @@ namespace LineStatusViewer.ViewModels
 
         public ObservableCollection<BuildItem> Builds { get; }
 
-        public LineStatusNavigationViewModel(ILookupBuildsService lookupBuildsService,
+        public LineStatusNavigationViewModel(
+            ILookupBuildsService lookupBuildsService,
             IEventAggregator eventAggregator)
         {
             try
             {
+                // 19
+                // 25
                 Message = "LineStatusNavigationViewModel";
 
                 _lookupBuildsService = lookupBuildsService;
                 _eventAggregator = eventAggregator;
                 Builds = new ObservableCollection<BuildItem>();
+
+                _eventAggregator.GetEvent<AfterLineStatusSavedEvent>().Subscribe(AfterLineStatusSaved);
             }
             catch (Exception ex)
             {
@@ -37,20 +42,60 @@ namespace LineStatusViewer.ViewModels
             }
         }
 
-        BuildItem _selectedBuild;
-
-        public BuildItem SelectedBuild
+        async void AfterLineStatusSaved(AfterLineStatusSavedEventArgs obj)
         {
-            get { return _selectedBuild; }
+            // S5
+
+            // This returns nothing because we are passed the new BuildItem not the old
+            //var buildItem = Builds.Single(n => n.LineId == obj.BuildItem.LineId
+            //            && n.StationNO == obj.BuildItem.StationNO
+            //            && n.BuildNo == obj.BuildItem.BuildNo);
+
+            // This does not error but doesn't do anything.
+
+            //SelectedBuildItem.LineId = obj.BuildItem.LineId;
+            //SelectedBuildItem.StationNO = obj.BuildItem.StationNO;
+            //SelectedBuildItem.BuildNo = obj.BuildItem.BuildNo;
+
+            // Maybe we need to Load Again?
+
+            await LoadAsync();
+
+            // Now the problem is the SelectedBuildItem is not set to the right info if the BuildItem Changed
+            // So reset it to the new value passed in EventArgs
+
+            SelectedBuildItem = obj.BuildItem;
+
+            // We cannot be more clever and avoid reloading the LineStatusDetailView
+            // See publish below if we update the backing field directly.  As someone doesn't
+            // get notified and some sequence returns no items
+
+            //_selectedBuildItem = obj.BuildItem;
+
+        }
+
+        BuildItem _selectedBuildItem;
+
+        public BuildItem SelectedBuildItem
+        {
+            get
+            {
+                // B5
+                return _selectedBuildItem;
+            }
             set
             {
-                _selectedBuild = value;
+                _selectedBuildItem = value;
                 OnPropertyChanged();
 
-                if (_selectedBuild != null)
+                if (_selectedBuildItem != null)
                 {
+                    
+                    // B1
+                    //_eventAggregator.GetEvent<OpenLineStatusDetailViewEvent>()
+                    //    .Publish(_selectedBuild.BuildNo);
                     _eventAggregator.GetEvent<OpenLineStatusDetailViewEvent>()
-                        .Publish(_selectedBuild.BuildNo);
+                        .Publish(_selectedBuildItem);
                 }
             }
         }
@@ -64,6 +109,7 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync()
         {
+            // 35
             var lookup = await _lookupBuildsService.GetBuildsAsync();
             Builds.Clear();
 

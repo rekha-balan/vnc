@@ -27,11 +27,13 @@ namespace LineStatusViewer.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public LineStatusNVDVViewModel(ILineStatusNavigationViewModel lineStatusNaviagationViewModel,
-                                        ILineStatusDetailViewModel lineStatusDetailViewModel)
+        public LineStatusNVDVViewModel(
+            ILineStatusNavigationViewModel lineStatusNaviagationViewModel,
+            ILineStatusDetailViewModel lineStatusDetailViewModel)
         {
             try
             {
+                // 22
                 Message = "LineStatusNVDVViewModel";
 
                 NavigationViewModel = lineStatusNaviagationViewModel;
@@ -45,6 +47,7 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync()
         {
+            // 34
             await NavigationViewModel.LoadAsync();
         }
     }

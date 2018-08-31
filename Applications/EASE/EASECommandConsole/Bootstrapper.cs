@@ -24,6 +24,7 @@ namespace EASECommandConsole
 
         protected override void ConfigureModuleCatalog()
         {
+            // 01
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
 
             moduleCatalog.AddModule(typeof(ModuleAModule));
@@ -32,12 +33,14 @@ namespace EASECommandConsole
             moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
             moduleCatalog.AddModule(typeof(LineStatusViewerModule));
             moduleCatalog.AddModule(typeof(LineStatusBodyShopViewerModule));
+            // 02
         }
 
         // Step 2 - Configure the container
 
         protected override void ConfigureContainer()
         {
+            // 03
             base.ConfigureContainer();
             // Use the ServiceRepository
             //Container.RegisterType<PersonRepository.Interface.IPersonRepository, ServiceRepository>();
@@ -45,21 +48,25 @@ namespace EASECommandConsole
             //Container.RegisterType<PersonRepository.Interface.IPersonRepository, CSVRepository>();
             // Use the SQLRepository
             Container.RegisterType<PersonRepository.Interface.IPersonRepository, SQLRepository>();
+            // 04
         }
 
         // Step 3 - Configure the RegionAdapters
 
         protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
         {
+            // 05
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
             mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
             return mappings;
+            // 06
         }
 
         // Step 4 - Create the Shell that will hold the modules in designated regions.
 
         protected override DependencyObject CreateShell()
         {
+            // 07
             return Container.Resolve<MainWindow>();
         }
 
@@ -67,6 +74,7 @@ namespace EASECommandConsole
 
         protected override void InitializeShell()
         {
+            // 08
             Application.Current.MainWindow.Show();
         }
     }

@@ -8,15 +8,11 @@ namespace LineStatusViewer.Models
 {
     public class BuildItem
     {
-        string _buildNo;
-        public string BuildNo
-        {
-            get { return _buildNo; }
-            set
-            {
-                _buildNo = value;
-            }
-        }
-        
+        public decimal LineId { get; set; }
+
+        public string StationNO { get; set; }
+
+        public string BuildNo { get; set; }
+
     }
 }

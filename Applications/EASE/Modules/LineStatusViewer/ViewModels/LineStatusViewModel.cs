@@ -58,6 +58,7 @@ namespace LineStatusViewer.ViewModels
         {
             try
             {
+                // 14
                 Message = "LineStatusViewModel";
                 _lineStatusDataService = lineStatusDataService;
                 LineStatus = new ObservableCollection<AML_LineStatus>();
@@ -82,6 +83,7 @@ namespace LineStatusViewer.ViewModels
 
         public async Task LoadAsync()
         {
+            // 38
             var lineStatus = await _lineStatusDataService.GetAllAsync();
 
             // Demo async loading.  UI should be responsive 

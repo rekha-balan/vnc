@@ -15,6 +15,8 @@ namespace LineStatusViewer.Data
 
         public LookupDataService(Func<AMLLinesCF> contextCreator)
         {
+            // 18
+            // 24
             _contextCreator = contextCreator;
         }
 
@@ -22,16 +24,22 @@ namespace LineStatusViewer.Data
         {
             using (var ctx = _contextCreator())
             {
+                ctx.Database.Log = Console.WriteLine;
 
-                return await ctx.AML_LineStatus.AsNoTracking()
+                // Await result so ctx doesn't get disposed before ToListAsync returns
+                // 36
+                //return await ctx.AML_LineStatus.AsNoTracking()
+                return await ctx.AML_LineStatus
                     .Select(f =>
                     new BuildItem
                     {
-                        BuildNo = f.BuildNo   
+                        LineId = f.LineID,
+                        StationNO = f.StationNO,
+                        BuildNo = f.BuildNo
+
                     })
                     .ToListAsync();
 
-                // Await result so ctx doesn't get disposed before ToListAsync returns
 
                 //return await ctx.AML_LineStatus.AsNoTracking().ToListAsync();
 
