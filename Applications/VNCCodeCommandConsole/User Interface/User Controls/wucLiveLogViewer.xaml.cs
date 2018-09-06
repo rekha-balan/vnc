@@ -40,7 +40,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-
         #region Constructors
 
         public wucLiveLogViewer()

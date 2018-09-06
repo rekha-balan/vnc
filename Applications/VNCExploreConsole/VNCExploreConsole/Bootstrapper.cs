@@ -43,11 +43,12 @@ namespace VNCExploreConsole
             Container.RegisterType<PersonRepository.Interface.IPersonRepository, SQLRepository>();
         }
 
-        // Step 3 - Configure the RegionAdapters
+        // Step 3 - Configure the RegionAdapters if any custom ones have been created
 
         protected override RegionAdapterMappings ConfigureRegionAdapterMappings()
         {
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
+
             mappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
             return mappings;
         }
