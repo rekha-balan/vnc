@@ -88,6 +88,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
                                 if (_configurationOptions.Boolean) addField = true;
                                 break;
 
+                            case "Byte":
+                                if (_configurationOptions.Byte) addField = true;
+                                break;
+
                             case "Date":
                                 if (_configurationOptions.Date) addField = true;
                                 break;
@@ -102,6 +106,10 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                             case "Int32":
                                 if (_configurationOptions.Int32) addField = true;
+                                break;
+
+                            case "Int64":
+                                if (_configurationOptions.Int64) addField = true;
                                 break;
 
                             case "Integer":
@@ -150,23 +158,25 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                 if (displayStructure)
                 {
-                    string messageContext = "";
+                    //string messageContext = "";
 
-                    if (_configurationOptions.ClassOrModuleName)
-                    {
-                        messageContext = Helpers.VB.GetContainingContext(node, _configurationOptions);
-                    }
+                    //if (_configurationOptions.ClassOrModuleName)
+                    //{
+                    //    messageContext = Helpers.VB.GetContainingContext(node, _configurationOptions);
+                    //}
 
-                    if (_configurationOptions.MethodName)
-                    {
-                        messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
-                    }
+                    //if (_configurationOptions.MethodName)
+                    //{
+                    //    messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                    //}
 
-                    Messages.AppendLine(String.Format("{0} {1}",
-                        messageContext,
-                        node.StructureStatement.ToString()));
+                    //Messages.AppendLine(String.Format("{0} {1}",
+                    //    messageContext,
+                    //    node.StructureStatement.ToString()));
 
-                    //Messages.AppendLine(node.StructureStatement.ToString());
+                    ////Messages.AppendLine(node.StructureStatement.ToString());
+
+                    RecordMatchAndContext(node, BlockType.None);
 
                     if (ShowFields)
                     {

@@ -66,13 +66,15 @@ namespace VNC.CodeAnalysis
         public bool AllTypes { get; set; } = false;
 
 
-        public bool Byte { get; set; } = false;
+
 
         public bool Boolean { get; set; } = false;
 
-        public bool Date { get; set; } = false;
+        public bool Byte { get; set; } = false;
 
         public bool DataTable { get; set; } = false;
+
+        public bool Date { get; set; } = false;
 
         public bool DateTime { get; set; } = false;
 
