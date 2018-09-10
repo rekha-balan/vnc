@@ -212,11 +212,10 @@ namespace VNC.CodeAnalysis.Helpers
             //walker.Messages = commandConfiguration.Results;
             walker.Messages = results;
 
+            // Setting the TargetPattern will call InitializeRegEx()
             walker.TargetPattern = commandConfiguration.UseRegEx ? commandConfiguration.RegEx : ".*";
-            walker._configurationOptions = commandConfiguration.ConfigurationOptions;
 
-            walker._targetPatternRegEx = Common.InitializeRegEx(walker.TargetPattern, walker.Messages, RegexOptions.IgnoreCase);
-            //walker.InitializeRegEx();
+            walker._configurationOptions = commandConfiguration.ConfigurationOptions;
 
             walker.Matches = commandConfiguration.Matches;
             walker.CRCMatchesToString = commandConfiguration.CRCMatchesToString;

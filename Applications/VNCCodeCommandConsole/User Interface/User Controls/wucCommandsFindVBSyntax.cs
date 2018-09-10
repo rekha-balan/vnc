@@ -405,6 +405,9 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             commandConfiguration.RegEx = teStructureRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
+            // StructureBlock has special (two types) of RegEx.
+            walker.InitializeRegEx();
+
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
         }
 

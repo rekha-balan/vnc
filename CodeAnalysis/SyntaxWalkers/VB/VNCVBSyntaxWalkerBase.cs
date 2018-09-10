@@ -47,7 +47,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             set
             {
                 _targetPattern = value;
-                Helpers.Common.InitializeRegEx(_targetPattern, Messages, RegexOptions.IgnoreCase);
+                _targetPatternRegEx = Helpers.Common.InitializeRegEx(_targetPattern, Messages, RegexOptions.IgnoreCase);
             }
         }
 
