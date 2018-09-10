@@ -182,7 +182,7 @@
                                                     Content="All Off" />
                                             </dxlc:LayoutGroup>
                                             <dxlc:LayoutGroup Orientation="Vertical">
-                                                <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Horizontal">
+                                                <dxlc:LayoutGroup HorizontalAlignment="Stretch" Orientation="Horizontal">
                                                     <Button
                                                         x:Name="btnInfoToggle"
                                                         HorizontalAlignment="Left"
@@ -219,7 +219,7 @@
                                                         IsChecked="True"
                                                         ToolTip="Info05"/>
                                                 </dxlc:LayoutGroup>
-                                                <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Horizontal">
+                                                <dxlc:LayoutGroup HorizontalAlignment="Stretch" Orientation="Horizontal">
                                                     <Button
                                                         x:Name="btnDebugToggle"
                                                         HorizontalAlignment="Left"
@@ -256,7 +256,7 @@
                                                         IsChecked="True" 
                                                         ToolTip="Debug05"/>
                                                 </dxlc:LayoutGroup>
-                                                <dxlc:LayoutGroup Orientation="Horizontal">
+                                                <dxlc:LayoutGroup HorizontalAlignment="Stretch" Orientation="Horizontal">
                                                     <Button
                                                         x:Name="btnTrace00_09Toggle"
                                                         HorizontalAlignment="Left"
@@ -313,7 +313,7 @@
                                                         IsChecked="True"
                                                         ToolTip="OPERATION / Trace09" />
                                                 </dxlc:LayoutGroup>
-                                                <dxlc:LayoutGroup Orientation="Horizontal">
+                                                <dxlc:LayoutGroup HorizontalAlignment="Stretch"  Orientation="Horizontal">
                                                     <Button
                                                         x:Name="btnTrace10_19Toggle"
                                                         HorizontalAlignment="Left"
@@ -321,56 +321,56 @@
                                                         Content="All Off" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace10"
-                                                        Content="Trace 10"
+                                                        Content="10010"
                                                         IsChecked="True"
                                                         ToolTip="APPLICATION_SESSION" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace11"
-                                                        Content="Trace 11"
+                                                        Content="10011"
                                                         IsChecked="True"
                                                         ToolTip="SYSTEM_CONFIG" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace12"
-                                                        Content="Trace 12"
+                                                        Content="10012"
                                                         IsChecked="True"
                                                         ToolTip="FILE_DIR_IO" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace13"
-                                                        Content="Trace 13"
+                                                        Content="10013"
                                                         IsChecked="True"
                                                         ToolTip="DATABASE_IO" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace14"
-                                                        Content="Trace 14"
+                                                        Content="10014"
                                                         IsChecked="True"
                                                         ToolTip="SECURITY" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace15"
-                                                        Content="Trace 15"
+                                                        Content="10015"
                                                         IsChecked="True"
                                                         ToolTip="ERROR_TRACE_LOW" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace16"
-                                                        Content="Trace 16"
+                                                        Content="10016"
                                                         IsChecked="True"
                                                         ToolTip="EASESYS_IO_MED" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace17"
-                                                        Content="Trace 17"
+                                                        Content="10017"
                                                         IsChecked="True"
                                                         ToolTip="UI_CONTROL_MED" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace18"
-                                                        Content="Trace 18"
+                                                        Content="10018"
                                                         IsChecked="True"
                                                         ToolTip="UTILITY_MED" />
                                                     <dxe:CheckEdit
                                                         x:Name="ceTrace19"
-                                                        Content="Trace 19"
+                                                        Content="10019"
                                                         IsChecked="True"
                                                         ToolTip="OPERATION_LOW / DEFAULT" />
                                                 </dxlc:LayoutGroup>
-                                                <dxlc:LayoutGroup Orientation="Horizontal">
+                                                <dxlc:LayoutGroup HorizontalAlignment="Stretch"  Orientation="Horizontal">
                                                     <Button
                                                         x:Name="btnTrace20_29Toggle"
                                                         HorizontalAlignment="Left"
@@ -379,61 +379,61 @@
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace20"
-                                                            Content="Trace 20"
+                                                            Content="10020"
                                                             IsChecked="True"
                                                             ToolTip="APPLICATIONSESSION_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace21"
-                                                            Content="Trace 21"
+                                                            Content="10021"
                                                             IsChecked="True"
                                                             ToolTip="SYSTEMCONFIG_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace22"
-                                                            Content="Trace 22"
+                                                            Content="10022"
                                                             IsChecked="True"
                                                             ToolTip="FILE_DIR_IO_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace23"
-                                                            Content="Trace 23"
+                                                            Content="10023"
                                                             IsChecked="True"
                                                             ToolTip="DATABASE_IO_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace24"
-                                                            Content="Trace 24"
+                                                            Content="10024"
                                                             IsChecked="True"
                                                             ToolTip="SECURITY_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace25"
-                                                            Content="Trace 25"
+                                                            Content="10025"
                                                             IsChecked="True"
                                                             ToolTip="CLEAR_INITIALIZE" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace26"
-                                                            Content="Trace 26"
+                                                            Content="10026"
                                                             IsChecked="True"
                                                             ToolTip="EASESYS_IO_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace27"
-                                                            Content="Trace 27"
+                                                            Content="10027"
                                                             IsChecked="True"
                                                             ToolTip="UI_CONTROL_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace28"
-                                                            Content="Trace 28"
+                                                            Content="10028"
                                                             IsChecked="True"
                                                             ToolTip="UTILITY_LOW" />
 
                                                         <dxe:CheckEdit
                                                             x:Name="ceTrace29"
-                                                            Content="Trace 29"
+                                                            Content="10029"
                                                             IsChecked="True"
                                                             ToolTip="" />
 

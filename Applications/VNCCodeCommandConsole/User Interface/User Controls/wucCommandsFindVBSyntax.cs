@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
-using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Editors;
-using DevExpress.Xpf.LayoutControl;
-using Microsoft.CodeAnalysis.VisualBasic;
-using System.Xml.Linq;
 using VNC.CodeAnalysis;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.MSBuild;
 
 using VNCCA = VNC.CodeAnalysis;
 using VNCSW = VNC.CodeAnalysis.SyntaxWalkers;

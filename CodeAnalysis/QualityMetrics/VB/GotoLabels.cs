@@ -1,27 +1,12 @@
-﻿using System;
-
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Classification;
-
-using Microsoft.CodeAnalysis.FindSymbols;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.MSBuild;
-using Microsoft.CodeAnalysis.Recommendations;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
-
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+
+using System.Data;
+
+using System.Linq;
+using System.Text;
 
 namespace VNC.CodeAnalysis.QualityMetrics.VB
 {
