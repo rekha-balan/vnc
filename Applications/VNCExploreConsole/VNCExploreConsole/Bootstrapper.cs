@@ -12,22 +12,66 @@ using PersonRepository.Interface;
 using PersonRepository.Service;
 using PersonRepository.CSV;
 using PersonRepository.SQL;
+using System;
 
 namespace VNCExploreConsole
 {
     class Bootstrapper : UnityBootstrapper
     {
 
-        // Step 1 - Configure the catalog of modules
+        // Step 1b - Configure the catalog of modules
+        // Modules are loaded at Startup and must be a project reference
 
         protected override void ConfigureModuleCatalog()
         {
+            Type moduleAType = typeof(ModuleAModule);
+            ModuleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = moduleAType.Name,
+                ModuleType = moduleAType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.WhenAvailable
+                //    InitializationMode = InitializationMode.OnDemand
+            });
+
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
 
-            moduleCatalog.AddModule(typeof(ModuleAModule));
+            //moduleCatalog.AddModule(typeof(ModuleAModule));
             moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
             moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
             moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
+        }
+
+        // Step 1a - Create the catalog of Modules
+
+        // To load modules from directory
+        //
+        // NB. ModuleB.dll and ModuleD.dll have not been referenced
+        // but appears in .\bin\Modules folder
+
+        //protected override IModuleCatalog CreateModuleCatalog()
+        //{
+        //    return new DirectoryModuleCatalog() { ModulePath = @".\Modules" };
+        //}
+
+        // To load modules from Xaml
+        //
+        // NB. ModuleC.dll has not been referenced
+        // but appear in .\bin folder
+
+        //protected override IModuleCatalog CreateModuleCatalog()
+        //{
+        //    return Prism.Modularity.ModuleCatalog.CreateFromXaml(
+        //        new Uri("/VNCExploreConsole;component/XamlCatalog.xaml", UriKind.Relative));
+        //}
+
+        // To load from an App.Config file
+        //
+        // NB. ModuleD.dll has not been referenced
+        // but appears in .\bin\Modules folder
+
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new ConfigurationModuleCatalog();
         }
 
         // Step 2 - Configure the container

@@ -46,7 +46,9 @@ namespace LineStatusViewer.ViewModels
         {
             // S5
 
-            // This returns nothing because we are passed the new BuildItem not the old
+            // This returns nothing because we are passed the new BuildItem not the old one
+            // that was selected to load the LineStatusDetail
+
             //var buildItem = Builds.Single(n => n.LineId == obj.BuildItem.LineId
             //            && n.StationNO == obj.BuildItem.StationNO
             //            && n.BuildNo == obj.BuildItem.BuildNo);

@@ -9,6 +9,17 @@ namespace Infrastructure
     {
         public static string ToolbarRegion = "ToolbarRegion";
         public static string ContentRegion = "ContentRegion";
+
+        public static string ToolbarRegionB = "ToolbarRegionB";
+        public static string ContentRegionB = "ContentRegionB";
+
+        public static string ToolbarRegionC = "ToolbarRegionC";
+        public static string ContentRegionC = "ContentRegionC";
+
+        public static string ToolbarRegionD = "ToolbarRegionD";
+        public static string ContentRegionD = "ContentRegionD";
+
+
         public static string StatusBarRegion = "StatusBarRegion";
         public static string ContentRegionP = "ContentRegionP";
         public static string ContentRegionX = "ContentRegionX";

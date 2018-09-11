@@ -81,7 +81,7 @@
                                 </dxlc:LayoutGroup.GroupBoxStyle>
                                 
                                 <!-- Individual LayoutGroups go here (if you want tabs or groups)-->
-                                <dxlc:LayoutGroup Header="Prism Stuff" Name="lg_W">
+                                <dxlc:LayoutGroup Header="Prism ModuleA - Reference" Name="lg_W">
                                     <DockPanel LastChildFill="True">
                                         <!-- Name regions directly -->
                                         <!--
@@ -90,19 +90,40 @@
                                                 prism:RegionManager.RegionName="ToolbarRegion" />
                                             <ContentControl 
                                                 prism:RegionManager.RegionName="ContentRegion"/>-->
-                                                                            <!-- Use class names -->
-                                                                            <!--<ContentControl 
+                                                <!-- Use class names -->
+                                                <!--<ContentControl 
                                                     DockPanel.Dock="Top" 
                                                     prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
-                                                                            <!--<ItemsControl 
+                                                <!--<ItemsControl 
                                                 DockPanel.Dock="Top" 
                                                 prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
 
                                         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionP}"/>
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
-                                
+
+                                <dxlc:LayoutGroup Header="Prism ModuleB - Directory" Name="lg_WB">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionB}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionB}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Prism ModuleC - Xaml" Name="lg_WC">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionC}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Prism ModuleD - AppConfig" Name="lg_WD">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionD}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionD}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
                                 <dxlc:LayoutGroup Header="DI(X)" Name="lg_X">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
                                 </dxlc:LayoutGroup> 
