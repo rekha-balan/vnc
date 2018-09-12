@@ -124,6 +124,27 @@
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
+                                <dxlc:LayoutGroup Header="Prism SimpleView" Name="lg_SV">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionSV}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionSV}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Prism MVVM Model 1st" Name="lg_M1">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM1}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM1}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Prism MVVM View 1st" Name="lg_V1">
+                                    <DockPanel LastChildFill="True">
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionV1}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionV1}"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+                                
                                 <dxlc:LayoutGroup Header="DI(X)" Name="lg_X">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
                                 </dxlc:LayoutGroup> 

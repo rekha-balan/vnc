@@ -134,6 +134,14 @@
       <Project>{3d9a8549-a7a8-4df9-829e-aeae7ecacaca}</Project>
       <Name>ModuleA</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\MVVMModel1st\MVVMViewModel1st.csproj">
+      <Project>{fea74cf7-4543-4db6-86ae-6608e923daf0}</Project>
+      <Name>MVVMViewModel1st</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\MVVMView1st\MVVMView1st.csproj">
+      <Project>{a2404ec3-1f6b-4d4f-8e24-9119d8cbde20}</Project>
+      <Name>MVVMView1st</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\PeopleViewerDI\PeopleViewerDI.csproj">
       <Project>{3104f414-ec1f-415b-bc49-c72abdc0e529}</Project>
       <Name>PeopleViewerDI</Name>
@@ -145,6 +153,10 @@
     <ProjectReference Include="..\Modules\PeopleViewerTightCoupling\PeopleViewerTightCoupling.csproj">
       <Project>{bd4a192e-c418-4fb6-8499-1fbd5bd7c4ba}</Project>
       <Name>PeopleViewerTightCoupling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\SimpleView\SimpleView.csproj">
+      <Project>{9bf41b1b-558b-496a-9ce2-6d34199f6297}</Project>
+      <Name>SimpleView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj">
       <Project>{22d242eb-8113-49e3-8cc9-03a41e3b185e}</Project>

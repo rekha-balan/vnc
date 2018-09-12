@@ -7,6 +7,7 @@ using Infrastructure;
 using System.Windows.Controls;
 using Prism.Regions;
 using ModuleA;
+using SimpleView;
 using PeopleViewer;
 using PersonRepository.Interface;
 using PersonRepository.Service;
@@ -18,30 +19,14 @@ namespace VNCExploreConsole
 {
     class Bootstrapper : UnityBootstrapper
     {
-
-        // Step 1b - Configure the catalog of modules
-        // Modules are loaded at Startup and must be a project reference
-
-        protected override void ConfigureModuleCatalog()
-        {
-            Type moduleAType = typeof(ModuleAModule);
-            ModuleCatalog.AddModule(new ModuleInfo()
-            {
-                ModuleName = moduleAType.Name,
-                ModuleType = moduleAType.AssemblyQualifiedName,
-                InitializationMode = InitializationMode.WhenAvailable
-                //    InitializationMode = InitializationMode.OnDemand
-            });
-
-            var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-
-            //moduleCatalog.AddModule(typeof(ModuleAModule));
-            moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
-            moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
-            moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
-        }
-
         // Step 1a - Create the catalog of Modules
+        //
+        // This is called when you do not directly reference the Assembly
+        // containing the module.
+
+        // TODO(crhodes)
+        // Figure out how you can do more than one of these creates at a time
+        // e.g. App.Config and look in Directory
 
         // To load modules from directory
         //
@@ -72,6 +57,31 @@ namespace VNCExploreConsole
         protected override IModuleCatalog CreateModuleCatalog()
         {
             return new ConfigurationModuleCatalog();
+        }
+
+        // Step 1b - Configure the catalog of modules
+        // Modules are loaded at Startup and must be a project reference
+
+        protected override void ConfigureModuleCatalog()
+        {
+            Type moduleAType = typeof(ModuleAModule);
+            ModuleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = moduleAType.Name,
+                ModuleType = moduleAType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.WhenAvailable
+                //    InitializationMode = InitializationMode.OnDemand
+            });
+
+            var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+
+            //moduleCatalog.AddModule(typeof(ModuleAModule));
+
+            moduleCatalog.AddModule(typeof(SimpleViewModule));
+
+            moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
+            moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
+            moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
         }
 
         // Step 2 - Configure the container

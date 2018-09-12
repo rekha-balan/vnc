@@ -1,16 +1,15 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Infrastructure
 {
-    public class ViewModelBase : IViewModel, IViewModel2, INotifyPropertyChanged
+    public class ViewModelBase : IViewModel_VM1, IViewModel_V1, INotifyPropertyChanged
     {
-        public IView View { get; set; }
+        public IView_VM1 View { get; set; }
 
         public ViewModelBase() { }
 
-        public ViewModelBase(IView view)
+        public ViewModelBase(IView_VM1 view)
         {
             View = view;
             View.ViewModel = this;
@@ -30,6 +29,7 @@ namespace Infrastructure
         public event PropertyChangedEventHandler PropertyChanged;
 
         // This is the traditional approach - requires string name to be passed in
+
         //private void OnPropertyChanged(string propertyName)
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

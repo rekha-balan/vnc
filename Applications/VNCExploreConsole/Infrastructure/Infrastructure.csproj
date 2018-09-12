@@ -49,10 +49,10 @@
     <Compile Include="Events.cs" />
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="IShellService.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="IView2.cs" />
-    <Compile Include="IViewModel.cs" />
-    <Compile Include="IViewModel2.cs" />
+    <Compile Include="IView_VM1.cs" />
+    <Compile Include="IView_V1.cs" />
+    <Compile Include="IViewModel_VM1.cs" />
+    <Compile Include="IViewModel_V1.cs" />
     <Compile Include="KnownRegionNames.cs" />
     <Compile Include="ModuleBase.cs" />
     <Compile Include="Prism\IRegionManagerAware.cs" />

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PrismDemo.Properties {
+namespace MVVMView1st.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
