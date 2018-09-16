@@ -64,17 +64,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\PeopleViewModel.cs" />
-    <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
-    <Compile Include="Views\People.xaml.cs">
-      <DependentUpon>People.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\PersonDetails.xaml.cs">
-      <DependentUpon>PersonDetails.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Views\Person.xaml.cs">
       <DependentUpon>Person.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,14 +92,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\People.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PersonDetails.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Person.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

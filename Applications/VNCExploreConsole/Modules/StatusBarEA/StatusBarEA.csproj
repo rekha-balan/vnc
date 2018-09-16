@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A0166329-790A-4C28-9D3A-F68A9DC30604}</ProjectGuid>
+    <ProjectGuid>{B00FA303-BF97-4B99-A66D-A288C51AAB14}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PeopleCC</RootNamespace>
-    <AssemblyName>PeopleCC</AssemblyName>
+    <RootNamespace>StatusBarEA</RootNamespace>
+    <AssemblyName>StatusBarEA</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PeopleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,11 +63,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\PersonViewModel.cs" />
-    <Compile Include="Views\Person.xaml.cs">
-      <DependentUpon>Person.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="StatusBarModule.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="Views\StatusBar.xaml.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -92,16 +89,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\Person.xaml">
+    <Page Include="Views\StatusBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\PrismDemo.Business\PrisimDemo.Business.csproj">
-      <Project>{ae529ede-3d2f-4a49-b0a1-81bc838008cb}</Project>
-      <Name>PrisimDemo.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
       <Project>{4b1b862b-aa00-48a1-b806-424689173863}</Project>
       <Name>Infrastructure</Name>

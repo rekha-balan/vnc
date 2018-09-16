@@ -3,13 +3,17 @@ using Prism.Events;
 using Infrastructure;
 using ModuleInterfaces;
 
-namespace StatusBar
+namespace StatusBarEA
 {
     public class StatusBarViewModel : ViewModelBase, IStatusBarViewModel
     {
-        public StatusBarViewModel(IStatusBar view)
+        IEventAggregator _eventAggregator;
+
+        public StatusBarViewModel(IStatusBar view, IEventAggregator eventAggregator)
             : base(view)
         {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<PersonUpdatedEvent>().Subscribe(PersonUpdated);
         }
 
         private string _message = "Ready";
@@ -21,6 +25,11 @@ namespace StatusBar
                 _message = value;
                 OnPropertyChanged("Message");
             }
+        }
+
+        void PersonUpdated(string obj)
+        {
+            Message = string.Format("{0} was updated", obj);
         }
     }
 }

@@ -147,7 +147,7 @@
 
                                 <dxlc:LayoutGroup Header="Prism Commanding - DelegateCommand" Name="lg_C_DC">
                                     <DockPanel LastChildFill="True">
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegionC_DC}"
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}"
                                                         DockPanel.Dock="Bottom" Width="Auto" Height="Auto"
                                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC_DC}"
@@ -160,7 +160,7 @@
                                         <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionC_CC}" 
                                                         DockPanel.Dock="Top" Width="Auto" Height="Auto" 
                                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegionC_CC}" 
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}" 
                                                         DockPanel.Dock="Bottom" Width="Auto" Height="Auto" 
                                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         <TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC_CC}" 

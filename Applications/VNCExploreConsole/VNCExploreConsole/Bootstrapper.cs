@@ -9,16 +9,10 @@ using Prism.Regions;
 using ModuleA;
 using SimpleView;
 using PeopleViewer;
-using PersonRepository.Interface;
-using PersonRepository.Service;
-using PersonRepository.CSV;
 using PersonRepository.SQL;
 using System;
 using MVVMView1st;
 using MVVMViewModel1st;
-using StatusBar;
-using PeopleCC;
-using PeopleDC;
 using Toolbar;
 
 namespace VNCExploreConsole
@@ -93,17 +87,35 @@ namespace VNCExploreConsole
 
             // Commanding Examples
 
-            moduleCatalog.AddModule(typeof(StatusBarModule));
-            moduleCatalog.AddModule(typeof(PeopleDC.PeopleModule));
-            moduleCatalog.AddModule(typeof(PeopleCC.PeopleModule));
-            moduleCatalog.AddModule(typeof(ToolbarModule));
+            // By default Prism uses just the class name to distinquish modules
+            // Even though these are from different namespaces they collide
 
+            AddModuleToCatalog(typeof(StatusBar.StatusBarModule), moduleCatalog);
+            //AddModuleToCatalog(typeof(StatusBarEA.StatusBarModule), moduleCatalog);
+
+            //moduleCatalog.AddModule(typeof(PeopleDC.PeopleModule));
+            //moduleCatalog.AddModule(typeof(PeopleCC.PeopleModule));
+
+            AddModuleToCatalog(typeof(PeopleDC.PeopleModule), moduleCatalog);
+            AddModuleToCatalog(typeof(PeopleCC.PeopleModule), moduleCatalog);
+
+            moduleCatalog.AddModule(typeof(ToolbarModule));
 
             moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
             moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));
             moduleCatalog.AddModule(typeof(PeopleViewerLooseCouplingModule));
         }
 
+        void AddModuleToCatalog(Type moduleType, ModuleCatalog catalog)
+        {
+            ModuleInfo moduleInfo = new ModuleInfo();
+
+            // Use the fully qualified name to distinquish the ModuleName
+            moduleInfo.ModuleName = moduleType.AssemblyQualifiedName;
+            moduleInfo.ModuleType = moduleType.AssemblyQualifiedName;
+
+            catalog.AddModule(moduleInfo);
+        }
         // Step 2 - Configure the container
 
         protected override void ConfigureContainer()

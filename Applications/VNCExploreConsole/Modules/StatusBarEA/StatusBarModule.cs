@@ -5,7 +5,7 @@ using Prism.Regions;
 using Prism.Modularity;
 using ModuleInterfaces;
 
-namespace StatusBar
+namespace StatusBarEA
 {
     public class StatusBarModule : IModule
     {

@@ -39,6 +39,7 @@ namespace Infrastructure
         public static string ContentRegionV_VM1 = "ContentRegionV_VM1";
 
         public static string StatusBarRegion = "StatusBarRegion";
+
         public static string ContentRegionP = "ContentRegionP";
         public static string ContentRegionX = "ContentRegionX";
         public static string ContentRegionY = "ContentRegionY";
@@ -48,13 +49,13 @@ namespace Infrastructure
 
         // Delegate Command
 
-        public static string StatusBarRegionC_DC = "StatusBarRegionC_DC";
+        //public static string StatusBarRegionC_DC = "StatusBarRegionC_DC";
         public static string ContentRegionC_DC = "ContentRegionC_DC";
 
         // Composite Command
 
         public static string ToolbarRegionC_CC = "ToolbarRegionC_CC";
-        public static string StatusBarRegionC_CC = "StatusBarRegionC_CC";
+        //public static string StatusBarRegionC_CC = "StatusBarRegionC_CC";
         public static string ContentRegionC_CC = "ContentRegionC_CC";
 
         // AML LineStatus examples

@@ -166,6 +166,10 @@
       <Project>{9bf41b1b-558b-496a-9ce2-6d34199f6297}</Project>
       <Name>SimpleView</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\StatusBarEA\StatusBarEA.csproj">
+      <Project>{b00fa303-bf97-4b99-a66d-a288c51aab14}</Project>
+      <Name>StatusBarEA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
       <Project>{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}</Project>
       <Name>StatusBar</Name>

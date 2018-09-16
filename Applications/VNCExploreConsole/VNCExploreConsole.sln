@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleCC", "Modules\PeopleC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleInterfaces", "ModuleInterfaces\ModuleInterfaces.csproj", "{77358BAB-7958-4300-A54E-9B0376E35CE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBarEA", "Modules\StatusBarEA\StatusBarEA.csproj", "{B00FA303-BF97-4B99-A66D-A288C51AAB14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{77358BAB-7958-4300-A54E-9B0376E35CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77358BAB-7958-4300-A54E-9B0376E35CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77358BAB-7958-4300-A54E-9B0376E35CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B00FA303-BF97-4B99-A66D-A288C51AAB14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00FA303-BF97-4B99-A66D-A288C51AAB14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00FA303-BF97-4B99-A66D-A288C51AAB14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00FA303-BF97-4B99-A66D-A288C51AAB14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,6 +224,7 @@ Global
 		{3C63D2A4-6280-47C5-B9B5-D42F7F2A6CD9} = {B6E0F8EE-8461-43D8-8CF8-DCDC466986D6}
 		{A0166329-790A-4C28-9D3A-F68A9DC30604} = {B6E0F8EE-8461-43D8-8CF8-DCDC466986D6}
 		{77358BAB-7958-4300-A54E-9B0376E35CE7} = {B6E0F8EE-8461-43D8-8CF8-DCDC466986D6}
+		{B00FA303-BF97-4B99-A66D-A288C51AAB14} = {B6E0F8EE-8461-43D8-8CF8-DCDC466986D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF0CF43D-129E-432C-925D-5B8A88020FF4}

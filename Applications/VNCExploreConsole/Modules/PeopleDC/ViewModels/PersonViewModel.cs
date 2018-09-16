@@ -11,9 +11,6 @@ namespace PeopleDC
 {
     public class PersonViewModel : ViewModelBase, IPersonViewModel
     {
-        IEventAggregator _eventAggregator;
-        //IPersonRepository _personRepository;
-
         #region "Constructors, Initialization, and Load"
 
         public PersonViewModel(IPerson view)
@@ -22,52 +19,13 @@ namespace PeopleDC
             CreatePerson();
 
             // Use this form if do not need/want to pass parameters to methods
+
             //SaveCommand = new DelegateCommand(Save, CanSave);
 
             // Use this form to pass nullable command parameter.  Use object or other nullable type.
+
             SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
-
-            // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
-
-            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
         }
-
-        // Need to pass in EventAggregator
-
-        public PersonViewModel(IPerson view, IEventAggregator eventAggregator)
-            : base(view)
-        {
-            _eventAggregator = eventAggregator;
-
-            CreatePerson();
-
-            // Use this form if do not need/want to pass parameters to methods
-            //SaveCommand = new DelegateCommand(Save, CanSave);
-
-            // Use this form to pass nullable command parameter.  Use object or other nullable type.
-            SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
-
-            // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
-
-            GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
-        }
-
-        //public PersonViewModel(IPerson view, IEventAggregator eventAggregator, IPersonRepository personRepository)
-        //    : base(view)
-        //{
-        //    _eventAggregator = eventAggregator;
-        //    _personRepository = personRepository;
-
-        //    // Use this form if do not need/want to pass parameters to methods
-        //    //SaveCommand = new DelegateCommand(Save, CanSave);
-
-        //    // Use this form to pass nullable command parameter.  Use object or other nullable type.
-        //    SaveCommand = new DelegateCommand<Business.Person>(Save, CanSave);
-
-        //    // Register the SaveCommand with the CompositeCommand declared in GlobalCommands.
-
-        //    GlobalCommands.SaveAllCommand.RegisterCommand(SaveCommand);
-        //}
 
         #endregion
 
@@ -83,14 +41,6 @@ namespace PeopleDC
                 // Hook in event handler to force (re)check of CanSave
                 _person.PropertyChanged += Person_PropertyChanged;
                 OnPropertyChanged("Person");
-            }
-        }
-
-        public string ViewName
-        {
-            get
-            {
-                return string.Format("{0}, {1}", Person.LastName, Person.FirstName);
             }
         }
 
@@ -127,6 +77,8 @@ namespace PeopleDC
             // Force calling of CanSave on SaveCommand delegate
             SaveCommand.RaiseCanExecuteChanged();
         }
+
+        #endregion
 
         #region DelegateCommand taking no parameters
 
@@ -199,8 +151,6 @@ namespace PeopleDC
                 //    Person.LastName, Person.FirstName, count));
             }
         }
-
-        #endregion
 
         #endregion
     }

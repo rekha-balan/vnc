@@ -2,11 +2,11 @@
 using ModuleInterfaces;
 using System.Windows.Controls;
 
-namespace PeopleDC
+namespace StatusBarEA
 {
-    public partial class People : UserControl, IPeople
+    public partial class StatusBar : UserControl, IStatusBar
     {
-        public People()
+        public StatusBar()
         {
             InitializeComponent();
         }
