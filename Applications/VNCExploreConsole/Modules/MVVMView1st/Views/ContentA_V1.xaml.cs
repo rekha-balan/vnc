@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using Infrastructure;
+using ModuleInterfaces;
 
 namespace MVVMView1st
 {

@@ -56,8 +56,6 @@
       <DependentUpon>ContentA_VM1.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ContentA_VM1_ViewModel.cs" />
-    <Compile Include="Views\IContentA_VM1.cs" />
-    <Compile Include="ViewModels\IContentA_VM1_ViewModel.cs" />
     <Compile Include="MVVMViewModel1stModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -90,6 +88,10 @@
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
       <Project>{55b3cc3e-3dfc-4fea-a93f-f13667074d74}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ModuleInterfaces\ModuleInterfaces.csproj">
+      <Project>{77358bab-7958-4300-a54e-9b0376e35ce7}</Project>
+      <Name>ModuleInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

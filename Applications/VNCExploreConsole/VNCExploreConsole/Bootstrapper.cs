@@ -14,6 +14,12 @@ using PersonRepository.Service;
 using PersonRepository.CSV;
 using PersonRepository.SQL;
 using System;
+using MVVMView1st;
+using MVVMViewModel1st;
+using StatusBar;
+using PeopleCC;
+using PeopleDC;
+using Toolbar;
 
 namespace VNCExploreConsole
 {
@@ -77,7 +83,21 @@ namespace VNCExploreConsole
 
             //moduleCatalog.AddModule(typeof(ModuleAModule));
 
+            // View Examples
+
             moduleCatalog.AddModule(typeof(SimpleViewModule));
+
+            moduleCatalog.AddModule(typeof(MVVMView1stModule));
+
+            moduleCatalog.AddModule(typeof(MVVMViewModel1stModule));
+
+            // Commanding Examples
+
+            moduleCatalog.AddModule(typeof(StatusBarModule));
+            moduleCatalog.AddModule(typeof(PeopleDC.PeopleModule));
+            moduleCatalog.AddModule(typeof(PeopleCC.PeopleModule));
+            moduleCatalog.AddModule(typeof(ToolbarModule));
+
 
             moduleCatalog.AddModule(typeof(PeopleViewerDIModule));
             moduleCatalog.AddModule(typeof(PeopleViewerTightCouplingModule));

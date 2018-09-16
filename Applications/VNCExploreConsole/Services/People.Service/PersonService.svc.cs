@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace People.Service
+namespace PeopleCC.Service
 {
     public class PersonService : IPersonService
     {

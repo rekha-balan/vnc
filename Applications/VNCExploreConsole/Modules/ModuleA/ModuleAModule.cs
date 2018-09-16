@@ -37,7 +37,7 @@ namespace ModuleA
 
             // Multiple Toolbar Regions
 
-            IRegion region = _regionManager.Regions[RegionNames.ToolbarRegion];
+            IRegion region = _regionManager.Regions[RegionNames.ToolbarRegionM];
 
             region.Add(_container.Resolve<ToolbarView>());
             region.Add(_container.Resolve<ToolbarView>());
@@ -45,7 +45,7 @@ namespace ModuleA
             region.Add(_container.Resolve<ToolbarView>());
             region.Add(_container.Resolve<ToolbarView>());
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ContentView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionM, typeof(ContentView));
         }
     }
 }

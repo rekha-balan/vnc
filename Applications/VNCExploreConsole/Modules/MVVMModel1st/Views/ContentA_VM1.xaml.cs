@@ -1,12 +1,9 @@
 ﻿using System.Windows.Controls;
 using Infrastructure;
+using ModuleInterfaces;
 
 namespace MVVMViewModel1st
 {
-    /// <summary>
-    /// Interaction logic for ContentA.xaml
-    /// This is for ViewModel first approaches
-    /// </summary>
     public partial class ContentA_VM1 : UserControl, IContentA_VM1
     {
         public ContentA_VM1()

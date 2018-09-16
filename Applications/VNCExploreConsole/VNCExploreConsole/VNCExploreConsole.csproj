@@ -142,6 +142,14 @@
       <Project>{a2404ec3-1f6b-4d4f-8e24-9119d8cbde20}</Project>
       <Name>MVVMView1st</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\PeopleCC\PeopleCC.csproj">
+      <Project>{a0166329-790a-4c28-9d3a-f68a9dc30604}</Project>
+      <Name>PeopleCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\PeopleDC\PeopleDC.csproj">
+      <Project>{3c63d2a4-6280-47c5-b9b5-d42f7f2a6cd9}</Project>
+      <Name>PeopleDC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\PeopleViewerDI\PeopleViewerDI.csproj">
       <Project>{3104f414-ec1f-415b-bc49-c72abdc0e529}</Project>
       <Name>PeopleViewerDI</Name>
@@ -157,6 +165,14 @@
     <ProjectReference Include="..\Modules\SimpleView\SimpleView.csproj">
       <Project>{9bf41b1b-558b-496a-9ce2-6d34199f6297}</Project>
       <Name>SimpleView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
+      <Project>{4634726F-AD0A-4BC2-90DC-D45CBAAE7BCA}</Project>
+      <Name>StatusBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Toolbar\Toolbar.csproj">
+      <Project>{A8003C7C-BDB7-4CE8-A934-0755EA19E9E1}</Project>
+      <Name>Toolbar</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\PersonRepository.CSV\PersonRepository.CSV.csproj">
       <Project>{22d242eb-8113-49e3-8cc9-03a41e3b185e}</Project>

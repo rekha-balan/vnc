@@ -98,53 +98,84 @@
                                                 DockPanel.Dock="Top" 
                                                 prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />-->
 
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegion}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegion}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="Prism ModuleB - Directory" Name="lg_WB">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionB}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionB}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM_B}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM_B}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="Prism ModuleC - Xaml" Name="lg_WC">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionC}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM_C}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM_C}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="Prism ModuleD - AppConfig" Name="lg_WD">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionD}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionD}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM_D}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM_D}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="Prism SimpleView" Name="lg_SV">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionSV}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionSV}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionV_SV}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionV_SV}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Header="Prism MVVM Model 1st" Name="lg_M1">
+                                <dxlc:LayoutGroup Header="Prism MVVM ViewModel 1st" Name="lg_VM1">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionM1}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionM1}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionV_VM1}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionV_VM1}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
 
                                 <dxlc:LayoutGroup Header="Prism MVVM View 1st" Name="lg_V1">
                                     <DockPanel LastChildFill="True">
-                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionV1}" />
-                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionV1}"/>
+                                        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionV_V1}" />
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionV_V1}"/>
                                     </DockPanel>
                                 </dxlc:LayoutGroup>
-                                
+
+                                <dxlc:LayoutGroup Header="Prism Commanding - DelegateCommand" Name="lg_C_DC">
+                                    <DockPanel LastChildFill="True">
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegionC_DC}"
+                                                        DockPanel.Dock="Bottom" Width="Auto" Height="Auto"
+                                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC_DC}"
+                                                        Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Header="Prism Commanding - CompositeCommand" Name="lg_C_CC">
+                                    <DockPanel LastChildFill="True">
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ToolbarRegionC_CC}" 
+                                                        DockPanel.Dock="Top" Width="Auto" Height="Auto" 
+                                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegionC_CC}" 
+                                                        DockPanel.Dock="Bottom" Width="Auto" Height="Auto" 
+                                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <TabControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionC_CC}" 
+                                                    Width="Auto" Height="Auto" 
+                                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <TabControl.ItemContainerStyle>
+                                                <Style TargetType="TabItem">
+                                                    <Setter Property="Header" 
+                                                            Value="{Binding Content.DataContext.ViewName, RelativeSource={RelativeSource Self}}" />
+                                                </Style>
+                                            </TabControl.ItemContainerStyle>
+                                        </TabControl>
+                                    </DockPanel>
+                                </dxlc:LayoutGroup>
+
                                 <dxlc:LayoutGroup Header="DI(X)" Name="lg_X">
                                     <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ContentRegionX}"/>
                                 </dxlc:LayoutGroup> 

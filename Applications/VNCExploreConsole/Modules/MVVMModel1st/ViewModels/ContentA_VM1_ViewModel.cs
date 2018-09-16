@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using ModuleInterfaces;
 
 namespace MVVMViewModel1st
 {

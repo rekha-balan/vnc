@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using Infrastructure;
 using Prism.Modularity;
 using Prism.Regions;
+using ModuleInterfaces;
 
 namespace MVVMView1st
 {
@@ -46,11 +47,11 @@ namespace MVVMView1st
             // Enable view discovery for toolbar
             // Not clear if need to RegisterType with container, supra, if using region manager
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionV1, typeof(ToolbarA));
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionV_V1, typeof(ToolbarA));
 
             // Enable view discovery for content
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionV1, typeof(ContentA_V1));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionV_V1, typeof(ContentA_V1));
 
             // If you need more control of region,
 

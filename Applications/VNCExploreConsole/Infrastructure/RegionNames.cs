@@ -7,30 +7,58 @@ namespace Infrastructure
 {
     public class RegionNames
     {
-        public static string ToolbarRegion = "ToolbarRegion";
-        public static string ContentRegion = "ContentRegion";
+        // Modules Examples
 
-        public static string ToolbarRegionB = "ToolbarRegionB";
-        public static string ContentRegionB = "ContentRegionB";
+        public static string ToolbarRegionM = "ToolbarRegionM";
+        public static string ContentRegionM = "ContentRegionM";
 
-        public static string ToolbarRegionC = "ToolbarRegionC";
-        public static string ContentRegionC = "ContentRegionC";
+        public static string ToolbarRegionM_B = "ToolbarRegionM_B";
+        public static string ContentRegionM_B = "ContentRegionM_B";
 
-        public static string ToolbarRegionD = "ToolbarRegionD";
-        public static string ContentRegionD = "ContentRegionD";
+        public static string ToolbarRegionM_C = "ToolbarRegionM_C";
+        public static string ContentRegionM_C = "ContentRegionM_C";
 
-        public static string ToolbarRegionSV = "ToolbarRegionSV";
-        public static string ContentRegionSV = "ContentRegionSV";
-        public static string ToolbarRegionV1 = "ToolbarRegionV1";
-        public static string ContentRegionV1 = "ContentRegionV1";
-        public static string ToolbarRegionM1 = "ToolbarRegionM1";
-        public static string ContentRegionM1 = "ContentRegionM1";
+        public static string ToolbarRegionM_D = "ToolbarRegionM_D";
+        public static string ContentRegionM_D = "ContentRegionM_D";
+
+        // View Examples
+
+        // Simple View
+
+        public static string ToolbarRegionV_SV = "ToolbarRegionV_SV";
+        public static string ContentRegionV_SV = "ContentRegionV_SV";
+
+        // View 1st
+
+        public static string ToolbarRegionV_V1 = "ToolbarRegionV_V1";
+        public static string ContentRegionV_V1 = "ContentRegionV_V1";
+
+        // ViewModel 1st
+
+        public static string ToolbarRegionV_VM1 = "ToolbarRegionV_VM1";
+        public static string ContentRegionV_VM1 = "ContentRegionV_VM1";
 
         public static string StatusBarRegion = "StatusBarRegion";
         public static string ContentRegionP = "ContentRegionP";
         public static string ContentRegionX = "ContentRegionX";
         public static string ContentRegionY = "ContentRegionY";
         public static string ContentRegionZ = "ContentRegionZ";
+
+        // Commanding Examples
+
+        // Delegate Command
+
+        public static string StatusBarRegionC_DC = "StatusBarRegionC_DC";
+        public static string ContentRegionC_DC = "ContentRegionC_DC";
+
+        // Composite Command
+
+        public static string ToolbarRegionC_CC = "ToolbarRegionC_CC";
+        public static string StatusBarRegionC_CC = "StatusBarRegionC_CC";
+        public static string ContentRegionC_CC = "ContentRegionC_CC";
+
+        // AML LineStatus examples
+
         public static string ContentRegionLineStatusV = "ContentRegionLineStatusV";
         public static string ContentRegionLineStatusNV = "ContentRegionLineStatusNV";
         public static string ContentRegionLineStatusDV = "ContentRegionLineStatusDV";

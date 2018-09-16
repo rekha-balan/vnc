@@ -1,6 +1,6 @@
 ﻿using Infrastructure;
 
-namespace MVVMViewModel1st
+namespace ModuleInterfaces
 {
     // This is for ViewModel 1st Approaches
     public interface IContentA_VM1 : IView_VM1

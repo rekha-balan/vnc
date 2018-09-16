@@ -27,8 +27,8 @@ namespace ModuleB
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionB, typeof(ToolbarView));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionB, typeof(ContentView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionM_B, typeof(ToolbarView));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionM_B, typeof(ContentView));
         }
     }
 }

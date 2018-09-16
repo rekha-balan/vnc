@@ -39,8 +39,8 @@ namespace SimpleView
             // 2. Tell the Region where the View goes.
             // NB. This also registers the type
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionSV, typeof(ToolbarA));
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionSV, typeof(ContentA));
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegionV_SV, typeof(ToolbarA));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegionV_SV, typeof(ContentA));
         }
     }
 }

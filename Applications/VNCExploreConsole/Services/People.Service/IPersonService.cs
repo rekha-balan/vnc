@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace People.Service
+namespace PeopleCC.Service
 {
     [ServiceContract]
     public interface IPersonService
