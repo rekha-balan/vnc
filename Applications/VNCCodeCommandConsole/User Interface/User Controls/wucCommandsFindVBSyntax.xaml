@@ -426,7 +426,41 @@
                 </Button>
             </dxlc:LayoutItem>
 
-        </dxlc:LayoutGroup>        
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup Header="Find HandlesClause Syntax" 
+            View="GroupBox"
+            Orientation="Vertical"
+            IsCollapsible="True" IsCollapsed="True">
+
+            <dxlc:LayoutGroup
+            	Orientation="Horizontal">
+
+                <dxlc:LayoutGroup
+                	Orientation="Vertical">
+                    <dxlc:LayoutItem>
+                        <dxe:CheckEdit x:Name="ceHandlesClauseUseRegEx" Content="Use Regular Expressions"
+                                       IsChecked="False"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Identifier">
+                        <dxe:TextEdit x:Name="teHandlesClauseRegEx" Text=".*"
+                                      IsEnabled="{cb:Binding ElementName=ceHandlesClauseUseRegEx, Path=IsChecked, Mode=OneWay}"
+                                      ToolTip="Supports Regular Expressions"/>
+                    </dxlc:LayoutItem>
+
+                </dxlc:LayoutGroup>
+
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutItem>
+                <Button Content="HandlesClause Walker"
+                        Style="{StaticResource SyntaxQueryButton}"
+                        Click="btnHandlesClauseWalker_Click"/>
+            </dxlc:LayoutItem>
+
+        </dxlc:LayoutGroup>
+        
         <dxlc:LayoutGroup Header="Find ParameterList Syntax" 
         	View="GroupBox"
             Orientation="Vertical"

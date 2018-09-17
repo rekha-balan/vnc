@@ -139,10 +139,6 @@
                 Orientation="Vertical"
                 Visibility="{cb:Binding ElementName=ceDisplayContext, Path=IsChecked}">
 
-                <dxe:CheckEdit x:Name="ceDisplayContainingBlock" 
-                                Content="ContainingBlock" 
-                                IsChecked="False" VerticalAlignment="Top" />
-
                 <dxe:CheckEdit x:Name="ceDisplayClassOrModuleName" 
                                 Content="Class or Module Name" 
                                 IsChecked="False" VerticalAlignment="Top" />
@@ -151,6 +147,14 @@
                                 Content="Method Name" 
                                 IsChecked="False" VerticalAlignment="Top" />
 
+                <dxe:CheckEdit x:Name="ceDisplayContainingMethodBlock" 
+                                Content="Containing Method Block" 
+                                IsChecked="False" VerticalAlignment="Top" />
+
+                <dxe:CheckEdit x:Name="ceDisplayContainingBlock" 
+                                Content="ContainingBlock" 
+                                IsChecked="False" VerticalAlignment="Top" />
+                
                 <dxe:CheckEdit x:Name="ceInTryBlock" 
                                 Content="In Try Block" 
                                 IsChecked="False" VerticalAlignment="Top" />

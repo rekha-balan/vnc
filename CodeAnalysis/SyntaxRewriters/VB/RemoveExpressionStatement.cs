@@ -40,7 +40,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
                         // Figure out how to get Helpers to work here.
                         Messages.AppendLine(String.Format("Removing {0} Method:({1,-35}) {2}",
                             VNCCA.Helpers.VB.GetContainingContext(node, _configurationOptions),
-                            VNCCA.Helpers.VB.GetContainingMethod(node),
+                            VNCCA.Helpers.VB.GetContainingMethodName(node),
                             node.ToString()));
 
                         if (_commentOutOnly)

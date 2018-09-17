@@ -41,17 +41,13 @@ namespace VNC.CodeAnalysis
 
         public bool ReplaceCRLF { get; set; } = false;
 
-
-        
-        public bool ContainingBlock { get; set; }
-
-
-
         public bool ClassOrModuleName { get; set; } = false;
 
         public bool MethodName { get; set; } = false;
 
-
+         public bool ContainingMethodBlock { get; set; }    
+        
+        public bool ContainingBlock { get; set; }
 
         public bool InTryBlock { get; set; } = false;
 
@@ -62,10 +58,7 @@ namespace VNC.CodeAnalysis
         public bool InIfBlock { get; set; } = false;
 
 
-
         public bool AllTypes { get; set; } = false;
-
-
 
 
         public bool Boolean { get; set; } = false;

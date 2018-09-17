@@ -77,6 +77,28 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #endregion
 
         #region Event Handlers
+        private void ceShowClassBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teWalk_ClassStatement.Text = isChecked ? "ClassBlock Walker" : "ClassStatement Walker";
+
+        }
+        private void ceShowMethodBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
+            // TODO(crhodes)
+            // What would be cool is to look for the parent that is a TextBlock.
+            // For now be boring and give it a name.
+            teWalk_MethodStatement.Text = isChecked ? "MethodBlock Walker" : "MethodStatement Walker";
+        }
+
+        private void btnHandlesClauseWalker_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ProcessOperation(DisplayHandlesClauseVB, CodeExplorer, CodeExplorerContext, CodeExplorer.configurationOptions);
+        }
 
         private void btnMultiLineLambdaExpressionWalker_Click(object sender, RoutedEventArgs e)
         {
@@ -222,7 +244,6 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
         #endregion
 
-
         #region Main Function Routines
         StringBuilder DisplayStopOrEndStatementVB(SearchTreeCommandConfiguration commandConfiguration)
         {
@@ -241,6 +262,17 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
 
             commandConfiguration.UseRegEx = (bool)ceExpressionStatementUseRegEx.IsChecked;
             commandConfiguration.RegEx = teExpressionStatementRegEx.Text;
+            commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
+
+            return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
+        }
+
+        StringBuilder DisplayHandlesClauseVB(SearchTreeCommandConfiguration commandConfiguration)
+        {
+            var walker = new VNCSW.VB.HandlesClause();
+
+            commandConfiguration.UseRegEx = (bool)ceHandlesClauseUseRegEx.IsChecked;
+            commandConfiguration.RegEx = teHandlesClauseRegEx.Text;
             commandConfiguration.ConfigurationOptions = CodeExplorer.configurationOptions.GetConfigurationInfo();
 
             return VNCCA.Helpers.VB.InvokeVNCSyntaxWalker(walker, commandConfiguration);
@@ -664,24 +696,5 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
         #region Utility Methods
 
         #endregion
-
-        private void ceShowMethodBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
-            // TODO(crhodes)
-            // What would be cool is to look for the parent that is a TextBlock.
-            // For now be boring and give it a name.
-            teWalk_MethodStatement.Text = isChecked ? "MethodBlock Walker" : "MethodStatement Walker";
-        }
-
-        private void ceShowClassBlock_EditValueChanged(object sender, EditValueChangedEventArgs e)
-        {
-            var isChecked = (Boolean)((CheckEdit)sender).IsChecked.Value;
-            // TODO(crhodes)
-            // What would be cool is to look for the parent that is a TextBlock.
-            // For now be boring and give it a name.
-            teWalk_ClassStatement.Text = isChecked ? "ClassBlock Walker" : "ClassStatement Walker";
-
-        }
     }
 }

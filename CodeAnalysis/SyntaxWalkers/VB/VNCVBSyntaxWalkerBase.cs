@@ -67,7 +67,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
             if (_configurationOptions.MethodName)
             {
-                messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethodName(node));
             }
 
             return messageContext;
@@ -383,7 +383,6 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
             StringBuilder analysisNodeValue = new StringBuilder();
 
             bool displayAnalysisOutput = _configurationOptions.DisplayNodeKind || _configurationOptions.DisplayNodeValue;
-
 
             // TODO(crhodes)
             // See if we can using some clever casting to handle this more generically

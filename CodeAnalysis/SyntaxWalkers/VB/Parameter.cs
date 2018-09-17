@@ -28,7 +28,7 @@ namespace VNC.CodeAnalysis.SyntaxWalkers.VB
 
                     if (_configurationOptions.MethodName)
                     {
-                        messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                        messageContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethodName(node));
                     }
 
                     // TODO(crhodes)

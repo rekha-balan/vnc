@@ -72,10 +72,11 @@ namespace VNCCodeCommandConsole.User_Interface.User_Controls
             configurationOptions.CRC32 = (bool)ceDisplayCRC32.IsChecked;
             configurationOptions.ReplaceCRLF = (bool)ceReplaceCRLF.IsChecked;
 
-            configurationOptions.ContainingBlock = (bool)ceDisplayContainingBlock.IsChecked;
-
             configurationOptions.ClassOrModuleName = (bool)ceDisplayClassOrModuleName.IsChecked;
             configurationOptions.MethodName = (bool)ceDisplayMethodName.IsChecked;
+
+            configurationOptions.ContainingMethodBlock = (bool)ceDisplayContainingMethodBlock.IsChecked;
+            configurationOptions.ContainingBlock = (bool)ceDisplayContainingBlock.IsChecked;
 
             configurationOptions.InTryBlock = (bool)ceInTryBlock.IsChecked;
             configurationOptions.InWhileBlock = (bool)ceInWhileBlock.IsChecked;

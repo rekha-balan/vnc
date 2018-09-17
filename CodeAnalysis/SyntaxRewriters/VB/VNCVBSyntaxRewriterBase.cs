@@ -51,7 +51,7 @@ namespace VNC.CodeAnalysis.SyntaxRewriters.VB
 
             if (_configurationOptions.MethodName)
             {
-                messageContext += string.Format(" Method:({0, -35})", VNCCA.Helpers.VB.GetContainingMethod(node));
+                messageContext += string.Format(" Method:({0, -35})", VNCCA.Helpers.VB.GetContainingMethodName(node));
             }
 
             return messageContext;

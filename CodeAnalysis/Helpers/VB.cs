@@ -27,7 +27,7 @@ namespace VNC.CodeAnalysis.Helpers
             return methodNames;
         }
 
-        public static string GetContainingMethod(VisualBasicSyntaxNode node)
+        public static string GetContainingMethodName(VisualBasicSyntaxNode node)
         {
             string methodName = "none";
 
@@ -43,6 +43,24 @@ namespace VNC.CodeAnalysis.Helpers
             }
 
             return methodName;
+        }
+
+        public static string GetContainingMethodBlock(VisualBasicSyntaxNode node)
+        {
+            string methodBlock = "<METHODBLOCK>";
+
+            var a5 = node.Ancestors()
+                .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
+                .Cast<MethodBlockSyntax>().ToList();
+
+            if (a5.Count > 0)
+            {
+                methodBlock = node.Ancestors()
+                    .Where(x => x.IsKind(SyntaxKind.FunctionBlock) || x.IsKind(SyntaxKind.SubBlock))
+                    .Cast<MethodBlockSyntax>().FirstOrDefault().ToString();
+            }
+
+            return methodBlock;
         }
 
         public static string GetContainingContext(VisualBasicSyntaxNode node, ConfigurationOptions displayInfo)
@@ -87,7 +105,11 @@ namespace VNC.CodeAnalysis.Helpers
 
             if (displayInfo.MethodName)
             {
-                methodContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethod(node));
+                methodContext += string.Format(" Method:({0, -35})", Helpers.VB.GetContainingMethodName(node));
+            }
+            else if (displayInfo.ContainingMethodBlock)
+            {
+                methodContext += string.Format(" MethodBlock:({0})", Helpers.VB.GetContainingMethodBlock(node));
             }
 
             return methodContext;
